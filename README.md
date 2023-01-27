@@ -1,8 +1,8 @@
 # 8 mandamentos do front
 
-* Não commitar o codigo com funções sem uso, 
-* Não commmitar codigo com erro,
-* Usar apenas styled-components, não usar ClassName.
+* Não commitar o código com funções sem uso 
+* Não commmitar código com erro
+* Usar apenas styled-components, não usar ClassName
 * Usar apeans extensão .jsx
 * Seguir o padrão Folder/index.jsx styles.jsx
 * Commitar o código diariamente e sempre ao final do dia
