@@ -1,3 +1,14 @@
+# 8 mandamentos do front
+
+* Não commitar o codigo com funções sem uso, 
+* Não commmitar codigo com erro,
+* Usar apenas styled-components, não usar ClassName.
+* Usar apeans extensão .jsx
+* Seguir o padrão Folder/index.jsx styles.jsx
+* Commitar o código diariamente e sempre ao final do dia
+* Codar em inglês
+* Proibido CHAT GPT
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
