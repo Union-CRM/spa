@@ -4,7 +4,7 @@ class SidBar extends React.Component {
   render() {
     return (
       <>
-        <h1>Let's go!</h1>
+        <h1>SideBar</h1>
       </>
     );
   }
