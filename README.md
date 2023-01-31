@@ -1,3 +1,29 @@
+# Como subir de forma manual no GIT
+
+Pelo terminal, dentro da pasta geral do projeto, insira o comando
+```
+git add .
+```
+
+Após adicionar o arquivo, insira o commit
+```
+git commit -m "{Insira aqui o commit conforme o que foi alterado}
+```
+
+Para finalizar, utilize o comando abaixo para subir o código
+```
+git push
+```
+
+Após o processo, abra um PULL RESQUEST e aguarde a aprovação ou aviso para efetuar mudanças
+
+# Como atualizar o código do form
+
+Para atualizar, clique em sync fork no canto superior direito, acima das pastas que contém o código, logo após isso, digite o código abaixo no terminal do VsCode / Bash
+```
+git pull
+```
+
 # 8 mandamentos do front
 
 * Não commitar o código com funções sem uso 
