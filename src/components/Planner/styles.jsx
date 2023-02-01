@@ -69,29 +69,6 @@ export const SecondDiv = styled.div`
   grid-template-columns: 164px 338px;
 `;
 
-export const ButtonSave = styled.button`
-    margin-top: 1.4em;
-    height: 50px;
-    width: 256px;
-    border-radius: 8px;
-    background-color: #007BFF;
-    border-color: #007BFF;
-    color: #ffffff;
-    margin-left: 120px;
-    font-size: 18px;
-`;
-export const ButtonCancel = styled.button`
-    margin-top: 1.4em;
-    height: 50px;
-    width: 256px;
-    border-radius: 8px;
-    background-color: #ffffff;
-    color: #007BFF;
-    border-color: #007BFF;
-    margin-left: 120px;
-    font-size: 18px;
-`;
-
 export const Content = styled.div`
     margin-left: 30px;
 `;
@@ -131,6 +108,12 @@ export const SelectGuest = styled.select`
          white-space: pre;
          min-height: 20px;
        }`
+
+export const ButtonDiv = styled.div`
+  margin-top: 20px;
+  margin-left: 80px;
+`;
+
 ;
 
 
