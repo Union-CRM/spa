@@ -19,3 +19,5 @@ function App() {
 }
 
 export default App;
+
+// lib react-select, como passar os itens selecionados para outro campo
