@@ -1,6 +1,7 @@
 import React from "react";
+import IconSystem from "../../IconSystem";
 
-import { Button } from "./styles";
+import { Button, IconAdd } from "./styles";
 //$mode- change background-color
 //
 class ButtonAdd extends React.Component {
@@ -13,6 +14,9 @@ class ButtonAdd extends React.Component {
           $height={this.props.height}
           $color={this.props.color}
         >
+          <IconAdd>
+            <IconSystem icon={"add2"} />
+          </IconAdd>
           {this.props.name}
         </Button>
       </>
