@@ -73,7 +73,7 @@ export const StatusSpan = styled.div`
 `
 
 export const Title = styled.div`
-    font-family: 'Houschka Rounded';
+    font-family: 'Houschka Rounded Alt';
     font-size: 14px;
     margin-bottom: 34px;
     margin-left: 10px;
@@ -82,7 +82,8 @@ export const Title = styled.div`
 
 export const Name = styled.div`
     font-size: 12px;
-    font-family: 'Inter';
+    font-family: 'Houschka Rounded Alt';
+    font-style: normal;
     color: #000000;
 `
 
@@ -90,7 +91,7 @@ export const Topic = styled.div`
     margin-left: 10px;
     font-size: 12px;
     margin-bottom: 18px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Houschka Rounded Alt';
 `
 
 export const Client = styled.span`
@@ -101,7 +102,7 @@ export const Client = styled.span`
     display: flex;
     margin-top: 10px;
     margin-left: 10px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Houschka Rounded Alt';
 `
 export const ClientName = styled.div`
     color: #656464;
@@ -116,7 +117,7 @@ export const Type = styled.div`
     margin-left: 10px;
     font-size: 12px;
     font-weight: bold;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Houschka Rounded Alt';
 `
 
 export const Line = styled.div`
@@ -133,14 +134,14 @@ export const PositionEdit = styled.span`
     height: 12px;
     margin-left: 105px;
     margin-top: 8px;
-    align-items: right;
     cursor: pointer;
+    display: flex;
 `
 
 export const PositionRemove = styled.span`
     width: 12px;
     height: 12px;
-    margin-left: 14px;
+    margin-left: 25px;
     margin-top: 8px;
     align-items: right;
     cursor: pointer;

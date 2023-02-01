@@ -1,7 +1,6 @@
 import React from 'react'
 import { Card, Status, StatusSpan, Title, Name, Topic, Client, ClientName, Type, Line, Header, PositionEdit, PositionRemove } from './styles'
-import {ReactComponent as Edit} from '../../../assets/Edit.svg'
-import {ReactComponent as Remove} from '../../../assets/Remove.svg'
+import IconSystem from '../../../assets/IconSystem'
 
 const SubjectCard = ({title, manager, topic, area, client, status}) => {
 
@@ -12,10 +11,10 @@ const SubjectCard = ({title, manager, topic, area, client, status}) => {
                 <StatusSpan>{status}</StatusSpan>
             </Status>
             <PositionEdit>
-                <Edit/>
+                <IconSystem icon={"paperEdit"} height={'15px'} width={'15px'}/>
             </PositionEdit>
             <PositionRemove>
-                <Remove/>
+                <IconSystem icon={"delete"} height={'15px'} width={'15px'}/>
             </PositionRemove>
         </Header>
         <Title>

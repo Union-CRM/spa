@@ -1,6 +1,7 @@
 import React from 'react'
-import { BoardStyle, H1, Container, Header, Top, HowManySubjectList, Button, Line, Spans, All, HowManyAll, Finished, HowManyFinished, Canceled, HowManyCancel } from './styles'
+import { BoardStyle, H1, Container, Header, Top, HowManySubjectList, Button, Line, Spans, All, HowManyAll, Finished, HowManyFinished, Canceled, HowManyCancel, SpanPosition, IconPosition } from './styles'
 import SubjectCard from './CardListView/index'
+import IconSystem from '../../assets/IconSystem'
 
 const SubjectList = () => {
     const subjects = [
@@ -82,31 +83,37 @@ const SubjectList = () => {
         return item.id
       })
     
-      const SubjectsCancel = subjects.filter((item) => {
+    const SubjectsCancel = subjects.filter((item) => {
         return item.status === "Canceled"
       })
     
-      const SubjectsFinished = subjects.filter((item) => {
+    const SubjectsFinished = subjects.filter((item) => {
         return item.status === "Finished"
       })
     
     
       return (
         <Container>
-                <Header>
-                    <Top>
-                        <H1>Subjects List <HowManySubjectList>({SubjectsId.length})</HowManySubjectList></H1>
-                        <Button>Create Subject</Button>
-                    </Top>
-                    <Line />
-                    <Spans>
-                        <All>All (<HowManyAll>{SubjectsId.length}</HowManyAll>)</All>
-                        <Finished>Finished (<HowManyFinished>{SubjectsFinished.length}</HowManyFinished>)</Finished>
-                        <Canceled>Canceled (<HowManyCancel>{SubjectsCancel.length}</HowManyCancel>)</Canceled>
-                    </Spans>
-                </Header>
+            <Header>
+                <Top>
+                    <H1>Subjects List <HowManySubjectList>({SubjectsId.length})</HowManySubjectList></H1>
+                    <Button>
+                        <IconPosition>
+                            <IconSystem icon={"add2"} height={'12px'} width={'12px'}/>
+                        </IconPosition>
+                        <SpanPosition>
+                            <span>Create Subject</span>
+                        </SpanPosition>
+                    </Button>
+                </Top>
+                <Line />
+                <Spans>
+                    <All>All (<HowManyAll>{SubjectsId.length}</HowManyAll>)</All>
+                    <Finished>Finished (<HowManyFinished>{SubjectsFinished.length}</HowManyFinished>)</Finished>
+                    <Canceled>Canceled (<HowManyCancel>{SubjectsCancel.length}</HowManyCancel>)</Canceled>
+                </Spans>
+            </Header>
             <BoardStyle>
-
                 {subjects.map(item => (
                 <SubjectCard
                     status={item.status}

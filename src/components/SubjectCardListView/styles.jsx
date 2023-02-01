@@ -10,6 +10,7 @@ export const BoardStyle = styled.div`
     grid-row: 2;
     margin-top: 5px;
     margin-right: 500px;
+    border-radius: 8px;
     &::-webkit-scrollbar{
         width: 15px;
         height: 10px;
@@ -53,10 +54,12 @@ export const Container = styled.div`
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
     margin-top: 64px;
     margin-right: 500px;
+    border-radius: 8px;
     &::-webkit-scrollbar{
-        width: 15px;
+        width: 18px;
         height: 10px;
         margin-right: 10px;
+        float: right;
     }
 
     &::-webkit-scrollbar-track{
@@ -65,12 +68,16 @@ export const Container = styled.div`
     }
 
     &::-webkit-scrollbar-track-piece{
-        background-color: #FFFFFF;
+        background-color: white;
     }
 
     &::-webkit-scrollbar-thumb{
+        height: 80%;
         background-color: #AFB2BB;
-        margin-right: 10px;
+        margin-left: 20px;
+        width: 15px;
+        border-right: 6px solid white;
+        border-top: 12px solid white;
     }
 
 `
@@ -118,6 +125,7 @@ export const Canceled = styled.div`
 export const Button = styled.button`
     width: 250px;
     height: 35px;
+    display: flex;
     font-family: 'Houschka Rounded Alt';
     font-size: 18px;
     color: #FFFFFF;
@@ -151,4 +159,15 @@ export const HowManyAll = styled.span`
 
 export const HowManySubjectList = styled.span`
     color: #525B75;
+`
+export const IconPosition = styled.div`
+    display: flex;
+    margin-left: 12px;
+    margin-top: 11px;
+`
+export const SpanPosition = styled.div`
+    display: flex;
+    margin-left: 8px;
+    margin-top: 9px;
+    font-size: 16px;
 `
