@@ -3,7 +3,7 @@ import { IconDefault } from './styles';
 
 const IconCountry = ({icon,height,width}) => {
 
-    const IconImage = require(`../svg/${icon.toLowerCase()}.svg`);
+    const IconImage = require(`../svg/${icon}.svg`);
   
   return (
       <IconDefault src={IconImage} alt={icon}  height={height} width ={width}/>
