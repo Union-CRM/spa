@@ -1,37 +1,39 @@
 import React from "react";
-import Card from './card';
-import Clientes from './clientes'
-import { DivMain, Div, Ul, H1} from "./styles";
+import { DivP, H1, DivMain } from "./styles";
+import Card from "./Card";
 
-function createCard(cliente){
-  return (
-    <Card
-      area={cliente.area}
-      nome={cliente.nome}
-      email = {cliente.email}
-    />
-  )
-}
-class PlannerCard extends React.Component {
-  render() {
+
+const PlannerCard = (props) =>  {
+    
     return (
 
+      
       <DivMain>
-
-        <Div>
+        <DivP>
+            <H1>18 - January</H1>
+      
           
-          <H1>18 - January</H1>
-          <Ul>
-            {Clientes.map(createCard)}
-           
-          </Ul>
+            {props.array.map((item) => (
+      
+            <Card
 
-        </Div>
+              name1={item.name1}
+              email1={item.email1}
+              name2={item.name2}
+              email2={item.email2}
+              sector = {item.sector}
+            />
 
+              ))}
+
+        </DivP>
       </DivMain>
+      
+
+      
 
     );
-  }
+
 }
 
 export default PlannerCard;
