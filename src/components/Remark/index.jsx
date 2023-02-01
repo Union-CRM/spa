@@ -4,7 +4,7 @@ import edit from "../../imagens/edit.svg"
 import finish from "../../imagens/finish.svg"
 import trash from "../../imagens/trash.svg"
 import calendar from "../../imagens/calendar.svg"
-import { Editar, Trash, Finish, Calendar} from "./styles";
+import { Editar, Trash, Finish, Calendar,ColorBar, Rectangle,Text1, Rectangle2, Text, Calendar2, CardHeader, IconsContainer} from "./styles";
 
 
 function Cards(props){
@@ -22,33 +22,44 @@ function Cards(props){
                
   <Card> 
 
-<div className="color-bar"></div>
-
-    <div className="card-header">
-      <div className="rectangle"> <p> Finished</p></div>
-      <div className="icons-container">
+ <ColorBar/>
+ <CardHeader>
+    
+    <Rectangle> <p> Finished</p> </Rectangle>     
+      <IconsContainer> 
       <button><Editar src={edit} /></button> 
         <button onClick={deleteSelectedCard}><Trash src= {trash}/></button>
-      </div>
-    </div>
-    <div className="text1">
+        </IconsContainer>
+    
+     
+    </CardHeader>
+
+      <Text1> 
       <h1>{props.title}</h1>
-      <h2>{props.author}</h2></div>
+      <h2>{props.author}</h2>
+      </Text1>
+    
 
-      <div className="calendar">
+    
+        <Calendar2>
       <button><Finish src= {finish} color="#43BA65"/> {props.estimatedDate}</button> 
-      <button><Calendar src= {calendar}/> {props.deliveryDate}</button>  </div>
-
-      <div className="text"> 
-      <h3>{props.description}</h3> 
-      <h3> {props.subdescription}</h3> 
-      </div>
+      <button><Calendar src= {calendar}/> {props.deliveryDate}</button> 
+      </Calendar2>
+   
+       
+      <Text>
+        <h3>{props.description}</h3> 
+        <h3> {props.subdescription}</h3> 
+      </Text>
+      
      
       
     
-    <div className="rectangle2">
+    
+    <Rectangle2>  
      <h4>Client | {props.Client} </h4>
-      </div>  
+     </Rectangle2>
+      
     
       
  
