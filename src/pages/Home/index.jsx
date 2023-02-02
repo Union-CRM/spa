@@ -42,7 +42,8 @@ class Home extends React.Component {
            
           <UserList userCount={"("+ (users.length.toString()) +")"} user={
               users.map((item,i) =>(<User key={i} name={item.name} id={item.id}/>))}/> 
-        
+
+          {/*Funcao necessária para a renderização do componente User List*/}
           </div>
 
 
