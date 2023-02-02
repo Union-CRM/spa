@@ -1,14 +1,14 @@
 import React from "react";
+import AddReleaseTrain from "../../components/AddReleaseTrain";
 
 class Home extends React.Component {
   render() {
     return (
       <>
-        <h1>Let's go</h1>
-
+        <h1>Let's Go!</h1>
       </>
     );
   }
 }
 
-Export default Home
+export default Home
