@@ -17,6 +17,6 @@ export const Button = styled.button`
     opacity: 0.8;
   }
 `;
-export const IconAdd = styled.img`
-  margin-left: 8px;
+export const IconAdd = styled.div`
+  margin-right: 8px;
 `;
