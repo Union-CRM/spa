@@ -34,35 +34,31 @@ export const Input = styled.input`
   height: 35px;
   width: 500px;
   border-radius: 5px;
-  display: block;
   border: 0.3px solid #d9d9d9;
   background-color: rgba(0, 0, 0, 0);
-  margin-top: 5px;
+  display: block;
+  justify-content: space-between;
   padding-left: 10px;
+  position: relative;
 `;
 
 //Divs and containers
 
 export const Container = styled.div`
   box-sizing: border-box;
-  width: 619px;
-  height: 40vh;
+  width: auto;
+  height: auto;
+  margin-bottom: 15px;
   background-color: rgba(0, 0, 0, 0);
 `;
 
 export const Box = styled.div`
-  top: 20px;
-  left: 55px;
-  position: relative;
-  align-items: center;
-`;
-
-export const Div = styled.div`
   display: grid;
   width: 100%;
   grid-template-rows: 50% 50%;
-  grid-template-columns: 42.5% 30%;
+  grid-template-columns: 50% 50%;
   left: 0px;
+  align-items: center;
 `;
 
 // Titles Labels
