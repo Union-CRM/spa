@@ -1,18 +1,14 @@
 import React from "react";
-import Planner from "../../components/Planner";
 
 class Home extends React.Component {
   render() {
     return (
       <>
-        <Planner></Planner>
+        <h1>Let's go</h1>
+
       </>
     );
-  
+  }
 }
 
-}
-
-export default Home
-
-
+Export default Home
