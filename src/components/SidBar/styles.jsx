@@ -15,21 +15,41 @@ export const Container = styled.div`
   border-radius: 0px 8px 8px 0px;
 `;
 export const OpenClose = styled.button`
-  transform: ${(props) => (props.$mode ? "" : "rotateY(180deg)")};
+  transform: ${(props) => (props.$mode ? "rotateY(180deg)" : "")};
   grid-row: 1;
   background-color: #1e2222;
+  margin-top: 10px;
+  margin-right: 2px;
   border: none;
   color: #ffff;
+  border-top-right-radius: 8px;
   :hover {
     color: #c8c8c8;
   }
 `;
-export const Icon = styled.div`
-  width: 100%;
-
+export const Logout = styled.button`
+  background-color: #1e2222;
+  height: fit-content;
+  width: fit-content;
+  grid-row: 5;
+  margin-top: auto;
+  margin-bottom: 55px;
+  border: none;
+  margin-left: ${(props) => (props.$mode ? "25px" : "55px")};
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: ${(props) => (props.$mode ? "center" : "left")};
+  :hover {
+    opacity: 0.5;
+  }
+`;
+
+export const Icon = styled.div`
+  width: 100%;
+  margin-left: ${(props) => (props.$mode ? "" : "15px")};
+  display: flex;
+  align-items: center;
+  justify-content: ${(props) => (props.$mode ? "center" : "left")};
 `;
 export const User = styled.div`
   width: ${(props) => (props.$mode ? "80px" : "186px")};
@@ -48,21 +68,34 @@ export const Img = styled.div`
   width: ${(props) => (props.$mode ? "50px" : "80px")};
   height: ${(props) => (props.$mode ? "50px" : "80px")};
   border-radius: 50%;
+  margin-bottom: 5px;
   background-color: gray;
 `;
 export const Name = styled.h1`
+  font-weight: 100;
+  color: #ffff;
   text-align: left;
-  margin-left: 10px;
-  font-size: 15px;
-  display: ${(props) => (props.$mode ? "none" : "")};
-`;
-export const Id = styled.h2`
-  text-align: left;
-  margin-left: 10px;
+  margin-left: 15px;
   font-size: 12px;
   display: ${(props) => (props.$mode ? "none" : "")};
 `;
-
+export const Id = styled.h2`
+  font-weight: 100;
+  color: #ffff;
+  text-align: left;
+  margin-left: 15px;
+  font-size: 10px;
+  display: ${(props) => (props.$mode ? "none" : "")};
+`;
+export const Email = styled.h2`
+  text-decoration: underline;
+  font-weight: 100;
+  color: #ffff;
+  text-align: left;
+  margin-left: 15px;
+  font-size: 12px;
+  display: ${(props) => (props.$mode ? "none" : "")};
+`;
 export const Ul = styled.ul`
   width: ${(props) => (props.$mode ? "80px" : "100%")};
   grid-row: 4/5;
@@ -80,6 +113,7 @@ export const Li = styled.li`
   text-align: center;
   vertical-align: middle;
   background-color: #1e2222;
+
   :hover {
     background-color: #007bff;
   }
@@ -87,14 +121,11 @@ export const Li = styled.li`
 export const Slink = styled(Link)`
   padding: 0;
   margin: 0;
+  text-decoration: none;
 `;
 
 export const Span = styled.span`
-  color: #000;
-
-  align-items: center;
-  justify-content: center;
+  color: #ffff;
+  margin-left: 10px;
   display: ${(props) => (props.$mode ? "none" : " flex")};
-
-  text-decoration: none;
 `;
