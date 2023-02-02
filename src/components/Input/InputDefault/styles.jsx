@@ -8,13 +8,14 @@ export const Input = styled.input`
   background-color: rgba(0, 0, 0, 0);
   display: block;
   margin-top: 10px;
-  margin: 20px auto;
+  justify-content: space-between;
   padding-left: 10px;
+  position: relative;
 `;
 export const Container = styled.div`
   box-sizing: border-box;
-  position: center;
-  width: 619px;
-  height: 22vh;
+  width: auto;
+  height: auto;
+  margin-bottom: 15px;
   background-color: rgba(0, 0, 0, 0);
 `;

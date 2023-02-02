@@ -49,7 +49,7 @@ class SidBar extends React.Component {
             <Slink to="/home">
               <Li>
                 <Icon $mode={this.state.sidBartState}>
-                  <IconSystem icon="Home" />
+                  <IconSystem icon="home" />
                   <Span $mode={this.state.sidBartState}>Home</Span>
                 </Icon>
               </Li>
@@ -57,7 +57,7 @@ class SidBar extends React.Component {
             <Slink to="/home">
               <Li>
                 <Icon $mode={this.state.sidBartState}>
-                  <IconSystem icon="Client" />
+                  <IconSystem icon="client" />
                   <Span $mode={this.state.sidBartState}>Client</Span>
                 </Icon>
               </Li>
@@ -66,7 +66,7 @@ class SidBar extends React.Component {
             <Slink to="/home">
               <Li>
                 <Icon $mode={this.state.sidBartState}>
-                  <IconSystem icon="Subjects" />
+                  <IconSystem icon="subjects" />
                   <Span $mode={this.state.sidBartState}>Subjects</Span>
                 </Icon>
               </Li>
@@ -75,7 +75,7 @@ class SidBar extends React.Component {
             <Slink to="/home">
               <Li>
                 <Icon $mode={this.state.sidBartState}>
-                  <IconSystem icon="Planner" />
+                  <IconSystem icon="planner" />
                   <Span $mode={this.state.sidBartState}>Planner</Span>
                 </Icon>
               </Li>
@@ -84,7 +84,7 @@ class SidBar extends React.Component {
             <Slink to="/home">
               <Li>
                 <Icon $mode={this.state.sidBartState}>
-                  <IconSystem icon="Remark" />
+                  <IconSystem icon="remark" />
                   <Span $mode={this.state.sidBartState}>Remark</Span>
                 </Icon>
               </Li>
