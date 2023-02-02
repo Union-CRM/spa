@@ -6,7 +6,9 @@ class Home extends React.Component {
     return (
       <>
         <Body>
-          <h1>Teste</h1>
+          <h1>
+            Substitua este H1 pelo seu codigo durante os testes, depois remova-o
+          </h1>
         </Body>
       </>
     );
