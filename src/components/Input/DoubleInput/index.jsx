@@ -2,30 +2,19 @@ import React from "react";
 import { useState } from "react";
 import { Input, Container, Label, Box } from "./styles";
 
-const DoubleInput = () => {
+const DoubleInput = (props, placeholder) => {
   const [name, setName, names, setNames] = useState();
 
   return (
     <>
       <Container>
         <Box>
-          <Label for="Name">Name </Label>
-
+          <Label>{props.label}</Label>
           <Input
             type="text"
-            id="Name"
-            placeholder="Name"
+            placeholder={props.placeholder}
             value={name}
             onChange={(event) => setName(event.target.value)}
-          />
-
-          <Label for="Name">Name</Label>
-          <Input
-            type="text"
-            id="Names"
-            placeholder="Names"
-            value={names}
-            onChange={(event) => setNames(event.target.value)}
           />
         </Box>
       </Container>

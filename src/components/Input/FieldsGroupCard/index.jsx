@@ -1,6 +1,6 @@
 import React from "react";
+import { useState } from "react";
 //import Select from "react-select";
-
 import {
   SelectOptions,
   Container,
@@ -8,48 +8,37 @@ import {
   Box,
   Input,
   InputDouble,
-  Div,
 } from "./styles";
-import { MultiSelect } from "./SelectMulti";
+import { MultiSelect } from "../SelectMulti";
 
-const FieldsGroupCard = ({
-  nameGroup,
-  costumers,
-  users,
-  setGroup,
-  setCostumers,
-  ...props
-}) => {
+const FieldsGroupCard = (props) => {
+  const [nameGroup, setGroup] = useState();
+  const [costumers, setCostumers] = useState();
   return (
     <>
       <Container>
-        <Box>
-          <Label for="NameGroup">Name Group</Label>
+        <Label>{props.label}</Label>
 
-          <Input
+        <Input
+          type="text"
+          id="NameGroups"
+          placeholder={props.placeholder}
+          value={nameGroup}
+          onChange={(event) => setGroup(event.target.value)}
+        />
+        <Box>
+          <Label>{props.label2}</Label>
+          <InputDouble
             type="text"
-            id="NameGroups"
-            placeholder="Fabrica Itáu - Torre 1"
-            value={nameGroup}
-            onChange={(event) => setGroup(event.target.value)}
+            id="costumers"
+            placeholder={props.placeholder}
+            value={costumers}
+            onChange={(event) => setCostumers(event.target.value)}
           />
 
-          <Div>
-            <Label for="Costumers">Costumers</Label>
-
-            <InputDouble
-              type="text"
-              id="Costumers"
-              placeholder="Itaú"
-              value={costumers}
-              onChange={(event) => setCostumers(event.target.value)}
-            />
-
-            <Label for="Users">Users</Label>
-            <SelectOptions>
-              <MultiSelect />
-            </SelectOptions>
-          </Div>
+          <SelectOptions>
+            <MultiSelect />
+          </SelectOptions>
         </Box>
       </Container>
     </>

@@ -1,21 +1,18 @@
 import { React, useState } from "react";
-import { Input, Container, Label, Div } from "./styles";
+import { Input, Container, Label } from "./styles";
 
-const InputPlaceHolder = (props) => {
+const InputPlaceHolder = (props, placeholder) => {
   const [name, setName] = useState();
   return (
     <>
       <Container>
-        <Div>
-          <Label>Name</Label>
-          <Input
-            type="text"
-            id="nome"
-            placeholder="Name"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          />
-        </Div>
+        <Label>{props.label}</Label>
+        <Input
+          type="text"
+          placeholder={props.placeholder}
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+        />
       </Container>
     </>
   );
