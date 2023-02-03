@@ -12,10 +12,12 @@ import {
   Tag,
   TeamsContainer,
   Avatar, 
-  AvatarContainer
+  AvatarContainer,
+  TopContainer,
+  Content
 } from "./styles";
 
-const Card = memo(() => {
+const CardGroup = memo(() => {
   const users = [1, 2, 3, 4, 5,6];
   const amountUsersToShow = 4;
   const showingUsers = users.slice(0, amountUsersToShow);
@@ -24,7 +26,8 @@ const Card = memo(() => {
  
   return (
     <Container>
-      <div className="top-container">
+      
+        <TopContainer>
         <Tag>Itau</Tag>
 
         <div>
@@ -35,9 +38,10 @@ const Card = memo(() => {
             <Editar height={14} src={paperEdit} />
           </IconButton>
         </div>
-      </div>
+      </TopContainer>
 
-      <div className="content">
+      
+        <Content>
         <PeopleImage src={peopleTeams} />
 
         <Description>Fabrica Itau - Torre 1</Description>
@@ -51,9 +55,9 @@ const Card = memo(() => {
       {hiddenUsersText}
     </AvatarContainer>
         </TeamsContainer>
-      </div>
+      </Content>
     </Container>
   );
 });
 
-export default Card;
+export default CardGroup;

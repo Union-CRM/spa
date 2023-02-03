@@ -24,16 +24,16 @@ export const Container = styled.div`
     height: 100%;
   }
 
-  .top-container {
+  `;
+
+  export const Content = styled.div`
+    text-align: center;`
+  
+export const TopContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-
-  .content {
-    text-align: center;
-  }
-`;
+  `
 
 export const Description = styled.p`
   text-align: center;
