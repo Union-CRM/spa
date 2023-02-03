@@ -33,10 +33,9 @@ export const Label = styled.label`
 
 export const Container = styled.div`
   box-sizing: border-box;
-  position: center;
-  left: 200px;
-  width: 619px;
-  height: 15vh;
+  width: auto;
+  height: auto;
+  margin-bottom: 20px;
   background-color: rgba(0, 0, 0, 0);
 `;
 
@@ -44,8 +43,7 @@ export const Box = styled.div`
   display: grid;
   width: 100%;
   grid-template-rows: 50% 50%;
-  grid-template-columns: 42.5% 30%;
-  left: 55px;
-  position: relative;
+  grid-template-columns: 51% 49%;
+  left: 0px;
   align-items: center;
 `;

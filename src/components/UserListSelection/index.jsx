@@ -1,6 +1,7 @@
 import ButtonDefault from "../../assets/Buttons/ButtonDefault";
 import {Box, Title,H1, Input, InputDate, SecondDiv, GuestBox, GuestItems, Content, Select, SelectGuest, ButtonDiv} from "./styles";
 
+// ID: 0018 Component: User list selection
 
 function Planner (){
     const client = [
@@ -53,4 +54,4 @@ return(
     </Box>
 )
 }
-export default Planner;
+export default UserListSelection;

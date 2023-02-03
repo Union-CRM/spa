@@ -7,6 +7,7 @@ margin-top: 4em;
 width: 595px; height: 830px;
 border-radius: 5px;
 border-left-style: solid; border-left-width: 18px; border-left-color: #007BFF;
+box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
 `;
 
 export const Title = styled.div`
@@ -111,7 +112,7 @@ export const SelectGuest = styled.select`
 
 export const ButtonDiv = styled.div`
   margin-top: 20px;
-  margin-left: 80px;
+  margin-left: 100px;
 `;
 
 ;
