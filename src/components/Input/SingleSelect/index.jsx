@@ -7,12 +7,7 @@ export const SingleSelect = (props) => {
   const animatedComponents = makeAnimated();
   const [value, setValue] = useState(null);
 
-  const options = [
-    { id: 1, value: "Phellype Flaibam", label: "Phellype Flaibam" },
-    { id: 2, value: "Carlos Costa", label: "Carlos Costa" },
-    { id: 3, value: "Alexandre Sarda", label: "Alexandre Sarda" },
-    { id: 4, value: "Patricia Melo", label: "Patricia Melo" },
-  ];
+  const options = props.option;
 
   return (
     <>
@@ -22,10 +17,11 @@ export const SingleSelect = (props) => {
         <Select
           options={options}
           defaultValue={value}
+          id={props.idSingleOption}
           components={animatedComponents}
           onChange={setValue}
           isClearable={true}
-          placeholder="Select this option"
+          placeholder={props.placeholder}
           isSearchable={true}
           //isDisabled={false}
           isLoading={false}
@@ -45,7 +41,7 @@ export const SingleSelect = (props) => {
 
             control: (baseStyles, state) => ({
               ...baseStyles,
-              width: "512px",
+              width: props.sizeSingle || "512px",
               borderColor: "#DFDFDF",
               cursor: "pointer",
             }),
@@ -55,7 +51,21 @@ export const SingleSelect = (props) => {
             }),
             menu: (baseStyles, state) => ({
               ...baseStyles,
-              width: "512px",
+              width: props.sizeSingle || "512px",
+            }),
+            menuList: (baseStyles, state) => ({
+              ...baseStyles,
+              width: props.sizeSingle || "512px",
+              overflowY: "scroll",
+              "&::-webkit-scrollbar": {
+                backgroundColor: "#FFF",
+              },
+              "&::-webkit-scrollbar-thumb ": {
+                backgroundColor: "#DFDFDF",
+              },
+              "&::-webkit-scrollbar--track-piece": {
+                backgroundColor: "#DFDFDF",
+              },
             }),
             option: (baseStyles, state) => ({
               ...baseStyles,

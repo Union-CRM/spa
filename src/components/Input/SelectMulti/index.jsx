@@ -1,25 +1,23 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+import { Label } from "./styles";
 
-export const MultiSelect = () => {
+export const MultiSelect = (props, placeholder, idMultiOption) => {
   const animatedComponents = makeAnimated();
   const [selectedOptions, setSelectedOptions] = useState([]);
 
-  const options = [
-    { value: 1, label: "Phellype Flaibam", color: "#3ddc97" },
-    { value: "Carlos Costa", label: "Carlos Costa", color: "#ACD4FF" },
-    { value: "Alexandre Sarda", label: "Alexandre Sarda", color: "#FFE60082" },
-    { value: "Patricia Melo", label: "Patricia Melo", color: "#FFB2D1" },
-  ];
+  const options = props.option;
 
   return (
     <>
+      <Label>{props.label3}</Label>
       <Select
         isMulti
         options={options}
+        id={props.idMultiOption}
         components={animatedComponents}
-        placeholder="Select this option"
+        placeholder={props.placeholder}
         onChange={(item) => setSelectedOptions(item)}
         isClearable={true}
         isSearchable={true}
@@ -32,8 +30,7 @@ export const MultiSelect = () => {
           borderRadius: 5,
           colors: {
             ...theme.colors,
-
-            primary: "#DFDFDF",
+            primary: "#000",
           },
         })}
         styles={{
@@ -45,10 +42,11 @@ export const MultiSelect = () => {
           control: (styles) => ({
             ...styles,
             backgroundColor: "none",
-            height: "20px",
-            width: "256px",
+            minHeight: props.heights || "39px",
+            top: props.top || "-1.8px",
+            width: props.width || "256px",
             cursor: "pointer",
-            borderColor: "#d9d9d9",
+            border: "2px solid  #d9d9d9",
           }),
 
           options: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -60,14 +58,25 @@ export const MultiSelect = () => {
             return {
               ...styles,
               borderRadius: "5px",
-              top: "50px",
-              position: "absolute",
-              border: "0.3px solid #D9D9D9",
+              top: props.top || "50px",
+              position: props.positions || "absolute",
+              border: "2px solid  #d9d9d9",
               right: "-1px",
-              width: "512px",
+              width: props.widths || "513px",
+              maxHeight: props.heighsts || "80px",
               paddingLeft: "5px",
               paddingTop: "5px",
               paddingBottom: "5px",
+              overflowY: "scroll",
+              "&::-webkit-scrollbar": {
+                backgroundColor: "#FFF",
+              },
+              "&::-webkit-scrollbar-thumb ": {
+                backgroundColor: "#DFDFDF",
+              },
+              "&::-webkit-scrollbar--track-piece": {
+                backgroundColor: "#DFDFDF",
+              },
             };
           },
 
@@ -75,13 +84,24 @@ export const MultiSelect = () => {
             return {
               ...styles,
               right: "0px",
-              position: "absolute",
+              position: props.positions || "absolute",
             };
           },
-          menu: (baseStyles, state) => ({
+          menuList: (baseStyles, state) => ({
             ...baseStyles,
-            width: "256px",
+            width: props.width || "256px",
+            overflowY: "scroll",
+            "&::-webkit-scrollbar": {
+              backgroundColor: "#FFF",
+            },
+            "&::-webkit-scrollbar-thumb ": {
+              backgroundColor: "#DFDFDF",
+            },
+            "&::-webkit-scrollbar--track-piece": {
+              backgroundColor: "#DFDFDF",
+            },
           }),
+
           multiValue: (styles, { data }) => {
             return {
               ...styles,
