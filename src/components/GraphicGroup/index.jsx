@@ -47,29 +47,9 @@ const GraphicGroup = () => {
         },
     ];
 
-    /*const Grupo1 = grupos.filter((item) => {
-        return item.group === 1
-    })
-
-    const Grupo2 = grupos.filter((item) => {
-        return item.group === 2
-    })
-
-    const Grupo3 = grupos.filter((item) => {
-        return item.group === 3
-    })
-
-    const Grupo4 = grupos.filter((item) => {
-        return item.group === 4
-    })*/
-
     const People = grupos.map((item) => {
         return item.id
     })
-
-    /*const Groups = grupos.map((item) => {
-        return item.group
-    })*/
 
     const uniqueGroups = [...new Map(grupos.map((item) => 
         [item["group"], item])).values(),
