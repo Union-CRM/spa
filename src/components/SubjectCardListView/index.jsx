@@ -91,7 +91,6 @@ const SubjectList = () => {
         return item.status === "Finished"
       })
     
-    
       return (
         <Container>
             <Header>

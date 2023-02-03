@@ -7,7 +7,7 @@ export const SelectOptions = styled.div`
   background-color: rgba(0, 0, 0, 0);
   border-radius: 5px;
   margin-top: 0px;
-  grid-row: 2;
+  grid-row: 0;
   grid-column: 2;
 `;
 
@@ -22,7 +22,7 @@ export const InputDouble = styled.input`
   height: 35px;
   width: 240px;
   border-radius: 5px;
-  border: 0.3px solid #d9d9d9;
+  border: 2px solid #d9d9d9;
   background-color: rgba(0, 0, 0, 0);
   display: block;
   grid-row: 2;
@@ -34,35 +34,33 @@ export const Input = styled.input`
   height: 35px;
   width: 500px;
   border-radius: 5px;
-  display: block;
-  border: 0.3px solid #d9d9d9;
+  border: 2px solid #d9d9d9;
   background-color: rgba(0, 0, 0, 0);
-  margin-top: 5px;
+  display: block;
+  justify-content: space-between;
   padding-left: 10px;
+  position: relative;
+  margin-bottom: 20px;
 `;
 
 //Divs and containers
 
 export const Container = styled.div`
   box-sizing: border-box;
-  width: 619px;
-  height: 40vh;
+  width: auto;
+  height: auto;
+  margin-bottom: 15px;
   background-color: rgba(0, 0, 0, 0);
 `;
 
 export const Box = styled.div`
-  top: 20px;
-  left: 55px;
-  position: relative;
-  align-items: center;
-`;
-
-export const Div = styled.div`
   display: grid;
   width: 100%;
   grid-template-rows: 50% 50%;
-  grid-template-columns: 42.5% 30%;
+  grid-template-columns: 50% 50%;
   left: 0px;
+  top: 0px;
+  align-items: center;
 `;
 
 // Titles Labels
@@ -76,12 +74,12 @@ export const Label = styled.label`
   color: rgba(0, 0, 0, 0.8);
 `;
 
-// Div Select
-export const SelectDiv = styled.input`
-  top: 40px;
-  width: auto;
-  height: auto;
-  border-radius: 5px;
-  border: 0.3px solid #d9d9d9;
-  background-color: rgba(0, 0, 0, 0);
+export const DivBox = styled.div`
+  margin-left: 30px;
+`;
+
+export const DivBox2 = styled.div`
+  margin-left: 30px;
+  position: relative;
+  top: 10px;
 `;

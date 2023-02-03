@@ -1,6 +1,6 @@
 import React from "react";
+import { useState } from "react";
 //import Select from "react-select";
-
 import {
   SelectOptions,
   Container,
@@ -8,48 +8,55 @@ import {
   Box,
   Input,
   InputDouble,
-  Div,
+  DivBox,
+  DivBox2,
 } from "./styles";
-import { MultiSelect } from "./SelectMulti";
+import { MultiSelect } from "../SelectMulti";
 
-const FieldsGroupCard = ({
-  nameGroup,
-  costumers,
-  users,
-  setGroup,
-  setCostumers,
-  ...props
-}) => {
+const FieldsGroupCard = (props) => {
+  const [nameGroup, setGroup] = useState();
+  const [costumers, setCostumers] = useState();
+
+  const options = [
+    { value: 1, label: "Phellype Flaibam", color: "#3ddc97" },
+    { value: 2, label: "Carlos Costa", color: "#ACD4FF" },
+    { value: 3, label: "Alexandre Sarda", color: "#FFE60082" },
+    { value: 4, label: "Patricia Melo", color: "#FFB2D1" },
+  ];
+
   return (
     <>
       <Container>
-        <Box>
-          <Label for="NameGroup">Name Group</Label>
-
+        <DivBox>
+          <Label>{props.label}</Label>
           <Input
             type="text"
-            id="NameGroups"
-            placeholder="Fabrica Itáu - Torre 1"
+            id={props.id1}
+            placeholder={props.placeholder1}
             value={nameGroup}
             onChange={(event) => setGroup(event.target.value)}
           />
+        </DivBox>
 
-          <Div>
-            <Label for="Costumers">Costumers</Label>
-
+        <Box>
+          <DivBox2>
+            <Label>{props.label2}</Label>
             <InputDouble
               type="text"
-              id="Costumers"
-              placeholder="Itaú"
+              id={props.id2}
+              placeholder={props.placeholder2}
               value={costumers}
               onChange={(event) => setCostumers(event.target.value)}
             />
+          </DivBox2>
 
-            <Label for="Users">Users</Label>
-            <SelectOptions>
-              <MultiSelect />
-            </SelectOptions>
-          </Div>
+          <SelectOptions>
+            <MultiSelect
+              label3={"Users"}
+              option={options}
+              placeholder={props.placeholder3}
+            />
+          </SelectOptions>
         </Box>
       </Container>
     </>
