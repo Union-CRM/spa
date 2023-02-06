@@ -63,7 +63,7 @@ const AddEditBusiness = ({title}) => {
                 </DivBName> 
                 <DivStatus>
                     
-                   <SingleSelect width={"86%"}/>
+                   <SingleSelect label={"Status"} width={"86%"}/>
                 </DivStatus>
             </DivBNameStatus>
 
