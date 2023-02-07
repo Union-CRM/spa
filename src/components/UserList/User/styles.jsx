@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 export const UserItem = styled.div`
 
-display: flex;
-flex-direction: row;
+display: grid;
+grid-template-columns: 15% 100%;
 align-items: center;
-padding: 12px 21px;
-margin-bottom : 5%;
+padding: 15px 21px;
+margin-bottom : 1%;
 gap: 15px;
 
 width: 512px;
@@ -44,7 +44,7 @@ export const IdUser = styled.p`
 font-family: 'Houschka Rounded Alt';
 font-style: normal;
 font-weight: 500;
-font-size: 12px;
+font-size: 12x;
 line-height: 16px;
 
 `;
