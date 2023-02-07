@@ -8,24 +8,22 @@ export const UserListComponentSt = styled.div`
         border-color: black;
         box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
         border-radius: 8px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+        display: grid;
+        grid-template-columns: 100%;
         padding: 10px 50px;
-        gap: 20px;
         position: center;
         width: 572px;
         height: 550px;
         left: 233px;
         top: 40px;
-        padding-bottom: 21px;
+    
       
         `;
  
-
   export const UserCount = styled.p`
     color: #E41165;
     margin-left: 5px;
+    margin-bottom : 5px;
     font-family: 'Houschka Rounded Alt';
     font-style: normal;
   `;
@@ -38,30 +36,15 @@ export const UserListComponentSt = styled.div`
 
 
 export const UserItem = styled.li`
-
-
 flex-direction: row;
-align-items: center;
-
-gap: 15px;
-
 width: 512px;
 height: 79px;
-
-background: #FFFFFF;
-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
-border-radius: 8px;
-
-flex: none;
+padding-top: 5%;
 order: 1;
-align-self: stretch;
-flex-grow: 0;
-    
+
 `;
 
 export const UserListSt = styled.ul`
-    
     padding-bottom:  21px;
-    background-color: #ffffff;
     list-style: none;
 `;

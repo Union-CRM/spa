@@ -7,12 +7,13 @@ function UserList(props){
         return( 
 
         <UserListComponentSt >
-            
+           
+                
+            <UserListSt>
+                 
             <H2>Users
                  <UserCount>{props.userCount}</UserCount>
             </H2>
-                
-            <UserListSt>
                     <UserItem>{props.user}</UserItem>
                 </UserListSt>
 
