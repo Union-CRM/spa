@@ -32,6 +32,7 @@ export const PositionIcon = styled.div`
 export const PositionSpan = styled.div`
     margin-left: 60px;
     margin-top: 27px;
+    color: #495057;
     font-family: 'Houschka Rounded Alt';
     font-size: 24px;
 `
@@ -71,6 +72,7 @@ export const PositionSpanGroups = styled.div`
     margin-left: 35px;
     margin-bottom: 5px;
     font-family: 'Houschka Rounded Alt';
+    color: #495057;
     font-size: 24px;
 `
 
@@ -80,4 +82,11 @@ export const PositionQuantity = styled.div`
     font-size: 50px;
     margin-bottom: 50px;
     color: #E41165;
+`
+export const PositionTitle = styled.div`
+    font-family: 'Houschka Rounded Alt';
+    font-size: 20px;
+    color: #495057;
+    margin-left: 26px;
+    margin-top: 11px;
 `
