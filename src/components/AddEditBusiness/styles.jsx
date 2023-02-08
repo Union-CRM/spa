@@ -51,7 +51,7 @@ export const DivBNameStatus = styled.div`
 `;
 export const DivStatus = styled.div`
 grid-area: 1 / 2 / 2 / 2;
-margin-top: 26px;
+margin-top: 12px;
     
 
 `;

@@ -7,6 +7,7 @@ import InputWithName from '../Input/InputWithName'
 import makeAnimated from "react-select/animated";
 import { TagComponent } from '../TagComponent'
 import SingleSelect from '../Input/SingleSelect'
+import DoubleInput from '../Input/DoubleInput'
 
 
 const AddEditBusiness = ({title}) => {
@@ -59,11 +60,11 @@ const AddEditBusiness = ({title}) => {
              
                 
                 <DivBName >
-                    <InputWithName label={"Bussines Name"} width={"100%"} />
+                    <DoubleInput label={"Bussines Name"} width={"100%"} />
                 </DivBName> 
                 <DivStatus>
                     
-                   <SingleSelect label={"Status"} width={"86%"}/>
+                   <SingleSelect label={"Status"} sizeSingle={"88%"}/>
                 </DivStatus>
             </DivBNameStatus>
 
