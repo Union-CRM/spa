@@ -15,7 +15,7 @@ export const SingleSelect = (props) => {
         <Label>{props.label}</Label>
 
         <Select
-          options={options}
+          options={props.options}
           defaultValue={value}
           id={props.idSingleOption}
           components={animatedComponents}

@@ -1,7 +1,7 @@
 import React from 'react'
 import IconSystem from '../../assets/IconSystem'
-import {Container, TotalMembers, PositionIcon, PositionSpan, TotalGroups, PositionTotal, MembersPerGroup, PositionIconGroups, PositionSpanGroups, PositionQuantity} from './styles'
-import { Chart } from "react-google-charts"
+import {PositionTitle, Container, TotalMembers, PositionIcon, PositionSpan, TotalGroups, PositionTotal, MembersPerGroup, PositionIconGroups, PositionSpanGroups, PositionQuantity} from './styles'
+import { Donut } from './Donut'
 
 const GraphicGroup = () => {
     const grupos = [
@@ -43,7 +43,7 @@ const GraphicGroup = () => {
         },
         {
             id: 8,
-            group: 4,
+            group: 6,
         },
     ];
 
@@ -55,17 +55,6 @@ const GraphicGroup = () => {
         [item["group"], item])).values(),
     ];
 
-        const options = {
-        title: "Groups",
-        pieHole: 0.3,
-        is3D: false,
-        slices: {
-            0: { color: "#FFD012" },
-            1: { color: "#07D95A" },
-            2: { color: "#BB1E00" },
-            3: { color: "#0AC9C9" },
-        },
-    };
 
   return (
     <Container>
@@ -92,7 +81,10 @@ const GraphicGroup = () => {
             </PositionTotal> 
         </TotalMembers>
         <MembersPerGroup>
-            <Chart chartType="PieChart" width="200px" height="200px" data={{grupos}} options={options}/>
+            <PositionTitle>
+                <p>Members Per Group</p>
+            </PositionTitle>
+                <Donut />
         </MembersPerGroup>
     </Container>
   )
