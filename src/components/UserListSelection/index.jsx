@@ -3,7 +3,7 @@ import {Box, Title,H1, Input, InputDate, SecondDiv, GuestBox, GuestItems, Conten
 
 // ID: 0018 Component: User list selection
 
-function Planner (){
+function UserListSelection (){
     const client = [
 
         { id : 1,  text : "João da Silva"},
