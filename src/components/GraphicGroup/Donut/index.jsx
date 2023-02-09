@@ -5,7 +5,7 @@ import { Chart } from "react-google-charts";
 export const dataBase = {
 
     names: ["Itáu - Torre 1", "Itáu - Torre 2", "Itáu - Torre 3", "Automação Sustentada"],
-    groups: [25, 25, 25, 25]
+    groups: [40, 20, 20, 20]
 
 };
 
@@ -24,17 +24,11 @@ data.unshift(arrIndice);
 
 export const options = {
   backgroundColor: '#F5F7FA',
-  graphic: {
-    area: {left: '200px'},
-  },
   pieHole: 0.6,
   is3D: false,
   legend: 'left',
   pieSliceText: 'value',
-  StyleTitleStyle: {
-    fontName: 'Houschka Rounded Alt',
-    fontSize: 20,
-  },
+  chartArea: {left: 75, top: 75, right: 0, bottom: 50},
   slices: { 
     0: { offset: 0.02, color: "#FFD012"},
     1: { offset: 0.02, color: "#07D95A"  },
@@ -48,7 +42,7 @@ export function Donut() {
   return (
       <Chart
       chartType="PieChart"
-      width="440px"
+      width="437px"
       height="300px"
       data={data}
       options={options}
