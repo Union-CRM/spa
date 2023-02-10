@@ -31,7 +31,7 @@ export const Card = styled.div`
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
     :hover {
         transition: 0.5s;
-        transform: scale(1.1);
+        transform: scale(1.07);
     }
 `
 export const Status = styled.div`

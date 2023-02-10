@@ -1,42 +1,25 @@
 import styled from 'styled-components'
 
 export const BoardStyle = styled.div`
-    height: 797px;
+    height: 780px;
+    width: 700px;
     display: grid;
     align-content: flex-start;
     background: rgba(255, 255, 255, 0.8);
-    position: absolute;
+    position: relative;
     grid-template-columns: 48% 48%;
+    margin-top: 20px;
     grid-row: 2;
-    margin-top: 5px;
     margin-right: 500px;
     border-radius: 8px;
-    &::-webkit-scrollbar{
-        width: 15px;
-        height: 10px;
-        margin-right: 10px;
-    }
-
-    &::-webkit-scrollbar-track{
-         box-shadow: 5px black;
-         border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-track-piece{
-        background-color: #FFFFFF;
-    }
-
-    &::-webkit-scrollbar-thumb{
-        background-color: #AFB2BB;
-        margin-right: 10px;
-    }
-
+    margin-bottom: 20px;
 `
 
 export const H1 = styled.span`
     width: 100%;
     font-family: 'Houschka Rounded Alt';
     font-size: 24px;
+    margin-top: 10px;
     
 `
 
@@ -44,12 +27,11 @@ export const Container = styled.div`
     display: grid;
     grid-template-rows: 9% 91%;
     width: 700px;
-    height: 797px;
+    height: 830px;
     align-content: flex-start;
     background: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
-    position: absolute;
-    grid-row: 2;
+    position: relative;
     overflow: auto;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
     margin-top: 64px;
@@ -79,7 +61,6 @@ export const Container = styled.div`
         border-right: 6px solid white;
         border-top: 12px solid white;
     }
-
 `
 
 export const Line = styled.div`
@@ -87,6 +68,8 @@ export const Line = styled.div`
     height: 0px;
     border: 2px solid #007BFF;
     border-radius: 10px;
+    margin-left: 10px;
+    margin-top: -15px;
 `
 
 export const All = styled.span`
@@ -96,17 +79,20 @@ export const All = styled.span`
 `
 
 export const Header = styled.div`                        
-    margin-top: 12px;
-    margin-left: 40px;
-    height: 30px;
+    margin-bottom: 20px;
+    margin-left: 25px;
+    width: 650px;
+    height: 100px;
     display: grid;
     grid-row: 1;
+    position: fixed;
+    z-index: 1;
+    background-color: #FFFFFF;
 `
 
 export const Finished = styled.span`
     font-family: 'Houschka Rounded Alt';
     font-size: 14px;
-    margin-left: 28px;
     color: #525B75;
 `
 
@@ -118,7 +104,6 @@ export const Spans = styled.div`
 export const Canceled = styled.div`
     font-family: 'Houschka Rounded Alt';
     font-size: 14px;
-    margin-left: 13px;
     color: #525B75;
 `
 
@@ -126,22 +111,24 @@ export const Button = styled.button`
     width: 250px;
     height: 35px;
     display: flex;
+    margin-top: 20px;
     font-family: 'Houschka Rounded Alt';
     font-size: 18px;
     color: #FFFFFF;
-    margin-right: 60px;
+    margin-right: 40px;
     border-radius: 8px;
     background-color: #007BFF;
     border: none;
     cursor: pointer;
     :hover{
         transition: 0.5s;
-        scale: 1.1;
+        scale: 1.07;
     }
 `
 
 export const Top = styled.div`
     display: flex;
+    margin-left: 10px;
 `
 
 export const HowManyFinished = styled.span`
@@ -170,4 +157,50 @@ export const SpanPosition = styled.div`
     margin-left: 8px;
     margin-top: 9px;
     font-size: 16px;
+`
+
+export const ButtonProgress = styled.button`
+    cursor: pointer;
+    border: none;
+    background-color: #FFFFFF;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    &:hover{
+        
+        border-bottom: 2px solid #007BFF;
+    }
+`
+
+
+export const ButtonFinished = styled.button`
+    cursor: pointer;
+    border: none;
+    background-color: #FFFFFF;
+    margin-left: 25px;
+    margin-bottom: 15px;
+    &:hover{
+        
+        border-bottom: 2px solid #007BFF;
+    }
+
+`
+
+export const ButtonCancel = styled.button`
+    cursor: pointer;
+    border: none;
+    background-color: #FFFFFF;
+    margin-left: 16px;
+    margin-bottom: 15px;
+    &:hover{
+        
+        border-bottom: 2px solid #007BFF;
+    }
+
+`
+
+export const LineGray = styled.div`
+    width: 640px;
+    height: 0px;
+    border: 1px solid #D8D8D8 ;
 `
