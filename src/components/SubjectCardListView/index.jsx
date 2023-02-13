@@ -1,7 +1,8 @@
 import React from 'react'
-import { BoardStyle, H1, Container, Header, Top, HowManySubjectList, Button, Line, Spans, All, HowManyAll, Finished, HowManyFinished, Canceled, HowManyCancel, SpanPosition, IconPosition } from './styles'
+import {LineGray, ButtonCancel, ButtonFinished, ButtonProgress, BoardStyle, H1, Container, Header, Top, HowManySubjectList, Button, Line, Spans, All, HowManyAll, Finished, HowManyFinished, Canceled, HowManyCancel, SpanPosition, IconPosition } from './styles'
 import SubjectCard from './CardListView/index'
 import IconSystem from '../../assets/IconSystem'
+import { useState } from 'react'
 
 const SubjectList = () => {
     const subjects = [
@@ -77,20 +78,51 @@ const SubjectList = () => {
             area: "Finanças Risco De Credito Pessoal",
             client: "Bruno Lins", 
         },
+        {
+            id: 9,
+            status: "Finished",
+            title: "Apresentação Institucional TCS",
+            manager: "Gilberto Anderson",
+            topic: "Jornada Digital Itaubers",
+            area: "Finanças Risco De Credito Pessoal",
+            client: "Bruno Lins", 
+        },
     ]
 
     const SubjectsId = subjects.map((item) => {
         return item.id
-      })
+    })
     
     const SubjectsCancel = subjects.filter((item) => {
         return item.status === "Canceled"
-      })
+    })
     
     const SubjectsFinished = subjects.filter((item) => {
         return item.status === "Finished"
-      })
-    
+    })
+
+    const SubjectsProgress = subjects.filter((item) => {
+        return item.status === "Progress"
+    })  
+
+    const cardStatus = {
+        INPROGRESS: "Progress",
+        FINISHED: "Finished",
+        CANCELED: "Canceled",
+    } 
+    const [cards, setCards] = useState(SubjectsProgress)
+
+    const [active, setActive] = useState(cardStatus.INPROGRESS);
+
+    const handleClick = (tabCards, selectedTab) => {
+        setCards(tabCards)
+        setActive(selectedTab)
+    };
+
+    const getTabColor = (status) => {
+        return {borderBottom: active === status ? "2px solid #007BFF" : ""}
+    }
+
       return (
         <Container>
             <Header>
@@ -107,13 +139,20 @@ const SubjectList = () => {
                 </Top>
                 <Line />
                 <Spans>
-                    <All>All (<HowManyAll>{SubjectsId.length}</HowManyAll>)</All>
-                    <Finished>Finished (<HowManyFinished>{SubjectsFinished.length}</HowManyFinished>)</Finished>
-                    <Canceled>Canceled (<HowManyCancel>{SubjectsCancel.length}</HowManyCancel>)</Canceled>
+                    <ButtonProgress key={cardStatus.INPROGRESS} onClick={() => handleClick(SubjectsProgress, cardStatus.INPROGRESS)} style={getTabColor(cardStatus.INPROGRESS)}>
+                        <All>Progress (<HowManyAll>{SubjectsProgress.length}</HowManyAll>)</All>
+                    </ButtonProgress>
+                    <ButtonFinished key={cardStatus.FINISHED} onClick={() => handleClick(SubjectsFinished, cardStatus.FINISHED)} style={getTabColor(cardStatus.FINISHED)}>
+                        <Finished>Finished (<HowManyFinished>{SubjectsFinished.length}</HowManyFinished>)</Finished>
+                    </ButtonFinished>
+                    <ButtonCancel key={cardStatus.CANCELED} onClick={() => handleClick(SubjectsCancel, cardStatus.CANCELED)} style={getTabColor(cardStatus.CANCELED)}>
+                        <Canceled>Canceled (<HowManyCancel>{SubjectsCancel.length}</HowManyCancel>)</Canceled>
+                    </ButtonCancel>
                 </Spans>
+                <LineGray />
             </Header>
             <BoardStyle>
-                {subjects.map(item => (
+                {cards.map(item => (
                 <SubjectCard
                     status={item.status}
                     title={item.title}

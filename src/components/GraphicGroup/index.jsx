@@ -38,12 +38,12 @@ const GraphicGroup = () => {
             group: 4,
         },
         {
-            id: 8,
-            group: 4,
+            id: 9,
+            group: 6,
         },
         {
-            id: 8,
-            group: 6,
+            id: 10,
+            group: 4,
         },
     ];
 
@@ -84,7 +84,7 @@ const GraphicGroup = () => {
             <PositionTitle>
                 <p>Members Per Group</p>
             </PositionTitle>
-                <Donut />
+            <Donut />
         </MembersPerGroup>
     </Container>
   )
