@@ -8,7 +8,7 @@ export const Container = styled.div`
         "PositionTitle PositionTitle"
         "PositionCustomer PositionCustomer"
         "PositionStatus PositionStatus"
-        "PositionField PositionField"
+        "PositionTags PositionTags"
         "ButtonConfirm ButtonConfirm"
         "ButtonCancel ButtonCancel";
     grid-template-rows: 180px 75px 21.5px 345px 55px 80px;
@@ -34,21 +34,12 @@ export const PositionCustomer = styled.div`
     margin-left: 44px;
 `
 
-export const LabelCustomer = styled.label`
-    font-family: 'Houschka Rounded Alt';
-    font-size: 16px;
-    margin-bottom: 2px;
-`
-
-export const InputCustomer = styled.input`
-    width: 500px;
-    height: 40px;
-`
 
 export const PositionStatus = styled.div`
     grid-area: PositionStatus;
-    margin-left: 44px;
-    display: flex;
+    margin-left: 43px;
+    margin-top: 16px;
+    display: grid;
 `
 
 export const ButtonConfirm = styled.div`
@@ -66,12 +57,33 @@ export const ButtonCancel = styled.div`
     margin-top: 20px;
 `
 
-export const PositionFields = styled.div`
-    grid-area: PositionField;
-    margin-left: 300px;
-    display: flex;
+export const PositionTags = styled.div`
+    grid-area: PositionTags;
+    margin-left: 302px;
+    margin-top: -15px;
+    display: grid;
     height: 38px;
     background-color: rgba(0, 0, 0, 0);
     border-radius: 5px;
 
 `
+
+export const SpanTag = styled.span`
+    margin-bottom: 6px;
+    margin-top: -6px;
+    margin-left: 4px;
+`
+
+export const Tag = styled.p`
+    font-family: 'Houschka Rounded Alt';
+    font-size: 16px;
+    margin-top: -2px;
+    margin-left: 2px;
+`
+
+export const Status = styled.p`
+    font-family: 'Houschka Rounded Alt';
+    font-size: 16px;
+    margin-top: -2px;
+`
+

@@ -14,7 +14,7 @@ export const MultiSelect = (props, placeholder, idMultiOption) => {
       <Label>{props.label3}</Label>
       <Select
         isMulti
-        options={options}
+        options={props.options}
         id={props.idMultiOption}
         components={animatedComponents}
         placeholder={props.placeholder}
