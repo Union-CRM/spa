@@ -3,6 +3,7 @@ import SidBar from "./components/SidBar";
 import PlannerCard from "./components/PlannerCard";
 import Home from "./pages/Home";
 import GlobalStyle from "./styles/GlobalStyle";
+import SubjectPage from "./pages/Subject";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/subject" element={<SubjectPage />} />
             <Route path="/sidbar" element={<SidBar />} />
             <Route path="/PlannerCard" element={<PlannerCard />} />
           </Routes>
