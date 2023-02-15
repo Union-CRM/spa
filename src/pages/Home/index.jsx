@@ -1,4 +1,6 @@
 import React from "react";
+import Body from "../../components/Body";
+
 
 class Home extends React.Component {
   render() {
@@ -9,6 +11,7 @@ class Home extends React.Component {
             Substitua este H1 pelo seu codigo durante os testes, depois remova-o
           </h1>
 
+          
         </Body>
       </>
     );

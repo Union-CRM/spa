@@ -4,6 +4,8 @@ import PlannerCard from "./components/PlannerCard";
 import Home from "./pages/Home";
 import GlobalStyle from "./styles/GlobalStyle";
 import SubjectPage from "./pages/Subject";
+import RemarkPage from "./pages/Remark";
+
 
 function App() {
   return (
@@ -15,8 +17,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/subject" element={<SubjectPage />} />
+            <Route path="/remark" element={<RemarkPage />} />
             <Route path="/sidbar" element={<SidBar />} />
             <Route path="/PlannerCard" element={<PlannerCard />} />
+         
           </Routes>
         </div>
       </Router>
