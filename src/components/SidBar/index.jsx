@@ -63,7 +63,7 @@ class SidBar extends React.Component {
               </Li>
             </Slink>
 
-            <Slink to="/home">
+            <Slink to="/subject">
               <Li>
                 <Icon $mode={this.state.sidBartState}>
                   <IconSystem icon="subjects" />
