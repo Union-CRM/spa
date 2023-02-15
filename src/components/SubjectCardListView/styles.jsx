@@ -37,6 +37,7 @@ export const Container = styled.div`
     margin-top: 64px;
     margin-right: 500px;
     border-radius: 8px;
+    margin-top: -10px;
     &::-webkit-scrollbar{
         width: 18px;
         height: 10px;
@@ -203,4 +204,11 @@ export const LineGray = styled.div`
     width: 640px;
     height: 0px;
     border: 1px solid #D8D8D8 ;
+`
+
+export const PositionModal = styled.div`
+    margin-left: 200px;
+`
+
+export const ContainerFather = styled.div`
 `

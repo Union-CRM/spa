@@ -129,7 +129,7 @@ export const Line = styled.div`
     margin-top: 5px;
 `
 
-export const PositionEdit = styled.span`
+export const PositionEdit = styled.div`
     width: 12px;
     height: 12px;
     margin-left: 105px;
@@ -149,4 +149,8 @@ export const PositionRemove = styled.span`
 
 export const Header = styled.div`
     display: flex;
+`
+
+export const Container = styled.div`
+    
 `
