@@ -1,16 +1,17 @@
 import React from 'react'
-import { Card, Status, StatusSpan, Title, Name, Topic, Client, ClientName, Type, Line, Header, PositionEdit, PositionRemove } from './styles'
+import { Card, Status, StatusSpan, Title, Name, Topic, Client, ClientName, Type, Line, Header, PositionEdit, PositionRemove, Container } from './styles'
 import IconSystem from '../../../assets/IconSystem'
 
-const SubjectCard = ({title, manager, topic, area, client, status}) => {
+const SubjectCard = ({title, manager, topic, area, client, status, openModal}) => {
 
   return (
+    <Container>
     <Card $mode={status}>
         <Header>
             <Status $mode={status}>
                 <StatusSpan>{status}</StatusSpan>
             </Status>
-            <PositionEdit>
+            <PositionEdit onClick={openModal}>
                 <IconSystem icon={"paperEdit"} height={'15px'} width={'15px'}/>
             </PositionEdit>
             <PositionRemove>
@@ -37,6 +38,7 @@ const SubjectCard = ({title, manager, topic, area, client, status}) => {
             </ClientName>
         </Client>
     </Card>
+    </Container>
   )
 }
 

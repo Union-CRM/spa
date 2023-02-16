@@ -31,7 +31,7 @@ export const Card = styled.div`
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
     :hover {
         transition: 0.5s;
-        transform: scale(1.1);
+        transform: scale(1.07);
     }
 `
 export const Status = styled.div`
@@ -129,7 +129,7 @@ export const Line = styled.div`
     margin-top: 5px;
 `
 
-export const PositionEdit = styled.span`
+export const PositionEdit = styled.div`
     width: 12px;
     height: 12px;
     margin-left: 105px;
@@ -149,4 +149,8 @@ export const PositionRemove = styled.span`
 
 export const Header = styled.div`
     display: flex;
+`
+
+export const Container = styled.div`
+    
 `
