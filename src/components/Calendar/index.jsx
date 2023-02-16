@@ -53,7 +53,16 @@ export function Calendar() {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   }
 
-  const days = isLeapYear(date.getFullYear()) ? DAYS_LEAP : DAYS;
+  const daysInMonth = isLeapYear(year) ? DAYS_LEAP[month] : DAYS[month];
+  const daysInNextMonth = isLeapYear(year)
+    ? DAYS_LEAP[month + 1]
+    : DAYS[month + 1];
+  let daysToCompleteBlock = 0;
+  if (daysInMonth + startDay > 35) {
+    daysToCompleteBlock = 42 - daysInMonth - startDay;
+  } else {
+    daysToCompleteBlock = 35 - daysInMonth - startDay;
+  }
 
   return (
     <Frame>
@@ -79,13 +88,15 @@ export function Calendar() {
           </ButtonRight>
         </Box>
       </Header>
+
       <Body>
         {DAYS_OF_THE_WEEK.map((d) => (
           <Day key={d}>
             <p>{d}</p>
           </Day>
         ))}
-        {Array(days[month] + startDay)
+
+        {Array(daysInMonth + (startDay + daysToCompleteBlock))
           .fill(null)
           .map((_, index) => {
             const d = index - (startDay - 1);
@@ -98,16 +109,16 @@ export function Calendar() {
               ? DAYS_LEAP[nextMonth]
               : DAYS[nextMonth];
 
-            if (d < 1) {
+            if (index < startDay) {
               return (
                 <Day key={index} isPrevMonth>
                   <ant> {prevMonthDays + d}</ant>
                 </Day>
               );
-            } else if (d > days[month]) {
+            } else if (index >= daysInMonth + startDay && index < 42) {
               return (
                 <Day key={index} isNextMonth>
-                  {d - days[month]}
+                  <ant> {d - daysInMonth}</ant>
                 </Day>
               );
             } else {

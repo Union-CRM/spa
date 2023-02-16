@@ -95,7 +95,7 @@ export const Day = styled.div`
   justify-content: center;
   cursor: pointer;
   font: "Roboto";
-  padding-bottom: 10px;
+
   color: #000000;
 
   ${(props) =>
