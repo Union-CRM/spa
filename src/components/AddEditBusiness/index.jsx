@@ -14,7 +14,7 @@ const AddEditBusiness = ({title}) => {
     const animatedComponents = makeAnimated();
     const [value, setValue] = useState(null);
 
-  const options = [
+  const option = [
     { id: 1, value: "True", label: "True" },
     { id: 2, value: "False", label: "False" },
   ];
@@ -64,7 +64,7 @@ const AddEditBusiness = ({title}) => {
                 </DivBName> 
                 <DivStatus>
                     
-                   <SingleSelect label={"Status"} sizeSingle={"88%"}/>
+                   <SingleSelect label={"Status"} sizeSingle={"88%"} options={option}/>
                 </DivStatus>
             </DivBNameStatus>
 
@@ -81,8 +81,8 @@ const AddEditBusiness = ({title}) => {
         
             <DivButton>
               
-            <BuuttonDefault type={"true"} name={"Save"}></BuuttonDefault>
-            <BuuttonDefault type={"false"} name={"Cancel"}></BuuttonDefault>
+            <BuuttonDefault type={"true"} ></BuuttonDefault>
+            <BuuttonDefault type={"false"} ></BuuttonDefault>
             
             </DivButton>
         
