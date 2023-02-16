@@ -84,7 +84,6 @@ export const Body = styled.div`
   p {
     color: #6e7781;
     font-size: 19.633px;
-    font-weight: 400;
   }
 `;
 export const Day = styled.div`

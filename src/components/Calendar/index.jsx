@@ -52,7 +52,7 @@ export function Calendar() {
   function isLeapYear(year) {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   }
-
+  //prevMonthDays, nextMonthDays
   const daysInMonth = isLeapYear(year) ? DAYS_LEAP[month] : DAYS[month];
   const daysInNextMonth = isLeapYear(year)
     ? DAYS_LEAP[month + 1]
