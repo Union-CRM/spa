@@ -7,15 +7,16 @@ function UserList(props){
         return( 
 
         <UserListComponentSt >
-           
-                
-            <UserListSt>
-                 
-            <H2>Users
-                 <UserCount>{props.userCount}</UserCount>
-            </H2>
-                    <UserItem>{props.user}</UserItem>
-                </UserListSt>
+
+           <UserListSt> 
+
+                <H2>Users
+                <UserCount>{props.userCount} </UserCount>    
+                </H2>
+
+                <UserItem>{props.user}</UserItem>
+
+            </UserListSt>
 
          </UserListComponentSt>
 

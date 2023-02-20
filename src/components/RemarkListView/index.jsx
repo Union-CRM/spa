@@ -35,6 +35,7 @@ function Cards(props) {
         <IconsContainer>
           <button>
             <Editar src={edit} />
+ 
           </button>
           <button onClick={deleteSelectedCard}>
             <Trash src={trash} />

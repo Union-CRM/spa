@@ -6,6 +6,7 @@ export const UserItem = styled.div`
 display: grid;
 grid-template-columns: 15% 100%;
 align-items: center;
+position: relative;
 padding: 15px 21px;
 margin-bottom : 1%;
 gap: 15px;
@@ -20,7 +21,7 @@ border-radius: 8px;
 
 
 export const ImageUser = styled.div`
-
+position: relative;
 width:  65px;
 height: 65px;
 background-color: darkgray;
@@ -29,7 +30,7 @@ border-radius: 50%;
 `;
 
 export const NameUser = styled.h3`
-
+position: relative;
 font-family: 'Houschka Rounded Alt';
 font-style: normal;
 font-weight: 600;
@@ -40,7 +41,7 @@ color: rgba(0, 0, 0, 0.8);
 `;
 
 export const IdUser = styled.p`
-
+position: relative;
 font-family: 'Houschka Rounded Alt';
 font-style: normal;
 font-weight: 500;

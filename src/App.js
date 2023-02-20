@@ -17,8 +17,10 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/client" element={<Client />} />
             <Route path="/subject" element={<SubjectPage />} />
+            <Route path="/remark" element={<RemarkPage />} />
             <Route path="/sidbar" element={<SidBar />} />
             <Route path="/PlannerCard" element={<PlannerCard />} />
+         
           </Routes>
         </div>
       </Router>

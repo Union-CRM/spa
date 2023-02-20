@@ -15,6 +15,19 @@ export const Button = styled.button`
           color: #e41165;
           border: solid 1px #e41165;
         `;
+        case "col":
+          return css`
+          background-color: #007BFF;
+          color: #e3e6ed;
+          border: solid 1px #007BFF;
+        `;
+
+        case "col2":
+          return css`
+          background-color: #e3e6ed;
+          color: #007BFF ;
+          border: solid 1px #007BFF  ;
+        `;
       default:
         return css`
           background-color: #bebebe;
