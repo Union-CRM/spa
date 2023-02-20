@@ -178,7 +178,7 @@ export const ButtonFinished = styled.button`
     cursor: pointer;
     border: none;
     background-color: #FFFFFF;
-    margin-left: 25px;
+    margin-left: 5px;
     margin-bottom: 15px;
     &:hover{
         
