@@ -1,9 +1,8 @@
 import React, { memo } from "react";
 import { Editar, Trash } from "../Remark/styles";
-import trash from "../../imagens/trash.svg";
-import peopleTeams from "../../assets/svg/peopleTeams.svg";
-import contact from "../../assets/svg/contact.svg";
-import paperEdit from "../../assets/svg/paperEdit.svg";
+import PeopleTeams from "../../assets/svg/PeopleTeams.svg";
+import Contact from "../../assets/svg/Contact.svg";
+import PaperEdit from "../../assets/svg/PaperEdit.svg";
 import {
   Container,
   Description,
@@ -32,17 +31,17 @@ const CardGroup = memo(() => {
 
         <div>
           <IconButton>
-            <Trash height={14} src={trash} />
+            <Trash height={14} src={Trash} />
           </IconButton>
           <IconButton>
-            <Editar height={14} src={paperEdit} />
+            <Editar height={14} src={PaperEdit} />
           </IconButton>
         </div>
       </TopContainer>
 
       
         <Content>
-        <PeopleImage src={peopleTeams} />
+        <PeopleImage src={PeopleTeams} />
 
         <Description>Fabrica Itau - Torre 1</Description>
         <TeamsContainer>
@@ -50,7 +49,7 @@ const CardGroup = memo(() => {
 
           <AvatarContainer>
       {showingUsers.map((user, index) => (
-        <Avatar key={index} position={index} src={contact} />
+        <Avatar key={index} position={index} src={Contact} />
       ))}
       {hiddenUsersText}
     </AvatarContainer>

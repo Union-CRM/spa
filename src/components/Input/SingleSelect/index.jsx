@@ -7,7 +7,6 @@ export const SingleSelect = (props) => {
   const animatedComponents = makeAnimated();
   const [value, setValue] = useState(null);
 
-  const options = props.option;
 
   return (
     <>

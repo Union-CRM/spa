@@ -7,13 +7,14 @@ import InputWithName from '../Input/InputWithName'
 import makeAnimated from "react-select/animated";
 import { TagComponent } from '../TagComponent'
 import SingleSelect from '../Input/SingleSelect'
+import DoubleInput from '../Input/DoubleInput'
 
 
 const AddEditBusiness = ({title}) => {
     const animatedComponents = makeAnimated();
     const [value, setValue] = useState(null);
 
-  const options = [
+  const option = [
     { id: 1, value: "True", label: "True" },
     { id: 2, value: "False", label: "False" },
   ];
@@ -59,11 +60,11 @@ const AddEditBusiness = ({title}) => {
              
                 
                 <DivBName >
-                    <InputWithName label={"Bussines Name"} width={"100%"} />
+                    <DoubleInput label={"Bussines Name"} width={"100%"} />
                 </DivBName> 
                 <DivStatus>
                     
-                   <SingleSelect width={"86%"}/>
+                   <SingleSelect label={"Status"} sizeSingle={"88%"} options={option}/>
                 </DivStatus>
             </DivBNameStatus>
 
@@ -80,8 +81,8 @@ const AddEditBusiness = ({title}) => {
         
             <DivButton>
               
-            <BuuttonDefault type={"true"} name={"Save"}></BuuttonDefault>
-            <BuuttonDefault type={"false"} name={"Cancel"}></BuuttonDefault>
+            <BuuttonDefault type={"true"} ></BuuttonDefault>
+            <BuuttonDefault type={"false"} ></BuuttonDefault>
             
             </DivButton>
         
