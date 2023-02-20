@@ -54,7 +54,7 @@ class SidBar extends React.Component {
                 </Icon>
               </Li>
             </Slink>
-            <Slink to="/home">
+            <Slink to="/client">
               <Li>
                 <Icon $mode={this.state.sidBartState}>
                   <IconSystem icon="client" />

@@ -51,7 +51,7 @@ export const DivBNameStatus = styled.div`
 `;
 export const DivStatus = styled.div`
 grid-area: 1 / 2 / 2 / 2;
-margin-top: 26px;
+margin-top: 12px;
     
 
 `;
@@ -94,5 +94,57 @@ export const DivCode = styled.div`
 
 `;
 
+export const HowManyActive = styled.span`
+    color: #00953B;
+`
+
+export const HowManyInactive = styled.span`
+    color: #771300;
+`
 
 
+
+
+export const HowManySubjectList = styled.span`
+    color: #525B75;
+`
+
+export const HowManyCancel = styled.div`
+    margin-left:20px;
+
+
+`;
+
+export const Finished = styled.div`
+    margin-left:20px;
+
+
+`;
+export const ButtonFinished = styled.div`
+    margin-left:20px;
+
+
+`;
+export const HowManyAll = styled.div`
+    margin-left:20px;
+
+
+`;
+export const ButtonProgress = styled.button`
+    margin-left:20px;
+
+
+`;
+export const Canceled = styled.div`
+    margin-left:20px;
+
+
+`;
+
+export const H1 = styled.span`
+    width: 100%;
+    font-family: 'Houschka Rounded Alt';
+    font-size: 24px;
+    margin-top: 10px;
+    
+`
