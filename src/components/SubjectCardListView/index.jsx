@@ -59,7 +59,7 @@ const SubjectList = () => {
                     <H1>Subjects List <HowManySubjectList>({SubjectsId.length})</HowManySubjectList></H1>
                     <Button onClick={() => createSubject()}>
                         <IconPosition>
-                            <IconSystem icon={"Add2"} height={'12px'} width={'12px'}/>
+                            <IconSystem icon={"add2"} height={'12px'} width={'12px'}/>
                         </IconPosition>
                         <SpanPosition>
                             <span>Create Subject</span>

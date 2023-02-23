@@ -25,7 +25,7 @@ const SubjectCard = ({email,client,status,textRole,textCostumer,textBusiness,tex
                 </Status>
 
                 <Status $mode={status}>
-                    <StatusSpan> Tags <IconSystem icon={"TaskRegular"} width={"10px"} height={"10px"}/></StatusSpan>
+                    <StatusSpan> Tags <IconSystem icon={"taskRegular"} width={"10px"} height={"10px"}/></StatusSpan>
                 </Status>
                 
                 <DivIcons>
@@ -34,7 +34,7 @@ const SubjectCard = ({email,client,status,textRole,textCostumer,textBusiness,tex
                         <LabelToggle $mode={status} for="option"><Span></Span></LabelToggle>
                     </DivToggle>
                     <IconEdit>
-                        <IconSystem icon={"Edit"} height={'15px'} width={'15px'}/>
+                        <IconSystem icon={"edit"} height={'15px'} width={'15px'}/>
                     </IconEdit>
                 </DivIcons>
                 
