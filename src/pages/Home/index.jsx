@@ -3,7 +3,7 @@ import Body from "../../components/Body";
 
 
 import AddEditBusiness from "../../components/AddEditBusiness";
-import Body from "../../components/Body";
+
 
 
 class Home extends React.Component {

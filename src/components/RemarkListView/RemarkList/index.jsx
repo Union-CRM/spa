@@ -6,17 +6,23 @@ import { useState } from 'react'
 import Remark from '../../RemarkModal'
 import {remarksMock as remarksList} from '../RemarkData';
 import {cardStatusMock as cardStatus} from '../RemarkData/Status';
+import Discard from '../../ModalDiscard'
 
-const RemarksId =     remarksList.map(item => item.id)
+
+const RemarksId = remarksList.map(item => item.id)
 const RemarksCancel = remarksList.filter(item => item.status === "Canceled")
 const RemarksFinished = remarksList.filter(item => item.status === "Finished")
-const RemarksProgress = remarksList.filter(item => item.status === "Progress") 
+
+
+
 
 const RemarkList = () => {
-    const [cards, setCards] = useState(RemarksProgress)
+
+    const [cards, setCards] = useState(RemarksFinished)
     const [active, setActive] = useState(cardStatus.INPROGRESS);
     const [modal, setModal] = useState(false)
     const [isEdit, setEdit] = useState(false)
+    const [modalDiscard,setModalDiscard] = useState(false);
 
     const handleClick = (tabCards, selectedTab) => {
         setCards(tabCards)
@@ -29,14 +35,18 @@ const RemarkList = () => {
     
     const createRemark= () => {
         setModal(true);
+        setModalDiscard(false);
         setEdit(false);
     }
 
+    
     const EditRemark = () => {
         setModal(true);
+        setModalDiscard(false);
         setEdit(true);
     }
 
+ 
     const getRemarkCards = () => {
         return cards.map(item => (
             <RemarkCard
@@ -48,11 +58,13 @@ const RemarkList = () => {
                 area={item.area}
                 client={item.client}
                 openModal={() => EditRemark()}
+                setModalDiscard={setModalDiscard}
+                opennedModal={setModal}
                 /> 
             ))
     }
       return (
-        <ContainerFather>
+    <ContainerFather>
         <Container>
             <Header>
                 <Top>
@@ -68,14 +80,12 @@ const RemarkList = () => {
                 </Top>
                 <Line />
                 <Spans>
-                    <ButtonProgress key={cardStatus.INPROGRESS} onClick={() => handleClick(RemarksProgress, cardStatus.INPROGRESS)} style={getTabColor(cardStatus.INPROGRESS)}>
-                    </ButtonProgress>
                     <ButtonFinished key={cardStatus.FINISHED} onClick={() => handleClick(RemarksFinished, cardStatus.FINISHED)} style={getTabColor(cardStatus.FINISHED)}>
                         <Finished>Finished (<HowManyFinished>{RemarksFinished.length}</HowManyFinished>)</Finished>
                     </ButtonFinished>
                     <ButtonCancel key={cardStatus.CANCELED} onClick={() => handleClick(RemarksCancel, cardStatus.CANCELED)} style={getTabColor(cardStatus.CANCELED)}>
                         <Canceled>Canceled (<HowManyCancel>{RemarksCancel.length}</HowManyCancel>)</Canceled>
-                    </ButtonCancel>
+                    </ButtonCancel>  
                 </Spans>
                 <LineGray />
             </Header>
@@ -83,7 +93,11 @@ const RemarkList = () => {
                 {getRemarkCards()}   
             </BoardStyle>
         </Container>
-            {modal && <Remark setModal={setModal} title={isEdit ? "Edit Remark" : "Create Remark"} /*content={CARD QUE VC CLICOU}*/ />}
+
+           {modal && <Remark setModal={setModal} 
+           title={isEdit ? "Edit Remark" : "Create Remark"} />}
+           {modalDiscard && <Discard setModal={setModalDiscard}  />}
+           
         </ContainerFather>
   )
 }
