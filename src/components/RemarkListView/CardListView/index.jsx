@@ -1,11 +1,19 @@
-import React from 'react'
-import { Card, Status, StatusSpan, Title, Name, Topic, Client, ClientName, Type, Line, Header, PositionEdit, PositionRemove, Container } from './styles'
+import {React,useState} from 'react'
+import { Card, Status, StatusSpan, Title, Name, Topic, Client, ClientName, Type, Line, Header, PositionEdit, PositionRemove, Container} from './styles'
 import IconSystem from '../../../assets/IconSystem'
 
-const RemarkCard = ({title, manager, topic, area, client, status, openModal}) => {
+const RemarkCard = ({title, manager, topic, area, client, status, openModal,setModalDiscard,opennedModal }) => {
 
+ 
+
+    const discardRemark=() =>{
+        setModalDiscard(true);
+        opennedModal(false);
+       console.log("Funcionou");
+    }
   return (
     <Container>
+        
     <Card $mode={status}>
         <Header>
             <Status $mode={status}>
@@ -13,10 +21,13 @@ const RemarkCard = ({title, manager, topic, area, client, status, openModal}) =>
             </Status>
             <PositionEdit onClick={openModal}>
                 <IconSystem icon={"paperEdit"} height={'15px'} width={'15px'}/>
+                
             </PositionEdit>
-            <PositionRemove>
-                <IconSystem icon={"delete"} height={'15px'} width={'15px'}/>
-            </PositionRemove>
+            <PositionRemove onClick={() => discardRemark()}>
+        <IconSystem icon={"delete"} height={'15px'} width={'15px'}/>
+            
+        </PositionRemove>
+        
         </Header>
         <Title>
             <strong>
@@ -38,7 +49,9 @@ const RemarkCard = ({title, manager, topic, area, client, status, openModal}) =>
             </ClientName>
         </Client>
     </Card>
+    
     </Container>
+             
   )
 }
 

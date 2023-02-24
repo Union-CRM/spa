@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import GlobalStyle from "./styles/GlobalStyle";
 import SubjectPage from "./pages/Subject";
 import Client from "./pages/Client";
+import RemarkPage from "./pages/Remark";
 
 function App() {
   return (
