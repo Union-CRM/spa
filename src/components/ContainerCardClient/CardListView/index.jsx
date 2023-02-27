@@ -62,39 +62,37 @@ const SubjectCard = ({
 
           <Status $mode={status}>
             <TagsSpan>
-              {" "}
-              Tags{" "}
+              
+              Tags
               <IconSystem icon={"taskRegular"} width={"10px"} height={"10px"} />
             </TagsSpan>
           </Status>
-
-          <DivIcons>
-            <DivToggle $mode={status}>
-              <InputToggle type="checkbox" name="option" id="option" />
-              <LabelToggle $mode={status} for="option">
-                <Span></Span>
-              </LabelToggle>
-            </DivToggle>
-            <IconEdit>
-              <IconSystem icon={"edit"} height={"15px"} width={"15px"} />
-            </IconEdit>
-          </DivIcons>
-        </Header>
+                
+                <DivIcons>
+                    <DivToggle $mode={status} >
+                        <InputToggle  type="checkbox" name="option" id="option" />
+                        <LabelToggle $mode={status} for="option"><Span></Span></LabelToggle>
+                    </DivToggle>
+                    <IconEdit>
+                        <IconSystem icon={"edit"} height={'15px'} width={'15px'}/>
+                    </IconEdit>
+                </DivIcons>                
+            </Header>     
 
         <Topic>
           <DivText>
             <TitleText>Role</TitleText>
             <Lline>|</Lline>
             <LineText>
-              {" "}
-              <Subtitle type={"TextMed"} name={textRole} />{" "}
+         
+              <Subtitle type={"TextMed"} name={textRole} />
             </LineText>
           </DivText>
           <DivText>
             <TitleText>Costumer</TitleText>
             <Lline>|</Lline>
             <LineText>
-              {" "}
+            
               <Subtitle type={"TextMed"} name={textCostumer} />
             </LineText>
           </DivText>
@@ -102,14 +100,14 @@ const SubjectCard = ({
             <TitleText>Business</TitleText>
             <Lline>|</Lline>
             <LineText>
-              <Subtitle type={"TextMed"} name={textBusiness} />{" "}
+              <Subtitle type={"TextMed"} name={textBusiness} />
             </LineText>
           </DivText>
           <DivText>
             <TitleText>Release Train</TitleText>
             <Lline>|</Lline>
             <LineText>
-              <Subtitle type={"TextMed"} name={textRelease} />{" "}
+              <Subtitle type={"TextMed"} name={textRelease} />
             </LineText>
           </DivText>
         </Topic>
