@@ -15,18 +15,18 @@ export const Button = styled.button`
           color: #e41165;
           border: solid 1px #e41165;
         `;
-        case "col":
-          return css`
-          background-color: #007BFF;
+      case "col":
+        return css`
+          background-color: #007bff;
           color: #e3e6ed;
-          border: solid 1px #007BFF;
+          border: solid 1px #007bff;
         `;
 
-        case "col2":
-          return css`
+      case "col2":
+        return css`
           background-color: #e3e6ed;
-          color: #007BFF ;
-          border: solid 1px #007BFF  ;
+          color: #007bff;
+          border: solid 1px #007bff;
         `;
       default:
         return css`
@@ -36,6 +36,8 @@ export const Button = styled.button`
   }}
   width: 240px;
   height: 50px;
+  font-size: ${(props) => props.sizeFont || "12px"};
+  font-weight: ${(props) => props.weightFont || "400"};
   margin-left: 8%;
   border-radius: 0.5em;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);

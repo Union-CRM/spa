@@ -5,11 +5,9 @@ export const Container = styled.div`
   grid-column: ${(props) => props.$column};
   grid-row: ${(props) => props.$row};
   width: ${(props) => (props.$mode ? "80px" : "186px")};
-
   display: grid;
   grid-template-rows: 50px 100px 162px 295px 417px;
-  height: 1024px;
-
+  height: 100vh;
   background: #1e2222;
   box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0px 8px 8px 0px;
@@ -32,7 +30,7 @@ export const Logout = styled.button`
   height: fit-content;
   width: fit-content;
   grid-row: 5;
-  margin-top: auto;
+  margin-top: 28vh;
   margin-bottom: 55px;
   border: none;
   margin-left: ${(props) => (props.$mode ? "25px" : "55px")};

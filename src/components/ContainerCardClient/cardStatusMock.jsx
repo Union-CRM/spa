@@ -1,4 +1,4 @@
 export const cardStatusMock = {
-    ACTIVE: "Active",
-    INACTIVE: "Inactive",
-}
+  ACTIVE: "Active",
+  INACTIVE: "Inactive",
+};

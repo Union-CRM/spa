@@ -12,10 +12,10 @@ const SubjectCard = ({title, manager, topic, area, client, status, openModal}) =
                 <StatusSpan>{status}</StatusSpan>
             </Status>
             <PositionEdit onClick={openModal}>
-                <IconSystem icon={"PaperEdit"} height={'15px'} width={'15px'}/>
+                <IconSystem icon={"paperEdit"} height={'15px'} width={'15px'}/>
             </PositionEdit>
             <PositionRemove>
-                <IconSystem icon={"Delete"} height={'15px'} width={'15px'}/>
+                <IconSystem icon={"delete"} height={'15px'} width={'15px'}/>
             </PositionRemove>
         </Header>
         <Title>

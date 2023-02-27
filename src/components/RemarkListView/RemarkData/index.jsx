@@ -28,7 +28,7 @@ export const remarksMock = [
     },
     {
         id: 4,
-        status: "Progress",
+        status: "Finished",
         title: "Apresentação Institucional TCS",
         manager: "Gilberto Anderson",
         topic: "Jornada Digital Itaubers",
@@ -37,7 +37,7 @@ export const remarksMock = [
     },
     {
         id: 5,
-        status: "Progress",
+        status: "Finished",
         title: "Apresentação Institucional TCS",
         manager: "Gilberto Anderson",
         topic: "Jornada Digital Itaubers",
@@ -55,7 +55,7 @@ export const remarksMock = [
     },
     {
         id: 7,
-        status: "Progress",
+        status: "Canceled",
         title: "Apresentação Institucional TCS",
         manager: "Gilberto Anderson",
         topic: "Jornada Digital Itaubers",
@@ -64,7 +64,7 @@ export const remarksMock = [
     },
     {
         id: 8,
-        status: "Finished",
+        status: "Canceled",
         title: "Apresentação Institucional TCS",
         manager: "Gilberto Anderson",
         topic: "Jornada Digital Itaubers",

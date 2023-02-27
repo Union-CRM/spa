@@ -1,5 +1,7 @@
 import React from 'react'
-import { Container, PositionTitle, SpanTitle, PositionInputRelease, PositionSingleSelect, PositionInputName, PositionInputEmail, PositionInputSubject, SpanDiv, Span, TextBox, PositionButtonSave, PositionButtonCancel } from './styles'
+import { Container, PositionTitle, SpanTitle, PositionInputRelease, PositionSingleSelect,
+     PositionInputName, PositionInputEmail, PositionInputSubject, Span, TextBox,
+      PositionButtonSave, PositionButtonCancel, Input,Date,Note,Div,Buttons} from './styles'
 import InputPlaceHolder from '../Input/InputPlaceholder'
 import SingleSelect from '../Input/SingleSelect'
 import ButtonDefault from '../../assets/Buttons/ButtonDefault'
@@ -24,12 +26,6 @@ const Remark = ({title, setModal, content}) => {
                     {title}
                 </SpanTitle> 
             </PositionTitle>
-            <PositionInputRelease>
-                <InputPlaceHolder /*value={content.RelaseTrain}*/ label="Release Train"/>
-            </PositionInputRelease>
-            <PositionSingleSelect>
-                <SingleSelect options={values} label="Business"/>
-            </PositionSingleSelect>
             <PositionInputName>
                 <InputPlaceHolder label="Client Name" />
             </PositionInputName>
@@ -39,18 +35,42 @@ const Remark = ({title, setModal, content}) => {
             <PositionInputSubject>
                 <InputPlaceHolder label="Subject" />
             </PositionInputSubject>
-            <SpanDiv>
-                <Span>
-                    Text
-                </Span>
-            </SpanDiv>
-            <TextBox placeholder="olá"/>
-            <PositionButtonSave onClick={saveModal}>
-                <ButtonDefault type="col"  name={"Save"}/>
-            </PositionButtonSave>
-            <PositionButtonCancel onClick={closeModal}>
-                <ButtonDefault type="col2" name={"Cancel"}/>
-            </PositionButtonCancel>
+            <PositionSingleSelect>
+                <SingleSelect options={values} label="Business"/>
+            </PositionSingleSelect>
+            <PositionInputRelease>
+                <InputPlaceHolder /*value={content.RelaseTrain}*/ label="Relase Train"/>
+            </PositionInputRelease>
+            
+            
+        <Div>
+            <Date>
+                    <span>Date</span>
+                    <Input type="date" />
+                    <br></br>
+                    <span>Date Return</span>
+                    <Input type="date" />
+                </Date>
+            
+        
+                <Note>
+                        <Span>Note Text</Span>
+                        <TextBox placeholder="aaaaa"/>
+                    </Note>
+            </Div>
+
+            <br></br>
+        
+            <Buttons>
+                <PositionButtonSave onClick={saveModal}>
+                    <ButtonDefault type="col"  name={"Save"}/>
+                </PositionButtonSave>
+                <PositionButtonCancel onClick={closeModal}>
+                    <ButtonDefault type="col2" name={"Cancel"}/>
+                </PositionButtonCancel>
+            </Buttons>
+            <br></br>
+       
         </Container>
     )
 }

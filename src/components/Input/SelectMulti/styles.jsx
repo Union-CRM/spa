@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Label = styled.label`
+  padding-left: 0px;
   margin-top: 10px;
   font-style: normal;
   font-weight: 500;
