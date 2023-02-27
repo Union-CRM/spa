@@ -2,11 +2,12 @@ import React from "react";
 import { Card, H1, Box, BoxInput, Div, DivBox } from "./styles";
 import FieldsGroupCard from "../Input/FieldsGroupCard";
 import ButtonDefault from "../../assets/Buttons/ButtonDefault";
+import Headline from "../FontSystem/Headline";
 
 const EditGroup = (props, title) => {
   return (
     <Card>
-      <H1> {props.title}</H1>
+      <Headline type={"Headline3"} name={title} />
       <FieldsGroupCard
         label={"Name"}
         label2={"Costumers"}

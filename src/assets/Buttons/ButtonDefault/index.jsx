@@ -6,7 +6,13 @@ class ButtonDefault extends React.Component {
   render() {
     return (
       <>
-        <Button $mode={this.props.type}>{this.props.name}</Button>
+        <Button
+          $mode={this.props.type}
+          weightFont={this.props.weightFont}
+          sizeFont={this.props.sizeFont}
+        >
+          {this.props.name}
+        </Button>
       </>
     );
   }

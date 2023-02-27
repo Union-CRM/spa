@@ -8,12 +8,15 @@ const InputWithName = (props) => {
   return (
     <>
       <Container>
-        <Label>{props.label}</Label>
-        <Input
-          type="text"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
+        <Label>
+          {props.label}
+          <Input
+            type="text"
+            widthInput={props.widthInput}
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+          />
+        </Label>
       </Container>
     </>
   );
