@@ -6,6 +6,8 @@ export const Button = styled.button`
   border: none;
   width: ${(props) => props.$width || "fit - content"};
   height: ${(props) => props.$height || "50px"};
+  font-size: ${(props) => props.sizeFont || "12px"};
+  font-weight: ${(props) => props.weightFont || "400"};
   padding: 15px;
   display: flex;
   align-items: center;

@@ -1,99 +1,98 @@
-import React from 'react'
-import { Container, PositionTitle, SpanTitle, DivEmailRole, DivEmail, DivRole,DivCostumer,NameClient,
-    DivBussines,DivRelease,DivTagStatus,DivStatus,SubTitle,DivButton,Buttton} from './styles'
-import InputPlaceHolder from '../Input/InputPlaceholder'
-import SingleSelect from '../Input/SingleSelect'
-import ButtonDefault from '../../assets/Buttons/ButtonDefault'
-import DoubleInput from '../Input/DoubleInput'
+import React from "react";
+import {
+  Container,
+  PositionTitle,
+  SpanTitle,
+  DivDouble,
+  DivButton,
+  Buttton,
+  DivSingle,
+} from "./styles";
 
-import { TagComponent } from '../TagComponent'
+//inputs component
+import SingleSelect from "../Input/SingleSelect";
+import ButtonDefault from "../../assets/Buttons/ButtonDefault";
+import InputWithName from "../Input/InputWithName";
+import { TagComponent } from "../TagComponent";
+
+const options = [
+  { value: 1, label: "Phellype Flaibam", color: "#3ddc97" },
+  { value: 2, label: "Carlos Costa", color: "#ACD4FF" },
+  { value: 3, label: "Alexandre Sarda", color: "#FFE60082" },
+  { value: 4, label: "Patricia Melo", color: "#FFB2D1" },
+];
 
 const option = [
-    { id: 1, value: "True", label: "True" },
-    { id: 2, value: "False", label: "False" },
-  ];
+  { id: 1, value: "True", label: "True" },
+  { id: 2, value: "False", label: "False" },
+];
 
-  
-  
-const Subject = ({title, setModal}) => {
+const AddEditClient = ({ title, setModal, props }) => {
+  const closeModal = () => {
+    setModal(false);
+  };
+  const saveModal = () => {
+    setModal(false);
+  };
 
-    const closeModal = () => {
-            setModal(false);
-        }
-        const saveModal = () => {
-            setModal(false);
-        }
-   
-    return (
-        <Container>
-            <PositionTitle>
-                <SpanTitle>
-                    {title}
-                </SpanTitle> 
-            </PositionTitle>
+  return (
+    <Container>
+      <PositionTitle>
+        <SpanTitle>{title}</SpanTitle>
+      </PositionTitle>
 
-            <NameClient>
-                <InputPlaceHolder  label="Client Name "/>
-            </NameClient>
-            
-            <DivEmailRole>
-             
-                
-                <DivEmail>
-                    <DoubleInput label={"E-mail"} width={"100%"} />
-                </DivEmail> 
+      <InputWithName label="Client Name" widthInput={"77.5%"} />
 
-                <DivRole>
-                    
-                   <SingleSelect label={"Role"} sizeSingle={"78%"} options={option}/>
-                </DivRole>
-            </DivEmailRole>
+      <DivDouble>
+        <InputWithName label="Email" widthInput={"240px"} />
 
-            <DivCostumer>
-                    
-                    <SingleSelect label={"Costumer"} sizeSingle={"92%"} options={option}/>
-            </DivCostumer>
+        <DivSingle>
+          <SingleSelect label={"Role"} sizeSingle={"240px"} options={option} />
+        </DivSingle>
+      </DivDouble>
 
-            <DivBussines>
-                <InputPlaceHolder  label="Bussines"/>
-            </DivBussines>
+      <SingleSelect label={"Customer"} sizeSingle={"79.7%"} options={option} />
 
-            <DivRelease>
-                    
-                    <SingleSelect label={"Release Train"} sizeSingle={"92%"} options={option}/>
-            </DivRelease>
+      <InputWithName label="Business" widthInput={"77.5%"} />
 
-           <DivTagStatus>
-             <SubTitle>Tag</SubTitle> 
-                <TagComponent/>
-               
-                <DivStatus>
-                   <SingleSelect label={"Status"} sizeSingle={"46%"} options={option}/>
-                </DivStatus>
-           </DivTagStatus>
+      <SingleSelect
+        label={"Release Train"}
+        sizeSingle={"79.7%"}
+        options={option}
+      />
 
+      <TagComponent
+        options={options}
+        label={"Status"}
+        widths={"289px"}
+        width={"192px"}
+        left={"220px"}
+        heights={"35px"}
+        topValue={"-3px"}
+      />
 
+      <SingleSelect label={"Status"} sizeSingle={"192px"} options={option} />
 
+      <DivButton>
+        <Buttton onClick={saveModal}>
+          <ButtonDefault
+            type={"col"}
+            weightFont={"500"}
+            sizeFont={"18px"}
+            name={"Save"}
+          />
+        </Buttton>
+        <Buttton onClick={closeModal}>
+          <ButtonDefault
+            type={"col2"}
+            weightFont={"500"}
+            sizeFont={"18px"}
+            name={"Cancel"}
+          />
+        </Buttton>
+      </DivButton>
+    </Container>
+  );
+};
 
-
-           
-
-
-
-            <DivButton>
-              
-                <Buttton onClick={saveModal}>
-                    <ButtonDefault  type={"true"} name={"Save"}/>
-                </Buttton>
-                <Buttton onClick={closeModal}>
-                    <ButtonDefault type={"False"} name={"Cancel"}/>
-                </Buttton>
-                
-              
-              </DivButton>
-            
-        </Container>
-    )
-}
-
-export default Subject
+export default AddEditClient;

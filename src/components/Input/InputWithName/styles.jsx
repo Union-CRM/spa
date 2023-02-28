@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Input = styled.input`
   height: 35px;
-  width: 500px;
+  width: ${(props) => props.widthInput || "500px"};
   border-radius: 5px;
   border: 2px solid #d9d9d9;
   background-color: rgba(0, 0, 0, 0);
@@ -19,6 +19,7 @@ export const Container = styled.div`
   margin-bottom: 15px;
   background-color: rgba(0, 0, 0, 0);
 `;
+
 export const Label = styled.label`
   padding-left: 0px;
   margin-top: 10px;
