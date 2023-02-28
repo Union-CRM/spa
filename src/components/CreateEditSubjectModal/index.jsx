@@ -62,7 +62,8 @@ const Subject = ({ title, setModal, content }) => {
         <ButtonDefault type={"userSave"} name={"Save"} />
       </PositionButtonSave>
       <PositionButtonCancel onClick={closeModal}>
-        <ButtonDefault type={"userCancel"} name={"Cancel"} />
+      <ButtonDefault type={"userCancel"} name={"Cancel"} />
+
       </PositionButtonCancel>
     </Container>
   );

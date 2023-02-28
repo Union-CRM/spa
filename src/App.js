@@ -19,9 +19,8 @@ function App() {
             <Route path="/client" element={<Client />} />
             <Route path="/subject" element={<SubjectPage />} />
             <Route path="/remark" element={<RemarkPage />} />
-            <Route path="/sidbar" element={<SidBar />} />
-            <Route path="/plannerCard" element={<PlannerCard />} />
-         
+            <Route path="/sidbar" element={<SidBar />} />         
+            <Route path="/planner" element={<PlannerCard />} />
           </Routes>
         </div>
       </Router>
