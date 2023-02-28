@@ -9,20 +9,17 @@ import {
   Header,
   Top,
   HowManySubjectList,
-  Button,
   Line,
   Spans,
   Active,
   HowManyActive,
   Inactive,
   HowManyInactive,
-  SpanPosition,
-  IconPosition,
-  ContainerFather,
+  ContainerFather,DivButton,
 } from "./styles";
 import SubjectCard from "./CardListView/index";
 import AddEditClient from "../AddEditClient";
-import IconSystem from "../../assets/IconSystem";
+import ButtonAdd from "../../assets/Buttons/ButtonAdd"
 import { useState } from "react";
 import { subjectsMock as subjectsList } from "./subjectListMock";
 import { cardStatusMock as cardStatus } from "./cardStatusMock";
@@ -79,14 +76,9 @@ const ContainerCards = () => {
             <Header>
                 <Top>
                     <H1>Client List <HowManySubjectList>({SubjectsId.length})</HowManySubjectList></H1>
-                    <Button onClick={() => createClient()}>
-                        <IconPosition>
-                            <IconSystem icon={"Add2"} height={'12px'} width={'12px'}/>
-                        </IconPosition>
-                        <SpanPosition>
-                            <span>Create Client</span>
-                        </SpanPosition>
-                    </Button>
+                    <DivButton onClick={() => createClient()}>
+                        <ButtonAdd mode="#007BFF" width="169px" height="38px" name="Create Subject" color="white"/>
+                    </DivButton>
                 </Top>
                 <Line />
                 <Spans>

@@ -1,7 +1,7 @@
 import React from "react";
 import IconSystem from "../../IconSystem";
 
-import { Button, IconAdd } from "./styles";
+import { Button, IconAdd, Span } from "./styles";
 //$mode- change background-color
 //
 class ButtonAdd extends React.Component {
@@ -17,9 +17,11 @@ class ButtonAdd extends React.Component {
           sizeFont={this.props.sizeFont}
         >
           <IconAdd>
-            <IconSystem icon={"add2"} />
+            <IconSystem icon={"Add2"} />
           </IconAdd>
-          {this.props.name}
+          <Span color={this.props.color}>
+            {this.props.name}
+          </Span>
         </Button>
       </>
     );

@@ -2,12 +2,10 @@ import styled from "styled-components";
 
 export const Button = styled.button`
   background-color: ${(props) => props.$mode || "#E41165"};
-  color: ${(props) => props.$color || "#fffff"};
+  
   border: none;
   width: ${(props) => props.$width || "fit - content"};
   height: ${(props) => props.$height || "50px"};
-  font-size: ${(props) => props.sizeFont || "12px"};
-  font-weight: ${(props) => props.weightFont || "400"};
   padding: 15px;
   display: flex;
   align-items: center;
@@ -22,3 +20,16 @@ export const Button = styled.button`
 export const IconAdd = styled.div`
   margin-right: 8px;
 `;
+
+export const SpanButton = styled.span`
+  color: ${(props) => props.color || "#fffff"};
+`;
+export const Span = styled.span`
+  color: ${(props) => props.color || "#fffff"};
+  margin: 0 auto;
+  font-size: 16px;
+  margin-bottom: 3px;
+  margin-right: 5px;
+  font-family: 'Houschka Rounded Alt';
+  text-align: right;
+  `;

@@ -212,3 +212,7 @@ export const PositionModal = styled.div`
 
 export const ContainerFather = styled.div`
 `
+export const DivButton = styled.div`
+    margin-top: 1.5%;
+    margin-right: 1.5%;
+    `;
