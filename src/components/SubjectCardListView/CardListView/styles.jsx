@@ -9,7 +9,7 @@ export const Card = styled.div`
                 `
             case "Progress":
             return css`
-                    border-left: 15px solid #0AC9C9;
+                    border-left: 15px solid #008585;
                 `
             case "Canceled":
                 return css`
@@ -43,7 +43,7 @@ export const Status = styled.div`
                 `
             case "Progress":
             return css`
-                    background-color: #0AC9C9;
+                    background-color: #008585;
                 `
             case "Canceled":
                 return css`

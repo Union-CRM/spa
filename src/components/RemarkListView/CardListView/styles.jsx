@@ -5,11 +5,7 @@ export const Card = styled.div`
         switch (props.$mode) {
             case "Finished":
                 return css`
-                    border-left: 15px solid #00953b;
-                `
-            case "Progress":
-            return css`
-                    border-left: 15px solid #0AC9C9;
+                    border-left: 15px solid #00953B;
                 `
             case "Canceled":
                 return css`
@@ -29,10 +25,7 @@ export const Card = styled.div`
     display: block;
     background-color: #F5F7FA;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
-    :hover {
-        transition: 0.5s;
-        transform: scale(1.07);
-    }
+ 
 `
 export const Status = styled.div`
     ${(props) => {
@@ -40,10 +33,6 @@ export const Status = styled.div`
             case "Finished":
                 return css`
                     background-color:#00953B;
-                `
-            case "Progress":
-            return css`
-                    background-color: #0AC9C9;
                 `
             case "Canceled":
                 return css`
@@ -138,19 +127,7 @@ export const PositionEdit = styled.div`
     display: flex;
 `
 
-export const PositionRemove = styled.span`
-    width: 12px;
-    height: 12px;
-    margin-left: 25px;
-    margin-top: 8px;
-    align-items: right;
-    cursor: pointer;
-`
 
 export const Header = styled.div`
     display: flex;
-`
-
-export const Container = styled.div`
-    
 `
