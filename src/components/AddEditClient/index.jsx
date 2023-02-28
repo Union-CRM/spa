@@ -76,7 +76,7 @@ const AddEditClient = ({ title, setModal, props }) => {
       <DivButton>
         <Buttton onClick={saveModal}>
           <ButtonDefault
-            type={"col"}
+            type={"userSave"}
             weightFont={"500"}
             sizeFont={"18px"}
             name={"Save"}
@@ -84,7 +84,7 @@ const AddEditClient = ({ title, setModal, props }) => {
         </Buttton>
         <Buttton onClick={closeModal}>
           <ButtonDefault
-            type={"col2"}
+            type={"userCancel"}
             weightFont={"500"}
             sizeFont={"18px"}
             name={"Cancel"}

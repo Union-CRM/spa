@@ -37,7 +37,7 @@ class SidBar extends React.Component {
               this.setState({ sidBartState: !this.state.sidBartState })
             }
           >
-            <IconSystem icon="openclose" />
+            <IconSystem icon={"OpenClose" }/>
           </OpenClose>
           <User $mode={this.state.sidBartState}>
             <Img $mode={this.state.sidBartState}></Img>
@@ -49,7 +49,7 @@ class SidBar extends React.Component {
             <Slink to="/home">
               <Li>
                 <Icon $mode={this.state.sidBartState}>
-                  <IconSystem icon="home" />
+                  <IconSystem icon={"Home"} />
                   <Span $mode={this.state.sidBartState}>Home</Span>
                 </Icon>
               </Li>
@@ -57,7 +57,7 @@ class SidBar extends React.Component {
             <Slink to="/client">
               <Li>
                 <Icon $mode={this.state.sidBartState}>
-                  <IconSystem icon="client" />
+                  <IconSystem icon={"Client" }/>
                   <Span $mode={this.state.sidBartState}>Client</Span>
                 </Icon>
               </Li>
@@ -66,7 +66,7 @@ class SidBar extends React.Component {
             <Slink to="/subject">
               <Li>
                 <Icon $mode={this.state.sidBartState}>
-                  <IconSystem icon="subjects" />
+                  <IconSystem icon={"Subjects"} />
                   <Span $mode={this.state.sidBartState}>Subjects</Span>
                 </Icon>
               </Li>
@@ -75,7 +75,7 @@ class SidBar extends React.Component {
             <Slink to="/home">
               <Li>
                 <Icon $mode={this.state.sidBartState}>
-                  <IconSystem icon="planner" />
+                  <IconSystem icon={"Planner"} />
                   <Span $mode={this.state.sidBartState}>Planner</Span>
                 </Icon>
               </Li>
@@ -84,14 +84,14 @@ class SidBar extends React.Component {
             <Slink to="/remark">
               <Li>
                 <Icon $mode={this.state.sidBartState}>
-                  <IconSystem icon="remark" />
+                  <IconSystem icon={"Remark"} />
                   <Span $mode={this.state.sidBartState}>Remark</Span>
                 </Icon>
               </Li>
             </Slink>
           </Ul>
           <Logout $mode={this.state.sidBartState}>
-            <IconSystem icon="logout" />
+            <IconSystem icon={"Logout"} />
             <Span $mode={this.state.sidBartState}>Logout</Span>
           </Logout>
         </Container>

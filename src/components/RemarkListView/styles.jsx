@@ -89,9 +89,7 @@ export const Finish = styled.img`
   width: 11px;
   background-color: #43ba65;
 `;
-export const Calendar = styled.img`
-  width: 11px;
-`;
+
 export const Text = styled.div`
   display: flex;
   justify-content: left;

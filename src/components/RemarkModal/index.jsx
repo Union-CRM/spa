@@ -63,10 +63,10 @@ const Remark = ({title, setModal, content}) => {
         
             <Buttons>
                 <PositionButtonSave onClick={saveModal}>
-                    <ButtonDefault type="col"  name={"Save"}/>
+                    <ButtonDefault type="userSave"  name={"Save"}/>
                 </PositionButtonSave>
                 <PositionButtonCancel onClick={closeModal}>
-                    <ButtonDefault type="col2" name={"Cancel"}/>
+                    <ButtonDefault type="userCancel" name={"Cancel"}/>
                 </PositionButtonCancel>
             </Buttons>
             <br></br>

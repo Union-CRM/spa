@@ -15,7 +15,7 @@ class NavBar extends React.Component {
       <>
         <Container $row={this.props.$row} $column={this.props.$column}>
           <Logo>
-            <IconSystem icon="tata_logo" />
+            <IconSystem icon={"TataLogo"} />
           </Logo>
 
           <DivSear>
@@ -23,7 +23,7 @@ class NavBar extends React.Component {
               $mode={this.state.searchtState}
               onClick={() => this.setState({ searchtState: "true" })}
             >
-              <IconSystem icon="search2" />
+              <IconSystem icon="Search2" />
             </DivIcon>
             <GoSearch
               type="search"

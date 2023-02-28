@@ -1,7 +1,7 @@
 import React  from "react";
 
 
-import {Li, P,H2, P1, Img, P2, P3, DivStatus, Horas} from "./styles";
+import {Li, P,H2, P1, P2, P3, DivStatus, Horas} from "./styles";
 const Card = (props) => {
     return(
 

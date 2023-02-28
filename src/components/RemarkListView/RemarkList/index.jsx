@@ -1,5 +1,6 @@
 import React from 'react'
-import {LineGray, ButtonCancel, ButtonFinished, ButtonProgress, BoardStyle, H1, Container, Header, Top, HowManySubjectList, Button, Line, Spans, All, HowManyAll, Finished, HowManyFinished, Canceled, HowManyCancel, SpanPosition, IconPosition, ContainerFather } from './styles'
+import {LineGray, ButtonCancel, ButtonFinished, BoardStyle, H1, Container, Header, Top,
+     HowManySubjectList, Button, Line, Spans, Finished, HowManyFinished, Canceled, HowManyCancel, SpanPosition, IconPosition, ContainerFather } from './styles'
 import RemarkCard from '../CardListView'
 import IconSystem from '../../../assets/IconSystem' 
 import { useState } from 'react'
@@ -71,7 +72,7 @@ const RemarkList = () => {
                     <H1>Remark List <HowManySubjectList>({RemarksId.length})</HowManySubjectList></H1>
                     <Button onClick={() => createRemark()}>
                         <IconPosition>
-                            <IconSystem icon={"add2"} height={'12px'} width={'12px'}/>
+                            <IconSystem icon={"Add2"} height={'12px'} width={'12px'}/>
                         </IconPosition>
                         <SpanPosition>
                             <span>Create Remark</span>

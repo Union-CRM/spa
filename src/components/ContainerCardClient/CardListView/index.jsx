@@ -26,7 +26,6 @@ import {
 import IconSystem from "../../../assets/IconSystem";
 
 //components FontSystem
-import Headline from "../../FontSystem/Headline";
 import Body from "../../FontSystem/Body";
 import Subtitle from "../../FontSystem/Subtitle";
 
@@ -64,7 +63,7 @@ const SubjectCard = ({
             <TagsSpan>
               
               Tags
-              <IconSystem icon={"taskRegular"} width={"10px"} height={"10px"} />
+              <IconSystem icon={"TaskRegular"} width={"10px"} height={"10px"} />
             </TagsSpan>
           </Status>
                 
@@ -74,7 +73,7 @@ const SubjectCard = ({
                         <LabelToggle $mode={status} for="option"><Span></Span></LabelToggle>
                     </DivToggle>
                     <IconEdit>
-                        <IconSystem icon={"edit"} height={'15px'} width={'15px'}/>
+                        <IconSystem icon={"Edit"} height={'15px'} width={'15px'}/>
                     </IconEdit>
                 </DivIcons>                
             </Header>     

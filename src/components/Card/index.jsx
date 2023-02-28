@@ -1,13 +1,9 @@
 import React, { memo } from "react";
-import { Editar, Trash } from "../Remark/styles";
-import peopleTeams from "../../assets/svg/peopleTeams.svg";
-import contact from "../../assets/svg/contact.svg";
-import paperEdit from "../../assets/svg/paperEdit.svg";
+import IconSystem from "../../../assets/IconSystem";
+
 import {
   Container,
-  Description,
   IconButton,
-  PeopleImage,
   Tag,
   TeamsContainer,
   Avatar,
@@ -17,6 +13,7 @@ import {
 } from "./styles";
 import FontSubtitle from "../FontSystem/Subtitle";
 import Body from "../FontSystem/Body";
+import IconSystem from "../../assets/IconSystem";
 
 const CardGroup = memo(() => {
   const users = [1, 2, 3, 4, 5, 6];
@@ -34,16 +31,16 @@ const CardGroup = memo(() => {
 
         <div>
           <IconButton>
-            <Trash height={14} src={Trash} />
+            <IconSystem icon={"Trash"} height={"14px"} />
           </IconButton>
           <IconButton>
-            <Editar height={14} src={paperEdit} />
+            <IconSystem icon={"PaperEdit"} height={"14px"} />
           </IconButton>
         </div>
       </TopContainer>
 
       <Content>
-        <PeopleImage src={peopleTeams} />
+        <IconSystem icon={"PeopleTeams"} />
 
         <Body type={"Body1"} name={"Fabrica Itau - Torre 1"} />
         <TeamsContainer>
