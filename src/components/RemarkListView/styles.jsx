@@ -1,160 +1,214 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-export const Card = styled.div`
-  width: 250px;
-  height: 172px;
-  background-color: #f5f7fa;
-  box-shadow: 0 2px 15px rgb(0, 0, 0, 0.5);
-  color: #333;
-  border-radius: 0.5rem;
-  margin: 1rem;
-  font-size: 0.5rem;
-  position: relative;
-  flex-direction: column;
-`;
-export const ColorBar = styled.div`
-  width: 14px;
-  height: 172px;
-  background-color: #00953b;
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 8px 0px 0px 8px;
-`;
-export const Rectangle = styled.div`
-  position: absolute;
-  width: 81px;
-  height: 14px;
-  left: 34px;
-  top: 10px;
-  background-color: #00953b;
-  border-radius: 8px;
-  text-align: center;
-  padding: 0.1rem;
+export const BoardStyle = styled.div`
+    height: 780px;
+    width: 700px;
+    display: grid;
+    align-content: flex-start;
+    background: rgba(255, 255, 255, 0.8);
+    position: relative;
+    grid-template-columns: 48% 48%;
+    margin-top: 20px;
+    grid-row: 2;
+    margin-right: 500px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+`
 
-  p {
-    color: #f5f7fa;
-    font-size: 0.7rem;
-  }
-`;
-export const Editar = styled.img`
-  width: 13.5px;
-  margin-right: 5px;
-`;
-export const Trash = styled.img`
-  width: 11px;
-`;
+export const H1 = styled.span`
+    width: 100%;
+    font-family: 'Houschka Rounded Alt';
+    font-size: 24px;
+    margin-top: 10px;
+    
+`
 
-export const Text1 = styled.div`
-  margin-top: 18px;
-  display: flex;
-  justify-content: left;
-  padding: 1rem;
-  flex-direction: column;
-  margin-left: 8px;
-
-  h1 {
-    color: #000000;
-    font-size: 0.7rem;
-  }
-
-  h2 {
-    color: #000000;
-    font-size: 0.6rem;
-    font-weight: normal;
-  }
-`;
-
-export const Calendar2 = styled.div`
-  margin-left: 8px;
-
-  button {
-    border: none;
-    margin-left: 1rem;
-    font-size: 12px;
-    line-height: 0;
-    cursor: pointer;
-    color: #1f1e1e;
-    background-color: #f5f7fa;
-    flex-direction: row;
-    font-weight: normal;
-
-    &:hover {
-      color: #000000;
-      transition: all 0.9s linear;
+export const Container = styled.div`
+    display: grid;
+    grid-template-rows: 9% 91%;
+    width: 700px;
+    height: 830px;
+    align-content: flex-start;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    position: relative;
+    overflow: auto;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+    margin-top: 64px;
+    margin-right: 500px;
+    border-radius: 8px;
+    margin-top: -10px;
+    &::-webkit-scrollbar{
+        width: 18px;
+        height: 10px;
+        margin-right: 10px;
+        float: right;
     }
-  }
-`;
-export const Finish = styled.img`
-  width: 11px;
-  background-color: #43ba65;
-`;
-export const Calendar = styled.img`
-  width: 11px;
-`;
-export const Text = styled.div`
-  display: flex;
-  justify-content: left;
-  flex-direction: column;
-  padding: 11px;
-  position: absolute;
-  margin-left: 12px;
 
-  h3 {
-    color: #656464;
-    font-size: 10px;
-    font-weight: normal;
-  }
-`;
-
-export const CardHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-`;
-
-export const IconsContainer = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 11px;
-
-  button {
-    border: none;
-    margin-left: 1rem;
-    font-size: 1rem;
-    line-height: 0;
-    cursor: pointer;
-    color: #1f1e1e;
-    background-color: #f5f7fa;
-
-    &:hover {
-      color: #000000;
-      transition: all 0.9s linear;
+    &::-webkit-scrollbar-track{
+         box-shadow: 5px black;
+         border-radius: 10px;
     }
-  }
-`;
 
-export const Rectangle2 = styled.div`
-  position: absolute;
-  border: 1px solid;
-  border-color: #00953b;
-  background-color: #ffffff;
-  border-radius: 8px;
-  width: 118px;
-  height: 17px;
-  left: 37px;
-  top: 140px;
-  text-align: center;
+    &::-webkit-scrollbar-track-piece{
+        background-color: white;
+    }
 
-  h4 {
-    color: #656464;
-    height: 5px;
-    font-size: 8px;
-    font-weight: normal;
-    text-align: center;
-    display: inline-block;
-    margin-top: 5px;
-  }
-`;
+    &::-webkit-scrollbar-thumb{
+        height: 80%;
+        background-color: #AFB2BB;
+        margin-left: 20px;
+        width: 15px;
+        border-right: 6px solid white;
+        border-top: 12px solid white;
+    }
+`
+
+export const Line = styled.div`
+    width: 128px;
+    height: 0px;
+    border: 2px solid #007BFF;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-top: -15px;
+`
+
+export const All = styled.span`
+    font-family: 'Houschka Rounded Alt';
+    font-size: 14px;
+    color: #525B75;
+`
+
+export const Header = styled.div`                        
+    margin-bottom: 20px;
+    margin-left: 25px;
+    width: 650px;
+    height: 100px;
+    display: grid;
+    grid-row: 1;
+    position: fixed;
+    z-index: 1;
+    background-color: #FFFFFF;
+`
+
+export const Finished = styled.span`
+    font-family: 'Houschka Rounded Alt';
+    font-size: 14px;
+    color: #525B75;
+`
+
+export const Spans = styled.div`
+    margin-top: 10px;
+    display: flex;
+`
+
+export const Canceled = styled.div`
+    font-family: 'Houschka Rounded Alt';
+    font-size: 14px;
+    color: #525B75;
+`
+
+export const Button = styled.button`
+    width: 250px;
+    height: 35px;
+    display: flex;
+    margin-top: 20px;
+    font-family: 'Houschka Rounded Alt';
+    font-size: 18px;
+    color: #FFFFFF;
+    margin-right: 40px;
+    border-radius: 8px;
+    background-color: #007BFF;
+    border: none;
+    cursor: pointer;
+    :hover{
+        transition: 0.5s;
+        scale: 1.07;
+    }
+`
+
+export const Top = styled.div`
+    display: flex;
+    margin-left: 10px;
+`
+
+export const HowManyFinished = styled.span`
+    color: #00953B;
+`
+
+export const HowManyCancel = styled.span`
+    color: #771300;
+`
+
+
+export const HowManyAll = styled.span`
+    color: #008585;
+`
+
+export const HowManySubjectList = styled.span`
+    color: #525B75;
+`
+export const IconPosition = styled.div`
+    display: flex;
+    margin-left: 12px;
+    margin-top: 11px;
+`
+export const SpanPosition = styled.div`
+    display: flex;
+    margin-left: 8px;
+    margin-top: 9px;
+    font-size: 16px;
+`
+
+export const ButtonProgress = styled.button`
+    cursor: pointer;
+    border: none;
+    background-color: #FFFFFF;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    &:hover{
+        
+        border-bottom: 2px solid #007BFF;
+    }
+`
+
+
+export const ButtonFinished = styled.button`
+    cursor: pointer;
+    border: none;
+    background-color: #FFFFFF;
+    margin-left: 25px;
+    margin-bottom: 15px;
+    &:hover{
+        
+        border-bottom: 2px solid #007BFF;
+    }
+
+`
+
+export const ButtonCancel = styled.button`
+    cursor: pointer;
+    border: none;
+    background-color: #FFFFFF;
+    margin-left: 16px;
+    margin-bottom: 15px;
+    &:hover{
+        
+        border-bottom: 2px solid #007BFF;
+    }
+
+`
+
+export const LineGray = styled.div`
+    width: 640px;
+    height: 0px;
+    border: 1px solid #D8D8D8 ;
+`
+
+export const PositionModal = styled.div`
+    margin-left: 200px;
+`
+
+export const ContainerFather = styled.div`
+`

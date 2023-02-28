@@ -1,6 +1,6 @@
 import React from "react";
 import Body from "../../components/Body";
-import RemarkList from "../../components/RemarkListView/RemarkList";
+import RemarkList from "../../components/RemarkListView/";
 
 
 class RemarkPage extends React.Component {

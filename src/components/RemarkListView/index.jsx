@@ -1,72 +1,107 @@
-import React from "react";
-import { Card } from "./styles";
-import edit from "../../imagens/edit.svg";
-import finish from "../../imagens/finish.svg";
-import trash from "../../imagens/trash.svg";
-import calendar from "../../imagens/calendar.svg";
-import {
-  Editar,
-  Trash,
-  Finish,
-  Calendar,
-  ColorBar,
-  Rectangle,
-  Text1,
-  Rectangle2,
-  Text,
-  Calendar2,
-  CardHeader,
-  IconsContainer,
-} from "./styles";
+import React from 'react'
+import {LineGray, ButtonCancel, ButtonFinished, BoardStyle, H1, Container, Header, Top, HowManySubjectList, Button, Line, Spans, All, HowManyAll, Finished, HowManyFinished, Canceled, HowManyCancel, SpanPosition, IconPosition, ContainerFather } from './styles'
+import RemarkCard from './CardListView'
+import IconSystem from '../../assets/IconSystem' 
+import { useState } from 'react'
+import Remark from '../RemarkModal'
+import {remarksData as remarksList} from './RemarkData';
+import {cardStatusMock as cardStatus} from './RemarkData/Status';
+import Discard from '../ModalDiscard'
 
-function Cards(props) {
-  function deleteSelectedCard() {
-    props.deleteCard(props.id);
-  }
 
-  return (
-    <Card>
-      <ColorBar />
-      <CardHeader>
-        <Rectangle>
-          {" "}
-          <p> Finished</p>{" "}
-        </Rectangle>
-        <IconsContainer>
-          <button>
-            <Editar src={edit} />
+
+
+
+
+const RemarksId = remarksList.map(item => item.id)
+const RemarksCancel = remarksList.filter(item => item.status === "Canceled")
+const RemarksFinished = remarksList.filter(item => item.status === "Finished")
+
+
+const RemarkList = () => {
+
+    const [cards, setCards] = useState(RemarksFinished)
+    const [active, setActive] = useState(cardStatus.INPROGRESS);
+    const [modal, setModal] = useState(false)
+    const [isEdit, setEdit] = useState(false)
+    const [modalDiscard,setModalDiscard] = useState(false);
+
+    const handleClick = (tabCards, selectedTab) => {
+        setCards(tabCards)
+        setActive(selectedTab)
+    }
+
+    const getTabColor = (status) => {
+        return {borderBottom: active === status ? "2px solid #007BFF" : ""}
+    }
+    
+    const createRemark= () => {
+        setModal(true);
+        setModalDiscard(false);
+        setEdit(false);
+    }
+
+    
+    const EditRemark = () => {
+        setModal(true);
+        setModalDiscard(false);
+        setEdit(true);
+    }
+
  
-          </button>
-          <button onClick={deleteSelectedCard}>
-            <Trash src={trash} />
-          </button>
-        </IconsContainer>
-      </CardHeader>
+    const getRemarkCards = () => {
+        return cards.map(item => (
+            <RemarkCard
+                key={item.id}
+                status={item.status}
+                title={item.title}
+                manager={item.manager}
+                topic={item.topic}
+                area={item.area}
+                client={item.client}
+                openModal={() => EditRemark()}
+                setModalDiscard={setModalDiscard}
+                opennedModal={setModal}
+                /> 
+            ))
+    }
+      return (
+    <ContainerFather>
+        <Container>
+            <Header>
+                <Top>
+                    <H1>Remark List <HowManySubjectList>({RemarksId.length})</HowManySubjectList></H1>
+                    <Button onClick={() => createRemark()}>
+                        <IconPosition>
+                            <IconSystem icon={"add2"} height={'12px'} width={'12px'}/>
+                        </IconPosition>
+                        <SpanPosition>
+                            <span>Create Remark</span>
+                        </SpanPosition>
+                    </Button>
+                </Top>
+                <Line />
+                <Spans>
+                    <ButtonFinished key={cardStatus.FINISHED} onClick={() => handleClick(RemarksFinished, cardStatus.FINISHED)} style={getTabColor(cardStatus.FINISHED)}>
+                        <Finished>Finished (<HowManyFinished>{RemarksFinished.length}</HowManyFinished>)</Finished>
+                    </ButtonFinished>
+                    <ButtonCancel key={cardStatus.CANCELED} onClick={() => handleClick(RemarksCancel, cardStatus.CANCELED)} style={getTabColor(cardStatus.CANCELED)}>
+                        <Canceled>Canceled (<HowManyCancel>{RemarksCancel.length}</HowManyCancel>)</Canceled>
+                    </ButtonCancel>  
+                </Spans>
+                <LineGray />
+            </Header>
+            <BoardStyle>
+                {getRemarkCards()}   
+            </BoardStyle>
+        </Container>
 
-      <Text1>
-        <h1>{props.title}</h1>
-        <h2>{props.author}</h2>
-      </Text1>
-
-      <Calendar2>
-        <button>
-          <Finish src={finish} color="#43BA65" /> {props.estimatedDate}
-        </button>
-        <button>
-          <Calendar src={calendar} /> {props.deliveryDate}
-        </button>
-      </Calendar2>
-
-      <Text>
-        <h3>{props.description}</h3>
-        <h3> {props.subdescription}</h3>
-      </Text>
-
-      <Rectangle2>
-        <h4>Client | {props.Client} </h4>
-      </Rectangle2>
-    </Card>
-  );
+           {modal && <Remark setModal={setModal} 
+           title={isEdit ? "Edit Remark" : "Create Remark"} />}
+           {modalDiscard && <Discard setModal={setModalDiscard}  />}
+           
+        </ContainerFather>
+  )
 }
 
-export default Cards;
+export default RemarkList;

@@ -23,19 +23,11 @@ const Discard = ({setModal}) => {
 
     return (
         <Container>
-            
-              
-         
+               
                 <Image>
                 <IconSystem icon={"discardChanges"} width={"80px"} height={"75px"}/>
                 </Image>
                 
-         
-              
-            
-
-              
-              
                 <SpanTitle>{Title}</SpanTitle> 
           
             <PositionButtonSave onClick={saveModal}>

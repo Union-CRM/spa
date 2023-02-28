@@ -10,7 +10,7 @@ export const Card = styled.div`
 
       case "Inactive":
         return css`
-          border-left: 15px solid #771300;
+          border-left: 15px solid #7a7a7a;
         `;
       default:
         return css`
@@ -37,7 +37,7 @@ export const Status = styled.div`
 
       case "Inactive":
         return css`
-          background-color: #771300;
+          background-color: #7a7a7a;
         `;
       default:
         return css`
@@ -71,6 +71,9 @@ export const TagsSpan = styled.div`
   font-family: Imported !important;
   border-radius: 8px;
   text-align: center;
+  height: 100%;
+  
+ 
 `;
 
 export const Title = styled.div`
@@ -196,7 +199,7 @@ export const InputToggle = styled.input`
   display: block;
   width: 100%;
   height: 100%;
-
+  
   position: absolute;
   top: 0;
   left: 0;
@@ -228,7 +231,7 @@ export const LabelToggle = styled.label`
 
       case "Inactive":
         return css`
-          background: #771300;
+          background: #7a7a7a;
         `;
       default:
         return css`
@@ -252,21 +255,21 @@ export const LabelToggle = styled.label`
 
 export const Span = styled.span`
   display: block;
-  width: 60%;
-  height: 100%;
-  background: #c0c0c0;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
 
   position: absolute;
   z-index: 2;
-  right: 41%;
+  right: 50%;
   top: 0;
-
-  border-radius: inherit;
+  border: 1px solid grey;
+  border-radius: 50%;
 
   :after {
     content: "";
 
-    position: absolute;
+    
     left: 15%;
     top: 25%;
 
@@ -274,13 +277,13 @@ export const Span = styled.span`
     height: 50%;
 
     background: white;
-    border-radius: inherit;
+    border-radius: inherit ;
   }
 
   :before {
     content: "";
 
-    position: absolute;
+  
     top: 50%;
     margin-top: -12px;
     right: -50%;
@@ -289,7 +292,7 @@ export const Span = styled.span`
     font-weight: bold;
     font-family: Arial, sans-serif;
     font-size: 24px;
-
+    
     color: #fff;
   }
 `;

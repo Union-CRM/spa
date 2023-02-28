@@ -1,4 +1,4 @@
-export const remarksMock = [
+export const remarksData = [
     {
         id: 1,
         status: "Canceled",
