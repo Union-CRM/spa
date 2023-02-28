@@ -20,8 +20,7 @@ function App() {
             <Route path="/subject" element={<SubjectPage />} />
             <Route path="/remark" element={<RemarkPage />} />
             <Route path="/sidbar" element={<SidBar />} />
-            <Route path="/PlannerCard" element={<PlannerCard />} />
-         
+            <Route path="/planner" element={<PlannerCard />} />
           </Routes>
         </div>
       </Router>
