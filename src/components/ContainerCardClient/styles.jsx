@@ -115,28 +115,10 @@ export const Inactive = styled.div`
   line-height: 16px;
 `;
 
-export const Button = styled.button`
-  width: 250px;
-  height: 35px;
-  display: flex;
-  margin-top: 20px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12.8px;
-  line-height: 15px;
-  color: #ffffff;
-  margin-right: 40px;
-  padding-left: 12px;
-  border-radius: 8px;
-  background-color: #007bff;
-  text-align: center;
-  border: none;
-  cursor: pointer;
-  :hover {
-    transition: 0.5s;
-    scale: 1.07;
-  }
-`;
+export const DivButton = styled.div`
+    margin-top: 1.5%;
+    margin-right: 1.5%;
+    `;
 
 export const Top = styled.div`
   display: flex;

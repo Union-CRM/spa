@@ -2,7 +2,6 @@ import React from "react";
 import {
   Container,
   PositionTitle,
-  SpanTitle,
   PositionInputRelease,
   PositionSingleSelect,
   PositionInputName,
@@ -60,10 +59,11 @@ const Subject = ({ title, setModal, content }) => {
       </SpanDiv>
       <TextBox placeholder="olá" />
       <PositionButtonSave onClick={saveModal}>
-        <ButtonDefault type={"true"} name={"Save"} />
+        <ButtonDefault type={"userSave"} name={"Save"} />
       </PositionButtonSave>
       <PositionButtonCancel onClick={closeModal}>
-        <ButtonDefault type={"false"} name={"Cancel"} />
+      <ButtonDefault type={"userCancel"} name={"Cancel"} />
+
       </PositionButtonCancel>
     </Container>
   );

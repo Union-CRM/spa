@@ -1,11 +1,8 @@
 import React from 'react'
-import { Container,SpanTitle, PositionButtonSave, PositionButtonCancel,Help} from './styles'
+import { Container,SpanTitle, PositionButtonSave, PositionButtonCancel} from './styles'
 import ButtonDefault from '../../assets/Buttons/ButtonDefault';
 import IconSystem from '../../assets/IconSystem';
-import help from '../../assets/svg/help.svg';
-import security from '../../assets/svg/security.svg';
-import cancel from '../../assets/svg/cancel.svg';
-import Remove from '../../assets/Remove.svg'
+
 import {Image} from './styles.jsx';
 
 
@@ -27,7 +24,7 @@ const Discard = ({setModal}) => {
               
          
                 <Image>
-                <IconSystem icon={"discardChanges"} width={"80px"} height={"75px"}/>
+                <IconSystem icon={"DiscardChanges"} width={"80px"} height={"75px"}/>
                 </Image>
                 
          

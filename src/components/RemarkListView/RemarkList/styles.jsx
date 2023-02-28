@@ -108,24 +108,10 @@ export const Canceled = styled.div`
     color: #525B75;
 `
 
-export const Button = styled.button`
-    width: 250px;
-    height: 35px;
-    display: flex;
-    margin-top: 20px;
-    font-family: 'Houschka Rounded Alt';
-    font-size: 18px;
-    color: #FFFFFF;
-    margin-right: 40px;
-    border-radius: 8px;
-    background-color: #007BFF;
-    border: none;
-    cursor: pointer;
-    :hover{
-        transition: 0.5s;
-        scale: 1.07;
-    }
-`
+export const DivButton = styled.div`
+    margin-top: 1.5%;
+    margin-right: 1.5%;
+    `;
 
 export const Top = styled.div`
     display: flex;

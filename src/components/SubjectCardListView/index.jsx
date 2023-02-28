@@ -1,11 +1,14 @@
 import React from 'react'
-import {LineGray, ButtonCancel, ButtonFinished, ButtonProgress, BoardStyle, H1, Container, Header, Top, HowManySubjectList, Button, Line, Spans, All, HowManyAll, Finished, HowManyFinished, Canceled, HowManyCancel, SpanPosition, IconPosition, ContainerFather } from './styles'
+import {LineGray, ButtonCancel, ButtonFinished, ButtonProgress, BoardStyle, H1, Container, Header,
+     Top, HowManySubjectList, Button, Line, Spans, All, HowManyAll, Finished, HowManyFinished, Canceled,
+      HowManyCancel, DivButton, ContainerFather } from './styles'
 import SubjectCard from './CardListView/index'
 import IconSystem from '../../assets/IconSystem'
 import { useState } from 'react'
 import Subject from '../CreateEditSubjectModal'
 import {subjectsMock as subjectsList} from './subjectListMock'
 import {cardStatusMock as cardStatus} from './cardStatusMock'
+import ButtonAdd from  "../../assets/Buttons/ButtonAdd"
 
 const SubjectsId = subjectsList.map(item => item.id)
 const SubjectsCancel = subjectsList.filter(item => item.status === "Canceled")
@@ -57,14 +60,9 @@ const SubjectList = () => {
             <Header>
                 <Top>
                     <H1>Subjects List <HowManySubjectList>({SubjectsId.length})</HowManySubjectList></H1>
-                    <Button onClick={() => createSubject()}>
-                        <IconPosition>
-                            <IconSystem icon={"add2"} height={'12px'} width={'12px'}/>
-                        </IconPosition>
-                        <SpanPosition>
-                            <span>Create Subject</span>
-                        </SpanPosition>
-                    </Button>
+                    <DivButton onClick={() => createSubject()}>
+                        <ButtonAdd mode="#007BFF" width="169px" height="38px" name="Create Subject" color="white"/>
+                    </DivButton>
                 </Top>
                 <Line />
                 <Spans>

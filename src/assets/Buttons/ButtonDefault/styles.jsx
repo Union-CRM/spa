@@ -3,26 +3,26 @@ import styled, { css } from "styled-components";
 export const Button = styled.button`
   ${(props) => {
     switch (props.$mode) {
-      case "true":
+      case "adminSave":
         return css`
           background-color: #e41165;
           color: #e3e6ed;
           border: none;
         `;
-      case "false":
+      case "adminCancel":
         return css`
           background-color: #e3e6ed;
           color: #e41165;
           border: solid 1px #e41165;
         `;
-      case "col":
+      case "userSave":
         return css`
           background-color: #007bff;
           color: #e3e6ed;
           border: solid 1px #007bff;
         `;
 
-      case "col2":
+      case "userCancel":
         return css`
           background-color: #e3e6ed;
           color: #007bff;

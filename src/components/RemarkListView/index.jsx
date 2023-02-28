@@ -34,11 +34,11 @@ function Cards(props) {
         </Rectangle>
         <IconsContainer>
           <button>
-            <Editar src={edit} />
+            <IconSystem icon={"Edit"} height={"11px"} />
  
           </button>
           <button onClick={deleteSelectedCard}>
-            <Trash src={trash} />
+          <IconSystem icon={"Trash"}  height={"11px"} />
           </button>
         </IconsContainer>
       </CardHeader>
@@ -53,7 +53,7 @@ function Cards(props) {
           <Finish src={finish} color="#43BA65" /> {props.estimatedDate}
         </button>
         <button>
-          <Calendar src={calendar} /> {props.deliveryDate}
+        <IconSystem icon={"Calendar"} height={"11px"} />{props.deliveryDate}
         </button>
       </Calendar2>
 

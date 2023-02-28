@@ -16,7 +16,6 @@ import { TagComponent } from "../TagComponent";
 import SingleSelect from "../Input/SingleSelect";
 import DoubleInput from "../Input/DoubleInput";
 import Headline from "../FontSystem/Headline";
-import Body from "../FontSystem/Body";
 
 const AddEditBusiness = ({ title }) => {
   const animatedComponents = makeAnimated();

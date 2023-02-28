@@ -1,4 +1,4 @@
-import {React,useState} from 'react'
+import {React} from 'react'
 import { Card, Status, StatusSpan, Title, Name, Topic, Client, ClientName, Type, Line, Header, PositionEdit, PositionRemove, Container} from './styles'
 import IconSystem from '../../../assets/IconSystem'
 
@@ -9,7 +9,6 @@ const RemarkCard = ({title, manager, topic, area, client, status, openModal,setM
     const discardRemark=() =>{
         setModalDiscard(true);
         opennedModal(false);
-       console.log("Funcionou");
     }
   return (
     <Container>
@@ -20,11 +19,11 @@ const RemarkCard = ({title, manager, topic, area, client, status, openModal,setM
                 <StatusSpan>{status}</StatusSpan>
             </Status>
             <PositionEdit onClick={openModal}>
-                <IconSystem icon={"paperEdit"} height={'15px'} width={'15px'}/>
+                <IconSystem icon={"PaperEdit"} height={'15px'} width={'15px'}/>
                 
             </PositionEdit>
             <PositionRemove onClick={() => discardRemark()}>
-        <IconSystem icon={"delete"} height={'15px'} width={'15px'}/>
+        <IconSystem icon={"Delete"} height={'15px'} width={'15px'}/>
             
         </PositionRemove>
         

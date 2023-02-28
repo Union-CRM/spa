@@ -1,7 +1,9 @@
 import React from 'react'
-import {LineGray, ButtonCancel, ButtonFinished, ButtonProgress, BoardStyle, H1, Container, Header, Top, HowManySubjectList, Button, Line, Spans, All, HowManyAll, Finished, HowManyFinished, Canceled, HowManyCancel, SpanPosition, IconPosition, ContainerFather } from './styles'
+import {LineGray, ButtonCancel, ButtonFinished, BoardStyle, H1, Container, Header, Top,
+     HowManySubjectList, Line, Spans, Finished, HowManyFinished, Canceled, HowManyCancel, DivButton,
+      ContainerFather } from './styles'
 import RemarkCard from '../CardListView'
-import IconSystem from '../../../assets/IconSystem' 
+import ButtonAdd from '../../../assets/Buttons/ButtonAdd'
 import { useState } from 'react'
 import Remark from '../../RemarkModal'
 import {remarksMock as remarksList} from '../RemarkData';
@@ -69,14 +71,9 @@ const RemarkList = () => {
             <Header>
                 <Top>
                     <H1>Remark List <HowManySubjectList>({RemarksId.length})</HowManySubjectList></H1>
-                    <Button onClick={() => createRemark()}>
-                        <IconPosition>
-                            <IconSystem icon={"add2"} height={'12px'} width={'12px'}/>
-                        </IconPosition>
-                        <SpanPosition>
-                            <span>Create Remark</span>
-                        </SpanPosition>
-                    </Button>
+                    <DivButton onClick={() => createRemark()}>
+                        <ButtonAdd mode="#007BFF" width="169px" height="38px" name="Create Subject" color="white"/>
+                    </DivButton>
                 </Top>
                 <Line />
                 <Spans>
