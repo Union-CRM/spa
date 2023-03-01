@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     width: 40%;
-    background-color: #ffffff;
-    border-left: 19px solid #007bff;
+    background-color: #FFFFFF;
+    border-left: 19px solid #007BFF;
     border-radius: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
     margin-left: 850px;
@@ -73,10 +73,10 @@ export const Input = styled.input `
 export const Date = styled.div`
   
     display: grid;
-    grid-template-columns: 40%;
-    grid-template-rows: 25% 25%;
+   grid-template-columns: 32%;
+   grid-template-rows: 15% 15%;
 
-    grid-gap:5%;
+   grid-gap:20%;
 `;
 
 export const Note = styled.div`
@@ -90,12 +90,14 @@ export const Note = styled.div`
 
 export const Div = styled.div`
     display: grid;
+
     grid-template-columns: 40% 70%;
     grid-template-rows: 50% 50%;
     margin-left:44px;
 `;
 
 export const Buttons = styled.div`
+    
     margin-top: 5%;
     display: grid;
     grid-gap:6%;

@@ -5,20 +5,20 @@ export const Card = styled.div`
     switch (props.$mode) {
       case "Active":
         return css`
-          border-left: 7px solid #00953b;
+          border-left: 15px solid #00953b;
         `;
 
       case "Inactive":
         return css`
-          border-left: 7px solid #7a7a7a;
+          border-left: 15px solid #771300;
         `;
       default:
         return css`
-          border-left: 7px solid #6e6b6b;
+          border-left: 15px solid #6e6b6b;
         `;
     }
   }}
-  width: 260px;
+  width: 265px;
   height: 146px;
   border-radius: 8px;
   margin-top: 30px;
@@ -37,7 +37,7 @@ export const Status = styled.div`
 
       case "Inactive":
         return css`
-          background-color: #7a7a7a;
+          background-color: #771300;
         `;
       default:
         return css`
@@ -71,7 +71,6 @@ export const TagsSpan = styled.div`
   font-family: Imported !important;
   border-radius: 8px;
   text-align: center;
-  height: 100%;
 `;
 
 export const Title = styled.div`
@@ -162,16 +161,10 @@ export const DivPhotoI = styled.div`
   width: 46.81px;
   border-radius: 100%;
   background-color: #d9d9d9;
-  border: solid #007bff;
-  text-align:center;
-  display:flex;
-  justify-content:center;
-  flex-direction:column;
+  border: solid blue;
 `;
 export const DivPhoto = styled.div`
   align-items: left;
-  display:flex;
-
   margin-left: 4%;
   margin-top: 4%;
 `;
@@ -235,7 +228,7 @@ export const LabelToggle = styled.label`
 
       case "Inactive":
         return css`
-          background: #7a7a7a;
+          background: #771300;
         `;
       default:
         return css`
@@ -259,16 +252,16 @@ export const LabelToggle = styled.label`
 
 export const Span = styled.span`
   display: block;
-  width: 12px;
-  height: 12px;
-  background: #ffffff;
+  width: 60%;
+  height: 100%;
+  background: #c0c0c0;
 
   position: absolute;
   z-index: 2;
-  right: 50%;
+  right: 41%;
   top: 0;
-  border: 1px solid grey;
-  border-radius: 50%;
+
+  border-radius: inherit;
 
   :after {
     content: "";
@@ -346,7 +339,7 @@ export const Lline = styled.p`
   display: inline-block;
   font-size: 12px;
   font-weight: bold;
-  color: #007bff;
+  color: blue;
   margin-left: 5px;
   margin-right: 5px;
 `;

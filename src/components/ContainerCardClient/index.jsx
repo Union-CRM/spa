@@ -77,7 +77,7 @@ const ContainerCards = () => {
                 <Top>
                     <H1>Client List <HowManySubjectList>({SubjectsId.length})</HowManySubjectList></H1>
                     <DivButton onClick={() => createClient()}>
-                        <ButtonAdd mode="#007BFF" width="169px" height="38px" name="Create Client" color="white"/>
+                        <ButtonAdd mode="#007BFF" width="169px" height="38px" name="Create Subject" color="white"/>
                     </DivButton>
                 </Top>
                 <Line />

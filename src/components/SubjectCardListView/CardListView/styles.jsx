@@ -5,19 +5,19 @@ export const Card = styled.div`
         switch (props.$mode) {
             case "Finished":
                 return css`
-                    border-left: 7px solid #00953b;
+                    border-left: 15px solid #00953b;
                 `
             case "Progress":
             return css`
-                    border-left: 7px solid #008585;
+                    border-left: 15px solid #0AC9C9;
                 `
             case "Canceled":
                 return css`
-                    border-left: 7px solid #771300;
+                    border-left: 15px solid #771300;
                 `
             default:
                 return css`
-                    border-left: 7px solid #6e6b6b;
+                    border-left: 15px solid #6e6b6b;
                 `
         } 
     }}
@@ -43,7 +43,7 @@ export const Status = styled.div`
                 `
             case "Progress":
             return css`
-                    background-color: #008585;
+                    background-color: #0AC9C9;
                 `
             case "Canceled":
                 return css`

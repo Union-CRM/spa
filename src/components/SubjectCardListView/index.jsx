@@ -1,8 +1,9 @@
 import React from 'react'
 import {LineGray, ButtonCancel, ButtonFinished, ButtonProgress, BoardStyle, H1, Container, Header,
-     Top, HowManySubjectList, Line, Spans, All, HowManyAll, Finished, HowManyFinished, Canceled,
+     Top, HowManySubjectList, Button, Line, Spans, All, HowManyAll, Finished, HowManyFinished, Canceled,
       HowManyCancel, DivButton, ContainerFather } from './styles'
 import SubjectCard from './CardListView/index'
+import IconSystem from '../../assets/IconSystem'
 import { useState } from 'react'
 import Subject from '../CreateEditSubjectModal'
 import {subjectsMock as subjectsList} from './subjectListMock'

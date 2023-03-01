@@ -130,7 +130,7 @@ export const HowManyActive = styled.span`
 `;
 
 export const HowManyInactive = styled.span`
-  color: #7a7a7a;
+  color: #771300;
 `;
 
 export const HowManySubjectList = styled.span`

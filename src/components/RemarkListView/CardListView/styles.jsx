@@ -5,15 +5,19 @@ export const Card = styled.div`
         switch (props.$mode) {
             case "Finished":
                 return css`
-                    border-left: 7px solid #00953b;
+                    border-left: 15px solid #00953b;
+                `
+            case "Progress":
+            return css`
+                    border-left: 15px solid #0AC9C9;
                 `
             case "Canceled":
                 return css`
-                    border-left: 7px solid #771300;
+                    border-left: 15px solid #771300;
                 `
             default:
                 return css`
-                    border-left: 7px solid #6e6b6b;
+                    border-left: 15px solid #6e6b6b;
                 `
         } 
     }}
@@ -23,7 +27,7 @@ export const Card = styled.div`
     margin-top: 30px;
     margin-left: 40px;
     display: block;
-    background-color: #f5f7fa;
+    background-color: #F5F7FA;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
     :hover {
         transition: 0.5s;
@@ -35,7 +39,11 @@ export const Status = styled.div`
         switch (props.$mode) {
             case "Finished":
                 return css`
-                    background-color:#00953b;
+                    background-color:#00953B;
+                `
+            case "Progress":
+            return css`
+                    background-color: #0AC9C9;
                 `
             case "Canceled":
                 return css`
@@ -57,7 +65,7 @@ export const Status = styled.div`
 `
 
 export const StatusSpan = styled.div`
-    color: #ffff;
+    color: #FFFFFF;
     font-size: 10;
     font-family: 'Inter', sans-serif;
     margin-left: 22px;
@@ -89,7 +97,7 @@ export const Topic = styled.div`
 export const Client = styled.span`
     width: 191px;
     height: 29px;
-    border: 1px solid #888c95;
+    border: 1px solid #888C95;
     border-radius: 8px;
     display: flex;
     margin-top: 10px;
@@ -128,10 +136,16 @@ export const PositionEdit = styled.div`
     margin-top: 8px;
     cursor: pointer;
     display: flex;
-    padding-left: 15%;
 `
 
-
+export const PositionRemove = styled.span`
+    width: 12px;
+    height: 12px;
+    margin-left: 25px;
+    margin-top: 8px;
+    align-items: right;
+    cursor: pointer;
+`
 
 export const Header = styled.div`
     display: flex;

@@ -19,10 +19,10 @@ export const OpenClose = styled.button`
   margin-top: 10px;
   margin-right: 2px;
   border: none;
-  color: #f5f7fa;
+  color: #ffff;
   border-top-right-radius: 8px;
   :hover {
-    color: #e3e6ed;
+    color: #c8c8c8;
   }
 `;
 export const Logout = styled.button`

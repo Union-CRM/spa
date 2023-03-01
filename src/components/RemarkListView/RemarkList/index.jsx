@@ -8,6 +8,7 @@ import { useState } from 'react'
 import Remark from '../../RemarkModal'
 import {remarksMock as remarksList} from '../RemarkData';
 import {cardStatusMock as cardStatus} from '../RemarkData/Status';
+import Discard from '../../ModalDiscard'
 
 
 const RemarksId = remarksList.map(item => item.id)
@@ -23,7 +24,7 @@ const RemarkList = () => {
     const [active, setActive] = useState(cardStatus.INPROGRESS);
     const [modal, setModal] = useState(false)
     const [isEdit, setEdit] = useState(false)
-    const [setModalDiscard] = useState(false);
+    const [modalDiscard,setModalDiscard] = useState(false);
 
     const handleClick = (tabCards, selectedTab) => {
         setCards(tabCards)
@@ -71,7 +72,7 @@ const RemarkList = () => {
                 <Top>
                     <H1>Remark List <HowManySubjectList>({RemarksId.length})</HowManySubjectList></H1>
                     <DivButton onClick={() => createRemark()}>
-                        <ButtonAdd mode="#007BFF" width="169px" height="38px" name="Create Remark" color="white"/>
+                        <ButtonAdd mode="#007BFF" width="169px" height="38px" name="Create Subject" color="white"/>
                     </DivButton>
                 </Top>
                 <Line />
@@ -92,7 +93,7 @@ const RemarkList = () => {
 
            {modal && <Remark setModal={setModal} 
            title={isEdit ? "Edit Remark" : "Create Remark"} />}
-          
+           {modalDiscard && <Discard setModal={setModalDiscard}  />}
            
         </ContainerFather>
   )

@@ -5,6 +5,8 @@ import finish from "../../imagens/finish.svg";
 import trash from "../../imagens/trash.svg";
 import calendar from "../../imagens/calendar.svg";
 import {
+  Editar,
+  Trash,
   Finish,
   Calendar,
   ColorBar,
