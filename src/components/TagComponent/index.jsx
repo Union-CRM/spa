@@ -5,9 +5,9 @@ import { Label, Container } from "./styles";
 
 export const TagComponent = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [setSelectedOptions] = useState([]);
 
-  const options = props.options;
+
 
   return (
     <>
