@@ -11,8 +11,8 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 20% 80%;
   border-radius: 8px;
-  background: #1e2222;
-  border-bottom: 1px solid #1e2222;
+  background: #313132;
+  border-bottom: 1px solid #313132;
 `;
 export const Logo = styled.div`
   grid-column: 1;

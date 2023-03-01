@@ -23,7 +23,7 @@ class NavBar extends React.Component {
               $mode={this.state.searchtState}
               onClick={() => this.setState({ searchtState: "true" })}
             >
-              <IconSystem icon="Search2" />
+              <IconSystem icon={"Search2" }/>
             </DivIcon>
             <GoSearch
               type="search"

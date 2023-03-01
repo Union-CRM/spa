@@ -59,10 +59,10 @@ const Subject = ({ title, setModal, content }) => {
       </SpanDiv>
       <TextBox placeholder="olá" />
       <PositionButtonSave onClick={saveModal}>
-        <ButtonDefault type={"userSave"} name={"Save"} />
+        <ButtonDefault type={"true"} name={"Save"} />
       </PositionButtonSave>
       <PositionButtonCancel onClick={closeModal}>
-        <ButtonDefault type={"userCancel"} name={"Cancel"} />
+        <ButtonDefault type={"false"} name={"Cancel"} />
       </PositionButtonCancel>
     </Container>
   );

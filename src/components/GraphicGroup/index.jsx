@@ -60,7 +60,7 @@ const GraphicGroup = () => {
     <Container>
         <TotalGroups>
             <PositionIconGroups>
-                <IconSystem icon={"peopleTeams"} width={"44px"} height={"50px"}/>
+                <IconSystem icon={"PeopleTeams"} width={"44px"} height={"50px"}/>
             </PositionIconGroups>
             <PositionSpanGroups>
                 <p>Groups</p>
@@ -71,7 +71,7 @@ const GraphicGroup = () => {
         </TotalGroups>
         <TotalMembers>
             <PositionIcon>
-                <IconSystem icon={"peopleTeams"} width={"57px"} height={"38px"}/>
+                <IconSystem icon={"PeopleTeams"} width={"57px"} height={"38px"}/>
             </PositionIcon>
             <PositionSpan>
                 <p>Total Members</p>

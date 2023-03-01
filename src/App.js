@@ -20,8 +20,7 @@ function App() {
             <Route path="/subject" element={<SubjectPage />} />
             <Route path="/remark" element={<RemarkPage />} />
             <Route path="/sidbar" element={<SidBar />} />
-            <Route path="/plannerCard" element={<PlannerCard />} />
-         
+            <Route path="/planner" element={<PlannerCard />} />
           </Routes>
         </div>
       </Router>
@@ -31,4 +30,3 @@ function App() {
 
 export default App;
 
-// lib react-select, como passar os itens selecionados para outro campo

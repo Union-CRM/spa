@@ -18,6 +18,7 @@ import {
   CardHeader,
   IconsContainer,
 } from "./styles";
+import IconSystem from "../../assets/IconSystem";
 
 function Cards(props) {
   function deleteSelectedCard() {
@@ -34,10 +35,12 @@ function Cards(props) {
         </Rectangle>
         <IconsContainer>
           <button>
-            <Editar src={edit} />
+            <IconSystem icon={"Edit"} size={"11px"}/>
+            
           </button>
           <button onClick={deleteSelectedCard}>
-            <Trash src={trash} />
+          <IconSystem icon={"Trash"} size={"11px"}/>
+           
           </button>
         </IconsContainer>
       </CardHeader>
