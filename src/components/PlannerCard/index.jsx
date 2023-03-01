@@ -45,7 +45,6 @@ const PlannerCard = () => {
 
           {clientes.map((item) => (
             <Card
-
               key={item.id}
               name1={item.name1}
               email1={item.email1}
