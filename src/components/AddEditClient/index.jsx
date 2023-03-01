@@ -5,11 +5,9 @@ import {
   SpanTitle,
   DivDouble,
   DivButton,
-  Buttton,
+  ClickButton,
   DivSingle,
 } from "./styles";
-
-//inputs component
 import SingleSelect from "../Input/SingleSelect";
 import ButtonDefault from "../../assets/Buttons/ButtonDefault";
 import InputWithName from "../Input/InputWithName";
@@ -27,7 +25,7 @@ const option = [
   { id: 2, value: "False", label: "False" },
 ];
 
-const AddEditClient = ({ title, setModal, props }) => {
+const AddEditClient = ({ title, setModal }) => {
   const closeModal = () => {
     setModal(false);
   };
@@ -40,27 +38,20 @@ const AddEditClient = ({ title, setModal, props }) => {
       <PositionTitle>
         <SpanTitle>{title}</SpanTitle>
       </PositionTitle>
-
       <InputWithName label="Client Name" widthInput={"77.5%"} />
-
       <DivDouble>
         <InputWithName label="Email" widthInput={"240px"} />
-
         <DivSingle>
           <SingleSelect label={"Role"} sizeSingle={"240px"} options={option} />
         </DivSingle>
       </DivDouble>
-
       <SingleSelect label={"Customer"} sizeSingle={"79.7%"} options={option} />
-
       <InputWithName label="Business" widthInput={"77.5%"} />
-
       <SingleSelect
         label={"Release Train"}
         sizeSingle={"79.7%"}
         options={option}
       />
-
       <TagComponent
         options={options}
         label={"Status"}
@@ -70,26 +61,24 @@ const AddEditClient = ({ title, setModal, props }) => {
         heights={"35px"}
         topValue={"-3px"}
       />
-
       <SingleSelect label={"Status"} sizeSingle={"192px"} options={option} />
-
       <DivButton>
-        <Buttton onClick={saveModal}>
+        <ClickButton onClick={saveModal}>
           <ButtonDefault
             type={"userSave"}
             weightFont={"500"}
             sizeFont={"18px"}
             name={"Save"}
           />
-        </Buttton>
-        <Buttton onClick={closeModal}>
+        </ClickButton>
+        <ClickButton onClick={closeModal}>
           <ButtonDefault
             type={"userCancel"}
             weightFont={"500"}
             sizeFont={"18px"}
             name={"Cancel"}
           />
-        </Buttton>
+        </ClickButton>
       </DivButton>
     </Container>
   );

@@ -23,22 +23,15 @@ export const Container = styled.div`
     width: 7px;
     height: 100%;
   }
-
-  `;
-
-  export const Content = styled.div`
-    text-align: center;`
-  
-export const TopContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  `
-
-export const Description = styled.p`
+`;
+export const Content = styled.div`
   text-align: center;
 `;
-
+export const TopContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 export const Tag = styled.div`
   color: #fff;
   background-color: #e41165;
@@ -48,7 +41,6 @@ export const Tag = styled.div`
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
 `;
-
 export const TeamsContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -61,32 +53,23 @@ export const TeamsContainer = styled.div`
   border-radius: 5px;
   line-height: 16px;
 `;
-
 export const IconButton = styled.button`
   border: none;
   background-color: transparent;
   margin-left: 8px;
-`;
-
-export const PeopleImage = styled.img`
-  height: 40px;
-  margin-bottom: 2px;
 `;
 export const AvatarContainer = styled.div`
   position: relative;
   width: 70px;
   text-align: right;
 `;
-
- export const Avatar = styled.img`
+export const Avatar = styled.img`
   height: 20px;
   width: 20px;
   border-radius: 20px;
   position: absolute;
   border: 1px solid #e41165;
-  top:-3px;
+  top: -3px;
   left: ${(props) => `calc(10px * ${props.position})`};
   background-color: #fff;
-
-
 `;

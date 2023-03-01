@@ -15,12 +15,10 @@ export const Container = styled.div`
   grid-row: 1;
   position: relative;
 `;
-
 export const PositionTitle = styled.div`
   margin-left: 0px;
   margin-top: 25px;
 `;
-
 export const SpanTitle = styled.span`
   font-family: "Houschka Rounded Alt";
   font-style: normal;
@@ -29,55 +27,18 @@ export const SpanTitle = styled.span`
   font-size: 32px;
   line-height: 36px;
 `;
-
-export const NameClient = styled.div`
-  margin-left: 4%;
-  margin-bottom: 15px;
-`;
-
-export const SpanDiv = styled.div`
-  margin-left: 44px;
-`;
-
-export const Span = styled.span`
-  font-family: "Houschka Rounded Alt";
-`;
-
-export const TextBox = styled.textarea`
-  width: 515px;
-  height: 55px;
-  border: 1px solid black;
-  margin-left: 44px;
-  margin-top: -10px;
-  resize: none;
-`;
-
-export const Buttton = styled.div``;
-
-export const SubTitle = styled.p`
-  margin-left: 4%;
-  margin-bottom: 0px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-  color: rgba(0, 0, 0, 0.8);
-  margin-left: 0;
-`;
-
+export const ClickButton = styled.div``;
 export const DivButton = styled.div`
   justify-content: center;
   display: grid;
   width: 100%;
   margin-top: 25px;
 `;
-
 export const DivDouble = styled.div`
   justify-content: space-between;
   display: flex;
   width: 80%;
 `;
-
 export const DivSingle = styled.div`
   display: flex;
   justify-content: space-between;

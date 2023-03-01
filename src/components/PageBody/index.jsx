@@ -3,7 +3,7 @@ import NavBar from "../NavBar";
 import SidBar from "../SidBar";
 import { Container, Content } from "./styles";
 
-class Body extends React.Component {
+class PageBody extends React.Component {
   render() {
     return (
       <>
@@ -17,5 +17,4 @@ class Body extends React.Component {
   }
 }
 
-export default Body;
-//oii
+export default PageBody;

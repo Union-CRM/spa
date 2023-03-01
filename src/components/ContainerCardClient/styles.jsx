@@ -14,8 +14,7 @@ export const BoardStyle = styled.div`
   border-radius: 8px;
   margin-bottom: 20px;
 `;
-
-export const H1 = styled.span`
+export const H1 = styled.h1`
   width: 100%;
   font-family: "Houschka Rounded Alt";
   font-size: 24px;
@@ -24,7 +23,6 @@ export const H1 = styled.span`
   line-height: 28px;
   margin-top: 10px;
 `;
-
 export const Container = styled.div`
   display: grid;
   grid-template-rows: 9% 91%;
@@ -66,7 +64,6 @@ export const Container = styled.div`
     border-top: 12px solid white;
   }
 `;
-
 export const Line = styled.div`
   width: 128px;
   height: 0px;
@@ -75,13 +72,6 @@ export const Line = styled.div`
   margin-left: 0px;
   margin-top: -15px;
 `;
-
-export const All = styled.span`
-  font-family: "Houschka Rounded Alt";
-  font-size: 14px;
-  color: #525b75;
-`;
-
 export const Header = styled.div`
   margin-bottom: 20px;
   margin-left: 25px;
@@ -93,7 +83,6 @@ export const Header = styled.div`
   z-index: 1;
   background-color: #ffffff;
 `;
-
 export const Active = styled.span`
   font-family: "Houschka Rounded Alt";
   font-size: 14px;
@@ -101,12 +90,10 @@ export const Active = styled.span`
   color: #525b75;
   line-height: 16px;
 `;
-
-export const Spans = styled.div`
+export const DivSpans = styled.div`
   margin-top: 10px;
   display: flex;
 `;
-
 export const Inactive = styled.div`
   font-family: "Houschka Rounded Alt";
   font-size: 14px;
@@ -114,40 +101,23 @@ export const Inactive = styled.div`
   color: #525b75;
   line-height: 16px;
 `;
-
 export const DivButton = styled.div`
-    margin-top: 1.5%;
-    margin-right: 1.5%;
-    `;
-
+  margin-top: 1.5%;
+  margin-right: 1.5%;
+`;
 export const Top = styled.div`
   display: flex;
   margin-left: 0px;
 `;
-
 export const HowManyActive = styled.span`
   color: #00953b;
 `;
-
 export const HowManyInactive = styled.span`
   color: #7a7a7a;
 `;
-
 export const HowManySubjectList = styled.span`
   color: #525b75;
 `;
-export const IconPosition = styled.div`
-  display: flex;
-  margin-left: 12px;
-  margin-top: 11px;
-`;
-export const SpanPosition = styled.div`
-  display: flex;
-  margin-left: 8px;
-  margin-top: 9px;
-  font-size: 16px;
-`;
-
 export const ButtonActive = styled.button`
   cursor: pointer;
   border: none;
@@ -157,7 +127,6 @@ export const ButtonActive = styled.button`
     border-bottom: 2px solid #007bff;
   }
 `;
-
 export const ButtonInactive = styled.button`
   cursor: pointer;
   border: none;
@@ -168,27 +137,15 @@ export const ButtonInactive = styled.button`
     border-bottom: 2px solid #007bff;
   }
 `;
-
 export const LineGray = styled.div`
   width: 640px;
   height: 0px;
   border: 1px solid #d8d8d8;
 `;
-
-export const PositionModal = styled.div`
-  margin-left: 200px;
-`;
-
 export const ContainerFather = styled.div`
   display: grid;
   width: 102%;
   height: auto;
   grid-template-rows: 50% 50%;
   grid-template-columns: 50% 50%; ;
-`;
-
-export const ContainerSon = styled.div`
-  grid-column: 2;
-  display: flex;
-  justify-content: right;
 `;
