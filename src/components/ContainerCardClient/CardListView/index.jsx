@@ -24,90 +24,75 @@ import {
   TagsSpan,
 } from "./styles";
 import IconSystem from "../../../assets/IconSystem";
+import Body from "../../../assets/FontSystem/Body";
+import Subtitle from "../../../assets/FontSystem/Subtitle";
 
-//components FontSystem
-import Body from "../../FontSystem/Body";
-import Subtitle from "../../FontSystem/Subtitle";
-
-const SubjectCard = ({
-  email,
-  client,
-  status,
-  textRole,
-  textCostumer,
-  textBusiness,
-  textRelease,
-}) => {
+const SubjectCard = (props) => {
   return (
     <Container>
-      <Card $mode={status}>
+      <Card $mode={props.status}>
         <Header>
           <DivPhoto>
             <DivPhotoI>
-            <Body type={"Body1"} name={"IS"} /></DivPhotoI>
+              <Body type={"Body1"} name={"IS"} />
+            </DivPhotoI>
           </DivPhoto>
-
           <DivDadosCard>
             <NameClient>
-              <Body type={"Body1"} name={client} />
+              <Body type={"Body1"} name={props.client} />
             </NameClient>
             <EmailClient>
-              <Subtitle type={"TextDescription"} name={email} />
+              <Subtitle type={"TextDescription"} name={props.email} />
             </EmailClient>
           </DivDadosCard>
-
-          <Status $mode={status}>
-            <StatusSpan> {status}</StatusSpan>
+          <Status $mode={props.status}>
+            <StatusSpan> {props.status}</StatusSpan>
           </Status>
-
-          <Status $mode={status}>
+          <Status $mode={props.status}>
             <TagsSpan>
-              
               Tags
               <IconSystem icon={"TaskRegular"} width={"10px"} height={"10px"} />
             </TagsSpan>
           </Status>
-                
-                <DivIcons>
-                    <DivToggle $mode={status} >
-                        <InputToggle  type="checkbox" name="option" id="option" />
-                        <LabelToggle $mode={status} for="option"><Span></Span></LabelToggle>
-                    </DivToggle>
-                    <IconEdit>
-                        <IconSystem icon={"Edit"} height={'15px'} width={'15px'}/>
-                    </IconEdit>
-                </DivIcons>                
-            </Header>     
-
+          <DivIcons>
+            <DivToggle $mode={props.status}>
+              <InputToggle type="checkbox" name="option" id="option" />
+              <LabelToggle $mode={props.status} for="option">
+                <Span></Span>
+              </LabelToggle>
+            </DivToggle>
+            <IconEdit>
+              <IconSystem icon={"Edit"} height={"15px"} width={"15px"} />
+            </IconEdit>
+          </DivIcons>
+        </Header>
         <Topic>
           <DivText>
             <TitleText>Role</TitleText>
             <Lline>|</Lline>
             <LineText>
-         
-              <Subtitle type={"TextMed"} name={textRole} />
+              <Subtitle type={"TextMed"} name={props.textRole} />
             </LineText>
           </DivText>
           <DivText>
             <TitleText>Costumer</TitleText>
             <Lline>|</Lline>
             <LineText>
-            
-              <Subtitle type={"TextMed"} name={textCostumer} />
+              <Subtitle type={"TextMed"} name={props.textCostumer} />
             </LineText>
           </DivText>
           <DivText>
             <TitleText>Business</TitleText>
             <Lline>|</Lline>
             <LineText>
-              <Subtitle type={"TextMed"} name={textBusiness} />
+              <Subtitle type={"TextMed"} name={props.textBusiness} />
             </LineText>
           </DivText>
           <DivText>
             <TitleText>Release Train</TitleText>
             <Lline>|</Lline>
             <LineText>
-              <Subtitle type={"TextMed"} name={textRelease} />
+              <Subtitle type={"TextMed"} name={props.textRelease} />
             </LineText>
           </DivText>
         </Topic>

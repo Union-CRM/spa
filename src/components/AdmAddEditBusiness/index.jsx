@@ -1,52 +1,26 @@
 import React from "react";
-import { useState } from "react";
 import {
   Div,
   SubTitle,
   DivBNameStatus,
   DivBName,
   DivStatus,
+  DivTag,
+  DivCodeSeguiment,
+  DivButton,
+  DivCode,
 } from "./styles";
-import { DivTag, DivCodeSeguiment, DivButton, DivCode } from "./styles";
 import ButtonDefault from "../../assets/Buttons/ButtonDefault";
 import InputWithName from "../Input/InputWithName";
-import makeAnimated from "react-select/animated";
 import { TagComponent } from "../TagComponent";
 import SingleSelect from "../Input/SingleSelect";
 import DoubleInput from "../Input/DoubleInput";
 import Headline from "../FontSystem/Headline";
 
 const AddEditBusiness = ({ title }) => {
-  const animatedComponents = makeAnimated();
-  const [value, setValue] = useState(null);
-
   const option = [
     { id: 1, value: "True", label: "True" },
     { id: 2, value: "False", label: "False" },
-  ];
-
-  const dados = [
-    {
-      status: "success",
-    },
-    {
-      status: "Braasil",
-    },
-    {
-      status: "Noruefa",
-    },
-    {
-      status: "Noruefa",
-    },
-    {
-      status: "Noruefa",
-    },
-    {
-      status: "Noruefa",
-    },
-    {
-      status: "Noruefa",
-    },
   ];
 
   return (
