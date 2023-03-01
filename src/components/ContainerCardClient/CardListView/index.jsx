@@ -43,7 +43,8 @@ const SubjectCard = ({
       <Card $mode={status}>
         <Header>
           <DivPhoto>
-            <DivPhotoI></DivPhotoI>
+            <DivPhotoI>
+            <Body type={"Body1"} name={"IS"} /></DivPhotoI>
           </DivPhoto>
 
           <DivDadosCard>

@@ -1,15 +1,12 @@
 import {React} from 'react'
-import { Card, Status, StatusSpan, Title, Name, Topic, Client, ClientName, Type, Line, Header, PositionEdit, PositionRemove, Container} from './styles'
+import { Card, Status, StatusSpan, Title, Name, Topic, Client, ClientName, Type, Line, Header, PositionEdit,Container} from './styles'
 import IconSystem from '../../../assets/IconSystem'
 
 const RemarkCard = ({title, manager, topic, area, client, status, openModal,setModalDiscard,opennedModal }) => {
 
  
 
-    const discardRemark=() =>{
-        setModalDiscard(true);
-        opennedModal(false);
-    }
+   
   return (
     <Container>
         
@@ -22,10 +19,7 @@ const RemarkCard = ({title, manager, topic, area, client, status, openModal,setM
                 <IconSystem icon={"PaperEdit"} height={'15px'} width={'15px'}/>
                 
             </PositionEdit>
-            <PositionRemove onClick={() => discardRemark()}>
-        <IconSystem icon={"Delete"} height={'15px'} width={'15px'}/>
             
-        </PositionRemove>
         
         </Header>
         <Title>
