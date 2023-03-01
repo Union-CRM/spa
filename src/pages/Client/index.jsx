@@ -1,18 +1,15 @@
-import React from 'react'
-import ContainerCards from '../../components/ContainerCardClient';
-import Body from "../../components/Body";
+import React from "react";
+import ContainerCards from "../../components/ContainerCardClient";
+import PageBody from "../../components/PageBody";
 
 const Client = () => {
-  
-    
-    return (
-        <>
-        <Body>
-          <ContainerCards/>
-        </Body>
-        </>
-    )
-   
-}
+  return (
+    <>
+      <PageBody>
+        <ContainerCards />
+      </PageBody>
+    </>
+  );
+};
 
 export default Client;

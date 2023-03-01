@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import SidBar from "./components/SidBar";
 import PlannerCard from "./components/PlannerCard";
 import Home from "./pages/Home";
 import GlobalStyle from "./styles/GlobalStyle";
@@ -19,7 +18,6 @@ function App() {
             <Route path="/client" element={<Client />} />
             <Route path="/subject" element={<SubjectPage />} />
             <Route path="/remark" element={<RemarkPage />} />
-            <Route path="/sidbar" element={<SidBar />} />
             <Route path="/planner" element={<PlannerCard />} />
           </Routes>
         </div>
@@ -29,4 +27,3 @@ function App() {
 }
 
 export default App;
-

@@ -1,6 +1,4 @@
 import React, { memo } from "react";
-import IconSystem from "../../../assets/IconSystem";
-
 import {
   Container,
   IconButton,
@@ -31,7 +29,7 @@ const CardGroup = memo(() => {
 
         <div>
           <IconButton>
-            <IconSystem icon={"Trash"} height={"14px"} />
+            <IconSystem icon={"Trash"} height={"140px"} />
           </IconButton>
           <IconButton>
             <IconSystem icon={"PaperEdit"} height={"14px"} />
@@ -48,7 +46,7 @@ const CardGroup = memo(() => {
 
           <AvatarContainer>
             {showingUsers.map((user, index) => (
-              <Avatar key={index} position={index} src={contact} />
+              <Avatar key={index} position={index} />
             ))}
             {hiddenUsersText}
           </AvatarContainer>

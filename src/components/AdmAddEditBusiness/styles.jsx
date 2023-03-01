@@ -16,7 +16,6 @@ export const InputWithName = styled.div`
   letter-spacing: 0em;
   text-align: left;
 `;
-
 export const Title = styled.h1`
   font-family: Houschka Rounded Alt;
   font-size: 32px;
@@ -27,7 +26,6 @@ export const Title = styled.h1`
   margin-left: 4%;
   display: inline-block;
 `;
-
 export const SubTitle = styled.p`
   margin-top: 10px;
   margin-left: 20px;
@@ -39,7 +37,6 @@ export const SubTitle = styled.p`
   line-height: 22px;
   color: rgba(0, 0, 0, 0.8);
 `;
-
 export const DivBNameStatus = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 50%);
@@ -58,12 +55,10 @@ export const DivBName = styled.div`
   grid-row-start: 1;
   grid-row-end: 5;
 `;
-
 export const DivCodeSeguiment = styled.div`
   margin-bottom: 10%;
   margin-left: 4%;
 `;
-
 export const DivTag = styled.div`
   display: grid;
   grid-template-columns: 30% 1fr;
@@ -72,7 +67,6 @@ export const DivTag = styled.div`
   grid-row-gap: 0px;
   margin-left: 4%;
 `;
-
 export const DivButton = styled.div`
   justify-content: center;
   display: grid;
@@ -83,23 +77,18 @@ export const DivButton = styled.div`
 export const DivCode = styled.div`
   margin-left: 20px;
 `;
-
 export const HowManyActive = styled.span`
   color: #00953b;
 `;
-
 export const HowManyInactive = styled.span`
   color: #771300;
 `;
-
 export const HowManySubjectList = styled.span`
   color: #525b75;
 `;
-
 export const HowManyCancel = styled.div`
   margin-left: 20px;
 `;
-
 export const Finished = styled.div`
   margin-left: 20px;
 `;
@@ -115,7 +104,6 @@ export const ButtonProgress = styled.button`
 export const Canceled = styled.div`
   margin-left: 20px;
 `;
-
 export const H1 = styled.span`
   width: 100%;
   font-family: "Houschka Rounded Alt";

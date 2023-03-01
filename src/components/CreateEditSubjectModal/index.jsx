@@ -16,12 +16,12 @@ import {
 import InputPlaceHolder from "../Input/InputPlaceholder";
 import SingleSelect from "../Input/SingleSelect";
 import ButtonDefault from "../../assets/Buttons/ButtonDefault";
-import Headline from "../FontSystem/Headline";
-import Body from "../FontSystem/Body";
+import Headline from "../../assets/FontSystem/Headline";
+import Body from "../../assets/FontSystem/Body";
 
 const values = [{ value: 1, label: "FINANÇAS CREDITO DE RISCO DE CAPITAL" }];
 
-const Subject = ({ title, setModal, content }) => {
+const Subject = ({ title, setModal }) => {
   const closeModal = () => {
     setModal(false);
   };
@@ -36,7 +36,7 @@ const Subject = ({ title, setModal, content }) => {
       </PositionTitle>
       <PositionInputRelease>
         <Body type={"Body2"} name={"Release Train"} />
-        <InputPlaceHolder /*value={content.RelaseTrain}*/ />
+        <InputPlaceHolder />
       </PositionInputRelease>
       <PositionSingleSelect>
         <Body type={"Body2"} name={"Business"} />
@@ -59,10 +59,10 @@ const Subject = ({ title, setModal, content }) => {
       </SpanDiv>
       <TextBox placeholder="olá" />
       <PositionButtonSave onClick={saveModal}>
-        <ButtonDefault type={"true"} name={"Save"} />
+        <ButtonDefault type={"userSave"} name={"Save"} />
       </PositionButtonSave>
       <PositionButtonCancel onClick={closeModal}>
-        <ButtonDefault type={"false"} name={"Cancel"} />
+        <ButtonDefault type={"userCancel"} name={"Cancel"} />
       </PositionButtonCancel>
     </Container>
   );

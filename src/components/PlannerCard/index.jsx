@@ -1,7 +1,7 @@
 import React from "react";
 import { DivP, H1, DivMain } from "./styles";
 import Card from "./Card";
-import Body from "../Body";
+import PageBody from "../PageBody";
 const clientes = [
   {
     id: 1,
@@ -38,7 +38,7 @@ const clientes = [
 ];
 const PlannerCard = () => {
   return (
-    <Body>
+    <PageBody>
       <DivMain>
         <DivP>
           <H1>18 - January</H1>
@@ -55,7 +55,7 @@ const PlannerCard = () => {
           ))}
         </DivP>
       </DivMain>
-    </Body>
+    </PageBody>
   );
 };
 

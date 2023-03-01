@@ -1,16 +1,14 @@
 import React from "react";
-import Body from "../../components/Body";
+import PageBody from "../../components/PageBody";
 import SubjectList from "../../components/SubjectCardListView";
-
 
 class SubjectPage extends React.Component {
   render() {
     return (
       <>
-        <Body>
-        <SubjectList />
-
-        </Body>
+        <PageBody>
+          <SubjectList />
+        </PageBody>
       </>
     );
   }

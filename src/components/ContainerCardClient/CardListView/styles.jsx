@@ -54,7 +54,6 @@ export const Status = styled.div`
   align-items: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
-
 export const StatusSpan = styled.div`
   color: #ffffff;
   font-size: 12;
@@ -62,7 +61,6 @@ export const StatusSpan = styled.div`
   font-family: Imported !important;
   text-align: center;
 `;
-
 export const TagsSpan = styled.div`
   color: #ffffff;
   background-color: #007bff !important;
@@ -73,21 +71,6 @@ export const TagsSpan = styled.div`
   text-align: center;
   height: 100%;
 `;
-
-export const Title = styled.div`
-  font-family: "Houschka Rounded Alt";
-  font-size: 14px;
-  margin-bottom: 34px;
-  margin-left: 10px;
-  margin-top: 3px;
-`;
-
-export const Name = styled.div`
-  font-family: "Houschka Rounded Alt";
-  font-style: normal;
-  color: #000000;
-`;
-
 export const Topic = styled.div`
   margin-left: 2%;
   margin-top: 1%;
@@ -96,51 +79,6 @@ export const Topic = styled.div`
   font-family: "Houschka Rounded Alt";
   position: absolute;
 `;
-
-export const Client = styled.span`
-  width: 191px;
-  height: 29px;
-  border: 1px solid #888c95;
-  border-radius: 8px;
-  display: flex;
-  margin-top: 10px;
-  margin-left: 10px;
-  font-family: "Houschka Rounded Alt";
-`;
-export const ClientName = styled.div`
-  color: #656464;
-  margin-left: 22px;
-  margin-top: 7px;
-  font-size: 12px;
-`;
-
-export const Type = styled.div`
-  color: #000000;
-  margin-top: 7px;
-  margin-left: 10px;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: "Houschka Rounded Alt";
-`;
-
-export const Line = styled.div`
-  width: 0px;
-  height: 16px;
-  border: 1px solid #888c95;
-  transform: rotate(180deg);
-  margin-left: 15px;
-  margin-top: 5px;
-`;
-
-export const PositionEdit = styled.div`
-  width: 12px;
-  height: 12px;
-  margin-left: 105px;
-  margin-top: 8px;
-  cursor: pointer;
-  display: flex;
-`;
-
 export const IconEdit = styled.span`
   width: 12px;
   height: 12px;
@@ -149,33 +87,29 @@ export const IconEdit = styled.span`
   cursor: pointer;
   position: relative;
 `;
-
 export const Header = styled.div`
   display: flex;
   width: 100%;
 `;
-
 export const Container = styled.div``;
+export const DivPhoto = styled.div`
+  align-items: left;
+  display: flex;
 
+  margin-left: 4%;
+  margin-top: 4%;
+`;
 export const DivPhotoI = styled.div`
   height: 46.81px;
   width: 46.81px;
   border-radius: 100%;
   background-color: #d9d9d9;
   border: solid #007bff;
-  text-align:center;
-  display:flex;
-  justify-content:center;
-  flex-direction:column;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 `;
-export const DivPhoto = styled.div`
-  align-items: left;
-  display:flex;
-
-  margin-left: 4%;
-  margin-top: 4%;
-`;
-
 export const DivToggle = styled.div`
   width: 27px;
   height: 13px;
@@ -198,7 +132,6 @@ export const DivIcons = styled.div`
   grid-column-gap: 10px;
   margin-left: 14%;
 `;
-
 export const InputToggle = styled.input`
   display: block;
   width: 100%;
@@ -219,7 +152,6 @@ export const InputToggle = styled.input`
     right: -2px;
   }
 `;
-
 export const LabelToggle = styled.label`
   display: block;
   width: 100%;
@@ -256,7 +188,6 @@ export const LabelToggle = styled.label`
     border-radius: inherit;
   }
 `;
-
 export const Span = styled.span`
   display: block;
   width: 12px;
@@ -300,9 +231,7 @@ export const Span = styled.span`
     color: #fff;
   }
 `;
-
 export const DivDadosCard = styled.div``;
-
 export const NameClient = styled.h2`
   margin-left: 1%;
   margin-top: 2.5%;
@@ -312,7 +241,6 @@ export const NameClient = styled.h2`
   position: absolute;
   text-align: left;
 `;
-
 export const EmailClient = styled.p`
   margin-left: 1%;
   margin-top: 5.2%;
@@ -331,7 +259,6 @@ export const LineText = styled.p`
   display: inline-block;
   font-size: 12px;
 `;
-
 export const TitleText = styled.p`
   text-align: left;
   height: 14px;
@@ -339,7 +266,6 @@ export const TitleText = styled.p`
   font-size: 12px;
   font-weight: 600;
 `;
-
 export const Lline = styled.p`
   text-align: left;
   height: 14px;
