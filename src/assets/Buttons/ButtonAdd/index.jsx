@@ -1,9 +1,7 @@
 import React from "react";
 import IconSystem from "../../IconSystem";
-
 import { Button, IconAdd, Span } from "./styles";
-//$mode- change background-color
-//
+
 class ButtonAdd extends React.Component {
   render() {
     return (
@@ -19,9 +17,7 @@ class ButtonAdd extends React.Component {
           <IconAdd>
             <IconSystem icon={"Add2"} />
           </IconAdd>
-          <Span color={this.props.color}>
-            {this.props.name}
-          </Span>
+          <Span color={this.props.color}>{this.props.name}</Span>
         </Button>
       </>
     );

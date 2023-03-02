@@ -7,14 +7,11 @@ export const TagComponent = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
   const [setSelectedOptions] = useState([]);
 
-
-
   return (
     <>
       <Container>
         <Label>
           {props.label}
-
           <Select
             isMulti
             options={props.options}
