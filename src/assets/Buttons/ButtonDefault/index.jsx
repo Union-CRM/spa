@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Button } from "./styles";
 
 class ButtonDefault extends React.Component {

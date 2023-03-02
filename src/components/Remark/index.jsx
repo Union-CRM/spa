@@ -1,12 +1,8 @@
 import React from "react";
 import { Card } from "./styles";
-import edit from "../../imagens/edit.svg";
 import finish from "../../imagens/finish.svg";
-import trash from "../../imagens/trash.svg";
 import calendar from "../../imagens/calendar.svg";
 import {
-  Editar,
-  Trash,
   Finish,
   Calendar,
   ColorBar,
@@ -30,21 +26,17 @@ function Cards(props) {
       <ColorBar />
       <CardHeader>
         <Rectangle>
-          {" "}
           <p> Finished</p>{" "}
         </Rectangle>
         <IconsContainer>
           <button>
-            <IconSystem icon={"Edit"} size={"11px"}/>
-            
+            <IconSystem icon={"Edit"} size={"11px"} />
           </button>
           <button onClick={deleteSelectedCard}>
-          <IconSystem icon={"Trash"} size={"11px"}/>
-           
+            <IconSystem icon={"Trash"} size={"11px"} />
           </button>
         </IconsContainer>
       </CardHeader>
-
       <Text1>
         <h1>{props.title}</h1>
         <h2>{props.author}</h2>
