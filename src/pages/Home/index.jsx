@@ -7,7 +7,7 @@ class Home extends React.Component {
     return (
       <>
         <PageBody>
-          <AdmAddEditPlanner title={"Create Planner"}></AdmAddEditPlanner>
+       
         </PageBody>
       </>
     );

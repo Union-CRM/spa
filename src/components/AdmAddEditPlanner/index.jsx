@@ -37,7 +37,7 @@ const AdmAddEditPlanner = ({ title }) => {
             <Headline type={"Headline3"} name={title}/>
         </DivTitle>
         
-            <SingleSelect label={"Subject"} height={"35px"}/>
+            <SingleSelect label={"Subject"} height={"35px"} sizeSingle={"100%"}/>
             <InputWithName label={"Client Name"}/>
             <InputWithName label={"Email"}/>
             <InputWithName label={"Business"}/>
