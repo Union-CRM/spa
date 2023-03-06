@@ -1,19 +1,19 @@
 import React from 'react'
-import {LineGray, ButtonCancel, ButtonFinished, BoardStyle, H1, Container, Header, Top,
+import {LineGray, ButtonCancel, ButtonFinished, BoardStyle, Container, Header, Top,
      HowManySubjectList, Line, Spans, Finished, HowManyFinished, Canceled, HowManyCancel, DivButton,
       ContainerFather } from './styles'
+
 import RemarkCard from '../CardListView'
 import ButtonAdd from '../../../assets/Buttons/ButtonAdd'
 import { useState } from 'react'
 import Remark from '../../RemarkModal'
 import {remarksMock as remarksList} from '../RemarkData';
 import {cardStatusMock as cardStatus} from '../RemarkData/Status';
-
+import Headline from "../../../assets/FontSystem/Headline";
 
 const RemarksId = remarksList.map(item => item.id)
 const RemarksCancel = remarksList.filter(item => item.status === "Canceled")
 const RemarksFinished = remarksList.filter(item => item.status === "Finished")
-
 
 
 
@@ -23,7 +23,7 @@ const RemarkList = () => {
     const [active, setActive] = useState(cardStatus.INPROGRESS);
     const [modal, setModal] = useState(false)
     const [isEdit, setEdit] = useState(false)
-    const [setModalDiscard] = useState(false);
+  
 
     const handleClick = (tabCards, selectedTab) => {
         setCards(tabCards)
@@ -36,15 +36,15 @@ const RemarkList = () => {
     
     const createRemark= () => {
         setModal(true);
-        setModalDiscard(false);
         setEdit(false);
+
+        console.log()
     }
 
     
     const EditRemark = () => {
         setModal(true);
-        setModalDiscard(false);
-        setEdit(true);
+        setEdit(true);       
     }
 
  
@@ -59,7 +59,6 @@ const RemarkList = () => {
                 area={item.area}
                 client={item.client}
                 openModal={() => EditRemark()}
-                setModalDiscard={setModalDiscard}
                 opennedModal={setModal}
                 /> 
             ))
@@ -69,7 +68,7 @@ const RemarkList = () => {
         <Container>
             <Header>
                 <Top>
-                    <H1>Remark List <HowManySubjectList>({RemarksId.length})</HowManySubjectList></H1>
+                    <Headline type={"Headline4"} name={"Remark List"}>  <HowManySubjectList>({RemarksId.length})</HowManySubjectList></Headline>
                     <DivButton onClick={() => createRemark()}>
                         <ButtonAdd mode="#007BFF" width="169px" height="38px" name="Create Remark" color="white"/>
                     </DivButton>
@@ -91,8 +90,7 @@ const RemarkList = () => {
         </Container>
 
            {modal && <Remark setModal={setModal} 
-           title={isEdit ? "Edit Remark" : "Create Remark"} />}
-          
+            title={isEdit ? "Edit Remark" : "Create Remark"}  />}
            
         </ContainerFather>
   )
