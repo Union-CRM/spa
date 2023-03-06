@@ -113,8 +113,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
 
               menuList: (baseStyles, state) => ({
                 ...baseStyles,
-                maxWidth: props.sizeMenuList || "auto",
-                minHeight: props.heightMenu || "100px",
+                width: props.width || "126px",
                 position: "relative",
                 overflowY: "scroll",
                 "&::-webkit-scrollbar": {

@@ -22,7 +22,7 @@ export const SingleSelect = (props) => {
             isClearable={false}
             placeholder={props.placeholder}
             isSearchable={true}
-            //isDisabled={false}
+            isDisabled={props.disabled}
             isLoading={false}
             theme={(theme) => ({
               ...theme,

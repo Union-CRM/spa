@@ -46,8 +46,9 @@ export const FontHeadline = styled.p`
       default:
     }
   }}
+color: ${(props) => props.colorFont || "#141824"};
 
-  color: ${(props) => props.colorFont || "#141824"};
+ 
 `;
 
 export const FontBody = styled.p`
@@ -72,8 +73,6 @@ export const FontBody = styled.p`
       default:
     }
   }}
-
-  color: ${(props) => props.colorFont || "#141824"};
 `;
 
 export const FontSubtitle = styled.p`
@@ -106,6 +105,4 @@ export const FontSubtitle = styled.p`
       default:
     }
   }}
-
-  color: ${(props) => props.colorFont || "#141824"};
 `;

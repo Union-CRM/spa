@@ -1,36 +1,64 @@
 import styled from "styled-components";
 
 export const DivP = styled.div`
-  display: grid;
-  grid-auto-rows: max-content;
   overflow: auto;
   background-color: #f5f7fa;
-  overflow: hidden;
-  overflow-y: scroll;
-  width: 517px;
-  height: 383px;
+  width: 640px;
+  height: 787px;
+  border-left: 15px solid #007BFF;
+  border-radius: 8px;
+  margin-top: -10px;
+  overflow: auto;
+  
+  
+  &::-webkit-scrollbar {
+    width: 18px;
+    height: 10px;
+    margin-right: 10px;
+    float: right;
+    
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: 5px black;
+  
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background-color: #f5f7fa;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 80%;
+    background-color: #afb2bb;
+    margin-left: 20px;
+    width: 15px;
+    border-right: 6px solid #f5f7fa;
+    border-top: 12px solid #f5f7fa;
+  }
 `;
-export const H1 = styled.h1`
-  stroke: none;
-  width: 95px;
-  display: flex;
-  margin-left: 50px;
-  margin-top: 10px;
-  height: 20px;
-  font-weight: 700;
-  top: 13px;
-  font-family: "Inter";
-  font-style: normal;
-  font-size: 20px;
-  white-space: nowrap;
-  border-radius: 2px;
-  border-bottom: 3px solid #e41165;
+export const Ddata = styled.div`
+    display: flex;
+    position: relative;
+    justify-content: right;
+    align-items: flex-end;
 `;
-export const DivMain = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+
+export const Header = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 273px);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  margin-left: 45px;
+  margin-top: 28px;
+  margin-bottom: 32px;
+`
+
+export const DivPlanner = styled.div`
+    display: flex;
+    position: relative;
+    justify-content: left;
+    align-items: flex-start;
+`
