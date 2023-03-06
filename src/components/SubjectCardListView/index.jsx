@@ -19,6 +19,7 @@ import {
   Canceled,
   HowManyCancel,
   DivButton,
+  DivModal,
   ContainerFather,
 } from "./styles";
 import SubjectCard from "./CardListView/index";
@@ -222,12 +223,15 @@ const SubjectList = () => {
         </Header>
         <BoardStyle>{getSubjectCards()}</BoardStyle>
       </Container>
-      {modal && (
-        <Subject
-          setModal={setModal}
-          title={isEdit ? "Edit Subject" : "Create Subject"}
-        />
-      )}
+
+      <DivModal>
+        {modal && (
+          <Subject
+            setModal={setModal}
+            title={isEdit ? "Edit Subject" : "Create Subject"}
+          />
+        )}
+      </DivModal>
     </ContainerFather>
   );
 };

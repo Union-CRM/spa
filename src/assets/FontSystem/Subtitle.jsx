@@ -6,7 +6,9 @@ class Subtitle extends React.Component {
   render() {
     return (
       <>
-        <FontSubtitle $mode={this.props.type}>{this.props.name}</FontSubtitle>
+        <FontSubtitle $mode={this.props.type} colorFont={this.props.colorFont}>
+          {this.props.name}
+        </FontSubtitle>
       </>
     );
   }

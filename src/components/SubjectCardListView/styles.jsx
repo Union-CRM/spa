@@ -18,6 +18,7 @@ export const H1 = styled.h1`
   width: 100%;
   font-family: "Houschka Rounded Alt";
   font-size: 24px;
+  line-height: 28px;
   margin-top: 10px;
 `;
 export const Container = styled.div`
@@ -72,7 +73,10 @@ export const All = styled.span`
   font-family: "Houschka Rounded Alt";
   font-size: 14px;
   color: #525b75;
+  line-height: 16px;
+  font-weight: 600;
 `;
+
 export const Header = styled.div`
   margin-bottom: 20px;
   margin-left: 25px;
@@ -88,6 +92,7 @@ export const Finished = styled.span`
   font-family: "Houschka Rounded Alt";
   font-size: 14px;
   color: #525b75;
+  font-weight: 600;
 `;
 export const Spans = styled.div`
   margin-top: 10px;
@@ -97,6 +102,7 @@ export const Canceled = styled.div`
   font-family: "Houschka Rounded Alt";
   font-size: 14px;
   color: #525b75;
+  font-weight: 600;
 `;
 export const Top = styled.div`
   display: flex;
@@ -150,7 +156,21 @@ export const LineGray = styled.div`
   height: 0px;
   border: 1px solid #d8d8d8;
 `;
-export const ContainerFather = styled.div``;
+
+export const ContainerFather = styled.div`
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 102%;
+  height: auto;
+  grid-template-rows: 50% 50%;
+`;
+
+export const DivModal = styled.div`
+  grid-column: 2;
+  flex-direction: row-reverse;
+  display: flex;
+`;
+
 export const DivButton = styled.div`
   margin-top: 1.5%;
   margin-right: 1.5%;

@@ -1,56 +1,32 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 580px;
-  height: 800px;
+  width: 80%;
+  height: 88vh;
+  grid-template-rows: 80% 20%;
+  display: grid;
   background-color: #ffffff;
   border-left: 19px solid #007bff;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   display: grid;
-  margin-left: 850px;
-  margin-top: -820px;
 `;
-export const PositionTitle = styled.div`
-  margin-left: 50px;
+
+export const DivFather = styled.div`
+  margin-left: 0px;
+  position: relative;
+  left: 40px;
   margin-top: 25px;
+  grid-row: 1;
 `;
-export const SpanTitle = styled.span`
-  font-family: "Houschka Rounded Alt";
-  font-style: normal;
-  font-size: 32px;
+
+export const PositionTitle = styled.div`
+  margin-bottom: 25px;
 `;
-export const PositionInputRelease = styled.div`
-  margin-left: 44px;
-`;
-export const PositionSingleSelect = styled.div`
-  margin-left: 44px;
-`;
-export const PositionInputName = styled.div`
-  margin-left: 44px;
-`;
-export const PositionInputEmail = styled.div`
-  margin-left: 44px;
-`;
-export const PositionInputSubject = styled.div`
-  margin-left: 44px;
-`;
-export const SpanDiv = styled.div`
-  margin-left: 44px;
-`;
-export const Span = styled.span`
-  font-family: "Houschka Rounded Alt";
-`;
-export const TextBox = styled.textarea`
-  width: 515px;
-  height: 55px;
-  border: 1px solid black;
-  margin-left: 44px;
-  margin-top: -10px;
-  resize: none;
-`;
+
 export const PositionButtonSave = styled.div`
   margin-left: 122px;
+  line-height: 70px;
 `;
 export const PositionButtonCancel = styled.div`
   margin-left: 122px;

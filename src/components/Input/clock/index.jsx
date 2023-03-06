@@ -1,9 +1,12 @@
 import React from 'react'
 import Select from "react-select"
-import { Label, PositionLabel } from './styles'
+import Body from '../../../assets/FontSystem/Body';
+import { PositionLabel } from './styles'
+
 
 const Clock = ({label}) => {
 
+  
     const options = [
         { value: " 00:00 ", label:" 00:00 "},
         { value: " 00:30 ", label:" 00:30 "},
@@ -58,7 +61,7 @@ const Clock = ({label}) => {
 
         placeholder: (baseStyles, state) => ({
             ...baseStyles,
-            color: "#000000",
+            color: "#656464",
             fontSize: "14px",
             fontFamily: "Arial",
         }),
@@ -73,8 +76,8 @@ const Clock = ({label}) => {
         control: (defaultStyles) => ({
           ...defaultStyles,
           backgroundColor: "#FFFFFF",
+          border: "2px solid #d9d9d9",
           padding: "10px",
-          border: "3px solid #000000",
           boxShadow: "none",
           width: "150px",
           height: "37px",
@@ -110,12 +113,20 @@ const Clock = ({label}) => {
   return (
     <>
     <PositionLabel>
-      <Label>{label}</Label>
+      <Body type={"Body2"} name={label}></Body>
     </PositionLabel>
     <Select components={{ IndicatorSeparator: () => null }}
       placeholder={"00:00"}
       options={options}
-      styles={customStyles}/>
+      styles={customStyles}
+      theme={(theme) => ({
+        ...theme,
+        borderRadius: 5,
+        colors: {
+          ...theme.colors,
+          primary: "#BFBFBF",
+        },
+      })}/>
     </>
   )
 }

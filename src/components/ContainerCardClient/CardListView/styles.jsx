@@ -33,6 +33,7 @@ export const Status = styled.div`
       case "Active":
         return css`
           background-color: #00953b;
+          text-transform: lowercase;
         `;
 
       case "Inactive":
@@ -65,10 +66,11 @@ export const TagsSpan = styled.div`
   color: #ffffff;
   background-color: #007bff !important;
   font-size: 12;
-  margin-top: 0;
+  margin-top: 5;
   font-family: Imported !important;
   border-radius: 8px;
-  text-align: center;
+  text-align: left;
+  padding-left: 5px;
   height: 100%;
 `;
 export const Topic = styled.div`
@@ -87,15 +89,47 @@ export const IconEdit = styled.span`
   cursor: pointer;
   position: relative;
 `;
+export const IconTag = styled.span`
+  margin-top: 2px;
+  padding-left: 8px;
+  position: absolute;
+`;
+
 export const Header = styled.div`
   display: flex;
   width: 100%;
 `;
-export const Container = styled.div``;
+
+export const Container = styled.div`
+  &::-webkit-scrollbar {
+    width: 18px;
+    height: 10px;
+    margin-right: 10px;
+    float: right;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: 5px black;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background-color: white;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 80%;
+    background-color: #afb2bb;
+    margin-left: 20px;
+    width: 15px;
+    border-right: 6px solid white;
+    border-top: 12px solid white;
+  }
+`;
+
 export const DivPhoto = styled.div`
   align-items: left;
   display: flex;
-
   margin-left: 4%;
   margin-top: 4%;
 `;

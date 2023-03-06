@@ -43,6 +43,7 @@ export const MultiSelect = (props, placeholder, idMultiOption) => {
             control: (styles) => ({
               ...styles,
               backgroundColor: "none",
+              border: "2px solid  #888C95",
               minHeight: props.heights || "39px",
               top: props.top || "-1.8px",
               width: props.width || "256px",
@@ -61,7 +62,7 @@ export const MultiSelect = (props, placeholder, idMultiOption) => {
                 borderRadius: "5px",
                 top: props.top || "50px",
                 position: props.positions || "absolute",
-                border: "2px solid  #d9d9d9",
+                border: "2px solid  #888C95",
                 right: "-1px",
                 width: props.widths || "513px",
                 maxHeight: props.heighsts || "80px",
@@ -86,6 +87,12 @@ export const MultiSelect = (props, placeholder, idMultiOption) => {
                 ...styles,
                 right: "0px",
                 position: props.positions || "absolute",
+              };
+            },
+            dropdownIndicator: (styles, { data }) => {
+              return {
+                ...styles,
+                color: "#888C95",
               };
             },
             menuList: (baseStyles, state) => ({
