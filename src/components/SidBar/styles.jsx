@@ -66,8 +66,9 @@ export const Img = styled.div`
   width: ${(props) => (props.$mode ? "50px" : "80px")};
   height: ${(props) => (props.$mode ? "50px" : "80px")};
   border-radius: 50%;
+  border: 3px solid #007bff;
   margin-bottom: 5px;
-  background-color: gray;
+  background-color: white;
 `;
 export const Name = styled.h1`
   font-weight: 100;
@@ -126,4 +127,8 @@ export const Span = styled.span`
   color: #ffff;
   margin-left: 10px;
   display: ${(props) => (props.$mode ? "none" : " flex")};
+`;
+
+export const DivPhotoI = styled.div`
+ 
 `;

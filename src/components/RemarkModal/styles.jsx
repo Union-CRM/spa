@@ -24,13 +24,6 @@ export const SpanTitle = styled.span`
   font-size: 32px;
 `;
 
-export const PositionInputRelease = styled.div`
-  margin-left: 44px;
-`;
-
-export const PositionSingleSelect = styled.div`
-  margin-left: 44px;
-`;
 export const PositionInputName = styled.div`
   margin-left: 44px;
 `;
@@ -43,6 +36,42 @@ export const PositionInputSubject = styled.div`
   margin-left: 44px;
 `;
 
+export const PositionSingleSelect = styled.div`
+  margin-left: 44px;
+`;
+
+export const PositionInputRelease = styled.div`
+  margin-left: 44px;
+`;
+
+export const Div = styled.div`
+  display: grid;
+  grid-template-columns: 40% 70%;
+  grid-template-rows: 50% 50%;
+  margin-left: 44px;
+`;
+
+
+export const Date = styled.div`
+  display: grid;
+  grid-template-columns: 40%;
+  grid-template-rows: 25% 25%;
+
+  grid-gap: 5%;
+`;
+
+export const Input = styled.input`
+  width: 150px;
+  height: 35px;
+`;
+
+export const Note = styled.div`
+  display: grid;
+  grid-template-columns: 83%;
+  grid-template-rows: 15% 15%;
+  grid-gap: 20%;
+`;
+
 export const Span = styled.span`
   font-family: "Houschka Rounded Alt";
 `;
@@ -53,6 +82,12 @@ export const TextBox = styled.textarea`
   padding-bottom: 10%;
 `;
 
+export const Buttons = styled.div`
+  margin-top: 5%;
+  display: grid;
+  grid-gap: 6%;
+`;
+
 export const PositionButtonSave = styled.div`
   margin-left: 122px;
 `;
@@ -60,35 +95,9 @@ export const PositionButtonSave = styled.div`
 export const PositionButtonCancel = styled.div`
   margin-left: 122px;
 `;
-export const Input = styled.input`
-  width: 150px;
-  height: 35px;
-`;
 
-export const Date = styled.div`
-  display: grid;
-  grid-template-columns: 40%;
-  grid-template-rows: 25% 25%;
 
-  grid-gap: 5%;
-`;
 
-export const Note = styled.div`
-  display: grid;
-  grid-template-columns: 83%;
-  grid-template-rows: 15% 15%;
-  grid-gap: 20%;
-`;
 
-export const Div = styled.div`
-  display: grid;
-  grid-template-columns: 40% 70%;
-  grid-template-rows: 50% 50%;
-  margin-left: 44px;
-`;
 
-export const Buttons = styled.div`
-  margin-top: 5%;
-  display: grid;
-  grid-gap: 6%;
-`;
+
