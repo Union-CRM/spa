@@ -1,20 +1,24 @@
 import { React } from "react";
 import {
+  Container,
   Card,
+  Header,
   Status,
   StatusSpan,
+  PositionEdit,
   Title,
   Name,
+  CardDate,
+  Date1,
+  Date2,
   Topic,
   Client,
-  ClientName,
   Type,
   Line,
-  Header,
-  PositionEdit,
-  Container,
+  ClientName
 } from "./styles";
 import IconSystem from "../../../assets/IconSystem";
+
 
 const RemarkCard = ({
   title,
@@ -23,10 +27,12 @@ const RemarkCard = ({
   area,
   client,
   status,
-  openModal,
-  setModalDiscard,
-  opennedModal,
-}) => {
+  openModal
+ }) => {
+
+  
+
+
   return (
     <Container>
       <Card $mode={status}>
@@ -44,6 +50,21 @@ const RemarkCard = ({
           </strong>
           <Name>{manager}</Name>
         </Title>
+        <CardDate>
+          <Date1>
+            <IconSystem icon={"FlechaVerde"} height={"15px"} width={"15px"} />
+            <p>10 Feb 2023</p>
+          </Date1>  
+       
+          
+          <Date2>
+          <IconSystem icon={"GridiconsCreate"} height={"15px"} width={"15px"} />
+          <p>07 Mar 2023</p>  
+          </Date2>
+        
+        </CardDate>
+        
+
         <Topic>
           <p>{topic}</p>
           <p>{area}</p>
@@ -57,6 +78,7 @@ const RemarkCard = ({
             <p>{client}</p>
           </ClientName>
         </Client>
+        
       </Card>
     </Container>
   );
