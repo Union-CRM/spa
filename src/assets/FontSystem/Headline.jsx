@@ -6,7 +6,9 @@ class Headline extends React.Component {
   render() {
     return (
       <>
-        <FontHeadline $mode={this.props.type}>{this.props.name}</FontHeadline>
+        <FontHeadline $mode={this.props.type} colorFont={this.props.colorFont}>
+          {this.props.name}
+        </FontHeadline>
       </>
     );
   }

@@ -19,7 +19,7 @@ export const SingleSelect = (props) => {
             id={props.idSingleOption}
             components={animatedComponents}
             onChange={setValue}
-            isClearable={true}
+            isClearable={false}
             placeholder={props.placeholder}
             isSearchable={true}
             //isDisabled={false}
@@ -33,33 +33,42 @@ export const SingleSelect = (props) => {
               },
             })}
             styles={{
-              placeholder: (baseStyles, state) => ({
-                ...baseStyles,
+              placeholder: (styles, state) => ({
+                ...styles,
                 color: "#656464",
               }),
 
               control: (baseStyles, state) => ({
                 ...baseStyles,
-                width: props.sizeSingle || "512px",
-                borderColor: "#DFDFDF",
+                width: props.sizeSingle || "80%",
+                border: "2px solid  #888C95",
                 minHeight: "35px",
                 cursor: "pointer",
                 top: "5px",
               }),
+
+              dropdownIndicator: (styles, { data }) => {
+                return {
+                  ...styles,
+                  color: "#888C95",
+                };
+              },
+
               singleValue: (baseStyles, state) => ({
                 ...baseStyles,
                 color: "#656464",
+                width: props.sizeSingle || "512px",
               }),
               menu: (baseStyles, state) => ({
                 ...baseStyles,
-                width: props.sizeSingle || "512px",
+                maxWidth: props.sizeMenu || "auto",
               }),
               menuList: (baseStyles, state) => ({
                 ...baseStyles,
-                width: props.sizeSingle || "512px",
+                maxWidth: props.sizeMenuList || "auto",
                 overflowY: "scroll",
                 "&::-webkit-scrollbar": {
-                  backgroundColor: "#FFF",
+                  backgroundColor: "#DFDFDF",
                 },
                 "&::-webkit-scrollbar-thumb ": {
                   backgroundColor: "#DFDFDF",
@@ -68,6 +77,7 @@ export const SingleSelect = (props) => {
                   backgroundColor: "#DFDFDF",
                 },
               }),
+
               option: (baseStyles, state) => ({
                 ...baseStyles,
                 backgroundColor: state.isSelected ? "#DFDFDF" : "#fff",

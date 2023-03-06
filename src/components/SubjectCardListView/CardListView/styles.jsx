@@ -123,17 +123,10 @@ export const Header = styled.div`
 export const PositionEdit = styled.div`
   width: 12px;
   height: 12px;
-  margin-left: 105px;
+  margin-left: 140px;
   margin-top: 8px;
   cursor: pointer;
   display: flex;
 `;
-export const PositionRemove = styled.span`
-  width: 12px;
-  height: 12px;
-  margin-left: 25px;
-  margin-top: 8px;
-  align-items: right;
-  cursor: pointer;
-`;
+
 export const Container = styled.div``;

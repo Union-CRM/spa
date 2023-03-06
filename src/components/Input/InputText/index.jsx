@@ -1,25 +1,27 @@
 import React from "react";
 import { useState } from "react";
-import { Input, Container, Label, Box } from "./styles";
+import { TextArea, Container, Label } from "./styles";
 
-const DoubleInput = (props, placeholder) => {
+const InputTextArea = (props) => {
   const [name, setName] = useState();
 
   return (
     <>
       <Container>
-        <Box>
-          <Label>{props.label}</Label>
-          <Input
+        <Label>
+          {props.label}
+          <TextArea
+            rows={props.rows}
             type="text"
             placeholder={props.placeholder}
+            widthInput={props.widthText}
             value={name}
             onChange={(event) => setName(event.target.value)}
           />
-        </Box>
+        </Label>
       </Container>
     </>
   );
 };
 
-export default DoubleInput;
+export default InputTextArea;

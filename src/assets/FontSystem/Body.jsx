@@ -6,7 +6,9 @@ class Body extends React.Component {
   render() {
     return (
       <>
-        <FontBody $mode={this.props.type}>{this.props.name}</FontBody>
+        <FontBody $mode={this.props.type} colorFont={this.props.colorFont}>
+          {this.props.name}
+        </FontBody>
       </>
     );
   }
