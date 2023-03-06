@@ -1,4 +1,5 @@
 import React from "react";
+import AdmAddEditPlanner from "../../components/AdmAddEditPlanner";
 import PageBody from "../../components/PageBody";
 
 class Home extends React.Component {
@@ -6,9 +7,7 @@ class Home extends React.Component {
     return (
       <>
         <PageBody>
-          <h1>
-            Substitua este H1 pelo seu codigo durante os testes, depois remova-o
-          </h1>
+       
         </PageBody>
       </>
     );

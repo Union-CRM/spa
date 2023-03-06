@@ -1,17 +1,19 @@
 import styled from "styled-components";
 
-export const Input = styled.input`
-  height: 35px;
-  width: 80%;
+export const TextArea = styled.textarea`
+  width: ${(props) => props.widthText || "80%"};
   border-radius: 5px;
-  border: 2px solid #d9d9d9;
+  border: 2px solid #888c95;
   background-color: rgba(0, 0, 0, 0);
   display: block;
   margin-top: 5px;
+  padding-top: 10px;
   justify-content: space-between;
-  padding-left: 10px;
   position: relative;
+  resize: none;
+  padding-left: 10px;
 `;
+
 export const Container = styled.div`
   box-sizing: border-box;
   width: auto;
@@ -19,6 +21,7 @@ export const Container = styled.div`
   margin-bottom: 15px;
   background-color: rgba(0, 0, 0, 0);
 `;
+
 export const Label = styled.label`
   padding-left: 0px;
   margin-top: 10px;

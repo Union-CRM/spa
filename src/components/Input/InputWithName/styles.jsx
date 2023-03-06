@@ -4,14 +4,15 @@ export const Input = styled.input`
   height: 35px;
   width: ${(props) => props.widthInput || "500px"};
   border-radius: 5px;
-  border: 2px solid #d9d9d9;
+  border: 2px solid #888c95;
   background-color: rgba(0, 0, 0, 0);
   display: block;
   margin-top: 5px;
   justify-content: space-between;
-  padding-left: 10px;
   position: relative;
+  padding-left: 10px;
 `;
+
 export const Container = styled.div`
   box-sizing: border-box;
   width: auto;

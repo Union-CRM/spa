@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  LineGray,
   ButtonInactive,
   ButtonActive,
   BoardStyle,
@@ -9,7 +8,6 @@ import {
   Header,
   Top,
   HowManySubjectList,
-  Line,
   DivSpans,
   Active,
   HowManyActive,
@@ -17,6 +15,7 @@ import {
   HowManyInactive,
   ContainerFather,
   DivButton,
+  DivModal,
 } from "./styles";
 import SubjectCard from "./CardListView/index";
 import AddEditClient from "../AddEditClient";
@@ -151,6 +150,12 @@ const ContainerCards = () => {
     setEdit(true);
   };
 
+  const [setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
   const getClientCard = () => {
     return cards.map((item) => (
       <SubjectCard
@@ -166,6 +171,7 @@ const ContainerCards = () => {
       />
     ));
   };
+
   return (
     <ContainerFather>
       <Container>
@@ -175,17 +181,18 @@ const ContainerCards = () => {
               Client List{" "}
               <HowManySubjectList>({SubjectsId.length})</HowManySubjectList>
             </H1>
-            <DivButton onClick={() => createClient()}>
-              <ButtonAdd
-                mode="#007BFF"
-                width="169px"
-                height="38px"
-                name="Create Client"
-                color="white"
-              />
-            </DivButton>
           </Top>
-          <Line />
+
+          <DivButton onClick={() => createClient()}>
+            <ButtonAdd
+              mode="#007BFF"
+              width="169px"
+              height="38px"
+              name="Create Client"
+              color="white"
+            />
+          </DivButton>
+
           <DivSpans>
             <ButtonActive
               key={abaStatus.ACTIVE}
@@ -207,16 +214,19 @@ const ContainerCards = () => {
               </Inactive>
             </ButtonInactive>
           </DivSpans>
-          <LineGray />
         </Header>
+
         <BoardStyle>{getClientCard()}</BoardStyle>
       </Container>
-      {modal && (
-        <AddEditClient
-          setModal={setModal}
-          title={isEdit ? "Edit Client" : "Create Client"}
-        />
-      )}
+
+      <DivModal $mode={modal}>
+        {modal && (
+          <AddEditClient
+            setModal={setModal}
+            title={isEdit ? "Edit Client" : "Create Client"}
+          />
+        )}
+      </DivModal>
     </ContainerFather>
   );
 };

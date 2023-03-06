@@ -12,7 +12,6 @@ import {
   Line,
   Header,
   PositionEdit,
-  PositionRemove,
   Container,
 } from "./styles";
 import IconSystem from "../../../assets/IconSystem";
@@ -36,9 +35,6 @@ const SubjectCard = ({
           <PositionEdit onClick={openModal}>
             <IconSystem icon={"PaperEdit"} height={"15px"} width={"15px"} />
           </PositionEdit>
-          <PositionRemove>
-            <IconSystem icon={"Delete"} height={"15px"} width={"15px"} />
-          </PositionRemove>
         </Header>
         <Title>
           <strong>

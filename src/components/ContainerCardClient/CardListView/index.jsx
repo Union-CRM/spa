@@ -22,12 +22,15 @@ import {
   DivText,
   Lline,
   TagsSpan,
+  IconTag,
 } from "./styles";
 import IconSystem from "../../../assets/IconSystem";
 import Body from "../../../assets/FontSystem/Body";
 import Subtitle from "../../../assets/FontSystem/Subtitle";
 
 const SubjectCard = (props) => {
+  const { openModal } = props;
+
   return (
     <Container>
       <Card $mode={props.status}>
@@ -51,7 +54,9 @@ const SubjectCard = (props) => {
           <Status $mode={props.status}>
             <TagsSpan>
               Tags
-              <IconSystem icon={"TaskRegular"} width={"10px"} height={"10px"} />
+              <IconTag>
+                <IconSystem icon={"TagWhite"} width={"10px"} height={"10px"} />
+              </IconTag>
             </TagsSpan>
           </Status>
           <DivIcons>
@@ -61,7 +66,8 @@ const SubjectCard = (props) => {
                 <Span></Span>
               </LabelToggle>
             </DivToggle>
-            <IconEdit>
+
+            <IconEdit onClick={openModal}>
               <IconSystem icon={"Edit"} height={"15px"} width={"15px"} />
             </IconEdit>
           </DivIcons>

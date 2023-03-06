@@ -5,7 +5,9 @@ import { Label, Container } from "./styles";
 
 export const TagComponent = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
-  const [setSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const options = props.option;
 
   return (
     <>
@@ -19,7 +21,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
             components={animatedComponents}
             placeholder={props.placeholder}
             onChange={(item) => setSelectedOptions(item)}
-            isClearable={true}
+            isClearable={false}
             isSearchable={true}
             isDisabled={false}
             isLoading={false}
@@ -36,18 +38,17 @@ export const TagComponent = (props, placeholder, idTagOption) => {
             styles={{
               placeholder: (styles, state) => ({
                 ...styles,
-                color: "#656464",
+                color: "#fff",
               }),
 
               control: (styles) => ({
                 ...styles,
                 backgroundColor: "none",
-                minHeight: props.heights || "35px",
-                maxHeight: "35px",
+                maxHeight: props.heights || "35px",
                 top: props.top || "5px",
                 maxWidth: props.width || "0%",
                 cursor: "pointer",
-                border: "2px solid  #d9d9d9",
+                border: "2px solid  #888C95",
               }),
 
               options: (
@@ -64,16 +65,16 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                   borderRadius: "5px",
                   top: props.topValue || "0px",
                   position: props.positions || "relative",
-                  justifyContent: "left",
                   alignItems: "left",
-                  border: "2px solid  #d9d9d9",
+                  border: "2px solid  #888C95",
                   left: props.left || "0px",
-                  minWidth: props.widths || "200px",
-                  minHeight: props.heightsValue || "135px",
+                  minWidth: props.widthValue || "auto",
+                  height: props.heightsValue || "auto",
                   paddingLeft: "5px",
                   paddingTop: "5px",
                   paddingBottom: "5px",
                   overflowY: "scroll",
+                  cursor: "pointer",
                   "&::-webkit-scrollbar": {
                     backgroundColor: "#FFF",
                   },
@@ -91,21 +92,32 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                   ...styles,
                   right: "0px",
                   top: "-2px",
+                  color: "#888C95",
                   position: props.positions || "absolute",
                 };
               },
+
+              dropdownIndicator: (styles, { data }) => {
+                return {
+                  ...styles,
+                  color: "#888C95",
+                };
+              },
+
               menu: (baseStyles, state) => ({
                 ...baseStyles,
                 position: "relative",
-                width: props.width || "126px",
+                maxWidth: props.sizeMenu || "auto",
+                minHeight: props.heightMenu || "100px",
               }),
+
               menuList: (baseStyles, state) => ({
                 ...baseStyles,
                 width: props.width || "126px",
                 position: "relative",
                 overflowY: "scroll",
                 "&::-webkit-scrollbar": {
-                  backgroundColor: "#FFF",
+                  backgroundColor: "#DFDFDF",
                 },
                 "&::-webkit-scrollbar-thumb ": {
                   backgroundColor: "#DFDFDF",
