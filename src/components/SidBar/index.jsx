@@ -1,10 +1,12 @@
 import React from "react";
 import IconSystem from "../../assets/IconSystem";
+import Body from "../../assets/FontSystem/Body";
 import {
   Container,
   OpenClose,
   User,
   Img,
+  DivPhotoI,
   Name,
   Id,
   Email,
@@ -16,6 +18,16 @@ import {
   Logout,
 } from "./styles";
 
+function Split() {
+
+  var name = "Héder Silva";
+  //Héder Silva
+  const lastName = name.split(' ');
+  const abbreviation = name.substring(0,1).toUpperCase() + lastName[1].substring(0,1).toUpperCase();
+  return abbreviation;
+
+}
+
 class SidBar extends React.Component {
   constructor(props) {
     super(props);
@@ -23,6 +35,7 @@ class SidBar extends React.Component {
       sidBartState: "false",
     };
   }
+  
   render() {
     return (
       <>
@@ -40,7 +53,11 @@ class SidBar extends React.Component {
             <IconSystem icon="OpenClose" />
           </OpenClose>
           <User $mode={this.state.sidBartState}>
-            <Img $mode={this.state.sidBartState}></Img>
+            <Img $mode={this.state.sidBartState}>
+              <DivPhotoI>
+                <Body type={"Body1"} name={Split()}/>
+              </DivPhotoI>
+            </Img>
             <Name $mode={this.state.sidBartState}>Héder Silva Oliveira</Name>
             <Email $mode={this.state.sidBartState}>meuemail@tcs.com</Email>
             <Id $mode={this.state.sidBartState}>ID:2555555</Id>

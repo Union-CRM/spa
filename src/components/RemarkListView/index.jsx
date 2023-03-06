@@ -4,6 +4,7 @@ import edit from "../../imagens/edit.svg";
 import finish from "../../imagens/finish.svg";
 import trash from "../../imagens/trash.svg";
 import calendar from "../../imagens/calendar.svg";
+import IconSystem from "../../assets/IconSystem";
 import {
   Finish,
   Calendar,
