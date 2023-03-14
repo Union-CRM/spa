@@ -1,110 +1,149 @@
-import React from "react";
+import { useState } from "react";
 import {
-  Card,
-  Status,
-  StatusSpan,
-  Topic,
-  Header,
-  IconEdit,
   Container,
+  Card,
+  Header,
   DivPhoto,
+  DivPhotoI,
+  DivDadosCard,
+  Status,
+  DivTagsStatus,
+  TagsSpan,
+  DivIcons,
+  IconTag,
+  IconEdit,
   DivToggle,
   InputToggle,
   LabelToggle,
   Span,
-  DivIcons,
-  DivDadosCard,
-  NameClient,
-  EmailClient,
-  DivPhotoI,
-  LineText,
-  TitleText,
-  DivText,
-  Lline,
-  TagsSpan,
-  IconTag,
+  DivInfo,
+  DivRole,
+  DivCustomer,
+  DivBusiness,
+  DivRelease,
+  ValueInfo,
+  TitleInfo,
+  ContainerFather,
 } from "./styles";
 import IconSystem from "../../../assets/IconSystem";
 import Body from "../../../assets/FontSystem/Body";
 import Subtitle from "../../../assets/FontSystem/Subtitle";
+import { useClientContext } from "../../../hook/useClientContent";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
 
-const SubjectCard = (props) => {
-  const { openModal } = props;
+const ClientCard = (props) => {
+  const { openModal, openModalPopUp } = props;
+
+  const { client: clientList } = useClientContext();
+  const client = clientList.filter((item) => item.id === props.id)[0];
+  const [tags] = useState(
+    client.tags.map((tag) => {
+      return tag.label + "; ";
+    })
+  );
+  const handleEdit = () => {
+    openModal();
+    props.setId(client.id);
+  };
+
+  const handleClick = () => {
+    openModalPopUp();
+    props.setId(client.id);
+  };
 
   return (
-    <Container>
-      <Card $mode={props.status}>
-        <Header>
-          <DivPhoto>
-            <DivPhotoI>
-              <Body type={"Body1"} name={"IS"} />
-            </DivPhotoI>
-          </DivPhoto>
-          <DivDadosCard>
-            <NameClient>
-              <Body type={"Body1"} name={props.client} />
-            </NameClient>
-            <EmailClient>
-              <Subtitle type={"TextDescription"} name={props.email} />
-            </EmailClient>
-          </DivDadosCard>
-          <Status $mode={props.status}>
-            <StatusSpan> {props.status}</StatusSpan>
-          </Status>
-          <Status $mode={props.status}>
-            <TagsSpan>
-              Tags
-              <IconTag>
-                <IconSystem icon={"TagWhite"} width={"10px"} height={"10px"} />
-              </IconTag>
-            </TagsSpan>
-          </Status>
-          <DivIcons>
-            <DivToggle $mode={props.status}>
-              <InputToggle type="checkbox" name="option" id="option" />
-              <LabelToggle $mode={props.status} for="option">
-                <Span></Span>
-              </LabelToggle>
-            </DivToggle>
+    <ContainerFather>
+      <Container>
+        <Card $mode={client.status}>
+          <Header>
+            <DivPhoto>
+              <DivPhotoI>
+                <Body
+                  type={"Body1"}
+                  name={client.client
+                    .match(/(^\S\S?|\b\S)?/g)
+                    .join("")
+                    .match(/(^\S|\S$)?/g)
+                    .join("")
+                    .toUpperCase()}
+                />
+              </DivPhotoI>
+            </DivPhoto>
 
-            <IconEdit onClick={openModal}>
-              <IconSystem icon={"Edit"} height={"15px"} width={"15px"} />
-            </IconEdit>
-          </DivIcons>
-        </Header>
-        <Topic>
-          <DivText>
-            <TitleText>Role</TitleText>
-            <Lline>|</Lline>
-            <LineText>
-              <Subtitle type={"TextMed"} name={props.textRole} />
-            </LineText>
-          </DivText>
-          <DivText>
-            <TitleText>Costumer</TitleText>
-            <Lline>|</Lline>
-            <LineText>
-              <Subtitle type={"TextMed"} name={props.textCostumer} />
-            </LineText>
-          </DivText>
-          <DivText>
-            <TitleText>Business</TitleText>
-            <Lline>|</Lline>
-            <LineText>
-              <Subtitle type={"TextMed"} name={props.textBusiness} />
-            </LineText>
-          </DivText>
-          <DivText>
-            <TitleText>Release Train</TitleText>
-            <Lline>|</Lline>
-            <LineText>
-              <Subtitle type={"TextMed"} name={props.textRelease} />
-            </LineText>
-          </DivText>
-        </Topic>
-      </Card>
-    </Container>
+            <DivDadosCard>
+              <Body type={"Body1"} name={client.client} />
+
+              <Subtitle type={"TextDescription"} name={client.email} />
+
+              <DivTagsStatus>
+                <Status $mode={client.status}>{client.status}</Status>
+                <TagsSpan $mode={client.tags}>
+                  tags
+                  <Tippy content={tags}>
+                    <IconTag>
+                      <IconSystem
+                        icon={"TagWhite"}
+                        width={"10px"}
+                        height={"10px"}
+                      />
+                    </IconTag>
+                  </Tippy>
+                </TagsSpan>
+              </DivTagsStatus>
+            </DivDadosCard>
+
+            <DivIcons>
+              <DivToggle $mode={client.status}>
+                <InputToggle
+                  type="checkbox"
+                  name="option"
+                  id={client.id}
+                  onClick={() => handleClick()}
+                />
+                <LabelToggle $mode={client.status} for="option">
+                  <Span></Span>
+                </LabelToggle>
+              </DivToggle>
+
+              <IconEdit onClick={handleEdit}>
+                <IconSystem icon={"Edit"} height={"15px"} width={"15px"} />
+              </IconEdit>
+            </DivIcons>
+          </Header>
+          <DivInfo>
+            <DivRole>
+              <TitleInfo>
+                Role <span> | </span>{" "}
+              </TitleInfo>
+              <ValueInfo>{client.textRole} </ValueInfo>
+            </DivRole>
+
+            <DivCustomer>
+              <TitleInfo>
+                Customer <span> | </span>{" "}
+              </TitleInfo>
+              <ValueInfo>{client.textCustomer}</ValueInfo>
+            </DivCustomer>
+
+            <DivBusiness>
+              <TitleInfo>
+                Business <span> | </span>{" "}
+              </TitleInfo>
+              <ValueInfo>{client.textBusiness} </ValueInfo>
+            </DivBusiness>
+
+            <DivRelease>
+              <TitleInfo>
+                Release Train <span>|</span>{" "}
+              </TitleInfo>
+              <ValueInfo>{client.textRelease} </ValueInfo>
+            </DivRelease>
+          </DivInfo>
+        </Card>
+      </Container>
+    </ContainerFather>
   );
 };
 
-export default SubjectCard;
+export default ClientCard;

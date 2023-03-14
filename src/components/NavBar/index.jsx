@@ -13,7 +13,7 @@ class NavBar extends React.Component {
   render() {
     return (
       <>
-        <Container $row={this.props.$row} $column={this.props.$column}>
+        <Container>
           <Logo>
             <IconSystem icon={"TataLogo"} />
           </Logo>

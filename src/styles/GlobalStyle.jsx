@@ -16,6 +16,23 @@ const GlobalStyle = createGlobalStyle`
   padding:0px;
 }
 
+input[disabled] {
+    border: 1px solid red; 
+    -webkit-border-radius: 30px; 
+    -moz-border-radius: 30px; 
+    border-radius: 30px;
+}
+
+
+input:placeholder-shown {
+  border-color: #b03535;
+}
+
+select:placeholder-shown {
+  border-color: #b03535;
+}
+
+
 body{
     justify-content: center; 
     overflow: hidden;

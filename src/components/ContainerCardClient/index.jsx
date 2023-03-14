@@ -1,138 +1,50 @@
 import React from "react";
 import {
+  ContainerFather,
+  Container,
+  DivModal,
+  Header,
+  BoardStyle,
+  Top,
+  DivTitlePage,
+  DivButton,
+  H1,
+  DivSpans,
   ButtonInactive,
   ButtonActive,
-  BoardStyle,
-  H1,
-  Container,
-  Header,
-  Top,
-  HowManySubjectList,
-  DivSpans,
+  HowManyClientList,
   Active,
   HowManyActive,
   Inactive,
   HowManyInactive,
-  ContainerFather,
-  DivButton,
-  DivModal,
 } from "./styles";
-import SubjectCard from "./CardListView/index";
+import ClientCard from "./CardListView/index";
 import AddEditClient from "../AddEditClient";
 import ButtonAdd from "../../assets/Buttons/ButtonAdd";
 import { useState } from "react";
+import { useClientContext } from "../../hook/useClientContent";
+import ModalPopUp from "../ModalPopUP";
 
 const abaStatus = {
   ACTIVE: "Active",
   INACTIVE: "Inactive",
 };
-const subjectsList = [
-  {
-    id: 1,
-    status: "Active",
-    email: "igorsena@tcs.com",
-    client: "Igor Sena",
-    textRole: "Dev Front-End",
-    textCostumer: "Itaú",
-    textBusiness: "React e Angular",
-    textRelease: "Itaú",
-  },
-  {
-    id: 2,
-    status: "Active",
-    email: "igorsena@tcs.com",
-    client: "Igor Sena",
-    textRole: "Dev Front-End",
-    textCostumer: "Itaú",
-    textBusiness: "React e Angular",
-    textRelease: "Itaú",
-  },
-  {
-    id: 3,
-    status: "Inactive",
-    email: "igorsena@tcs.com",
-    client: "Igor Sena",
-    textRole: "Dev Front-End",
-    textCostumer: "Itaú",
-    textBusiness: "React e Angular",
-    textRelease: "Itaú",
-  },
-  {
-    id: 4,
-    status: "Active",
-    email: "igorsena@tcs.com",
-    client: "Igor Sena",
-    textRole: "Dev Front-End",
-    textCostumer: "Itaú",
-    textBusiness: "React e Angular",
-    textRelease: "Itaú",
-  },
-  {
-    id: 5,
-    status: "Active",
-    email: "igorsena@tcs.com",
-    client: "Guilherme Rezende",
-    textRole: "Dev Front-End",
-    textCostumer: "Itaú",
-    textBusiness: "React e Angular",
-    textRelease: "Itaú",
-  },
-  {
-    id: 6,
-    status: "Active",
-    email: "igorsena@tcs.com",
-    client: "Igor Sena",
-    textRole: "Dev Front-End",
-    textCostumer: "Itaú",
-    textBusiness: "React e Angular",
-    textRelease: "Itaú",
-  },
-  {
-    id: 7,
-    status: "Inactive",
-    email: "igorsena@tcs.com",
-    client: "Guilherme Rezende",
-    textRole: "Dev Front-End",
-    textCostumer: "Itaú",
-    textBusiness: "React e Angular",
-    textRelease: "Itaú",
-  },
-  {
-    id: 8,
-    status: "Inactive",
-    email: "igorsena@tcs.com",
-    client: "Igor Sena",
-    textRole: "Dev Front-End",
-    textCostumer: "Itaú",
-    textBusiness: "React e Angular",
-    textRelease: "Itaú",
-  },
-  {
-    id: 9,
-    status: "Active",
-    email: "igorsena@tcs.com",
-    client: "Igor Sena",
-    textRole: "Dev Front-End",
-    textCostumer: "Itaú",
-    textBusiness: "React e Angular",
-    textRelease: "Itaú",
-  },
-];
-
-const SubjectsId = subjectsList.map((item) => item.id);
-const SubjectsActive = subjectsList.filter((item) => item.status === "Active");
-const SubjectsInactive = subjectsList.filter(
-  (item) => item.status === "Inactive"
-);
 
 const ContainerCards = () => {
-  const [cards, setCards] = useState(SubjectsActive);
-  const [active, setActive] = useState(abaStatus.ACTIVE);
+  // States modal//
   const [modal, setModal] = useState(false);
+
+  const [modalPopUp, setModalPopUp] = useState(false);
+
+  const [id, setId] = useState(null);
+
   const [isEdit, setEdit] = useState(false);
 
-  const handleClick = (tabCards, selectedTab) => {
-    setCards(tabCards);
+  const { client } = useClientContext();
+
+  const [active, setActive] = useState(abaStatus.ACTIVE);
+
+  const handleClick = (selectedTab) => {
     setActive(selectedTab);
   };
 
@@ -150,38 +62,19 @@ const ContainerCards = () => {
     setEdit(true);
   };
 
-  const [setShowModal] = useState(false);
-
-  const openModal = () => {
-    setShowModal((prev) => !prev);
-  };
-
-  const getClientCard = () => {
-    return cards.map((item) => (
-      <SubjectCard
-        key={item.id}
-        status={item.status}
-        email={item.email}
-        client={item.client}
-        textRole={item.textRole}
-        textCostumer={item.textCostumer}
-        textBusiness={item.textBusiness}
-        textRelease={item.textRelease}
-        openModal={() => EditClient()}
-      />
-    ));
+  const modalClose = () => {
+    setModalPopUp(true);
   };
 
   return (
     <ContainerFather>
-      <Container>
-        <Header>
-          <Top>
-            <H1>
-              Client List{" "}
-              <HowManySubjectList>({SubjectsId.length})</HowManySubjectList>
-            </H1>
-          </Top>
+      <DivModal $mode={modal} />
+      <Header>
+        <Top>
+          <DivTitlePage>
+            <H1>Client List </H1>
+            <HowManyClientList>({client.length})</HowManyClientList>{" "}
+          </DivTitlePage>
 
           <DivButton onClick={() => createClient()}>
             <ButtonAdd
@@ -192,41 +85,81 @@ const ContainerCards = () => {
               color="white"
             />
           </DivButton>
+        </Top>
 
-          <DivSpans>
-            <ButtonActive
-              key={abaStatus.ACTIVE}
-              onClick={() => handleClick(SubjectsActive, abaStatus.ACTIVE)}
-              style={getTabColor(abaStatus.ACTIVE)}
-            >
-              <Active>
-                Active (<HowManyActive>{SubjectsActive.length}</HowManyActive>)
-              </Active>
-            </ButtonActive>
-            <ButtonInactive
-              key={abaStatus.INACTIVE}
-              onClick={() => handleClick(SubjectsInactive, abaStatus.INACTIVE)}
-              style={getTabColor(abaStatus.INACTIVE)}
-            >
-              <Inactive>
-                Inactive (
-                <HowManyInactive>{SubjectsInactive.length}</HowManyInactive>)
-              </Inactive>
-            </ButtonInactive>
-          </DivSpans>
-        </Header>
+        <DivSpans>
+          <ButtonActive
+            key={abaStatus.ACTIVE}
+            onClick={() => handleClick(abaStatus.ACTIVE)}
+            style={getTabColor(abaStatus.ACTIVE)}
+          >
+            <Active>
+              Active (
+              <HowManyActive>
+                {client.filter((item) => item.status === "Active").length}
+              </HowManyActive>
+              )
+            </Active>
+          </ButtonActive>
+          <ButtonInactive
+            key={abaStatus.INACTIVE}
+            onClick={() => handleClick(abaStatus.INACTIVE)}
+            style={getTabColor(abaStatus.INACTIVE)}
+          >
+            <Inactive>
+              Inactive (
+              <HowManyInactive>
+                {client.filter((item) => item.status === "Inactive").length}
+              </HowManyInactive>
+              )
+            </Inactive>
+          </ButtonInactive>
+        </DivSpans>
+      </Header>
+      <Container>
+        <BoardStyle>
+          {client &&
+            client
+              .filter((item) => item.status === active)
+              .map((item) => (
+                <ClientCard
+                  setId={(i) => setId(i)}
+                  openModalPopUp={() => setModalPopUp(true)}
+                  key={item.id}
+                  id={item.id}
+                  openModal={() => EditClient()}
+                  //modalPopUp={() => PopUp()}
+                />
+              ))}
 
-        <BoardStyle>{getClientCard()}</BoardStyle>
+          {/*
+          {cards.map((item) => (
+      <ClientCard
+        key={item.id}
+        id={item.id}
+        status={item.status}
+        email={item.email}
+        client={item.client}
+        textRole={item.textRole}
+        textCostumer={item.textCostumer}
+        textBusiness={item.textBusiness}
+        textRelease={item.textRelease}
+        openModal={() => EditClient()}
+      />))}; 
+      */}
+        </BoardStyle>
       </Container>
-
-      <DivModal $mode={modal}>
-        {modal && (
-          <AddEditClient
-            setModal={setModal}
-            title={isEdit ? "Edit Client" : "Create Client"}
-          />
-        )}
-      </DivModal>
+      {modal && (
+        <AddEditClient
+          id={id}
+          setModal={setModal}
+          title={isEdit ? "Edit Client" : "Create Client"}
+        />
+      )}
+      {modalPopUp && (
+        <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
+      )}
+      {/*id && <ModalPopUp id={id} setModalPopUp={() => setId(null)} />*/}
     </ContainerFather>
   );
 };

@@ -1,5 +1,17 @@
 import styled, { css } from "styled-components";
 
+export const DivModal = styled.div``;
+
+//Container Father //
+export const Container = styled.div`
+  padding: 0px;
+  height: 100%;
+  padding-left: 0px;
+  width: 96%;
+  z-index: 0 !important;
+`;
+
+//Cards Clients //
 export const Card = styled.div`
   ${(props) => {
     switch (props.$mode) {
@@ -18,15 +30,99 @@ export const Card = styled.div`
         `;
     }
   }}
-  width: 260px;
-  height: 146px;
+
+  grid-template-rows:40% 60%;
+  display: grid;
   border-radius: 8px;
-  margin-top: 30px;
-  margin-left: 40px;
-  display: block;
-  background-color: #f5f7fa;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+  background-color: #ffffff;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  position: relative;
+  width: auto;
+  height: 100%;
+  z-index: 0 !important;
+  padding-left: 10px;
 `;
+
+// Div Grid Header the Card //
+
+export const Header = styled.div`
+  grid-row: 1;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-rows: 20% auto;
+  grid-template-columns: 60px auto;
+  position: relative;
+`;
+
+// Photo Client //
+
+export const DivPhoto = styled.div`
+  display: grid;
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const DivPhotoI = styled.div`
+  background-color: #d9d9d9;
+  border: 5px solid #007bff;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  top: 30%;
+`;
+
+// Div Name Client, Email and Status/Tags //
+export const DivDadosCard = styled.div`
+  text-align: left;
+  width: 96%;
+  height: fit-content;
+  display: grid;
+  grid-row: 2;
+  align-items: center;
+  grid-column: 2;
+  padding-left: 3%;
+`;
+
+// Div Icons //
+export const DivIcons = styled.div`
+  display: flex;
+  grid-row: 1;
+  justify-content: end;
+  padding-right: 5%;
+  grid-gap: 5px;
+  height: 100%;
+  grid-column: 2;
+  align-items: center;
+`;
+
+// Div Info client //
+
+export const DivInfo = styled.div`
+  grid-row: 2;
+  margin-top: 3%;
+  position: relative;
+  display: grid;
+  width: 98%;
+  height: auto;
+  z-index: 0;
+  grid-template-rows: auto;
+`;
+
+// Styles Status and tags //
+export const DivTagsStatus = styled.div`
+  margin-top: 2px;
+  display: flex;
+`;
+
 export const Status = styled.div`
   ${(props) => {
     switch (props.$mode) {
@@ -46,113 +142,59 @@ export const Status = styled.div`
         `;
     }
   }}
-  width: 17%;
+  display: flex;
+  color: #ffffff;
+  width: fit-content;
   height: 15px;
   border-radius: 8px;
-  margin-top: 22%;
-  margin-left: 2%;
-  font-size: 10px;
+  font-size: 14px;
   align-items: center;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  justify-content: center;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 2%;
 `;
-export const StatusSpan = styled.div`
-  color: #ffffff;
-  font-size: 12;
-  margin-top: 0;
-  font-family: Imported !important;
-  text-align: center;
-`;
+
 export const TagsSpan = styled.div`
+  display: flex;
   color: #ffffff;
   background-color: #007bff !important;
-  font-size: 12;
-  margin-top: 5;
-  font-family: Imported !important;
+  width: fit-content;
+  height: 15px;
   border-radius: 8px;
-  text-align: left;
-  padding-left: 5px;
-  height: 100%;
-`;
-export const Topic = styled.div`
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 2%;
   margin-left: 2%;
-  margin-top: 1%;
-  font-size: 12px;
-  margin-bottom: 18px;
-  font-family: "Houschka Rounded Alt";
-  position: absolute;
 `;
+
+export const IconTag = styled.span`
+  display: flex;
+  margin-top: 2px;
+  margin-left: 2px;
+`;
+
+// Styles Icons Edit and Toggle //
+
 export const IconEdit = styled.span`
   width: 12px;
   height: 12px;
-  right: 0;
   margin-top: 8px;
   cursor: pointer;
-  position: relative;
-`;
-export const IconTag = styled.span`
-  margin-top: 2px;
-  padding-left: 8px;
-  position: absolute;
 `;
 
-export const Header = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
-export const Container = styled.div`
-  &::-webkit-scrollbar {
-    width: 18px;
-    height: 10px;
-    margin-right: 10px;
-    float: right;
-  }
-
-  &::-webkit-scrollbar-track {
-    box-shadow: 5px black;
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-track-piece {
-    background-color: white;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    height: 80%;
-    background-color: #afb2bb;
-    margin-left: 20px;
-    width: 15px;
-    border-right: 6px solid white;
-    border-top: 12px solid white;
-  }
-`;
-
-export const DivPhoto = styled.div`
-  align-items: left;
-  display: flex;
-  margin-left: 4%;
-  margin-top: 4%;
-`;
-export const DivPhotoI = styled.div`
-  height: 46.81px;
-  width: 46.81px;
-  border-radius: 100%;
-  background-color: #d9d9d9;
-  border: solid #007bff;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-`;
 export const DivToggle = styled.div`
-  width: 27px;
+  width: 30px;
   height: 13px;
-  position: relative;
   margin-top: 8px;
-
   ${(props) => {
     switch (props.$mode) {
       case "Active":
+        return css`
+          transform: rotateY(180deg);
+        `;
+      case "Inactive":
         return css`
           transform: rotateY(180deg);
         `;
@@ -161,11 +203,7 @@ export const DivToggle = styled.div`
     }
   }}
 `;
-export const DivIcons = styled.div`
-  display: flex;
-  grid-column-gap: 10px;
-  margin-left: 14%;
-`;
+
 export const InputToggle = styled.input`
   display: block;
   width: 100%;
@@ -178,30 +216,27 @@ export const InputToggle = styled.input`
 
   opacity: 0;
   cursor: pointer;
-
-  :checked ~ label {
-    background: #abaaaa;
-  }
-  :checked ~ label span {
-    right: -2px;
-  }
 `;
 export const LabelToggle = styled.label`
   display: block;
   width: 100%;
   height: 100%;
   border-radius: 40px;
-
   ${(props) => {
     switch (props.$mode) {
       case "Active":
         return css`
           background: #00953b;
+          left: 2px;
         `;
 
       case "Inactive":
         return css`
           background: #7a7a7a;
+          :checked ~ label span {
+            right: 2px;
+            background: #7a7a7a;
+          }
         `;
       default:
         return css`
@@ -212,22 +247,94 @@ export const LabelToggle = styled.label`
 
   :after {
     content: "";
-
     position: absolute;
     top: -10px;
     right: -10px;
     bottom: -10px;
     left: -10px;
-
     border-radius: inherit;
   }
 `;
+
+// Infos Clients //
+export const Line = styled.p`
+  color: #007bff;
+  padding-right: 5px;
+  padding-left: 3px;
+  font-weight: 600;
+`;
+
+export const DivRole = styled.span`
+  display: flex;
+  height: fit-content;
+  width: 100%;
+  position: relative;
+  flex-direction: row;
+  justify-content: flex-start;
+  span {
+    color: rgba(0, 0, 0, 0.7);
+  }
+`;
+
+export const DivCustomer = styled.span`
+  display: flex;
+  height: fit-content;
+  width: 100%;
+  position: relative;
+  flex-direction: row;
+  justify-content: flex-start;
+  span {
+    color: rgba(0, 0, 0, 0.7);
+  }
+`;
+
+export const DivBusiness = styled.span`
+  display: flex;
+  height: fit-content;
+  width: 100%;
+  position: relative;
+  flex-direction: row;
+  justify-content: flex-start;
+  span {
+    color: rgba(0, 0, 0, 0.7);
+  }
+`;
+
+export const DivRelease = styled.span`
+  display: flex;
+  height: fit-content;
+  width: 90%;
+  position: relative;
+  flex-direction: row;
+  justify-content: flex-start;
+  color: rgba(0, 0, 0, 0.7);
+`;
+
+// * Title and Value Infos* //
+export const TitleInfo = styled.span`
+  display: flex;
+  font-weight: 900;
+  font-style: bold;
+  font-size: 1rem;
+  span {
+    color: #007bff;
+    font-weight: 700;
+    margin-right: 2px;
+    margin-left: 5px;
+  }
+`;
+
+export const ValueInfo = styled.span`
+  font-weight: 500;
+  font-size: 1rem;
+`;
+
+// VERIFICAR //
 export const Span = styled.span`
   display: block;
   width: 12px;
   height: 12px;
   background: #ffffff;
-
   position: absolute;
   z-index: 2;
   right: 50%;
@@ -265,48 +372,7 @@ export const Span = styled.span`
     color: #fff;
   }
 `;
-export const DivDadosCard = styled.div``;
-export const NameClient = styled.h2`
-  margin-left: 1%;
-  margin-top: 2.5%;
-  font-style: Houschka Rounded Alt;
-  font-size: 18px;
-  max-width: 190px;
-  position: absolute;
-  text-align: left;
-`;
-export const EmailClient = styled.p`
-  margin-left: 1%;
-  margin-top: 5.2%;
-  font-style: Houschka Rounded Alt;
-  font-size: 12px;
-  max-width: 190px;
-  position: absolute;
-  text-align: left;
-`;
-export const DivText = styled.div`
-  display: flex;
-`;
-export const LineText = styled.p`
-  text-align: left;
-  height: 14px;
-  display: inline-block;
-  font-size: 12px;
-`;
-export const TitleText = styled.p`
-  text-align: left;
-  height: 14px;
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 600;
-`;
-export const Lline = styled.p`
-  text-align: left;
-  height: 14px;
-  display: inline-block;
-  font-size: 12px;
-  font-weight: bold;
-  color: #007bff;
-  margin-left: 5px;
-  margin-right: 5px;
+
+export const ContainerFather = styled.div`
+  z-index: 10;
 `;
