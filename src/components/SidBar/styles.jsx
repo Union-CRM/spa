@@ -6,23 +6,28 @@ export const Container = styled.div`
   grid-row: ${(props) => props.$row};
   width: ${(props) => (props.$mode ? "80px" : "186px")};
   display: grid;
-  grid-template-rows: 50px 100px 162px 295px 417px;
+  grid-template-rows: 7% 22% 9% 28% 32%;
   height: 100vh;
+  min-height: 300px;
   background: #1e2222;
   box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0px 8px 8px 0px;
+  @media screen and (max-height: 500px) {
+    grid-template-rows: auto auto auto auto auto;
+  }
 `;
 export const OpenClose = styled.button`
   transform: ${(props) => (props.$mode ? "rotateY(180deg)" : "")};
   grid-row: 1;
   background-color: #1e2222;
-  margin-top: 10px;
-  margin-right: 2px;
   border: none;
+  margin-left: ${(props) => (props.$mode ? "7%" : "70%")};
   color: #f5f7fa;
   border-top-right-radius: 8px;
+  justify-content: ${(props) => (props.$mode ? "center" : "left")};
   :hover {
     color: #e3e6ed;
+    cursor: pointer;
   }
 `;
 export const Logout = styled.button`
@@ -51,11 +56,12 @@ export const Icon = styled.div`
 `;
 export const User = styled.div`
   width: ${(props) => (props.$mode ? "80px" : "186px")};
-  display: block;
+  display: flex;
   align-items: stretch;
+  flex-direction: column;
   justify-content: center;
-  grid-row: 3;
-  padding-top: 10px;
+  grid-row: 2;
+  padding-top: 0px;
   text-align: center;
 `;
 export const Img = styled.div`
@@ -73,16 +79,14 @@ export const Img = styled.div`
 export const Name = styled.h1`
   font-weight: 100;
   color: #ffff;
-  text-align: left;
-  margin-left: 15px;
+  align-self: center;
   font-size: 12px;
   display: ${(props) => (props.$mode ? "none" : "")};
 `;
 export const Id = styled.h2`
   font-weight: 100;
   color: #ffff;
-  text-align: left;
-  margin-left: 15px;
+  align-self: center;
   font-size: 10px;
   display: ${(props) => (props.$mode ? "none" : "")};
 `;
@@ -90,8 +94,7 @@ export const Email = styled.h2`
   text-decoration: underline;
   font-weight: 100;
   color: #ffff;
-  text-align: left;
-  margin-left: 15px;
+  align-self: center;
   font-size: 12px;
   display: ${(props) => (props.$mode ? "none" : "")};
 `;
@@ -101,9 +104,12 @@ export const Ul = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   grid-template-rows: auto;
 `;
+
 export const Li = styled.li`
   width: 100%;
   justify-content: center;
@@ -129,6 +135,4 @@ export const Span = styled.span`
   display: ${(props) => (props.$mode ? "none" : " flex")};
 `;
 
-export const DivPhotoI = styled.div`
- 
-`;
+export const DivPhotoI = styled.div``;

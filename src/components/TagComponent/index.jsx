@@ -7,7 +7,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
   const [selectedOptions, setSelectedOptions] = useState([]);
 
-  const options = props.option;
+  const options = props.options;
 
   return (
     <>
@@ -20,12 +20,13 @@ export const TagComponent = (props, placeholder, idTagOption) => {
             id={props.idTagOption}
             components={animatedComponents}
             placeholder={props.placeholder}
-            onChange={(item) => setSelectedOptions(item)}
+            onChange={(item) => props.set(item)}
             isClearable={false}
             isSearchable={true}
             isDisabled={false}
             isLoading={false}
             isRtl={false}
+            required
             closeMenuOnSelect={false}
             theme={(theme) => ({
               ...theme,
@@ -41,40 +42,41 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                 color: "#fff",
               }),
 
-              control: (styles) => ({
-                ...styles,
-                backgroundColor: "none",
-                maxHeight: props.heights || "35px",
-                top: props.top || "5px",
-                maxWidth: props.width || "0%",
-                cursor: "pointer",
-                border: "2px solid  #888C95",
+              container: (state) => ({
+                width: "100%",
+                position: "relative",
+                gridTemplateColumns: "40% 60%",
+                display: "grid",
               }),
 
-              options: (
-                styles,
-                { data, isDisabled, isFocused, isSelected }
-              ) => {
-                console.log("options", data, isFocused, isSelected, isDisabled);
-                return { ...styles, color: data.color };
-              },
+              control: (state) => ({
+                border: `2px solid ${
+                  props.placeholder === "" ? "#888C95" : "#b03535"
+                }`,
+                height: "28px !important",
+                top: props.top || "0px",
+                width: props.width || "100%",
+                gridColumn: "1",
+                display: "grid",
+                cursor: "pointer",
+                borderRadius: "5px",
+              }),
 
               valueContainer: (styles, { data }) => {
                 return {
                   ...styles,
+                  gridColumn: "2",
+                  display: "grid",
+                  position: props.positions || "absolute",
                   borderRadius: "5px",
-                  top: props.topValue || "0px",
-                  position: props.positions || "relative",
-                  alignItems: "left",
+                  top: props.top || "0px",
                   border: "2px solid  #888C95",
-                  left: props.left || "0px",
-                  minWidth: props.widthValue || "auto",
-                  height: props.heightsValue || "auto",
-                  paddingLeft: "5px",
+                  width: props.widths || "90%",
+                  height: "12.5vh",
+                  left: "11%",
                   paddingTop: "5px",
                   paddingBottom: "5px",
                   overflowY: "scroll",
-                  cursor: "pointer",
                   "&::-webkit-scrollbar": {
                     backgroundColor: "#FFF",
                   },
@@ -87,13 +89,21 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                 };
               },
 
-              indicatorsContainer: (styles, { data }) => {
+              options: (
+                styles,
+                { data, isDisabled, isFocused, isSelected }
+              ) => {
+                console.log("options", data, isFocused, isSelected, isDisabled);
+                return { ...styles, color: data.color };
+              },
+
+              indicatorsContainer: (state) => {
                 return {
-                  ...styles,
-                  right: "0px",
-                  top: "-2px",
                   color: "#888C95",
-                  position: props.positions || "absolute",
+                  display: "flex",
+                  justifyContent: "end",
+                  alignItems: "center",
+                  height: "80%",
                 };
               },
 
@@ -106,15 +116,14 @@ export const TagComponent = (props, placeholder, idTagOption) => {
 
               menu: (baseStyles, state) => ({
                 ...baseStyles,
-                position: "relative",
                 maxWidth: props.sizeMenu || "auto",
-                minHeight: props.heightMenu || "100px",
+                maxHeight: props.heightMenu || "110px",
               }),
 
               menuList: (baseStyles, state) => ({
                 ...baseStyles,
-                width: props.width || "126px",
-                position: "relative",
+                maxWidth: props.sizeMenuList || "auto",
+                maxHeight: props.heightMenu || "110px",
                 overflowY: "scroll",
                 "&::-webkit-scrollbar": {
                   backgroundColor: "#DFDFDF",

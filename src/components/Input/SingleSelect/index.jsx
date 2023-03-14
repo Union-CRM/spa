@@ -4,93 +4,103 @@ import makeAnimated from "react-select/animated";
 import { Label, Container } from "./styles";
 
 export const SingleSelect = (props) => {
+  const { options } = props;
   const animatedComponents = makeAnimated();
   const [value, setValue] = useState(null);
+  //const teste = props.options.filter((item) => item.label === props.value)[0];
+  //console.log(props.options.filter((item) => item.label === props.value)[0]);
+  //console.log(options);
 
   return (
     <>
-      <Container>
-        <Label>
-          {props.label}
-
-          <Select
-            options={props.options}
-            defaultValue={value}
-            id={props.idSingleOption}
-            components={animatedComponents}
-            onChange={setValue}
-            isClearable={false}
-            placeholder={props.placeholder}
-            isSearchable={true}
-            isDisabled={props.disabled}
-            isLoading={false}
-            theme={(theme) => ({
-              ...theme,
-              borderRadius: 5,
-              colors: {
-                ...theme.colors,
-                primary: "#BFBFBF",
+      <Label>
+        {props.label}
+        <Select
+          required
+          options={props.options}
+          defaultValue={value}
+          id={props.idSingleOption}
+          components={animatedComponents}
+          onChange={(event) => props.set(event.value)}
+          isClearable={false}
+          placeholder={props.placeholder}
+          isSearchable={true}
+          isLoading={false}
+          theme={(theme) => ({
+            ...theme,
+            borderRadius: 5,
+            colors: {
+              ...theme.colors,
+              primary: "#BFBFBF",
+            },
+          })}
+          styles={{
+            placeholder: (styles, state) => ({
+              ...styles,
+              color: "#656464",
+              "::placeholder-shown": {
+                borderColor: "red",
               },
-            })}
-            styles={{
-              placeholder: (styles, state) => ({
+            }),
+
+            control: () => ({
+              width: props.sizeSingle || "100%",
+              border: `2px solid ${
+                props.placeholder === "" ? "#888C95" : "#b03535"
+              }`,
+              height: "28px !important",
+              position: "relative !important",
+              cursor: "pointer",
+              backgroundColor: "transparent",
+              display: "flex",
+              borderRadius: "5px",
+              top: "0px",
+              alignItems: "center",
+            }),
+
+            dropdownIndicator: (styles, { data }) => {
+              return {
                 ...styles,
-                color: "#656464",
-              }),
+                color: "#888C95",
+              };
+            },
 
-              control: (baseStyles, state) => ({
-                ...baseStyles,
-                width: props.sizeSingle || "80%",
-                border: "2px solid  #888C95",
-                minHeight: "35px",
-                cursor: "pointer",
-                top: "5px",
-              }),
-
-              dropdownIndicator: (styles, { data }) => {
-                return {
-                  ...styles,
-                  color: "#888C95",
-                };
+            singleValue: (baseStyles, state) => ({
+              ...baseStyles,
+              color: "#656464",
+              width: props.sizeSingle || "512px",
+            }),
+            menu: (baseStyles, state) => ({
+              ...baseStyles,
+              maxWidth: props.sizeMenu || "auto",
+            }),
+            menuList: (baseStyles, state) => ({
+              ...baseStyles,
+              maxWidth: props.sizeMenuList || "auto",
+              overflowY: "scroll",
+              "&::-webkit-scrollbar": {
+                backgroundColor: "#DFDFDF",
               },
+              "&::-webkit-scrollbar-thumb ": {
+                backgroundColor: "#DFDFDF",
+              },
+              "&::-webkit-scrollbar--track-piece": {
+                backgroundColor: "#DFDFDF",
+              },
+            }),
 
-              singleValue: (baseStyles, state) => ({
-                ...baseStyles,
-                color: "#656464",
-                width: props.sizeSingle || "512px",
-              }),
-              menu: (baseStyles, state) => ({
-                ...baseStyles,
-                maxWidth: props.sizeMenu || "auto",
-              }),
-              menuList: (baseStyles, state) => ({
-                ...baseStyles,
-                maxWidth: props.sizeMenuList || "auto",
-                overflowY: "scroll",
-                "&::-webkit-scrollbar": {
-                  backgroundColor: "#DFDFDF",
-                },
-                "&::-webkit-scrollbar-thumb ": {
-                  backgroundColor: "#DFDFDF",
-                },
-                "&::-webkit-scrollbar--track-piece": {
-                  backgroundColor: "#DFDFDF",
-                },
-              }),
-
-              option: (baseStyles, state) => ({
-                ...baseStyles,
-                backgroundColor: state.isSelected ? "#DFDFDF" : "#fff",
-                color: state.isSelected ? "#656464" : "#656464",
-                ":hover": {
-                  cursor: "pointer",
-                  backgroundColor: "#DFDFDF",
-                },
-              }),
-            }}
-          />
-        </Label>
-      </Container>
+            option: (baseStyles, state) => ({
+              ...baseStyles,
+              backgroundColor: state.isSelected ? "#DFDFDF" : "#fff",
+              color: state.isSelected ? "#656464" : "#656464",
+              ":hover": {
+                cursor: "pointer",
+                backgroundColor: "#DFDFDF",
+              },
+            }),
+          }}
+        />
+      </Label>
     </>
   );
 };

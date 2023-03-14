@@ -1,12 +1,15 @@
 import React from "react";
 import ContainerCards from "../../components/ContainerCardClient";
 import PageBody from "../../components/PageBody";
+import { ClientContextProvider } from "../../context/ClientContext";
 
 const Client = () => {
   return (
     <>
       <PageBody>
-        <ContainerCards />
+        <ClientContextProvider>
+          <ContainerCards />
+        </ClientContextProvider>
       </PageBody>
     </>
   );

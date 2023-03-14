@@ -19,13 +19,14 @@ import {
 } from "./styles";
 
 function Split() {
-
-  var name = "Héder Silva";
-  //Héder Silva
-  const lastName = name.split(' ');
-  const abbreviation = name.substring(0,1).toUpperCase() + lastName[1].substring(0,1).toUpperCase();
+  var name = "Héder Silva Oliveira";
+  const abbreviation = name
+    .match(/(^\S\S?|\b\S)?/g)
+    .join("")
+    .match(/(^\S|\S$)?/g)
+    .join("")
+    .toUpperCase();
   return abbreviation;
-
 }
 
 class SidBar extends React.Component {
@@ -35,7 +36,7 @@ class SidBar extends React.Component {
       sidBartState: "false",
     };
   }
-  
+
   render() {
     return (
       <>
@@ -55,7 +56,7 @@ class SidBar extends React.Component {
           <User $mode={this.state.sidBartState}>
             <Img $mode={this.state.sidBartState}>
               <DivPhotoI>
-                <Body type={"Body1"} name={Split()}/>
+                <Body type={"Body1"} name={Split()} />
               </DivPhotoI>
             </Img>
             <Name $mode={this.state.sidBartState}>Héder Silva Oliveira</Name>

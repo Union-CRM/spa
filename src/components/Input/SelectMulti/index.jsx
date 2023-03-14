@@ -3,7 +3,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { Label } from "./styles";
 
-export const MultiSelect = (props, placeholder, idMultiOption) => {
+export const MultiSelect = (props) => {
   const animatedComponents = makeAnimated();
   const [selectedOptions, setSelectedOptions] = useState([]);
 

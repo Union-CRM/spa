@@ -9,6 +9,8 @@ class ButtonDefault extends React.Component {
           $mode={this.props.type}
           weightFont={this.props.weightFont}
           sizeFont={this.props.sizeFont}
+          sizeWidth={this.props.sizeWidth}
+          sizeHeight={this.props.sizeHeight}
         >
           {this.props.name}
         </Button>

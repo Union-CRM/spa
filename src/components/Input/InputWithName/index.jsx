@@ -1,24 +1,18 @@
 import React from "react";
-import { useState } from "react";
-import { Input, Container, Label } from "./styles";
+import { Input } from "./styles";
 
-const InputWithName = (props) => {
-  const [name, setName] = useState();
-
+const InputWithName = (props, placeholder) => {
   return (
-    <>
-      <Container>
-        <Label>
-          {props.label}
-          <Input
-            type="text"
-            widthInput={props.widthInput}
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          />
-        </Label>
-      </Container>
-    </>
+    <Input
+      name={props.name}
+      value={props.value}
+      onChante={props.onchange}
+      type="text"
+      widthInput={props.widthInput}
+      heightInput={props.heightInput}
+      placeholder={props.placeholder}
+      backgroundInput={props.backgroundInput}
+    />
   );
 };
 
