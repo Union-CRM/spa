@@ -31,7 +31,6 @@ function Split() {
 function handleLogin(event) { // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
   // Impedir comportamento padrão de submissão do formulário
   localStorage.setItem("token","");
-  console.log("Ok");
 }
 
 class SidBar extends React.Component {
