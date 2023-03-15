@@ -38,7 +38,7 @@ export const Button = styled.button`
   height: 50px;
   font-size: ${(props) => props.sizeFont || "12px"};
   font-weight: ${(props) => props.weightFont || "400"};
-  margin-left: 8%;
+  margin-left: 0;
   border-radius: 0.5em;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
   cursor: pointer;

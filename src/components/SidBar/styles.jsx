@@ -132,3 +132,6 @@ export const Span = styled.span`
 export const DivPhotoI = styled.div`
  
 `;
+export const Form = styled.form`
+   
+`;

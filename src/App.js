@@ -5,7 +5,7 @@ import GlobalStyle from "./styles/GlobalStyle";
 import SubjectPage from "./pages/Subject";
 import Client from "./pages/Client";
 import RemarkPage from "./pages/Remark";
-
+import LoginPage from "./pages/Login/index";
 function App() {
   return (
     <>
@@ -13,12 +13,17 @@ function App() {
         <GlobalStyle />
         <div className="App">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/client" element={<Client />} />
-            <Route path="/subject" element={<SubjectPage />} />
-            <Route path="/remark" element={<RemarkPage />} />
-            <Route path="/planner" element={<PlannerCard />} />
+            <Route path="/" element={<LoginPage/>} />
+            <Route path="/home" element={localStorage.getItem("token")
+            !=false ? <Home/>: <LoginPage/>} />
+            <Route path="/client" element={localStorage.getItem("token")
+            !=false ? <Client/>: <LoginPage/>} />
+            <Route path="/subject" element={localStorage.getItem("token")
+            !=false ? <SubjectPage/>: <LoginPage/>} />
+            <Route path="/remark" element={localStorage.getItem("token")
+            !=false ? <RemarkPage/>: <LoginPage/>} />
+            <Route path="/planner" element={localStorage.getItem("token")
+            !=false ? <PlannerCard/>: <LoginPage/>} />
           </Routes>
         </div>
       </Router>
