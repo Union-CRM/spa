@@ -87,13 +87,15 @@ export const Span = styled.span`
     position:relative;
     margin-bottom: 5px;
 `;
-export const Input = styled.input`
+export const Inputs = styled.input`
     border-radius: 5px;
     width: 100%;
     height: 35px;
     border: 1px solid #888c95;
     padding-left: 40px;
     box-sizing: border-box;
+    :placeholder-shown {
+    border-color: #888c95;}
     
 `;
 
@@ -150,3 +152,4 @@ export const AdministratorEnter = styled.button`
   margin: 0;
   text-decoration: none;
 `
+

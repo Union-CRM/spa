@@ -1,15 +1,16 @@
 import React, { useState } from 'react'; // Importar useState para criar estado para email e senha
 import IconSystem from '../../assets/IconSystem';
 import ButtonDefault from '../../assets/Buttons/ButtonDefault';
-import { Container,DivTcs,Content,LogoDiv,Form,DivIcons,Label,Span,Input,ForgotPassword,DivTerms,
+import { Container,DivTcs,Content,LogoDiv,Form,DivIcons,Label,Span,Inputs,ForgotPassword,DivTerms,
     DivWelcome,TextTerm,LoginBt,AdministratorEnter,DivImgs,DivEmailIcon,DivPassWIcon} from './styles';
 import Headline from '../../assets/FontSystem/Headline';
 import axios from 'axios';
 
 function LoginPage() {
+  
   const [email, setEmail] = useState(''); // Criar estado para email com o hook useState
   const [password, setPassword] = useState(''); // Criar estado para senha com o hook useState
-
+  localStorage.setItem("token","");
     async function handleLogin(event) { // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
         event.preventDefault(); // Impedir comportamento padrão de submissão do formulário
 
@@ -29,7 +30,7 @@ function LoginPage() {
                 }
             });
             
-
+            console.log(data.token);
             localStorage.setItem('token', data.token);
             window.location.href = '/home';
         }
@@ -61,7 +62,7 @@ function LoginPage() {
           <Form onSubmit={handleLogin}> {/* Adicionar evento de submissão de formulário */}
             <Label>
               <Span>Email</Span>
-              <Input placeholder='user@tcs.com' value={email} onChange={(e) => setEmail(e.target.value)} />
+              <Inputs placeholder='user@tcs.com' value={email} onChange={(e) => setEmail(e.target.value)} />
               <DivEmailIcon>
                 <IconSystem icon="Email2" />
               </DivEmailIcon>
@@ -71,7 +72,7 @@ function LoginPage() {
               <DivPassWIcon>
                 <IconSystem icon="Lock" width={"20px"} height={"20px"} />
               </DivPassWIcon>
-              <Input type="password" placeholder= '●●●●●●●●' value={password} onChange={(e) => setPassword(e.target.value)} />
+              <Inputs type="password" placeholder= '●●●●●●●●' value={password} onChange={(e) => setPassword(e.target.value)} />
            </Label>  
 
            <LoginBt>

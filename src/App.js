@@ -7,14 +7,15 @@ import Client from "./pages/Client";
 import RemarkPage from "./pages/Remark";
 import LoginPage from "./pages/Login/index";
 function App() {
-   localStorage.setItem("token","");
+  
   return (
     <>
       <Router>
         <GlobalStyle />
         <div className="App">
           <Routes>
-            <Route path="/" element={<LoginPage/>} />
+            <Route path="/" element={<LoginPage></LoginPage>}/>
+
             <Route path="/home" element={localStorage.getItem("token")
             !=false ? <Home/>: <LoginPage/>} />
             <Route path="/client" element={localStorage.getItem("token")
