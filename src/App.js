@@ -7,8 +7,7 @@ import Client from "./pages/Client";
 import RemarkPage from "./pages/Remark";
 import LoginPage from "./pages/Login/index";
 function App() {
-   localStorage.setItem("token","");
-  return (
+     return (
     <>
       <Router>
         <GlobalStyle />
