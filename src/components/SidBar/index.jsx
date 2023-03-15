@@ -28,6 +28,11 @@ function Split() {
     .toUpperCase();
   return abbreviation;
 }
+function handleLogin(event) { // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
+  // Impedir comportamento padrão de submissão do formulário
+  localStorage.setItem("token","");
+  console.log("Ok");
+}
 
 class SidBar extends React.Component {
   constructor(props) {
@@ -108,10 +113,12 @@ class SidBar extends React.Component {
               </Li>
             </Slink>
           </Ul>
-          <Logout $mode={this.state.sidBartState}>
-            <IconSystem icon="Logout" />
-            <Span $mode={this.state.sidBartState}>Logout</Span>
-          </Logout>
+          <Logout $mode={this.state.sidBartState} onClick={handleLogin}>
+              <Slink to="/">
+                <IconSystem icon="Logout"  />
+                <Span $mode={this.state.sidBartState}>Logout</Span>
+              </Slink>  
+            </Logout>
         </Container>
       </>
     );

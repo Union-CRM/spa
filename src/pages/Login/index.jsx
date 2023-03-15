@@ -9,10 +9,17 @@ import axios from 'axios';
 function LoginPage() {
   const [email, setEmail] = useState(''); // Criar estado para email com o hook useState
   const [password, setPassword] = useState(''); // Criar estado para senha com o hook useState
-
+    localStorage.setItem("token","");
     async function handleLogin(event) { // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
         event.preventDefault(); // Impedir comportamento padrão de submissão do formulário
+        
 
+        /* O codigo abaixo representa a verificação do login via endpoint 
+
+        // Endpoint AWS = ec2-18-230-74-206.sa-east-1.compute.amazonaws.com
+
+------------------------------------------------------------------------------------------------------------------------
+        
         if (email !== "" && password !== "" && password.length >= 8) { // Verificar email e senha preenchidos e tamanho mínimo da senha
             const { data } = await axios.post('http://localhost:8081/union/v1/users/login', {
                 email,
@@ -32,7 +39,11 @@ function LoginPage() {
 
             localStorage.setItem('token', data.token);
             window.location.href = '/home';
-        }
+        }*/
+
+        localStorage.setItem('token', "data.token");
+        window.location.href = '/home';
+
     }
   
   return(
