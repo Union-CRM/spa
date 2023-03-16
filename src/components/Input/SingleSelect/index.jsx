@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { Label, Container } from "./styles";
 
 export const SingleSelect = (props) => {
-  const { options } = props;
+  const { options, value } = props;
   const animatedComponents = makeAnimated();
-  const [value, setValue] = useState(null);
-  //const teste = props.options.filter((item) => item.label === props.value)[0];
-  //console.log(props.options.filter((item) => item.label === props.value)[0]);
-  //console.log(options);
+  const [index, setIndex] = useState(-1);
+
+  useEffect(() => {
+    let i = 0;
+    let v = props.value;
+    props.options.map((option) => {
+      if (v == option.label) {
+        setIndex(i);
+      }
+      i = i + 1;
+    });
+  }, [value]);
 
   return (
     <>
@@ -18,7 +26,7 @@ export const SingleSelect = (props) => {
         <Select
           required
           options={props.options}
-          defaultValue={value}
+          value={props.options[index]}
           id={props.idSingleOption}
           components={animatedComponents}
           onChange={(event) => props.set(event.value)}

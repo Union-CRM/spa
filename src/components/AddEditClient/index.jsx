@@ -90,7 +90,7 @@ const AddEditClient = (props) => {
       textRelease: release,
       tags: tags,
     };
-    console.log(newClient);
+
     if (name && email && role && customer && business && release) {
       setClientList([...clientList, newClient]);
       setModal(false);
