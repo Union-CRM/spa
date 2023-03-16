@@ -81,6 +81,7 @@ export const Label = styled.label`
     grid-template-columns: 100%;
     max-width: 100%;
     height: 100%;
+    
 `;
 
 export const Span = styled.span`
@@ -94,6 +95,9 @@ export const Input = styled.input`
     border: 1px solid #888c95;
     padding-left: 40px;
     box-sizing: border-box;
+    :placeholder-shown {
+        border-color: #888c95;
+      }
     
 `;
 
