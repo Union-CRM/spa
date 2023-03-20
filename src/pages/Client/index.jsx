@@ -1,6 +1,6 @@
 import React from "react";
-import ContainerCards from "../../components/ContainerCardClient";
-import PageBody from "../../components/PageBody";
+import ContainerCards from "../../components/Client/ContainerCardClient";
+import PageBody from "../../components/Geral/PageBody";
 import { ClientContextProvider } from "../../context/ClientContext";
 
 const Client = () => {
