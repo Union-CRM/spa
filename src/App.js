@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import PlannerCard from "./components/PlannerCard";
+import PlannerCard from "./components/Planner/PlannerCard";
 import Home from "./pages/Home";
 import GlobalStyle from "./styles/GlobalStyle";
-import SubjectPage from "./pages/Subject";
+import SubjectPage from "./pages/Subject/index"
 import Client from "./pages/Client";
 import RemarkPage from "./pages/Remark";
 import LoginPage from "./pages/Login/index";
