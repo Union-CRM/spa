@@ -4,14 +4,17 @@ export const SubjectContext = createContext();
 export const SubjectContextProvider = ({ children }) => {
   const [subject, setSubject] = useState(subjectsList);
 
+
   return (
     <SubjectContext.Provider value={{ subject, setSubject }}>
+
       {children}
     </SubjectContext.Provider>
   );
 };
 
 const subjectsList = [
+
     {
       id: 1,
       status: "Progress",

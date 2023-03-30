@@ -50,6 +50,7 @@ const PlannerCard = ({ setOpenPlannerModal, date }) => {
             />
           ))}
         </DivP>
+
   );
 };
 

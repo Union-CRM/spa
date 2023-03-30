@@ -2,7 +2,11 @@ import { createContext, useState } from "react";
 export const ClientContext = createContext();
 
 export const ClientContextProvider = ({ children }) => {
-  const [client, setClient] = useState(subjectsList);
+  const [client, setClient] = useState(clientList);
+  //alphabetical order
+  const sortedList = clientList.sort((a, b) =>
+    a.client.localeCompare(b.client)
+  );
 
   return (
     <ClientContext.Provider value={{ client, setClient }}>
@@ -11,12 +15,12 @@ export const ClientContextProvider = ({ children }) => {
   );
 };
 
-const subjectsList = [
+const clientList = [
   {
     id: 1,
     status: "Active",
     email: "igorsena@tcs.com",
-    client: "Igor Sena Soares Silva",
+    client: "Igor Sena",
     textRole: "Analyst DevOps",
     textCustomer: "Itaú",
     textBusiness: "Infraestrutura e Operações TI",
@@ -151,6 +155,7 @@ const subjectsList = [
   },
 ];
 
+export default clientList;
 /*
   { value: 1, label: "Online Banking", color: "#3ddc97" },
   { value: 2, label: "Cyber Security", color: "#ACD4FF" },

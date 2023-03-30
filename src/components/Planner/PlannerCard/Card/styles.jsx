@@ -1,4 +1,4 @@
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 
 export const ContainerCards = styled.li`
   
@@ -30,6 +30,7 @@ export const ContainerCards = styled.li`
 `;
 
 export const DivStatus = styled.div`
+
 ${(props) => {
   switch (props.$mode) {
     case "Done":
@@ -58,7 +59,7 @@ ${(props) => {
 
   width: 8px;
   height: 8px;
-  margin-right:9px;
+  margin-right: 9px;
   border-radius: 50%;
   font-weight: bold;
 `;
@@ -81,8 +82,7 @@ export const Guests = styled.p`
   white-space: nowrap;
 `;
 
-export const UserName = styled.p`
-`;
+export const UserName = styled.p``;
 
 export const EmailClient = styled.p`
   position: relative;
@@ -97,13 +97,9 @@ export const EmailClient = styled.p`
 
   white-space: nowrap;
 `;
-export const EmailUser = styled.p`
- 
-`;
+export const EmailUser = styled.p``;
 
-export const Client = styled.p`
-
-`
+export const Client = styled.p``;
 
 export const Status = styled.div`
 ${(props) => {
@@ -142,16 +138,16 @@ ${(props) => {
 
 export const DivPhoto = styled.div`
   border-radius: 50%;
-  border: 3.96px solid #007BFF;
+  border: 3.96px solid #007bff;
   width: 33px;
   height: 33px;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   margin: 0;
   text-align: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
-`
+`;
 
 export const ReleaseTrain = styled.div`
   position: relative;
@@ -160,7 +156,7 @@ export const ReleaseTrain = styled.div`
 `;
 
 export const PositionStatus = styled.div`
- display: grid;
+  display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
@@ -177,13 +173,14 @@ export const DivTextCard = styled.div`
   display: grid;
   box-sizing: border-box;
 `;
- 
- export const TextClient = styled.div`
+
+export const TextClient = styled.div`
   display: inline-flex;
   box-sizing: border-box;
 `;
 
 export const TextEmail = styled.div`
+
     display: inline-flex;
     box-sizing: border-box;
     position: relative;
@@ -196,9 +193,10 @@ export const TextGuests = styled.div`
     box-sizing: border-box;
   `;
 
-  export const ClientContent = styled.div`
-    display: grid;
-  `
+
+export const ClientContent = styled.div`
+  display: grid;
+`;
 
   export const UserContent = styled.div`
   display: grid;
@@ -210,14 +208,15 @@ export const TextGuests = styled.div`
   
   `
 
-  export const DivStatusTime = styled.div`
-    display: inline-flex;
-    position: relative;
-    flex-direction: row;
-    justify-content: left;
-    align-items: center;
-    top: 0;
-  `
+
+export const DivStatusTime = styled.div`
+  display: inline-flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  top: 0;
+`;
 
 export const DivUserInformation = styled.div`
   display: grid;
@@ -230,6 +229,7 @@ export const DivUserInformation = styled.div`
   width: fit-content
   
 `
+
 
 
 export const DivNameEmail = styled.div`
@@ -277,6 +277,7 @@ export const Email2 = styled.p`
 
 `
 
+
 export const DivIcon = styled.div`
   display: flex;
   flex-direction: row;
@@ -287,5 +288,4 @@ export const DivIcon = styled.div`
   position: absolute;
   z-index: 5;
 `
-
 

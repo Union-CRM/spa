@@ -1,41 +1,93 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const BoardStyle = styled.div`
-  height: 780px;
-  width: 700px;
-  display: grid;
-  align-content: flex-start;
-  background: rgba(255, 255, 255, 0.8);
-  position: relative;
-  grid-template-columns: 48% 48%;
-  margin-top: 20px;
-  grid-row: 2;
-  margin-right: 500px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-`;
-export const H1 = styled.h1`
+// Container father and children
+export const ContainerGlobal = styled.div`
   width: 100%;
-  font-family: "Houschka Rounded Alt";
-  font-size: 24px;
-  line-height: 28px;
-  margin-top: 10px;
-`;
-export const Container = styled.div`
+  height: 80vh;
   display: grid;
-  grid-template-rows: 9% 91%;
-  width: 700px;
-  height: 830px;
-  align-content: flex-start;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
+  min-width: 400px;
   position: relative;
-  overflow: auto;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
-  margin-top: 64px;
-  margin-right: 500px;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
+  @media (width: 500px) {
+    width: 790px;
+  }
+  @media (min-width: 1824px) and (max-width: 2000px) {
+    width: 100%;
+    height: 85vh;
+  }
+`;
+
+//* Container father and children *//
+export const ContainerHeaderAndCards = styled.div`
+  width: 100%;
+  min-width: 340px;
+  height: 100%;
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  display: grid;
   border-radius: 8px;
-  margin-top: -10px;
+  grid-template-rows: 15% 85%;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+  @media (min-width: 50px) and (max-width: 1360px) {
+    height: 80vh;
+    width: 100%;
+  }
+  @media (min-width: 1355px) and (max-width: 1824px) {
+    width: 100%;
+  }
+`;
+
+//* Header Container *//
+
+export const HeaderContainerCards = styled.div`
+  z-index: 4;
+  grid-row: 1;
+  width: auto;
+  height: 100%;
+  display: grid;
+  background-color: #ffffff;
+  border-radius: 8px 8px 0px 0px;
+  grid-template-rows: 20% 50% 30%;
+  @media (min-width: 100px) and (max-width: 500px) {
+    display: grid;
+    grid-row: 1;
+    position: relative;
+    grid-column: 1;
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+// Div Title and Button //
+export const Top = styled.div`
+  display: grid;
+  grid-row: 2;
+  grid-template-columns: 50% 50%;
+  width: 100%;
+`;
+
+//** Line **//
+export const LineDivisor = styled.div`
+  width: 92%;
+  height: 2px;
+  margin-left: 5%;
+  background-color: #e3e6ed;
+  position: absolute;
+`;
+
+//* CONTAINER CARDS *//
+export const ContainerCards = styled.div`
+  padding-left: 2%;
+  height: 100%;
+  grid-column: 1;
+  grid-row: 2;
+  width: auto;
+  display: grid;
+  position: relative;
+  background-color: #fff;
+  overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 18px;
     height: 10px;
@@ -50,83 +102,172 @@ export const Container = styled.div`
 
   &::-webkit-scrollbar-track-piece {
     background-color: white;
+    margin-top: 25px;
+    padding-top: 0px;
   }
 
   &::-webkit-scrollbar-thumb {
     height: 80%;
-    background-color: #afb2bb;
-    margin-left: 20px;
     width: 15px;
+    margin-left: 20px;
+    background-color: #d9d9d9;
     border-right: 6px solid white;
-    border-top: 12px solid white;
   }
 `;
-export const Line = styled.div`
-  width: 128px;
-  height: 0px;
-  border: 2px solid #007bff;
-  border-radius: 10px;
-  margin-left: 10px;
-  margin-top: -15px;
+
+// Cards //
+export const BoardStyle = styled.div`
+  width: 99%;
+  top: 20px;
+  grid-gap: 20px;
+  grid-row: 1;
+  display: grid;
+  position: relative;
+  height: fit-content;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
+  @media (min-width: 1355px) and (max-width: 1724px) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
+  }
 `;
-export const All = styled.span`
+
+//* Modal Edit and Add Subject *//
+export const DivModal = styled.div`
+  ${(props) => {
+    switch (props.$mode) {
+      case true:
+        return css`
+          z-index: 1000;
+          height: 100vh;
+          width: 100vw;
+          background: rgba(0, 0, 0, 0.8);
+          position: fixed;
+          top: 0;
+          left: 0;
+        `;
+
+      default:
+    }
+  }}
+  grid-template-columns:50% 50%;
+  @media (min-width: 50px) and (max-width: 500px) {
+    height: 100vh;
+    width: 100%;
+  }
+`;
+
+// *** ITEMS HEADER ***//
+
+// Div Title Page //
+export const DivTitlePage = styled.div`
+  padding-left: 10%;
+  display: flex;
+  grid-row: 2;
+  grid-column: 1;
+  width: 100%;
+`;
+
+// Title Subject List //
+export const H1 = styled.h1`
+  width: fit-content;
   font-family: "Houschka Rounded Alt";
-  font-size: 14px;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+  grid-row: 2;
+  height: fit-content;
+  border-bottom: 2px solid #007bff;
+  @media (min-width: 50px) and (max-width: 900px) {
+    font-size: 1.2rem;
+  }
+`;
+
+// Number of cards Subjects //
+export const HowManySubjectList = styled.span`
+  font-size: 24px;
   color: #525b75;
-  line-height: 16px;
   font-weight: 600;
 `;
 
-export const Header = styled.div`
-  margin-bottom: 20px;
-  margin-left: 25px;
-  width: 650px;
-  height: 100px;
+/// Div Buttons Create ///
+export const DivButton = styled.div`
   display: grid;
-  grid-row: 1;
-  position: fixed;
-  z-index: 1;
-  background-color: #ffffff;
+  grid-column: 2;
+  grid-row: 2;
+  width: 90%;
+  justify-content: end;
+  align-items: center;
+  @media (min-width: 100px) and (max-width: 500px) {
+    width: 90%;
+    top: -10%;
+    position: relative;
+  }
 `;
+
+/// Div Buttons Status ///
+export const DivSpans = styled.div`
+  display: flex;
+  grid-column: 1;
+  grid-row: 3;
+  padding-left: 5%;
+  position: relative;
+  @media (min-width: 100px) and (max-width: 500px) {
+    display: flex;
+    width: 80%;
+  }
+`;
+
+//*** Status: PROGRESS, FINISHED AND CANCEL ***//
+
+//* Title Status  *//
+
+export const Progress = styled.span`
+  font-family: "Houschka Rounded Alt";
+  font-size: 14px;
+  color: #525b75;
+  line-height: 20px;
+  font-weight: 600;
+`;
+
 export const Finished = styled.span`
   font-family: "Houschka Rounded Alt";
   font-size: 14px;
+  line-height: 20px;
   color: #525b75;
   font-weight: 600;
 `;
-export const Spans = styled.div`
-  margin-top: 10px;
-  display: flex;
-`;
+
 export const Canceled = styled.div`
   font-family: "Houschka Rounded Alt";
   font-size: 14px;
+  line-height: 20px;
   color: #525b75;
   font-weight: 600;
 `;
-export const Top = styled.div`
-  display: flex;
-  margin-left: 10px;
-`;
+
+//* Number of status => ("") *//
 export const HowManyFinished = styled.span`
-  color: #00953b;
+  color: #008585;
+  font-weight: 600;
 `;
 export const HowManyCancel = styled.span`
   color: #771300;
+  font-weight: 600;
 `;
-export const HowManyAll = styled.span`
-  color: #008585;
+
+export const HowManyProgress = styled.span`
+  color: #00953b;
+  font-weight: 600;
 `;
-export const HowManySubjectList = styled.span`
-  color: #525b75;
-`;
+
+/// Buttons Status ///
 export const ButtonProgress = styled.button`
   cursor: pointer;
   border: none;
-  background-color: #ffffff;
-  margin-right: 15px;
-  margin-bottom: 15px;
-  margin-left: 10px;
+  width: fit-content;
+  height: fit-content;
+  background-color: white;
+  margin-right: 3%;
   &:hover {
     border-bottom: 2px solid #007bff;
   }
@@ -134,9 +275,10 @@ export const ButtonProgress = styled.button`
 export const ButtonFinished = styled.button`
   cursor: pointer;
   border: none;
-  background-color: #ffffff;
-  margin-left: 5px;
-  margin-bottom: 15px;
+  height: fit-content;
+  width: fit-content;
+  margin-right: 3%;
+  background-color: white;
   &:hover {
     border-bottom: 2px solid #007bff;
   }
@@ -144,34 +286,11 @@ export const ButtonFinished = styled.button`
 export const ButtonCancel = styled.button`
   cursor: pointer;
   border: none;
-  background-color: #ffffff;
-  margin-left: 16px;
-  margin-bottom: 15px;
+  height: fit-content;
+  width: fit-content;
+  margin-right: 10px;
+  background-color: transparent;
   &:hover {
     border-bottom: 2px solid #007bff;
   }
-`;
-export const LineGray = styled.div`
-  width: 640px;
-  height: 0px;
-  border: 1px solid #d8d8d8;
-`;
-
-export const ContainerFather = styled.div`
-  display: grid;
-  grid-template-columns: 50% 50%;
-  width: 102%;
-  height: auto;
-  grid-template-rows: 50% 50%;
-`;
-
-export const DivModal = styled.div`
-  grid-column: 2;
-  flex-direction: row-reverse;
-  display: flex;
-`;
-
-export const DivButton = styled.div`
-  margin-top: 1.5%;
-  margin-right: 1.5%;
 `;

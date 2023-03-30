@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const DivP = styled.div`
   overflow: auto;
   background-color: #f5f7fa;
+
   width: 40vw;
   height: fit-content;
   border-left: 15px solid #007BFF;
@@ -27,12 +28,10 @@ export const DivP = styled.div`
     height: 10px;
     margin-right: 10px;
     float: right;
-    
   }
   
   &::-webkit-scrollbar-track {
     box-shadow: 5px black;
-  
   }
   
   &::-webkit-scrollbar-track-piece {
@@ -48,6 +47,7 @@ export const DivP = styled.div`
     border-right: 6px solid #f5f7fa;
     border-top: 12px solid #f5f7fa;
   }
+
   `;
   export const Ddata = styled.div`
   display: flex;
@@ -56,9 +56,11 @@ export const DivP = styled.div`
   `;
   
   export const Header = styled.div`
+
   display: grid;
   grid-template-columns: 60% 35%;
   grid-template-rows: 1fr;
+
   margin-left: 8%;
   margin-right: 5.5%;
   margin-top: 5%;
@@ -80,3 +82,4 @@ font-weight: 600;
 font-size: 20px;
 line-height: 24px;
 `
+
