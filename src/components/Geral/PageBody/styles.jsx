@@ -18,5 +18,7 @@ export const Content = styled.div`
   margin-right: 8%;
   margin-bottom: 50px;
   grid-column: 2;
-  grid-row: 2;
+  grid-row: ${(props)=>  props.nav ? "2" : "1"};
 `;
+
+
