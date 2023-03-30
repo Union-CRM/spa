@@ -2,15 +2,13 @@ import styled, { css } from "styled-components";
 
 // Div Father
 export const ContainerCentral = styled.div`
-  justify-content: end;
   display: flex;
-  grid-row: 1;
-  grid-column: 2;
-  @media (min-width: 100px) and (max-width: 590px) {
+  justify-content: end;
+  @media (min-width: 100px) and (max-width: 500px) {
     grid-column: 1;
     grid-row: 1;
     display: grid;
-    position: absolute;
+    position: relative;
     top: 0px;
     left: 0;
     justify-content: start;
@@ -18,35 +16,35 @@ export const ContainerCentral = styled.div`
 `;
 
 // Div Title
-export const PositionTitle = styled.div`
-  margin-left: 0px;
+export const DivHeader = styled.div`
+  width: 100%;
   height: 100%;
-  grid-row: 1;
   display: grid;
-  grid-template-columns: 80% 20%;
-  @media (min-width: 50px) and (max-width: 500px) {
-    display: grid;
-    grid-template-columns: 70% 10%;
-  }
+  grid-template-rows: 40% 30%;
+  grid-row: 1;
+  margin: 7%;
 `;
 
-export const H1 = styled.h1`
+export const Title = styled.h1`
   font-size: 32px;
-  font-style: normal;
   font-weight: 600;
   line-height: 36px;
-  display: flex;
-  height: 100%;
-  align-items: center;
   width: 100%;
-  padding-left: 9%;
-  padding-top: 2%;
-  grid-column: 1;
+  grid-row: 1;
   @media (min-width: 50px) and (max-width: 500px) {
     font-size: 1.5rem;
   }
 `;
 
+export const SubTitle = styled.h2`
+  font-size: 18px;
+  font-weight: 600;
+  width: 100%;
+  grid-row: 2;
+  @media (min-width: 50px) and (max-width: 500px) {
+    font-size: 1.5rem;
+  }
+`;
 /// Button Close
 
 export const DivClose = styled.div`
@@ -75,27 +73,32 @@ export const Close = styled.button`
 // Children
 
 export const Container = styled.div`
-  grid-row: 1;
   grid-column: 2;
-  width: 75%;
-  min-width: 350px;
+  width: 85%;
   height: 100%;
-  background: #fff;
   display: grid;
+  min-width: 300px;
+  background: #fff;
   border-left: 16.56px solid #007bff;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   z-index: 1000;
-  grid-template-rows: 10% 75% 15%;
-  @media (width: 500px) {
+  grid-template-rows: 20% 60% 20%;
+  @media (min-width: 100px) and (max-width: 502px) {
     height: 81vh;
-    width: 375px;
+    width: 100%;
     flex-direction: flex-start;
     position: relative;
   }
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    width: 80%;
-  }
+`;
+
+export const ContainerChildren = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  z-index: 1000;
+  grid-row: 2;
+  background: green;
 `;
 
 // Div Content
@@ -107,13 +110,9 @@ export const Form = styled.div`
   width: 93%;
   padding-left: 7%;
   grid-row: 2;
-  grid-template-rows: 14.2% 14.2% 14.2% 14.2% 14.2% 29%;
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    width: 95%;
-    height: 100%;
-  }
-  @media (min-width: 1824px) and (max-width: 2000px) {
-    width: 95%;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: 30% 30% 30% 10%;
+  @media (min-width: 1600px) {
   }
 `;
 
@@ -125,30 +124,12 @@ export const Input = styled.input`
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
   position: relative;
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    height: 25px;
-  }
-`;
-
-export const TextArea = styled.textarea`
-  height: ${(props) => props.heightInput || "80px"};
-  width: ${(props) => props.widthInput || "100%"};
-  border-radius: 5px;
-  border: 2px solid #888c95;
-  background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
-  display: block;
-  resize: none;
-  position: relative;
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    height: 70px;
-  }
-  @media (min-width: 1824px) and (max-width: 2000px) {
-    height: 100px;
+  @media (min-width: 1600px) {
+    width: 40px;
   }
 `;
 
 export const Label = styled.label`
-  padding-left: 0px;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -157,44 +138,29 @@ export const Label = styled.label`
 
 // Divs
 
-export const DivName = styled.div`
+export const DivDate = styled.div`
   grid-row: 1;
   width: 90%;
   height: 100%;
   display: grid;
 `;
 
-export const DivBusiness = styled.div`
+export const DivStart = styled.div`
   grid-row: 2;
-  grid-template-columns: 50% 50%;
   width: 90%;
   height: 100%;
   display: grid;
 `;
 
-export const DivEmail = styled.div`
-  width: 90%;
-  height: 100%;
-  display: grid;
+export const DivFinish = styled.div`
   grid-row: 3;
-`;
-
-export const DivSubject = styled.div`
-  grid-row: 4;
   width: 90%;
-  height: auto;
+  height: 100%;
   display: grid;
 `;
 
-export const DivStatus = styled.div`
-  grid-row: 5;
-  width: 90%;
-  height: auto;
-  display: grid;
-`;
-
-export const DivDescription = styled.div`
-  grid-row: 6;
+export const DivGuest = styled.div`
+  grid-row: 1;
   width: 90%;
   height: auto;
   display: grid;
@@ -210,14 +176,7 @@ export const DivButton = styled.div`
   width: 100%;
   height: 100%;
   grid-row: 3;
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    bottom: 10%;
-    position: relative;
-    height: 100%;
-  }
-  @media (min-width: 1824px) and (max-width: 2000px) {
-    height: 85%;
-  }
+  background: red;
 `;
 
 export const PositionButtonCancel = styled.div``;

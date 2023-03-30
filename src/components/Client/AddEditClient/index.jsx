@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   ContainerCentral,
   Container,
+  ContainerChildren,
   PositionTitle,
   H1,
   Input,
@@ -18,7 +19,7 @@ import {
   DivButton,
   ClickButton,
   PositionButtonCancel,
-} from "./styles" ;
+} from "./styles";
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import { TagComponent } from "../../Geral/TagComponent";
@@ -128,138 +129,140 @@ const AddEditClient = (props) => {
     <>
       <ContainerCentral>
         <Container>
-          <PositionTitle>
-            <H1>{props.title} </H1>
+          <ContainerChildren>
+            <PositionTitle>
+              <H1>{props.title} </H1>
 
-            {/*<DivClose>
+              {/*<DivClose>
               <ClickButton onClick={closeModal}>
               <Close>Close</Close>
               </ClickButton>
             </DivClose>*/}
-          </PositionTitle>
-          <Form>
-            <DivName>
-              <Label>
-                Client Name
-                <Input
-                  widthInput={"100% !important"}
-                  placeholder={flag && !name ? "Required field" : ""}
-                  value={name}
+            </PositionTitle>
+            <Form>
+              <DivName>
+                <Label>
+                  Client Name
+                  <Input
+                    widthInput={"100% !important"}
+                    placeholder={flag && !name ? "Required field" : ""}
+                    value={name}
+                    required
+                    onChange={(event) => setName(event.target.value)}
+                  />
+                </Label>
+              </DivName>
+
+              <DivEmail>
+                <Label>
+                  Email
+                  <Input
+                    widthInput={"90% !important"}
+                    name={email}
+                    value={email}
+                    placeholder={flag && !email ? "Required field" : ""}
+                    required
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
+                </Label>
+
+                <SingleSelect
+                  set={(role) => setRole(role)}
+                  placeholder={flag && !role ? "Required field" : ""}
+                  name={role}
+                  value={role}
                   required
-                  onChange={(event) => setName(event.target.value)}
+                  label={"Role"}
+                  sizeSingle={"100%"}
+                  sizeMenu={"100%"}
+                  options={role_mok}
+                  onChange={(choice) => setUserChoice(choice)}
                 />
-              </Label>
-            </DivName>
+              </DivEmail>
 
-            <DivEmail>
-              <Label>
-                Email
-                <Input
-                  widthInput={"90% !important"}
-                  name={email}
-                  value={email}
-                  placeholder={flag && !email ? "Required field" : ""}
+              <DivCustomer>
+                <Label>
+                  Customer
+                  <Input
+                    widthInput={"100% !important"}
+                    name={customer}
+                    value={customer}
+                    placeholder={flag && !customer ? "Required field" : ""}
+                    required
+                    onChange={(event) => setCustomer(event.target.value)}
+                  />
+                </Label>
+              </DivCustomer>
+
+              <DivBusiness>
+                <Label>
+                  Business
+                  <Input
+                    widthInput={"100% !important"}
+                    value={business}
+                    placeholder={flag && !business ? "Required field" : ""}
+                    required
+                    name={business}
+                    onChange={(event) => setBusiness(event.target.value)}
+                  />
+                </Label>
+              </DivBusiness>
+
+              <DivRelease>
+                <SingleSelect
+                  set={(release) => setRelease(release)}
+                  label={"Release Train"}
+                  value={release}
+                  placeholder={flag && !release ? "Required field" : ""}
+                  sizeSingle={"100%"}
                   required
-                  onChange={(event) => setEmail(event.target.value)}
+                  sizeMenu={"100%"}
+                  options={release_mok}
+                  onChange={(choice) => setUserChoice(choice)}
                 />
-              </Label>
+              </DivRelease>
 
-              <SingleSelect
-                set={(role) => setRole(role)}
-                placeholder={flag && !role ? "Required field" : ""}
-                name={role}
-                value={role}
-                required
-                label={"Role"}
-                sizeSingle={"100%"}
-                sizeMenu={"100%"}
-                options={role_mok}
-                onChange={(choice) => setUserChoice(choice)}
-              />
-            </DivEmail>
-
-            <DivCustomer>
-              <Label>
-                Customer
-                <Input
-                  widthInput={"100% !important"}
-                  name={customer}
-                  value={customer}
-                  placeholder={flag && !customer ? "Required field" : ""}
+              <DivTag>
+                <TagComponent
+                  set={(tags) => setTags(tags)}
+                  tags={tags}
+                  label={"Tags"}
+                  placeholder={flag && !tags ? "Required field" : ""}
+                  sizeSingle={"40%"}
                   required
-                  onChange={(event) => setCustomer(event.target.value)}
+                  sizeMenu={"40%"}
+                  options={options}
                 />
-              </Label>
-            </DivCustomer>
+              </DivTag>
 
-            <DivBusiness>
-              <Label>
-                Business
-                <Input
-                  widthInput={"100% !important"}
-                  value={business}
-                  placeholder={flag && !business ? "Required field" : ""}
+              <DivStatus>
+                <SingleSelect
+                  set={(status) => setStatus(status)}
+                  label={"Status"}
+                  value={status}
+                  placeholder={flag && !status ? "Required field" : ""}
+                  sizeSingle={"40%"}
                   required
-                  name={business}
-                  onChange={(event) => setBusiness(event.target.value)}
+                  sizeMenu={"40%"}
+                  options={status_mok}
+                  onChange={(choice) => setUserChoice(choice)}
                 />
-              </Label>
-            </DivBusiness>
-
-            <DivRelease>
-              <SingleSelect
-                set={(release) => setRelease(release)}
-                label={"Release Train"}
-                value={release}
-                placeholder={flag && !release ? "Required field" : ""}
-                sizeSingle={"100%"}
-                required
-                sizeMenu={"100%"}
-                options={release_mok}
-                onChange={(choice) => setUserChoice(choice)}
-              />
-            </DivRelease>
-
-            <DivTag>
-              <TagComponent
-                set={(tags) => setTags(tags)}
-                tags={tags}
-                label={"Tags"}
-                placeholder={flag && !tags ? "Required field" : ""}
-                sizeSingle={"40%"}
-                required
-                sizeMenu={"40%"}
-                options={options}
-              />
-            </DivTag>
-
-            <DivStatus>
-              <SingleSelect
-                set={(status) => setStatus(status)}
-                label={"Status"}
-                value={status}
-                placeholder={flag && !status ? "Required field" : ""}
-                sizeSingle={"40%"}
-                required
-                sizeMenu={"40%"}
-                options={status_mok}
-                onChange={(choice) => setUserChoice(choice)}
-              />
-            </DivStatus>
-          </Form>{" "}
-          <DivButton>
-            <ClickButton onClick={handleSubmit}>
-              <ButtonDefault
-                type="userSave"
-                weightFont={"500"}
-                sizeFont={"18px"}
-                name={"Save"}
-              />
-            </ClickButton>
-            <PositionButtonCancel onClick={closeModal}>
-              <ButtonDefault type="userCancel" name={"Cancel"} />
-            </PositionButtonCancel>
-          </DivButton>
+              </DivStatus>
+            </Form>{" "}
+            <DivButton>
+              <ClickButton onClick={handleSubmit}>
+                <ButtonDefault
+                  type="userSave"
+                  weightFont={"500"}
+                  sizeFont={"18px"}
+                  name={"Save"}
+                />
+              </ClickButton>
+              <PositionButtonCancel onClick={closeModal}>
+                <ButtonDefault type="userCancel" name={"Cancel"} />
+              </PositionButtonCancel>
+            </DivButton>
+          </ContainerChildren>
         </Container>
       </ContainerCentral>
     </>

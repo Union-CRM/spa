@@ -7,7 +7,7 @@ export const Container = styled.div`
   grid-template-columns: fit-content(10%) auto;
   grid-template-rows: 110px 914px;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: #f5f7fa;
 `;
 
 export const Content = styled.div`

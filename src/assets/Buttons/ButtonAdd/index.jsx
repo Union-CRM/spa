@@ -10,14 +10,23 @@ class ButtonAdd extends React.Component {
           $mode={this.props.mode}
           $width={this.props.width}
           $height={this.props.height}
+          $padding={this.props.padding}
           $color={this.props.color}
+          $border={this.props.border}
+          $boxShadow={this.props.boxShadow}
           weighFont={this.props.weightFont}
           sizeFont={this.props.sizeFont}
         >
           <IconAdd>
             <IconSystem icon={"Add2"} />
           </IconAdd>
-          <Span color={this.props.color}>{this.props.name}</Span>
+          <Span
+            color={this.props.color}
+            margin={this.props.margin}
+            sizeFont={this.props.sizeFont}
+          >
+            {this.props.name}
+          </Span>
         </Button>
       </>
     );
