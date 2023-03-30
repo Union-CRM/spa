@@ -2,12 +2,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import PlannerCard from "./components/Planner/PlannerCard";
 import Home from "./pages/Home";
 import GlobalStyle from "./styles/GlobalStyle";
-import SubjectPage from "./pages/Subject/index"
+import SubjectPage from "./pages/Subject/index";
 import Client from "./pages/Client";
 import RemarkPage from "./pages/Remark";
 import LoginPage from "./pages/Login/index";
+import PlannerPage from "./pages/Planner";
 function App() {
-     return (
+  return (
     <>
       <Router>
         <GlobalStyle />
@@ -23,7 +24,9 @@ function App() {
             <Route path="/remark" element={localStorage.getItem("token")
             !=false ? <RemarkPage/>: <LoginPage/>} />
             <Route path="/planner" element={localStorage.getItem("token")
-            !=false ? <PlannerCard/>: <LoginPage/>} />
+            !=false ? <PlannerPage/>: <LoginPage/>} />
+
+            
           </Routes>
         </div>
       </Router>
