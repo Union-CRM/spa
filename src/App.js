@@ -6,6 +6,7 @@ import SubjectPage from "./pages/Subject/index"
 import Client from "./pages/Client";
 import RemarkPage from "./pages/Remark";
 import LoginPage from "./pages/Login/index";
+import PlannerPage from "./pages/Planner";
 function App() {
      return (
     <>
@@ -23,7 +24,7 @@ function App() {
             <Route path="/remark" element={localStorage.getItem("token")
             !=false ? <RemarkPage/>: <LoginPage/>} />
             <Route path="/planner" element={localStorage.getItem("token")
-            !=false ? <PlannerCard/>: <LoginPage/>} />
+            !=false ? <PlannerPage/>: <LoginPage/>} />
           </Routes>
         </div>
       </Router>

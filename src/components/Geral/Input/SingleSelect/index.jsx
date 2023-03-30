@@ -12,7 +12,7 @@ export const SingleSelect = (props) => {
     let i = 0;
     let v = props.value;
     props.options.map((option) => {
-      if (v == option.label) {
+      if (v == option.value) {
         setIndex(i);
       }
       i = i + 1;
@@ -25,6 +25,7 @@ export const SingleSelect = (props) => {
         {props.label}
         <Select
           required
+          isDisabled={props.isDisabled}
           options={props.options}
           value={props.options[index]}
           id={props.idSingleOption}
@@ -45,7 +46,7 @@ export const SingleSelect = (props) => {
           styles={{
             placeholder: (styles, state) => ({
               ...styles,
-              color: "#656464",
+              color: "#000000",
               "::placeholder-shown": {
                 borderColor: "red",
               },
@@ -56,7 +57,7 @@ export const SingleSelect = (props) => {
               border: `2px solid ${
                 props.placeholder === "" ? "#888C95" : "#b03535"
               }`,
-              height: "28px !important",
+              height: props.sizeHeight || "100%",
               position: "relative !important",
               cursor: "pointer",
               backgroundColor: "transparent",
@@ -87,13 +88,13 @@ export const SingleSelect = (props) => {
               maxWidth: props.sizeMenuList || "auto",
               overflowY: "scroll",
               "&::-webkit-scrollbar": {
-                backgroundColor: "#DFDFDF",
+                backgroundColor: "#FFFFFF",
               },
               "&::-webkit-scrollbar-thumb ": {
-                backgroundColor: "#DFDFDF",
+                backgroundColor: "#FFFFFF",
               },
               "&::-webkit-scrollbar--track-piece": {
-                backgroundColor: "#DFDFDF",
+                backgroundColor: "#FFFFFF",
               },
             }),
 

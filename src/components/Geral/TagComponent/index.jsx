@@ -44,7 +44,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
               }),
 
               container: (state) => ({
-                width: "100%",
+                width: props.width || "100%",
                 position: "relative",
                 gridTemplateColumns: "40% 60%",
                 display: "grid",
@@ -54,7 +54,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                 border: `2px solid ${
                   props.placeholder === "" ? "#888C95" : "#b03535"
                 }`,
-                height: "28px !important",
+                height: props.sizeHeight || "100%",
                 top: props.top || "0px",
                 width: props.width || "100%",
                 gridColumn: "1",
