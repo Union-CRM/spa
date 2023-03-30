@@ -21,20 +21,24 @@ import {
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import subjectsList from "../../../context/ClientContext";
+import { useSubjectContext } from "../../../hook/useSubjectContent";
 
-const Subject = ({ title, setModal }) => {
-  const closeModal = () => {
-    setModal(false);
+const EditSubject = ({ title }) => {
+  const { setModalDetails, setModalEdit } = useSubjectContext();
+
+  const CloseModal = () => {
+    setModalDetails(true);
+    setModalEdit(false);
   };
 
-  const saveModal = () => {
-    setModal(false);
-    console.log(name);
-    console.log(email);
-    console.log(customer);
-    console.log(business);
-    console.log(role);
-  };
+  //const saveModal = () => {
+  // setModal(false);
+  //console.log(name);
+  //console.log(email);
+  //console.log(customer);
+  //console.log(business);
+  //console.log(role);
+  // };
 
   const role = [
     { id: 1, value: "Teach Lead", label: "Tech Lead" },
@@ -97,13 +101,7 @@ const Subject = ({ title, setModal }) => {
       <ContainerCentral>
         <Container>
           <PositionTitle>
-            <H1>{title} </H1>
-
-            {/*<DivClose>
-    <ClickButton onClick={closeModal}>
-    <Close>Close</Close>
-    </ClickButton>
-  </DivClose>*/}
+            <H1>Edit Subject</H1>
           </PositionTitle>
 
           <Form>
@@ -198,7 +196,7 @@ const Subject = ({ title, setModal }) => {
           </Form>
 
           <DivButton>
-            <ClickButton onClick={saveModal}>
+            <ClickButton>
               <ButtonDefault
                 type={"userSave"}
                 weightFont={"500"}
@@ -207,7 +205,7 @@ const Subject = ({ title, setModal }) => {
               />
             </ClickButton>
 
-            <PositionButtonCancel onClick={closeModal}>
+            <PositionButtonCancel onClick={CloseModal}>
               <ButtonDefault
                 type="userCancel"
                 name={"Cancel"}
@@ -222,4 +220,4 @@ const Subject = ({ title, setModal }) => {
   );
 };
 
-export default Subject;
+export default EditSubject;

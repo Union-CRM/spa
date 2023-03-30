@@ -10,12 +10,10 @@ const clientes = [
     releaseTrain: "Inteligência comercial",
     client: "Gilberto Anderson",
     emailClient: "gilberto.costumer@itau.com.br",
-    guests:"Mario Alves ",
-    userName:"Eber Delgado",
+    guests: "Mario Alves ",
+    userName: "Eber Delgado",
     emailUser: "EberDelgado@tcs.com",
-    status:"scheduled",   
-    
-    
+    status: "scheduled",
   },
   {
     id: 2,
@@ -23,10 +21,10 @@ const clientes = [
     releaseTrain: "Onboarding e Transacional",
     client: "Fernando Souza",
     emailClient: "fernando.costumer@itau.com.br",
-    guests:"Mario Alves, Gedson Souza, Eneiane Lopes ",
-    userName:"Gustavo Carvalho",
+    guests: "Mario Alves, Gedson Souza, Eneiane Lopes ",
+    userName: "Gustavo Carvalho",
     emailUser: "gustavoCarvalho@tcs.com",
-    status:"finished",   
+    status: "finished",
   },
   {
     id: 3,
@@ -34,10 +32,10 @@ const clientes = [
     releaseTrain: "Experiencia digital",
     client: "Willian Pedroso",
     emailClient: "Willian.costumer@itau.com.br",
-    guests:"Murilo Alves ",
-    userName:"Gilberto Anderson",
-    emailUser: "gilbertoanderson@tcs.com",
-    status:"finished",   
+    guests: "Murilo Alves ",
+    userName: "Gilberto Anderson",
+    emailUser: "gilbertoanderson.costumer",
+    status: "finished",
   },
   {
     id: 4,
@@ -45,10 +43,10 @@ const clientes = [
     releaseTrain: "Jornada Digital Itauber",
     client: "Márcio Silva",
     emailClient: "Márcio.costumer@itau.com.br",
-    guests:"Mariano Peres ",
-    userName:"Luana Alves",
+    guests: "Mariano Peres ",
+    userName: "Luana Alves",
     emailUser: "luanaAlves@tcs.com",
-    status:"canceled",   
+    status: "canceled",
   },
   {
     id: 4,
@@ -56,10 +54,10 @@ const clientes = [
     releaseTrain: "Jornada Digital Itauber",
     client: "Márcio Silva",
     emailClient: "Márcio.costumer@itau.com.br",
-    guests:"Mariano Peres ",
-    userName:"Luana Alves",
+    guests: "Mariano Peres ",
+    userName: "Luana Alves",
     emailUser: "luanaAlves@tcs.com",
-    status:"canceled",   
+    status: "canceled",
   },
   {
     id: 4,
@@ -67,10 +65,10 @@ const clientes = [
     releaseTrain: "Jornada Digital Itauber",
     client: "Márcio Silva",
     emailClient: "Márcio.costumer@itau.com.br",
-    guests:"Mariano Peres ",
-    userName:"Luana Alves",
+    guests: "Mariano Peres ",
+    userName: "Luana Alves",
     emailUser: "luanaAlves@tcs.com",
-    status:"canceled",   
+    status: "canceled",
   },
   {
     id: 4,
@@ -78,10 +76,10 @@ const clientes = [
     releaseTrain: "Jornada Digital Itauber",
     client: "Márcio Silva",
     emailClient: "Márcio.costumer@itau.com.br",
-    guests:"Mariano Peres ",
-    userName:"Luana Alves",
+    guests: "Mariano Peres ",
+    userName: "Luana Alves",
     emailUser: "luanaAlves@tcs.com",
-    status:"canceled",   
+    status: "canceled",
   },
   {
     id: 4,
@@ -89,10 +87,10 @@ const clientes = [
     releaseTrain: "Jornada Digital Itauber",
     client: "Márcio Silva",
     emailClient: "Márcio.costumer@itau.com.br",
-    guests:"Mariano Peres ",
-    userName:"Luana Alves",
+    guests: "Mariano Peres ",
+    userName: "Luana Alves",
     emailUser: "luanaAlves@tcs.com",
-    status:"canceled",   
+    status: "canceled",
   },
   {
     id: 4,
@@ -100,10 +98,10 @@ const clientes = [
     releaseTrain: "Jornada Digital Itauber",
     client: "Márcio Silva",
     emailClient: "Márcio.costumer@itau.com.br",
-    guests:"Mariano Peres ",
-    userName:"Luana Alves",
+    guests: "Mariano Peres ",
+    userName: "Luana Alves",
     emailUser: "luanaAlves@tcs.com",
-    status:"canceled",   
+    status: "canceled",
   },
   {
     id: 4,
@@ -111,10 +109,10 @@ const clientes = [
     releaseTrain: "Jornada Digital Itauber",
     client: "Márcio Silva",
     emailClient: "Márcio.costumer@itau.com.br",
-    guests:"Mariano Peres ",
-    userName:"Luana Alves",
+    guests: "Mariano Peres ",
+    userName: "Luana Alves",
     emailUser: "luanaAlves@tcs.com",
-    status:"canceled",   
+    status: "canceled",
   },
   {
     id: 4,
@@ -122,42 +120,39 @@ const clientes = [
     releaseTrain: "Jornada Digital Itauber",
     client: "Márcio Silva",
     emailClient: "Márcio.costumer@itau.com.br",
-    guests:"Mariano Peres ",
-    userName:"Luana Alves",
+    guests: "Mariano Peres ",
+    userName: "Luana Alves",
     emailUser: "luanaAlves@tcs.com",
-    status:"canceled",   
+    status: "canceled",
   },
-  
 ];
-
-
 
 const PlannerCard = () => {
   return (
     <PageBody>
-        <DivP>
-          <Header>
-            <DivPlanner>
-              <Headline type={"Headline3"} name={"Planner Of Day"}/>
-            </DivPlanner>
-            <Ddata>
-              <Headline type={"Headline5"} name={"Mach 03th"}></Headline>
-            </Ddata>
-          </Header>
-          {clientes.map((item) => (
-            <Card
-              key={item.id}
-              subject={item.subject}
-              releaseTrain={item.releaseTrain}
-              emailClient={item.emailClient}
-              emailUser={item.emailUser}
-              client={item.client}
-              guests={item.guests}
-              userName={item.userName}
-              status={item.status}
-            />
-          ))}
-        </DivP>
+      <DivP>
+        <Header>
+          <DivPlanner>
+            <Headline type={"Headline3"} name={"Planner Of Day"} />
+          </DivPlanner>
+          <Ddata>
+            <Headline type={"Headline5"} name={"Mach 03th"}></Headline>
+          </Ddata>
+        </Header>
+        {clientes.map((item) => (
+          <Card
+            key={item.id}
+            subject={item.subject}
+            releaseTrain={item.releaseTrain}
+            emailClient={item.emailClient}
+            emailUser={item.emailUser}
+            client={item.client}
+            guests={item.guests}
+            userName={item.userName}
+            status={item.status}
+          />
+        ))}
+      </DivP>
     </PageBody>
   );
 };

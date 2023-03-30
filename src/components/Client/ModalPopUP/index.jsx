@@ -23,7 +23,7 @@ const ModalPopUp = (props) => {
 
   const span =
     client.status === "Active"
-      ? "Do you want do deactivate this card?"
+      ? "Do you want do Inactivate this card?"
       : "Do you want to activate this card?";
 
   const handleAlterStatus = () => {

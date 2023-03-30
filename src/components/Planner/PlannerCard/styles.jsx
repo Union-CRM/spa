@@ -5,23 +5,20 @@ export const DivP = styled.div`
   background-color: #f5f7fa;
   width: 640px;
   height: 787px;
-  border-left: 15px solid #007BFF;
+  border-left: 15px solid #007bff;
   border-radius: 8px;
   margin-top: -10px;
   overflow: auto;
-  
-  
+
   &::-webkit-scrollbar {
     width: 18px;
     height: 10px;
     margin-right: 10px;
     float: right;
-    
   }
 
   &::-webkit-scrollbar-track {
     box-shadow: 5px black;
-  
   }
 
   &::-webkit-scrollbar-track-piece {
@@ -39,10 +36,10 @@ export const DivP = styled.div`
   }
 `;
 export const Ddata = styled.div`
-    display: flex;
-    position: relative;
-    justify-content: right;
-    align-items: flex-end;
+  display: flex;
+  position: relative;
+  justify-content: right;
+  align-items: flex-end;
 `;
 
 export const Header = styled.div`
@@ -54,11 +51,11 @@ export const Header = styled.div`
   margin-left: 45px;
   margin-top: 28px;
   margin-bottom: 32px;
-`
+`;
 
 export const DivPlanner = styled.div`
-    display: flex;
-    position: relative;
-    justify-content: left;
-    align-items: flex-start;
-`
+  display: flex;
+  position: relative;
+  justify-content: left;
+  align-items: flex-start;
+`;
