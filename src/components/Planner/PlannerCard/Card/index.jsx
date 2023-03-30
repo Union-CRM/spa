@@ -4,6 +4,7 @@ import Headline from "../../../../assets/FontSystem/Headline";
 import { FontSubtitle } from "../../../../assets/FontSystem/styles";
 import Subtitle from "../../../../assets/FontSystem/Subtitle";
 import IconSystem from "../../../../assets/IconSystem";
+import { useState } from 'react'
 
 import {
   ContainerCards,
@@ -26,6 +27,9 @@ import {
   DivNameEmail,
   DivIcon,
 } from "./styles";
+
+
+
 
 
 const Card = (props) => {
@@ -56,13 +60,10 @@ const Card = (props) => {
             </TextGuests>
           </DivTextCard>
         </ClientContent>
-          
-        
-        
         <UserContent>
-          <DivIcon>
+          <DivIcon  onClick={()=> props.OpenModal()}>
             <IconSystem icon={"Edit"} width={"11px"} height={"11px"}/>
-          </DivIcon>
+          </DivIcon >
           <DivStatusTime>
             <DivStatus $mode={props.status}/>
             <Body type={"Body2"} name={"11:00 - 12:00"} colorFont={"#000000"}></Body> 

@@ -3,12 +3,23 @@ import styled from "styled-components";
 export const DivP = styled.div`
   overflow: auto;
   background-color: #f5f7fa;
-  width: 640px;
-  height: 787px;
+  width: 40vw;
+  height: fit-content;
   border-left: 15px solid #007BFF;
   border-radius: 8px;
   margin-top: -10px;
   overflow: auto;
+  position: fixed;
+  top: 10%;
+  left: 30%;
+  z-index: 5;
+
+  //@media (min-width: 1200px) {
+    //width: 100px
+
+
+
+//}
   
   
   &::-webkit-scrollbar {
@@ -18,12 +29,12 @@ export const DivP = styled.div`
     float: right;
     
   }
-
+  
   &::-webkit-scrollbar-track {
     box-shadow: 5px black;
   
   }
-
+  
   &::-webkit-scrollbar-track-piece {
     background-color: #f5f7fa;
     border-radius: 10px;
@@ -37,28 +48,35 @@ export const DivP = styled.div`
     border-right: 6px solid #f5f7fa;
     border-top: 12px solid #f5f7fa;
   }
-`;
-export const Ddata = styled.div`
-    display: flex;
-    position: relative;
-    justify-content: right;
-    align-items: flex-end;
-`;
-
-export const Header = styled.div`
+  `;
+  export const Ddata = styled.div`
+  display: flex;
+  justify-content: right;
+  align-items: flex-end;
+  `;
+  
+  export const Header = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 273px);
+  grid-template-columns: 60% 35%;
   grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  margin-left: 45px;
-  margin-top: 28px;
-  margin-bottom: 32px;
+  margin-left: 8%;
+  margin-right: 5.5%;
+  margin-top: 5%;
+  margin-bottom: 8%;
+  `
+  
+  export const DivPlanner = styled.div`
+  display: flex;
+  position: relative;
+  justify-content: left;
+  align-items: flex-start;
 `
 
-export const DivPlanner = styled.div`
-    display: flex;
-    position: relative;
-    justify-content: left;
-    align-items: flex-start;
+export const TextMonDay = styled.p`
+
+font-family: 'Houschka Rounded Alt';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 24px;
 `
