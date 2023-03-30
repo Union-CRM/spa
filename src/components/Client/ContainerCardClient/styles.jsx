@@ -187,6 +187,7 @@ export const HowManyClientList = styled.span`
   font-size: 24px;
   color: #525b75;
   font-weight: 600;
+  margin-right: 5%;
   @media (min-width: 100px) and (max-width: 500px) {
     font-size: 1.4rem;
   }
