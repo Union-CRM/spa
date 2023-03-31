@@ -86,7 +86,7 @@ const ContainerCards = () => {
                   >
                 
                 
-                    <IconSystem icon={"Info"} width={"2vw"} height={"3.5vh"} ></IconSystem>
+                    <IconSystem icon={"Info"} width={"1.5vw"} height={"2.1vh"} ></IconSystem>
                     
                 </Tooltip >
              
