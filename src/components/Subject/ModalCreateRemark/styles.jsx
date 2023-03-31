@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 // Div Father
 export const ContainerCentral = styled.div`
@@ -73,8 +73,9 @@ export const Close = styled.button`
 // Children
 
 export const Container = styled.div`
+  grid-row: 1;
   grid-column: 2;
-  width: 85%;
+  width: 90%;
   height: 100%;
   display: grid;
   min-width: 300px;
@@ -83,21 +84,13 @@ export const Container = styled.div`
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   z-index: 1000;
-  grid-template-rows: 15% 75% 10%;
+  grid-template-rows: 20% 70% 10%;
   @media (min-width: 100px) and (max-width: 502px) {
     height: 81vh;
     width: 100%;
     flex-direction: flex-start;
     position: relative;
   }
-`;
-
-export const ContainerChildren = styled.div`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  z-index: 1000;
-  grid-row: 2;
 `;
 
 // Div Content
@@ -109,8 +102,8 @@ export const Form = styled.div`
   width: 93%;
   padding-left: 7%;
   grid-row: 2;
-  grid-template-columns: 40% 0.1% 60%;
-  grid-template-rows: 33.3% 33.3% 33.3%;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
   @media (min-width: 1600px) {
   }
 `;
@@ -122,7 +115,6 @@ export const Input = styled.input`
   border: 2px solid #888c95;
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
-
   @media (min-width: 1600px) {
     width: 40px;
   }
@@ -139,32 +131,24 @@ export const Label = styled.label`
 
 export const DivDate = styled.div`
   grid-row: 1;
-  width: 90%;
+  width: 30%;
   height: 100%;
   display: grid;
 `;
 
-export const DivStart = styled.div`
-  grid-row: 2;
-  width: 90%;
-  height: 100%;
-  display: grid;
-`;
-
-export const DivFinish = styled.div`
-  grid-row: 3;
-  width: 90%;
-  height: 100%;
-  display: grid;
-`;
-
-export const DivGuest = styled.div`
+export const DivDateReturn = styled.div`
   grid-row: 1;
-  width: 90%;
-  height: auto;
+  grid-column: 2;
+  width: 30%;
+  height: 100%;
   display: grid;
-  grid-column: 3;
-  margin-bottom: 16%;
+`;
+
+export const DivText = styled.div`
+  grid-row: 2;
+  width: 200%;
+  height: 100%;
+  display: grid;
 `;
 
 // Button Save and Cancel
@@ -176,7 +160,8 @@ export const DivButton = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  grid-row: 4;
+  grid-row: 3;
+  background: red;
 `;
 
 export const PositionButtonCancel = styled.div``;

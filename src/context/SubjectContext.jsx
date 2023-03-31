@@ -4,8 +4,16 @@ export const SubjectContext = createContext();
 export const SubjectContextProvider = ({ children }) => {
   const [subject, setSubject] = useState(subjectsList);
 
+  const [modalDetails, setModalDetails] = useState(false);
+  const [modal, setModal] = useState();
+  const [modalEdit, setModalEdit] = useState(false);
+  const [isEdit, setEdit] = useState(false);
+
+
+  const [idSubject, setIdSubject] = useState(false);
 
   return (
+
     <SubjectContext.Provider value={{ subject, setSubject }}>
 
       {children}
@@ -14,6 +22,7 @@ export const SubjectContextProvider = ({ children }) => {
 };
 
 const subjectsList = [
+
 
     {
       id: 1,
@@ -142,5 +151,6 @@ const subjectsList = [
       client_email: "j.pedro@tcs.com",
     },
   ];
+
 
 export default subjectsList;
