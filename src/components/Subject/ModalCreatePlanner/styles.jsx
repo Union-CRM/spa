@@ -98,6 +98,7 @@ export const ContainerChildren = styled.div`
   display: grid;
   z-index: 1000;
   grid-row: 2;
+  background: green;
 `;
 
 // Div Content
@@ -109,8 +110,8 @@ export const Form = styled.div`
   width: 93%;
   padding-left: 7%;
   grid-row: 2;
-  grid-template-columns: 40% 0.1% 61%;
-  grid-template-rows: 30% 35% 30% 10%;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: 30% 30% 30% 10%;
   @media (min-width: 1600px) {
   }
 `;
@@ -122,6 +123,7 @@ export const Input = styled.input`
   border: 2px solid #888c95;
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
+  position: relative;
   @media (min-width: 1600px) {
     width: 40px;
   }
@@ -162,7 +164,6 @@ export const DivGuest = styled.div`
   width: 90%;
   height: auto;
   display: grid;
-  grid-column: 3;
 `;
 
 // Button Save and Cancel
@@ -174,7 +175,7 @@ export const DivButton = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  grid-row: 4;
+  grid-row: 3;
   background: red;
 `;
 

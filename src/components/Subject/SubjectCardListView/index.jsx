@@ -137,7 +137,7 @@ const SubjectsProgress = subjectsList.filter(
 const SubjectList = () => {
   const [cards, setCards] = useState(SubjectsProgress);
 
-  const { idSubject, setIdSubject } = useSubjectContext();
+  const [idSubject, setIdSubject] = useState(false);
 
   const [active, setActive] = useState(cardStatus.INPROGRESS);
 

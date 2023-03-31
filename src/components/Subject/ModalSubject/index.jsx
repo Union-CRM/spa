@@ -22,77 +22,28 @@ import {
   DivModal,
   PageEdit,
   ContainerDois,
-  Span,
 } from "./styles";
-
-// contents modal global
+import Subject from "../CreateEditSubjectModal";
 import ContentRemarks from "../ContentRemark";
 import ContentsPlanner from "../ContentPlanner";
 import ContentDetailsCard from "../ContentDetailsCard";
-
-// hook context
+import SubjectList from "../SubjectCardListView";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 
-const ModalSubject = (props) => {
-  const { setModal, id } = props;
+const ModalSubject = ({ title, setModal }) => {
+  const { setModalDetails, isEdit, setEdit, modalEdit, setModalEdit } =
+    useSubjectContext();
 
-  // functions Edit
-  const { setModalDetails, setModalEdit } = useSubjectContext();
-
-  // Array map
-  const { idSubject, setIdSubject } = useSubjectContext();
-
-  const { subject: subjectsList } = useSubjectContext();
-
-  const subject = subjectsList.filter((item) => item.id === id)[0];
-
-  const [title, setTitle] = useState("");
-  const [status, setStatus] = useState("");
-  const [manager, setManager] = useState("");
-
-  const [selectedSubjectID, setSelectedSubjectID] = useState(null);
-
-  // Close Modal
   const closeModal = () => {
     setModal(false);
   };
 
-  useEffect(() => {
-    if (selectedSubjectID) {
-      const selectedSubjectID = subject.find(
-        (subject) => subject.id === selectedSubjectID
-      );
-      setTitle(selectedSubjectID.title);
-      setStatus(selectedSubjectID.status);
-      setManager(selectedSubjectID.manager);
-    }
-  }, [selectedSubjectID]);
-
-  const activeSubject = subjectsList.filter(
-    (subject) => subject.status === "Progress"
-  );
-
-  const optionsClient = activeSubject.map((subject) => {
-    return {
-      id: subject.id,
-      title: subject.tile,
-      status: subject.status,
-      manager: subject.manager,
-    };
-  });
-
-  const handleClientChange = (selectedSubjectID) => {
-    setSelectedSubjectID(selectedSubjectID.id);
-  };
-
-  // Navegation for tabs
   const [toggleState, setToggleState] = useState(1);
 
   const toggleTab = (index) => {
     setToggleState(index);
   };
 
-  // Modal for edit
   const EditModal = () => {
     setModalDetails(false);
     setModalEdit(true);
@@ -107,19 +58,19 @@ const ModalSubject = (props) => {
           </ClickButton>
 
           <DivStatus>
-            <Status onChange={handleClientChange} status={status} />
+            <Status>
+              <span>In Progress</span>
+            </Status>
           </DivStatus>
 
           <DivTitle>
-            <TitleSubject>{title} </TitleSubject>
+            <TitleSubject>Apresentação Institucional TCS</TitleSubject>
 
             <IconTag onClick={EditModal}>
               <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
             </IconTag>
 
-            <CreatedBy onchange={handleClientChange}>
-              Created by {manager} on 29 February{" "}
-            </CreatedBy>
+            <CreatedBy>Created by Gilberto Anderson on 29 February </CreatedBy>
           </DivTitle>
 
           <DivPages>

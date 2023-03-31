@@ -10,6 +10,10 @@ import {
 } from "./styles";
 
 const SubjectsDetails = ({ title, setModal }) => {
+  const closeModal = () => {
+    setModal(false);
+  };
+
   return (
     <ContainerDetails>
       <DivBetween>
