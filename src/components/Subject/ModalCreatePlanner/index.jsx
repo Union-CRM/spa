@@ -21,8 +21,9 @@ import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import { TagComponent } from "../../Geral/TagComponent";
 import Clock from "../../Geral/Input/clock";
 import { useClientContext } from "../../../hook/useClientContent";
+import { GuestComponent } from "../../Geral/Input/GuestsComponent";
 
-const AddEditClient = (props) => {
+const ModalCreatePlanner = (props) => {
   const { setModal, id } = props;
 
   const closeModal = () => {
@@ -133,17 +134,15 @@ const AddEditClient = (props) => {
           <ContainerChildren>
             <Form>
               <DivDate>
-                <Label>
-                  Date
-                  <Input
-                    type={"date"}
-                    widthInput={"45% !important"}
-                    placeholder={flag && !name ? "Required field" : ""}
-                    value={name}
-                    required
-                    onChange={(event) => setName(event.target.value)}
-                  />
-                </Label>
+                <Label>Date</Label>
+                <Input
+                  type={"date"}
+                  widthInput={"93% !important"}
+                  placeholder={flag && !name ? "Required field" : ""}
+                  value={name}
+                  required
+                  onChange={(event) => setName(event.target.value)}
+                />
               </DivDate>
 
               <DivStart>
@@ -161,15 +160,18 @@ const AddEditClient = (props) => {
               </DivFinish>
 
               <DivGuest>
-                <TagComponent
+                <Label>Select Guest</Label>
+                <GuestComponent
                   set={(tags) => setTags(tags)}
-                  tags={tags}
-                  label={"Select Guests"}
                   placeholder={flag && !tags ? "Required field" : ""}
                   sizeSingle={"60%"}
                   required
-                  sizeMenu={"50%"}
+                  sizeMenu={"80%"}
                   options={options}
+                  top={"65px"}
+                  width={"230%"}
+                  widths={"95%"}
+                  height={"15.2vh"}
                 />
               </DivGuest>
             </Form>{" "}
@@ -193,7 +195,7 @@ const AddEditClient = (props) => {
   );
 };
 
-export default AddEditClient;
+export default ModalCreatePlanner;
 
 const options = [
   { value: 1, label: "Maycon Cabo", color: "#d9d9d9" },
