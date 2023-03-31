@@ -1,10 +1,9 @@
 import React from 'react'
 import Select from "react-select"
-import Body from '../../../assets/FontSystem/Body';
 import { PositionLabel } from './styles'
 
 
-const Clock = ({label}) => {
+const Clock = ({label, sizeSingle}) => {
 
   
     const options = [
@@ -79,14 +78,14 @@ const Clock = ({label}) => {
           border: "2px solid #d9d9d9",
           padding: "10px",
           boxShadow: "none",
-          width: "150px",
+          width: sizeSingle || "100%",
           height: "37px",
           borderRadius: "8px",
         }),
 
         menu: (defaultStyles) => ({
             ...defaultStyles,
-            width: "150px",
+            width: sizeSingle || "100%",
             borderRadius: "8px",
         }),
 
@@ -113,7 +112,7 @@ const Clock = ({label}) => {
   return (
     <>
     <PositionLabel>
-      <Body type={"Body2"} name={label}></Body>
+      {label}
     </PositionLabel>
     <Select components={{ IndicatorSeparator: () => null }}
       placeholder={"00:00"}
