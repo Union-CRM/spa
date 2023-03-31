@@ -9,6 +9,9 @@ import {Top} from "../../components/Client/ContainerCardClient/styles";
 import {BoardStyle} from "../../components/Client/ContainerCardClient/styles";
 import {DivModal as PlannerDiv} from "../../components/Client/ContainerCardClient/styles";
 import { HowManyClientList } from "../../components/Client/ContainerCardClient/styles";
+import {DivP} from "../../components/Planner/PlannerCard/styles";
+import {ContainerCentral} from "../../components/Client/AddEditClient/styles";
+import {DivModal} from "../../components/Client/ContainerCardClient/styles";
 
 export const Container = styled.div`
   display: grid;
@@ -26,8 +29,13 @@ export const DivClient = styled.div`
   width:  100%;
   height: 63.5%;
   margin:0;
-  
- 
+
+${DivModal}{
+  display:none;
+}
+${ContainerCentral}{
+  display:none;
+} 
 //   grid-column: 1;
   position: relative;
   border-radius: 0px 0px 8px 0px;
@@ -74,22 +82,27 @@ display:grid;
 grid-template-columns: 50% 50%;
 grid-template-rows: 80% 20% ;
 width: 100%;
+
 margin: 0;
 
 
 `;
 export const DivPlanner = styled.div`
-  
-  position:relative;
-  text-align: center;
-    background-color: gray ;
-    color: black;
-    width: 50% ;
-    height: 71% ;
-    margin-left: 60px;
-    float: bottom;
-    max-width: 1773px;
-    max-height: 755px;
+  width:50%;
+  margin-left:5%;
+  ${DivP}{
+    /* width:100%; */
+    margin-top: 0px;
+    top: 0%;
+    left: 0%;
+      position:relative;
+      border-color:white;
+      border: 1px groove ; 
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+      
+     
+
+  }
     @media screen and (max-width:1773px) and (max-height:742px){
       
      
@@ -112,5 +125,20 @@ export const Graph = styled.div`
       
     }
 `;
-
-
+export const H1Planners = styled.div`
+  width: fit-content;
+  font-family: "Houschka Rounded Alt";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+  grid-row: 2;
+  height: fit-content;
+  border-bottom: 2px solid #007bff;
+`;
+export const HowManyPlanners = styled.div`
+font-size: 24px;
+  color: #525b75;
+  font-weight: 600;
+  margin-right: 5%;
+`;
