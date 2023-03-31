@@ -14,8 +14,8 @@ import {
   ClickButton,
   PositionButtonCancel,
 } from "./styles";
-import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import InputTextArea from "../../Geral/Input/InputText";
+import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 
 const CreateRemark = (props) => {
   const { setModal } = props;
@@ -81,5 +81,4 @@ const CreateRemark = (props) => {
     </Container>
   );
 };
-
 export default CreateRemark;

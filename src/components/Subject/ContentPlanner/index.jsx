@@ -171,7 +171,6 @@ class ContentsPlanner extends React.Component {
                     instituição financeira;
                   </span>
                 </NoteText>
-                {/* uaua */}
               </ContainerComplete>
 
               <IconOpenClose

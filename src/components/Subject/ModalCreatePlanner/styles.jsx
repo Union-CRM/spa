@@ -122,7 +122,6 @@ export const Input = styled.input`
   border: 2px solid #888c95;
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
-
   @media (min-width: 1600px) {
     width: 40px;
   }
