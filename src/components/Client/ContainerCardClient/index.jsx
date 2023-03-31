@@ -27,6 +27,9 @@ import { useState } from "react";
 import { useClientContext } from "../../../hook/useClientContent";
 import ModalPopUp from "../ModalPopUP";
 import ModalCreatePlanner from "../../Subject/ModalCreatePlanner";
+import IconSystem from "../../../assets/IconSystem";
+import { Tooltip } from 'react-tippy';
+import 'react-tippy/dist/tippy.css';
 
 const abaStatus = {
   ACTIVE: "Active",
@@ -79,6 +82,17 @@ const ContainerCards = () => {
               <HowManyClientList>({client.length})</HowManyClientList>{" "}
             </DivTitlePage>
 
+                    <Tooltip
+                    title="List of all clients."
+                    theme="light"
+                    duration={100}
+                    delay={0}
+                  >
+
+
+                    <IconSystem icon={"Info"} width={"2vw"} height={"3.5vh"} ></IconSystem>
+
+                </Tooltip >
             <DivButton onClick={() => createClient()}>
               <ButtonAdd
                 mode="#007BFF"
