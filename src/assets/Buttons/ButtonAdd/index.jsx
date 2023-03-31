@@ -16,7 +16,6 @@ class ButtonAdd extends React.Component {
           $boxShadow={this.props.boxShadow}
           weighFont={this.props.weightFont}
           sizeFont={this.props.sizeFont}
-          onClick={()=>this.props.onClick()}
         >
           <IconAdd>
             <IconSystem icon={"Add2"} />

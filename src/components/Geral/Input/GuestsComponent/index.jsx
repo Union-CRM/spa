@@ -3,11 +3,39 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { Label, Container } from "./styles";
 
-export const TagComponent = (props, placeholder, idTagOption) => {
+export const GuestComponent = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
   const [selectedOptions, setSelectedOptions] = useState([]);
 
-  const options = props.options;
+  /*const options = props.options;*/
+
+  const options = [
+    {
+      id: 1,
+      name: "Igor Sena",
+      color: "#d9d9d9",
+    },
+    {
+      id: 2,
+      name: "Luana Nogueira",
+      color: "#d9d9d9",
+    },
+    {
+      id: 3,
+      name: "Graziele Miranda",
+      color: "#d9d9d9",
+    },
+    {
+      id: 4,
+      name: "João Pedro",
+      color: "#d9d9d9",
+    },
+    {
+      id: 5,
+      name: "Maycon Cabo",
+      color: "#d9d9d9",
+    },
+  ];
 
   return (
     <>
@@ -56,7 +84,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                 }`,
                 height: "28px !important",
                 top: props.top || "0px",
-                width: props.width || "100%",
+                width: props.width || "90%",
                 gridColumn: "1",
                 display: "grid",
                 cursor: "pointer",
@@ -66,15 +94,14 @@ export const TagComponent = (props, placeholder, idTagOption) => {
               valueContainer: (styles, { data }) => {
                 return {
                   ...styles,
-                  gridColumn: "2",
+                  gridColumn: "1",
                   display: "grid",
                   position: props.positions || "absolute",
                   borderRadius: "5px",
                   top: props.top || "0px",
                   border: "2px solid  #888C95",
                   width: props.widths || "90%",
-                  height: "12.5vh",
-                  left: "11%",
+                  height: props.height || "12.5vh",
                   paddingTop: "5px",
                   paddingBottom: "5px",
                   overflowY: "scroll",
@@ -124,7 +151,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
               menuList: (baseStyles, state) => ({
                 ...baseStyles,
                 maxWidth: props.sizeMenuList || "auto",
-                maxHeight: props.heightMenu || "110px",
+                maxHeight: props.heightMenu || "150px",
                 overflowY: "scroll",
                 "&::-webkit-scrollbar": {
                   backgroundColor: "#DFDFDF",

@@ -83,7 +83,7 @@ export const Container = styled.div`
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   z-index: 1000;
-  grid-template-rows: 15% 75% 10%;
+  grid-template-rows: 20% 60% 20%;
   @media (min-width: 100px) and (max-width: 502px) {
     height: 81vh;
     width: 100%;
@@ -109,8 +109,8 @@ export const Form = styled.div`
   width: 93%;
   padding-left: 7%;
   grid-row: 2;
-  grid-template-columns: 40% 0.1% 60%;
-  grid-template-rows: 33.3% 33.3% 33.3%;
+  grid-template-columns: 40% 0.1% 61%;
+  grid-template-rows: 30% 35% 30% 10%;
   @media (min-width: 1600px) {
   }
 `;
@@ -143,27 +143,18 @@ export const DivDate = styled.div`
   display: grid;
 `;
 
-export const DivStart = styled.div`
+export const DivDateReturn = styled.div`
   grid-row: 2;
   width: 90%;
   height: 100%;
   display: grid;
 `;
 
-export const DivFinish = styled.div`
-  grid-row: 3;
+export const DivText = styled.div`
+  grid-row: 2;
   width: 90%;
   height: 100%;
   display: grid;
-`;
-
-export const DivGuest = styled.div`
-  grid-row: 1;
-  width: 90%;
-  height: auto;
-  display: grid;
-  grid-column: 3;
-  margin-bottom: 16%;
 `;
 
 // Button Save and Cancel
@@ -176,6 +167,7 @@ export const DivButton = styled.div`
   width: 100%;
   height: 100%;
   grid-row: 4;
+  background: red;
 `;
 
 export const PositionButtonCancel = styled.div``;

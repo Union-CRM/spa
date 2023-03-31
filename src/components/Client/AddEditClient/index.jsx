@@ -64,7 +64,6 @@ const AddEditClient = (props) => {
 
   const [flag, setFlag] = useState(false);
 
-  //console.log(tags);
   useEffect(() => {
     if (props.title === "Edit Client") {
       const client = clientList.filter((item) => item.id === props.id)[0];
