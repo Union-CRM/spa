@@ -11,6 +11,7 @@ class ButtonDefault extends React.Component {
           sizeFont={this.props.sizeFont}
           sizeWidth={this.props.sizeWidth}
           sizeHeight={this.props.sizeHeight}
+          onClick={()=>this.props.onClick()}
         >
           {this.props.name}
         </Button>

@@ -1,6 +1,8 @@
+
 import React from "react";
 import Select from "react-select";
 import { PositionLabel } from "./styles";
+
 
 const Clock = ({ label }) => {
   const options = [
@@ -60,6 +62,8 @@ const Clock = ({ label }) => {
       fontSize: "14px",
       fontFamily: "Arial",
     }),
+const Clock = ({label, sizeSingle}) => {
+
 
     option: (defaultStyles, state) => ({
       ...defaultStyles,
@@ -98,6 +102,30 @@ const Clock = ({ label }) => {
       ...defaultStyles,
       marginTop: "-10px",
     }),
+        option: (defaultStyles, state) => ({
+          ...defaultStyles,
+          color: state.isSelected ? "#212529" : "#000000",
+          backgroundColor: state.isSelected ? "#a0a0a0" : "#FFFFFF",
+          fontSize: "14px",
+        }),
+    
+        control: (defaultStyles) => ({
+          ...defaultStyles,
+          backgroundColor: "#FFFFFF",
+          border: "2px solid #d9d9d9",
+          padding: "10px",
+          boxShadow: "none",
+          width: sizeSingle || "100%",
+          height: "37px",
+          borderRadius: "8px",
+        }),
+
+        menu: (defaultStyles) => ({
+            ...defaultStyles,
+            width: sizeSingle || "100%",
+            borderRadius: "8px",
+        }),
+
 
     singleValue: (defaultStyles) => ({
       ...defaultStyles,
@@ -108,21 +136,23 @@ const Clock = ({ label }) => {
 
   return (
     <>
-      <PositionLabel></PositionLabel>
-      <Select
-        components={{ IndicatorSeparator: () => null }}
-        placeholder={"00:00"}
-        options={options}
-        styles={customStyles}
-        theme={(theme) => ({
-          ...theme,
-          borderRadius: 5,
-          colors: {
-            ...theme.colors,
-            primary: "#888C95",
-          },
-        })}
-      />
+
+    <PositionLabel>
+      {label}
+    </PositionLabel>
+    <Select components={{ IndicatorSeparator: () => null }}
+      placeholder={"00:00"}
+      options={options}
+      styles={customStyles}
+      theme={(theme) => ({
+        ...theme,
+        borderRadius: 5,
+        colors: {
+          ...theme.colors,
+          primary: "#BFBFBF",
+        },
+      })}/>
+
     </>
   );
 };
