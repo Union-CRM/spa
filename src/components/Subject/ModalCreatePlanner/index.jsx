@@ -134,15 +134,17 @@ const ModalCreatePlanner = (props) => {
           <ContainerChildren>
             <Form>
               <DivDate>
-                <Label>Date</Label>
-                <Input
-                  type={"date"}
-                  widthInput={"93% !important"}
-                  placeholder={flag && !name ? "Required field" : ""}
-                  value={name}
-                  required
-                  onChange={(event) => setName(event.target.value)}
-                />
+                <Label>
+                  Date
+                  <Input
+                    type={"date"}
+                    widthInput={"93% !important"}
+                    placeholder={flag && !name ? "Required field" : ""}
+                    value={name}
+                    required
+                    onChange={(event) => setName(event.target.value)}
+                  />
+                </Label>
               </DivDate>
 
               <DivStart>
@@ -168,10 +170,10 @@ const ModalCreatePlanner = (props) => {
                   required
                   sizeMenu={"80%"}
                   options={options}
-                  top={"65px"}
+                  top={"240%"}
                   width={"230%"}
-                  widths={"95%"}
-                  height={"15.2vh"}
+                  widths={"93%"}
+                  height={"16.5vh"}
                 />
               </DivGuest>
             </Form>{" "}

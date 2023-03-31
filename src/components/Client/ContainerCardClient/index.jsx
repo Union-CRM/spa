@@ -144,7 +144,7 @@ const ContainerCards = () => {
       <DivModal $mode={modal} />
 
       {modal && (
-        <AddEditClient
+        <ModalCreatePlanner
           id={id}
           setModal={setModal}
           title={isEdit ? "Edit Client" : "Create Client"}
