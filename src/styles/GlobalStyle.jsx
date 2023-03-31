@@ -16,7 +16,6 @@ const GlobalStyle = createGlobalStyle`
   padding:0px;
 }
 
-
 input[disabled] {
     border: 1px solid; 
     background-color: #D9D9D9;
@@ -30,7 +29,6 @@ input:placeholder-shown {
 select:placeholder-shown {
   border-color: #b03535;
 }
-
 
 body{
     justify-content: center; 
