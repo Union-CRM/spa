@@ -334,3 +334,6 @@ export const PageEdit = styled.button`
 `;
 
 // CLICK //
+export const Span = styled.span`
+  font-size: 1rem;
+`;

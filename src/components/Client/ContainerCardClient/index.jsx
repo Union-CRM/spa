@@ -24,9 +24,13 @@ import ButtonAdd from "../../../assets/Buttons/ButtonAdd";
 import { useState } from "react";
 import { useClientContext } from "../../../hook/useClientContent";
 import ModalPopUp from "../ModalPopUP";
+
+import ModalCreatePlanner from "../../Subject/ModalCreatePlanner";
+
 import IconSystem from "../../../assets/IconSystem";
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css';
+
 
 const abaStatus = {
   ACTIVE: "Active",
@@ -167,7 +171,7 @@ const ContainerCards = () => {
         </BoardStyle>
       </Container>
       {modal && (
-        <AddEditClient
+        <ModalCreatePlanner
           id={id}
           setModal={setModal}
           title={isEdit ? "Edit Client" : "Create Client"}

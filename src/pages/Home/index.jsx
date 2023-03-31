@@ -1,8 +1,12 @@
 import React from "react";
 import PageBody from "../../components/Geral/PageBody";
+
+import CreateRemark from "../../components/Subject/ModalCreateRemark";
+
 import Donut from "../../components/Admin/AdmGraphicGroup/Donut";
 import ContainerCards from "../../components/Client/ContainerCardClient";
 import { ClientContextProvider } from "../../context/ClientContext";
+
 
 import { Container, DivSection, DivClient, DivPlanner,H1Planners,HowManyPlanners, Graph } from "./styles";
 import Grafico from "../../components/Grafico";
@@ -28,6 +32,11 @@ class Home extends React.Component {
   render() {
     return (
       <>
+
+        <PageBody>
+          <CreateRemark />
+        </PageBody>
+
         <Container>
           <PageBodyHome>
             <DivClient>

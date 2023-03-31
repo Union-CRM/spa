@@ -3,6 +3,7 @@ export const ClientContext = createContext();
 
 export const ClientContextProvider = ({ children }) => {
   const [client, setClient] = useState(clientList);
+
   //alphabetical order
   const sortedList = clientList.sort((a, b) =>
     a.client.localeCompare(b.client)
