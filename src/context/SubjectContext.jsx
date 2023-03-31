@@ -3,10 +3,13 @@ export const SubjectContext = createContext();
 
 export const SubjectContextProvider = ({ children }) => {
   const [subject, setSubject] = useState(subjectsList);
+
   const [modalDetails, setModalDetails] = useState(false);
   const [modal, setModal] = useState();
   const [modalEdit, setModalEdit] = useState(false);
   const [isEdit, setEdit] = useState(false);
+
+  const [idSubject, setIdSubject] = useState(false);
 
   return (
     <SubjectContext.Provider
@@ -21,6 +24,8 @@ export const SubjectContextProvider = ({ children }) => {
         setModalEdit,
         isEdit,
         setEdit,
+        idSubject,
+        setIdSubject,
       }}
     >
       {children}
@@ -31,7 +36,7 @@ export const SubjectContextProvider = ({ children }) => {
 const subjectsList = [
   {
     id: 1,
-    status: "Progress",
+    status: "Canceled",
     title: "Apresentação Institucional TCS Institucional",
     manager_id: 1,
     manager: "Helio Endo",

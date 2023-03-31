@@ -143,26 +143,18 @@ export const DivDate = styled.div`
   display: grid;
 `;
 
-export const DivStart = styled.div`
+export const DivDateReturn = styled.div`
   grid-row: 2;
   width: 90%;
   height: 100%;
   display: grid;
 `;
 
-export const DivFinish = styled.div`
-  grid-row: 3;
+export const DivText = styled.div`
+  grid-row: 2;
   width: 90%;
   height: 100%;
   display: grid;
-`;
-
-export const DivGuest = styled.div`
-  grid-row: 1;
-  width: 90%;
-  height: auto;
-  display: grid;
-  grid-column: 3;
 `;
 
 // Button Save and Cancel
