@@ -7,7 +7,7 @@ export const Container = styled.div`
   grid-template-columns: fit-content(10%) auto;
   grid-template-rows: 110px 914px;
   margin: 0 auto;
-  background-color: #f5f7fa;
+  background-color: #ffffff;
 `;
 
 export const Content = styled.div`
@@ -18,7 +18,5 @@ export const Content = styled.div`
   margin-right: 8%;
   margin-bottom: 50px;
   grid-column: 2;
-  grid-row: ${(props)=>  props.nav ? "2" : "1"};
+  grid-row: 2;
 `;
-
-

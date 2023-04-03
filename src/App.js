@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import PlannerCard from "./components/Planner/PlannerCard";
+import PlannerPage from "./pages/Planner";
 import Home from "./pages/Home";
 import GlobalStyle from "./styles/GlobalStyle";
 import SubjectPage from "./pages/Subject/index";
@@ -58,7 +58,7 @@ function App() {
               path="/planner"
               element={
                 localStorage.getItem("token") != false ? (
-                  <PlannerCard />
+                  <PlannerPage />
                 ) : (
                   <LoginPage />
                 )
