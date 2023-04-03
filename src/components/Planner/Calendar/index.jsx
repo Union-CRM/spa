@@ -51,6 +51,11 @@ import "tippy.js/dist/tippy.css";
 import ModalSave from "../ModalSuccessfuly";
 import ModalDiscardChanges from "../ModalDiscardChanges";
 import RemarkModal from "../RemarkModal";
+import PopUpCanceled from "../PopUpCanceled";
+import FollowUpModal from "../FollowUpModal";
+import PopUpFinished from "../PopUpFinished";
+import Subject from "../../Subject/CreateEditSubjectModal";
+
 
 export const BigCalender = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -66,7 +71,19 @@ export const BigCalender = () => {
   //seta os eventos
   const [events, setEvents] = useState(MOCKAPPS);
   
-  const { planner: plannerList, setPlanner: setPlannerList, modalEdit, setModalEdit, modalSave, setModalSave, modalDiscard, setModalDiscard, modalCreate, setModalCreate, modalRemark, setModalRemark} = usePlannerContext();
+
+  const { planner: plannerList, 
+    setPlanner: setPlannerList, 
+    modalEdit, setModalEdit, 
+    modalSave, setModalSave, 
+    modalDiscard, setModalDiscard, 
+    modalCreate, setModalCreate, 
+    modalRemark, setModalRemark, 
+    modalReschedule,
+    modalFollowUp, modalPopUpCanceled,
+    modalPopUpFinished, modalSubject,
+  } = usePlannerContext();
+
 
   const addEvent = (date, event) => {
     if (!event.target.classList.contains("StyledEvent")) {
@@ -185,7 +202,9 @@ formatDate(today, 'mm/dd/aa');
         </DivNextMonth>
         </CurrentMonth>
         <DivCreatePlanner onClick={() => setModalCreate(true)}>
-          <ButtonAdd mode={"#007BFF"} color={"#FFFFFF"} name={"Create Planner"} onClick={() => setOpenModal(true)}/>
+
+          <ButtonAdd  mode={"#007BFF"} color={"#FFFFFF"} name={"Create Planner"} onClick={() => setOpenModal(true)}/>
+
         </DivCreatePlanner>
       </DateControls>
       <SevenColGrid>
@@ -288,11 +307,37 @@ formatDate(today, 'mm/dd/aa');
       </>
     )}
 
-    {/*modalRemark && (
+
+    {modalPopUpCanceled && (
+      <PopUpCanceled/>
+    )}
+    
+
+    {modalFollowUp && (
       <>
-      <RemarkModal />
+        <FollowUpModal />
       </>
-    )*/}
+      
+    )}
+
+    {modalReschedule && (
+      <>
+        <ModalPlanner title={"Reschedule Planner"}/>
+      </>
+    )}
+
+    {modalPopUpFinished && (
+      <>
+        <PopUpFinished />
+      </>
+    )}
+
+    {modalSubject && (
+      <>
+        <Subject />
+      </>  
+    )}
+      
 
     </Container>
   );
