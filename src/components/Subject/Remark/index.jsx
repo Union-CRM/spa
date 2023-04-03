@@ -8,7 +8,6 @@ import {
   ContainerRemark,
   ContainerCards,
   CardRemark,
-  ButtonCreateRemark,
   DivDate,
   DivDateReturn,
   DivPhoto,
@@ -22,10 +21,11 @@ import {
   Circle,
   DivGlobalCard,
   IconTag,
-  ButtonAdd,
 } from "./styles";
 
-const ContentRemarks = (props) => {
+const Remark = (props) => {
+  // subject status
+
   const { subject: subjectsList, setSubject: setSubjectList } =
     useSubjectContext();
 
@@ -34,7 +34,7 @@ const ContentRemarks = (props) => {
   const [status, setStatus] = useState();
 
   useEffect(() => {
-    if (props.title === "Remark") {
+    if (props.title === "DetalhesRemark") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
       setStatus(subject.status);
     }
@@ -52,7 +52,7 @@ const ContentRemarks = (props) => {
   };
   const [activeContent, setActiveContent] = useState(0);
 
-  //
+  // Remark //
 
   const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
 
@@ -63,7 +63,7 @@ const ContentRemarks = (props) => {
   const [noteText, setNoteText] = useState();
 
   useEffect(() => {
-    if (props.title === "Remark") {
+    if (props.title === "DetalhesRemark") {
       const remark = remarkList.filter(
         (item) => item.idRemark === props.idRemark
       )[0];
@@ -73,31 +73,8 @@ const ContentRemarks = (props) => {
     }
   }, [idRemark]);
 
-  const remark = remarkList.filter(
-    (item) => item.idRemark === props.idRemark
-  )[0];
-
-  const handleClick = () => {
-    setToggleState(3);
-    props.setIdRemark(remark.idRemark);
-  };
-
   return (
     <ContainerRemark>
-      <ButtonCreateRemark>
-        <ButtonAdd
-          $mode={status}
-          width="130px"
-          padding="0"
-          sizeFont="0.9rem"
-          boxShadow="none"
-          margin="none"
-        >
-          {" "}
-          <span>Create Remark</span>
-        </ButtonAdd>
-      </ButtonCreateRemark>
-
       <ContainerCards>
         <CardRemark $mode={status}>
           <DivGlobalCard>
@@ -127,11 +104,24 @@ const ContentRemarks = (props) => {
                 <span>2534659</span>
               </NameEmail>
             </DivDadosRemark>
+
+            <IconTag onClick={() => toggleTab(5)}>
+              <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
+            </IconTag>
           </DivGlobalCard>
+
+          <ContainerComplete>
+            <NoteText>
+              Note Text:
+              <span onChange={(event) => setNoteText(event.target.value)}>
+                {noteText}
+              </span>
+            </NoteText>
+          </ContainerComplete>
 
           <IconOpenClose $mode={status}>
             <Circle>
-              <FaChevronCircleDown onClick={handleClick} />
+              <FaChevronCircleDown onClick={() => toggleTab(1)} />
             </Circle>
           </IconOpenClose>
         </CardRemark>
@@ -140,4 +130,4 @@ const ContentRemarks = (props) => {
   );
 };
 
-export default ContentRemarks;
+export default Remark;

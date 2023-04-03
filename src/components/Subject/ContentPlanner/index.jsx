@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import ButtonAdd from "../../../assets/Buttons/ButtonAdd";
+import React, { useState, useEffect } from "react";
 import {
   FaRegCalendarAlt,
   FaRegClock,
   FaChevronCircleDown,
 } from "react-icons/fa";
+import { useSubjectContext } from "../../../hook/useSubjectContent";
 
 import {
   DivContainerAll,
@@ -12,6 +12,7 @@ import {
   ContainerCards,
   CardPlanner,
   ButtonCreatePlanner,
+  ButtonAdd,
   DivDate,
   DivTime,
   DivPhoto,
@@ -23,258 +24,213 @@ import {
   DivStatusPlanner,
   IconOpenClose,
   Circle,
-  AboutPlanner,
   Span,
   NoteText,
   ContainerComplete,
   DivGlobalCard,
   Guest,
+  CardScheduled,
+  DivDateScheduled,
+  DivTimeScheduled,
+  DivPhotoScheduled,
+  DivPhotoIIScheduled,
+  PhotoScheduled,
+  DivDadosPlannerScheduled,
+  NameEmailScheduled,
+  StatusPlannerScheduled,
+  DivStatusPlannerScheduled,
+  DivModal,
 } from "./styles";
+import { usePlannerContext } from "../../../hook/usePlannerContent";
 
-class ContentsPlanner extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sidBartState: "false",
-    };
-  }
+const ContentsPlanner = (props) => {
+  const { title, setModal } = props;
 
-  render() {
-    const status = {
-      SCHEDULED: "Scheduled",
-      FINISHED: "Finished",
-      CANCELED: "Canceled",
-    };
+  const { subject: subjectsList, setSubject: setSubjectList } =
+    useSubjectContext();
 
-    const [statusPlanner] = ["Scheduled"];
+  const { id } = useSubjectContext();
 
-    const [statusPlannerTwo] = ["Finished"];
+  const { setModalDetails, setModalEdit } = useSubjectContext();
 
-    const [statusPlannerThree] = ["Canceled"];
+  const { setModalPlanner } = usePlannerContext();
 
-    return (
-      <DivContainerAll>
-        <ContainerPlanner $mode={this.state.sidBartState}>
-          <ButtonCreatePlanner $mode={this.state.sidBartState}>
-            <ButtonAdd
-              mode="#fff"
-              width="130px"
-              height="28px"
-              padding="0"
-              name="Create Planner"
-              sizeFont="0.9rem"
-              border="1px solid #00953b"
-              boxShadow="none"
-              color="#00953b"
-              margin="none"
-            />
-          </ButtonCreatePlanner>
+  const [status, setStatus] = useState();
 
-          <ContainerCards $mode={this.state.sidBartState}>
-            <CardPlanner $mode={statusPlanner}>
-              <DivGlobalCard>
-                <DivDate>
-                  <FaRegCalendarAlt color={"#00953b"} />
-                  <Span $mode={statusPlanner}> Date </Span>
-                  <p>03-03-23</p>
-                </DivDate>
+  useEffect(() => {
+    if (props.title === "Planner") {
+      const subject = subjectsList.filter((item) => item.id === props.id)[0];
+      setStatus(subject.status);
+    }
+  }, [id]);
 
-                <DivTime>
-                  <FaRegClock color={"#00953b"} />
-                  <Span $mode={statusPlanner}> Time </Span>
-                  <p>16:00 - 17:00</p>
-                </DivTime>
+  const statusPlanner = {
+    SCHEDULED: "Scheduled",
+    FINISHED: "Finished",
+    CANCELED: "Canceled",
+  };
 
-                <DivPhoto>
-                  <DivPhotoII>
-                    <Photo $mode={statusPlanner}>GA</Photo>
-                  </DivPhotoII>
-                </DivPhoto>
+  const [statusPlannerYellow] = ["Scheduled"];
 
-                <DivDadosPlanner>
-                  <NameEmail>
-                    Gilberto Anderson
-                    <span>2534659</span>
-                    <DivStatusPlanner>
-                      <StatusPlanner $mode={statusPlanner}>
-                        <span>{statusPlanner}</span>
-                      </StatusPlanner>
-                    </DivStatusPlanner>
-                  </NameEmail>
-                </DivDadosPlanner>
-              </DivGlobalCard>
-            </CardPlanner>
+  const [statusPlannerTwo] = ["Finished"];
 
-            <CardPlanner $mode={statusPlannerTwo}>
-              <DivGlobalCard>
-                <DivDate>
-                  <FaRegCalendarAlt color={"#008585"} />
-                  <Span $mode={statusPlannerTwo}> Date </Span>
-                  <p>03-03-23</p>
-                </DivDate>
+  const [statusPlannerThree] = ["Canceled"];
 
-                <DivTime>
-                  <FaRegClock color={"#008585"} />
-                  <Span $mode={statusPlannerTwo}> Time </Span>
-                  <p>16:00 - 17:00</p>
-                </DivTime>
+  // Tabs
+  const { toggleState, setToggleState } = useSubjectContext();
 
-                <DivPhoto>
-                  <DivPhotoII>
-                    <Photo $mode={statusPlannerTwo}>GA</Photo>
-                  </DivPhotoII>
-                </DivPhoto>
+  const [activeTab, setActiveTab] = useState(0);
 
-                <DivDadosPlanner>
-                  <NameEmail>
-                    Gilberto Anderson
-                    <span>2534659</span>
-                    <DivStatusPlanner>
-                      <StatusPlanner $mode={statusPlannerTwo}>
-                        <span>{statusPlannerTwo}</span>
-                      </StatusPlanner>
-                    </DivStatusPlanner>
-                  </NameEmail>
-                </DivDadosPlanner>
-              </DivGlobalCard>
+  const toggleTab = (index) => {
+    setToggleState(index);
+    setActiveTab(index);
+    setActiveContent(index);
+  };
+  const [activeContent, setActiveContent] = useState(0);
 
-              <ContainerComplete $mode={this.state.sidBartState}>
-                <Guest>
-                  Guests{" "}
-                  <span>Flavio Martins, Gedson Souza, Eneiane Lopes</span>
-                </Guest>
-                <NoteText>
-                  Note Text:
-                  <span>
-                    Identificar as necessidades do cliente e compreender seus
-                    objetivos; Apresentar a expertise da consultoria de TI em
-                    serviços financeiros; Discutir as soluções personalizadas
-                    que podem ser oferecidas para as necessidades específicas da
-                    instituição financeira; Identificar as necessidades do
-                    cliente e compreender seus objetivos; Apresentar a expertise
-                    da consultoria de TI em serviços financeiros; Discutir as
-                    soluções personalizadas que podem ser oferecidas para as
-                    necessidades específicas da instituição financeira;
-                    Identificar as necessidades do cliente e compreender seus
-                    objetivos; Apresentar a expertise da consultoria de TI em
-                    serviços financeiros; Discutir as soluções personalizadas
-                    que podem ser oferecidas para as necessidades específicas da
-                    instituição financeira; Identificar as necessidades do
-                    cliente e compreender seus objetivos; Apresentar a expertise
-                    da consultoria de TI em serviços financeiros; Discutir as
-                    soluções personalizadas que podem ser oferecidas para as
-                    necessidades específicas da instituição financeira;
-                    Identificar as necessidades do cliente e compreender seus
-                    objetivos; Apresentar a expertise da consultoria de TI em
-                    serviços financeiros; Discutir as soluções personalizadas
-                    que podem ser oferecidas para as necessidades específicas da
-                    instituição financeira;
-                  </span>
-                </NoteText>
-              </ContainerComplete>
+  // Planner Create //
 
-              <IconOpenClose
-                $mode={this.state.sidBartState}
-                $modes={statusPlannerTwo}
-              >
-                <Circle $mode={statusPlannerTwo}>
-                  <FaChevronCircleDown
-                    $mode={this.state.sidBartState}
-                    onClick={() =>
-                      this.setState({ sidBartState: !this.state.sidBartState })
-                    }
-                  />
-                </Circle>
-              </IconOpenClose>
-            </CardPlanner>
+  const clickOn = () => {
+    setModalPlanner(true);
+  };
 
-            <CardPlanner $mode={statusPlannerThree}>
-              <DivGlobalCard>
-                <DivDate>
-                  <FaRegCalendarAlt color={"#BB1E00"} />
-                  <Span $mode={statusPlannerThree}> Date </Span>
-                  <p>03-03-23</p>
-                </DivDate>
+  return (
+    <DivContainerAll>
+      <ContainerPlanner>
+        <ButtonCreatePlanner>
+          <ButtonAdd
+            onClick={() => clickOn()}
+            $mode={status}
+            width="130px"
+            padding="0"
+            sizeFont="0.9rem"
+            boxShadow="none"
+            margin="none"
+          >
+            {" "}
+            <span>Create Planner</span>
+          </ButtonAdd>
+        </ButtonCreatePlanner>
 
-                <DivTime>
-                  <FaRegClock color={"#BB1E00"} />
-                  <Span $mode={statusPlannerThree}> Time </Span>
-                  <p>16:00 - 17:00</p>
-                </DivTime>
+        <ContainerCards>
+          <CardScheduled>
+            <DivGlobalCard>
+              <DivDateScheduled $mode={status}>
+                <FaRegCalendarAlt $mode={status} />
+                <Span $mode={status}> Date </Span>
+                <p>03-03-23</p>
+              </DivDateScheduled>
 
-                <DivPhoto>
-                  <DivPhotoII>
-                    <Photo $mode={statusPlannerThree}>GA</Photo>
-                  </DivPhotoII>
-                </DivPhoto>
+              <DivTimeScheduled $mode={status}>
+                <FaRegClock $mode={status} />
+                <Span $mode={status}> Time </Span>
+                <p>16:00 - 17:00</p>
+              </DivTimeScheduled>
 
-                <DivDadosPlanner>
-                  <NameEmail>
-                    Gilberto Anderson
-                    <span>2534659</span>
-                    <DivStatusPlanner>
-                      <StatusPlanner $mode={statusPlannerThree}>
-                        <span>{statusPlannerThree}</span>
-                      </StatusPlanner>
-                    </DivStatusPlanner>
-                  </NameEmail>
-                </DivDadosPlanner>
-              </DivGlobalCard>
+              <DivPhotoScheduled>
+                <DivPhotoIIScheduled>
+                  <PhotoScheduled $mode={statusPlannerYellow}>
+                    GA
+                  </PhotoScheduled>
+                </DivPhotoIIScheduled>
+              </DivPhotoScheduled>
 
-              <ContainerComplete $mode={this.state.sidBartState}>
-                <Guest>
-                  Guests{" "}
-                  <span>Flavio Martins, Gedson Souza, Eneiane Lopes</span>
-                </Guest>
-                <NoteText>
-                  Note Text:
-                  <span>
-                    Identificar as necessidades do cliente e compreender seus
-                    objetivos; Apresentar a expertise da consultoria de TI em
-                    serviços financeiros; Discutir as soluções personalizadas
-                    que podem ser oferecidas para as necessidades específicas da
-                    instituição financeira; Identificar as necessidades do
-                    cliente e compreender seus objetivos; Apresentar a expertise
-                    da consultoria de TI em serviços financeiros; Discutir as
-                    soluções personalizadas que podem ser oferecidas para as
-                    necessidades específicas da instituição financeira;
-                    Identificar as necessidades do cliente e compreender seus
-                    objetivos; Apresentar a expertise da consultoria de TI em
-                    serviços financeiros; Discutir as soluções personalizadas
-                    que podem ser oferecidas para as necessidades específicas da
-                    instituição financeira; Identificar as necessidades do
-                    cliente e compreender seus objetivos; Apresentar a expertise
-                    da consultoria de TI em serviços financeiros; Discutir as
-                    soluções personalizadas que podem ser oferecidas para as
-                    necessidades específicas da instituição financeira;
-                    Identificar as necessidades do cliente e compreender seus
-                    objetivos; Apresentar a expertise da consultoria de TI em
-                    serviços financeiros; Discutir as soluções personalizadas
-                    que podem ser oferecidas para as necessidades específicas da
-                    instituição financeira;
-                  </span>
-                </NoteText>
-              </ContainerComplete>
+              <DivDadosPlannerScheduled>
+                <NameEmailScheduled>
+                  Gilberto Anderson
+                  <span>2534659</span>
+                  <DivStatusPlannerScheduled>
+                    <StatusPlannerScheduled $mode={statusPlannerYellow}>
+                      <span>{statusPlannerYellow}</span>
+                    </StatusPlannerScheduled>
+                  </DivStatusPlannerScheduled>
+                </NameEmailScheduled>
+              </DivDadosPlannerScheduled>
+            </DivGlobalCard>
+          </CardScheduled>
 
-              <IconOpenClose
-                $mode={this.state.sidBartState}
-                $modes={statusPlannerThree}
-              >
-                <Circle $mode={statusPlannerThree}>
-                  <FaChevronCircleDown
-                    $mode={this.state.sidBartState}
-                    onClick={() =>
-                      this.setState({ sidBartState: !this.state.sidBartState })
-                    }
-                  />
-                </Circle>
-              </IconOpenClose>
-            </CardPlanner>
-          </ContainerCards>
-        </ContainerPlanner>
-      </DivContainerAll>
-    );
-  }
-}
+          <CardPlanner $mode={statusPlannerTwo}>
+            <DivGlobalCard>
+              <DivDate>
+                <FaRegCalendarAlt color={"#008585"} />
+                <Span $mode={statusPlannerTwo}> Date </Span>
+                <p>03-03-23</p>
+              </DivDate>
 
+              <DivTime>
+                <FaRegClock color={"#008585"} />
+                <Span $mode={statusPlannerTwo}> Time </Span>
+                <p>16:00 - 17:00</p>
+              </DivTime>
+
+              <DivPhoto>
+                <DivPhotoII>
+                  <Photo $mode={statusPlannerTwo}>GA</Photo>
+                </DivPhotoII>
+              </DivPhoto>
+
+              <DivDadosPlanner>
+                <NameEmail>
+                  Gilberto Anderson
+                  <span>2534659</span>
+                  <DivStatusPlanner>
+                    <StatusPlanner $mode={statusPlannerTwo}>
+                      <span>{statusPlannerTwo}</span>
+                    </StatusPlanner>
+                  </DivStatusPlanner>
+                </NameEmail>
+              </DivDadosPlanner>
+            </DivGlobalCard>
+
+            <IconOpenClose $modes={statusPlannerTwo}>
+              <Circle $mode={statusPlannerTwo}>
+                <FaChevronCircleDown onClick={() => toggleTab(4)} />
+              </Circle>
+            </IconOpenClose>
+          </CardPlanner>
+
+          <CardPlanner $mode={statusPlannerThree}>
+            <DivGlobalCard>
+              <DivDate>
+                <FaRegCalendarAlt color={"#BB1E00"} />
+                <Span $mode={statusPlannerThree}> Date </Span>
+                <p>03-03-23</p>
+              </DivDate>
+
+              <DivTime>
+                <FaRegClock color={"#BB1E00"} />
+                <Span $mode={statusPlannerThree}> Time </Span>
+                <p>16:00 - 17:00</p>
+              </DivTime>
+
+              <DivPhoto>
+                <DivPhotoII>
+                  <Photo $mode={statusPlannerThree}>GA</Photo>
+                </DivPhotoII>
+              </DivPhoto>
+
+              <DivDadosPlanner>
+                <NameEmail>
+                  Gilberto Anderson
+                  <span>2534659</span>
+                  <DivStatusPlanner>
+                    <StatusPlanner $mode={statusPlannerThree}>
+                      <span>{statusPlannerThree}</span>
+                    </StatusPlanner>
+                  </DivStatusPlanner>
+                </NameEmail>
+              </DivDadosPlanner>
+            </DivGlobalCard>
+
+            <IconOpenClose $modes={statusPlannerThree}>
+              <Circle $mode={statusPlannerThree}>
+                <FaChevronCircleDown onClick={() => toggleTab(4)} />
+              </Circle>
+            </IconOpenClose>
+          </CardPlanner>
+        </ContainerCards>
+      </ContainerPlanner>
+    </DivContainerAll>
+  );
+};
 export default ContentsPlanner;

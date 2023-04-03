@@ -3,38 +3,28 @@ export const PlannerContext = createContext();
 
 export const PlannerContextProvider = ({ children }) => {
   const [planner, setPlanner] = useState(plannerList);
-  const [modalEdit, setModalEdit] = useState(false);
-  const [modalDiscard, setModalDiscard] = useState(false);
-  const [modalSave, setModalSave] = useState(false);
-  const [modalCreate, setModalCreate] = useState(false);
-  const [modalRemark, setModalRemark] = useState(false);
 
-  const [modalFollowUp, setModalFollowUp] = useState(false);
-  const [modalPopUpCanceled, setModalPopUpCanceled] = useState(false);
-  const [modalReschedule, setModalReschedule] = useState(false)
-  const [modalPopUpFinished, setModalPopUpFinished] = useState(false)
-  const [modalSubject, setModalSubject] = useState(false)
 
+  const [modalPlanner, setModalPlanner] = useState(false);
+
+  const [modalDetails, setModalDetails] = useState(false);
 
   return (
-    <PlannerContext.Provider value={{ planner, setPlanner, 
-    modalEdit, setModalEdit, 
-    modalDiscard, setModalDiscard,
-    modalSave, setModalSave, 
-    modalCreate, setModalCreate,
-    modalRemark, setModalRemark,
-    modalFollowUp, setModalFollowUp,
-    modalPopUpCanceled, setModalPopUpCanceled,
-    modalReschedule, setModalReschedule,
-    modalPopUpFinished, setModalPopUpFinished,
-    modalSubject, setModalSubject,
+    <PlannerContext.Provider
+      value={{
+        planner,
+        setPlanner,
+        modalPlanner,
+        setModalPlanner,
+        modalDetails,
+        setModalDetails,
+      }}
+    >
 
-    }}>
       {children}
     </PlannerContext.Provider>
   );
 };
-
 
 const plannerList = [
   {
@@ -51,15 +41,18 @@ const plannerList = [
     cleint_email: "igorsena@tcs.com",
     release_id: 1,
     release_name: "Experiência Digital",
-    status:"Done",
+
+    status: "Done",
     user_id: 21345678,
-    user_name: "joão da silva"
+    user_name: "joão da silva",
+
   },
   {
     id: 2,
     subject: "Contest",
     date: new Date(2023, 2, 3, 10, 0),
-    duration:"11:30",
+    duration: "11:30",
+
     subject_id: 1,
     remark_id: 1,
     subject_name: "Contest",
@@ -235,4 +228,3 @@ const plannerList = [
     user_name: "joão da silva"
   },
 ];
-

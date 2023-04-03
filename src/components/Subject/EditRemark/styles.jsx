@@ -5,75 +5,34 @@ export const ContainerRemark = styled.div`
   position: relative;
 `;
 
-//* BUTTON CREATE NEW REMARK *//
-export const ButtonCreateRemark = styled.div`
-  display: flex;
-  width: 99%;
-  padding-top: 2%;
-  padding-right: 1.5%;
+export const Input = styled.input`
+  height: ${(props) => props.heightInput || "28px"};
+  width: ${(props) => props.widthInput || "100%"};
+  border-radius: 5px;
+  border: 2px solid #888c95;
+  background-color: ${(props) => props.backgroundInput || " #fff"};
+  display: block;
   position: relative;
-  justify-content: end;
+  padding-left: 2%;
+  @media (min-width: 1355px) and (max-width: 1824px) {
+    height: 25px;
+  }
 `;
 
-export const ButtonAdd = styled.button`
-  ${(props) => {
-    switch (props.$mode) {
-      case "Finished":
-        return css`
-          border: 1px solid #008585;
-        `;
-      case "Progress":
-        return css`
-          border: 1px solid #00953b;
-        `;
-
-      case "Canceled":
-        return css`
-          border: 1px solid #771300;
-        `;
-
-      default:
-        return css`
-          background-color: #6e6b6b;
-        `;
-    }
-  }}
-  background-color:transparent;
-  width: ${(props) => props.$width || "fit - content"};
-  height: ${(props) => props.$height || "fit-content"};
-  padding: ${(props) => props.$padding || "7px"};
-  display: flex;
-  align-items: center;
-  text-align: center;
-  border-radius: 0.5em;
-  cursor: pointer;
-  span {
-    ${(props) => {
-      switch (props.$mode) {
-        case "Finished":
-          return css`
-            color: #008585;
-          `;
-        case "Progress":
-          return css`
-            color: #00953b;
-          `;
-
-        case "Canceled":
-          return css`
-            color: #771300;
-          `;
-
-        default:
-          return css`
-            background-color: #6e6b6b;
-          `;
-      }
-    }}
-    font-size:0.9rem;
+export const TextArea = styled.textarea`
+  height: ${(props) => props.heightInput || "80px"};
+  width: ${(props) => props.widthInput || "100%"};
+  border-radius: 5px;
+  border: 2px solid #888c95;
+  background-color: ${(props) => props.backgroundInput || " #fff"};
+  display: block;
+  resize: none;
+  position: relative;
+  @media (min-width: 1355px) and (max-width: 1824px) {
+    height: 70px;
   }
-  :hover {
-    opacity: 0.8;
+  @media (min-width: 1824px) and (max-width: 2000px) {
+    height: 100px;
   }
 `;
 
@@ -108,6 +67,81 @@ export const ContainerCards = styled.div`
   }
 `;
 
+//* BUTTON CREATE NEW REMARK *//
+export const ButtonCreateRemark = styled.div`
+  display: flex;
+  width: 99%;
+  padding-top: 4%;
+  padding-right: 1.5%;
+  position: relative;
+`;
+
+export const ButtonAdd = styled.button`
+  ${(props) => {
+    switch (props.$mode) {
+      case "Finished":
+        return css`
+          border: 1px solid #008585;
+        `;
+      case "Progress":
+        return css`
+          border: 1px solid #00953b;
+        `;
+
+      case "Canceled":
+        return css`
+          border: 1px solid #771300;
+        `;
+
+      default:
+        return css`
+          background-color: #6e6b6b;
+        `;
+    }
+  }}
+  background-color:transparent;
+  width: ${(props) => props.$width || "60px"};
+  height: ${(props) => props.$height || "fit-content"};
+  padding: ${(props) => props.$padding || "7px"};
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border-radius: 0.5em;
+  cursor: pointer;
+  span {
+    ${(props) => {
+      switch (props.$mode) {
+        case "Finished":
+          return css`
+            color: #008585;
+          `;
+        case "Progress":
+          return css`
+            color: #00953b;
+          `;
+
+        case "Canceled":
+          return css`
+            color: #771300;
+          `;
+
+        default:
+          return css`
+            background-color: #6e6b6b;
+          `;
+      }
+    }}
+    font-size:0.9rem;
+    align-items: center;
+    text-align: center;
+    display: flex;
+  }
+  :hover {
+    opacity: 0.8;
+  }
+`;
+
 //* CARDS REMARK *//
 export const CardRemark = styled.div`
   ${(props) => {
@@ -134,7 +168,7 @@ export const CardRemark = styled.div`
   }}
   width:97%;
   z-index: 9999999;
-  height: 75px;
+  height: 100%;
   margin-top: 3%;
   position: relative;
   align-items: center;
@@ -149,11 +183,9 @@ export const Circle = styled.div`
   width: 16px;
   height: 16px;
   cursor: pointer;
-  bottom: 0;
-  top: 6%;
   position: relative;
   border-radius: 100%;
-  align-items: end;
+  bottom: 3px;
   background-color: #fff;
 `;
 
@@ -184,12 +216,11 @@ export const IconOpenClose = styled.button`
   height: 100%;
   border: none;
   cursor: pointer;
-  position: absolute;
-  top: 0;
-  align-items: end;
   justify-content: center;
   background-color: transparent;
+  bottom: 0px;
   display: flex;
+  transform: rotateX(180deg);
   svg {
     ${(props) => {
       switch (props.$mode) {
@@ -213,11 +244,11 @@ export const IconOpenClose = styled.button`
           `;
       }
     }}
-    transform: rotateX(360deg);
-    cursor: pointer;
+    cursor:pointer;
     height: 100%;
     width: 100%;
-    align-items: end;
+    position: relative;
+    top: 0px;
   }
 `;
 
@@ -253,7 +284,7 @@ ${(props) => {
 }}
 }
 height:50px;
-width:90%;
+width:75%;
 padding-top:0%;
 text-align:left;
 padding-left:3%;
@@ -375,6 +406,7 @@ p {
 export const DivPhoto = styled.div`
   width: 50%;
   height: 100%;
+  padding-left: 5%;
 `;
 
 export const DivPhotoII = styled.div`
@@ -460,9 +492,7 @@ export const ContainerComplete = styled.div`
   position: relative;
   display: ${(props) => (props.$mode ? "none" : "block")};
   visibility: ${(props) => (props.$mode ? "hidden" : "visible")};
-  z-index: 99999999;
-  padding-top: 2%;
-  padding-left: 3%;
+  padding-bottom: 5%;
   z-index: 99999999;
   padding-top: 2%;
   padding-left: 3%;
