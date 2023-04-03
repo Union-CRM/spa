@@ -74,13 +74,13 @@ class ContentsPlanner extends React.Component {
             <CardPlanner $mode={statusPlanner}>
               <DivGlobalCard>
                 <DivDate>
-                  <FaRegCalendarAlt color={"#FFD012"} />
+                  <FaRegCalendarAlt color={"#00953b"} />
                   <Span $mode={statusPlanner}> Date </Span>
                   <p>03-03-23</p>
                 </DivDate>
 
                 <DivTime>
-                  <FaRegClock color={"#FFD012"} />
+                  <FaRegClock color={"#00953b"} />
                   <Span $mode={statusPlanner}> Time </Span>
                   <p>16:00 - 17:00</p>
                 </DivTime>

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import {DivButton} from "../../components/Client/ContainerCardClient/styles";
-import {Container as ContainerClient} from "../../components/Client/ContainerCardClient/styles";
+import {ContainerHeaderAndCards as ContainerClient} from "../../components/Client/ContainerCardClient/styles";
 import {BoardStyle as BoardStyleClient} from "../../components/Client/ContainerCardClient/styles";
-import { ContainerFather } from "../../components/Client/ContainerCardClient/styles";
+import { ContainerGlobal } from "../../components/Client/ContainerCardClient/styles";
 import {DivIcons} from "../../components/Client/ContainerCardClient/CardListView/styles";
 import {DivTitlePage} from "../../components/Client/ContainerCardClient/styles";
 import {Top} from "../../components/Client/ContainerCardClient/styles";
@@ -40,7 +40,7 @@ ${ContainerCentral}{
   position: relative;
   border-radius: 0px 0px 8px 0px;
 
-${ContainerFather}{
+${ContainerGlobal}{
     display: grid;
     grid-template-columns: 100% 0% ;
     height: auto;

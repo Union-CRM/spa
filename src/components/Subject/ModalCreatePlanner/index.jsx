@@ -21,8 +21,9 @@ import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import { TagComponent } from "../../Geral/TagComponent";
 import Clock from "../../Geral/Input/clock";
 import { useClientContext } from "../../../hook/useClientContent";
+import { GuestComponent } from "../../Geral/Input/GuestsComponent";
 
-const AddEditClient = (props) => {
+const ModalCreatePlanner = (props) => {
   const { setModal, id } = props;
 
   const closeModal = () => {
@@ -137,7 +138,7 @@ const AddEditClient = (props) => {
                   Date
                   <Input
                     type={"date"}
-                    widthInput={"45% !important"}
+                    widthInput={"93% !important"}
                     placeholder={flag && !name ? "Required field" : ""}
                     value={name}
                     required
@@ -161,15 +162,18 @@ const AddEditClient = (props) => {
               </DivFinish>
 
               <DivGuest>
-                <TagComponent
+                <Label>Select Guest</Label>
+                <GuestComponent
                   set={(tags) => setTags(tags)}
-                  tags={tags}
-                  label={"Select Guests"}
                   placeholder={flag && !tags ? "Required field" : ""}
                   sizeSingle={"60%"}
                   required
-                  sizeMenu={"50%"}
+                  sizeMenu={"80%"}
                   options={options}
+                  top={"240%"}
+                  width={"230%"}
+                  widths={"93%"}
+                  height={"16.5vh"}
                 />
               </DivGuest>
             </Form>{" "}
@@ -193,7 +197,7 @@ const AddEditClient = (props) => {
   );
 };
 
-export default AddEditClient;
+export default ModalCreatePlanner;
 
 const options = [
   { value: 1, label: "Maycon Cabo", color: "#d9d9d9" },
