@@ -388,7 +388,7 @@ export const Span = styled.span`
         `;
       case "Scheduled":
         return css`
-          color: #ffd012;
+          color: #00953b;
         `;
       case "Canceled":
         return css`
