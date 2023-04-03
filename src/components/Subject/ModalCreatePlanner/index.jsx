@@ -18,7 +18,6 @@ import {
   PositionButtonCancel,
 } from "./styles";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
-import { TagComponent } from "../../Geral/TagComponent";
 import Clock from "../../Geral/Input/clock";
 import { useClientContext } from "../../../hook/useClientContent";
 import { GuestComponent } from "../../Geral/Input/GuestsComponent";
@@ -31,7 +30,7 @@ const ModalCreatePlanner = (props) => {
   };
 
   const handleSubmit = () => {
-    if (props.title === "Edit Client") {
+    if (props.title === "Planner") {
       editClient();
     } else {
       createClient();
@@ -63,7 +62,7 @@ const ModalCreatePlanner = (props) => {
 
   //console.log(tags);
   useEffect(() => {
-    if (props.title === "Edit Client") {
+    if (props.title === "Planner") {
       const client = clientList.filter((item) => item.id === props.id)[0];
       setName(client.client);
       setStatus(client.status);
@@ -134,15 +133,17 @@ const ModalCreatePlanner = (props) => {
           <ContainerChildren>
             <Form>
               <DivDate>
-                <Label>Date</Label>
-                <Input
-                  type={"date"}
-                  widthInput={"93% !important"}
-                  placeholder={flag && !name ? "Required field" : ""}
-                  value={name}
-                  required
-                  onChange={(event) => setName(event.target.value)}
-                />
+                <Label>
+                  Date
+                  <Input
+                    type={"date"}
+                    widthInput={"93% !important"}
+                    placeholder={flag && !name ? "Required field" : ""}
+                    value={name}
+                    required
+                    onChange={(event) => setName(event.target.value)}
+                  />
+                </Label>
               </DivDate>
 
               <DivStart>
@@ -168,10 +169,10 @@ const ModalCreatePlanner = (props) => {
                   required
                   sizeMenu={"80%"}
                   options={options}
-                  top={"65px"}
+                  top={"240%"}
                   width={"230%"}
-                  widths={"95%"}
-                  height={"15.2vh"}
+                  widths={"93%"}
+                  height={"16.5vh"}
                 />
               </DivGuest>
             </Form>{" "}

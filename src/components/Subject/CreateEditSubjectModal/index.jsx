@@ -20,53 +20,103 @@ import {
 } from "./styles";
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
-import subjectsList from "../../../context/ClientContext";
+import clientList from "../../../context/ClientContext";
+import subjectList from "../../../context/SubjectContext";
+import { useClientContext } from "../../../hook/useClientContent";
+import { useSubjectContext } from "../../../hook/useSubjectContent";
 
-const Subject = ({ title, setModal }) => {
+const Subject = (props) => {
+  const { setModal, title, id } = props;
+
+  // CLOSE E SAVE ////////////
   const closeModal = () => {
     setModal(false);
   };
 
-  const saveModal = () => {
-    setModal(false);
-    console.log(name);
-    console.log(email);
-    console.log(customer);
-    console.log(business);
-    console.log(role);
+  const handleSubmit = () => {
+    if (props.title === "Create Subject") {
+      createSubject();
+    }
   };
 
-  const role = [
-    { id: 1, value: "Teach Lead", label: "Tech Lead" },
-    { id: 2, value: "Scrum Master", label: "Scrum Master" },
-    { id: 3, value: "Product Owner", label: "Product Owner" },
-    { id: 4, value: "Project Manager", label: "Project Manager" },
-    { id: 5, value: "Analyst DevOps", label: "Analyst DeveOps" },
-  ];
+  ////////////////////////////////////
 
-  const statusClient = [
-    { id: 1, value: "Progress", label: "Progress" },
-    { id: 2, value: "Finished", label: "Finished" },
-    { id: 3, value: "Canceld", label: "Canceld" },
-  ];
+  /////////// SUBJECT ////////////////
+
+  const { subject: subjectsList, setSubject: setSubjectList } =
+    useSubjectContext();
+
+  const [subject, setSubject] = useState();
+  const [manager, setManager] = useState();
+  const [description, setDescription] = useState();
+  const [status, setStatus] = useState("Progress");
+  const [flag, setFlag] = useState(false);
+  const [email, setEmail] = useState();
+  const [business, setBusiness] = useState();
+  const [client, setClient] = useState();
+  const [release, setRelease] = useState();
+
+  function getId() {
+    let lastId = 1;
+
+    subjectsList.map((s) => {
+      lastId = s.id > lastId ? s.id : lastId;
+    });
+
+    return lastId + 1;
+  }
+  /*id: 1,
+    status: "Progress",
+    subject_title: "Apresentação Institucional TCS Institucional",
+    manager_id: 1,
+    manager: "Helio Endo",
+    release_id: 1,
+    release: "Experiência Digital",
+    business_id: 1,
+    business: "Infraestrutura e Operações TI",
+    client_id: 1,
+    client: "Igor Sena Soares Silva",
+    client_email: "igorsena@tcs.com",
+    description:"", */
+
+  const createSubject = () => {
+    const newSubject = {
+      id: getId(),
+      status: status,
+      manager: manager,
+      client: selectedClient,
+      client_email: email,
+      release: release,
+      business: business,
+      subject_title: subject,
+      description: description,
+    };
+
+    if (
+      status &&
+      manager &&
+      selectedClient &&
+      email &&
+      release &&
+      business &&
+      subject &&
+      description
+    ) {
+      setSubjectList([...subjectsList, newSubject]);
+      setModal(false);
+    } else {
+      setFlag(true);
+    }
+  };
+
+  // PUXANDO OS CLIENTS DO CLIENT LIST
 
   const [selectedClient, setSelectedClient] = useState(null);
 
-  const [name, setName] = useState();
-  const [email, setEmail] = useState("");
-  const [customer, setCustomer] = useState("");
-  const [business, setBusiness] = useState("");
-  const [subject, setSubject] = useState("");
-  const [description, setDescription] = useState("");
-  const [client, setClient] = useState("");
-  const [status, setStatus] = useState("");
-  const [flag, setFlag] = useState(false);
-  const [release, setRelease] = useState();
-
   useEffect(() => {
     if (selectedClient) {
-      const selectedSubject = subjectsList.find(
-        (subject) => subject.client === selectedClient
+      const selectedSubject = clientList.find(
+        (client) => client.client === selectedClient
       );
       setEmail(selectedSubject.email);
       setBusiness(selectedSubject.textBusiness);
@@ -74,23 +124,26 @@ const Subject = ({ title, setModal }) => {
     }
   }, [selectedClient]);
 
-  const activeClients = subjectsList.filter(
-    (subject) => subject.status === "Active"
+  const activeClients = clientList.filter(
+    (client) => client.status === "Active"
   );
 
-  const optionsClient = activeClients.map((subject) => {
+  const optionsClient = activeClients.map((client) => {
     return {
-      value: subject.client,
-      label: subject.client,
-      email: subject.email,
-      business: subject.textBusiness,
-      release: subject.textRelease,
+      value: client.client,
+      label: client.client,
+      email: client.email,
+      business: client.textBusiness,
+      release: client.textRelease,
     };
   });
 
   const handleClientChange = (selectedClient) => {
     setSelectedClient(selectedClient.value);
   };
+  ////////////////////////////////////
+
+  const [userChoice, setUserChoice] = useState("");
 
   return (
     <>
@@ -98,12 +151,6 @@ const Subject = ({ title, setModal }) => {
         <Container>
           <PositionTitle>
             <H1>{title} </H1>
-
-            {/*<DivClose>
-    <ClickButton onClick={closeModal}>
-    <Close>Close</Close>
-    </ClickButton>
-  </DivClose>*/}
           </PositionTitle>
 
           <Form>
@@ -112,8 +159,8 @@ const Subject = ({ title, setModal }) => {
                 Client Name
                 <SingleSelect
                   set={(client) => setSelectedClient(client)}
-                  onChange={handleClientChange}
-                  placeholder={flag && !client ? "" : ""}
+                  onChange={(choice) => setUserChoice(choice)}
+                  placeholder={flag && !selectedClient ? "" : ""}
                   sizeSingle={"100%"}
                   sizeMenu={"100%"}
                   options={optionsClient}
@@ -126,6 +173,7 @@ const Subject = ({ title, setModal }) => {
               <Label>
                 Business
                 <Input
+                  onChange={(event) => setBusiness(event.target.value)}
                   widthInput={"90% !important"}
                   value={business}
                   name={business}
@@ -136,9 +184,9 @@ const Subject = ({ title, setModal }) => {
               <Label>
                 ReleaseTrain
                 <Input
-                  widthInput={"100% !important"}
+                  onChange={(event) => setRelease(event.target.value)}
+                  widthInput={"98% !important"}
                   value={release}
-                  onChange={(e) => setRelease(e.target.value)}
                   disabled={selectedClient}
                 />
               </Label>
@@ -148,9 +196,9 @@ const Subject = ({ title, setModal }) => {
               <Label>
                 Email
                 <Input
-                  widthInput={"100% !important"}
+                  widthInput={"98% !important"}
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(event) => setEmail(event.target.value)}
                   disabled={selectedClient}
                 />
               </Label>
@@ -160,7 +208,8 @@ const Subject = ({ title, setModal }) => {
               <Label>
                 Subject
                 <Input
-                  widthInput={"100% !important"}
+                  widthInput={"98% !important"}
+                  placeholder={flag && !subject ? "Required field" : ""}
                   name={subject}
                   set={(subject) => setSubject(subject)}
                   onChange={(event) => setSubject(event.target.value)}
@@ -170,14 +219,29 @@ const Subject = ({ title, setModal }) => {
             </DivSubject>
 
             <DivStatus>
+              <Label>
+                Status
+                <Input
+                  label={"Status"}
+                  placeholder={flag && !status ? "" : ""}
+                  widthInput={"90% !important"}
+                  value={status}
+                  onChange={(event) => setStatus(event.target.value)}
+                  set={(status) => setStatus(status)}
+                  disabled
+                />
+              </Label>
+
               <SingleSelect
-                set={(status) => setStatus(status)}
-                label={"Status"}
-                onChange={(event) => setStatus(event.target.value)}
-                placeholder={flag && !status ? "" : ""}
+                label={"Manager"}
+                value={manager}
+                placeholder={flag && !manager ? "Required field" : ""}
                 sizeSingle={"100%"}
+                required
                 sizeMenu={"100%"}
-                options={statusClient}
+                options={manager_mok}
+                onChange={(choice) => setUserChoice(choice)}
+                set={(manager) => setManager(manager)}
               />
             </DivStatus>
 
@@ -186,6 +250,7 @@ const Subject = ({ title, setModal }) => {
                 Description
                 <TextArea
                   widthInput={"100% !important"}
+                  placeholder={flag && !description ? "Required field" : ""}
                   name={description}
                   value={description}
                   set={(description) => setDescription(description)}
@@ -198,7 +263,7 @@ const Subject = ({ title, setModal }) => {
           </Form>
 
           <DivButton>
-            <ClickButton onClick={saveModal}>
+            <ClickButton onClick={handleSubmit}>
               <ButtonDefault
                 type={"userSave"}
                 weightFont={"500"}
@@ -223,3 +288,9 @@ const Subject = ({ title, setModal }) => {
 };
 
 export default Subject;
+
+const manager_mok = [
+  { id: 1, value: "Helio Endo", label: "Helio Endo" },
+  { id: 2, value: "Felipe Flaibam", label: "Felipe Flaibam" },
+  { id: 3, value: "Camila Gomes", label: "Camila Gomes" },
+];

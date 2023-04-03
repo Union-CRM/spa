@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
 
 //* CONTAINER FATHER *//
 export const ContainerFather = styled.div`
@@ -50,7 +49,27 @@ export const DivModal = styled.div`
 
 //* CONTAINER MODAL *//
 export const Container = styled.div`
-  width: 70%;
+  ${(props) => {
+    switch (props.$mode) {
+      case "Finished":
+        return css`
+          border-left: 16.56px solid #008585;
+        `;
+      case "Progress":
+        return css`
+          border-left: 16.56px solid #00953b;
+        `;
+      case "Canceled":
+        return css`
+          border-left: 16.56px solid #771300;
+        `;
+      default:
+        return css`
+          background-color: #6e6b6b;
+        `;
+    }
+  }}
+  width:70%;
   min-width: 350px;
   height: 100%;
   z-index: 1000;
@@ -58,7 +77,6 @@ export const Container = styled.div`
   padding-left: 5%;
   background-color: #fff;
   border-radius: 8px;
-  border-left: 16.56px solid #00953b;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   @media (min-width: 100px) and (max-width: 502px) {
     height: 81vh;
@@ -84,7 +102,7 @@ export const BodyAll = styled.div`
 `;
 
 export const ContainerBorder = styled.div`
-  width: 100%;
+  width: 99%;
   height: 70%;
   min-height: 100px;
   position: relative;
@@ -150,7 +168,6 @@ export const Status = styled.div`
   border-radius: 3px;
   align-items: center;
   justify-content: center;
-  background-color: #00953b;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   span {
     font-size: 0.8rem;
@@ -226,85 +243,61 @@ export const Pages = styled.div`
   position: relative;
 `;
 
-export const PageIndex = styled.button`
-  width: 100%;
+export const TabButton = styled.button`
+  ${(props) => {
+    switch (props.$mode) {
+      case "Finished":
+        return css`
+          background-color: ${(props) => (props.active ? "#008585" : "white")};
+          color: ${(props) => (props.active ? "white" : "black")};
+          :hover {
+            background-color: #008585;
+            color: #fff;
+          }
+        `;
+      case "Progress":
+        return css`
+          background-color: ${(props) => (props.active ? "#00953b" : "white")};
+          color: ${(props) => (props.active ? "white" : "black")};
+          :hover {
+            background-color: #00953b;
+            color: #fff;
+          }
+        `;
+      case "Canceled":
+        return css`
+          background-color: ${(props) => (props.active ? "#771300" : "white")};
+          color: ${(props) => (props.active ? "white" : "black")};
+          :hover {
+            background-color: #771300;
+            color: #fff;
+          }
+        `;
+      default:
+        return css`
+          background-color: #6e6b6b;
+        `;
+    }
+  }}
+  width:100%;
   height: 100%;
   display: grid;
-  color: #000;
   cursor: pointer;
   font-size: 0.9rem;
   margin-right: 0.8%;
   position: relative;
   align-items: center;
-  background-color: #fff;
   border: 0.2px solid #656464;
   border-radius: 5px 5px 0px 0px;
   border: 0.2px solid rgba(0, 0, 0, 0.25);
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25);
-  :hover {
-    background-color: #00953b;
-    color: #fff;
-  }
-  :focus {
-    background-color: #00953b;
-    color: #fff;
-  }
-  :active {
-    background-color: #00953b;
-  }
 `;
 
-export const PageRemarks = styled.button`
+export const Content = styled.div`
+  background: white;
   width: 100%;
-  height: 100%;
-  display: grid;
-  color: #000;
-  cursor: pointer;
-  font-size: 0.9rem;
-  margin-right: 0.8%;
-  position: relative;
-  align-items: center;
-  background-color: #ffffff;
-  border-radius: 5px 5px 0px 0px;
-  border: 0.2px solid rgba(0, 0, 0, 0.25);
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25);
-  :hover {
-    background-color: #00953b;
-    color: #fff;
-  }
-  :focus {
-    background-color: #00953b;
-    color: #fff;
-  }
-  :active {
-    background-color: #00953b;
-  }
-`;
-
-export const PagePlanners = styled.button`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  color: #000;
-  cursor: pointer;
-  font-size: 0.9rem;
-  position: relative;
-  align-items: center;
-  background-color: #ffffff;
-  border-radius: 5px 5px 0px 0px;
-  border: 0.2px solid rgba(0, 0, 0, 0.25);
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25);
-  :hover {
-    background-color: #00953b;
-    color: #fff;
-  }
-  :focus {
-    background-color: #00953b;
-    color: #fff;
-  }
-  :active {
-    background-color: #00953b;
-  }
+  height: auto;
+  display: ${(props) => (props.active ? "block" : "none")};
 `;
 
 export const PageEdit = styled.button`
@@ -331,9 +324,4 @@ export const PageEdit = styled.button`
   :active {
     background-color: #00953b;
   }
-`;
-
-// CLICK //
-export const Span = styled.span`
-  font-size: 1rem;
 `;

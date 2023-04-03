@@ -122,7 +122,7 @@ export const Input = styled.input`
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
   border: 2px solid #888c95;
-  background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
+  background-color: ${(props) => props.backgroundInput || "rgba(0, 0, 0, 0)"};
   display: block;
   position: relative;
   @media (min-width: 1355px) and (max-width: 1824px) {
@@ -188,8 +188,9 @@ export const DivSubject = styled.div`
 
 export const DivStatus = styled.div`
   grid-row: 5;
+  grid-template-columns: 50% 50%;
   width: 90%;
-  height: auto;
+  height: 100%;
   display: grid;
 `;
 

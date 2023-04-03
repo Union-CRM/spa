@@ -20,57 +20,114 @@ import {
 } from "./styles";
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
-import subjectsList from "../../../context/ClientContext";
+import clientList from "../../../context/ClientContext";
+import subjectList from "../../../context/SubjectContext";
+import { useClientContext } from "../../../hook/useClientContent";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 
-const EditSubject = ({ title }) => {
+const Subject = (props) => {
+  const { setModal, title, id } = props;
+
+  // CLOSE E SAVE ////////////
   const { setModalDetails, setModalEdit } = useSubjectContext();
 
-  const CloseModal = () => {
+  const { toggleState, setToggleState } = useSubjectContext();
+
+  const closeModal = () => {
     setModalDetails(true);
     setModalEdit(false);
+    setToggleState(0);
   };
 
-  //const saveModal = () => {
-  // setModal(false);
-  //console.log(name);
-  //console.log(email);
-  //console.log(customer);
-  //console.log(business);
-  //console.log(role);
-  // };
+  const handleSubmit = () => {
+    if (props.title === "Edit Subject") {
+      editSubject();
+    }
+  };
 
-  const role = [
-    { id: 1, value: "Teach Lead", label: "Tech Lead" },
-    { id: 2, value: "Scrum Master", label: "Scrum Master" },
-    { id: 3, value: "Product Owner", label: "Product Owner" },
-    { id: 4, value: "Project Manager", label: "Project Manager" },
-    { id: 5, value: "Analyst DevOps", label: "Analyst DeveOps" },
-  ];
+  ////////////////////////////////////
 
-  const statusClient = [
-    { id: 1, value: "Progress", label: "Progress" },
-    { id: 2, value: "Finished", label: "Finished" },
-    { id: 3, value: "Canceld", label: "Canceld" },
-  ];
+  /////////// CREATE SUBJECT ////////////////
+
+  const { subject: subjectsList, setSubject: setSubjectList } =
+    useSubjectContext();
+
+  const [subject, setSubject] = useState();
+  const [manager, setManager] = useState();
+  const [description, setDescription] = useState();
+  const [status, setStatus] = useState();
+  const [flag, setFlag] = useState(false);
+  const [email, setEmail] = useState();
+  const [business, setBusiness] = useState();
+  const [client, setClient] = useState();
+  const [release, setRelease] = useState();
+
+  function getId() {
+    let lastId = 1;
+
+    subjectsList.map((s) => {
+      lastId = s.id > lastId ? s.id : lastId;
+    });
+
+    return lastId + 1;
+  }
+
+  ////////// EDIT SUBJECT ////////////
+
+  useEffect(() => {
+    if (props.title === "Edit Subject") {
+      const subject = subjectsList.filter((item) => item.id === props.id)[0];
+      setStatus(subject.status);
+      setSubject(subject.subject_title);
+      setManager(subject.manager);
+      setClient(subject.client);
+      setEmail(subject.client_email);
+      setRelease(subject.release);
+      setBusiness(subject.business);
+      setDescription(subject.description);
+    }
+  }, [id]);
 
   const [selectedClient, setSelectedClient] = useState(null);
 
-  const [name, setName] = useState();
-  const [email, setEmail] = useState("");
-  const [customer, setCustomer] = useState("");
-  const [business, setBusiness] = useState("");
-  const [subject, setSubject] = useState("");
-  const [description, setDescription] = useState("");
-  const [client, setClient] = useState("");
-  const [status, setStatus] = useState("");
-  const [flag, setFlag] = useState(false);
-  const [release, setRelease] = useState();
+  const editSubject = () => {
+    const newSubject = {
+      id: id,
+      status: status,
+      manager: manager,
+      client: selectedClient,
+      client_email: email,
+      release: release,
+      business: business,
+      subject_title: subject,
+      description: description,
+    };
+    if (
+      status &&
+      manager &&
+      selectedClient &&
+      email &&
+      release &&
+      business &&
+      subject &&
+      description
+    ) {
+      const noId = subjectsList.filter((item) => item.id !== id);
+      setSubjectList([...noId, newSubject]);
+      setModalDetails(true);
+      setModalEdit(false);
+      setToggleState(0);
+    } else {
+      setFlag(true);
+    }
+  };
+
+  // PUXANDO OS CLIENTS DO CLIENT LIST
 
   useEffect(() => {
     if (selectedClient) {
-      const selectedSubject = subjectsList.find(
-        (subject) => subject.client === selectedClient
+      const selectedSubject = clientList.find(
+        (client) => client.client === selectedClient
       );
       setEmail(selectedSubject.email);
       setBusiness(selectedSubject.textBusiness);
@@ -78,30 +135,33 @@ const EditSubject = ({ title }) => {
     }
   }, [selectedClient]);
 
-  const activeClients = subjectsList.filter(
-    (subject) => subject.status === "Active"
+  const activeClients = clientList.filter(
+    (client) => client.status === "Active"
   );
 
-  const optionsClient = activeClients.map((subject) => {
+  const optionsClient = activeClients.map((client) => {
     return {
-      value: subject.client,
-      label: subject.client,
-      email: subject.email,
-      business: subject.textBusiness,
-      release: subject.textRelease,
+      value: client.client,
+      label: client.client,
+      email: client.email,
+      business: client.textBusiness,
+      release: client.textRelease,
     };
   });
 
   const handleClientChange = (selectedClient) => {
     setSelectedClient(selectedClient.value);
   };
+  ////////////////////////////////////
+
+  const [userChoice, setUserChoice] = useState("");
 
   return (
     <>
       <ContainerCentral>
         <Container>
           <PositionTitle>
-            <H1>Edit Subject</H1>
+            <H1>{title} </H1>
           </PositionTitle>
 
           <Form>
@@ -111,11 +171,14 @@ const EditSubject = ({ title }) => {
                 <SingleSelect
                   set={(client) => setSelectedClient(client)}
                   onChange={handleClientChange}
-                  placeholder={flag && !client ? "" : ""}
+                  /*onChange={(choice) => setUserChoice(choice)}*/
                   sizeSingle={"100%"}
                   sizeMenu={"100%"}
+                  name={client}
                   options={optionsClient}
-                  value={selectedClient}
+                  value={optionsClient}
+                  placeholder={flag && !client ? "" : ""}
+                  required
                 />
               </Label>
             </DivName>
@@ -124,20 +187,23 @@ const EditSubject = ({ title }) => {
               <Label>
                 Business
                 <Input
+                  onChange={(event) => setBusiness(event.target.value)}
                   widthInput={"90% !important"}
+                  backgroundInput={"#D9D9D9"}
                   value={business}
                   name={business}
-                  disabled={selectedClient}
+                  disabled
                 />
               </Label>
 
               <Label>
                 ReleaseTrain
                 <Input
+                  onChange={(event) => setRelease(event.target.value)}
                   widthInput={"100% !important"}
+                  backgroundInput={"#D9D9D9"}
                   value={release}
-                  onChange={(e) => setRelease(e.target.value)}
-                  disabled={selectedClient}
+                  disabled
                 />
               </Label>
             </DivBusiness>
@@ -147,9 +213,10 @@ const EditSubject = ({ title }) => {
                 Email
                 <Input
                   widthInput={"100% !important"}
+                  backgroundInput={"#D9D9D9"}
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  disabled={selectedClient}
+                  onChange={(event) => setEmail(event.target.value)}
+                  disabled
                 />
               </Label>
             </DivEmail>
@@ -160,22 +227,39 @@ const EditSubject = ({ title }) => {
                 <Input
                   widthInput={"100% !important"}
                   name={subject}
+                  value={subject}
                   set={(subject) => setSubject(subject)}
                   onChange={(event) => setSubject(event.target.value)}
+                  placeholder={flag && !subject ? "" : ""}
                   required
                 />
               </Label>
             </DivSubject>
 
             <DivStatus>
+              <Label>
+                Status
+                <SingleSelect
+                  sizeMenu={"90%"}
+                  sizeSingle={"90%"}
+                  options={status_mok}
+                  onChange={(event) => setStatus(event.target.value)}
+                  set={(status) => setStatus(status)}
+                  value={status}
+                  placeholder={flag && !status ? "" : ""}
+                />
+              </Label>
+
               <SingleSelect
-                set={(status) => setStatus(status)}
-                label={"Status"}
-                onChange={(event) => setStatus(event.target.value)}
-                placeholder={flag && !status ? "" : ""}
-                sizeSingle={"100%"}
+                label={"Manager"}
+                value={manager}
+                placeholder={flag && !manager ? "Required field" : ""}
                 sizeMenu={"100%"}
-                options={statusClient}
+                sizeSingle={"100%"}
+                required
+                options={manager_mok}
+                onChange={(choice) => setUserChoice(choice)}
+                set={(manager) => setManager(manager)}
               />
             </DivStatus>
 
@@ -186,6 +270,7 @@ const EditSubject = ({ title }) => {
                   widthInput={"100% !important"}
                   name={description}
                   value={description}
+                  placeholder={flag && !description ? "Required field" : ""}
                   set={(description) => setDescription(description)}
                   onChange={(event) => setDescription(event.target.value)}
                   required
@@ -196,7 +281,7 @@ const EditSubject = ({ title }) => {
           </Form>
 
           <DivButton>
-            <ClickButton>
+            <ClickButton onClick={handleSubmit}>
               <ButtonDefault
                 type={"userSave"}
                 weightFont={"500"}
@@ -205,7 +290,7 @@ const EditSubject = ({ title }) => {
               />
             </ClickButton>
 
-            <PositionButtonCancel onClick={CloseModal}>
+            <PositionButtonCancel onClick={closeModal}>
               <ButtonDefault
                 type="userCancel"
                 name={"Cancel"}
@@ -220,4 +305,16 @@ const EditSubject = ({ title }) => {
   );
 };
 
-export default EditSubject;
+export default Subject;
+
+const manager_mok = [
+  { id: 1, value: "Helio Endo", label: "Helio Endo" },
+  { id: 2, value: "Felipe Flaibam", label: "Felipe Flaibam" },
+  { id: 3, value: "Gilberto Anderson", label: "Gilberto Anderson" },
+];
+
+const status_mok = [
+  { id: 1, value: "Progress", label: "Progress" },
+  { id: 2, value: "Finished", label: "Finishedl" },
+  { id: 3, value: "Canceled", label: "Canceled" },
+];

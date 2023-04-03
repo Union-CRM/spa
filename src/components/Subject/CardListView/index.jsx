@@ -18,22 +18,25 @@ import {
   Client,
   PositionEdit,
 } from "./styles";
-
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 
-const SubjectCard = ({ setIdSubject, openModal, id }) => {
-  const { subject: subjectsList } = useSubjectContext();
+const SubjectCard = (props) => {
+  const { openModal, id } = props;
 
-  const subject = subjectsList.filter((item) => item.id === id)[0];
+  const { subject: subjectsList } = useSubjectContext();
+  const subject = subjectsList.filter((item) => item.id === props.id)[0];
+
+  const { toggleState, setToggleState } = useSubjectContext();
 
   const handleClick = () => {
     openModal();
-    setIdSubject(subject.id);
+    setToggleState(0);
+    props.setId(subject.id);
   };
 
   return (
-    <Container onClick={handleClick}>
-      <Card $mode={subject.status}>
+    <Container>
+      <Card $mode={subject.status} onClick={handleClick}>
         <Header>
           <DivStatusSubject>
             <Status $mode={subject.status}>
@@ -43,7 +46,7 @@ const SubjectCard = ({ setIdSubject, openModal, id }) => {
 
           <DivDadosCard>
             <DivSubjectAndCreatedBy>
-              <p>{subject.title}</p>
+              <p>{subject.subject_title}</p>
 
               <CreatedByManager>{subject.manager}</CreatedByManager>
             </DivSubjectAndCreatedBy>

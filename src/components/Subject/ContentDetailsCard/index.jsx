@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ContainerDetails,
   DivBetween,
@@ -8,42 +8,76 @@ import {
   DivRelease,
   DivDescription,
 } from "./styles";
+import { useSubjectContext } from "../../../hook/useSubjectContent";
 
-const SubjectsDetails = ({ title, setModal }) => {
+const SubjectsDetails = (props) => {
+  const { setModal } = props;
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
+  // UseEffect Details
+  const { subject: subjectsList, setSubject: setSubjectList } =
+    useSubjectContext();
+
+  const { id, setId } = useSubjectContext();
+
+  const [client, setClient] = useState();
+  const [email, setEmail] = useState();
+  const [release, setRelease] = useState();
+  const [business, setBusiness] = useState();
+  const [description, setDescription] = useState();
+
+  useEffect(() => {
+    if (props.title === "Details") {
+      const subject = subjectsList.filter((item) => item.id === props.id)[0];
+      setClient(subject.client);
+      setEmail(subject.client_email);
+      setRelease(subject.release);
+      setBusiness(subject.business);
+      setDescription(subject.description);
+    }
+  }, [id]);
+
   return (
     <ContainerDetails>
       <DivBetween>
         <DivName>
           Client Name
-          <span>Flavio Alcantara Martins dos Santos</span>
+          <span onChange={(event) => setClient(event.target.value)}>
+            {client}
+          </span>
         </DivName>
 
         <DivEmail>
           Email
-          <span>flavio.martins@tcs.com</span>
+          <span onChange={(event) => setEmail(event.target.value)}>
+            {email}
+          </span>
         </DivEmail>
       </DivBetween>
 
       <DivBetween>
         <DivRelease>
           Release Train
-          <span>Jornada Digital itaubers</span>
+          <span onChange={(event) => setRelease(event.target.value)}>
+            {release}
+          </span>
         </DivRelease>
 
         <DivBusiness>
           Business
-          <span>FINANÇAS RISCO DE CRÉDITO E CAPITAL</span>
+          <span onChange={(event) => setBusiness(event.target.value)}>
+            {business}
+          </span>
         </DivBusiness>
       </DivBetween>
 
       <DivDescription>
         Description
-        <span>
-          Objetivos da apresentação: Identificar as necessidades do cliente e
-          compreender seus objetivos; Apresentar a expertise da consultoria de
-          TI em serviços financeiros; Discutir as soluções personalizadas que
-          podem ser oferecidas para as necessidades específicas da instituição
-          financeira;
+        <span onChange={(event) => setDescription(event.target.value)}>
+          {description}
         </span>
       </DivDescription>
     </ContainerDetails>
