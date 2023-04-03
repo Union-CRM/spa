@@ -1,4 +1,6 @@
 import React from "react";
+import PageBody from "../../components/Geral/PageBody";
+import Donut from "../../components/Admin/AdmGraphicGroup/Donut";
 import ContainerCards from "../../components/Client/ContainerCardClient";
 import { ClientContextProvider } from "../../context/ClientContext";
 

@@ -120,14 +120,12 @@ export const Graph = styled.div`
     padding: 0px;
     gap: 1%;
     margin-bottom:0;
-    @media screen and (max-width:1773px) and (max-height:742px){
-      height: 20%;
-      
-    }
+ 
 
-    @media screen and (max-width:864px){
+    @media screen and (max-width:864px)  {
      flex-direction:column;
     }
+  
 `;
 export const H1Planners = styled.div`
   width: fit-content;
