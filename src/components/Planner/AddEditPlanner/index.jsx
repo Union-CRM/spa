@@ -22,6 +22,8 @@ import { Container,
      DivStart,
      DivFinish,
      LabelDate,
+     PositionButtons,
+
      } from './styles'
 import ModalDiscardChanges from '../ModalDiscardChanges';
 import ModalSave from '../ModalSuccessfuly';
@@ -38,7 +40,9 @@ const ModalPlanner = ({ title, setOpenModal }) => {
       const [timeFinish, setTimeFinish] = useState();
       const [guest,setGuest]= useState([]);
       const {planner: plannerList, setPlanner: setPlannerList} = usePlannerContext();
-      const {setModalSave , modalEdit, setModalEdit, modalDiscard, setModalDiscard, setModalCreate, setModalRemark} =  usePlannerContext()
+
+      const {setModalSave , modalEdit, setModalEdit, modalDiscard, setModalDiscard, setModalCreate, setModalRemark, setModalReschedule} =  usePlannerContext()
+      
 
 
       useEffect(()=>{
@@ -103,7 +107,9 @@ const ModalPlanner = ({ title, setOpenModal }) => {
       client_email:subjectObj.client_email,
       release_id: subjectObj.release_id,
       release_name: subjectObj.release_name,
-      status:"Scheduled",
+
+      status:"Finished",
+
       user_id: 21345678,
       user_name: "joão da silva",
       guest:guest.map((g)=>({id:g.value,name:g.label}))
@@ -111,9 +117,12 @@ const ModalPlanner = ({ title, setOpenModal }) => {
     setPlannerList([...plannerList,newPlanner]);
     setModalSave(true);
     setModalCreate(false);
+    setModalReschedule(false)
   }
 
+
   const editPlanner=()=>{
+
           /*if (newPlanner) {
           if(newPlanner.status === "Canceled" || "Finished" ) {
             setModalRemark(true)
@@ -181,6 +190,10 @@ const ModalPlanner = ({ title, setOpenModal }) => {
               <TagComponent options={clientOption}
                   label={"Guests"} 
                   width={"90%"}
+
+                  widths={"13vw"}
+                  heights={"11vh"}
+
                   set={(g)=> setGuest(g)}
                   sizeHeight={"3.5vh"}
                />
@@ -206,12 +219,16 @@ const ModalPlanner = ({ title, setOpenModal }) => {
                   sizeHeight={"3.5vh"}
               />)}
             </PositionStatus>
-            <PositionButtonSave>
-              <ButtonDefault type={"userSave"} name={"Save"} />
-            </PositionButtonSave>
-            <PositionButtonCancel onClick={() => setModalDiscard(true)}>
-              <ButtonDefault type={"userCancel"} name={"Cancel"} />
-            </PositionButtonCancel>
+
+            <PositionButtons>
+              <PositionButtonCancel onClick={() => setModalDiscard(true)}>
+                <ButtonDefault type={"userCancel"} name={"Cancel"} sizeWidth={"11vw"} />
+              </PositionButtonCancel>
+              <PositionButtonSave>
+                <ButtonDefault type={"userSave"} name={"Save"} sizeWidth={"11vw"} />
+              </PositionButtonSave>
+            </PositionButtons>
+
         </Form>
     </Container>
   )
