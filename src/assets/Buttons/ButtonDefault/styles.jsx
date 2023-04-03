@@ -45,8 +45,8 @@ export const Button = styled.button`
         `;
     }
   }}
-  width: ${(props) => props.sizeWidth || "200px"};
-  height: ${(props) => props.sizeHeight || "30px"};
+  width: 200px;
+  height: 30px;
   font-size: ${(props) => props.sizeFont || "12px"};
   font-weight: ${(props) => props.weightFont || "400"};
   border-radius: 0.5em;
