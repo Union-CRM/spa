@@ -261,6 +261,11 @@ export const PositionTodayDone = styled.div`
   flex-direction: row;
   display: flex;
   justify-content: flex-end;
+
+  @media (max-width: 978px ){
+    width: fit-content;
+    justify-content: flex-start; 
+  }
 `
 
 export const MonthYear = styled.p`

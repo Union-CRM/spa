@@ -13,22 +13,23 @@ export const ContainerFather = styled.div`
 // Container ModalPopup //
 export const Container = styled.div`
   grid-column: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -150%);
   position: relative;
   grid-column: 1;
   height:auto;
   display: flex;
   justify-content: center;
   box-sizing: border-box;
-  z-index: 999999;
-  min-width: 300px;
-  max-width: 400px;
-  max-height: 40%;
-  min-height: 50%;
+  z-index: 100;
+  width: 25%;
+  height: 25%;
   border-left: 16.56px solid #007bff;
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  background-color: #f5f7fa;
+  background-color: #F5F7FA;
   border-left: 7px solid #007bff;
   @media (min-width: 100px) and (max-width: 500px) {
     justify-content: center;
@@ -45,6 +46,7 @@ export const Content = styled.div`
   padding-top: 0.5%;
   margin-bottom: 2%;
   box-sizing: border-box;
+  row-gap: 5%;
 `;
 
 export const Span = styled.span`
@@ -79,10 +81,29 @@ export const Circle = styled.div`
 `;
 
 export const Button = styled.button`
-    height: 3.5vh;
-    width: 5vw;
+    height: 4vh;
+    width: 17vw;
     border-radius: 8px;
-    border: 1px solid black
+    background-color: #FFFFFF;
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 5%;
+    cursor: pointer;
+    align-self: center;
+    margin-bottom: 3%;
+    font-weight: 500;
+    font-size: 18px;
+    @media(max-width: 1200px) {
+      font-size: 12px;
+    }
 `
-
+export const Title = styled.div`
+  align-self: center;
+  font-size: 32px;
+  font-weight: 600;
+  margin-top: 3%;
+  @media(max-width: 1200px) {
+    font-size: 16px;
+  }
+`
 
