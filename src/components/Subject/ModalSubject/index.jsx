@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import IconSystem from "../../../assets/IconSystem";
+import styled, { css } from "styled-components";
 
 import {
   ContainerFather,
@@ -13,86 +14,72 @@ import {
   CreatedBy,
   DivPages,
   Pages,
-  PageIndex,
-  PageRemarks,
-  PagePlanners,
   ContainerBorder,
   ClickButton,
   IconTag,
-  DivModal,
-  PageEdit,
-  ContainerDois,
-  Span,
+  TabButton,
+  Content,
 } from "./styles";
-
-// contents modal global
 import ContentRemarks from "../ContentRemark";
 import ContentsPlanner from "../ContentPlanner";
 import ContentDetailsCard from "../ContentDetailsCard";
-
-// hook context
 import { useSubjectContext } from "../../../hook/useSubjectContent";
+import { useRemarkContext } from "../../../hook/useRemarkContent";
+
+import EditRemark from "../../Subject/EditRemark";
+import Remark from "../../Subject/Remark";
+import Planner from "../../Subject/Planner";
 
 const ModalSubject = (props) => {
+  // Remark
+  const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
+
+  const { idRemark, setIdRemark } = useRemarkContext();
+
   const { setModal, id } = props;
 
-  // functions Edit
+  const { setId, isEdit, setEdit } = useSubjectContext();
+
   const { setModalDetails, setModalEdit } = useSubjectContext();
 
-  // Array map
-  const { idSubject, setIdSubject } = useSubjectContext();
+  // UseEffect Details
+  const { subject: subjectsList, setSubject: setSubjectList } =
+    useSubjectContext();
 
-  const { subject: subjectsList } = useSubjectContext();
+  const [status, setStatus] = useState();
+  const [subject, setSubject] = useState();
+  const [manager, setManager] = useState();
 
-  const subject = subjectsList.filter((item) => item.id === id)[0];
+  useEffect(() => {
+    if (props.title === "Subject Details") {
+      const subject = subjectsList.filter((item) => item.id === props.id)[0];
+      setStatus(subject.status);
+      setSubject(subject.subject_title);
+      setManager(subject.manager);
+    }
+  }, [id]);
 
-  const [title, setTitle] = useState("");
-  const [status, setStatus] = useState("");
-  const [manager, setManager] = useState("");
-
-  const [selectedSubjectID, setSelectedSubjectID] = useState(null);
-
-  // Close Modal
+  //Close page
   const closeModal = () => {
     setModal(false);
   };
 
-  useEffect(() => {
-    if (selectedSubjectID) {
-      const selectedSubjectID = subject.find(
-        (subject) => subject.id === selectedSubjectID
-      );
-      setTitle(selectedSubjectID.title);
-      setStatus(selectedSubjectID.status);
-      setManager(selectedSubjectID.manager);
-    }
-  }, [selectedSubjectID]);
+  // Tabs
+  const { toggleState, setToggleState } = useSubjectContext();
 
-  const activeSubject = subjectsList.filter(
-    (subject) => subject.status === "Progress"
-  );
-
-  const optionsClient = activeSubject.map((subject) => {
-    return {
-      id: subject.id,
-      title: subject.tile,
-      status: subject.status,
-      manager: subject.manager,
-    };
-  });
-
-  const handleClientChange = (selectedSubjectID) => {
-    setSelectedSubjectID(selectedSubjectID.id);
-  };
-
-  // Navegation for tabs
-  const [toggleState, setToggleState] = useState(1);
+  const [activeTab, setActiveTab] = useState(0);
 
   const toggleTab = (index) => {
     setToggleState(index);
+    setActiveTab(index);
+    setActiveContent(index);
   };
 
-  // Modal for edit
+  //Content Tabs
+
+  const [activeContent, setActiveContent] = useState(0);
+
+  //Edit
   const EditModal = () => {
     setModalDetails(false);
     setModalEdit(true);
@@ -100,75 +87,115 @@ const ModalSubject = (props) => {
 
   return (
     <ContainerFather>
-      <Container>
+      <Container $mode={status}>
         <BodyAll>
           <ClickButton>
             <Close onClick={closeModal}>X</Close>
           </ClickButton>
 
           <DivStatus>
-            <Status onChange={handleClientChange} status={status} />
+            <Status $mode={status}>
+              <span onChange={(event) => setStatus(event.target.value)}>
+                {status}
+              </span>
+            </Status>
           </DivStatus>
 
           <DivTitle>
-            <TitleSubject>{title} </TitleSubject>
+            <TitleSubject onChange={(event) => setSubject(event.target.value)}>
+              {" "}
+              {subject}{" "}
+            </TitleSubject>
 
-            <IconTag onClick={EditModal}>
-              <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
-            </IconTag>
+            {activeTab === 0 && (
+              <IconTag onClick={EditModal}>
+                <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
+              </IconTag>
+            )}
 
-            <CreatedBy onchange={handleClientChange}>
-              Created by {manager} on 29 February{" "}
+            <CreatedBy onChange={(event) => setManager(event.target.value)}>
+              Created by on {manager} 20 February
             </CreatedBy>
           </DivTitle>
 
           <DivPages>
             <Pages>
-              <PageIndex
-                className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
-                onClick={() => toggleTab(1)}
+              <TabButton
+                $mode={status}
+                active={activeTab === 0}
+                onClick={() => toggleTab(0)}
               >
                 Subject Details
-              </PageIndex>
-              <PageRemarks
-                className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
-                onClick={() => toggleTab(2)}
+              </TabButton>
+              <TabButton
+                $mode={status}
+                active={activeTab === 1}
+                onClick={() => toggleTab(1)}
               >
                 Remarks
-              </PageRemarks>
-              <PagePlanners
-                className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
-                onClick={() => toggleTab(3)}
+              </TabButton>
+              <TabButton
+                $mode={status}
+                active={activeTab === 2}
+                onClick={() => toggleTab(2)}
               >
                 Planners
-              </PagePlanners>
+              </TabButton>
             </Pages>
           </DivPages>
 
           <ContainerBorder>
-            <div
-              className={
-                toggleState === 1 ? "content active-content" : "content"
-              }
-            >
-              <ContentDetailsCard />
-            </div>
+            <Content active={toggleState === 0}>
+              <ContentDetailsCard
+                setId={(i) => setId(i)}
+                setIdRemark={(i) => setIdRemark(i)}
+                id={id}
+                title={"Details"}
+              />
+            </Content>
 
-            <div
-              className={
-                toggleState === 2 ? "content active-content" : "content"
-              }
-            >
-              <ContentRemarks />
-            </div>
+            <Content active={toggleState === 1}>
+              <ContentRemarks
+                setId={(i) => setId(i)}
+                setIdRemark={(i) => setIdRemark(i)}
+                id={id}
+                title={"Remark"}
+              />
+            </Content>
 
-            <div
-              className={
-                toggleState === 3 ? "content active-content" : "content"
-              }
-            >
-              <ContentsPlanner />
-            </div>
+            <Content active={toggleState === 2}>
+              <ContentsPlanner
+                setId={(i) => setId(i)}
+                id={id}
+                title={"Planner"}
+              />
+            </Content>
+
+            <Content active={toggleState === 3}>
+              <Remark
+                setId={(i) => setId(i)}
+                setIdRemark={(i) => setIdRemark(i)}
+                id={id}
+                title={"DetalhesRemark"}
+              />
+            </Content>
+
+            <Content active={toggleState === 4}>
+              <Planner
+                setId={(i) => setId(i)}
+                id={id}
+                title={"DetalhesPlanner"}
+              />
+            </Content>
+
+            <Content active={toggleState === 5}>
+              <EditRemark
+                setIdRemark={(i) => setIdRemark(i)}
+                setId={(i) => setId(i)}
+                id={id}
+                title={"Edit Remark"}
+              />
+            </Content>
           </ContainerBorder>
         </BodyAll>
       </Container>

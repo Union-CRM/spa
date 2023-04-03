@@ -26,6 +26,13 @@ import SubjectCard from "./CardListView/index";
 import { useState } from "react";
 import Subject from "../CreateEditSubjectModal";
 import ButtonAdd from "../../../assets/Buttons/ButtonAdd";
+import ModalSubject from "../../Subject/ModalSubject";
+import { useSubjectContext } from "../../../hook/useSubjectContent";
+import { useRemarkContext } from "../../../hook/useRemarkContent";
+
+import EditSubject from "../../Subject/EditSubject";
+import CreateRemark from "../../Subject/ModalCreateRemark";
+import ModalCreatePlanner from "../../Subject/ModalCreatePlanner";
 
 const cardStatus = {
   INPROGRESS: "Progress",
@@ -128,10 +135,26 @@ const SubjectsProgress = subjectsList.filter(
 );
 
 const SubjectList = () => {
+
+  const { subject: subjectsList1 } = useSubjectContext();
+
+  const [modal, setModal] = useState(false);
+  const [openModalD, openModalSubjects] = useState(false);
+  const [closeModalDetails, setCloseModalDetails] = useState(false);
   const [cards, setCards] = useState(SubjectsProgress);
   const [active, setActive] = useState(cardStatus.INPROGRESS);
-  const [modal, setModal] = useState(false);
-  const [isEdit, setEdit] = useState(false);
+
+  const {
+    modalDetails,
+    setModalDetails,
+    isEdit,
+    setEdit,
+    modalEdit,
+    setModalEdit,
+  } = useSubjectContext();
+
+  // tabs status
+
 
   const handleClick = (tabCards, selectedTab) => {
     setCards(tabCards);
@@ -142,30 +165,33 @@ const SubjectList = () => {
     return { borderBottom: active === status ? "2px solid #007BFF" : "" };
   };
 
+  // Create new subject
   const createSubject = () => {
     setModal(true);
     setEdit(false);
   };
 
-  const EditSubject = () => {
-    setModal(true);
-    setEdit(true);
+
+  // Open modal of details
+  const detailsModal = () => {
+    setModalDetails(true);
   };
 
-  const getSubjectCards = () => {
-    return cards.map((item) => (
-      <SubjectCard
-        key={item.id}
-        status={item.status}
-        title={item.title}
-        manager={item.manager}
-        topic={item.topic}
-        area={item.area}
-        client={item.client}
-        openModal={() => EditSubject()}
-      />
-    ));
-  };
+  // Remark e Subject
+
+  const [id, setId] = useState(null);
+
+  const { subject } = useSubjectContext();
+
+  const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
+
+  const { idRemark, setIdRemark } = useRemarkContext();
+
+  // Create Planner //
+
+  const [modalPlanner, setModalPlanner] = useState(false);
+
+
   return (
     <ContainerFather>
       <Container>
@@ -218,21 +244,66 @@ const SubjectList = () => {
                 )
               </Canceled>
             </ButtonCancel>
-          </Spans>
-          <LineGray />
-        </Header>
-        <BoardStyle>{getSubjectCards()}</BoardStyle>
-      </Container>
 
-      <DivModal>
-        {modal && (
-          <Subject
-            setModal={setModal}
-            title={isEdit ? "Edit Subject" : "Create Subject"}
-          />
-        )}
-      </DivModal>
-    </ContainerFather>
+          </DivSpans>
+        </HeaderContainerCards>
+
+        <ContainerCards>
+          <LineDivisor />
+          <BoardStyle>
+            {subject &&
+              subject
+                .filter((item) => item.status === active)
+                .map((item) => (
+                  <SubjectCard
+                    key={item.id}
+                    id={item.id}
+                    setIdRemark={(i) => setIdRemark(i)}
+                    setId={(i) => setId(i)}
+                    openModal={() => detailsModal()}
+                  />
+                ))}
+          </BoardStyle>
+        </ContainerCards>
+      </ContainerHeaderAndCards>
+
+      <DivModal $mode={modalEdit} />
+      {modalEdit && (
+        <EditSubject
+          id={id}
+          setModalEdit={setModalEdit}
+          title={isEdit ? "Create Subject" : "Edit Subject"}
+        />
+      )}
+
+      <DivModal $mode={modal} />
+
+      {modal && (
+        <CreateRemark id={id} setModal={setModal} title={"Create Subject"} />
+      )}
+
+      <DivModal $mode={modalDetails} />
+
+      {modalDetails && (
+        <ModalSubject
+          id={id}
+          idRemark={idRemark}
+          setModal={setModalDetails}
+          title={isEdit ? "Subject" : "Subject Details"}
+        />
+      )}
+
+      <DivModal $mode={modalPlanner} />
+
+      {modalPlanner && (
+        <ModalCreatePlanner
+          id={id}
+          setModalPlanner={setModalPlanner}
+          title={"Planner"}
+        />
+      )}
+    </ContainerGlobal>
+
   );
 };
 export default SubjectList;

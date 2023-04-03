@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import {
   Container,
+
+  ContainerCentral,
   Title,
   SubTitle,
   Input,
@@ -29,56 +31,65 @@ const CreateRemark = (props) => {
   const [text, setText] = useState();
 
   return (
-    <Container>
-      <DivHeader>
-        <Title>Create Remark</Title>
 
-        <SubTitle>Apresentação Institucional TCS</SubTitle>
-      </DivHeader>
-      <Form>
-        <DivDate>
-          <Label>Date</Label>
-          <Input
-            type={"date"}
-            widthInput={"93% !important"}
-            value={date}
-            required
-            onChange={(event) => setDate(event.target.value)}
-          />
-        </DivDate>
+    <ContainerCentral>
+      <Container>
+        <DivHeader>
+          <Title>Create Remark</Title>
 
-        <DivDateReturn>
-          <Label>Date Return</Label>
-          <Input
-            type={"date"}
-            value={dateReturn}
-            required
-            onChange={(event) => setDateReturn(event.target.value)}
-          />
-        </DivDateReturn>
+          <SubTitle>Apresentação Institucional TCS</SubTitle>
+        </DivHeader>
+        <Form>
+          <DivDate>
+            <Label>Date</Label>
+            <Input
+              type={"date"}
+              name={date}
+              widthInput={"80%"}
+              value={new Date().toISOString().slice(0, 10)}
+              required
+              onChange={(event) => setDate(event.target.value)}
+            />
+          </DivDate>
 
-        <DivText>
-          <Label>Note Text</Label>
-          <InputTextArea
-            value={text}
-            onChange={(event) => setText(event.target.value)}
-          />
-        </DivText>
-      </Form>{" "}
-      <DivButton>
-        <ClickButton>
-          <ButtonDefault
-            type="userSave"
-            weightFont={"500"}
-            sizeFont={"18px"}
-            name={"Save"}
-          />
-        </ClickButton>
-        <PositionButtonCancel onClick={closeModal}>
-          <ButtonDefault type="userCancel" name={"Cancel"} />
-        </PositionButtonCancel>
-      </DivButton>
-    </Container>
+          <DivDateReturn>
+            <Label>Date Return</Label>
+            <Input
+              type={"date"}
+              widthInput={"80%"}
+              name={dateReturn}
+              value={new Date().toISOString().slice(0, 10)}
+              required
+              onChange={(event) => setDateReturn(event.target.value)}
+            />
+          </DivDateReturn>
+
+          <DivText>
+            <Label>Note Text</Label>
+            <InputTextArea
+              name={text}
+              rows={"10"}
+              required
+              onChange={(event) => setText(event.target.value)}
+            />
+          </DivText>
+        </Form>{" "}
+        <DivButton>
+          <ClickButton>
+            <ButtonDefault
+              type="userSave"
+              weightFont={"500"}
+              sizeFont={"18px"}
+              name={"Save"}
+            />
+          </ClickButton>
+          <PositionButtonCancel onClick={closeModal}>
+            <ButtonDefault type="userCancel" name={"Cancel"} />
+          </PositionButtonCancel>
+        </DivButton>
+      </Container>
+    </ContainerCentral>
+
   );
 };
 export default CreateRemark;

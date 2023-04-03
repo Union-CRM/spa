@@ -5,78 +5,6 @@ export const ContainerRemark = styled.div`
   position: relative;
 `;
 
-//* BUTTON CREATE NEW REMARK *//
-export const ButtonCreateRemark = styled.div`
-  display: flex;
-  width: 99%;
-  padding-top: 2%;
-  padding-right: 1.5%;
-  position: relative;
-  justify-content: end;
-`;
-
-export const ButtonAdd = styled.button`
-  ${(props) => {
-    switch (props.$mode) {
-      case "Finished":
-        return css`
-          border: 1px solid #008585;
-        `;
-      case "Progress":
-        return css`
-          border: 1px solid #00953b;
-        `;
-
-      case "Canceled":
-        return css`
-          border: 1px solid #771300;
-        `;
-
-      default:
-        return css`
-          background-color: #6e6b6b;
-        `;
-    }
-  }}
-  background-color:transparent;
-  width: ${(props) => props.$width || "fit - content"};
-  height: ${(props) => props.$height || "fit-content"};
-  padding: ${(props) => props.$padding || "7px"};
-  display: flex;
-  align-items: center;
-  text-align: center;
-  border-radius: 0.5em;
-  cursor: pointer;
-  span {
-    ${(props) => {
-      switch (props.$mode) {
-        case "Finished":
-          return css`
-            color: #008585;
-          `;
-        case "Progress":
-          return css`
-            color: #00953b;
-          `;
-
-        case "Canceled":
-          return css`
-            color: #771300;
-          `;
-
-        default:
-          return css`
-            background-color: #6e6b6b;
-          `;
-      }
-    }}
-    font-size:0.9rem;
-  }
-  :hover {
-    opacity: 0.8;
-  }
-`;
-
 /// CONTAINER CARDS ///
 
 export const ContainerCards = styled.div`
@@ -134,7 +62,7 @@ export const CardRemark = styled.div`
   }}
   width:97%;
   z-index: 9999999;
-  height: 75px;
+  height: 100%;
   margin-top: 3%;
   position: relative;
   align-items: center;
@@ -149,11 +77,9 @@ export const Circle = styled.div`
   width: 16px;
   height: 16px;
   cursor: pointer;
-  bottom: 0;
-  top: 6%;
   position: relative;
   border-radius: 100%;
-  align-items: end;
+  bottom: 3px;
   background-color: #fff;
 `;
 
@@ -184,12 +110,11 @@ export const IconOpenClose = styled.button`
   height: 100%;
   border: none;
   cursor: pointer;
-  position: absolute;
-  top: 0;
-  align-items: end;
   justify-content: center;
   background-color: transparent;
+  bottom: 0px;
   display: flex;
+  transform: rotateX(180deg);
   svg {
     ${(props) => {
       switch (props.$mode) {
@@ -213,11 +138,11 @@ export const IconOpenClose = styled.button`
           `;
       }
     }}
-    transform: rotateX(360deg);
-    cursor: pointer;
+    cursor:pointer;
     height: 100%;
     width: 100%;
-    align-items: end;
+    position: relative;
+    top: 0px;
   }
 `;
 
@@ -299,7 +224,7 @@ p {
 }
 `;
 
-export const DivDateReturn = styled.div`
+export const DivTime = styled.div`
 ${(props) => {
   switch (props.$mode) {
     case "Finished":
@@ -332,34 +257,9 @@ svg {
   width:13px;
   height:13px;
 }
-span {
-  ${(props) => {
-    switch (props.$mode) {
-      case "Finished":
-        return css`
-          color: #008585;
-        `;
-      case "Progress":
-        return css`
-          color: #00953b;
-        `;
 
-      case "Canceled":
-        return css`
-          color: #771300;
-        `;
-
-      default:
-        return css`
-          color: #6e6b6b;
-        `;
-    }
-  }}
-}
-  font-size:0.82rem;
-}
 p {
-  font-size:0.9rem;
+  font-size:0.8rem;
   color:#000;
   font-weight:900;
 }
@@ -367,7 +267,35 @@ p {
   span {
     font-size:1rem;
   }
+  p {
+  font-size:1rem;
+  color:#000;
+  font-weight:900;
 }
+}
+`;
+
+export const Span = styled.span`
+  ${(props) => {
+    switch (props.$mode) {
+      case "Finished":
+        return css`
+          color: #008585;
+        `;
+      case "Scheduled":
+        return css`
+          color: #ffd012;
+        `;
+      case "Canceled":
+        return css`
+          color: #771300;
+        `;
+      default:
+        return css`
+          color: #00953b; ;
+        `;
+    }
+  }}
 `;
 
 // PHOTO //
@@ -509,6 +437,31 @@ export const NoteText = styled.div`
       height: 80%;
       background-color: #dfdfdf;
     }
+  }
+`;
+
+export const Guest = styled.div`
+  width: 98%;
+  height: 100%;
+  padding-left: 0%;
+  padding-bottom: 3%;
+  font-weight: 550;
+  font-size: 0.84rem;
+  position: relative;
+  visibility: ${(props) => (props.$mode ? "hidden" : "visible")};
+
+  span {
+    position: relative;
+    font-size: 0.74rem;
+    padding-top: 2%;
+    padding-right: 5%;
+    text-align: justify;
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    max-height: 220px;
+    font-weight: 400;
+    color: #888c95;
   }
 `;
 

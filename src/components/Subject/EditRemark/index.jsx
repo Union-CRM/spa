@@ -8,7 +8,6 @@ import {
   ContainerRemark,
   ContainerCards,
   CardRemark,
-  ButtonCreateRemark,
   DivDate,
   DivDateReturn,
   DivPhoto,
@@ -18,14 +17,16 @@ import {
   NameEmail,
   ContainerComplete,
   NoteText,
-  IconOpenClose,
-  Circle,
   DivGlobalCard,
-  IconTag,
+  Input,
+  TextArea,
+  ButtonCreateRemark,
   ButtonAdd,
 } from "./styles";
 
-const ContentRemarks = (props) => {
+const EditRemark = (props) => {
+  // Subject status
+
   const { subject: subjectsList, setSubject: setSubjectList } =
     useSubjectContext();
 
@@ -34,7 +35,7 @@ const ContentRemarks = (props) => {
   const [status, setStatus] = useState();
 
   useEffect(() => {
-    if (props.title === "Remark") {
+    if (props.title === "Edit Remark") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
       setStatus(subject.status);
     }
@@ -52,7 +53,7 @@ const ContentRemarks = (props) => {
   };
   const [activeContent, setActiveContent] = useState(0);
 
-  //
+  // Remark //
 
   const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
 
@@ -63,7 +64,7 @@ const ContentRemarks = (props) => {
   const [noteText, setNoteText] = useState();
 
   useEffect(() => {
-    if (props.title === "Remark") {
+    if (props.title === "Edit Remark") {
       const remark = remarkList.filter(
         (item) => item.idRemark === props.idRemark
       )[0];
@@ -73,31 +74,28 @@ const ContentRemarks = (props) => {
     }
   }, [idRemark]);
 
-  const remark = remarkList.filter(
-    (item) => item.idRemark === props.idRemark
-  )[0];
+  const editRemark = () => {
+    const newRemark = {
+      id: id,
+      date: date,
+      dateReturn: dateReturn,
+      noteText: noteText,
+    };
+    if (date && dateReturn && noteText) {
+      const noId = remarkList.filter((item) => item.idRemark !== idRemark);
+      setRemarkList([...noId, newRemark]);
+      setToggleState(3);
+    }
+  };
 
-  const handleClick = () => {
-    setToggleState(3);
-    props.setIdRemark(remark.idRemark);
+  const handleSubmit = () => {
+    if (props.title === "Edit Remark") {
+      editRemark();
+    }
   };
 
   return (
     <ContainerRemark>
-      <ButtonCreateRemark>
-        <ButtonAdd
-          $mode={status}
-          width="130px"
-          padding="0"
-          sizeFont="0.9rem"
-          boxShadow="none"
-          margin="none"
-        >
-          {" "}
-          <span>Create Remark</span>
-        </ButtonAdd>
-      </ButtonCreateRemark>
-
       <ContainerCards>
         <CardRemark $mode={status}>
           <DivGlobalCard>
@@ -110,9 +108,10 @@ const ContentRemarks = (props) => {
             <DivDateReturn $mode={status}>
               <FaRegCalendarAlt $mode={status} />
               <span> Date Return </span>
-              <p onChange={(event) => setDateReturn(event.target.value)}>
-                {dateReturn}
-              </p>
+              <Input
+                type="date"
+                onChange={(event) => setDateReturn(event.target.value)}
+              />
             </DivDateReturn>
 
             <DivPhoto>
@@ -125,19 +124,35 @@ const ContentRemarks = (props) => {
               <NameEmail>
                 Gilberto Anderson Teste
                 <span>2534659</span>
+                <ButtonCreateRemark onClick={handleSubmit}>
+                  <ButtonAdd
+                    $mode={status}
+                    width="130px"
+                    padding="0"
+                    sizeFont="0.9rem"
+                    boxShadow="none"
+                    margin="none"
+                  >
+                    {" "}
+                    <span>Save</span>
+                  </ButtonAdd>
+                </ButtonCreateRemark>
               </NameEmail>
             </DivDadosRemark>
           </DivGlobalCard>
 
-          <IconOpenClose $mode={status}>
-            <Circle>
-              <FaChevronCircleDown onClick={handleClick} />
-            </Circle>
-          </IconOpenClose>
+          <ContainerComplete>
+            <NoteText>
+              Note Text:
+              <TextArea onChange={(event) => setNoteText(event.target.value)}>
+                {noteText}
+              </TextArea>
+            </NoteText>
+          </ContainerComplete>
         </CardRemark>
       </ContainerCards>
     </ContainerRemark>
   );
 };
 
-export default ContentRemarks;
+export default EditRemark;

@@ -4,6 +4,8 @@ import styled, { css } from "styled-components";
 export const ContainerCentral = styled.div`
   display: flex;
   justify-content: end;
+  grid-row: 1;
+  grid-column: 2;
   @media (min-width: 100px) and (max-width: 500px) {
     grid-column: 1;
     grid-row: 1;
@@ -73,6 +75,7 @@ export const Close = styled.button`
 // Children
 
 export const Container = styled.div`
+  grid-row: 1;
   grid-column: 2;
   width: 85%;
   height: 100%;

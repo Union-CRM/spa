@@ -18,7 +18,6 @@ import {
   PositionButtonCancel,
 } from "./styles";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
-import { TagComponent } from "../../Geral/TagComponent";
 import Clock from "../../Geral/Input/clock";
 import { useClientContext } from "../../../hook/useClientContent";
 import { GuestComponent } from "../../Geral/Input/GuestsComponent";
@@ -31,7 +30,7 @@ const ModalCreatePlanner = (props) => {
   };
 
   const handleSubmit = () => {
-    if (props.title === "Edit Client") {
+    if (props.title === "Planner") {
       editClient();
     } else {
       createClient();
@@ -63,7 +62,7 @@ const ModalCreatePlanner = (props) => {
 
   //console.log(tags);
   useEffect(() => {
-    if (props.title === "Edit Client") {
+    if (props.title === "Planner") {
       const client = clientList.filter((item) => item.id === props.id)[0];
       setName(client.client);
       setStatus(client.status);
