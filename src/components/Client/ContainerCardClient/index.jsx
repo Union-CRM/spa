@@ -143,6 +143,97 @@ const ContainerCards = () => {
 
       <DivModal $mode={modal} />
 
+      <Header>
+        <Top>
+          <DivTitlePage>
+            <H1>Client List </H1>
+            <HowManyClientList>({client.length})</HowManyClientList>{" "}
+             
+                <Tooltip
+                    title="List of all clients."
+                    theme="light"
+                    duration={100}
+                    delay={0}
+                  >
+                    <IconSystem icon={"Info"} width={"1.5vw"} height={"2.1vh"} ></IconSystem> 
+                </Tooltip>
+             
+          </DivTitlePage>
+
+          <DivButton onClick={() => createClient()}>
+            <ButtonAdd
+              mode="#007BFF"
+              width="169px"
+              height="38px"
+              name="Create Client"
+              color="white"
+            />
+          </DivButton>
+        </Top>
+
+        <DivSpans>
+          <ButtonActive
+            key={abaStatus.ACTIVE}
+            onClick={() => handleClick(abaStatus.ACTIVE)}
+            style={getTabColor(abaStatus.ACTIVE)}
+          >
+            <Active>
+              Active (
+              <HowManyActive>
+                {client.filter((item) => item.status === "Active").length}
+              </HowManyActive>
+              )
+            </Active>
+          </ButtonActive>
+          <ButtonInactive
+            key={abaStatus.INACTIVE}
+            onClick={() => handleClick(abaStatus.INACTIVE)}
+            style={getTabColor(abaStatus.INACTIVE)}
+          >
+            <Inactive>
+              Inactive (
+              <HowManyInactive>
+                {client.filter((item) => item.status === "Inactive").length}
+              </HowManyInactive>
+              )
+            </Inactive>
+          </ButtonInactive>
+        </DivSpans>
+      </Header>
+      <Container>
+        <BoardStyle>
+          {client &&
+            client
+              .filter((item) => item.status === active)
+              .map((item) => (
+                <ClientCard
+                  setId={(i) => setId(i)}
+                  openModalPopUp={() => setModalPopUp(true)}
+                  key={item.id}
+                  id={item.id}
+                  openModal={() => EditClient()}
+                  //modalPopUp={() => PopUp()}
+                />
+              ))}
+
+          {/*
+          {cards.map((item) => (
+      <ClientCard
+        key={item.id}
+        id={item.id}
+        status={item.status}
+        email={item.email}
+        client={item.client}
+        textRole={item.textRole}
+        textCostumer={item.textCostumer}
+        textBusiness={item.textBusiness}
+        textRelease={item.textRelease}
+        openModal={() => EditClient()}
+      />))}; 
+      */}
+        </BoardStyle>
+      </Container>
+
       {modal && (
         <AddEditClient
           id={id}

@@ -82,14 +82,16 @@ display:grid;
 grid-template-columns: 50% 50%;
 grid-template-rows: 80% 20% ;
 width: 100%;
-
 margin: 0;
-
 
 `;
 export const DivPlanner = styled.div`
-  width:50%;
+ 
+  
+  display: flex;
+  flex-direction:column;
   margin-left:5%;
+  
   ${DivP}{
     /* width:100%; */
     margin-top: 0px;
@@ -99,12 +101,10 @@ export const DivPlanner = styled.div`
       border-color:white;
       border: 1px groove ; 
       box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-      
-     
-
+      height: 65%;
+      min-height: 200px;
   }
     @media screen and (max-width:1773px) and (max-height:742px){
-      
      
     }
 `;
@@ -124,9 +124,15 @@ export const Graph = styled.div`
       height: 20%;
       
     }
+
+    @media screen and (max-width:864px){
+     flex-direction:column;
+    }
 `;
 export const H1Planners = styled.div`
   width: fit-content;
+  display: flex;
+  flex-direction:row;
   font-family: "Houschka Rounded Alt";
   font-size: 24px;
   font-style: normal;
@@ -136,9 +142,14 @@ export const H1Planners = styled.div`
   height: fit-content;
   border-bottom: 2px solid #007bff;
 `;
+
 export const HowManyPlanners = styled.div`
 font-size: 24px;
   color: #525b75;
   font-weight: 600;
   margin-right: 5%;
 `;
+
+
+
+
