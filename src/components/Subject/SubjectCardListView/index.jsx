@@ -29,7 +29,7 @@ import Subject from "../CreateEditSubjectModal";
 import ButtonAdd from "../../../assets/Buttons/ButtonAdd";
 import ModalSubject from "../../Subject/ModalSubject";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
-
+import CreateRemark from "../ModalCreateRemark";
 import EditSubject from "../../Subject/EditSubject";
 
 const cardStatus = {
@@ -137,7 +137,7 @@ const SubjectsProgress = subjectsList.filter(
 const SubjectList = () => {
   const [cards, setCards] = useState(SubjectsProgress);
 
-  const [idSubject, setIdSubject] = useState(false);
+  const { idSubject, setIdSubject } = useSubjectContext();
 
   const [active, setActive] = useState(cardStatus.INPROGRESS);
 
@@ -279,7 +279,7 @@ const SubjectList = () => {
 
       <DivModal $mode={modal} />
 
-      {modal && <Subject setModal={setModal} title={"Create Subject"} />}
+      {modal && <CreateRemark setModal={setModal} title={"Create Subject"} />}
 
       <DivModal $mode={modalDetails} />
 

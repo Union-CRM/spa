@@ -64,12 +64,17 @@ export const DivAparecer = styled.div`
 
 
 export const Icon = styled.div`
-    grid-column: 4;
-    margin-right: 5px;
-    cursor: pointer;
+
+grid-column: 4;
+margin-right: 5px;
+cursor: pointer;
+
+
 `;
 
+
 export const ModalButon = styled.div`
+
     height: 50px;
     width: 400px;
     border: solid black;
@@ -79,44 +84,54 @@ export const ModalButon = styled.div`
     background-color: white;
     font-size: 40px;
     text-align: center;
+    
+    
  `;
 
 
 export const Container = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, 100%);
-    grid-template-rows: 1fr;
-    grid-column-gap: 20px;
-    grid-row-gap: 0px;
+
+display: grid;
+grid-template-columns: repeat(2, 100%);
+grid-template-rows: 1fr;
+grid-column-gap: 20px;
+grid-row-gap: 0px;
+    
  `;
  
 
 export const NavbarGrup = styled.div`
-    grid-area: 1 / 1 / 2 / 2;
- `;
 
+grid-area: 1 / 1 / 2 / 2;
+ `;
  export const DivConteudo = styled.div`
+
     grid-area: 1 / 1 / 2 / 2 ;
     height:60%;
     width:100%;
+    
  `;
 
 export const DivHead = styled.div`
-    background-color: #F5F5F5;
-    height: 13%;
-    width: 100%;
-    border-radius: 10px 10px 0 0;
+
+background-color: #F5F5F5;
+height: 13%;
+width: 100%;
+border-radius: 10px 10px 0 0;
+
 `;
 
 
 export const H2 = styled.h2`
-    font-size: 24px;
-    font-family: Desktop/h4-Houschka;
-    font-style: normal;
-    position: absolute;
-    display: inline-block;
-    margin-top:2%;
-    margin-left: 2%;
+
+font-size: 24px;
+font-family: Desktop/h4-Houschka;
+font-style: normal;
+position: absolute;
+display: inline-block;
+margin-top:2%;
+margin-left: 2%;
+
 `;
 
 export const DivButton = styled.div`
@@ -124,7 +139,6 @@ export const DivButton = styled.div`
     align-items: right;
     justify-content: right;
 `;
-
 export const ActiveNot = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 15%);
