@@ -17,7 +17,9 @@ import {usePlannerContext} from "../../../hook/usePlannerContext";
 
 const ModalDiscardChanges = ({setCloseDiscard}) => {
 
+
   const {planner: modalDiscard, setModalDiscard, setModal, setModalEdit, setModalCreate, setModalReschedule } = usePlannerContext();
+
   
   const CloseDiscard = () => (
     setCloseDiscard(false)
@@ -28,6 +30,7 @@ const ModalDiscardChanges = ({setCloseDiscard}) => {
     setModalEdit(false)
     setModalCreate(false)
     setModalReschedule(false)
+
   }
 
   return (

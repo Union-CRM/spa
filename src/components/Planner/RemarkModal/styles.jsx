@@ -16,8 +16,7 @@ export const Container = styled.div`
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-45%, -50%);
-
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -28,15 +27,12 @@ export const Container = styled.div`
 
 export const PositionButtonSave = styled.div`
     align-self: center;
-    margin-top: 5%;
-    margin-bottom: 4%;
+    margin-top: 5.5%;
 `;
 
 export const PositionButtonCancel = styled.div`
     align-self: center;
-    margin-top: 5%;
-    margin-bottom: 4%;
-
+    margin-top: 3%;
 `;
 
 export const PositionTitle = styled.div`
@@ -46,8 +42,7 @@ export const PositionTitle = styled.div`
     font-size: 32px;
     font-style: bold;
     font-weight: 600;
-    margin-bottom: 3%;
-
+    margin-bottom: 5%;
 `
 
 export const InputPlanner = styled.input`
@@ -118,12 +113,3 @@ export const LabelDate = styled.p`
     display: inline-block;
 
 `
-
-export const PositionButtons = styled.div`
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    margin-top: 5%;
-    
-`
-

@@ -266,6 +266,7 @@ export const PositionTodayDone = styled.div`
     width: fit-content;
     justify-content: flex-start; 
   }
+
 `
 
 export const MonthYear = styled.p`

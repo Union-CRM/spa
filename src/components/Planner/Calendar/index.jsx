@@ -56,6 +56,7 @@ import FollowUpModal from "../FollowUpModal";
 import PopUpFinished from "../PopUpFinished";
 import Subject from "../../Subject/CreateEditSubjectModal";
 
+
 export const BigCalender = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [numberOfEvents, setNumberOfEvents]= useState(2);
@@ -70,6 +71,7 @@ export const BigCalender = () => {
   //seta os eventos
   const [events, setEvents] = useState(MOCKAPPS);
   
+
   const { planner: plannerList, 
     setPlanner: setPlannerList, 
     modalEdit, setModalEdit, 
@@ -81,6 +83,7 @@ export const BigCalender = () => {
     modalFollowUp, modalPopUpCanceled,
     modalPopUpFinished, modalSubject,
   } = usePlannerContext();
+
 
   const addEvent = (date, event) => {
     if (!event.target.classList.contains("StyledEvent")) {
@@ -199,7 +202,9 @@ formatDate(today, 'mm/dd/aa');
         </DivNextMonth>
         </CurrentMonth>
         <DivCreatePlanner onClick={() => setModalCreate(true)}>
+
           <ButtonAdd  mode={"#007BFF"} color={"#FFFFFF"} name={"Create Planner"} onClick={() => setOpenModal(true)}/>
+
         </DivCreatePlanner>
       </DateControls>
       <SevenColGrid>
@@ -302,6 +307,7 @@ formatDate(today, 'mm/dd/aa');
       </>
     )}
 
+
     {modalPopUpCanceled && (
       <PopUpCanceled/>
     )}
@@ -332,6 +338,7 @@ formatDate(today, 'mm/dd/aa');
       </>  
     )}
       
+
     </Container>
   );
 };
