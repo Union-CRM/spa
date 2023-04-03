@@ -84,12 +84,8 @@ const ContainerCards = () => {
                     duration={100}
                     delay={0}
                   >
-                
-                
-                    <IconSystem icon={"Info"} width={"1.5vw"} height={"2.1vh"} ></IconSystem>
-                    
-                </Tooltip >
-             
+                    <IconSystem icon={"Info"} width={"1.5vw"} height={"2.1vh"} ></IconSystem> 
+                </Tooltip>
              
           </DivTitlePage>
 
