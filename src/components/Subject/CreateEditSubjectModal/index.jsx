@@ -1,29 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
-  Input,
-  ContainerCentral,
   Container,
-  PositionTitle,
-  H1,
-  Form,
-  Label,
-  DivName,
-  DivEmail,
-  DivBusiness,
-  DivSubject,
-  DivStatus,
-  DivButton,
-  ClickButton,
+  PositionButtonSave,
   PositionButtonCancel,
-  DivDescription,
-  TextArea,
+  DivFather,
+  PositionTitle,
 } from "./styles";
+import InputWithName from "../../Geral/Input/InputWithName";
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import clientList from "../../../context/ClientContext";
 import subjectList from "../../../context/SubjectContext";
 import { useClientContext } from "../../../hook/useClientContent";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
+import Headline from "../../../assets/FontSystem/Headline";
+import InputText from "../../Geral/Input/InputText";
+
+const values = [
+  { value: 1, label: "Finanças Crédito e Risco Capital" },
+  { value: 2, label: "Cartões, Négócios e Financeiro" },
+  { value: 3, label: "Cash Management" },
+  { value: 4, label: "Crédito Consignado" },
+  { value: 5, label: "Consórcio" },
+];
+
+const valuesRealese = [
+  { value: 1, label: "Inteligência Comercial" },
+  { value: 2, label: "Solucões Vic e Cartões" },
+  { value: 3, label: "Receber e Arrecadar PJ" },
+  { value: 4, label: "Proteção e Comunicação com o Cliente" },
+  { value: 5, label: "Experiência Digital" },
+];
+
 
 const Subject = (props) => {
   const { setModal, title, id } = props;
@@ -32,6 +40,7 @@ const Subject = (props) => {
   const closeModal = () => {
     setModal(false);
   };
+
 
   const handleSubmit = () => {
     if (props.title === "Create Subject") {
@@ -141,149 +150,48 @@ const Subject = (props) => {
   const handleClientChange = (selectedClient) => {
     setSelectedClient(selectedClient.value);
   };
-  ////////////////////////////////////
+
 
   const [userChoice, setUserChoice] = useState("");
 
   return (
-    <>
-      <ContainerCentral>
-        <Container>
-          <PositionTitle>
-            <H1>{title} </H1>
-          </PositionTitle>
+    <Container>
+      <DivFather>
+        <PositionTitle>
+          <Headline type={"Headline3"} name={title} />
+        </PositionTitle>
 
-          <Form>
-            <DivName>
-              <Label>
-                Client Name
-                <SingleSelect
-                  set={(client) => setSelectedClient(client)}
-                  onChange={(choice) => setUserChoice(choice)}
-                  placeholder={flag && !selectedClient ? "" : ""}
-                  sizeSingle={"100%"}
-                  sizeMenu={"100%"}
-                  options={optionsClient}
-                  value={selectedClient}
-                />
-              </Label>
-            </DivName>
+        <SingleSelect
+          label={"Release Train"}
+          options={valuesRealese}
+          sizeSingle={"82%"}
+          sizeMenu={"82%"}
+        />
 
-            <DivBusiness>
-              <Label>
-                Business
-                <Input
-                  onChange={(event) => setBusiness(event.target.value)}
-                  widthInput={"90% !important"}
-                  value={business}
-                  name={business}
-                  disabled={selectedClient}
-                />
-              </Label>
+        <SingleSelect
+          label={"Business"}
+          options={values}
+          sizeMenu={"82%"}
+          sizeSingle={"82%"}
+        />
 
-              <Label>
-                ReleaseTrain
-                <Input
-                  onChange={(event) => setRelease(event.target.value)}
-                  widthInput={"98% !important"}
-                  value={release}
-                  disabled={selectedClient}
-                />
-              </Label>
-            </DivBusiness>
+        <InputWithName label={"Client Name"} widthInput={"80%"} />
 
-            <DivEmail>
-              <Label>
-                Email
-                <Input
-                  widthInput={"98% !important"}
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  disabled={selectedClient}
-                />
-              </Label>
-            </DivEmail>
+        <InputWithName label={"Email"} widthInput={"80%"} />
 
-            <DivSubject>
-              <Label>
-                Subject
-                <Input
-                  widthInput={"98% !important"}
-                  placeholder={flag && !subject ? "Required field" : ""}
-                  name={subject}
-                  set={(subject) => setSubject(subject)}
-                  onChange={(event) => setSubject(event.target.value)}
-                  required
-                />
-              </Label>
-            </DivSubject>
+        <InputWithName label={"Subject"} widthInput={"80%"} />
 
-            <DivStatus>
-              <Label>
-                Status
-                <Input
-                  label={"Status"}
-                  placeholder={flag && !status ? "" : ""}
-                  widthInput={"90% !important"}
-                  value={status}
-                  onChange={(event) => setStatus(event.target.value)}
-                  set={(status) => setStatus(status)}
-                  disabled
-                />
-              </Label>
+        <InputText label={"Description"} rows={6} widthText={"80%"} />
 
-              <SingleSelect
-                label={"Manager"}
-                value={manager}
-                placeholder={flag && !manager ? "Required field" : ""}
-                sizeSingle={"100%"}
-                required
-                sizeMenu={"100%"}
-                options={manager_mok}
-                onChange={(choice) => setUserChoice(choice)}
-                set={(manager) => setManager(manager)}
-              />
-            </DivStatus>
+        <PositionButtonSave onClick={saveModal}>
+          <ButtonDefault type={"userSave"} name={"Save"} />
+        </PositionButtonSave>
+        <PositionButtonCancel onClick={closeModal}>
+          <ButtonDefault type={"userCancel"} name={"Cancel"} />
+        </PositionButtonCancel>
+      </DivFather>
+    </Container>
 
-            <DivDescription>
-              <Label>
-                Description
-                <TextArea
-                  widthInput={"100% !important"}
-                  placeholder={flag && !description ? "Required field" : ""}
-                  name={description}
-                  value={description}
-                  set={(description) => setDescription(description)}
-                  onChange={(event) => setDescription(event.target.value)}
-                  required
-                  rows="4"
-                />
-              </Label>
-            </DivDescription>
-          </Form>
-
-          <DivButton>
-            <ClickButton onClick={handleSubmit}>
-              <ButtonDefault
-                type={"userSave"}
-                weightFont={"500"}
-                sizeFont={"1rem"}
-                name={"Save"}
-              />
-            </ClickButton>
-
-            <PositionButtonCancel onClick={closeModal}>
-              <ButtonDefault
-                type="userCancel"
-                name={"Cancel"}
-                weightFont={"500"}
-                sizeFont={"1rem"}
-              />
-            </PositionButtonCancel>
-          </DivButton>
-        </Container>
-      </ContainerCentral>
-    </>
   );
 };
 
