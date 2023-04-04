@@ -2,11 +2,11 @@ import styled, { css } from "styled-components";
 
 // Div Father
 export const ContainerCentral = styled.div`
-  justify-content: end;
   display: flex;
-  grid-row: 1;
+  justify-content: end;
   @media (min-width: 100px) and (max-width: 500px) {
     grid-column: 1;
+    grid-row: 1;
     display: grid;
     position: relative;
     top: 0px;
@@ -73,24 +73,32 @@ export const Close = styled.button`
 // Children
 
 export const Container = styled.div`
-  grid-row: 1;
   grid-column: 2;
   width: 85%;
-  min-width: 300px;
-  height: 81vh;
-  background: #fff;
+  height: 100%;
   display: grid;
+  background: #fff;
+  min-width: 300px;
   border-left: 16.56px solid #007bff;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   z-index: 1000;
-  grid-template-rows: 10% 75% 15%;
+
   @media (min-width: 100px) and (max-width: 502px) {
     height: 81vh;
     width: 100%;
     flex-direction: flex-start;
     position: relative;
   }
+`;
+
+export const ContainerChildren = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  z-index: 1000;
+  background: #fff;
+  grid-template-rows: 10% 75% 15%;
 `;
 
 // Div Content
@@ -154,14 +162,14 @@ export const DivCustomer = styled.div`
 `;
 
 export const DivBusiness = styled.div`
-  grid-row: 5;
+  grid-row: 4;
   width: 90%;
   height: auto;
   display: grid;
 `;
 
 export const DivRelease = styled.div`
-  grid-row: 4;
+  grid-row: 5;
   width: 90%;
   height: auto;
   display: grid;
