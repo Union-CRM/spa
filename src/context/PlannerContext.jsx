@@ -3,11 +3,18 @@ export const PlannerContext = createContext();
 
 export const PlannerContextProvider = ({ children }) => {
   const [planner, setPlanner] = useState(plannerList);
-
-
   const [modalPlanner, setModalPlanner] = useState(false);
-
   const [modalDetails, setModalDetails] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
+  const [modalDiscard, setModalDiscard] = useState(false);
+  const [modalSave, setModalSave] = useState(false);
+  const [modalCreate, setModalCreate] = useState(false);
+  const [modalRemark, setModalRemark] = useState(false);
+  const [modalFollowUp, setModalFollowUp] = useState(false);
+  const [modalPopUpCanceled, setModalPopUpCanceled] = useState(false);
+  const [modalReschedule, setModalReschedule] = useState(false)
+  const [modalPopUpFinished, setModalPopUpFinished] = useState(false)
+  const [modalSubject, setModalSubject] = useState(false)
 
   return (
     <PlannerContext.Provider
@@ -18,6 +25,16 @@ export const PlannerContextProvider = ({ children }) => {
         setModalPlanner,
         modalDetails,
         setModalDetails,
+        modalEdit, setModalEdit, 
+        modalDiscard, setModalDiscard,
+        modalSave, setModalSave, 
+        modalCreate, setModalCreate,
+        modalRemark, setModalRemark,
+        modalFollowUp, setModalFollowUp,
+        modalPopUpCanceled, setModalPopUpCanceled,
+        modalReschedule, setModalReschedule,
+        modalPopUpFinished, setModalPopUpFinished,
+        modalSubject, setModalSubject,
       }}
     >
 
