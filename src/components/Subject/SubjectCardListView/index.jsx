@@ -1,28 +1,29 @@
 import React from "react";
 import {
-  LineGray,
+  ContainerGlobal,
+  ContainerHeaderAndCards,
+  HeaderContainerCards,
+  ContainerCards,
+  DivModal,
+  LineDivisor,
+  BoardStyle,
+  DivTitlePage,
+  Top,
+  H1,
+  DivButton,
+  DivSpans,
   ButtonCancel,
   ButtonFinished,
   ButtonProgress,
-  BoardStyle,
-  H1,
-  Container,
-  Header,
-  Top,
   HowManySubjectList,
-  Line,
-  Spans,
-  All,
-  HowManyAll,
+  Progress,
+  HowManyProgress,
   Finished,
   HowManyFinished,
   Canceled,
   HowManyCancel,
-  DivButton,
-  DivModal,
-  ContainerFather,
 } from "./styles";
-import SubjectCard from "./CardListView/index";
+import SubjectCard from "../CardListView/index";
 import { useState } from "react";
 import Subject from "../CreateEditSubjectModal";
 import ButtonAdd from "../../../assets/Buttons/ButtonAdd";
@@ -33,29 +34,29 @@ import EditSubject from "../../Subject/EditSubject";
 import CreateRemark from "../../Subject/ModalCreateRemark";
 import ModalCreatePlanner from "../../Subject/ModalCreatePlanner";
 
-
 const cardStatus = {
   INPROGRESS: "Progress",
   FINISHED: "Finished",
   CANCELED: "Canceled",
 };
+
 const subjectsList = [
   {
     id: 1,
-    status: "Canceled",
-    title: "Apresentação Institucional TCS",
-    manager: "Gilberto Anderson",
-    topic: "Jornada Digital Itaubers",
-    area: "Finanças Risco De Credito Capital",
-    client: "Bruno Lins",
+    status: "Progress",
+    title: "Apresentação Institucional TCS Institucional",
+    manager: "Helio Endo",
+    release: "Pagamento Cartão",
+    business: "Finanças Risco De Credito Pessoal Credito Pessoal",
+    client: "Bruno Lins Oliveira Santos",
   },
   {
     id: 2,
     status: "Finished",
     title: "Apresentação Institucional TCS",
     manager: "Gilberto Anderson",
-    topic: "Jornada Digital Itaubers",
-    area: "Finanças Risco De Credito Pessoal",
+    release: "Inteligencia Comercial",
+    business: "Finanças Risco De Credito Pessoal",
     client: "Heder",
   },
   {
@@ -63,8 +64,8 @@ const subjectsList = [
     status: "Canceled",
     title: "Apresentação Institucional TCS",
     manager: "Gilberto Anderson",
-    topic: "Jornada Digital Itaubers",
-    area: "Finanças Risco De Credito Capital",
+    release: "Jornada Digital Itaubers",
+    business: "Finanças Risco De Credito Capital",
     client: "Kaere",
   },
   {
@@ -72,8 +73,8 @@ const subjectsList = [
     status: "Progress",
     title: "Apresentação Institucional TCS",
     manager: "Gilberto Anderson",
-    topic: "Jornada Digital Itaubers",
-    area: "Finanças Risco De Credito Pessoal",
+    release: "Dados Onboarding",
+    business: "Finanças Risco De Credito Pessoal",
     client: "Carlos",
   },
   {
@@ -81,17 +82,17 @@ const subjectsList = [
     status: "Progress",
     title: "Apresentação Institucional TCS",
     manager: "Gilberto Anderson",
-    topic: "Jornada Digital Itaubers",
-    area: "Finanças Risco De Credito Pessoal",
+    release: "Experiencia Digital",
+    business: "Finanças Risco De Credito Pessoal",
     client: "Bruno Lins",
   },
   {
     id: 6,
-    status: "Finished",
+    status: "Progress",
     title: "Apresentação Institucional TCS",
-    manager: "Gilberto Anderson",
-    topic: "Jornada Digital Itaubers",
-    area: "Finanças Risco De Credito Pessoal",
+    manager: "Helio Endo",
+    release: "Jornada Digital Itaubers",
+    business: "Finanças Risco De Credito Pessoal",
     client: "Bruno Lins",
   },
   {
@@ -99,17 +100,17 @@ const subjectsList = [
     status: "Progress",
     title: "Apresentação Institucional TCS",
     manager: "Gilberto Anderson",
-    topic: "Jornada Digital Itaubers",
-    area: "Finanças Risco De Credito Pessoal",
+    release: "Jornada Digital Itaubers",
+    business: "Finanças Risco De Credito Pessoal",
     client: "Bruno Lins",
   },
   {
     id: 8,
-    status: "Finished",
+    status: "Progress",
     title: "Apresentação Institucional TCS",
-    manager: "Gilberto Anderson",
-    topic: "Jornada Digital Itaubers",
-    area: "Finanças Risco De Credito Pessoal",
+    manager: "Felipe Massaret",
+    release: "Jornada Digital Itaubers",
+    business: "Finanças Risco De Credito Pessoal",
     client: "Bruno Lins",
   },
   {
@@ -117,13 +118,14 @@ const subjectsList = [
     status: "Finished",
     title: "Apresentação Institucional TCS",
     manager: "Gilberto Anderson",
-    topic: "Jornada Digital Itaubers",
-    area: "Finanças Risco De Credito Pessoal",
+    release: "Dados Onboarding",
+    business: "Finanças Risco De Credito Pessoal",
     client: "Bruno Lins",
   },
 ];
 
 const SubjectsId = subjectsList.map((item) => item.id);
+
 const SubjectsCancel = subjectsList.filter(
   (item) => item.status === "Canceled"
 );
@@ -135,11 +137,24 @@ const SubjectsProgress = subjectsList.filter(
 );
 
 const SubjectList = () => {
+  const { subject: subjectsList1 } = useSubjectContext();
 
+  const [modal, setModal] = useState(false);
+  const [openModalD, openModalSubjects] = useState(false);
+  const [closeModalDetails, setCloseModalDetails] = useState(false);
   const [cards, setCards] = useState(SubjectsProgress);
   const [active, setActive] = useState(cardStatus.INPROGRESS);
-  const [modal, setModal] = useState(false);
-  const [isEdit, setEdit] = useState(false);
+
+  const {
+    modalDetails,
+    setModalDetails,
+    isEdit,
+    setEdit,
+    modalEdit,
+    setModalEdit,
+  } = useSubjectContext();
+
+  // tabs status
 
   const handleClick = (tabCards, selectedTab) => {
     setCards(tabCards);
@@ -153,9 +168,7 @@ const SubjectList = () => {
   // Create new subject
   const createSubject = () => {
     setModal(true);
-    setEdit(false);
   };
-
 
   // Open modal of details
   const detailsModal = () => {
@@ -176,36 +189,16 @@ const SubjectList = () => {
 
   const [modalPlanner, setModalPlanner] = useState(false);
 
-
-  const EditSubject = () => {
-    setModal(true);
-    setEdit(true);
-  };
-
-  const getSubjectCards = () => {
-    return cards.map((item) => (
-      <SubjectCard
-        key={item.id}
-        status={item.status}
-        title={item.title}
-        manager={item.manager}
-        topic={item.topic}
-        area={item.area}
-        client={item.client}
-        openModal={() => EditSubject()}
-      />
-    ));
-  };
-
   return (
-    <ContainerFather>
-      <Container>
-        <Header>
+    <ContainerGlobal>
+      <ContainerHeaderAndCards>
+        <HeaderContainerCards>
           <Top>
-            <H1>
-              Subjects List{" "}
+            <DivTitlePage>
+              <H1>Subjects List </H1>
               <HowManySubjectList>({SubjectsId.length})</HowManySubjectList>
-            </H1>
+            </DivTitlePage>
+
             <DivButton onClick={() => createSubject()}>
               <ButtonAdd
                 mode="#007BFF"
@@ -216,8 +209,8 @@ const SubjectList = () => {
               />
             </DivButton>
           </Top>
-          <Line />
-          <Spans>
+
+          <DivSpans>
             <ButtonProgress
               key={cardStatus.INPROGRESS}
               onClick={() =>
@@ -225,10 +218,18 @@ const SubjectList = () => {
               }
               style={getTabColor(cardStatus.INPROGRESS)}
             >
-              <All>
-                Progress (<HowManyAll>{SubjectsProgress.length}</HowManyAll>)
-              </All>
+              <Progress>
+                Progress (
+                <HowManyProgress>
+                  {
+                    subjectsList1.filter((item) => item.status === "Progress")
+                      .length
+                  }
+                </HowManyProgress>
+                )
+              </Progress>
             </ButtonProgress>
+
             <ButtonFinished
               key={cardStatus.FINISHED}
               onClick={() => handleClick(SubjectsFinished, cardStatus.FINISHED)}
@@ -236,35 +237,92 @@ const SubjectList = () => {
             >
               <Finished>
                 Finished (
-                <HowManyFinished>{SubjectsFinished.length}</HowManyFinished>)
+                <HowManyFinished>
+                  {
+                    subjectsList1.filter((item) => item.status === "Finished")
+                      .length
+                  }
+                </HowManyFinished>
+                )
               </Finished>
             </ButtonFinished>
+
             <ButtonCancel
               key={cardStatus.CANCELED}
               onClick={() => handleClick(SubjectsCancel, cardStatus.CANCELED)}
               style={getTabColor(cardStatus.CANCELED)}
             >
               <Canceled>
-                Canceled (<HowManyCancel>{SubjectsCancel.length}</HowManyCancel>
+                Canceled (
+                <HowManyCancel>
+                  {
+                    subjectsList1.filter((item) => item.status === "Canceled")
+                      .length
+                  }
+                </HowManyCancel>
                 )
               </Canceled>
             </ButtonCancel>
-          </Spans>
-          <LineGray />
-        </Header>
-        <BoardStyle>{getSubjectCards()}</BoardStyle>
-      </Container>
+          </DivSpans>
+        </HeaderContainerCards>
 
-      <DivModal>
-        {modal && (
-          <Subject
-            setModal={setModal}
-            title={isEdit ? "Edit Subject" : "Create Subject"}
-          />
-        )}
-      </DivModal>
-    </ContainerFather>
+        <ContainerCards>
+          <LineDivisor />
+          <BoardStyle>
+            {subject &&
+              subject
+                .filter((item) => item.status === active)
+                .map((item) => (
+                  <SubjectCard
+                    key={item.id}
+                    id={item.id}
+                    setIdRemark={(i) => setIdRemark(i)}
+                    setId={(i) => setId(i)}
+                    openModal={() => detailsModal()}
+                  />
+                ))}
+          </BoardStyle>
+        </ContainerCards>
+      </ContainerHeaderAndCards>
 
+      <DivModal $mode={modalEdit} />
+      {modalEdit && (
+        <EditSubject
+          id={id}
+          setModalEdit={setModalEdit}
+          title={isEdit ? "Create Subject" : "Edit Subject"}
+        />
+      )}
+
+      <DivModal $mode={modal} />
+
+
+      {modal && (
+        <CreateRemark id={id} setModal={setModal} title={"Create Subject"} />
+      )}
+
+
+      <DivModal $mode={modalDetails} />
+
+      {modalDetails && (
+        <ModalSubject
+          id={id}
+          idRemark={idRemark}
+          setModal={setModalDetails}
+          title={isEdit ? "Subject" : "Subject Details"}
+        />
+      )}
+
+      <DivModal $mode={modalPlanner} />
+
+      {modalPlanner && (
+        <ModalCreatePlanner
+          id={id}
+          setModalPlanner={setModalPlanner}
+          title={"Planner"}
+        />
+      )}
+    </ContainerGlobal>
   );
 };
 export default SubjectList;
