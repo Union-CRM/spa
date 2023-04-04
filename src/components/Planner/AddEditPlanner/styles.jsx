@@ -17,12 +17,16 @@ export const Container = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-45%, -50%);
-
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     border-left: 15px solid #007BFF;
     border-radius: 8px;
+    @media(max-width: 1200px) {
+        transform: translate(-60%,-50%);
+        width: 35vw;
+         
+    }
     
 `
 
@@ -77,6 +81,11 @@ export const DivClocks = styled.div`
     grid-column-gap: 2%;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
+
+    @media (max-width: 766px){
+        display: block;
+    }
+    
 `
 export const PositionTags = styled.div`
     margin-left: 5.5%;
@@ -86,6 +95,7 @@ export const PositionTags = styled.div`
 
 export const PositionStatus = styled.div`
     margin-left: 5%;
+    margin-top: 2.5%;
 `
 export const DivDate = styled.div`
    display: flex;
@@ -99,6 +109,11 @@ export const InputDate = styled.input`
   height:3.5vh;
   color: #a0a0a0;;
   border-radius: 8px;
+
+  @media (max-width: 1200px) {
+    width: 85%;
+
+  }
 `
 export const DivStart = styled.div`
 display: flex;

@@ -23,8 +23,8 @@ export const Container = styled.div`
   justify-content: center;
   box-sizing: border-box;
   z-index: 100;
-  width: 25%;
-  height: 25%;
+  max-width: 350px;
+  max-height: 250px;
   border-left: 16.56px solid #007bff;
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
@@ -33,6 +33,10 @@ export const Container = styled.div`
   border-left: 7px solid #007bff;
   @media (min-width: 100px) and (max-width: 500px) {
     justify-content: center;
+  }
+  @media (max-width: 1200px) {
+    width: 300px;
+    height: 210px;
   }
 `;
 
@@ -82,7 +86,7 @@ export const Circle = styled.div`
 
 export const Button = styled.button`
     height: 4vh;
-    width: 17vw;
+    width: 250px;
     border-radius: 8px;
     background-color: #FFFFFF;
     border: none;
@@ -94,7 +98,8 @@ export const Button = styled.button`
     font-weight: 500;
     font-size: 18px;
     @media(max-width: 1200px) {
-      font-size: 12px;
+      font-size: 14px;
+      width: 230px
     }
 `
 export const Title = styled.div`
@@ -103,7 +108,7 @@ export const Title = styled.div`
   font-weight: 600;
   margin-top: 3%;
   @media(max-width: 1200px) {
-    font-size: 16px;
+    font-size: 24px;
   }
 `
 

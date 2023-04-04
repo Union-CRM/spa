@@ -15,7 +15,7 @@ const PopUpCanceled= () => {
   const { setModalFollowUp, 
     setModalPopUpCanceled, 
     setModalReschedule, 
-    setModalSubject } =  usePlannerContext()
+    setModalSubject} =  usePlannerContext()
 
   const handleFollowUp = () => (
     setModalFollowUp(true),

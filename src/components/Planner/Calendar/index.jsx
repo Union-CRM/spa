@@ -25,8 +25,8 @@ import {
   InputSearch,
   DivIconSearch,
   DivIconS,
-  DivClose
-
+  DivClose,
+  PositionSubject,
 } from "./styles";
 import { DAYS, MOCKAPPS } from "./utils/conts";
 import {
@@ -55,7 +55,6 @@ import PopUpCanceled from "../PopUpCanceled";
 import FollowUpModal from "../FollowUpModal";
 import PopUpFinished from "../PopUpFinished";
 import Subject from "../../Subject/CreateEditSubjectModal";
-
 
 export const BigCalender = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -174,7 +173,7 @@ formatDate(today, 'mm/dd/aa');
       <DivIconSearch>
       <Tippy content="Search">
                 <DivIconS>
-                  <IconSystem icon="Search" width={"20px"} height={"17px"} />
+                  <IconSystem icon="Search" width={"20px"} height={"3vh"} />
                 </DivIconS> 
       </Tippy>
                 <InputSearch placeholder="Search..."/>
@@ -202,9 +201,7 @@ formatDate(today, 'mm/dd/aa');
         </DivNextMonth>
         </CurrentMonth>
         <DivCreatePlanner onClick={() => setModalCreate(true)}>
-
           <ButtonAdd  mode={"#007BFF"} color={"#FFFFFF"} name={"Create Planner"} onClick={() => setOpenModal(true)}/>
-
         </DivCreatePlanner>
       </DateControls>
       <SevenColGrid>
@@ -334,7 +331,9 @@ formatDate(today, 'mm/dd/aa');
 
     {modalSubject && (
       <>
-        <Subject />
+        <PositionSubject>
+          <Subject title={"Create Subject"}/>
+        </PositionSubject>
       </>  
     )}
       

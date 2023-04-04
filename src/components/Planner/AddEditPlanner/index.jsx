@@ -190,10 +190,7 @@ const ModalPlanner = ({ title, setOpenModal }) => {
               <TagComponent options={clientOption}
                   label={"Guests"} 
                   width={"90%"}
-
                   widths={"13vw"}
-                  heights={"11vh"}
-
                   set={(g)=> setGuest(g)}
                   sizeHeight={"3.5vh"}
                />
@@ -212,9 +209,9 @@ const ModalPlanner = ({ title, setOpenModal }) => {
                   options={StatusOption}
                   value={"Scheduled"} 
                   label={"Status"} 
-                  sizeSingle={"33%"} 
+                  sizeSingle={"37%"} 
                   sizeMenuList={"100%"}
-                  sizeMenu={"30%"}
+                  sizeMenu={"33%"}
                   isDisabled={true}
                   sizeHeight={"3.5vh"}
               />)}
