@@ -7,7 +7,7 @@ export const SingleSelect = (props) => {
   const { options, value } = props;
   const animatedComponents = makeAnimated();
   const [index, setIndex] = useState(-1);
-  
+
   useEffect(() => {
     let i = 0;
     let v = props.value;
@@ -17,7 +17,7 @@ export const SingleSelect = (props) => {
       }
       i = i + 1;
     });
-  }, [options,value]);
+  }, [value]);
 
   return (
     <>
