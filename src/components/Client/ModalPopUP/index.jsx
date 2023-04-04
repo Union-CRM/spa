@@ -11,7 +11,6 @@ import {
 } from "./styles";
 import { useClientContext } from "../../../hook/useClientContent";
 import { useEffect, useRef } from "react";
-import axios from "axios";
 
 const ModalPopUp = (props) => {
   const { modalClose } = props;
@@ -24,32 +23,14 @@ const ModalPopUp = (props) => {
 
   const span =
     client.status === "Active"
-      ? "Do you want do deactivate this card?"
+      ? "Do you want do Inactivate this card?"
       : "Do you want to activate this card?";
 
   const handleAlterStatus = () => {
-    
-    async function UpdateStatusClient(){
-
-
-        axios.put(`http://localhost:8083/union/v1/clients/update/status/${client.id}`,{},        
-        {headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}})
-        .then(function (response) {
-            console.log(response);
-    
-        })
-        .catch(function (error) {
-            console.log(error.response);
-        });
-    
-    }
-    UpdateStatusClient();
-
     const noId = clientList.filter((item) => item.id !== client.id);
     client.status = client.status === "Active" ? "Inactive" : "Active";
 
     setClientList([...noId, client]);
-    
     modalClose();
   };
 
