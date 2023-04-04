@@ -8,6 +8,7 @@ export const Container = styled.div`
   height: 100%;
   padding-left: 0px;
   width: 96%;
+  z-index: 0 !important;
 `;
 
 //Cards Clients //
@@ -16,7 +17,7 @@ export const Card = styled.div`
     switch (props.$mode) {
       case "Active":
         return css`
-          border-left: 7px solid #008585;
+          border-left: 7px solid #00953b;
         `;
 
       case "Inactive":
@@ -29,28 +30,17 @@ export const Card = styled.div`
         `;
     }
   }}
+
+  grid-template-rows:40% 60%;
   display: grid;
   border-radius: 8px;
-  background-color: #f5f7fa;
+  background-color: #ffffff;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
   width: auto;
-  height: 204px;
-  z-index: 0;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-bottom: 10%;
-  @media (min-width: 900px) and (max-width: 1824px) {
-    height: 180px;
-    width: 90%;
-    margin-bottom: 5%;
-  }
-`;
-
-export const CardContainer = styled.div`
-  display: grid;
-  width: 100%;
-  grid-template-rows: 80px;
+  height: 100%;
+  z-index: 0 !important;
+  padding-left: 10px;
 `;
 
 // Div Grid Header the Card //
@@ -60,7 +50,7 @@ export const Header = styled.div`
   display: grid;
   width: 100%;
   height: 100%;
-  grid-auto-rows: 25% 75%;
+  grid-template-rows: 20% auto;
   grid-template-columns: 60px auto;
   position: relative;
 `;
@@ -88,25 +78,6 @@ export const DivPhotoI = styled.div`
   justify-content: center;
   align-items: center;
   top: 30%;
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    width: 45px;
-    height: 45px;
-  }
-`;
-
-////////////// Client //////////////
-export const NameClient = styled.div`
-  font-size: 0.9rem;
-  span {
-    font-size: 0.82rem;
-    display: flex;
-  }
-`;
-
-export const EmailClient = styled.span`
-  font-size: 0.82rem;
-  text-align: justify;
-  word-wrap: break-word;
 `;
 
 // Div Name Client, Email and Status/Tags //
@@ -114,6 +85,7 @@ export const DivDadosCard = styled.div`
   text-align: left;
   width: 96%;
   height: fit-content;
+  display: grid;
   grid-row: 2;
   align-items: center;
   grid-column: 2;
@@ -125,15 +97,29 @@ export const DivIcons = styled.div`
   display: flex;
   grid-row: 1;
   justify-content: end;
-  padding-right: 4%;
+  padding-right: 5%;
   grid-gap: 5px;
   height: 100%;
   grid-column: 2;
   align-items: center;
 `;
 
+// Div Info client //
+
+export const DivInfo = styled.div`
+  grid-row: 2;
+  margin-top: 3%;
+  position: relative;
+  display: grid;
+  width: 98%;
+  height: auto;
+  z-index: 0;
+  grid-template-rows: auto;
+`;
+
 // Styles Status and tags //
 export const DivTagsStatus = styled.div`
+  margin-top: 2px;
   display: flex;
 `;
 
@@ -142,7 +128,7 @@ export const Status = styled.div`
     switch (props.$mode) {
       case "Active":
         return css`
-          background-color: #008585;
+          background-color: #00953b;
           text-transform: lowercase;
         `;
 
@@ -159,17 +145,13 @@ export const Status = styled.div`
   display: flex;
   color: #ffffff;
   width: fit-content;
-  height: 13px;
+  height: 15px;
   border-radius: 8px;
   font-size: 14px;
   align-items: center;
   justify-content: center;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 2%;
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    width: fit-content;
-    height: 12px;
-  }
 `;
 
 export const TagsSpan = styled.div`
@@ -177,7 +159,7 @@ export const TagsSpan = styled.div`
   color: #ffffff;
   background-color: #007bff !important;
   width: fit-content;
-  height: 13px;
+  height: 15px;
   border-radius: 8px;
   font-size: 14px;
   align-items: center;
@@ -185,15 +167,12 @@ export const TagsSpan = styled.div`
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 2%;
   margin-left: 2%;
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    width: fit-content;
-    height: 12px;
-  }
 `;
 
 export const IconTag = styled.span`
   display: flex;
-  margin-top: 0px;
+  margin-top: 2px;
+  margin-left: 2px;
 `;
 
 // Styles Icons Edit and Toggle //
@@ -203,7 +182,6 @@ export const IconEdit = styled.span`
   height: 12px;
   margin-top: 8px;
   cursor: pointer;
-  padding-left: 3%;
 `;
 
 export const DivToggle = styled.div`
@@ -230,10 +208,12 @@ export const InputToggle = styled.input`
   display: block;
   width: 100%;
   height: 100%;
+
   position: absolute;
   top: 0;
   left: 0;
   z-index: 10;
+
   opacity: 0;
   cursor: pointer;
 `;
@@ -246,7 +226,7 @@ export const LabelToggle = styled.label`
     switch (props.$mode) {
       case "Active":
         return css`
-          background: #008585;
+          background: #00953b;
           left: 2px;
         `;
 
@@ -276,19 +256,6 @@ export const LabelToggle = styled.label`
   }
 `;
 
-// Div Info client //
-
-export const DivInfo = styled.div`
-  grid-row: 2;
-  margin-top: 3%;
-  position: relative;
-  display: grid;
-  width: 98%;
-  height: 100%;
-  z-index: 0;
-  grid-template-rows: 25% 25% 25% 25%;
-`;
-
 // Infos Clients //
 export const Line = styled.p`
   color: #007bff;
@@ -298,11 +265,11 @@ export const Line = styled.p`
 `;
 
 export const DivRole = styled.span`
-  height: 100%;
+  display: flex;
+  height: fit-content;
   width: 100%;
-  display: grid;
   position: relative;
-  grid-row: 1;
+  flex-direction: row;
   justify-content: flex-start;
   span {
     color: rgba(0, 0, 0, 0.7);
@@ -310,11 +277,11 @@ export const DivRole = styled.span`
 `;
 
 export const DivCustomer = styled.span`
-  display: grid;
-  grid-row: 2;
-  height: 100%;
+  display: flex;
+  height: fit-content;
   width: 100%;
   position: relative;
+  flex-direction: row;
   justify-content: flex-start;
   span {
     color: rgba(0, 0, 0, 0.7);
@@ -322,11 +289,11 @@ export const DivCustomer = styled.span`
 `;
 
 export const DivBusiness = styled.span`
-  height: 100%;
-  grid-row: 3;
+  display: flex;
+  height: fit-content;
   width: 100%;
   position: relative;
-  display: grid;
+  flex-direction: row;
   justify-content: flex-start;
   span {
     color: rgba(0, 0, 0, 0.7);
@@ -334,12 +301,11 @@ export const DivBusiness = styled.span`
 `;
 
 export const DivRelease = styled.span`
-  display: grid;
-  height: 100%;
-  grid-row: 4;
-  width: 100%;
+  display: flex;
+  height: fit-content;
+  width: 90%;
   position: relative;
-
+  flex-direction: row;
   justify-content: flex-start;
   color: rgba(0, 0, 0, 0.7);
 `;
@@ -356,17 +322,11 @@ export const TitleInfo = styled.span`
     margin-right: 2px;
     margin-left: 5px;
   }
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    font-size: 0.9rem;
-  }
 `;
 
 export const ValueInfo = styled.span`
   font-weight: 500;
   font-size: 1rem;
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    font-size: 0.9rem;
-  }
 `;
 
 // VERIFICAR //

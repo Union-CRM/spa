@@ -20,13 +20,13 @@ import {
 } from "./styles";
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
-import clientList from "../../../context/ClientContext";
 import subjectList from "../../../context/SubjectContext";
 import { useClientContext } from "../../../hook/useClientContent";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 
 const Subject = (props) => {
   const { setModal, title, id } = props;
+  const { client: clientList} = useClientContext();
 
   // CLOSE E SAVE ////////////
   const closeModal = () => {
