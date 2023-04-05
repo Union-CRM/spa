@@ -69,7 +69,7 @@ export const Container = styled.div`
         `;
     }
   }}
-  width:70%;
+  width:75%;
   min-width: 350px;
   height: 100%;
   z-index: 1000;

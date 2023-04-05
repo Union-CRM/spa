@@ -7,6 +7,8 @@ export const SubjectContextProvider = ({ children }) => {
 
   const [modalDetails, setModalDetails] = useState(false);
 
+  const [activeTab, setActiveTab] = useState(null);
+
   const [modal, setModal] = useState();
   const [modalEdit, setModalEdit] = useState(false);
   const [isEdit, setEdit] = useState(false);
@@ -42,6 +44,8 @@ export const SubjectContextProvider = ({ children }) => {
         setEdit,
         modalPlanner,
         setModalPlanner,
+        activeTab,
+        setActiveTab,
       }}
     >
       {children}
@@ -104,9 +108,9 @@ const subjectsList = [
     subject_title: "Apresentação Institucional TCS",
     manager: "Felipe Flaibam",
     release: "Itaú",
-    business: "React e Angular",
-    client: "Carlos Hideki Morita",
-    client_email: "morita.carlos@tcs.com",
+    business: "Integração Digital",
+    client: "Guilherme Rezende",
+    client_email: "guilherme@tcs.com",
     description:
       "Objetivos da apresentação: Identificar as necessidades do cliente e compreender seus objetivos Apresentar a expertise da consultoria de TI em serviços financeiros; Discutir as soluções personalizadas que podem ser oferecidas para as necessidades específicas da instituição financeira;",
   },

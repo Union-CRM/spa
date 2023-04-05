@@ -77,10 +77,10 @@ export const Close = styled.button`
 export const Container = styled.div`
   grid-row: 1;
   grid-column: 2;
-  width: 85%;
+  width: 80%;
   height: 100%;
   display: grid;
-  min-width: 300px;
+  min-width: 400px;
   background: #fff;
   border-left: 16.56px solid #007bff;
   border-radius: 8px;
@@ -123,10 +123,11 @@ export const Input = styled.input`
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
   border: 2px solid #888c95;
+
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
   @media (min-width: 1600px) {
-    width: 40px;
+    width: 20px;
   }
 `;
 
@@ -148,14 +149,14 @@ export const DivDate = styled.div`
 
 export const DivStart = styled.div`
   grid-row: 2;
-  width: 90%;
+  width: 93%;
   height: 100%;
   display: grid;
 `;
 
 export const DivFinish = styled.div`
   grid-row: 3;
-  width: 90%;
+  width: 93%;
   height: 100%;
   display: grid;
 `;

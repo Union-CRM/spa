@@ -25,8 +25,11 @@ import {
 } from "./styles";
 import SubjectCard from "../CardListView/index";
 import { useState } from "react";
-import Subject from "../CreateEditSubjectModal";
 import ButtonAdd from "../../../assets/Buttons/ButtonAdd";
+
+//Components
+import Subject from "../CreateEditSubjectModal";
+
 import ModalSubject from "../../Subject/ModalSubject";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
@@ -34,6 +37,9 @@ import { useRemarkContext } from "../../../hook/useRemarkContent";
 import EditSubject from "../../Subject/EditSubject";
 import CreateRemark from "../../Subject/ModalCreateRemark";
 import ModalCreatePlanner from "../../Subject/ModalCreatePlanner";
+// Hooks
+
+import { usePlannerContext } from "../../../hook/usePlannerContent";
 
 const cardStatus = {
   INPROGRESS: "Progress",
@@ -142,7 +148,6 @@ const SubjectList = () => {
 
   const [modal, setModal] = useState(false);
   const [openModalD, openModalSubjects] = useState(false);
-  const [closeModalDetails, setCloseModalDetails] = useState(false);
   const [cards, setCards] = useState(SubjectsProgress);
   const [active, setActive] = useState(cardStatus.INPROGRESS);
 
@@ -176,19 +181,19 @@ const SubjectList = () => {
     setModalDetails(true);
   };
 
-  // Remark e Subject
-
-  const [id, setId] = useState(null);
-
+  // Subject //
+  const { id, setId } = useSubjectContext();
   const { subject } = useSubjectContext();
 
+  // Remark //
   const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
-
   const { idRemark, setIdRemark } = useRemarkContext();
 
-  // Create Planner //
+  const { modalRemark, setModalRemark } = useRemarkContext();
 
-  const [modalPlanner, setModalPlanner] = useState(false);
+  // Create Planner //
+  const { idPlanner, setIdPlanner } = usePlannerContext();
+  const { modalPlanner, setModalPlanner } = usePlannerContext();
 
   return (
     <ContainerGlobal>
@@ -277,6 +282,7 @@ const SubjectList = () => {
                   <SubjectCard
                     key={item.id}
                     id={item.id}
+                    /*setIdPlanner={(i) => setIdPlanner(i)}*/
                     setIdRemark={(i) => setIdRemark(i)}
                     setId={(i) => setId(i)}
                     openModal={() => detailsModal()}
@@ -298,7 +304,7 @@ const SubjectList = () => {
       <DivModal $mode={modal} />
 
       {modal && (
-        <CreateRemark id={id} setModal={setModal} title={"Create Subject"} />
+        <Subject id={id} setModal={setModal} title={"Create Subject"} />
       )}
 
       <DivModal $mode={modalDetails} />
@@ -306,9 +312,11 @@ const SubjectList = () => {
       {modalDetails && (
         <ModalSubject
           id={id}
+          idPlanner={idPlanner}
           idRemark={idRemark}
           setModal={setModalDetails}
           title={isEdit ? "Subject" : "Subject Details"}
+          openModal={() => detailsModal()}
         />
       )}
 
@@ -316,9 +324,19 @@ const SubjectList = () => {
 
       {modalPlanner && (
         <ModalCreatePlanner
-          id={id}
+          idPlanner={idPlanner}
           setModalPlanner={setModalPlanner}
-          title={"Planner"}
+          title={"Create Planner"}
+        />
+      )}
+
+      <DivModal $mode={modalRemark} />
+
+      {modalRemark && (
+        <CreateRemark
+          idRemark={idRemark}
+          setModalRemark={setModalRemark}
+          title={"Create Remark"}
         />
       )}
     </ContainerGlobal>

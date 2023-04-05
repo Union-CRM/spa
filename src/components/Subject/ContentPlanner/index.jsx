@@ -51,9 +51,11 @@ const ContentsPlanner = (props) => {
 
   const { id } = useSubjectContext();
 
+  const { setId, isEdit, setEdit } = useSubjectContext();
+
   const { setModalDetails, setModalEdit } = useSubjectContext();
 
-  const { setModalPlanner } = usePlannerContext();
+  const { setModalPlanner, modalPlanner } = usePlannerContext();
 
   const [status, setStatus] = useState();
 
@@ -90,7 +92,8 @@ const ContentsPlanner = (props) => {
 
   // Planner Create //
 
-  const clickOn = () => {
+  const PlannerModal = () => {
+    setModalDetails(false);
     setModalPlanner(true);
   };
 
@@ -98,18 +101,20 @@ const ContentsPlanner = (props) => {
     <DivContainerAll>
       <ContainerPlanner>
         <ButtonCreatePlanner>
-          <ButtonAdd
-            onClick={() => clickOn()}
-            $mode={status}
-            width="130px"
-            padding="0"
-            sizeFont="0.9rem"
-            boxShadow="none"
-            margin="none"
-          >
-            {" "}
-            <span>Create Planner</span>
-          </ButtonAdd>
+          {status !== "Finished" && status !== "Canceled" && (
+            <ButtonAdd
+              onClick={() => PlannerModal()}
+              $mode={status}
+              width="130px"
+              padding="0"
+              sizeFont="0.9rem"
+              boxShadow="none"
+              margin="none"
+            >
+              {" "}
+              <span>Create Planner</span>
+            </ButtonAdd>
+          )}
         </ButtonCreatePlanner>
 
         <ContainerCards>
