@@ -33,7 +33,6 @@ import Subject from "../CreateEditSubjectModal";
 import ModalSubject from "../../Subject/ModalSubject";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
-
 import EditSubject from "../../Subject/EditSubject";
 import CreateRemark from "../../Subject/ModalCreateRemark";
 import ModalCreatePlanner from "../../Subject/ModalCreatePlanner";
@@ -303,9 +302,11 @@ const SubjectList = () => {
 
       <DivModal $mode={modal} />
 
+
       {modal && (
         <Subject id={id} setModal={setModal} title={"Create Subject"} />
       )}
+
 
       <DivModal $mode={modalDetails} />
 
