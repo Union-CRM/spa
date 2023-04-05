@@ -22,6 +22,7 @@ function LoginPage() {
         //'http://ec2-18-230-74-206.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login'
         // Só utilizar quando for apresentar ao Giba.
 
+        //teste
      
         if (email !== "" && password !== "") { // Verificar email e senha preenchidos e tamanho mínimo da senha
             const { data } = await axios.post('http://ec2-18-230-74-206.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login', {
@@ -42,12 +43,13 @@ function LoginPage() {
             });
             
 
-            localStorage.setItem('token', data.token);
-            window.location.href = '/home';
+           /* localStorage.setItem('token', data.token);
+            window.location.href = '/home';*/
         }
       
-      /*localStorage.setItem('token', "data.token");
-      window.location.href = '/home';*/
+      localStorage.setItem('token', "data.token");
+      window.location.href = '/home';
+      console.log("teste");
 
     }
   
