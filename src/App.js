@@ -6,14 +6,19 @@ import SubjectPage from "./pages/Subject/index";
 import Client from "./pages/Client";
 import RemarkPage from "./pages/Remark";
 import LoginPage from "./pages/Login/index";
+import { ClientContextProvider } from "./context/ClientContext"
+import { UserContextProvider } from "./context/UserContext"
 function App() {
   return (
     <>
+    <UserContextProvider>
+    <ClientContextProvider>
       <Router>
         <GlobalStyle />
         <div className="App">
           <Routes>
             <Route path="/" element={<LoginPage />} />
+            
             <Route
               path="/home"
               element={
@@ -34,6 +39,7 @@ function App() {
                 )
               }
             />
+            
             <Route
               path="/subject"
               element={
@@ -67,6 +73,8 @@ function App() {
           </Routes>
         </div>
       </Router>
+      </ClientContextProvider>
+      </UserContextProvider>      
     </>
   );
 }

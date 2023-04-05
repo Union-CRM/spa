@@ -1,6 +1,7 @@
-import React from "react";
+import React,{useState} from "react";
 import IconSystem from "../../../assets/IconSystem";
 import Body from "../../../assets/FontSystem/Body";
+import {useUserContext} from "../../../hook/useUserContext"
 import {
   Container,
   OpenClose,
@@ -18,21 +19,98 @@ import {
   Logout,
 } from "./styles";
 
-function Split() {
-  var name = "Héder Silva Oliveira";
-  const abbreviation = name
-    .match(/(^\S\S?|\b\S)?/g)
-    .join("")
-    .match(/(^\S|\S$)?/g)
-    .join("")
-    .toUpperCase();
-  return abbreviation;
+function Split(n) {
+  const name= n? n:""
+  var nameSplit=name.split(" ")
+  var name2=nameSplit[0].split("")[0]+" "+nameSplit[nameSplit.length-1].split("")[0]+"";
+  return name2.toUpperCase();
 }
+
 function handleLogin(event) { // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
   // Impedir comportamento padrão de submissão do formulário
   localStorage.setItem("token","");
 }
 
+
+const SidBar =(props)=>{
+  const [sidBarState,setSidBarState]=useState(true);
+  const {user}=useUserContext();
+  console.log(user)
+
+  return (
+    <>
+      <Container
+        $column={props.column}
+        $row={props.row}
+        $mode={sidBarState}
+      >
+        <OpenClose
+          $mode={sidBarState}
+          onClick={() =>
+            setSidBarState(!sidBarState)
+          }
+        >
+          <IconSystem icon="OpenClose" />
+        </OpenClose>
+        <User $mode={sidBarState}>
+          <Img $mode={sidBarState}>
+            <DivPhotoI>
+              <Body type={"Body1"} name={Split(user.name)} />
+            </DivPhotoI>
+          </Img>
+          <Name $mode={sidBarState}>{user.name}</Name>
+          <Email $mode={sidBarState}>{user.email}</Email>
+          <Id $mode={sidBarState}>{user.tcs_id}</Id>
+        </User>
+        <Ul $mode={sidBarState}>
+          <Slink to="/home">
+            <Li>
+              <Icon $mode={sidBarState}>
+                <IconSystem icon="Home" />
+                <Span $mode={sidBarState}>Home</Span>
+              </Icon>
+            </Li>
+          </Slink>
+          <Slink to="/client">
+            <Li>
+              <Icon $mode={sidBarState}>
+                <IconSystem icon="Client" />
+                <Span $mode={sidBarState}>Client</Span>
+              </Icon>
+            </Li>
+          </Slink>
+
+          <Slink to="/subject">
+            <Li>
+              <Icon $mode={sidBarState}>
+                <IconSystem icon="Subjects" />
+                <Span $mode={sidBarState}>Subjects</Span>
+              </Icon>
+            </Li>
+          </Slink>
+
+          <Slink to="/planner">
+            <Li>
+              <Icon $mode={sidBarState}>
+                <IconSystem icon="Planner" />
+                <Span $mode={sidBarState}>Planner</Span>
+              </Icon>
+            </Li>
+          </Slink>
+
+        </Ul>
+        <Logout $mode={sidBarState} onClick={handleLogin}>
+            <Slink to="/">
+              <IconSystem icon="Logout"  />
+              <Span $mode={sidBarState}>Logout</Span>
+            </Slink>  
+          </Logout>
+      </Container>
+    </>
+  );
+}
+
+/*
 class SidBar extends React.Component {
   constructor(props) {
     super(props);
@@ -40,8 +118,11 @@ class SidBar extends React.Component {
       sidBartState: "false",
     };
   }
-
+  
   render() {
+    const {user} = useUserContext()
+    console.log(user)
+
     return (
       <>
         <Container
@@ -115,5 +196,5 @@ class SidBar extends React.Component {
     );
   }
 }
-
+*/
 export default SidBar;
