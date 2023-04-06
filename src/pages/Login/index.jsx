@@ -43,13 +43,13 @@ function LoginPage() {
             });
             
 
-           /* localStorage.setItem('token', data.token);
-            window.location.href = '/home';*/
+            localStorage.setItem('token', data.token);
+            window.location.href = '/home';
         }
       
-      localStorage.setItem('token', "data.token");
+      /*localStorage.setItem('token', "data.token");
       window.location.href = '/home';
-      console.log("teste");
+      console.log("teste");*/
 
     }
   
