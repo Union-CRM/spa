@@ -5,12 +5,10 @@ export const ContainerCentral = styled.div`
   justify-content: end;
   display: flex;
   grid-row: 1;
-  grid-column: 2;
   @media (min-width: 100px) and (max-width: 590px) {
     grid-column: 1;
-    grid-row: 1;
     display: grid;
-    position: absolute;
+    position: relative;
     top: 0px;
     left: 0;
     justify-content: start;
@@ -77,7 +75,7 @@ export const Close = styled.button`
 export const Container = styled.div`
   grid-row: 1;
   grid-column: 2;
-  width: 75%;
+  width: 80%;
   min-width: 350px;
   height: 100%;
   background: #fff;
@@ -88,8 +86,8 @@ export const Container = styled.div`
   z-index: 1000;
   grid-template-rows: 10% 75% 15%;
   @media (width: 500px) {
-    height: 81vh;
     width: 375px;
+    height: 100%;
     flex-direction: flex-start;
     position: relative;
   }

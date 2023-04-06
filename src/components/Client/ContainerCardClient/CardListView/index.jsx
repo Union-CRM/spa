@@ -78,18 +78,11 @@ const ClientCard = (props) => {
 
               <DivTagsStatus>
                 <Status $mode={client.status}>{client.status}</Status>
-                <TagsSpan $mode={client.tags}>
-                  tags
-                  <Tippy content={tags}>
-                    <IconTag>
-                      <IconSystem
-                        icon={"TagWhite"}
-                        width={"10px"}
-                        height={"10px"}
-                      />
-                    </IconTag>
-                  </Tippy>
-                </TagsSpan>
+                <Tippy content={tags}>
+                   <TagsSpan $mode={client.tags}>
+                    tags
+                   </TagsSpan>
+                </Tippy>
               </DivTagsStatus>
             </DivDadosCard>
 

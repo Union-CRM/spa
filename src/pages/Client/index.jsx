@@ -7,9 +7,9 @@ const Client = () => {
   return (
     <>
       <PageBody>
-        <ClientContextProvider>
+        
           <ContainerCards />
-        </ClientContextProvider>
+   
       </PageBody>
     </>
   );

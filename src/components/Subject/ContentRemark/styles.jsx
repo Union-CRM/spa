@@ -18,16 +18,16 @@ export const ButtonCreateRemark = styled.div`
 export const ButtonAdd = styled.button`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           border: 1px solid #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           border: 1px solid #00953b;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
           border: 1px solid #771300;
         `;
@@ -50,16 +50,16 @@ export const ButtonAdd = styled.button`
   span {
     ${(props) => {
       switch (props.$mode) {
-        case "Finished":
+        case "FINISHED":
           return css`
             color: #008585;
           `;
-        case "Progress":
+        case "IN PROGRESS":
           return css`
             color: #00953b;
           `;
 
-        case "Canceled":
+        case "CANCELED":
           return css`
             color: #771300;
           `;
@@ -112,16 +112,16 @@ export const ContainerCards = styled.div`
 export const CardRemark = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           border-bottom: 8px solid #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           border-bottom: 8px solid #00953b;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
           border-bottom: 8px solid #771300;
         `;
@@ -160,16 +160,16 @@ export const Circle = styled.div`
 export const IconOpenClose = styled.button`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           background-color: #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           background-color: #00953b;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
           color: #771300;
         `;
@@ -193,16 +193,16 @@ export const IconOpenClose = styled.button`
   svg {
     ${(props) => {
       switch (props.$mode) {
-        case "Finished":
+        case "FINISHED":
           return css`
             color: #008585;
           `;
-        case "Progress":
+        case "IN PROGRESS":
           return css`
             color: #00953b;
           `;
 
-        case "Canceled":
+        case "CANCELED":
           return css`
             color: #771300;
           `;
@@ -231,16 +231,16 @@ export const DivGlobalCard = styled.div`
 export const DivDate = styled.div`
 ${(props) => {
   switch (props.$mode) {
-    case "Finished":
+    case "FINISHED":
       return css`
         color: #008585;
       `;
-    case "Progress":
+    case "IN PROGRESS":
       return css`
         color: #00953b;
       `;
 
-    case "Canceled":
+    case "CANCELED":
       return css`
         color: #771300;
       `;
@@ -264,16 +264,16 @@ svg {
 span {
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           color: #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           color: #00953b;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
           color: #771300;
         `;
@@ -302,16 +302,16 @@ p {
 export const DivDateReturn = styled.div`
 ${(props) => {
   switch (props.$mode) {
-    case "Finished":
+    case "FINISHED":
       return css`
         color: #008585;
       `;
-    case "Progress":
+    case "IN PROGRESS":
       return css`
         color: #00953b;
       `;
 
-    case "Canceled":
+    case "CANCELED":
       return css`
         color: #771300;
       `;
@@ -335,16 +335,16 @@ svg {
 span {
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           color: #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           color: #00953b;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
           color: #771300;
         `;
@@ -387,16 +387,16 @@ export const DivPhotoII = styled.div`
 export const Photo = styled.div`
 ${(props) => {
   switch (props.$mode) {
-    case "Finished":
+    case "FINISHED":
       return css`
         border: 2px solid #008585;
       `;
-    case "Progress":
+    case "IN PROGRESS":
       return css`
         border: 2px solid #00953b;
       `;
 
-    case "Canceled":
+    case "CANCELED":
       return css`
         border: 2px solid #771300;
       `;

@@ -222,7 +222,7 @@ export const Types = styled.div`
 
 export const DivCurrentDate = styled.button`
   grid-area: 2 / 1 / 3 / 2; 
-  font-size: 25px;
+  font-size: 32px;
   font-weight: 600;
   border: none;
   cursor: pointer;
@@ -230,11 +230,10 @@ export const DivCurrentDate = styled.button`
   color: #007BFF;
   height: fit-content;
   width: fit-content;
-  justify-content: flex-start;
-  background-color: #FFFFFF;
-  @media (max-width: 640px) {
-    inline-size: max-content;
-
+  background-color: #F5F7FA;
+  justify-content: flex-start; 
+  @media (max-width: 1200px) {
+    font-size: 24px;
   }
 `
 
@@ -244,8 +243,9 @@ export const CurrentMonth = styled.div`
   flex-direction: row;
   justify-content: center;
 
-  @media (max-width: 640px) {
-    grid-area: 2 / 1 / 3 / 2;
+  @media (max-width: 978px) {
+    grid-area: auto;
+    font
   }
 `
 
@@ -262,15 +262,20 @@ export const PositionTodayDone = styled.div`
   display: flex;
   justify-content: flex-end;
 
-  @media (max-width: 978px ){
-    width: fit-content;
-    justify-content: flex-start; 
+  @media (max-width: 976px){
+    grid-area: 2 / 4 / 3 / 2;
+    font-size: initial;
+    justify-content: center;
   }
 
 `
 
 export const MonthYear = styled.p`
   font-size: 25px;
+
+  @media (max-width: 850px) {
+    font-size: 20px;
+  }
 `
 
 export const Container = styled.div`
@@ -295,30 +300,33 @@ export const DivNextMonth = styled.div`
 `
 
 export const InputSearch = styled.input`
-  width: 20vw;
+  width: 22vw;
   height: 3.5vh;
-  border-radius: 10px;
-  border: 1px solid #CBD0DD;
+  border-radius: 8px;
+  border: none;
+  :focus{
+    outline: none;
+  }
   `;
 
 export const DivIcon = styled.input`
-  width: 20vw;
   height: 3.5vh;
   border-radius: 8px;
 `
 export const DivIconSearch = styled.div`
-  width: 20vw;
+  width: 22vw;
   height: 3.5vh;
-  display: flexbox;
+  display: flex;
   position: relative;
+  border: 2px solid #CBD0DD;
+  border-radius: 8px;
  
 `;
 export const DivIconS = styled.div`
   width: fit-content;
   height: fit-content;
   border-radius: 50%;
-  margin-right: 5px;
-  border: 1px solid #CBD0DD;
+  margin-top: 1%;
 `
 
 export const DivClose = styled.div`
@@ -330,4 +338,10 @@ export const DivClose = styled.div`
   background-color: black;
   opacity: 55%;
   z-index: 0;
+`
+
+export const PositionSubject = styled.div`
+  top: 50%;
+  left: 50%;
+  transform: translate(-10%, -100%)
 `

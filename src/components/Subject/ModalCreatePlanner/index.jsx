@@ -19,16 +19,26 @@ import {
 } from "./styles";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import Clock from "../../Geral/Input/clock";
-import { useClientContext } from "../../../hook/useClientContent";
+import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { GuestComponent } from "../../Geral/Input/GuestsComponent";
+import { usePlannerContext } from "../../../hook/usePlannerContent";
 
 const ModalCreatePlanner = (props) => {
   const { setModal, id } = props;
 
   const closeModal = () => {
-    setModal(false);
+    setModalDetails(true);
+    setModalPlanner(false);
+    setToggleState(2);
   };
 
+  const { setToggleState } = useSubjectContext();
+
+  const { setModalDetails } = useSubjectContext();
+
+  const { setModalPlanner } = usePlannerContext();
+
+  /*
   const handleSubmit = () => {
     if (props.title === "Planner") {
       editClient();
@@ -37,6 +47,7 @@ const ModalCreatePlanner = (props) => {
     }
   };
 
+  
   function getId() {
     let lastId = 1;
 
@@ -115,7 +126,11 @@ const ModalCreatePlanner = (props) => {
     } else {
       setFlag(true);
     }
-  };
+  };*/
+
+  const [tags, setTags] = useState([]);
+
+  const [flag, setFlag] = useState(false);
 
   const [userChoice, setUserChoice] = useState("");
 
@@ -137,11 +152,12 @@ const ModalCreatePlanner = (props) => {
                   Date
                   <Input
                     type={"date"}
-                    widthInput={"93% !important"}
-                    placeholder={flag && !name ? "Required field" : ""}
+                    widthInput={"100% !important"}
+                    value={new Date().toISOString().slice(0, 10)}
+                    /*placeholder={flag && !name ? "Required field" : ""}
                     value={name}
                     required
-                    onChange={(event) => setName(event.target.value)}
+                    onChange={(event) => setName(event.target.value)}*/
                   />
                 </Label>
               </DivDate>
@@ -149,14 +165,14 @@ const ModalCreatePlanner = (props) => {
               <DivStart>
                 <Label>
                   Start
-                  <Clock />
+                  <Clock widthClock={"100%"} />
                 </Label>
               </DivStart>
 
               <DivFinish>
                 <Label>
                   Finish
-                  <Clock />
+                  <Clock widthClock={"100%"} />
                 </Label>
               </DivFinish>
 
@@ -167,7 +183,7 @@ const ModalCreatePlanner = (props) => {
                   placeholder={flag && !tags ? "Required field" : ""}
                   sizeSingle={"60%"}
                   required
-                  sizeMenu={"80%"}
+                  sizeMenu={"90%"}
                   options={options}
                   top={"240%"}
                   width={"230%"}
@@ -177,7 +193,7 @@ const ModalCreatePlanner = (props) => {
               </DivGuest>
             </Form>{" "}
             <DivButton>
-              <ClickButton onClick={handleSubmit}>
+              <ClickButton>
                 <ButtonDefault
                   type="userSave"
                   weightFont={"500"}

@@ -1,7 +1,7 @@
 import React from 'react'
 import SingleSelect from '../../Geral/Input/SingleSelect'
 import ButtonDefault from '../../../assets/Buttons/ButtonDefault'
-import { TagComponent } from '../../Geral/TagComponent'
+import { GuestComponent } from '../../Geral/Input/GuestsComponent'
 import { Container, 
     Title,
     PositionLabel,
@@ -33,7 +33,7 @@ const FollowUpModal = () => {
                 <SingleSelect label={"Release Train"} options={options} sizeHeight={"3.5vh"} sizeSingle={"27.5vw"}/>
             </PositionSingle>
             <PositionTag>
-                <TagComponent label={"Guests"} sizeHeight={"3.5vh"} width={"9vw"} widths={"17.5vw"} heights={"18.9vh"} marginLeft={"111%"}/>
+                <GuestComponent label={"Guests"} sizeHeight={"3.5vh"} width={"9vw"} widths={"17.5vw"} heights={"17vh"} marginLeft={"35%"}/>
             </PositionTag>
             <PositionSingle>
                 <SingleSelect label={"Return"} options={options} sizeHeight={"3.5vh"} sizeSingle={"9vw"}/>

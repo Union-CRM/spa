@@ -5,13 +5,13 @@ import ContainerCards from "../../components/Client/ContainerCardClient";
 import { ClientContextProvider } from "../../context/ClientContext";
 
 import {
-  Container,
-  DivSection,
+  Content,
   DivClient,
   DivPlanner,
   H1Planners,
   HowManyPlanners,
-  Graph,
+  Graph1,
+  Graph2,
 } from "./styles";
 import Grafico from "../../components/Grafico";
 import PageBodyHome from "../../components/Geral/PageBody/PageBodyHome";
@@ -23,7 +23,7 @@ import { usePlannerContext } from "../../hook/usePlannerContext";
 
 import IconSystem from "../../../src/assets/IconSystem";
 
-import { Tooltip } from "react-tippy"
+import { Tooltip } from "react-tippy";
 import "react-tippy/dist/tippy.css";
 
 /*const funcClientInfo =()=>{
@@ -41,43 +41,33 @@ class Home extends React.Component {
   render() {
     return (
       <>
-        <Container>
-          <PageBodyHome>
+        <PageBodyHome>
+          <Content>
             <DivClient>
               <ClientContextProvider>
                 <ContainerCards />
               </ClientContextProvider>
-              <DivPlanner>
-                <H1Planners>
-                  Planners
-                  <HowManyPlanners>({PlannerCount.length})</HowManyPlanners>{" "}
-                  <Tooltip
-                    title="List of Planners of the Day"
-                    theme="light"
-                    duration={100}
-                    delay={0}
-                  >
-                    <IconSystem
-                      icon={"Info"}
-                      width={"1.5vw"}
-                      height={"2.1vh"}
-                    ></IconSystem>
-                  </Tooltip>
-                </H1Planners>
-                <PlannerContextProvider>
-                  <PlannerCard date={dateOfTheDay} />
-                </PlannerContextProvider>
-              </DivPlanner>
             </DivClient>
 
-            {/* <ClientCard/>*/}
+            <DivPlanner>
+              <PlannerContextProvider>
+                <PlannerCard date={dateOfTheDay} />
+              </PlannerContextProvider>
+            </DivPlanner>
 
-            <Graph>
-              <Grafico />
-              <Grafico />
-            </Graph>
-          </PageBodyHome>
-        </Container>
+          </Content>
+
+          <Graph1>
+              <Grafico value={0}  />
+
+        
+              <Grafico value={1} />
+    
+          </Graph1>
+
+          
+
+        </PageBodyHome>
       </>
     );
   }
@@ -89,4 +79,3 @@ export default Home;
       <Donut></Donut>
     <Donut></Donut>*/
 }
-
