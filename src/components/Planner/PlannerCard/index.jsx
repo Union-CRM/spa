@@ -11,7 +11,7 @@ const PlannerCard = ({ setOpenPlannerModal, date }) => {
 
   const { planner: plannerList, setPlanner: setPlannerList, setModalEdit} = usePlannerContext();
 
-  const [plannerDay] = useState(plannerList.filter((planner)=> datesAreOnSameDay(planner.date, date)))
+  const [plannerDay] = useState(plannerList.filter((planner)=> datesAreOnSameDay(new Date(planner.date), date)))
  
 
 
@@ -39,12 +39,12 @@ const PlannerCard = ({ setOpenPlannerModal, date }) => {
             <Card
               key={item.id}
               subject={item.subject}
-              releaseTrain={item.release_name}
+              releaseTrain={item.release}
               emailClient={item.client_email}
               emailUser={item.user_id}
-              client={item.client_name}
+              client={item.client}
               guests={""}
-              userName={item.user_name}
+              userName={item.user}
               status={item.status}
               OpenModal={() => setModalEdit(item.id)}
             />

@@ -15,22 +15,34 @@ import {usePlannerContext} from "../../../hook/usePlannerContext";
 
 
 
-const ModalDiscardChanges = ({setCloseDiscard}) => {
+const ModalDiscardChanges = () => {
 
 
-  const {planner: modalDiscard, setModalDiscard, setModal, setModalEdit, setModalCreate, setModalReschedule } = usePlannerContext();
+  const {planner: modalDiscard, 
+    setModalDiscard, setModal, 
+    setModalEdit, setModalCreate, 
+    setModalReschedule,
+    setModalSave,
+    setModalFollowUp,
+    setModalRemark,
+    setModalPopUpCanceled,
+    setModalPopUpFinished,
+  } = usePlannerContext();
 
   
-  const CloseDiscard = () => (
-    setCloseDiscard(false)
-  )
 
   const handleModal= () => {
-    setModalDiscard(false)
-    setModalEdit(false)
-    setModalCreate(false)
-    setModalReschedule(false)
-
+    
+    setModalEdit(false);
+    setModalCreate(false);
+    setModalReschedule(false);
+    setModalDiscard(false);
+    setModalSave(false);
+    setModalFollowUp(false);
+    setModalRemark(false);
+    setModalPopUpCanceled(false);
+    setModalPopUpFinished(false);
+    
   }
 
   return (
@@ -42,7 +54,7 @@ const ModalDiscardChanges = ({setCloseDiscard}) => {
               <span>?!</span>
             </Circle>
             <Span>{`Discard Changes?`}</Span>
-            <DivSave onClick={() => handleModal(true)}>
+            <DivSave onClick={handleModal}>
               <ButtonDefault
                 type={"userSave"}
                 sizeFont={"1rem"}

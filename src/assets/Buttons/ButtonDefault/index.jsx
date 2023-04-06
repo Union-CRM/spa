@@ -6,6 +6,7 @@ class ButtonDefault extends React.Component {
     return (
       <>
         <Button
+          onClick={this.props.onClick}
           $mode={this.props.type}
           weightFont={this.props.weightFont}
           sizeFont={this.props.sizeFont}
