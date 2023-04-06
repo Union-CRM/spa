@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 100vh;
   width: 100%;
   grid-template-columns: fit-content(10%) auto;
-  grid-template-rows: 110px 914px;
+  grid-template-rows: 3% 914px;
   margin: 0 auto;
   background-color: #ffffff;
 `;
