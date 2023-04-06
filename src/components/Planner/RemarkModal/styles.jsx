@@ -5,7 +5,6 @@ export const Form = styled.form`
     justify-content: center;
     flex-direction: column;
     overflow-y: auto;
-   
 `
 
 export const Container = styled.div`
@@ -27,12 +26,14 @@ export const Container = styled.div`
 
 export const PositionButtonSave = styled.div`
     align-self: center;
-    margin-top: 5.5%;
+    margin-top: 10%;
+    margin-bottom: 5%;
 `;
 
 export const PositionButtonCancel = styled.div`
     align-self: center;
-    margin-top: 3%;
+    margin-top: 10%;
+    margin-bottom: 5%;
 `;
 
 export const PositionTitle = styled.div`
@@ -64,14 +65,7 @@ export const PositionLabel = styled.label`
 `
 
 export const DivClocks = styled.div`
-    margin-top: 1%;
-    margin-left: 5%;
-    margin-right: 7%;
-    justify-content: center;
-    display: grid;
-    grid-column-gap: 2%;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr;
+    width: fit-content;
 `
 export const PositionTags = styled.div`
     margin-left: 5.5%;
@@ -80,36 +74,67 @@ export const PositionTags = styled.div`
 `
 
 export const PositionStatus = styled.div`
-    margin-left: 5%;
+    grid-area: Status;
+    margin-top: 1.5%;
 `
 export const DivDate = styled.div`
    display: flex;
    flex-direction: column;
-   grid-template-rows: 45% 55%;
-   width: 100%;
+   width: 40%;
 `
 export const InputDate = styled.input`
-  width: auto;
-  max-width: 90%;
+  width: 9.2vw;
   height:3.5vh;
-  color: #a0a0a0;;
   border-radius: 8px;
+  grid-area: Finish;
 `
 export const DivStart = styled.div`
-display: flex;
-flex-direction: column;
-grid-template-rows: 45% 55%;
-width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    grid-area: Date;
   
 `
 export const DivFinish = styled.div`
-display: flex;
-flex-direction: column;
-grid-template-rows: 45% 55%;
-width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    grid-area: Finish;
 
 `
 export const LabelDate = styled.p`
     display: inline-block;
+`
 
+export const InputText = styled.textarea`
+    resize: none;
+    grid-area: NoteText;
+    width: 15.5vw;
+    border: 1px solid black;
+    margin-top: -10%;
+    margin-left: 3.5%;
+`
+
+export const DivPositions = styled.div`
+    display: grid;
+    grid-template-areas: 
+    "Date LabelNote"
+    "TimeStart NoteText"
+    "Finish NoteText"
+    "Status NoteText";
+    grid-rows: 4;
+    grid-columns: 2;
+    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-columns: 35% 65%;
+    height: 100%;
+    margin-left: 5.5%;
+`
+
+export const Label = styled.label`
+    grid-area: LabelNote; 
+    margin-left: 3.5%;
+`
+export const PositionButtons = styled.div`
+    display: flex;
+    justify-content: space-around;
 `

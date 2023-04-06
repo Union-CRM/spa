@@ -20,13 +20,9 @@ import {
 
 function Split() {
   var name = "Héder Silva Oliveira";
-  const abbreviation = name
-    .match(/(^\S\S?|\b\S)?/g)
-    .join("")
-    .match(/(^\S|\S$)?/g)
-    .join("")
-    .toUpperCase();
-  return abbreviation;
+  var nameSplit=name.split(" ")
+  var name2=nameSplit[0].split("")[0]+"."+nameSplit[nameSplit.length-1].split("")[0]+".";
+  return name2.toUpperCase();
 }
 function handleLogin(event) { // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
   // Impedir comportamento padrão de submissão do formulário

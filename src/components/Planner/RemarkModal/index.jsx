@@ -22,6 +22,10 @@ import { Container,
      DivStart,
      DivFinish,
      LabelDate,
+     InputText,
+     DivPositions,
+     Label,
+     PositionButtons,
      } from './styles'
 import ModalDiscardChanges from '../ModalDiscardChanges';
 import ModalSave from '../ModalSuccessfuly';
@@ -37,10 +41,17 @@ const RemarkModal = ({ title, setOpenModal }) => {
       const [timeStart, setTimeStart] = useState();
       const [timeFinish, setTimeFinish] = useState();
       const [guest,setGuest]= useState();
-      const {planner: plannerList, setPlanner: setPlannerList, modalEdit, setModalEdit, modalDiscard, setModalDiscard, setModalCreate, setModalRemark} = usePlannerContext();
+      const {planner: plannerList,
+        plannerEdit,setPlannerEdit, 
+        setPlanner: setPlannerList, 
+        modalEdit, setModalEdit, 
+        modalDiscard, setModalDiscard, 
+        setModalCreate, setModalRemark,
+        setModalPopUpFinished, setModalPopUpCanceled,
+      } = usePlannerContext();
       const {setModalSave} =  usePlannerContext()
 
-
+      
       useEffect(()=>{
         if(modalEdit){
           const plannerEdit = plannerList.filter((p)=>  p.id === modalEdit) [0];
@@ -49,9 +60,9 @@ const RemarkModal = ({ title, setOpenModal }) => {
       },[])
       
     const StatusOption = [
-      {id: 1, value: "Scheduled", label: "Scheduled"},
-      {id: 2, value: "Done", label: "Done"},
-      {id: 3, value: "Canceled", label: "Canceled"},
+      {id: 1, value: "SCHEDULED", label: "Scheduled"},
+      {id: 2, value: "DONE", label: "Done"},
+      {id: 3, value: "CANCELED", label: "Canceled"},
       
     ]
 
@@ -61,15 +72,21 @@ const RemarkModal = ({ title, setOpenModal }) => {
     }
 
     const handleSubmit=(e)=>{
+      console.log(plannerEdit.status)
+      if(plannerEdit.status === "DONE"){
+        //to do: save plannerEdit
+        setModalPopUpFinished(true)
+        setModalRemark(false)
+      }else{
+         //to do: save plannerEdit
+        //to do: open Modal
+        setModalPopUpCanceled(true)
+        setModalRemark(false)
+      }
  
     }
 
-    const handleModal = (newPlanner) => {
-      setModalSave(true)
-      setModalCreate(false)
-      setModalEdit(false)
-    }
-
+   
 
     return (
     <Container>
@@ -95,30 +112,23 @@ const RemarkModal = ({ title, setOpenModal }) => {
                 <PositionLabel>Release Train</PositionLabel>
                 <InputPlanner  type="text" placeholder="Business" value={subjectObj.release} disabled/>
             </PositionInputs>
+            <DivPositions>
             <DivClocks>
               <DivDate>
                 <LabelDate>Date</LabelDate>
-                <InputDate type="Date" name="date" onChange={(e)=> setDate(e.target.value)} required></InputDate>
+                <InputDate type="Date" name="date" onChange={(e)=> setDate(e.target.value)}></InputDate>
               </DivDate>
               <DivStart>
                 <LabelDate>Start</LabelDate>
-                <InputDate value={timeStart} type="time" name="time" onChange={(e) => setTimeStart(e.target.value)} required></InputDate>
-              
+                <InputDate value={timeStart} type="time" name="time" onChange={(e) => setTimeStart(e.target.value)}></InputDate>
               </DivStart>
               <DivFinish>
                 <LabelDate>Finish</LabelDate>
-                <InputDate value={timeFinish} type="time" name="time-finish" onChange={(e) => setTimeFinish(e.target.value)} required></InputDate>
+                <InputDate value={timeFinish} type="time" name="time-finish" onChange={(e) => setTimeFinish(e.target.value)}></InputDate>
               </DivFinish>
-              
             </DivClocks>
-            <PositionTags>
-              <TagComponent options={clientOption}
-                  label={"Guests"} 
-                  width={"90%"}
-                  set={(g)=> setGuest(g)}
-                  sizeHeight={"3.5vh"}
-               />
-            </PositionTags>
+            <Label>Note Text</Label>
+            <InputText></InputText>
             <PositionStatus>
               {modalEdit && ( <SingleSelect set={(c) => console.log()}
                   options={StatusOption}
@@ -129,23 +139,16 @@ const RemarkModal = ({ title, setOpenModal }) => {
                   isDisabled={false}
                   sizeHeight={"3.5vh"}
               />)}
-              {!modalEdit && ( <SingleSelect set={(c) => console.log()}
-                  options={StatusOption}
-                  value={"Scheduled"} 
-                  label={"Status"} 
-                  sizeSingle={"33%"} 
-                  sizeMenuList={"100%"}
-                  sizeMenu={"30%"}
-                  isDisabled={true}
-                  sizeHeight={"3.5vh"}
-              />)}
             </PositionStatus>
-            <PositionButtonSave onClick={() => handleModal()}>
-              <ButtonDefault type={"userSave"} name={"Save"} />
-            </PositionButtonSave>
-            <PositionButtonCancel onClick={() => setModalDiscard(true)}>
-              <ButtonDefault type={"userCancel"} name={"Cancel"} />
-            </PositionButtonCancel>
+            </DivPositions>
+            <PositionButtons>
+              <PositionButtonCancel onClick={() => setModalRemark(false)}>
+                <ButtonDefault sizeWidth={"10.5vw"}  type={"userCancel"} name={"Cancel"} />
+              </PositionButtonCancel>
+              <PositionButtonSave>
+                <ButtonDefault sizeWidth={"10.5vw"} type={"userSave"} name={"Save"} />
+              </PositionButtonSave>
+            </PositionButtons>
         </Form>
     </Container>
   )
