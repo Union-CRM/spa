@@ -25,123 +25,55 @@ import {
 } from "./styles";
 import SubjectCard from "../CardListView/index";
 import { useState } from "react";
-import Subject from "../CreateEditSubjectModal";
 import ButtonAdd from "../../../assets/Buttons/ButtonAdd";
+
+//Components
+import Subject from "../CreateEditSubjectModal";
+
 import ModalSubject from "../../Subject/ModalSubject";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
 import EditSubject from "../../Subject/EditSubject";
 import CreateRemark from "../../Subject/ModalCreateRemark";
 import ModalCreatePlanner from "../../Subject/ModalCreatePlanner";
+// Hooks
+
+import { usePlannerContext } from "../../../hook/usePlannerContent";
 
 const cardStatus = {
-  INPROGRESS: "Progress",
-  FINISHED: "Finished",
-  CANCELED: "Canceled",
+  INPROGRESS: "IN PROGRESS",
+  FINISHED: "FINISHED",
+  CANCELED: "CANCELED",
 };
 
-const subjectsList = [
-  {
-    id: 1,
-    status: "Progress",
-    title: "Apresentação Institucional TCS Institucional",
-    manager: "Helio Endo",
-    release: "Pagamento Cartão",
-    business: "Finanças Risco De Credito Pessoal Credito Pessoal",
-    client: "Bruno Lins Oliveira Santos",
-  },
-  {
-    id: 2,
-    status: "Finished",
-    title: "Apresentação Institucional TCS",
-    manager: "Gilberto Anderson",
-    release: "Inteligencia Comercial",
-    business: "Finanças Risco De Credito Pessoal",
-    client: "Heder",
-  },
-  {
-    id: 3,
-    status: "Canceled",
-    title: "Apresentação Institucional TCS",
-    manager: "Gilberto Anderson",
-    release: "Jornada Digital Itaubers",
-    business: "Finanças Risco De Credito Capital",
-    client: "Kaere",
-  },
-  {
-    id: 4,
-    status: "Progress",
-    title: "Apresentação Institucional TCS",
-    manager: "Gilberto Anderson",
-    release: "Dados Onboarding",
-    business: "Finanças Risco De Credito Pessoal",
-    client: "Carlos",
-  },
-  {
-    id: 5,
-    status: "Progress",
-    title: "Apresentação Institucional TCS",
-    manager: "Gilberto Anderson",
-    release: "Experiencia Digital",
-    business: "Finanças Risco De Credito Pessoal",
-    client: "Bruno Lins",
-  },
-  {
-    id: 6,
-    status: "Progress",
-    title: "Apresentação Institucional TCS",
-    manager: "Helio Endo",
-    release: "Jornada Digital Itaubers",
-    business: "Finanças Risco De Credito Pessoal",
-    client: "Bruno Lins",
-  },
-  {
-    id: 7,
-    status: "Progress",
-    title: "Apresentação Institucional TCS",
-    manager: "Gilberto Anderson",
-    release: "Jornada Digital Itaubers",
-    business: "Finanças Risco De Credito Pessoal",
-    client: "Bruno Lins",
-  },
-  {
-    id: 8,
-    status: "Progress",
-    title: "Apresentação Institucional TCS",
-    manager: "Felipe Massaret",
-    release: "Jornada Digital Itaubers",
-    business: "Finanças Risco De Credito Pessoal",
-    client: "Bruno Lins",
-  },
-  {
-    id: 9,
-    status: "Finished",
-    title: "Apresentação Institucional TCS",
-    manager: "Gilberto Anderson",
-    release: "Dados Onboarding",
-    business: "Finanças Risco De Credito Pessoal",
-    client: "Bruno Lins",
-  },
-];
-
-const SubjectsId = subjectsList.map((item) => item.id);
-
-const SubjectsCancel = subjectsList.filter(
-  (item) => item.status === "Canceled"
-);
-const SubjectsFinished = subjectsList.filter(
-  (item) => item.status === "Finished"
-);
-const SubjectsProgress = subjectsList.filter(
-  (item) => item.status === "Progress"
-);
 
 const SubjectList = () => {
   const { subject: subjectsList1 } = useSubjectContext();
 
+  const SubjectsId = subjectsList1.map((item) => item.id);
+  const { subject } = useSubjectContext();
+  
+  /*
+  const SubjectsCancel = "";
+
+  const SubjectsProgress ="";
+
+  const SubjectsFinished = "" ;
+  */
+
+ 
+  const SubjectsCancel = subject.filter(
+  (item) => item.status_description === "CANCELED"
+  );
+  const SubjectsFinished = subject.filter(
+  (item) => item.status_description === "FINISHED"
+  );
+  const SubjectsProgress = subject.filter(
+  (item) => item.status_description === "IN PROGRESS"
+  );
+
   const [modal, setModal] = useState(false);
   const [openModalD, openModalSubjects] = useState(false);
-  const [closeModalDetails, setCloseModalDetails] = useState(false);
   const [cards, setCards] = useState(SubjectsProgress);
   const [active, setActive] = useState(cardStatus.INPROGRESS);
 
@@ -175,19 +107,20 @@ const SubjectList = () => {
     setModalDetails(true);
   };
 
-  // Remark e Subject
+  // Subject //
+  const { id, setId } = useSubjectContext();
+  
+  
 
-  const [id, setId] = useState(null);
-
-  const { subject } = useSubjectContext();
-
+  // Remark //
   const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
-
   const { idRemark, setIdRemark } = useRemarkContext();
 
-  // Create Planner //
+  const { modalRemark, setModalRemark } = useRemarkContext();
 
-  const [modalPlanner, setModalPlanner] = useState(false);
+  // Create Planner //
+  const { idPlanner, setIdPlanner } = usePlannerContext();
+  const { modalPlanner, setModalPlanner } = usePlannerContext();
 
   return (
     <ContainerGlobal>
@@ -195,7 +128,7 @@ const SubjectList = () => {
         <HeaderContainerCards>
           <Top>
             <DivTitlePage>
-              <H1>Subjects List </H1>
+              <H1>Subjects List</H1>
               <HowManySubjectList>({SubjectsId.length})</HowManySubjectList>
             </DivTitlePage>
 
@@ -222,7 +155,7 @@ const SubjectList = () => {
                 Progress (
                 <HowManyProgress>
                   {
-                    subjectsList1.filter((item) => item.status === "Progress")
+                    subject.filter((item) => item.status === "IN PROGRESS")
                       .length
                   }
                 </HowManyProgress>
@@ -239,7 +172,7 @@ const SubjectList = () => {
                 Finished (
                 <HowManyFinished>
                   {
-                    subjectsList1.filter((item) => item.status === "Finished")
+                    subject.filter((item) => item.status === "FINISHED")
                       .length
                   }
                 </HowManyFinished>
@@ -256,7 +189,7 @@ const SubjectList = () => {
                 Canceled (
                 <HowManyCancel>
                   {
-                    subjectsList1.filter((item) => item.status === "Canceled")
+                    subject.filter((item) => item.status === "CANCELED")
                       .length
                   }
                 </HowManyCancel>
@@ -276,6 +209,7 @@ const SubjectList = () => {
                   <SubjectCard
                     key={item.id}
                     id={item.id}
+                    /*setIdPlanner={(i) => setIdPlanner(i)}*/
                     setIdRemark={(i) => setIdRemark(i)}
                     setId={(i) => setId(i)}
                     openModal={() => detailsModal()}
@@ -298,7 +232,7 @@ const SubjectList = () => {
 
 
       {modal && (
-        <CreateRemark id={id} setModal={setModal} title={"Create Subject"} />
+        <Subject id={id} setModal={setModal} title={"Create Subject"} />
       )}
 
 
@@ -307,9 +241,11 @@ const SubjectList = () => {
       {modalDetails && (
         <ModalSubject
           id={id}
+          idPlanner={idPlanner}
           idRemark={idRemark}
           setModal={setModalDetails}
           title={isEdit ? "Subject" : "Subject Details"}
+          openModal={() => detailsModal()}
         />
       )}
 
@@ -317,9 +253,19 @@ const SubjectList = () => {
 
       {modalPlanner && (
         <ModalCreatePlanner
-          id={id}
+          idPlanner={idPlanner}
           setModalPlanner={setModalPlanner}
-          title={"Planner"}
+          title={"Create Planner"}
+        />
+      )}
+
+      <DivModal $mode={modalRemark} />
+
+      {modalRemark && (
+        <CreateRemark
+          idRemark={idRemark}
+          setModalRemark={setModalRemark}
+          title={"Create Remark"}
         />
       )}
     </ContainerGlobal>

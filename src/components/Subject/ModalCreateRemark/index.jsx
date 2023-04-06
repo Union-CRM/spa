@@ -18,13 +18,30 @@ import {
 } from "./styles";
 import InputTextArea from "../../Geral/Input/InputText";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
+import { useRemarkContext } from "../../../hook/useRemarkContent";
+import { useSubjectContext } from "../../../hook/useSubjectContent";
 
 const CreateRemark = (props) => {
   const { setModal } = props;
 
+  // Remark //
+
+  const { setModalRemark } = useRemarkContext();
+
   const closeModal = () => {
-    setModal(false);
+    setModalDetails(true);
+    setModalRemark(false);
+    setActiveTab(1);
+    setToggleState(1);
   };
+
+  // Subject //
+
+  const { activeTab, setActiveTab } = useSubjectContext();
+
+  const { toggleState, setToggleState } = useSubjectContext();
+
+  const { setModalDetails } = useSubjectContext();
 
   const [date, setDate] = useState();
   const [dateReturn, setDateReturn] = useState();
@@ -34,9 +51,10 @@ const CreateRemark = (props) => {
     <ContainerCentral>
       <Container>
         <DivHeader>
-          <Title>Create Remark</Title>
-
-          <SubTitle>Apresentação Institucional TCS</SubTitle>
+          <Title>
+            Create Remark
+            <p>Apresentação Institucional TCS</p>
+          </Title>
         </DivHeader>
         <Form>
           <DivDate>

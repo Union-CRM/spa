@@ -28,6 +28,12 @@ import {
   DivIcon,
 } from "./styles";
 
+function Split(n) {
+  const name= n? n:""
+  var nameSplit=name.split(" ")
+  var name2=nameSplit[0].split("")[0]+" "+nameSplit[nameSplit.length-1].split("")[0]+"";
+  return name2.toUpperCase();
+}
 
 const Card = (props) => {
   //const corStatus=
@@ -85,10 +91,11 @@ const Card = (props) => {
           </DivTextCard>
         </ClientContent>
         <UserContent>
-          <DivIcon  onClick={()=> props.OpenModal()}>
+          {props.status === "SCHEDULED" && (
+            <DivIcon  onClick={()=> props.OpenModal()}>
             <IconSystem icon={"Edit"} width={"11px"} height={"11px"}/>
           </DivIcon >
-
+          )}
           <DivStatusTime>
             <DivStatus $mode={props.status} />
             <Body
@@ -101,12 +108,13 @@ const Card = (props) => {
             <DivPhoto>
               <Body
                 type={"Body1"}
-                name={props.userName
+                name={Split(props.userName)
+                 /* props.userName
                   .split(/\s/)
                   .reduce(
                     (response, word) => (response += word.slice(0, 1)),
                     ""
-                  )}
+                  )*/}
               />
             </DivPhoto>
             <DivNameEmail>

@@ -37,15 +37,15 @@ export const DivModal = styled.div`
 export const Card = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           border-left: 7px solid #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           border-left: 7px solid #00953b;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           border-left: 7px solid #771300;
         `;
@@ -91,15 +91,15 @@ export const Header = styled.div`
 export const Status = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           background-color: #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           background-color: #00953b;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           background-color: #771300;
         `;
@@ -109,7 +109,7 @@ export const Status = styled.div`
         `;
     }
   }}
-  width: 83px;
+  width: fit-content;
   height: 15px;
   border-radius: 8px;
   margin-top: 10px;
@@ -120,8 +120,11 @@ export const Status = styled.div`
 export const LabelStatus = styled.div`
   color: #ffffff;
   font-size: 10;
-  margin-left: 22px;
+  text-transform:lowercase;
+  margin-left: 0px;
   margin-top: 1px;
+  padding-left:5px;
+  padding-right:5px;
 `;
 
 //* DIVS DETAILS CARDS!! *//

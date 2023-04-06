@@ -11,6 +11,7 @@ import { Container,
      PositionButtonCancel, 
      PositionTitle,
      InputPlanner,
+     InputStatus,
      PositionInputs,
      PositionLabel,
      DivClocks,
@@ -23,7 +24,7 @@ import { Container,
      DivFinish,
      LabelDate,
      PositionButtons,
-
+      
      } from './styles'
 import ModalDiscardChanges from '../ModalDiscardChanges';
 import ModalSave from '../ModalSuccessfuly';
@@ -39,31 +40,33 @@ const ModalPlanner = ({ title, setOpenModal }) => {
       const [timeStart, setTimeStart] = useState();
       const [timeFinish, setTimeFinish] = useState();
       const [guest,setGuest]= useState([]);
-      const {planner: plannerList, setPlanner: setPlannerList} = usePlannerContext();
-
+      const {planner: plannerList, setPlanner: setPlannerList, plannerEdit,setPlannerEdit} = usePlannerContext();
+      const [status,setStatus]=useState("SCHEDULED")
       const {setModalSave , modalEdit, setModalEdit, modalDiscard, setModalDiscard, setModalCreate, setModalRemark, setModalReschedule} =  usePlannerContext()
       
-
+      console.log(status)
 
       useEffect(()=>{
         if(modalEdit){
-          const plannerEdit = plannerList.filter((p)=>  p.id === modalEdit) [0];
-          const y= plannerEdit.date.getFullYear();
-          const m= plannerEdit.date.getMonth()+1 <10 ? `0${plannerEdit.date.getMonth()+1}`: plannerEdit.date.getMonth()+1;
-          const d= plannerEdit.date.getDate()<10 ? `0${plannerEdit.date.getDate()}` : plannerEdit.date.getDate(); 
+          const p = plannerList.filter((p)=>  p.id === modalEdit) [0];
+          const y= p.date.getFullYear();
+          const m= p.date.getMonth()+1 <10 ? `0${p.date.getMonth()+1}`: p.date.getMonth()+1;
+          const d= p.date.getDate()<10 ? `0${p.date.getDate()}` : p.date.getDate(); 
+          setStatus(p.status)
           setDate(y+"-"+m+"-"+d);
-          setTimeFinish(plannerEdit.duration)
-          setTimeStart(plannerEdit.date.toLocaleTimeString())
-          handleSelectSubject(plannerEdit.subject_id);
+          setTimeFinish(p.duration)
+          setTimeStart(p.date.toLocaleTimeString())
+          handleSelectSubject(p.subject_id);
         }
         
       },[])
 
     const StatusOption = [
-      {id: 1, value: "Scheduled", label: "Scheduled"},
-      {id: 2, value: "Done", label: "Done"},
-      {id: 3, value: "Canceled", label: "Canceled"},
+      {id: 1, value: "SCHEDULED", label: "Scheduled"},
+      {id: 2, value: "DONE", label: "Done"},
+      {id: 3, value: "CANCELED", label: "Canceled"},
     ]
+
 
     const handleSelectSubject=(id)=>{
         setSubjectObj(subjectList.filter((s)=>s.id===id)[0])
@@ -78,13 +81,6 @@ const ModalPlanner = ({ title, setOpenModal }) => {
       }
     }
 
-    const handleModal = (newPlanner) => {
-      setModalSave(true)
-      setModalCreate(false)
-      setModalEdit(false)
-      
-    }
-    
   function getId() {
     let lastId = 1;
     plannerList.map((p) => {
@@ -100,18 +96,16 @@ const ModalPlanner = ({ title, setOpenModal }) => {
       date: new Date(date +" "+ timeStart),
       duration: timeFinish,
       subject_id: subjectObj.id,
-      subject_name: subjectObj.title,
+      subject: subjectObj.title,
       remark_id: null,
       client_id: subjectObj.client_id,
-      client_name:subjectObj.client,
+      client:subjectObj.client,
       client_email:subjectObj.client_email,
       release_id: subjectObj.release_id,
-      release_name: subjectObj.release_name,
-
-      status:"Finished",
-
+      release: subjectObj.release_name,
+      status:"SCHEDULED",
       user_id: 21345678,
-      user_name: "joão da silva",
+      user: "joão da silva",
       guest:guest.map((g)=>({id:g.value,name:g.label}))
     };
     setPlannerList([...plannerList,newPlanner]);
@@ -122,6 +116,13 @@ const ModalPlanner = ({ title, setOpenModal }) => {
 
 
   const editPlanner=()=>{
+      if(status === "SCHEDULED"){
+        setModalEdit(false)
+      }else{
+        setPlannerEdit({status:status})
+        setModalRemark(true)
+        setModalEdit(false)
+      }
 
           /*if (newPlanner) {
           if(newPlanner.status === "Canceled" || "Finished" ) {
@@ -130,7 +131,7 @@ const ModalPlanner = ({ title, setOpenModal }) => {
             setModalRemark(false)
           }
         }*/
-    const id=1;
+    /*const id=1;
     if (id)
     if(id === "Canceled" || "Finished" ) {
       setModalRemark(true)
@@ -138,7 +139,7 @@ const ModalPlanner = ({ title, setOpenModal }) => {
     }else {
       setModalRemark(false)
       setOpenModal(false);
-    }
+    }*/
     
   }
     return (
@@ -190,45 +191,53 @@ const ModalPlanner = ({ title, setOpenModal }) => {
               <TagComponent options={clientOption}
                   label={"Guests"} 
                   width={"90%"}
-
                   widths={"13vw"}
-                  heights={"11vh"}
-
                   set={(g)=> setGuest(g)}
                   sizeHeight={"3.5vh"}
-               />
+                  heights={"105px"}
+                  sizeMenuList={"10vw"}
+                  sizeMenu={"35%"}/>
             </PositionTags>
             <PositionStatus>
-              {modalEdit && ( <SingleSelect set={(c) => console.log()}
+              {modalEdit && ( 
+              <SingleSelect 
+                  set={(c) => setStatus(c)}
                   options={StatusOption}
+                  value={status}
                   label={"Status"} 
-                  sizeSingle={"33%"} 
+                  sizeSingle={"37%"} 
                   sizeMenuList={"100%"}
-                  sizeMenu={"30%"}
+                  sizeMenu={"33%"}
                   isDisabled={false}
                   sizeHeight={"3.5vh"}
               />)}
-              {!modalEdit && ( <SingleSelect set={(c) => console.log()}
+              {!modalEdit && ( 
+               <>
+               <PositionLabel>Status</PositionLabel>
+                <InputStatus placeholder="Status" value="Scheduled" disabled/>
+                </>
+                /*
+              <SingleSelect 
+                  set={(c) => setStatus(c)}
                   options={StatusOption}
-                  value={"Scheduled"} 
+                  value={"Scheduled"}
                   label={"Status"} 
-                  sizeSingle={"33%"} 
+                  sizeSingle={"37%"} 
                   sizeMenuList={"100%"}
-                  sizeMenu={"30%"}
-                  isDisabled={true}
+                  sizeMenu={"33%"}
+                  isDisabled={false}
                   sizeHeight={"3.5vh"}
-              />)}
+              />*/)}
             </PositionStatus>
 
             <PositionButtons>
               <PositionButtonCancel onClick={() => setModalDiscard(true)}>
-                <ButtonDefault type={"userCancel"} name={"Cancel"} sizeWidth={"11vw"} />
+                <ButtonDefault type={"userCancel"} name={"Cancel"} sizeWidth={"11vw"} onClick={() => setModalDiscard(true)}/>
               </PositionButtonCancel>
               <PositionButtonSave>
                 <ButtonDefault type={"userSave"} name={"Save"} sizeWidth={"11vw"} />
               </PositionButtonSave>
             </PositionButtons>
-
         </Form>
     </Container>
   )
