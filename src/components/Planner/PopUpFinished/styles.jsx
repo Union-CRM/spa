@@ -23,7 +23,7 @@ export const Container = styled.div`
   justify-content: center;
   box-sizing: border-box;
   z-index: 999999;
-  max-width: 350px;
+  max-width: 22.5vw;
   max-height: 250px;
   border-left: 16.56px solid #007bff;
   border-radius: 8px;
@@ -99,7 +99,7 @@ export const Button = styled.button`
     font-size: 18px;
     @media(max-width: 1200px) {
       font-size: 14px;
-      width: 230px
+      width: 14vw;
     }
 `
 export const Title = styled.div`
