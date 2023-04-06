@@ -44,10 +44,8 @@ class Home extends React.Component {
         <Container>
           <PageBodyHome>
             <DivClient>
-              <ClientContextProvider>
                 <ContainerCards />
-              </ClientContextProvider>
-              <DivPlanner>
+             <DivPlanner>
                 <H1Planners>
                   Planners
                   <HowManyPlanners>({PlannerCount.length})</HowManyPlanners>{" "}

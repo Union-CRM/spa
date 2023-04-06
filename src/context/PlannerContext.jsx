@@ -3,8 +3,10 @@ import axios from "axios";
 export const PlannerContext = createContext();
 
 export const PlannerContextProvider = ({ children }) => {
+
   const [planner, setPlanner] = useState([{}]);
   const [plannerEdit, setPlannerEdit]=useState();
+
   const [modalPlanner, setModalPlanner] = useState(false);
   const [modalDetails, setModalDetails] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
@@ -39,12 +41,15 @@ export const PlannerContextProvider = ({ children }) => {
   }
 console.log(planner)
 
+
   return (
     <PlannerContext.Provider
       value={{
+
         planner,setPlanner, 
         modalPlanner,setModalPlanner,
         modalDetails, setModalDetails,
+
         modalEdit, setModalEdit, 
         modalDiscard, setModalDiscard,
         modalSave, setModalSave, 
@@ -55,7 +60,9 @@ console.log(planner)
         modalReschedule, setModalReschedule,
         modalPopUpFinished, setModalPopUpFinished,
         modalSubject, setModalSubject,
+
         plannerEdit, setPlannerEdit
+
       }}
     >
 
