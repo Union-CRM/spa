@@ -101,7 +101,7 @@ const ContentsPlanner = (props) => {
     <DivContainerAll>
       <ContainerPlanner>
         <ButtonCreatePlanner>
-          {status !== "Finished" && status !== "Canceled" && (
+          {status !== "FINISHED" && status !== "CANCELED" && (
             <ButtonAdd
               onClick={() => PlannerModal()}
               $mode={status}

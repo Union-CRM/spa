@@ -157,17 +157,3 @@ const clientList = [
 ];
 
 export default clientList;
-/*
-  { value: 1, label: "Online Banking", color: "#3ddc97" },
-  { value: 2, label: "Cyber Security", color: "#ACD4FF" },
-  { value: 3, label: "Issue of Credit Cards", color: "#FFE60082" },
-  { value: 4, label: "Security & Identification", color: "#FFB2D1" },
-  { value: 5, label: "Internet of Things (IoT)", color: "#FFE60082" },
-  { value: 6, label: "Azure", color: "#3ddc97" },
-  { value: 7, label: "Salesforce", color: "#ACD4FF" },
-  { value: 8, label: "AWS", color: "#ACD4FF" },
-  { value: 9, label: "Google Cloud", color: "#ACD4FF" },
-  { value: 10, label: "Credit & Debit Cards", color: "#ACD4FF" },
-  { value: 11, label: "Product design", color: "#ACD4FF" },
-  { value: 12, label: "Demand Drafts", color:"#ACD4FF"},
-*/

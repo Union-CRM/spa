@@ -26,6 +26,7 @@ const SubjectCard = (props) => {
   const { modalDetails, setModalDetails } = useSubjectContext();
 
   const { subject: subjectsList } = useSubjectContext();
+  
   const subject = subjectsList.filter((item) => item.id === props.id)[0];
 
   const { toggleState, setToggleState } = useSubjectContext();

@@ -1,8 +1,43 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import axios from "axios";
 export const SubjectContext = createContext();
 
 export const SubjectContextProvider = ({ children }) => {
-  const [subject, setSubject] = useState(subjectsList);
+  const [subject, setSubject] = useState([{}]);
+
+  useEffect(()=>{
+    async function loadDate(){
+      
+        var subjects;
+        try {
+            const response = await axios.get('http://localhost:8089/union/v1/subjects/submissives',{
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
+                subjects = response;
+                
+        }catch (error) {
+            console.error(error);
+            
+        }
+        
+        setSubject(subjects.data.List.map((item)=>({
+          id:item.subject_id, 
+          status_id: item.status_id,
+          status:item.status.status_description,
+          subject_title:item.subject_title,
+          release:item.release_name,
+          business:item.business_name,
+          manager:item.user_name,
+          client: item.client_name,
+          client_id: item.client_id,
+          client_email: item.client_email,
+          description:item.subject_text,
+          })
+        ))
+    }
+    
+    loadDate();
+  },[])
+
   const [selectedSubject, setSelectedSubject] = useState(null);
 
   const [modalDetails, setModalDetails] = useState(false);
