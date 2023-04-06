@@ -3,7 +3,7 @@ import { Container,H1,TitleDiv,DivImg, SquareDiv,TextGraphic,SquareText,LateSqua
 } from './styles';
 import Donut from './Donut';
 
-const Grafic = () => {
+const Grafic = (props) => {
 
     const obj= [
         {
@@ -20,10 +20,11 @@ const Grafic = () => {
         }
     ];
      
+    const value= props.value;
     return(
         <Container>
             <TitleDiv>
-                <H1>{obj[0].titulo}</H1>    
+                <H1>{obj[value].titulo}</H1>    
             </TitleDiv>           
             <SquareDiv>
                 <SquareText>Late</SquareText> 
