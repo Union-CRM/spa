@@ -93,7 +93,7 @@ const ContentRemarks = (props) => {
   return (
     <ContainerRemark>
       <ButtonCreateRemark>
-        {status !== "Finished" && status !== "Canceled" && (
+        {status !== "FINISHED" && status !== "CANCELED" && (
           <ButtonAdd
             onClick={() => RemarkModal()}
             $mode={status}

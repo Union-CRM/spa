@@ -68,7 +68,7 @@ const ModalSubject = (props) => {
   // Tabs
   const { toggleState, setToggleState } = useSubjectContext();
 
-  const { activeTab, setActiveTab } = useSubjectContext(0);
+  const { activeTab, setActiveTab } = useSubjectContext();
 
   const toggleTab = (index) => {
     setToggleState(index);

@@ -51,15 +51,15 @@ export const DivModal = styled.div`
 export const Container = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           border-left: 16.56px solid #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           border-left: 16.56px solid #00953b;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           border-left: 16.56px solid #771300;
         `;
@@ -143,15 +143,15 @@ export const Close = styled.button`
 export const Status = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           background-color: #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           background-color: #00953b;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           background-color: #771300;
         `;
@@ -246,7 +246,7 @@ export const Pages = styled.div`
 export const TabButton = styled.button`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           background-color: ${(props) => (props.active ? "#008585" : "white")};
           color: ${(props) => (props.active ? "white" : "black")};
@@ -255,7 +255,7 @@ export const TabButton = styled.button`
             color: #fff;
           }
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           background-color: ${(props) => (props.active ? "#00953b" : "white")};
           color: ${(props) => (props.active ? "white" : "black")};
@@ -264,7 +264,7 @@ export const TabButton = styled.button`
             color: #fff;
           }
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           background-color: ${(props) => (props.active ? "#771300" : "white")};
           color: ${(props) => (props.active ? "white" : "black")};
