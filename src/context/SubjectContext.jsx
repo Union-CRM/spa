@@ -1,11 +1,48 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import axios from "axios";
 export const SubjectContext = createContext();
 
 export const SubjectContextProvider = ({ children }) => {
-  const [subject, setSubject] = useState(subjectsList);
+  const [subject, setSubject] = useState([{}]);
+
+  useEffect(()=>{
+    async function loadDate(){
+      
+        var subjects;
+        try {
+            const response = await axios.get('http://localhost:8089/union/v1/subjects/submissives',{
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
+                subjects = response;
+                
+        }catch (error) {
+            console.error(error);
+            
+        }
+        
+        setSubject(subjects.data.List.map((item)=>({
+          id:item.subject_id, 
+          status_id: item.status_id,
+          status:item.status.status_description,
+          subject_title:item.subject_title,
+          release:item.release_name,
+          business:item.business_name,
+          manager:item.user_name,
+          client: item.client_name,
+          client_id: item.client_id,
+          client_email: item.client_email,
+          description:item.subject_text,
+          })
+        ))
+    }
+    
+    loadDate();
+  },[])
+
   const [selectedSubject, setSelectedSubject] = useState(null);
 
   const [modalDetails, setModalDetails] = useState(false);
+
+  const [activeTab, setActiveTab] = useState(null);
 
   const [modal, setModal] = useState();
   const [modalEdit, setModalEdit] = useState(false);
@@ -42,6 +79,8 @@ export const SubjectContextProvider = ({ children }) => {
         setEdit,
         modalPlanner,
         setModalPlanner,
+        activeTab,
+        setActiveTab,
       }}
     >
       {children}
@@ -104,9 +143,9 @@ const subjectsList = [
     subject_title: "Apresentação Institucional TCS",
     manager: "Felipe Flaibam",
     release: "Itaú",
-    business: "React e Angular",
-    client: "Carlos Hideki Morita",
-    client_email: "morita.carlos@tcs.com",
+    business: "Integração Digital",
+    client: "Guilherme Rezende",
+    client_email: "guilherme@tcs.com",
     description:
       "Objetivos da apresentação: Identificar as necessidades do cliente e compreender seus objetivos Apresentar a expertise da consultoria de TI em serviços financeiros; Discutir as soluções personalizadas que podem ser oferecidas para as necessidades específicas da instituição financeira;",
   },

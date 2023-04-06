@@ -59,6 +59,7 @@ const Clock = ({ label }) => {
       color: "#656464",
       fontSize: "14px",
       fontFamily: "Arial",
+      marginLeft: "5px",
     }),
 
     option: (defaultStyles, state) => ({
@@ -68,13 +69,14 @@ const Clock = ({ label }) => {
       fontSize: "14px",
     }),
 
-    control: (defaultStyles) => ({
+    control: (defaultStyles, props) => ({
       ...defaultStyles,
+
       backgroundColor: "#FFFFFF",
       border: "2px solid #888C95",
       padding: "5px",
       boxShadow: "none",
-      width: "152px",
+      width: props.widthClock ?? "100%",
       height: "31px",
       minHeight: "31px",
       borderRadius: "5px",
@@ -82,7 +84,7 @@ const Clock = ({ label }) => {
 
     menu: (defaultStyles) => ({
       ...defaultStyles,
-      width: "150px",
+      width: "100%",
       borderRadius: "5px",
     }),
 
@@ -114,6 +116,7 @@ const Clock = ({ label }) => {
         placeholder={"00:00"}
         options={options}
         styles={customStyles}
+        width={"80%"}
         theme={(theme) => ({
           ...theme,
           borderRadius: 5,

@@ -13,7 +13,9 @@ function App() {
     <>
     <UserContextProvider>
     <ClientContextProvider>
+
       <Router>
+      
         <GlobalStyle />
         <div className="App">
           <Routes>
@@ -75,6 +77,7 @@ function App() {
       </Router>
       </ClientContextProvider>
       </UserContextProvider>      
+
     </>
   );
 }

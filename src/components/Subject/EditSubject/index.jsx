@@ -80,7 +80,7 @@ const Subject = (props) => {
       setStatus(subject.status);
       setSubject(subject.subject_title);
       setManager(subject.manager);
-      setClient(subject.client);
+      setSelectedClient(subject.client);
       setEmail(subject.client_email);
       setRelease(subject.release);
       setBusiness(subject.business);
@@ -170,14 +170,13 @@ const Subject = (props) => {
                 Client Name
                 <SingleSelect
                   set={(client) => setSelectedClient(client)}
-                  onChange={handleClientChange}
-                  /*onChange={(choice) => setUserChoice(choice)}*/
                   sizeSingle={"100%"}
                   sizeMenu={"100%"}
                   name={client}
                   options={optionsClient}
-                  value={optionsClient}
-                  placeholder={flag && !client ? "" : ""}
+                  value={selectedClient}
+                  onChange={{ value: selectedClient }}
+                  placeholder={flag && !selectedClient ? "" : ""}
                   required
                 />
               </Label>

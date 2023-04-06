@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const  Container  = styled.div`
     margin-left: 1vw;
-    background-color: #FFFFFF;
+    background-color:#FFFFFF; 
     height: 20vh;
     width: 40vw;
     border: 1px groove;
@@ -13,6 +13,7 @@ export const  Container  = styled.div`
     margin-bottom: 10%;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     filter:drop-shadow;
+    
   `;
   
   export const H1 = styled.h1`
@@ -109,5 +110,5 @@ export const  Container  = styled.div`
     margin: 0;
     background-color: rgba(255, 255, 255, 1); 
     margin: 0 auto;
-    width: 10vw;
+    width: fit-content;
   `;

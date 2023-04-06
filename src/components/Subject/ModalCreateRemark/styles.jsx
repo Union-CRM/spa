@@ -21,21 +21,21 @@ export const ContainerCentral = styled.div`
 
 export const DivHeader = styled.div`
   width: 100%;
-  height: 100%;
+  height: auto;
   display: grid;
-  grid-template-rows: 35% 35%;
   grid-row: 1;
 `;
 
 export const Title = styled.h1`
   font-size: 32px;
   font-weight: 600;
-  line-height: 36px;
   width: 100%;
-  grid-row: 1;
   margin: 7%;
   @media (min-width: 50px) and (max-width: 500px) {
     font-size: 1.5rem;
+  }
+  p {
+    font-size: 1.4rem;
   }
 `;
 
@@ -43,7 +43,6 @@ export const SubTitle = styled.h2`
   font-size: 18px;
   font-weight: 600;
   width: 100%;
-  grid-row: 2;
   margin: 7%;
   @media (min-width: 50px) and (max-width: 500px) {
     font-size: 1.5rem;
@@ -79,16 +78,16 @@ export const Close = styled.button`
 
 export const Container = styled.div`
   grid-column: 2;
-  width: 85%;
+  width: 80%;
+  min-width: 400px;
   height: 100%;
   display: grid;
   background: #fff;
-  min-width: 300px;
   border-left: 16.56px solid #007bff;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   z-index: 1000;
-  grid-template-rows: 25% 50% 25%;
+  grid-template-rows: 20% 60% 20%;
   @media (min-width: 100px) and (max-width: 502px) {
     height: 81vh;
     width: 100%;
@@ -107,7 +106,7 @@ export const Form = styled.div`
   padding-left: 7%;
   grid-row: 2;
   grid-template-columns: 30% 30% 40%;
-  grid-template-rows: 27% 73%;
+  grid-template-rows: 27% auto;
   @media (min-width: 1600px) {
   }
 `;
@@ -155,7 +154,7 @@ export const DivButton = styled.div`
   position: relative;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 80%;
   grid-row: 3;
 `;
 

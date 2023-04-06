@@ -5,9 +5,22 @@ export const RemarkContextProvider = ({ children }) => {
   const [idRemark, setIdRemark] = useState(null);
   const [remark, setRemark] = useState(remarkList);
 
+  const [modalRemark, setModalRemark] = useState(false);
+
+  const [activeTab, setActiveTab] = useState(0);
+
   return (
     <RemarkContext.Provider
-      value={{ remark, setRemark, idRemark, setIdRemark }}
+      value={{
+        modalRemark,
+        setModalRemark,
+        remark,
+        setRemark,
+        idRemark,
+        setIdRemark,
+        activeTab,
+        setActiveTab,
+      }}
     >
       {children}
     </RemarkContext.Provider>

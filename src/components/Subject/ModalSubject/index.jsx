@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import IconSystem from "../../../assets/IconSystem";
-import styled, { css } from "styled-components";
 
 import {
   ContainerFather,
@@ -32,6 +31,7 @@ import Planner from "../../Subject/Planner";
 
 const ModalSubject = (props) => {
   // Remark
+
   const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
 
   const { idRemark, setIdRemark } = useRemarkContext();
@@ -45,7 +45,6 @@ const ModalSubject = (props) => {
   // UseEffect Details
   const { subject: subjectsList, setSubject: setSubjectList } =
     useSubjectContext();
-
   const [status, setStatus] = useState();
   const [subject, setSubject] = useState();
   const [manager, setManager] = useState();
@@ -62,12 +61,14 @@ const ModalSubject = (props) => {
   //Close page
   const closeModal = () => {
     setModal(false);
+    setToggleState(0);
+    setActiveTab(0);
   };
 
   // Tabs
   const { toggleState, setToggleState } = useSubjectContext();
 
-  const [activeTab, setActiveTab] = useState(0);
+  const { activeTab, setActiveTab } = useSubjectContext();
 
   const toggleTab = (index) => {
     setToggleState(index);

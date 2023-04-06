@@ -23,20 +23,25 @@ import { useSubjectContext } from "../../../hook/useSubjectContent";
 const SubjectCard = (props) => {
   const { openModal, id } = props;
 
+  const { modalDetails, setModalDetails } = useSubjectContext();
+
   const { subject: subjectsList } = useSubjectContext();
+  
   const subject = subjectsList.filter((item) => item.id === props.id)[0];
 
   const { toggleState, setToggleState } = useSubjectContext();
 
   const handleClick = () => {
     openModal();
+    setModalDetails(true);
     setToggleState(0);
     props.setId(subject.id);
+    console.log(handleClick);
   };
 
   return (
     <Container>
-      <Card $mode={subject.status} onClick={handleClick}>
+      <Card $mode={subject.status} onClick={() => handleClick()}>
         <Header>
           <DivStatusSubject>
             <Status $mode={subject.status}>
