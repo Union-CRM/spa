@@ -1,69 +1,86 @@
 import styled from "styled-components";
 import {DivButton} from "../../components/Client/ContainerCardClient/styles";
-import {ContainerHeaderAndCards  as ContainerClient} from "../../components/Client/ContainerCardClient/styles";
+import {Container as ContainerClient} from "../../components/Client/ContainerCardClient/styles";
 import {BoardStyle as BoardStyleClient} from "../../components/Client/ContainerCardClient/styles";
 import { ContainerFather } from "../../components/Client/ContainerCardClient/styles";
 import {DivIcons} from "../../components/Client/ContainerCardClient/CardListView/styles";
-import {DivTitlePage} from "../../components/Client/ContainerCardClient/styles";
-import {Top} from "../../components/Client/ContainerCardClient/styles";
-import {BoardStyle} from "../../components/Client/ContainerCardClient/styles";
-import {DivModal as PlannerDiv} from "../../components/Client/ContainerCardClient/styles";
-import { HowManyClientList } from "../../components/Client/ContainerCardClient/styles";
 import {DivP} from "../../components/Planner/PlannerCard/styles";
 import {ContainerCentral} from "../../components/Client/AddEditClient/styles";
 import {DivModal} from "../../components/Client/ContainerCardClient/styles";
+import { Card as  ContainerCard } from "../../components/Client/ContainerCardClient/CardListView/styles";
 
-export const Container = styled.div`
-  display: grid;
-  grid-template-columns: 100% 100%;
-  grid-template-rows: 4em 80% ;
-  position: relative;
-  min-height: 580px;
-  
+
+//* PAGE GLOBAL *//
+export const Content = styled.div`
+  display:grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 50% 50%;
+  overflow-y: scroll; 
+  top:0;
+  height:70vh;
+  width:100%;
+  min-width:900px;
+  position:relative;
+  @media screen and (max-width: 755px){
+    display: flex;
+   
+    flex-direction: column;
+   
+    
+   }
+ 
 `;
 
+/////////////////////**///////////////////////////////
+
+//* CLIENT *//
 
 export const DivClient = styled.div`
-  display: flex;
-  top: -15px;
   width:  100%;
-  height: 63.5%;
+  height:95%;
   margin:0;
-
+  grid-column:1;
+  min-width:400px;
+  @media screen and (max-width: 755px){
+   width:65%;
+   
+    
+   }
 ${DivModal}{
-  display:none;
+  display: none;
+  grid-template-columns:0%
+}
+
+${ContainerFather} {
+  width:100%;
+  height:100%;
+  grid-template-columns:100%;
+  background:#fff;
+  min-width:200px;
 }
 ${ContainerCentral}{
   display:none;
+  
 } 
-//   grid-column: 1;
-  position: relative;
-  border-radius: 0px 0px 8px 0px;
-
-${ContainerFather}{
-    display: grid;
-    grid-template-columns: 100% 0% ;
-    height: auto;
-    position:relative;
-    width: 50%;
-    min-height: 460px;
-}
 
  ${ContainerClient}{ 
-    display: flex;
-    max-height: 68.5%;
-    min-height: 41% ;
-    width: 100% ;
-    height: 100%;
-    position: relative;
-    min-height: 200px;
+  display: grid;
+  z-index: 0 !important;
+  background:#fff;
+  top: -15px;
+  width: 100%;
+  height: 104%;
+  grid-column: 1;
+  position: relative;
+  box-shadow: 5px 6px 5px -4px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 0px 8px 0px;
+  overflow-y: scroll;
+ 
 }
    ${BoardStyleClient}{ 
-    max-height: 41%;
-    min-height: 41% ;
-   
     width: 100%;
-    height: 41%;
+    height: 100%;
+    background:#fff;
    }
 
    ${DivButton}{
@@ -73,27 +90,32 @@ ${ContainerFather}{
         display:none;
     }
 
-   
+    ${ContainerCard}{
+      width: auto;
+      height: 204px;
+    }
 `;
 
-export const DivSection = styled.div`
 
-display:grid;
-grid-template-columns: 50% 50%;
-grid-template-rows: 80% 20% ;
-width: 100%;
-margin: 0;
+//////////////*****////////////////////// 
 
-`;
+
+//* PLANNER *//
+
 export const DivPlanner = styled.div`
- 
+  position: relative;
+  width:98%;
+  height:95%;
+  grid-column:2;
+  left:2%;
+
   
-  display: flex;
-  flex-direction:column;
-  margin-left:5%;
+
   
   ${DivP}{
-    /* width:100%; */
+    width:98%;
+    height:100%;
+    min-width:400px;
     margin-top: 0px;
     top: 0%;
     left: 0%;
@@ -101,32 +123,39 @@ export const DivPlanner = styled.div`
       border-color:white;
       border: 1px groove ; 
       box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-      height: 65%;
-      min-height: 200px;
-  }
-    @media screen and (max-width:1773px) and (max-height:742px){
-     
     }
+    @media screen and (max-width: 1090){
+    width:50%; 
+    min-width:300px;
+    
+   }
 `;
 
-export const Graph = styled.div`
+export const Graph1 = styled.div`
+    /*min-width:900px;*/
+    width: fit-content;
+    grid-column:1;
     display:flex;
+   justify-content:space-between;
+    /*justify-content:center;*/
+    grid-row:2;
+  /*  height:20%;*/
+    height:auto;
+   
     position: relative;
-    width:auto;
     margin:0;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
-    gap: 1%;
+    padding-bottom: 1%;
+    padding-right:2%;
+    padding-top: 1%;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
     margin-bottom:0;
- 
-
-    @media screen and (max-width:864px)  {
-     flex-direction:column;
-    }
   
+   
 `;
+
+// PENSAR //
 export const H1Planners = styled.div`
   width: fit-content;
   display: flex;

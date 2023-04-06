@@ -35,7 +35,7 @@ export const dataBase = {
     height:"80",
     background:"none",
     tooltip: { trigger: 'none' },
-  
+    areaOpacity: 0.3,
     /*{
       position: 'bottom',
       textStyle: {color: 'blue', fontSize: 16, fontFamily:"Houschka Rounded Alt"}
