@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { FaRegCalendarAlt, FaChevronCircleDown } from "react-icons/fa";
-import IconSystem from "../../../assets/IconSystem";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
 
@@ -16,16 +15,19 @@ import {
   Photo,
   DivDadosRemark,
   NameEmail,
-  ContainerComplete,
-  NoteText,
   IconOpenClose,
   Circle,
   DivGlobalCard,
-  IconTag,
   ButtonAdd,
 } from "./styles";
 
 const ContentRemarks = (props) => {
+  // Tabs //
+
+  const { toggleState, setToggleState } = useSubjectContext();
+
+  const { setModalDetails } = useSubjectContext();
+
   const { subject: subjectsList, setSubject: setSubjectList } =
     useSubjectContext();
 
@@ -40,21 +42,32 @@ const ContentRemarks = (props) => {
     }
   }, [id]);
 
-  // Tabs
-  const { toggleState, setToggleState } = useSubjectContext();
-
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(1);
 
   const toggleTab = (index) => {
     setToggleState(index);
     setActiveTab(index);
     setActiveContent(index);
   };
+
+  // Remark //
+
+  const RemarkModal = () => {
+    setModalRemark(true);
+    setModalDetails(false);
+  };
+
+  const handleClick = () => {
+    setToggleState(3);
+    props.setIdRemark(remark.idRemark);
+  };
   const [activeContent, setActiveContent] = useState(0);
 
-  //
+  //Remark Context //
 
   const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
+
+  const { setModalRemark } = useRemarkContext();
 
   const { idRemark, setIdRemark } = useRemarkContext();
 
@@ -77,25 +90,23 @@ const ContentRemarks = (props) => {
     (item) => item.idRemark === props.idRemark
   )[0];
 
-  const handleClick = () => {
-    setToggleState(3);
-    props.setIdRemark(remark.idRemark);
-  };
-
   return (
     <ContainerRemark>
       <ButtonCreateRemark>
-        <ButtonAdd
-          $mode={status}
-          width="130px"
-          padding="0"
-          sizeFont="0.9rem"
-          boxShadow="none"
-          margin="none"
-        >
-          {" "}
-          <span>Create Remark</span>
-        </ButtonAdd>
+        {status !== "Finished" && status !== "Canceled" && (
+          <ButtonAdd
+            onClick={() => RemarkModal()}
+            $mode={status}
+            width="130px"
+            padding="0"
+            sizeFont="0.9rem"
+            boxShadow="none"
+            margin="none"
+          >
+            {" "}
+            <span>Create Remark</span>
+          </ButtonAdd>
+        )}
       </ButtonCreateRemark>
 
       <ContainerCards>
