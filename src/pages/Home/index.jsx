@@ -23,7 +23,7 @@ import { usePlannerContext } from "../../hook/usePlannerContext";
 
 import IconSystem from "../../../src/assets/IconSystem";
 
-import { Tooltip } from "react-tippy";
+import { Tooltip } from "react-tippy"
 import "react-tippy/dist/tippy.css";
 
 /*const funcClientInfo =()=>{
@@ -44,10 +44,8 @@ class Home extends React.Component {
         <Container>
           <PageBodyHome>
             <DivClient>
-              <ClientContextProvider>
                 <ContainerCards />
-              </ClientContextProvider>
-              <DivPlanner>
+             <DivPlanner>
                 <H1Planners>
                   Planners
                   <HowManyPlanners>({PlannerCount.length})</HowManyPlanners>{" "}
@@ -89,3 +87,4 @@ export default Home;
       <Donut></Donut>
     <Donut></Donut>*/
 }
+

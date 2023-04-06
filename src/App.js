@@ -7,16 +7,20 @@ import Client from "./pages/Client";
 import RemarkPage from "./pages/Remark";
 import LoginPage from "./pages/Login/index";
 import { ClientContextProvider } from "./context/ClientContext"
+import { UserContextProvider } from "./context/UserContext"
 function App() {
   return (
     <>
-     <ClientContextProvider>
+    <UserContextProvider>
+    <ClientContextProvider>
+
       <Router>
       
         <GlobalStyle />
         <div className="App">
           <Routes>
             <Route path="/" element={<LoginPage />} />
+            
             <Route
               path="/home"
               element={
@@ -37,6 +41,7 @@ function App() {
                 )
               }
             />
+            
             <Route
               path="/subject"
               element={
@@ -71,6 +76,8 @@ function App() {
         </div>
       </Router>
       </ClientContextProvider>
+      </UserContextProvider>      
+
     </>
   );
 }

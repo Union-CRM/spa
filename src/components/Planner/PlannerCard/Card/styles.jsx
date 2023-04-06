@@ -17,6 +17,7 @@ export const ContainerCards = styled.li`
   box-shadow: 2px 2px 5px rgba(233, 203, 203, 0.25);
   padding-bottom: 3%;
   padding-top: 3%;
+  margin-bottom: 2%;
   
   &:hover {
     border: 2px solid #ccc;
@@ -25,7 +26,6 @@ export const ContainerCards = styled.li`
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   &:hover {
     border: 2px solid #ccc;
-  
   }
 `;
 
@@ -33,18 +33,18 @@ export const DivStatus = styled.div`
 
 ${(props) => {
   switch (props.$mode) {
-    case "Done":
+    case "DONE":
       return css`
         background-color: #07D95A;
     
         ;
       `;
-    case "Scheduled":
+    case "SCHEDULED":
       return css`
         background-color: #FFD012;
         ;
       `;
-    case "Canceled":
+    case "CANCELED":
       return css`
         background-color: #771300;
         ;
@@ -104,17 +104,17 @@ export const Client = styled.p``;
 export const Status = styled.div`
 ${(props) => {
   switch (props.$mode) {
-    case "Done":
+    case "DONE":
       return css`
         background-color: #07D95A;
         ;
       `;
-    case "Scheduled":
+    case "SCHEDULED":
       return css`
         background-color: #FFD012;
         ;
       `;
-    case "Canceled":
+    case "CANCELED":
       return css`
         background-color: #771300;
         ;

@@ -15,22 +15,22 @@ const PopUpCanceled= () => {
   const { setModalFollowUp, 
     setModalPopUpCanceled, 
     setModalReschedule, 
-    setModalSubject } =  usePlannerContext()
+    setModalSubject} =  usePlannerContext();
 
   const handleFollowUp = () => (
     setModalFollowUp(true),
     setModalPopUpCanceled(false)
-  )
+  );
 
   const handleReschedule = () => (
     setModalPopUpCanceled(false),
     setModalReschedule(true)
-  )
+  );
 
   const handleSubject = () => (
     setModalPopUpCanceled(false),
     setModalSubject(true)
-  )
+  );
 
   return (
     <ContainerFather>

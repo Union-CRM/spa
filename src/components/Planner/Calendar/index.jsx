@@ -25,8 +25,8 @@ import {
   InputSearch,
   DivIconSearch,
   DivIconS,
-  DivClose
-
+  DivClose,
+  PositionSubject,
 } from "./styles";
 import { DAYS, MOCKAPPS } from "./utils/conts";
 import {
@@ -56,7 +56,6 @@ import FollowUpModal from "../FollowUpModal";
 import PopUpFinished from "../PopUpFinished";
 import Subject from "../../Subject/CreateEditSubjectModal";
 
-
 export const BigCalender = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [numberOfEvents, setNumberOfEvents]= useState(2);
@@ -79,10 +78,14 @@ export const BigCalender = () => {
     modalDiscard, setModalDiscard, 
     modalCreate, setModalCreate, 
     modalRemark, setModalRemark, 
-    modalReschedule,
-    modalFollowUp, modalPopUpCanceled,
+    modalReschedule, setModalPopUpFinished,
+    modalFollowUp, setModalPopUpCanceled,
     modalPopUpFinished, modalSubject,
+    setModalReschedule, setModalFollowUp,
+    modalPopUpCanceled, setModalPlanner
   } = usePlannerContext();
+
+  
 
 
   const addEvent = (date, event) => {
@@ -124,19 +127,12 @@ export const BigCalender = () => {
   const handleOnClickEvent = (d) => {
     setPlannerModalOfDay(true)
     setDateTarget(d)    
-    
-    
     //setShowPortal(true);
     //setPortalData(event);
   };
 
   const handleCloseModal = (event)=>{
-    setPlannerModalOfDay(false);
-    setModalEdit(false);
-    setOpenModal(false);
-    setModalSave(false);
-    setModalDiscard(false);
-    setModalCreate(false);
+    setModalDiscard(true)
   }
 
   const handlePotalClose = () => setShowPortal(false);
@@ -150,9 +146,9 @@ export const BigCalender = () => {
 
   const today = new Date();
 
-function formatDate(date, format) {
+/*function formatDate(date, format) {
 	
-}
+}*/
 
 const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -161,7 +157,7 @@ let dayweek = weekday[d.getDay()];
 let Month = month[d.getMonth()]; 
 
 
-formatDate(today, 'mm/dd/aa');
+//formatDate(today, 'mm/dd/aa');
 
 //const data=new Date(date.day, date.Date, date.getMonth, date.getMonthYear)
 
@@ -174,7 +170,7 @@ formatDate(today, 'mm/dd/aa');
       <DivIconSearch>
       <Tippy content="Search">
                 <DivIconS>
-                  <IconSystem icon="Search" width={"20px"} height={"17px"} />
+                  <IconSystem icon="Search" width={"20px"} height={"3vh"} />
                 </DivIconS> 
       </Tippy>
                 <InputSearch placeholder="Search..."/>
@@ -202,9 +198,7 @@ formatDate(today, 'mm/dd/aa');
         </DivNextMonth>
         </CurrentMonth>
         <DivCreatePlanner onClick={() => setModalCreate(true)}>
-
           <ButtonAdd  mode={"#007BFF"} color={"#FFFFFF"} name={"Create Planner"} onClick={() => setOpenModal(true)}/>
-
         </DivCreatePlanner>
       </DateControls>
       <SevenColGrid>
@@ -218,35 +212,38 @@ formatDate(today, 'mm/dd/aa');
         is28Days={getDaysInMonth(currentDate) === 28}
       >
         {getSortedDaysDate(currentDate).map((d, index) => {
-          const date = new Date(d);
+          const date = new Date(d + " 00:00");
           const day=date.getDate();
           const month= date.getMonth();
           const year= date.getFullYear();
           const dayOfWeek=date.getDay();
           return(
             <DivDays
+              key={index}
               id={`${year}/${month}/${day}`}          
               onClick={(e) => handleOnClickEvent(date)} //abri planner of day             
               dayColor={ 6 > dayOfWeek && dayOfWeek > 0 ? "#31374A" : "#D6700A"}
               monthColor={ month===currentDate.getMonth() ? "#E3E6ED" : "#e3e6ed7a"}      
             >
-              <span className={`nonDRAG ${
+              <span 
+                  key={d}
+                  className={`nonDRAG ${
                   datesAreOnSameDay(new Date(),date) ? "active": ""}`}
               >
                 {day}
               </span>
               <EventWrapper>
                 {plannerList.filter((planner)=> 
-                  datesAreOnSameDay(planner.date, date)).map((ev,index)=>
+                  datesAreOnSameDay(new Date(planner.date), date)).map((ev,index)=>
                           index<numberOfEvents && 
                           <StyledEvent
                               onClick={() => handleOnClickEvent(date)}
                               className="StyledEvent"
                               id={`${ev.id} ${ev.subject}`}
-                              key={ev.id}
+                              key={`${ev.id} ${ev.subject}${index}`}
                           >
-                            <Dot bgColor={ev.status==="Done" ? "#07D95A" : 
-                                          ev.status==="Canceled"?"#BB1E00":"#FFDE59"}></Dot>
+                            <Dot bgColor={ev.status==="DONE" ? "#07D95A" : 
+                                          ev.status==="CANCELED"?"#BB1E00":"#FFDE59"}></Dot>
                             <p>{ev.subject}</p>
                           </StyledEvent>)}
                         
@@ -267,7 +264,7 @@ formatDate(today, 'mm/dd/aa');
 
      {modalPlannerOfDay && (
       <>
-      <DivClose onClick={handleCloseModal}></DivClose>
+      <DivClose onClick={()=> setPlannerModalOfDay(false)}></DivClose>
       <PlannerCard
       date={dateTarget}
       setOpenPlannerModal={setPlannerModalOfDay}
@@ -302,43 +299,56 @@ formatDate(today, 'mm/dd/aa');
 
     {modalDiscard && (
       <>
-       <DivClose onClick={handleCloseModal}></DivClose>
        <ModalDiscardChanges />
       </>
     )}
 
 
     {modalPopUpCanceled && (
-      <PopUpCanceled/>
+      <>
+        <DivClose onClick={handleCloseModal}></DivClose>
+        <PopUpCanceled/>
+      </>
+      
     )}
     
 
     {modalFollowUp && (
       <>
+        <DivClose onClick={handleCloseModal}></DivClose>
         <FollowUpModal />
       </>
       
     )}
 
     {modalReschedule && (
-      <>
+      <><DivClose onClick={handleCloseModal}></DivClose>
         <ModalPlanner title={"Reschedule Planner"}/>
       </>
     )}
 
     {modalPopUpFinished && (
       <>
+        <DivClose onClick={handleCloseModal}></DivClose>
         <PopUpFinished />
       </>
     )}
 
     {modalSubject && (
       <>
-        <Subject />
+        <PositionSubject>
+          <Subject title={"Create Subject"}/>
+        </PositionSubject>
       </>  
     )}
-      
 
+    {modalRemark && (
+      <>
+        <DivClose onClick={handleCloseModal}></DivClose>
+        <RemarkModal title={"Create Remark"}/>
+      </>
+    )}
+      
     </Container>
   );
 };

@@ -6,9 +6,17 @@ import { Label, Container } from "./styles";
 export const TagComponent = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const colors=["#FFC0CB","#DDA0DD","#F5DEB3","#98FB98","#87CEEB"]
+  
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+ 
 
-  const options = props.options;
 
+  const options = props.options.map((item)=>({value:item.value,label:item.label,color:colors[Math.floor(Math.random() * (colors.length-1))]}));//props.options;
+  //console.log(options.map((item)=>({value:item.value,label:item.label,color:colors[getRandomInt(colors.length-1)]})))
+  
   return (
     <>
       <Container>
@@ -16,7 +24,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
           {props.label}
           <Select
             isMulti
-            options={props.options}
+            options={options}
             value={props.tags}
             id={props.idTagOption}
             components={animatedComponents}
@@ -74,7 +82,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                   border: "2px solid  #888C95",
                   width: props.widths || "90%",
                   height: props.heights || "12.5vh",
-                  marginLeft: props.marginLeft || "5%",
+                  marginLeft: props.marginLeft || "0%",
                   left: "11%",
                   paddingTop: "5px",
                   paddingBottom: "5px",
