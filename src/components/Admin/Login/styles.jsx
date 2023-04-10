@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const DivImgs = styled.div`
     display: grid;
     grid-template-rows: 10% 60% 15% 15%;
-    background-color: #3999FF;
+    background-color:  #E41165;
     position: relative;
     
 `;
@@ -118,8 +118,7 @@ export const ForgotPassword = styled.button`
     font-weight: bold;
     display:flex;
     justify-content: right;
-    margin-bottom: 30px;
-    
+    margin-bottom:50px;
     cursor: pointer;
 `;
 
@@ -156,18 +155,31 @@ export const AdministratorEnter = styled.button`
   text-decoration: none;
 `
 
-export const EnterAdmin = styled.div`
+export const EnterUser = styled.div`
     display: flex;
     margin-top: 10%;
     align-items: center;
     justify-content: center;
 `;
-
-export const EnterAdminButton = styled.button`
+export const ButtonEnterUser = styled.button`
+ 
     background-color: rgba(255,255,255,0);
     font-family: "Houschka Rounded Alt";
     border: none;
     font-size: 15px;
     cursor: pointer;
+`;
 
+export const ForgotPasswordADM = styled.button`
+    color: rgba(0, 0, 0, 1);
+    font-family: "Houschka Rounded Alt";
+    font-size: 12px;
+    background-color: rgba(255,255,255,0);
+    border: none;
+    font-weight: bold;
+    display:flex;
+    justify-content: right;
+    margin-bottom: 30px;
+   
+    cursor: pointer;
 `;

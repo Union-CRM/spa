@@ -6,6 +6,7 @@ import SubjectPage from "./pages/Subject/index";
 import Client from "./pages/Client";
 import RemarkPage from "./pages/Remark";
 import LoginPage from "./pages/Login/index";
+import LoginPageAdmin from "./components/Admin/Login/index";
 import { ClientContextProvider } from "./context/ClientContext"
 import { UserContextProvider } from "./context/UserContext"
 function App() {
@@ -19,8 +20,8 @@ function App() {
         <GlobalStyle />
         <div className="App">
           <Routes>
-            <Route path="/" element={<LoginPage />} />
-            
+            <Route path="/" element={<LoginPageAdmin />} />
+            <Route path="/loginClient" element={<LoginPage />}/>
             <Route
               path="/home"
               element={

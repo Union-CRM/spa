@@ -102,7 +102,7 @@ const SidBar =(props)=>{
 
         </Ul>
         <Logout $mode={sidBarState} onClick={handleLogin}>
-            <Slink to="/">
+            <Slink to="/loginClient">
               <IconSystem icon="Logout"  />
               <Span $mode={sidBarState}>Logout</Span>
             </Slink>  

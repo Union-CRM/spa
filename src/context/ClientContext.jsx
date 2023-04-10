@@ -9,15 +9,15 @@ export const ClientContextProvider = ({ children }) => {
   useEffect(()=>{
     loadData();
   },[])
-  
+  console.log(localStorage.getItem('token'));
   const loadData=async()=>{
     var clients;
     try {
-        const response = await axios.get('http://ec2-18-231-39-171.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/mygroups',{
+        const response = await axios.get('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/mygroups',{
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
             clients = response;
     }catch (error) {
-        console.error(error);
+        console.error(error.response);
     }
     setClient(clients.data.list.map((item)=>({
       id:item.client_id, 
