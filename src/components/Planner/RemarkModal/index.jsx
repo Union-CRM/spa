@@ -53,6 +53,7 @@ const RemarkModal = ({ title, setOpenModal }) => {
 
       
       useEffect(()=>{
+        console.log(plannerEdit)
         if(modalEdit){
           const plannerEdit = plannerList.filter((p)=>  p.id === modalEdit) [0];
           handleSelectSubject=(plannerEdit.subject_id);

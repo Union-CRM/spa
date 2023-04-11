@@ -10,7 +10,7 @@ export const useFetchRole=(role)=>{
             var roles;
             try {
 
-                const response = await axios.get('http://ec2-18-231-39-171.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/roles',{
+                const response = await axios.get('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/roles',{
                     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
                     roles = response;
             }catch (error) {

@@ -292,8 +292,8 @@ let Month = month[d.getMonth()];
 
     {modalSave && (
       <>
-      <DivClose onClick={handleCloseModal} ></DivClose>
-      <ModalSave onClick={handleCloseModal} />
+      <DivClose onClick={() => setModalSave(false)} ></DivClose>
+      <ModalSave />
       </>
     )}
 
