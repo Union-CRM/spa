@@ -1,8 +1,6 @@
 import React from "react";
 import PageBody from "../../components/Geral/PageBody";
 import { BigCalender } from "../../components/Planner/Calendar";
-import { ClientContextProvider } from "../../context/ClientContext";
-import { PlannerContextProvider } from "../../context/PlannerContext";
 import { SubjectContextProvider } from "../../context/SubjectContext";
 import { DivHeader,DivTitle,DivLogo,DivIconTitle,DivRouteTitle,Path,Title } from "./styles";
 import IconSystem from "../../assets/IconSystem";
@@ -14,11 +12,8 @@ import "tippy.js/dist/tippy.css";
 class PlannerPage extends React.Component {
   render() {
     return (
-      
         <PageBody showNav={true}>
-          <PlannerContextProvider>
           <SubjectContextProvider>
-          <ClientContextProvider>
           <DivHeader>
             {/*A Rota e o Nome da Pagina de Planner*/}
             <DivRouteTitle>
@@ -37,9 +32,7 @@ class PlannerPage extends React.Component {
               </DivLogo>
           </DivHeader>
           <BigCalender />
-          </ClientContextProvider>
           </SubjectContextProvider>
-          </PlannerContextProvider>
         </PageBody>
       
     );
