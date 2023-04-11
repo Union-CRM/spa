@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const ContainerCards = styled.li`
+export const ContainerCards = styled.div`
   
   margin-top: 15px;
   margin-left: 8%;
@@ -10,7 +10,7 @@ export const ContainerCards = styled.li`
   position: relative;
   display: grid;
   height: fit-content;
-  width: auto;
+  width: auto;  
   max-width: 100%;
   grid-template-columns: 60% 39%;
   grid-column-gap: 1%;

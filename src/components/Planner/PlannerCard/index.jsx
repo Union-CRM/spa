@@ -1,5 +1,5 @@
 import React from "react";
-import { DivP, Ddata, Header, DivPlanner,TextMonDay } from "./styles";
+import { DivP, Ddata, Header, DivPlanner,TextMonDay, DivCard } from "./styles";
 import Card from "./Card";
 import Headline from "../../../assets/FontSystem/Headline";
 import { useState } from 'react'
@@ -9,12 +9,11 @@ import { datesAreOnSameDay } from "../Calendar/utils/utils";
 
 const PlannerCard = ({ setOpenPlannerModal, date }) => {
 
+  
+
   const { planner: plannerList, setPlanner: setPlannerList, setModalEdit} = usePlannerContext();
-
   const [plannerDay] = useState(plannerList.filter((planner)=> datesAreOnSameDay(new Date(planner.date), date)))
- 
-
-
+  const [guest] = useState(plannerDay.guest?plannerDay.guest.map((g,index)=>({value:index,label:g.client_name})):[])
   const closePlanner = () => (
     setOpenPlannerModal(false)
   )
@@ -35,6 +34,7 @@ const PlannerCard = ({ setOpenPlannerModal, date }) => {
               
             </Ddata>
           </Header>
+          <DivCard>
           {plannerDay.map((item) => (
             <Card
               key={item.id}
@@ -43,12 +43,15 @@ const PlannerCard = ({ setOpenPlannerModal, date }) => {
               emailClient={item.client_email}
               emailUser={item.user_id}
               client={item.client}
-              guests={""}
+              guests={item.client_name}
+              initial={item.date}
+              finish={item.duration}
               userName={item.user}
               status={item.status}
               OpenModal={() => setModalEdit(item.id)}
             />
           ))}
+          </DivCard>
         </DivP>
 
   );

@@ -37,8 +37,6 @@ function handleLogin(event) { // Renomear função de teste para handleLogin e a
 const SidBar =(props)=>{
   const [sidBarState,setSidBarState]=useState(true);
   const {user}=useUserContext();
-  console.log(user)
-
   return (
     <>
       <Container
