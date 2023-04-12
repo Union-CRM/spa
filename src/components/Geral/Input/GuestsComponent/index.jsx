@@ -101,7 +101,7 @@ export const GuestComponent = (props, placeholder, idTagOption) => {
                   top: props.top || "0px",
                   border: "2px solid  #888C95",
                   width: props.widths || "90%",
-                  height: props.heights || "12.5vh",
+                  height: props.heights || "12.2vh",
                   marginLeft: props.marginLeft || "5%",
                   paddingTop: "5px",
                   paddingBottom: "5px",
