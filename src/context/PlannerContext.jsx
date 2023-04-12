@@ -27,7 +27,7 @@ export const PlannerContextProvider = ({ children }) => {
   const loadPlannerList=async()=>{
     let planners;
     try {
-      const response = await axios.get('http://localhost:8086/union/v1/planners/submissives',{
+      const response = await axios.get('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8086/union/v1/planners/submissives',{
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
           planners = response;
           

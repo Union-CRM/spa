@@ -23,6 +23,7 @@ import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import subjectList from "../../../context/SubjectContext";
 import { useClientContext } from "../../../hook/useClientContent";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
+import { useFetchSubject } from "../../../hook/useFetchSubject";
 
 const Subject = (props) => {
   const { setModal, title, id } = props;
@@ -43,18 +44,21 @@ const Subject = (props) => {
 
   /////////// SUBJECT ////////////////
 
-  const { subject: subjectsList, setSubject: setSubjectList } =
+  const { subject: subjectsList, setSubject: setSubjectList, loadData } =
     useSubjectContext();
 
   const [subject, setSubject] = useState();
-  const [manager, setManager] = useState();
   const [description, setDescription] = useState();
-  const [status, setStatus] = useState("Progress");
   const [flag, setFlag] = useState(false);
   const [email, setEmail] = useState();
   const [business, setBusiness] = useState();
   const [client, setClient] = useState();
   const [release, setRelease] = useState();
+  const [ReleaseId, setReleaseId] = useState();
+  const [ClientId, setClientId] = useState()
+
+  // useFetch
+  const {insertSubject,updateSubject}= useFetchSubject();
 
   function getId() {
     let lastId = 1;
@@ -65,44 +69,23 @@ const Subject = (props) => {
 
     return lastId + 1;
   }
-  /*id: 1,
-    status: "Progress",
-    subject_title: "Apresentação Institucional TCS Institucional",
-    manager_id: 1,
-    manager: "Helio Endo",
-    release_id: 1,
-    release: "Experiência Digital",
-    business_id: 1,
-    business: "Infraestrutura e Operações TI",
-    client_id: 1,
-    client: "Igor Sena Soares Silva",
-    client_email: "igorsena@tcs.com",
-    description:"", */
+ 
 
   const createSubject = () => {
     const newSubject = {
-      id: getId(),
-      status: status,
-      manager: manager,
-      client: selectedClient,
-      client_email: email,
-      release: release,
-      business: business,
+      client: ClientId,
+      release_id: ReleaseId,
       subject_title: subject,
-      description: description,
+      subject_text: description,
     };
 
     if (
-      status &&
-      manager &&
-      selectedClient &&
-      email &&
+      ClientId &&
       release &&
-      business &&
       subject &&
       description
     ) {
-      setSubjectList([...subjectsList, newSubject]);
+      insertSubject(newSubject);
       setModal(false);
     } else {
       setFlag(true);
@@ -114,13 +97,17 @@ const Subject = (props) => {
   const [selectedClient, setSelectedClient] = useState(null);
 
   useEffect(() => {
+    
     if (selectedClient) {
       const selectedSubject = clientList.find(
         (client) => client.client === selectedClient
       );
+      setClientId(selectedSubject.id);
       setEmail(selectedSubject.email);
       setBusiness(selectedSubject.textBusiness);
+      setReleaseId(selectedSubject.release_id);
       setRelease(selectedSubject.textRelease);
+      setDescription(selectedSubject.subject_text);
     }
   }, [selectedClient]);
 
@@ -217,33 +204,6 @@ const Subject = (props) => {
                 />
               </Label>
             </DivSubject>
-
-            <DivStatus>
-              <Label>
-                Status
-                <Input
-                  label={"Status"}
-                  placeholder={flag && !status ? "" : ""}
-                  widthInput={"90% !important"}
-                  value={status}
-                  onChange={(event) => setStatus(event.target.value)}
-                  set={(status) => setStatus(status)}
-                  disabled
-                />
-              </Label>
-
-              <SingleSelect
-                label={"Manager"}
-                value={manager}
-                placeholder={flag && !manager ? "Required field" : ""}
-                sizeSingle={"100%"}
-                required
-                sizeMenu={"100%"}
-                options={manager_mok}
-                onChange={(choice) => setUserChoice(choice)}
-                set={(manager) => setManager(manager)}
-              />
-            </DivStatus>
 
             <DivDescription>
               <Label>

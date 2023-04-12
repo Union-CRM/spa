@@ -188,7 +188,8 @@ const ModalCreatePlanner = (props) => {
                   top={"240%"}
                   width={"230%"}
                   widths={"93%"}
-                  height={"16.5vh"}
+                  heights={"16.2vh"}
+                  marginLeft={"0%"}
                 />
               </DivGuest>
             </Form>{" "}

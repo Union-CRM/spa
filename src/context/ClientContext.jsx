@@ -16,7 +16,7 @@ export const ClientContextProvider = ({ children }) => {
         const response = await axios.get('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/mygroups',{
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
             clients = response;
-    }catch (error) {
+    }catch (error){
         console.error(error);
     }
     setClient(clients.data.list.map((item)=>({

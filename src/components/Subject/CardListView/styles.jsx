@@ -113,18 +113,24 @@ export const Status = styled.div`
   height: 15px;
   border-radius: 8px;
   margin-top: 10px;
+  padding-bottom:2px;
   font-size: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
 `;
 
 export const LabelStatus = styled.div`
   color: #ffffff;
-  font-size: 10;
-  text-transform:lowercase;
+  font-size: 0.8rem;
   margin-left: 0px;
   margin-top: 1px;
   padding-left:5px;
   padding-right:5px;
+  text-transform: lowercase;
+  span:first-letter {
+    text-transform: uppercase;
+    color: #fff;
+  }
 `;
 
 //* DIVS DETAILS CARDS!! *//
