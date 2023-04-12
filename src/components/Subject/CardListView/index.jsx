@@ -45,7 +45,7 @@ const SubjectCard = (props) => {
         <Header>
           <DivStatusSubject>
             <Status $mode={subject.status}>
-              <LabelStatus>{subject.status}</LabelStatus>
+              <LabelStatus><span>{subject.status}</span></LabelStatus>
             </Status>
           </DivStatusSubject>
 

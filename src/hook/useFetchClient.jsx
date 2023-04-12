@@ -6,7 +6,8 @@ export const useFetchClient=()=>{
     const {loadData}=useClientContext() 
     const insertClient = async(client)=>{
         console.log(client)
-        axios.post('http://ec2-18-231-39-171.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/', {
+        axios.post('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/', 
+        {
             client_name: client.client,
             client_email: client.email,
             client_role: parseInt(client.role_id),
@@ -28,7 +29,7 @@ export const useFetchClient=()=>{
 
     const updateClient = async(client_id,client)=>{
         
-        axios.put(`http://ec2-18-231-39-171.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/update/${client_id}`, {
+        axios.put(`http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/update/${client_id}`, {
             client_name: client.client,
             client_email: client.email,
             client_role: parseInt(client.role_id),
