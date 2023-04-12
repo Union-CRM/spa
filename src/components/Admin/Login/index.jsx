@@ -1,12 +1,12 @@
 import React, { useState } from 'react'; // Importar useState para criar estado para email e senha
-import IconSystem from '../../assets/IconSystem';
-import ButtonDefault from '../../assets/Buttons/ButtonDefault';
+import IconSystem from '../../../assets/IconSystem';
+import ButtonDefault from '../../../assets/Buttons/ButtonDefault';
 import { Container,DivTcs,Content,LogoDiv,Form,DivIcons,Label,Span,Input,DivTerms,
-    DivWelcome,TextTerm,LoginBt,DivImgs,DivEmailIcon,DivPassWIcon,EnterAdmin, ForgotPassword,EnterAdminButton} from './styles';
-import Headline from '../../assets/FontSystem/Headline';
+    DivWelcome,TextTerm,LoginBt,DivImgs,DivEmailIcon,DivPassWIcon,EnterUser,ButtonEnterUser,ForgotPasswordADM} from './styles';
+import Headline from '../../../assets/FontSystem/Headline'
 import axios from 'axios';
 
-function LoginPage() {
+function LoginPageAdmin() {
 
   const [email, setEmail] = useState(''); // Criar estado para email com o hook useState
   const [password, setPassword] = useState(''); // Criar estado para senha com o hook useState
@@ -26,9 +26,7 @@ function LoginPage() {
      
         if (email !== "" && password !== "") { // Verificar email e senha preenchidos e tamanho mínimo da senha
             const { data } = await axios.post('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login', {
-
                 email,
-
                 password,
   
             }).catch(function (error) {
@@ -55,8 +53,8 @@ function LoginPage() {
 
     }
 
-    function loginAdm(){
-      window.location.href = '/';
+    function loginClient(){
+      window.location.href = '/loginClient';
     }
   
   return(
@@ -97,14 +95,15 @@ function LoginPage() {
               </DivPassWIcon>
               <Input type="password" placeholder= '●●●●●●●●' value={password} onChange={(e) => setPassword(e.target.value)} />
            </Label>  
-           < ForgotPassword>Forgot password?</ForgotPassword>
+
+           < ForgotPasswordADM>Forgot password?</ForgotPasswordADM>
 
            <LoginBt>
-                    <ButtonDefault name={"Login"} type={"userSave"} sizeFont={"1.5em"}></ButtonDefault>
+                    <ButtonDefault name={"Login"} type={"adminSave"} sizeFont={"1.5em"}></ButtonDefault>
             </LoginBt>
-            <EnterAdmin>
-                <EnterAdminButton onClick={loginAdm}>Enter Administrator</EnterAdminButton>
-            </EnterAdmin>
+            <EnterUser>
+                <ButtonEnterUser onClick={loginClient}>Enter User</ButtonEnterUser>
+            </EnterUser>
         </Form>
     </Content>
  </Container> 
@@ -114,4 +113,4 @@ function LoginPage() {
 }
 
    
-export default LoginPage;
+export default LoginPageAdmin;
