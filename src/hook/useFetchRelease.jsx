@@ -10,7 +10,7 @@ export const useFetchRelease=(release)=>{
             var releases;
             try {
 
-                const response = await axios.get('http://ec2-18-230-70-227.sa-east-1.compute.amazonaws.com:8087/union/v1/releasetrains',{
+                const response = await axios.get('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8087/union/v1/releasetrains',{
                     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
                     releases = response;
             }catch (error) {

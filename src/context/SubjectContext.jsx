@@ -29,6 +29,7 @@ export const SubjectContextProvider = ({ children }) => {
           subject_text:item.Subject_text,
           release_id:item.release_id,
           release:item.release_name,
+          release_id:item.release_id,
           business:item.business_name,
           manager:item.user_name,
           client: item.client_name,
@@ -38,9 +39,7 @@ export const SubjectContextProvider = ({ children }) => {
         ))
       }
   const [selectedSubject, setSelectedSubject] = useState(null);
-
   const [modalDetails, setModalDetails] = useState(false);
-
   const [activeTab, setActiveTab] = useState(null);
 
   const [modal, setModal] = useState();

@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const DivP = styled.div`
   overflow: auto;
   background-color: #f5f7fa;
-
   width: 40vw;
   height: fit-content;
   border-left: 15px solid #007BFF;
@@ -14,24 +13,21 @@ export const DivP = styled.div`
   top: 10%;
   left: 30%;
   z-index: 5;
-
+  @media (max-height: 300px) {
+    height: 75vh;
+  }
   //@media (min-width: 1200px) {
     //width: 100px
-
-
-
 //}
-  
-  
   &::-webkit-scrollbar {
     width: 18px;
     height: 10px;
     margin-right: 10px;
     float: right;
   }
-  
   &::-webkit-scrollbar-track {
     box-shadow: 5px black;
+    background: blue;
   }
   
   &::-webkit-scrollbar-track-piece {
@@ -41,7 +37,7 @@ export const DivP = styled.div`
 
   &::-webkit-scrollbar-thumb {
     height: 80%;
-    background-color: #afb2bb;
+    background-color: #22325f;
     margin-left: 20px;
     width: 15px;
     border-right: 6px solid #f5f7fa;
@@ -83,3 +79,7 @@ font-size: 20px;
 line-height: 24px;
 `
 
+export const DivCard = styled.div`
+  align-self: center;
+  margin: 0 auto;
+`

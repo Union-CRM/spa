@@ -12,12 +12,15 @@ import {
 import { useClientContext } from "../../../hook/useClientContent";
 import { useEffect, useRef } from "react";
 import IconSystem from "../../../assets/IconSystem";
+import {usePlannerContext} from "../../../hook/usePlannerContext";
 
 const ModalSave = () => {
+
+  const { setModalSave } = usePlannerContext();
   
 
   return (
-    <ContainerFather>
+    <ContainerFather onClick={() => setModalSave(false)}>
         <Container>
           <Content>
             <Circle>

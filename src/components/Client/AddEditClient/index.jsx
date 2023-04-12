@@ -34,7 +34,6 @@ import { useFetchTag } from "../../../hook/useFetchTag";
 const AddEditClient = (props) => {
   const { client: clientList, setClient: setClientList,loadData} = useClientContext();
   const {user} = useUserContext()
-
   const [clientId,setClientId]=useState()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -135,6 +134,7 @@ const AddEditClient = (props) => {
       business_id:releaseObj.business_id,
       release_id: releaseObj.release_id,
       tags: tags,
+      user_id:user.id
     };
     
     if (name && email && role.id && customer.id && releaseObj.id) {
