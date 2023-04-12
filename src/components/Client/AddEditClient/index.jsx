@@ -34,7 +34,6 @@ import { useFetchTag } from "../../../hook/useFetchTag";
 const AddEditClient = (props) => {
   const { client: clientList, setClient: setClientList,loadData} = useClientContext();
   const {user} = useUserContext()
-
   const [clientId,setClientId]=useState()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -42,7 +41,7 @@ const AddEditClient = (props) => {
   const [business, setBusiness] = useState("");
   const [role, setRole] = useState({});
   const [status, setStatus] = useState({value: "Active"});
-  const {releaseList} =useFetchRelease("release");
+  const {releaseList} = useFetchRelease("release");
   const {customerList} = useFetchCustomer("Customer");
   const {roleList} = useFetchRole("Role");
   const {tagList} = useFetchTag("Tag")
@@ -135,6 +134,7 @@ const AddEditClient = (props) => {
       business_id:releaseObj.business_id,
       release_id: releaseObj.release_id,
       tags: tags,
+      user_id:user.id
     };
     
     if (name && email && role.id && customer.id && releaseObj.id) {
@@ -265,7 +265,7 @@ const AddEditClient = (props) => {
             </DivTag>
 
             <DivStatus>
-              {false && <SingleSelect
+              {true && props.title === "Edit Client" && ( <SingleSelect
                 set={(status) => setStatus(status)}
                 label={"Status"}
                 value={status}
@@ -274,7 +274,7 @@ const AddEditClient = (props) => {
                 required
                 sizeMenu={"40%"}
                 options={status_mok}
-              />}
+              />)}
             </DivStatus>
           </Form>{" "}
           <DivButton>

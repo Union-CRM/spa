@@ -16,7 +16,7 @@ import axios from "axios";
 const ModalPopUp = (props) => {
   const { modalClose } = props;
 
-  const { client: clientList, setClient: setClientList } = useClientContext();
+  const { client: clientList, setClient: setClientList,loadData } = useClientContext();
 
   const client = clientList.filter((item) => item.id === props.id)[0];
 
@@ -28,15 +28,12 @@ const ModalPopUp = (props) => {
       : "Do you want to activate this card?";
 
   const handleAlterStatus = () => {
-    
     async function UpdateStatusClient(){
-
-
-        axios.put(`http://localhost:8083/union/v1/clients/update/status/${client.id}`,{},        
+        axios.put(`http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/update/status/${client.id}`,{},        
         {headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}})
         .then(function (response) {
-            console.log(response);
-    
+            //console.log(response);
+            loadData();
         })
         .catch(function (error) {
             console.log(error.response);
@@ -44,12 +41,9 @@ const ModalPopUp = (props) => {
     
     }
     UpdateStatusClient();
-
     const noId = clientList.filter((item) => item.id !== client.id);
     client.status = client.status === "Active" ? "Inactive" : "Active";
-
     setClientList([...noId, client]);
-    
     modalClose();
   };
 

@@ -196,7 +196,7 @@ export const DivStatus = styled.div`
 `;
 
 export const DivDescription = styled.div`
-  grid-row: 6;
+  grid-row:5;
   width: 90%;
   height: auto;
   display: grid;

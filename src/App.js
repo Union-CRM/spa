@@ -9,10 +9,14 @@ import LoginPage from "./pages/Login/index";
 import LoginPageAdmin from "./components/Admin/Login/index";
 import { ClientContextProvider } from "./context/ClientContext"
 import { UserContextProvider } from "./context/UserContext"
+import { PlannerContextProvider } from "./context/PlannerContext";
+
+
 function App() {
   return (
     <>
     <UserContextProvider>
+    <PlannerContextProvider>
     <ClientContextProvider>
 
       <Router>
@@ -77,6 +81,7 @@ function App() {
         </div>
       </Router>
       </ClientContextProvider>
+      </PlannerContextProvider>
       </UserContextProvider>      
 
     </>

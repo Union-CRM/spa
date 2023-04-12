@@ -6,6 +6,8 @@ import SingleSelect from '../../Geral/Input/SingleSelect';
 import { useClientContext } from "../../../hook/useClientContent";
 import {usePlannerContext} from "../../../hook/usePlannerContext";
 import {useSubjectContext} from "../../../hook/useSubjectContent";
+import { useFetchPlanner } from '../../../hook/useFetchPlanner';
+import {useUserContext} from "../../../hook/useUserContext"
 import { Container,
      PositionButtonSave,
      PositionButtonCancel, 
@@ -33,7 +35,7 @@ import ModalSave from '../ModalSuccessfuly';
 const ModalPlanner = ({ title, setOpenModal }) => {
       const [subjectObj,setSubjectObj]=useState({});
       const {subject: subjectList}=useSubjectContext();
-      const subjectOption = subjectList.filter((s)=>s.status==="Progress").map((s)=>({id:s.id,value:s.id,label:s.title}))
+      const [subjectOption, setSubjectOption] = useState([])
       const { client: clientList} = useClientContext();
       const clientOption = clientList.filter((c)=>c.status==="Active").map((c)=>({id:c.id,value:c.id,label:c.client}))
       const [date,setDate]= useState();
@@ -43,31 +45,37 @@ const ModalPlanner = ({ title, setOpenModal }) => {
       const {planner: plannerList, setPlanner: setPlannerList, plannerEdit,setPlannerEdit} = usePlannerContext();
       const [status,setStatus]=useState("SCHEDULED")
       const {setModalSave , modalEdit, setModalEdit, modalDiscard, setModalDiscard, setModalCreate, setModalRemark, setModalReschedule} =  usePlannerContext()
-      
-      console.log(status)
+      const {createPlanner} = useFetchPlanner();
+      const {user} = useUserContext();
+      useEffect(()=>{
+        setSubjectOption(subjectList.filter((s)=>s.status==="IN PROGRESS").map((s)=>({id:s.id,value:s.id,label:s.subject_title})))
+      },[subjectList])
+
 
       useEffect(()=>{
         if(modalEdit){
           const p = plannerList.filter((p)=>  p.id === modalEdit) [0];
-          const y= p.date.getFullYear();
-          const m= p.date.getMonth()+1 <10 ? `0${p.date.getMonth()+1}`: p.date.getMonth()+1;
-          const d= p.date.getDate()<10 ? `0${p.date.getDate()}` : p.date.getDate(); 
+          const date = new Date(p.date)
+          const y= date.getFullYear();
+          const m= date.getMonth()+1 <10 ? `0${date.getMonth()+1}`: date.getMonth()+1;
+          const d= date.getDate()<10 ? `0${date.getDate()}` : date.getDate(); 
           setStatus(p.status)
           setDate(y+"-"+m+"-"+d);
           setTimeFinish(p.duration)
-          setTimeStart(p.date.toLocaleTimeString())
+          setTimeStart(date.toLocaleTimeString())
           handleSelectSubject(p.subject_id);
+          setGuest(p.guest?p.guest.map((g)=>({value:g.client_id,label:g.client_name})):[])
         }
         
       },[])
-
+    
     const StatusOption = [
-      {id: 1, value: "SCHEDULED", label: "Scheduled"},
-      {id: 2, value: "DONE", label: "Done"},
-      {id: 3, value: "CANCELED", label: "Canceled"},
+      {id: 18, value: "SCHEDULED", label: "SCHEDULED"},
+      {id: 16, value: "DONE", label: "DONE"},
+      {id: 17, value: "CANCELED", label: "CANCELED"},
     ]
 
-
+    
     const handleSelectSubject=(id)=>{
         setSubjectObj(subjectList.filter((s)=>s.id===id)[0])
     }
@@ -75,7 +83,7 @@ const ModalPlanner = ({ title, setOpenModal }) => {
     const handleSubmit=(e)=>{
       e.preventDefault();
       if(!modalEdit){
-        createPlanner();
+        HandleCreatePlanner();
       }else{
         editPlanner();
       }
@@ -89,58 +97,45 @@ const ModalPlanner = ({ title, setOpenModal }) => {
     return lastId + 1;
   }
 
-  const createPlanner=()=>{
+  const HandleCreatePlanner=()=>{
     const newPlanner = {
-      id: getId(),
-      subject: subjectObj.title,
-      date: new Date(date +" "+ timeStart),
+      name:subjectObj.subject_title,
+      date:date +" "+ timeStart,
       duration: timeFinish,
-      subject_id: subjectObj.id,
-      subject: subjectObj.title,
-      remark_id: null,
-      client_id: subjectObj.client_id,
-      client:subjectObj.client,
-      client_email:subjectObj.client_email,
-      release_id: subjectObj.release_id,
-      release: subjectObj.release_name,
-      status:"SCHEDULED",
-      user_id: 21345678,
-      user: "joão da silva",
-      guest:guest.map((g)=>({id:g.value,name:g.label}))
+      subject:subjectObj.id,
+      client:subjectObj.client_id,
+      release:subjectObj.release_id,
+      user:user.id,
+      guest:guest.map((g)=>({client_id:g.value}))
     };
-    setPlannerList([...plannerList,newPlanner]);
-    setModalSave(true);
-    setModalCreate(false);
-    setModalReschedule(false)
+    createPlanner(newPlanner);
+    //setPlannerList([...plannerList,newPlanner]);
+    //setModalSave(true);
+    //setModalCreate(false);
+    //setModalReschedule(false)
   }
 
 
   const editPlanner=()=>{
+    const newPlanner = {
+      name:subjectObj.subject_title,
+      date:date +" "+ timeStart,
+      duration: timeFinish,
+      subject:subjectObj.id,
+      client:subjectObj.client_id,
+      release:subjectObj.release_id,
+      user:user.id,
+      status:status,
+      guest:guest.map((g)=>({id:g.value}))
+    };
       if(status === "SCHEDULED"){
         setModalEdit(false)
-      }else{
-        setPlannerEdit({status:status})
+      }else{    
+        
+        setPlannerEdit(newPlanner)
         setModalRemark(true)
         setModalEdit(false)
       }
-
-          /*if (newPlanner) {
-          if(newPlanner.status === "Canceled" || "Finished" ) {
-            setModalRemark(true)
-          }else {
-            setModalRemark(false)
-          }
-        }*/
-    /*const id=1;
-    if (id)
-    if(id === "Canceled" || "Finished" ) {
-      setModalRemark(true)
-      setOpenModal(false);
-    }else {
-      setModalRemark(false)
-      setOpenModal(false);
-    }*/
-    
   }
     return (
     <Container>
@@ -150,6 +145,7 @@ const ModalPlanner = ({ title, setOpenModal }) => {
         <Form onSubmit={handleSubmit}>
             <PositionInputs>
                 {!modalEdit && (<SingleSelect 
+                    placeholder={""}
                     set={(s) => handleSelectSubject(s)}
                     options={subjectOption} 
                     name={"subject"} 
@@ -161,7 +157,7 @@ const ModalPlanner = ({ title, setOpenModal }) => {
                 {modalEdit &&(
                     <>
                       <PositionLabel>Subject</PositionLabel>
-                      <InputPlanner type="text" placeholder="Client Name" value={subjectObj.title} disabled/>
+                      <InputPlanner type="text" placeholder="Client Name" value={subjectObj.subject_title} disabled/>
                     </>)}
                 <PositionLabel>Client Name</PositionLabel>
                 <InputPlanner type="text" placeholder="Client Name" value={subjectObj.client} disabled/>
@@ -189,7 +185,9 @@ const ModalPlanner = ({ title, setOpenModal }) => {
             </DivClocks>
             <PositionTags>
               <TagComponent options={clientOption}
-                  label={"Guests"} 
+                  placeholder={""}
+                  label={"Guests"}
+                  tags={guest} 
                   width={"90%"}
                   widths={"13vw"}
                   set={(g)=> setGuest(g)}
@@ -201,6 +199,7 @@ const ModalPlanner = ({ title, setOpenModal }) => {
             <PositionStatus>
               {modalEdit && ( 
               <SingleSelect 
+                  
                   set={(c) => setStatus(c)}
                   options={StatusOption}
                   value={status}
@@ -216,18 +215,7 @@ const ModalPlanner = ({ title, setOpenModal }) => {
                <PositionLabel>Status</PositionLabel>
                 <InputStatus placeholder="Status" value="Scheduled" disabled/>
                 </>
-                /*
-              <SingleSelect 
-                  set={(c) => setStatus(c)}
-                  options={StatusOption}
-                  value={"Scheduled"}
-                  label={"Status"} 
-                  sizeSingle={"37%"} 
-                  sizeMenuList={"100%"}
-                  sizeMenu={"33%"}
-                  isDisabled={false}
-                  sizeHeight={"3.5vh"}
-              />*/)}
+                )}
             </PositionStatus>
 
             <PositionButtons>

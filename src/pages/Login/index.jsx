@@ -26,7 +26,9 @@ function LoginPage() {
      
         if (email !== "" && password !== "") { // Verificar email e senha preenchidos e tamanho mínimo da senha
             const { data } = await axios.post('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login', {
+
                 email,
+
                 password,
   
             }).catch(function (error) {

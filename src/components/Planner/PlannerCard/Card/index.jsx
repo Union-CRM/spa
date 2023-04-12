@@ -36,6 +36,11 @@ function Split(n) {
 }
 
 const Card = (props) => {
+  const time=props.initial.split(" ")[1].split(":");
+  const [timeStart] = useState(`${time[0]}:${time[1]}`);
+  
+  
+  
   //const corStatus=
   return (
     <>
@@ -82,11 +87,7 @@ const Card = (props) => {
                 name={"Guests:"}
                 colorFont={"#1E2222"}
               />
-              <Subtitle
-                type={"TextDescription"}
-                name={props.guests}
-                colorFont={"#888888"}
-              />
+              {props.guests}
             </TextGuests>
           </DivTextCard>
         </ClientContent>
@@ -98,11 +99,7 @@ const Card = (props) => {
           )}
           <DivStatusTime>
             <DivStatus $mode={props.status} />
-            <Body
-              type={"Body2"}
-              name={"11:00 - 12:00"}
-              colorFont={"#000000"}
-            ></Body>
+            {timeStart} - {props.finish}
           </DivStatusTime>
           <DivUserInformation>
             <DivPhoto>
