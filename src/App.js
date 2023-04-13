@@ -35,5 +35,36 @@ function App() {
                 )
               }
             />
+<Route
+              path="/client"
+              element={
+                localStorage.getItem("token") != false ? (
+                  <Client />
+                ) : (
+                  <LoginPage />
+                )
+              }
+            />
+            
+            <Route
+              path="/subject"
+              element={
+                localStorage.getItem("token") != false ? (
+                  <SubjectPage />
+                ) : (
+                  <LoginPage />
+                )
+              }
+            />
+            <Route
+              path="/remark"
+              element={
+                localStorage.getItem("token") != false ? (
+                  <RemarkPage />
+                ) : (
+                  <LoginPage />
+                )
+              }
+            />
 
 export default App;
