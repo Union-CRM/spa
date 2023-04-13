@@ -11,6 +11,7 @@ import { ClientContextProvider } from "./context/ClientContext"
 import { UserContextProvider } from "./context/UserContext"
 import { PlannerContextProvider } from "./context/PlannerContext";
 
+
 function App() {
   return (
     <>
@@ -35,7 +36,7 @@ function App() {
                 )
               }
             />
-<Route
+            <Route
               path="/client"
               element={
                 localStorage.getItem("token") != false ? (
@@ -66,7 +67,7 @@ function App() {
                 )
               }
             />
- <Route
+            <Route
               path="/planner"
               element={
                 localStorage.getItem("token") != false ? (
