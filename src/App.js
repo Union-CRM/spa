@@ -79,10 +79,7 @@ function App() {
             />
           </Routes>
         </div>
-      </Router>
-      </ClientContextProvider>
-      </PlannerContextProvider>
-      </UserContextProvider>      
+  
 
     </>
   );
