@@ -66,5 +66,25 @@ function App() {
                 )
               }
             />
+ <Route
+              path="/planner"
+              element={
+                localStorage.getItem("token") != false ? (
+                  <PlannerPage />
+                ) : (
+                  <LoginPage />
+                )
+              }
+            />
+          </Routes>
+        </div>
+      </Router>
+      </ClientContextProvider>
+      </PlannerContextProvider>
+      </UserContextProvider>      
+
+    </>
+  );
+}
 
 export default App;
