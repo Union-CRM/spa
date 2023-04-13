@@ -11,6 +11,29 @@ import { ClientContextProvider } from "./context/ClientContext"
 import { UserContextProvider } from "./context/UserContext"
 import { PlannerContextProvider } from "./context/PlannerContext";
 
+function App() {
+  return (
+    <>
+    <UserContextProvider>
+    <PlannerContextProvider>
+    <ClientContextProvider>
 
+      <Router>
+      
+        <GlobalStyle />
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<LoginPageAdmin />} />
+            <Route path="/loginClient" element={<LoginPage />}/>
+            <Route
+              path="/home"
+              element={
+                localStorage.getItem("token") != false ? (
+                  <Home />
+                ) : (
+                  <LoginPage />
+                )
+              }
+            />
 
 export default App;
