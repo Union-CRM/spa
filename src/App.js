@@ -15,7 +15,11 @@ import { PlannerContextProvider } from "./context/PlannerContext";
 function App() {
   return (
     <>
-         <Router>
+    <UserContextProvider>
+    <PlannerContextProvider>
+    <ClientContextProvider>
+
+      <Router>
       
         <GlobalStyle />
         <div className="App">
@@ -75,7 +79,10 @@ function App() {
             />
           </Routes>
         </div>
-        </Router>
+      </Router>
+      </ClientContextProvider>
+      </PlannerContextProvider>
+      </UserContextProvider>      
 
     </>
   );
