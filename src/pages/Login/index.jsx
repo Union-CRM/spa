@@ -2,15 +2,20 @@ import React, { useState } from 'react'; // Importar useState para criar estado 
 import IconSystem from '../../assets/IconSystem';
 import ButtonDefault from '../../assets/Buttons/ButtonDefault';
 import { Container,DivTcs,Content,LogoDiv,Form,DivIcons,Label,Span,Input,DivTerms,
-    DivWelcome,TextTerm,LoginBt,DivImgs,DivEmailIcon,DivPassWIcon,EnterAdmin, ForgotPassword,EnterAdminButton} from './styles';
+    DivWelcome,TextTerm,LoginBt,DivImgs,DivEmailIcon,DivPassWIcon,EnterAdmin, ForgotPassword,EnterAdminButton,DivModal} from './styles';
 import Headline from '../../assets/FontSystem/Headline';
 import axios from 'axios';
+import LoginProblems from '../../components/Geral/LoginModals/LoginProblems';
+import LoginInvalid from '../../components/Geral/LoginModals/LoginInvalid';
+import AcessBlocked from '../../components/Geral/LoginModals/AcessBlocked';
 
 function LoginPage() {
 
   const [email, setEmail] = useState(''); // Criar estado para email com o hook useState
   const [password, setPassword] = useState(''); // Criar estado para senha com o hook useState
-
+  const [forgotPassword,setForgotPassword] = useState(false);
+  const [invalid,setInvalid] = useState(false);
+ 
     localStorage.setItem("token","");
 
     async function handleLogin(event) { // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
@@ -56,11 +61,22 @@ function LoginPage() {
     function loginAdm(){
       window.location.href = '/';
     }
-  
+    function CloseModal(){
+      setForgotPassword(false);
+    }
+    
+    const handleBackgroundClick = (e)=>{
+        if(e.target === e.currentTarget){
+            CloseModal();
+        }
+      };
   return(
     <>
+     
     <Container>
+    
         <DivImgs>
+        
           <DivTcs>
             <IconSystem icon="LogoTataWhite" width={"100%"} height={"100%"} />
           </DivTcs>
@@ -75,11 +91,15 @@ function LoginPage() {
               <Headline type={"Headline5"} name={"Terms of Use | Browser and Display Compatibility Copyright © 2023 Tata Consultancy Services Entry to this is restricted to employees and affiliates."} colorFont={"#E5F2FF"} />
             </TextTerm>
           </DivTerms>
+       
         </DivImgs>
+       
         <Content>
+       
           <LogoDiv>
             <IconSystem icon="LogoUnion" />
           </LogoDiv>
+          {invalid && <LoginInvalid/>}
           <Form onSubmit={handleLogin}> {/* Adicionar evento de submissão de formulário */}
             <Label>
               <Span>Email</Span>
@@ -95,7 +115,9 @@ function LoginPage() {
               </DivPassWIcon>
               <Input type="password" placeholder= '●●●●●●●●' value={password} onChange={(e) => setPassword(e.target.value)} />
            </Label>  
-           < ForgotPassword>Forgot password?</ForgotPassword>
+           
+           < ForgotPassword onClick={()=>setForgotPassword(true)}>Forgot password?</ForgotPassword>
+          
 
            <LoginBt>
                     <ButtonDefault name={"Login"} type={"userSave"} sizeFont={"1.5em"}></ButtonDefault>
@@ -104,9 +126,20 @@ function LoginPage() {
                 <EnterAdminButton onClick={loginAdm}>Enter Administrator</EnterAdminButton>
             </EnterAdmin>
         </Form>
+        
+      <DivModal onClick={handleBackgroundClick} $mode={forgotPassword}>
+         { forgotPassword && <AcessBlocked/>}
+
+         {/*<LoginProblems typeUser={"userSave"} iconColor={"#e41165"}/>  */} 
+         
+      </DivModal>
+       
+      
+         
     </Content>
+   
  </Container> 
-                      
+               
 </>
 );
 }
