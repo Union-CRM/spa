@@ -9,7 +9,7 @@ export const Form = styled.form`
 `
 
 export const Container = styled.div`
-    width: 30vw;
+    width: 30.7vw;
     height: fit-content;
     z-index: 20;
     background-color: #FFFFFF;
@@ -57,13 +57,11 @@ export const PositionTitle = styled.div`
 export const InputPlanner = styled.input`
     width: 26vw;
     height: 3.5vh;
-    margin-bottom: 2.5%;
     border-radius: 6px;
 `
 export const InputStatus = styled.input`
     width: 10.4vw;
     height: 3.5vh;
-    margin-bottom: 2.5%;
     border-radius: 6px;
 `
 export const PositionInputs = styled.div`
@@ -75,17 +73,19 @@ export const PositionLabel = styled.label`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    margin-top: 2%;
     
 `
 
 export const DivClocks = styled.div`
-    margin-top: 1%;
+    margin-top: 2%;
     margin-left: 5%;
     margin-right: 7%;
-    justify-content: center;
+    justify-content: space-between;
     display: grid;
-    grid-column-gap: 2%;
-    grid-template-columns: repeat(3, 1fr);
+    width: 27vw;
+    grid-column-gap: 5%;
+    grid-template-columns: 30% 30% 30%;
     grid-template-rows: 1fr;
 
     @media (max-width: 766px){
@@ -101,7 +101,6 @@ export const PositionTags = styled.div`
 
 export const PositionStatus = styled.div`
     margin-left: 5%;
-    margin-top: 1.5%;
 `
 export const DivDate = styled.div`
    display: flex;
@@ -113,9 +112,10 @@ export const InputDate = styled.input`
   width: auto;
   max-width: 90%;
   height:3.5vh;
-  color: #a0a0a0;;
-  border-radius: 8px;
-
+  color: #a0a0a0;
+  border-radius: 8px ;
+  border: 2px solid ${(props)=> props.required ? "#b03535" : "#888C95"};
+  
   @media (max-width: 1200px) {
     width: 85%;
 
