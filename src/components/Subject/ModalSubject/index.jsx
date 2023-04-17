@@ -49,7 +49,7 @@ const ModalSubject = (props) => {
 
   const subject = subjectsList.filter((item) => item.id === props.id)[0];
 
-  const [statusCard, setStatusCard] = useState();
+  const [statusCard, setStatus] = useState();
   const [subjectTitle, setSubjectTitle] = useState();
   const [manager, setManager] = useState();
 
@@ -57,7 +57,7 @@ const ModalSubject = (props) => {
     if (props.title === "Subject Details") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
       console.log(subject);
-      setStatusCard(subject.status);
+      setStatus(subject.status);
       setSubjectTitle(subject.subject_title);
       setManager(subject.manager);      
     }
