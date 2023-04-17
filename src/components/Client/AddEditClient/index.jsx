@@ -41,7 +41,7 @@ const AddEditClient = (props) => {
   const [business, setBusiness] = useState("");
   const [role, setRole] = useState({});
   const [status, setStatus] = useState({value: "Active"});
-  const {releaseList} =useFetchRelease("release");
+  const {releaseList} = useFetchRelease("release");
   const {customerList} = useFetchCustomer("Customer");
   const {roleList} = useFetchRole("Role");
   const {tagList} = useFetchTag("Tag")
@@ -265,7 +265,7 @@ const AddEditClient = (props) => {
             </DivTag>
 
             <DivStatus>
-              {false && <SingleSelect
+              {true && props.title === "Edit Client" && ( <SingleSelect
                 set={(status) => setStatus(status)}
                 label={"Status"}
                 value={status}
@@ -274,7 +274,7 @@ const AddEditClient = (props) => {
                 required
                 sizeMenu={"40%"}
                 options={status_mok}
-              />}
+              />)}
             </DivStatus>
           </Form>{" "}
           <DivButton>

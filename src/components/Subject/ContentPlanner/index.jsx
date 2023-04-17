@@ -25,21 +25,7 @@ import {
   IconOpenClose,
   Circle,
   Span,
-  NoteText,
-  ContainerComplete,
   DivGlobalCard,
-  Guest,
-  CardScheduled,
-  DivDateScheduled,
-  DivTimeScheduled,
-  DivPhotoScheduled,
-  DivPhotoIIScheduled,
-  PhotoScheduled,
-  DivDadosPlannerScheduled,
-  NameEmailScheduled,
-  StatusPlannerScheduled,
-  DivStatusPlannerScheduled,
-  DivModal,
 } from "./styles";
 import { usePlannerContext } from "../../../hook/usePlannerContent";
 
@@ -118,41 +104,46 @@ const ContentsPlanner = (props) => {
         </ButtonCreatePlanner>
 
         <ContainerCards>
-          <CardScheduled>
+
+        <CardPlanner $mode={statusPlannerYellow}>
             <DivGlobalCard>
-              <DivDateScheduled $mode={status}>
-                <FaRegCalendarAlt $mode={status} />
-                <Span $mode={status}> Date </Span>
+              <DivDate>
+                <FaRegCalendarAlt color={"#000"} />
+                <Span $mode={statusPlannerYellow}> Date </Span>
                 <p>03-03-23</p>
-              </DivDateScheduled>
+              </DivDate>
 
-              <DivTimeScheduled $mode={status}>
-                <FaRegClock $mode={status} />
-                <Span $mode={status}> Time </Span>
+              <DivTime>
+                <FaRegClock color={"#000"} />
+                <Span $mode={statusPlannerYellow}> Time </Span>
                 <p>16:00 - 17:00</p>
-              </DivTimeScheduled>
+              </DivTime>
 
-              <DivPhotoScheduled>
-                <DivPhotoIIScheduled>
-                  <PhotoScheduled $mode={statusPlannerYellow}>
-                    GA
-                  </PhotoScheduled>
-                </DivPhotoIIScheduled>
-              </DivPhotoScheduled>
+              <DivPhoto>
+                <DivPhotoII>
+                  <Photo $mode={statusPlannerYellow}>GA</Photo>
+                </DivPhotoII>
+              </DivPhoto>
 
-              <DivDadosPlannerScheduled>
-                <NameEmailScheduled>
+              <DivDadosPlanner>
+                <NameEmail>
                   Gilberto Anderson
                   <span>2534659</span>
-                  <DivStatusPlannerScheduled>
-                    <StatusPlannerScheduled $mode={statusPlannerYellow}>
+                  <DivStatusPlanner>
+                    <StatusPlanner $mode={statusPlannerYellow}>
                       <span>{statusPlannerYellow}</span>
-                    </StatusPlannerScheduled>
-                  </DivStatusPlannerScheduled>
-                </NameEmailScheduled>
-              </DivDadosPlannerScheduled>
+                    </StatusPlanner>
+                  </DivStatusPlanner>
+                </NameEmail>
+              </DivDadosPlanner>
             </DivGlobalCard>
-          </CardScheduled>
+
+            <IconOpenClose $modes={statusPlannerYellow}>
+              <Circle $mode={statusPlannerYellow}>
+                <FaChevronCircleDown onClick={() => toggleTab(4)} />
+              </Circle>
+            </IconOpenClose>
+          </CardPlanner>
 
           <CardPlanner $mode={statusPlannerTwo}>
             <DivGlobalCard>

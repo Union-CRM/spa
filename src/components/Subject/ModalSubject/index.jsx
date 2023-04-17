@@ -43,7 +43,7 @@ const ModalSubject = (props) => {
   const { setModalDetails, setModalEdit } = useSubjectContext();
 
   // UseEffect Details
-  const { subject: subjectsList, setSubject: setSubjectList } =
+  const { subject: subjectsList, setSubject: setSubjectList, loadData } =
     useSubjectContext();
   const [status, setStatus] = useState();
   const [subject, setSubject] = useState();
@@ -108,11 +108,15 @@ const ModalSubject = (props) => {
               {subject}{" "}
             </TitleSubject>
 
-            {activeTab === 0 && (
+            {activeTab === 0 && status !== "FINISHED" && status !== "CANCELED" && (
+              
               <IconTag onClick={EditModal}>
+              
                 <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
               </IconTag>
             )}
+
+        
 
             <CreatedBy onChange={(event) => setManager(event.target.value)}>
               Created by on {manager} 20 February

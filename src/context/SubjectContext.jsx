@@ -6,8 +6,10 @@ export const SubjectContextProvider = ({ children }) => {
   const [subject, setSubject] = useState([{}]);
 
   useEffect(()=>{
-    async function loadDate(){
-      
+    loadData();
+  },[])
+  
+  const loadData=async()=>{
         var subjects;
         try {
             const response = await axios.get('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8089/union/v1/subjects/submissives',{
@@ -18,12 +20,14 @@ export const SubjectContextProvider = ({ children }) => {
             console.error(error);
             
         }
-        
+        console.log(subjects.data.List)
         setSubject(subjects.data.List.map((item)=>({
           id:item.subject_id, 
           status_id: item.status_id,
           status:item.status.status_description,
           subject_title:item.subject_title,
+          subject_text:item.Subject_text,
+          release_id:item.release_id,
           release:item.release_name,
           release_id:item.release_id,
           business:item.business_name,
@@ -31,14 +35,9 @@ export const SubjectContextProvider = ({ children }) => {
           client: item.client_name,
           client_id: item.client_id,
           client_email: item.client_email,
-          description:item.subject_text,
-          })
+        })
         ))
-    }
-    
-    loadDate();
-  },[])
-
+      }
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [modalDetails, setModalDetails] = useState(false);
   const [activeTab, setActiveTab] = useState(null);
@@ -80,6 +79,7 @@ export const SubjectContextProvider = ({ children }) => {
         setModalPlanner,
         activeTab,
         setActiveTab,
+        loadData,
       }}
     >
       {children}

@@ -105,9 +105,10 @@ const Remark = (props) => {
               </NameEmail>
             </DivDadosRemark>
 
+            {status !== "FINISHED" && status !== "CANCELED" && (
             <IconTag onClick={() => toggleTab(5)}>
               <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
-            </IconTag>
+            </IconTag> )}
           </DivGlobalCard>
 
           <ContainerComplete>

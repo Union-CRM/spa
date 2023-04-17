@@ -40,16 +40,16 @@ export const ContainerCards = styled.div`
 export const CardRemark = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           border-bottom: 8px solid #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           border-bottom: 8px solid #00953b;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
           border-bottom: 8px solid #771300;
         `;
@@ -70,6 +70,9 @@ export const CardRemark = styled.div`
   border-radius: 6px;
   background-color: #f5f7fa;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+  @media (min-width: 1650px) and (max-width: 2500px) {
+    height: 55vh;
+  }
 `;
 
 //* COMPONENT OPEN/CLOSE DETAILS *//
@@ -86,16 +89,16 @@ export const Circle = styled.div`
 export const IconOpenClose = styled.button`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           background-color: #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           background-color: #00953b;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
           color: #771300;
         `;
@@ -109,25 +112,28 @@ export const IconOpenClose = styled.button`
   width:100%;
   height: 100%;
   border: none;
-  cursor: pointer;
   justify-content: center;
   background-color: transparent;
   bottom: 0px;
   display: flex;
   transform: rotateX(180deg);
+  @media (min-width: 1650px) and (max-width: 2500px) {
+    top:0;
+    position:absolute;
+  }
   svg {
     ${(props) => {
       switch (props.$mode) {
-        case "Finished":
+        case "FINISHED":
           return css`
             color: #008585;
           `;
-        case "Progress":
+        case "IN PROGRESS":
           return css`
             color: #00953b;
           `;
 
-        case "Canceled":
+        case "CANCELED":
           return css`
             color: #771300;
           `;
@@ -156,16 +162,16 @@ export const DivGlobalCard = styled.div`
 export const DivDate = styled.div`
 ${(props) => {
   switch (props.$mode) {
-    case "Finished":
+    case "FINISHED":
       return css`
         color: #008585;
       `;
-    case "Progress":
+    case "IN PROGRESS":
       return css`
         color: #00953b;
       `;
 
-    case "Canceled":
+    case "CANCELED":
       return css`
         color: #771300;
       `;
@@ -189,16 +195,16 @@ svg {
 span {
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           color: #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           color: #00953b;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
           color: #771300;
         `;
@@ -227,16 +233,16 @@ p {
 export const DivDateReturn = styled.div`
 ${(props) => {
   switch (props.$mode) {
-    case "Finished":
+    case "FINISHED":
       return css`
         color: #008585;
       `;
-    case "Progress":
+    case "IN PROGRESS":
       return css`
         color: #00953b;
       `;
 
-    case "Canceled":
+    case "CANCELED":
       return css`
         color: #771300;
       `;
@@ -260,16 +266,16 @@ svg {
 span {
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           color: #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           color: #00953b;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
           color: #771300;
         `;
@@ -312,16 +318,16 @@ export const DivPhotoII = styled.div`
 export const Photo = styled.div`
 ${(props) => {
   switch (props.$mode) {
-    case "Finished":
+    case "FINISHED":
       return css`
         border: 2px solid #008585;
       `;
-    case "Progress":
+    case "IN PROGRESS":
       return css`
         border: 2px solid #00953b;
       `;
 
-    case "Canceled":
+    case "CANCELED":
       return css`
         border: 2px solid #771300;
       `;
@@ -453,4 +459,5 @@ export const IconTag = styled.div`
   padding-left: 3%;
   padding-bottom: 10%;
   cursor: pointer;
+  z-index:100000;
 `;

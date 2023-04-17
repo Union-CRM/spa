@@ -1,25 +1,31 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import { useSubjectContext } from './useSubjectContent'
 
-export const useCreateSubject=()=>{
 
+export const useFetchSubject=()=>{
+
+    const {loadData}=useSubjectContext() 
     const insertSubject = async(subject)=>{
-        
+
         axios.post('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8089/union/v1/subjects/create/user/1', {
             subject_title: subject.subject_title,
             subject_text: subject.subject_text,
             subject_type: 20,
-            client_id: parseInt(subject.client_id),
+            client_id: parseInt(subject.client),
             release_id: parseInt(subject.release_id)
         },
         {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
         .then(function (response) {
+            loadData();
             //console.log(response);
         })
         .catch(function (error) {
             console.log(error);
+
         });
     }
+
 
     const updateSubject = async(client_id,client)=>{
         
@@ -33,11 +39,11 @@ export const useCreateSubject=()=>{
             user_id: 1,  
             tags:client.tags.map((t)=>({tag_id:parseInt(t.value),tag_name:t.label}))
 
+
         },
         {headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}})
         .then(function (response) {
-            //console.log(response);
-
+            loadData();
         })
         .catch(function (error) {
             console.log(error);
@@ -46,8 +52,8 @@ export const useCreateSubject=()=>{
     }
 
     return{
-        insertClient,
-        updateClient
+        insertSubject,
+        updateSubject
     }
 
 
