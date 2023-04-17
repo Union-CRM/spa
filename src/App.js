@@ -29,7 +29,7 @@ function App() {
             <Route
               path="/home"
               element={
-                localStorage.getItem("token") != false ? (
+                localStorage.getItem("token") !== false ? (
                   <Home />
                 ) : (
                   <LoginPage />
@@ -39,7 +39,7 @@ function App() {
             <Route
               path="/client"
               element={
-                localStorage.getItem("token") != false ? (
+                localStorage.getItem("token") !== false ? (
                   <Client />
                 ) : (
                   <LoginPage />
@@ -50,7 +50,7 @@ function App() {
             <Route
               path="/subject"
               element={
-                localStorage.getItem("token") != false ? (
+                localStorage.getItem("token") !== false ? (
                   <SubjectPage />
                 ) : (
                   <LoginPage />
@@ -60,7 +60,7 @@ function App() {
             <Route
               path="/remark"
               element={
-                localStorage.getItem("token") != false ? (
+                localStorage.getItem("token") !== false ? (
                   <RemarkPage />
                 ) : (
                   <LoginPage />
@@ -70,7 +70,7 @@ function App() {
             <Route
               path="/planner"
               element={
-                localStorage.getItem("token") != false ? (
+                localStorage.getItem("token") !== false ? (
                   <PlannerPage />
                 ) : (
                   <LoginPage />

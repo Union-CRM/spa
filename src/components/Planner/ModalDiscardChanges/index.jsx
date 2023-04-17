@@ -9,18 +9,16 @@ import {
   Span,
   ContainerFather,
 } from "./styles";
-import { useClientContext } from "../../../hook/useClientContent";
-import { useEffect, useRef } from "react";
 import {usePlannerContext} from "../../../hook/usePlannerContext";
 
 
 
 const ModalDiscardChanges = () => {
 
-
-  const {planner: modalDiscard, 
-    setModalDiscard, setModal, 
-    setModalEdit, setModalCreate, 
+  const {  
+    setModalDiscard, 
+    setModalEdit, 
+    setModalCreate, 
     setModalReschedule,
     setModalSave,
     setModalFollowUp,
@@ -28,8 +26,6 @@ const ModalDiscardChanges = () => {
     setModalPopUpCanceled,
     setModalPopUpFinished,
   } = usePlannerContext();
-
-  
 
   const handleModal= () => {
     
@@ -54,7 +50,7 @@ const ModalDiscardChanges = () => {
               <span>?!</span>
             </Circle>
             <Span>{`Discard Changes?`}</Span>
-            <DivSave onClick={handleModal}>
+            <DivSave onClick={()=>handleModal()}>
               <ButtonDefault
                 type={"userSave"}
                 sizeFont={"1rem"}

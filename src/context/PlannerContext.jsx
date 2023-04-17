@@ -15,14 +15,14 @@ export const PlannerContextProvider = ({ children }) => {
   const [modalRemark, setModalRemark] = useState(false);
   const [modalFollowUp, setModalFollowUp] = useState(false);
   const [modalPopUpCanceled, setModalPopUpCanceled] = useState(false);
-  const [modalReschedule, setModalReschedule] = useState(false)
-  const [modalPopUpFinished, setModalPopUpFinished] = useState(false)
-  const [modalSubject, setModalSubject] = useState(false)
-
+  const [modalReschedule, setModalReschedule] = useState(false);
+  const [modalPopUpFinished, setModalPopUpFinished] = useState(false);
+  const [modalSubject, setModalSubject] = useState(false);
+  const [modalError, setModalError] = useState(false);
 
   useEffect(()=>{
       loadPlannerList()
-  },[])
+  },[]);
 
   const loadPlannerList=async()=>{
     let planners;
@@ -37,13 +37,12 @@ export const PlannerContextProvider = ({ children }) => {
     }
     setPlanner(planners.data.list)
     
-  }
+  };
 
 
   return (
     <PlannerContext.Provider
       value={{
-
         planner,setPlanner, 
         modalPlanner,setModalPlanner,
         modalDetails, setModalDetails,
@@ -58,8 +57,8 @@ export const PlannerContextProvider = ({ children }) => {
         modalPopUpFinished, setModalPopUpFinished,
         modalSubject, setModalSubject,
         plannerEdit, setPlannerEdit,
-        loadPlannerList
-
+        loadPlannerList, modalError,
+        setModalError,
       }}
     >
 

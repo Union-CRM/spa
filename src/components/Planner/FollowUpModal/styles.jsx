@@ -9,7 +9,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    z-index: 500;
+    z-index: 20;
     left: 50%;
     transform: translate(90%, -85%);
     background-color: #FFFFFF;
