@@ -38,23 +38,28 @@ const ModalSubject = (props) => {
 
   const { setModal, id } = props;
 
+  const {setStatusId, statusId} = useState();
+
   const { setId, isEdit, setEdit } = useSubjectContext();
 
   const { setModalDetails, setModalEdit } = useSubjectContext();
 
   // UseEffect Details
-  const { subject: subjectsList, setSubject: setSubjectList, loadData } =
-    useSubjectContext();
-  const [status, setStatus] = useState();
-  const [subject, setSubject] = useState();
+  const { subject: subjectsList, loadData } =useSubjectContext();
+
+  const subject = subjectsList.filter((item) => item.id === props.id)[0];
+
+  const [statusCard, setStatusCard] = useState();
+  const [subjectTitle, setSubjectTitle] = useState();
   const [manager, setManager] = useState();
 
   useEffect(() => {
     if (props.title === "Subject Details") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
-      setStatus(subject.status);
-      setSubject(subject.subject_title);
-      setManager(subject.manager);
+      console.log(subject);
+      setStatusCard(subject.status);
+      setSubjectTitle(subject.subject_title);
+      setManager(subject.manager);      
     }
   }, [id]);
 
@@ -84,31 +89,31 @@ const ModalSubject = (props) => {
   const EditModal = () => {
     setModalDetails(false);
     setModalEdit(true);
+    
   };
 
   return (
     <ContainerFather>
-      <Container $mode={status}>
+      <Container $mode= {subject.status}>
         <BodyAll>
           <ClickButton>
             <Close onClick={closeModal}>X</Close>
           </ClickButton>
 
           <DivStatus>
-            <Status $mode={status}>
+            <Status $mode={subject.status}>
               <span onChange={(event) => setStatus(event.target.value)}>
-                {status}
+                {subject.status}
               </span>
             </Status>
           </DivStatus>
 
           <DivTitle>
-            <TitleSubject onChange={(event) => setSubject(event.target.value)}>
-              {" "}
-              {subject}{" "}
+            <TitleSubject onChange={(event) => setSubjectTitle(event.target.value)}>
+              {subject.subject_title}
             </TitleSubject>
 
-            {activeTab === 0 && status !== "FINISHED" && status !== "CANCELED" && (
+            {activeTab === 0 &&  subject.status !== "FINISHED" && subject.status !== "CANCELED" && (
               
               <IconTag onClick={EditModal}>
               
@@ -126,21 +131,21 @@ const ModalSubject = (props) => {
           <DivPages>
             <Pages>
               <TabButton
-                $mode={status}
+                $mode= {subject.status}
                 active={activeTab === 0}
                 onClick={() => toggleTab(0)}
               >
                 Subject Details
               </TabButton>
               <TabButton
-                $mode={status}
+                $mode= {subject.status}
                 active={activeTab === 1}
                 onClick={() => toggleTab(1)}
               >
                 Remarks
               </TabButton>
               <TabButton
-                $mode={status}
+                $mode= {subject.status}
                 active={activeTab === 2}
                 onClick={() => toggleTab(2)}
               >

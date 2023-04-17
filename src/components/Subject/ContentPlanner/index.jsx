@@ -5,6 +5,7 @@ import {
   FaChevronCircleDown,
 } from "react-icons/fa";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
+import { usePlannerContext } from "../../../hook/usePlannerContent";
 
 import {
   DivContainerAll,
@@ -27,7 +28,9 @@ import {
   Span,
   DivGlobalCard,
 } from "./styles";
-import { usePlannerContext } from "../../../hook/usePlannerContent";
+
+
+
 
 const ContentsPlanner = (props) => {
   const { title, setModal } = props;

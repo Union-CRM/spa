@@ -23,12 +23,14 @@ import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import subjectList from "../../../context/SubjectContext";
 import { useClientContext } from "../../../hook/useClientContent";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
-import {useFetchSubject} from "../../../hook/useFetchSubject"
+import {useFetchSubject} from "../../../hook/useFetchSubject";
+import { useFetchSubjectStatus } from "../../../hook/useFetchSubjectStatus";
 
 const Subject = (props) => {
   const { setModal, title, id } = props;
   const { client: clientList} = useClientContext();
   const {updateSubject} = useFetchSubject();
+  const {subjectFinished, subjectCanceld} = useFetchSubjectStatus();
   // CLOSE E SAVE ////////////
   const { setModalDetails, setModalEdit } = useSubjectContext();
 
@@ -43,6 +45,7 @@ const Subject = (props) => {
   const handleSubmit = () => {
     if (props.title === "Edit Subject") {
       editSubject();
+      
       
     }
   };
@@ -63,6 +66,7 @@ const Subject = (props) => {
   const [business, setBusiness] = useState();
   const [client, setClient] = useState();
   const [release, setRelease] = useState();
+ 
 
   function getId() {
     let lastId = 1;
@@ -79,6 +83,7 @@ const Subject = (props) => {
   useEffect(() => {
     if (props.title === "Edit Subject") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
+      
       setStatus(subject.status);
       setSubject(subject.subject_title);
       setSelectedClient(subject.client);
@@ -89,17 +94,24 @@ const Subject = (props) => {
   const [selectedClient, setSelectedClient] = useState(null);
 
   const editSubject = () => {
+    
     const newSubject = {
       id: id,
       title: subject,
       text: description,
-    };  
+      status_id: status,
+    };
+
     console.log(newSubject); 
     if (
       subject &&
-      description
+      description && status
     ){
-      console.log(newSubject);
+      if(status === "FINISHED"){
+        subjectFinished(id, newSubject)
+      } else if (status === "CANCELED"){
+        subjectCanceld(id, newSubject)
+      }
       updateSubject(id,newSubject);
       setModalEdit(false);
       setModalDetails(true);
@@ -151,7 +163,7 @@ const Subject = (props) => {
             <H1>{title} </H1>
           </PositionTitle>
 
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <DivName>
               <Label>
                 Client Name
@@ -254,7 +266,8 @@ const Subject = (props) => {
           </Form>
 
           <DivButton>
-            <ClickButton onClick={handleSubmit}>
+         
+            <ClickButton  onClick={() => handleSubmit()}>
               <ButtonDefault
                 type={"userSave"}
                 weightFont={"500"}
@@ -280,11 +293,7 @@ const Subject = (props) => {
 
 export default Subject;
 
-const manager_mok = [
-  { id: 1, value: "Helio Endo", label: "Helio Endo" },
-  { id: 2, value: "Felipe Flaibam", label: "Felipe Flaibam" },
-  { id: 3, value: "Gilberto Anderson", label: "Gilberto Anderson" },
-];
+
 
 const status_mok = [
   { id: 1, value: "IN PROGRESS", label: "IN PROGRESS" },

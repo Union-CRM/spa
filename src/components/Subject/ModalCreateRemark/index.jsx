@@ -62,7 +62,7 @@ const CreateRemark = (props) => {
             <Input
               type={"date"}
               name={date}
-              widthInput={"80%"}
+              widthInput={"90%"}
               value={new Date().toISOString().slice(0, 10)}
               required
               onChange={(event) => setDate(event.target.value)}
@@ -73,7 +73,7 @@ const CreateRemark = (props) => {
             <Label>Date Return</Label>
             <Input
               type={"date"}
-              widthInput={"80%"}
+              widthInput={"90%"}
               name={dateReturn}
               value={new Date().toISOString().slice(0, 10)}
               required

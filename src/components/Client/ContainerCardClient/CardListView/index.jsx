@@ -99,12 +99,9 @@ const ClientCard = (props) => {
                 </LabelToggle>
               </DivToggle>
 
-              <IconEdit onClick={handleEdit}>
-                <IconSystem icon={"Edit"} height={"15px"} width={"15px"} />
-              </IconEdit>
             </DivIcons>
           </Header>
-          <DivInfo>
+          <DivInfo onClick={handleEdit}>
             <DivRole>
               <TitleInfo>
                 Role <span> | </span>{" "}
