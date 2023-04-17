@@ -36,8 +36,10 @@ export const PlannerContextProvider = ({ children }) => {
       //console.log("buscou")
     }
     setPlanner(planners.data.list)
-    
-  };
+
+  
+  }
+
 
 
   return (

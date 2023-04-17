@@ -27,18 +27,11 @@ export const useFetchSubject=()=>{
     }
 
 
-    const updateSubject = async(client_id,client)=>{
-        
-        axios.put(`http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/update/${client_id}`, {
-            client_name: client.client,
-            client_email: client.email,
-            client_role: parseInt(client.role_id),
-            customer_id: parseInt(client.customer_id),
-            release_id: parseInt(client.release_id),
-            business_id: parseInt(client.business_id),   
-            user_id: 1,  
-            tags:client.tags.map((t)=>({tag_id:parseInt(t.value),tag_name:t.label}))
-
+    const updateSubject = async(subject_id,subject)=>{
+        //console.log(subject.title + "teste" + subject.text + subject_id);
+        axios.put(`http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8089/union/v1/subjects/update/${subject_id}`, {
+            subject_title: subject.title,
+            subject_text: subject.text
 
         },
         {headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}})

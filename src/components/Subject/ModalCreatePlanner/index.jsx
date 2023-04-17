@@ -164,7 +164,7 @@ const ModalCreatePlanner = (props) => {
 
               <DivStart>
                 <Label>
-                  Start
+                  Start 
                   <Clock widthClock={"100%"} />
                 </Label>
               </DivStart>
