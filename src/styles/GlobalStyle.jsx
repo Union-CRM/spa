@@ -22,13 +22,13 @@ input[disabled] {
     border: 2px solid #888c95;
 }
 
-input:placeholder-shown {
+/*input:placeholder-shown {
   border-color: #b03535;
 }
 
 select:placeholder-shown {
   border-color: #b03535;
-}
+}*/
 
 body{
     justify-content: center; 

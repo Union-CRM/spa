@@ -109,7 +109,8 @@ export const DateControls = styled.div`
   grid-template-columns: 33% 33% 33%;
   grid-template-rows: 50% 50%;
   width: 82vw;
-  height: 20%;
+  height: 15%;
+  margin-bottom: 0.5%;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   align-items: center;
@@ -123,6 +124,7 @@ export const DateControls = styled.div`
     font-size: 1.6rem;
     cursor: pointer;
   }
+
 `;
 
 export const SeeMore = styled.p`
@@ -130,7 +132,6 @@ export const SeeMore = styled.p`
   padding: 0 5px;
   cursor: pointer;
   display: inline-block;
-  
 `;
 
 export const PortalWrapper = styled.div`
@@ -245,7 +246,7 @@ export const CurrentMonth = styled.div`
 
   @media (max-width: 978px) {
     grid-area: auto;
-    font
+    //font
   }
 `
 
@@ -280,7 +281,7 @@ export const MonthYear = styled.p`
 
 export const Container = styled.div`
  width: 85vw;
- height: 85vh;
+ height: 82vh;
  border: 1px solid #F5F7FA;
  border-radius: 20px;
  box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.25),
@@ -343,5 +344,16 @@ export const DivClose = styled.div`
 export const PositionSubject = styled.div`
   top: 50%;
   left: 50%;
-  transform: translate(-10%, -100%)
+  transform: translate(-10%, -100%);
+`
+
+export const DivMonth = styled.div`
+  height: 60vh;
+`
+
+export const DivNumberPlanner = styled.div`
+  align-self: flex-end;
+  display: flex;
+  background-color: #E3E6ED;
+  border: transparent;
 `

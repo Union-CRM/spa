@@ -5,32 +5,27 @@ import Headline from "../../../assets/FontSystem/Headline";
 import { useState } from 'react'
 import { usePlannerContext } from "../../../hook/usePlannerContext";
 import { datesAreOnSameDay } from "../Calendar/utils/utils"; 
-
+import { month } from '../Calendar/utils/conts'
 
 const PlannerCard = ({ setOpenPlannerModal, date }) => {
 
-  
-
-  const { planner: plannerList, setPlanner: setPlannerList, setModalEdit} = usePlannerContext();
+  const { planner: plannerList, setPlannerEdit ,setModalEdit} = usePlannerContext();
   const [plannerDay] = useState(plannerList.filter((planner)=> datesAreOnSameDay(new Date(planner.date), date)))
-  const [guest] = useState(plannerDay.guest?plannerDay.guest.map((g,index)=>({value:index,label:g.client_name})):[])
-  const closePlanner = () => (
-    setOpenPlannerModal(false)
-  )
+  
+  const handleEdit=(id)=>{
+    setPlannerEdit(plannerList.filter((p)=>  p.id === id)[0]);
+    setModalEdit(id)
+  }
 
-  const OpenEdit = () => (
-    setModalEdit(false)
-  )
-  const monName = new Array ("January", "February", "March", "Abril", "May", "June", "July", "August", "September", "November", "December")
   return (
 
-        <DivP>
+        <DivP $mode={plannerDay.length}>
           <Header>
             <DivPlanner>
               <Headline type={"Headline3"} name={"Planner Of Day"}/>
             </DivPlanner>
             <Ddata>
-              <TextMonDay> {monName[date.getMonth()]+" " + date.getDate()+ "th"}</TextMonDay>
+              <TextMonDay> {month[date.getMonth()]+" " + date.getDate()+ "th"}</TextMonDay>
               
             </Ddata>
           </Header>
@@ -43,12 +38,12 @@ const PlannerCard = ({ setOpenPlannerModal, date }) => {
               emailClient={item.client_email}
               emailUser={item.user_id}
               client={item.client}
-              guests={item.client_name}
+              guests={item.guest ? item.guest.map((g)=>({client_name: g.client_name})):false}
               initial={item.date}
               finish={item.duration}
               userName={item.user}
               status={item.status}
-              OpenModal={() => setModalEdit(item.id)}
+              OpenModal={() => handleEdit(item.id)}
             />
           ))}
           </DivCard>

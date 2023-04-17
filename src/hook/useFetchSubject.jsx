@@ -5,7 +5,7 @@ export const useCreateSubject=()=>{
 
     const insertSubject = async(subject)=>{
         
-        axios.post('http://localhost:8089/union/v1/subjects/create/user/1', {
+        axios.post('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8089/union/v1/subjects/create/user/1', {
             subject_title: subject.subject_title,
             subject_text: subject.subject_text,
             subject_type: 20,
@@ -23,7 +23,7 @@ export const useCreateSubject=()=>{
 
     const updateSubject = async(client_id,client)=>{
         
-        axios.put(`http://localhost:8083/union/v1/clients/update/${client_id}`, {
+        axios.put(`http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/update/${client_id}`, {
             client_name: client.client,
             client_email: client.email,
             client_role: parseInt(client.role_id),

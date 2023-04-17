@@ -1,18 +1,15 @@
 import React from "react";
 import Body from "../../../../assets/FontSystem/Body";
 import Headline from "../../../../assets/FontSystem/Headline";
-import { FontSubtitle } from "../../../../assets/FontSystem/styles";
 import Subtitle from "../../../../assets/FontSystem/Subtitle";
 import IconSystem from "../../../../assets/IconSystem";
 import { useState } from 'react'
-
+import { usePlannerContext } from '../../../../hook/usePlannerContext'
 import {
   ContainerCards,
   DivStatus,
-  Time,
   Setor,
   ReleaseTrain,
-  EmailUser,
   Status,
   DivPhoto,
   DivUserInformation,
@@ -26,6 +23,9 @@ import {
   DivStatusTime,
   DivNameEmail,
   DivIcon,
+  DivGuests,
+  SpanGuests,
+  NameUser,
 } from "./styles";
 
 function Split(n) {
@@ -36,12 +36,14 @@ function Split(n) {
 }
 
 const Card = (props) => {
+  const { setModalPlanner } = usePlannerContext();
   const time=props.initial.split(" ")[1].split(":");
   const [timeStart] = useState(`${time[0]}:${time[1]}`);
-  
-  
-  
-  //const corStatus=
+  const handleEdit = () => {
+    props.OpenModal();
+    setModalPlanner(false);
+  }
+
   return (
     <>
       <ContainerCards>
@@ -60,40 +62,28 @@ const Card = (props) => {
             <TextClient>
               <Subtitle
                 type={"TextDescription"}
-                name={"Client:"}
+                name={"Client"}
                 colorFont={"#1E2222"}
               />
-              <Subtitle
-                type={"TextDescription"}
-                name={props.client}
-                colorFont={"#888888"}
-              />
+              <SpanGuests>{props.client}</SpanGuests>
             </TextClient>
             <TextEmail>
               <Subtitle
                 type={"TextDescription"}
-                name={"Email:"}
+                name={"Email"}
                 colorFont={"#1E2222"}
               />
-              <Subtitle
-                type={"TextDescription"}
-                name={props.emailClient}
-                colorFont={"#888888"}
-              />
+              <SpanGuests>{props.emailClient}</SpanGuests>
             </TextEmail>
-            <TextGuests>
-              <Subtitle
-                type={"TextDescription"}
-                name={"Guests:"}
-                colorFont={"#1E2222"}
-              />
-              {props.guests}
-            </TextGuests>
+            {props.guests && <TextGuests>
+              <DivGuests>Guests</DivGuests>
+                <SpanGuests>{props.guests ? props.guests.map((g)=> {return g.client_name + " , "}):""}</SpanGuests>
+            </TextGuests>}
           </DivTextCard>
         </ClientContent>
         <UserContent>
           {props.status === "SCHEDULED" && (
-            <DivIcon  onClick={()=> props.OpenModal()}>
+            <DivIcon  onClick={()=> handleEdit()}>
             <IconSystem icon={"Edit"} width={"11px"} height={"11px"}/>
           </DivIcon >
           )}
@@ -105,24 +95,18 @@ const Card = (props) => {
             <DivPhoto>
               <Body
                 type={"Body1"}
-                name={Split(props.userName)
-                 /* props.userName
-                  .split(/\s/)
-                  .reduce(
-                    (response, word) => (response += word.slice(0, 1)),
-                    ""
-                  )*/}
+                name={Split(props.userName)}
               />
             </DivPhoto>
             <DivNameEmail>
-              <Subtitle type={"TitleMed"} name={props.userName}></Subtitle>
-
+              <NameUser>
+                {props.userName}
+              </NameUser>
               <Subtitle
                 type={"TextDescription"}
                 name={props.emailUser}
                 colorFont={"#888888"}
               ></Subtitle>
-
               <Status $mode={props.status}>
                 <PositionStatus>
                   <Subtitle

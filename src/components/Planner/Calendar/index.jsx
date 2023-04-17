@@ -1,13 +1,11 @@
-import { useRef, useState } from "react";
-import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
+import { useState } from "react";
+
 import {
   SevenColGrid,
   Wrapper,
   HeadDays,
   DateControls,
   StyledEvent,
-  SeeMore,
-  PortalWrapper,
   DivDays,
   Scheduled,
   Canceled,
@@ -27,19 +25,17 @@ import {
   DivIconS,
   DivClose,
   PositionSubject,
+  DivMonth,
+  DivNumberPlanner,
 } from "./styles";
-import { DAYS, MOCKAPPS } from "./utils/conts";
+import { DAYS, month} from "./utils/conts";
 import {
   datesAreOnSameDay,
-  getDarkColor,
   getDaysInMonth,
   getMonthYear,
-  getSortedDays,
   getSortedDaysDate,
   nextMonth,
   prevMonth,
-  range,
-  sortDays
 } from "./utils/utils";
 import ButtonAdd from '../../../assets/Buttons/ButtonAdd'
 import ModalPlanner from "../AddEditPlanner";
@@ -55,115 +51,43 @@ import PopUpCanceled from "../PopUpCanceled";
 import FollowUpModal from "../FollowUpModal";
 import PopUpFinished from "../PopUpFinished";
 import Subject from "../../Subject/CreateEditSubjectModal";
+import ModalError from "../ModalError";
 
 export const BigCalender = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [numberOfEvents, setNumberOfEvents]= useState(2);
-  const [showPortal, setShowPortal] = useState(false);
-  const [portalData, setPortalData] = useState({});
-  const [modal, setOpenModal] = useState(false);
-  const [modalPlannerOfDay, setPlannerModalOfDay] = useState(false);
-  const [plannerOfDay, setPlannerOfDay] = useState(false)
-  //const [modalEdit, setModalEdit] = useState(false)
-  const [dateTarget, setDateTarget]=useState(new Date)
-
-  //seta os eventos
-  const [events, setEvents] = useState(MOCKAPPS);
-  
-
-  const { planner: plannerList, 
-    setPlanner: setPlannerList, 
-    modalEdit, setModalEdit, 
-    modalSave, setModalSave, 
+  const [numberOfEvents]= useState(2);
+  const [setOpenModal] = useState(false);
+  const [dateTarget, setDateTarget]=useState(new Date())
+  const { planner: plannerList,  
+    modalEdit, modalSave, setModalSave, 
     modalDiscard, setModalDiscard, 
     modalCreate, setModalCreate, 
-    modalRemark, setModalRemark, 
-    modalReschedule, setModalPopUpFinished,
-    modalFollowUp, setModalPopUpCanceled,
+    modalRemark,  
+    modalReschedule, 
+    modalFollowUp, 
     modalPopUpFinished, modalSubject,
-    setModalReschedule, setModalFollowUp,
-    modalPopUpCanceled, setModalPlanner
+    modalPopUpCanceled, setModalPlanner,
+    modalPlanner, modalError,
+    setModalError,
   } = usePlannerContext();
 
-  
-
-
-  const addEvent = (date, event) => {
-    if (!event.target.classList.contains("StyledEvent")) {
-      const text = window.prompt("name");
-      if (text) {
-        date.setHours(0);
-        date.setSeconds(0);
-        date.setMilliseconds(0);
-        setEvents((prev) => [
-          ...prev,
-          { date, title: text, color: getDarkColor() }
-        ]);
-      }
-    }
-  };
-
-  const EventWrapper = ({ children }) => {
-    if (children.filter((child) => child).length){   
-      //console.log(children.filter((child) => child).length)
-      return (
-        <>
-          {children}
-          {children.filter((child) => child).length >= numberOfEvents && (
-            <SeeMore
-              onClick={console.log()/*(e) => {
-                e.stopPropagation();
-                console.log("clicked p");
-              }*/}
-            >
-              see more...
-            </SeeMore>
-          )}
-        </>
-      );}
-  };
-
-
   const handleOnClickEvent = (d) => {
-    setPlannerModalOfDay(true)
+    setModalPlanner(true)
     setDateTarget(d)    
-    //setShowPortal(true);
-    //setPortalData(event);
   };
 
-  const handleCloseModal = (event)=>{
+  const handleCloseModal = ()=>{
     setModalDiscard(true)
+    setModalError(false)
   }
 
-  const handlePotalClose = () => setShowPortal(false);
-
-  const handleDelete = () => {
-    setEvents((prevEvents) =>
-      prevEvents.filter((ev) => ev.title !== portalData.title)
-    );
-    handlePotalClose();
-  };
-
-  const today = new Date();
-
-/*function formatDate(date, format) {
-	
-}*/
-
 const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
 const d = new Date();
 let dayweek = weekday[d.getDay()];
 let Month = month[d.getMonth()]; 
 
-
-//formatDate(today, 'mm/dd/aa');
-
-//const data=new Date(date.day, date.Date, date.getMonth, date.getMonthYear)
-
-  
   return (
-    
     <Container>
     <Wrapper>
       <DateControls>
@@ -198,15 +122,15 @@ let Month = month[d.getMonth()];
         </DivNextMonth>
         </CurrentMonth>
         <DivCreatePlanner onClick={() => setModalCreate(true)}>
-          <ButtonAdd  mode={"#007BFF"} color={"#FFFFFF"} name={"Create Planner"} onClick={() => setOpenModal(true)}/>
+          <ButtonAdd height={"4.8vh"} width={"9.5vw"} mode={"#007BFF"} color={"#FFFFFF"} name={"Create Planner"} onClick={() => setOpenModal(true)}/>
         </DivCreatePlanner>
       </DateControls>
+      <DivMonth>
       <SevenColGrid>
-        {DAYS.map((day) => (
-          <HeadDays className="nonDRAG">{day}</HeadDays>
+        {DAYS.map((day,index) => (
+          <HeadDays key={index} className="nonDRAG">{day}</HeadDays>
         ))}
       </SevenColGrid>
-
       <SevenColGrid
         fullheight={true}
         is28Days={getDaysInMonth(currentDate) === 28}
@@ -217,6 +141,7 @@ let Month = month[d.getMonth()];
           const month= date.getMonth();
           const year= date.getFullYear();
           const dayOfWeek=date.getDay();
+          const numberOfPlanner=plannerList.filter((planner)=> datesAreOnSameDay(new Date(planner.date), date)).length
           return(
             <DivDays
               key={index}
@@ -232,7 +157,6 @@ let Month = month[d.getMonth()];
               >
                 {day}
               </span>
-              <EventWrapper>
                 {plannerList.filter((planner)=> 
                   datesAreOnSameDay(new Date(planner.date), date)).map((ev,index)=>
                           index<numberOfEvents && 
@@ -245,29 +169,22 @@ let Month = month[d.getMonth()];
                             <Dot bgColor={ev.status==="DONE" ? "#07D95A" : 
                                           ev.status==="CANCELED"?"#BB1E00":"#FFDE59"}></Dot>
                             <p>{ev.subject}</p>
-                          </StyledEvent>)}
-                        
-              </EventWrapper> 
+                </StyledEvent>)}
+                {numberOfPlanner>2 && 
+                <DivNumberPlanner>
+                    <p>+{numberOfPlanner-2}</p>
+                </DivNumberPlanner>}
             </DivDays>
           )})}
       </SevenColGrid>
-      {showPortal && (
-        <Portal
-          {...portalData}
-          handleDelete={handleDelete}
-          handlePotalClose={handlePotalClose}
-        />
-      )}
+      </DivMonth>
     </Wrapper>
 
-  
-
-     {modalPlannerOfDay && (
+     {modalPlanner && (
       <>
-      <DivClose onClick={()=> setPlannerModalOfDay(false)}></DivClose>
+      <DivClose onClick={()=> setModalPlanner(false)}></DivClose>
       <PlannerCard
       date={dateTarget}
-      setOpenPlannerModal={setPlannerModalOfDay}
       />
       </>     
     )} 
@@ -303,22 +220,18 @@ let Month = month[d.getMonth()];
       </>
     )}
 
-
     {modalPopUpCanceled && (
       <>
-        <DivClose onClick={handleCloseModal}></DivClose>
         <PopUpCanceled/>
       </>
-      
     )}
     
 
     {modalFollowUp && (
       <>
-        <DivClose onClick={handleCloseModal}></DivClose>
+        <DivClose/>
         <FollowUpModal />
       </>
-      
     )}
 
     {modalReschedule && (
@@ -329,7 +242,7 @@ let Month = month[d.getMonth()];
 
     {modalPopUpFinished && (
       <>
-        <DivClose onClick={handleCloseModal}></DivClose>
+        <DivClose/>
         <PopUpFinished />
       </>
     )}
@@ -348,23 +261,16 @@ let Month = month[d.getMonth()];
         <RemarkModal title={"Create Remark"}/>
       </>
     )}
+
+    {modalError && (
+      <>
+        <DivClose onClick={() => setModalError(false)}></DivClose>
+        <ModalError />
+      </>
+        
+    )}
       
     </Container>
   );
 };
 
-
-
-
-//modal do planner of day
-const Portal = ({ title, date, handleDelete, handlePotalClose }) => {
-  return (
-    <PlannerCard date={date}>
-      <h2>Planner Of Day</h2>
-      <h2>{title}</h2>
-      <p>{date.toDateString()}</p>
-      <ion-icon onClick={handleDelete} name="trash-outline"></ion-icon>
-      <ion-icon onClick={handlePotalClose} name="close-outline"></ion-icon>
-    </PlannerCard>
-  );
-};
