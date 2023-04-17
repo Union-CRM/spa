@@ -18,8 +18,8 @@ const SubjectsDetails = (props) => {
   };
 
   // UseEffect Details
-  const { subject: subjectsList, setSubject: setSubjectList, loadData } =
-    useSubjectContext();
+  const { subject: subjectsList, loadData } = useSubjectContext();
+  const subject = subjectsList.filter((item) => item.id === props.id)[0];
 
   const { id, setId } = useSubjectContext();
 
@@ -30,7 +30,7 @@ const SubjectsDetails = (props) => {
   const [description, setDescription] = useState();
 
   useEffect(() => {
-    console.log(subjectsList);
+    
     if (props.title === "Details") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
       setClient(subject.client);
@@ -78,7 +78,7 @@ const SubjectsDetails = (props) => {
       <DivDescription>
         Description
         <span onChange={(event) => setDescription(event.target.value)}>
-        {description}
+        {subject.subject_text}
         </span>
       </DivDescription>
     </ContainerDetails>

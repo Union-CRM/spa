@@ -36,7 +36,7 @@ export const PlannerContextProvider = ({ children }) => {
       //console.log("buscou")
     }
     setPlanner(planners.data.list)
-    
+    console.log(planners.data.list)
   }
 
 

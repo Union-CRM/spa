@@ -31,12 +31,14 @@ const SubjectCard = (props) => {
 
   const { toggleState, setToggleState } = useSubjectContext();
 
+  const { activeTab, setActiveTab } = useSubjectContext();
+
   const handleClick = () => {
     openModal();
     setModalDetails(true);
     setToggleState(0);
+    setActiveTab(0);
     props.setId(subject.id);
-    console.log(handleClick);
   };
 
   return (

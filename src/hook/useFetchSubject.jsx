@@ -31,7 +31,6 @@ export const useFetchSubject=()=>{
         axios.put(`http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8089/union/v1/subjects/update/${subject_id}`, {
             subject_title: subject.title,
             subject_text: subject.text
-
         },
         {headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}})
         .then(function (response) {
