@@ -108,22 +108,21 @@ export const LabelDate = styled.p`
 
 export const InputText = styled.textarea`
     resize: none;
-    grid-area: NoteText;
+    height: 15.8vh;
     width: 15.5vw;
+    margin-left: 2%;
     border: 1px solid black;
-    margin-top: -10%;
-    margin-left: 3.5%;
 `
 
 export const DivPositions = styled.div`
     display: grid;
     grid-template-areas: 
-    "Date LabelNote"
-    "TimeStart NoteText"
-    "Finish NoteText"
-    "Status NoteText";
-    grid-rows: 4;
-    grid-columns: 2;
+    "Date TextInput"
+    "TimeStart TextInput"
+    "Finish TextInput"
+    "Status TextInput";
+    grid-row: 4;
+    grid-column: 2;
     grid-template-rows: 25% 25% 25% 25%;
     grid-template-columns: 35% 65%;
     height: 100%;
@@ -131,10 +130,16 @@ export const DivPositions = styled.div`
 `
 
 export const Label = styled.label`
-    grid-area: LabelNote; 
-    margin-left: 3.5%;
+    margin-left: 2%;
+    height: fit-content;
+    width: fit-content;
 `
 export const PositionButtons = styled.div`
     display: flex;
     justify-content: space-around;
+`
+
+export const Text = styled.div`
+    grid-area: TextInput;
+    display: grid;
 `

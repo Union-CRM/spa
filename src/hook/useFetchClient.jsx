@@ -28,6 +28,22 @@ export const useFetchClient=()=>{
         });
     }
 
+    const updateStatusClient=async(client_id)=>{
+        axios.put(`http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/update/status/${client_id}`,{},        
+        {headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}})
+        .then(function (response) {
+            //console.log(response);
+            loadData();
+        })
+        .catch(function (error) {
+            console.log(error.response);
+        });
+    
+    }
+
+
+
+
     const updateClient = async(client_id,client)=>{
         
         axios.put(`http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/update/${client_id}`, {
@@ -54,7 +70,8 @@ export const useFetchClient=()=>{
 
     return{
         insertClient,
-        updateClient
+        updateClient,
+        updateStatusClient
     }
 
 

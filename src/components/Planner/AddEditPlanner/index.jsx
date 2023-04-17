@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import Clock from '../../Geral/Input/clock';
 import { TagComponent } from '../../Geral/TagComponent';
 import ButtonDefault from '../../../assets/Buttons/ButtonDefault'
 import SingleSelect from '../../Geral/Input/SingleSelect';
@@ -26,14 +25,17 @@ import { Container,
      DivFinish,
      LabelDate,
      PositionButtons,
-      
      } from './styles'
-import ModalDiscardChanges from '../ModalDiscardChanges';
-import ModalSave from '../ModalSuccessfuly';
 
-
-const ModalPlanner = ({ title, setOpenModal }) => {
-      const [subjectObj,setSubjectObj]=useState({});
+const ModalPlanner = ({ title }) => {
+      const [subjectObj,setSubjectObj]=useState({
+        id: false,
+        subject_title: "",
+        client: "",
+        client_email:"",
+        business:"",
+        release:""
+      });
       const {subject: subjectList}=useSubjectContext();
       const [subjectOption, setSubjectOption] = useState([])
       const { client: clientList} = useClientContext();
@@ -42,31 +44,33 @@ const ModalPlanner = ({ title, setOpenModal }) => {
       const [timeStart, setTimeStart] = useState();
       const [timeFinish, setTimeFinish] = useState();
       const [guest,setGuest]= useState([]);
-      const {planner: plannerList, setPlanner: setPlannerList, plannerEdit,setPlannerEdit} = usePlannerContext();
+      const {plannerEdit, setPlannerEdit} = usePlannerContext();
+      const [planner,setPlanner]=useState()
       const [status,setStatus]=useState("SCHEDULED")
-      const {setModalSave , modalEdit, setModalEdit, modalDiscard, setModalDiscard, setModalCreate, setModalRemark, setModalReschedule} =  usePlannerContext()
-      const {createPlanner} = useFetchPlanner();
+      const {modalEdit, setModalEdit,modalDiscard, setModalDiscard, setModalRemark, modalReschedule} =  usePlannerContext()
+      const {createPlanner,updatePlanner} = useFetchPlanner();
       const {user} = useUserContext();
+      const [flag, setFlag] = useState(false);
+      
       useEffect(()=>{
         setSubjectOption(subjectList.filter((s)=>s.status==="IN PROGRESS").map((s)=>({id:s.id,value:s.id,label:s.subject_title})))
       },[subjectList])
 
 
       useEffect(()=>{
-        if(modalEdit){
-          const p = plannerList.filter((p)=>  p.id === modalEdit) [0];
-          const date = new Date(p.date)
+        if(modalEdit || modalReschedule){
+          setPlanner(plannerEdit)
+          const date = new Date(plannerEdit.date)
           const y= date.getFullYear();
           const m= date.getMonth()+1 <10 ? `0${date.getMonth()+1}`: date.getMonth()+1;
-          const d= date.getDate()<10 ? `0${date.getDate()}` : date.getDate(); 
-          setStatus(p.status)
+          const d= date.getDate()<10 ? `0${date.getDate()}` : date.getDate();
+          setStatus(plannerEdit.status)
           setDate(y+"-"+m+"-"+d);
-          setTimeFinish(p.duration)
+          setTimeFinish(plannerEdit.duration)
           setTimeStart(date.toLocaleTimeString())
-          handleSelectSubject(p.subject_id);
-          setGuest(p.guest?p.guest.map((g)=>({value:g.client_id,label:g.client_name})):[])
+          handleSelectSubject(plannerEdit.subject_id?plannerEdit.subject_id:plannerEdit.subject);
+          setGuest(plannerEdit.guest?plannerEdit.guest.map((g)=>({value:g.client_id,label:g.client_name})):[])
         }
-        
       },[])
     
     const StatusOption = [
@@ -74,28 +78,21 @@ const ModalPlanner = ({ title, setOpenModal }) => {
       {id: 16, value: "DONE", label: "DONE"},
       {id: 17, value: "CANCELED", label: "CANCELED"},
     ]
-
     
     const handleSelectSubject=(id)=>{
         setSubjectObj(subjectList.filter((s)=>s.id===id)[0])
+        
     }
 
     const handleSubmit=(e)=>{
       e.preventDefault();
+      if(!modalDiscard){
       if(!modalEdit){
         HandleCreatePlanner();
       }else{
         editPlanner();
-      }
+      }}
     }
-
-  function getId() {
-    let lastId = 1;
-    plannerList.map((p) => {
-      lastId = p.id > lastId ? p.id : lastId;
-    });
-    return lastId + 1;
-  }
 
   const HandleCreatePlanner=()=>{
     const newPlanner = {
@@ -108,44 +105,56 @@ const ModalPlanner = ({ title, setOpenModal }) => {
       user:user.id,
       guest:guest.map((g)=>({client_id:g.value}))
     };
-    createPlanner(newPlanner);
-    //setPlannerList([...plannerList,newPlanner]);
-    //setModalSave(true);
-    //setModalCreate(false);
-    //setModalReschedule(false)
+    if(subjectObj.id && date && timeFinish && timeStart){
+      createPlanner(newPlanner);
+    }else{
+      setFlag(true)
+    }
+    
   }
 
+  const handleCancel = (e)=>{
+    e.preventDefault();
+    setModalDiscard(true)
+  }
+  
 
   const editPlanner=()=>{
     const newPlanner = {
-      name:subjectObj.subject_title,
-      date:date +" "+ timeStart,
-      duration: timeFinish,
-      subject:subjectObj.id,
-      client:subjectObj.client_id,
-      release:subjectObj.release_id,
-      user:user.id,
-      status:status,
-      guest:guest.map((g)=>({id:g.value}))
+        id:planner.id,
+        name:subjectObj.subject_title,
+        date:date +" "+ timeStart,
+        duration: timeFinish,
+        subject:subjectObj.id,
+        subject_title:subjectObj.subject_title,
+        remark:null,
+        client:subjectObj.client_id,
+        client_name:subjectObj.client,
+        client_email:subjectObj.client_email,
+        release:subjectObj.release_id,
+        release_title:subjectObj.release,
+        business:subjectObj.business,
+        user:user.id,
+        status:StatusOption.filter((s)=>s.label===status)[0].id,
+        guest:guest.map((g)=>({client_id:g.value, client_name:g.label}))
     };
-      if(status === "SCHEDULED"){
-        setModalEdit(false)
-      }else{    
-        
+    if(status === "SCHEDULED"){
+        updatePlanner(planner.id,newPlanner)
+    }else{ 
         setPlannerEdit(newPlanner)
         setModalRemark(true)
         setModalEdit(false)
-      }
+    }
   }
     return (
     <Container>
         <PositionTitle>
             {title}
         </PositionTitle>
-        <Form onSubmit={handleSubmit}>
+        <Form>
             <PositionInputs>
-                {!modalEdit && (<SingleSelect 
-                    placeholder={""}
+                {(!modalEdit && !modalReschedule) && (<SingleSelect
+                    placeholder={flag && !subjectObj.id ? "Required field" : ""} 
                     set={(s) => handleSelectSubject(s)}
                     options={subjectOption} 
                     name={"subject"} 
@@ -154,7 +163,7 @@ const ModalPlanner = ({ title, setOpenModal }) => {
                     sizeSingle={"26vw"} 
                     required
                     onChange={(s) => handleSelectSubject(s)}/>)}
-                {modalEdit &&(
+                {(modalEdit || modalReschedule)&&(
                     <>
                       <PositionLabel>Subject</PositionLabel>
                       <InputPlanner type="text" placeholder="Client Name" value={subjectObj.subject_title} disabled/>
@@ -171,20 +180,20 @@ const ModalPlanner = ({ title, setOpenModal }) => {
             <DivClocks>
               <DivDate>
                 <LabelDate>Date</LabelDate>
-                <InputDate defaultValue={date} type="Date" name="date" onChange={(e)=> setDate(e.target.value)} required></InputDate>
+                <InputDate defaultValue={date} type="Date" name="date" onChange={(e)=> setDate(e.target.value)} required={flag && !date ? true : false}></InputDate>
               </DivDate>
               <DivStart>
                 <LabelDate>Start</LabelDate>
-                <InputDate defaultValue={timeStart} type="time" name="time" onChange={(e) => setTimeStart(e.target.value)} required></InputDate>
+                <InputDate defaultValue={timeStart} type="time" name="time" onChange={(e) => setTimeStart(e.target.value)} required={flag && !timeStart ? true : false}></InputDate>
               </DivStart>
               <DivFinish>
                 <LabelDate>Finish</LabelDate>
-                <InputDate defaultValue={timeFinish} type="time" name="time-finish" onChange={(e) => setTimeFinish(e.target.value)} required></InputDate>
+                <InputDate defaultValue={timeFinish} type="time" name="time-finish" onChange={(e) => setTimeFinish(e.target.value)} required={flag && !timeFinish ? true : false}></InputDate>
               </DivFinish>
-              
             </DivClocks>
             <PositionTags>
-              <TagComponent options={clientOption}
+              <TagComponent 
+                  options={clientOption}
                   placeholder={""}
                   label={"Guests"}
                   tags={guest} 
@@ -192,14 +201,14 @@ const ModalPlanner = ({ title, setOpenModal }) => {
                   widths={"13vw"}
                   set={(g)=> setGuest(g)}
                   sizeHeight={"3.5vh"}
-                  heights={"105px"}
+                  heights={"12vh"}
                   sizeMenuList={"10vw"}
                   sizeMenu={"35%"}/>
             </PositionTags>
             <PositionStatus>
-              {modalEdit && ( 
+              {(modalEdit) && ( 
               <SingleSelect 
-                  
+                  placeholder={""}
                   set={(c) => setStatus(c)}
                   options={StatusOption}
                   value={status}
@@ -210,20 +219,19 @@ const ModalPlanner = ({ title, setOpenModal }) => {
                   isDisabled={false}
                   sizeHeight={"3.5vh"}
               />)}
-              {!modalEdit && ( 
+              {(!modalEdit)&& ( 
                <>
                <PositionLabel>Status</PositionLabel>
-                <InputStatus placeholder="Status" value="Scheduled" disabled/>
+                <InputStatus placeholder="Status" value="SCHEDULED" disabled/>
                 </>
                 )}
             </PositionStatus>
-
             <PositionButtons>
-              <PositionButtonCancel onClick={() => setModalDiscard(true)}>
-                <ButtonDefault type={"userCancel"} name={"Cancel"} sizeWidth={"11vw"} onClick={() => setModalDiscard(true)}/>
+              <PositionButtonCancel>
+                <ButtonDefault onClick={(e) => handleCancel(e)} type={"userCancel"} name={"Cancel"} sizeWidth={"11vw"} />
               </PositionButtonCancel>
               <PositionButtonSave>
-                <ButtonDefault type={"userSave"} name={"Save"} sizeWidth={"11vw"} />
+                <ButtonDefault onClick={(e)=> handleSubmit(e)} type={"userSave"} name={"Save"} sizeWidth={"11vw"} />
               </PositionButtonSave>
             </PositionButtons>
         </Form>
