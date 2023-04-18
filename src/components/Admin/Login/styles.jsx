@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled,{css} from "styled-components";
 
 
 export const Container = styled.div`
@@ -182,4 +182,36 @@ export const ForgotPasswordADM = styled.button`
     margin-bottom: 30px;
    
     cursor: pointer;
+`;
+export const DivModal = styled.div`
+ ${(props) => {
+    switch (props.$mode) {
+      case true:
+        return css`
+         display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0,0,0,0.5);
+        `;
+     case false:
+        return css`
+         display: none;
+      
+        `;
+      default:
+        return css`
+            display:none;
+        `;
+    }
+  }}
+     
+        
+   
 `;

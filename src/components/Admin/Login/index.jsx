@@ -1,8 +1,11 @@
 import React, { useState } from 'react'; // Importar useState para criar estado para email e senha
 import IconSystem from '../../../assets/IconSystem';
 import ButtonDefault from '../../../assets/Buttons/ButtonDefault';
+import LoginProblems from '../../../components/Geral/LoginModals/LoginProblems';
+import LoginInvalid from '../../../components/Geral/LoginModals/LoginInvalid';
+import AcessBlocked from '../../../components/Geral/LoginModals/AcessBlocked';
 import { Container,DivTcs,Content,LogoDiv,Form,DivIcons,Label,Span,Input,DivTerms,
-    DivWelcome,TextTerm,LoginBt,DivImgs,DivEmailIcon,DivPassWIcon,EnterUser,ButtonEnterUser,ForgotPasswordADM} from './styles';
+    DivWelcome,TextTerm,LoginBt,DivImgs,DivEmailIcon,DivPassWIcon,EnterUser,ButtonEnterUser,ForgotPasswordADM,DivModal} from './styles';
 import Headline from '../../../assets/FontSystem/Headline'
 import axios from 'axios';
 
@@ -45,6 +48,8 @@ function LoginPageAdmin() {
 
             localStorage.setItem('token', data.token);
             window.location.href = '/home';
+        }else{
+          setInvalid(true);
         }
       
       /*localStorage.setItem('token', "data.token");
@@ -56,7 +61,17 @@ function LoginPageAdmin() {
     function loginClient(){
       window.location.href = '/loginClient';
     }
-  
+    const [forgotPassword,setForgotPassword] = useState(false);
+    const [invalid,setInvalid] = useState(false);
+    function CloseModal(){
+      setForgotPassword(false);
+    }
+    
+    const handleBackgroundClick = (e)=>{
+      if(e.target === e.currentTarget){
+          CloseModal();
+      }
+    };
   return(
     <>
     <Container>
@@ -80,6 +95,7 @@ function LoginPageAdmin() {
           <LogoDiv>
             <IconSystem icon="LogoUnion" />
           </LogoDiv>
+          {invalid && <LoginInvalid/>}
           <Form onSubmit={handleLogin}> {/* Adicionar evento de submissão de formulário */}
             <Label>
               <Span>Email</Span>
@@ -96,7 +112,7 @@ function LoginPageAdmin() {
               <Input type="password" placeholder= '●●●●●●●●' value={password} onChange={(e) => setPassword(e.target.value)} />
            </Label>  
 
-           < ForgotPasswordADM>Forgot password?</ForgotPasswordADM>
+           < ForgotPasswordADM onClick={()=>setForgotPassword(true)}>Forgot password?</ForgotPasswordADM>
 
            <LoginBt>
                     <ButtonDefault name={"Login"} type={"adminSave"} sizeFont={"1.5em"}></ButtonDefault>
@@ -105,6 +121,10 @@ function LoginPageAdmin() {
                 <ButtonEnterUser onClick={loginClient}>Enter User</ButtonEnterUser>
             </EnterUser>
         </Form>
+        <DivModal onClick={handleBackgroundClick} $mode={forgotPassword}>
+         { forgotPassword && <LoginProblems typeUser={"adm"}/>} 
+         
+      </DivModal>
     </Content>
  </Container> 
                       
