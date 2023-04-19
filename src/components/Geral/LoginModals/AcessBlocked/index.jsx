@@ -5,12 +5,14 @@ import IconSystem from '../../../../assets/IconSystem';
  
 
 
-const AcessBlocked = () =>{
+const AcessBlocked = (props) =>{
+  const iconType = props.typeUser=="adm"  ? "Lock2Adm" :"Lock2";
+  const buttonType = props.typeUser=="adm" ? "adminSave" :"userSave";
   return (
     <Container>
         <Title>Acess blocked</Title>
         <DivIcon>
-        <IconSystem icon={"Lock2"} width={"100px"} height={"100px"}></IconSystem>
+        <IconSystem icon={iconType} width={"100px"} height={"100px"}></IconSystem>
         </DivIcon>
      
         <P>You have the maximum number of attempts.
@@ -18,7 +20,7 @@ const AcessBlocked = () =>{
         </P>
        
         <DivButton>
-            <ButtonDefault type={"userSave"} name={"Reset"} sizeWidth={"250px"} sizeHeight={"47px"} sizeFont={"20px"}></ButtonDefault>
+            <ButtonDefault type={buttonType} name={"Reset"} sizeWidth={"250px"} sizeHeight={"47px"} sizeFont={"20px"}></ButtonDefault>
         </DivButton>
        
     </Container>
