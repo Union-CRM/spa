@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const TextArea = styled.textarea`
   width: ${(props) => props.widthText || "80%"};
   border-radius: 5px;
-  border: 2px solid #888c95;
   background-color: rgba(0, 0, 0, 0);
   display: block;
   margin-top: 5px;

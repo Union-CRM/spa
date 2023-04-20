@@ -9,28 +9,26 @@ import {
   Span,
   ContainerFather,
 } from "./styles";
-import { usePlannerContext } from "../../../hook/usePlannerContext";
+import { useSubjectContext } from "../../../hook/useSubjectContent";
 
 const ModalDiscardChanges = () => {
   const {
     setModalDiscard,
     setModalEdit,
     setModalCreate,
-    setModalReschedule,
     setModalSave,
-    setModalFollowUp,
     setModalRemark,
     setModalPopUpCanceled,
     setModalPopUpFinished,
-  } = usePlannerContext();
+  } = useSubjectContext();
 
   const handleModal = () => {
     setModalEdit(false);
     setModalCreate(false);
-    setModalReschedule(false);
+
     setModalDiscard(false);
     setModalSave(false);
-    setModalFollowUp(false);
+
     setModalRemark(false);
     setModalPopUpCanceled(false);
     setModalPopUpFinished(false);

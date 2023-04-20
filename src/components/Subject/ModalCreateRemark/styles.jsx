@@ -87,7 +87,7 @@ export const Container = styled.div`
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   z-index: 1000;
-  grid-template-rows: 20% 60% 20%;
+  grid-template-rows: 15% 60% 25%;
   @media (min-width: 100px) and (max-width: 502px) {
     height: 81vh;
     width: 100%;
@@ -106,7 +106,7 @@ export const Form = styled.div`
   padding-left: 7%;
   grid-row: 2;
   grid-template-columns: 30% 30% 40%;
-  grid-template-rows: 27% auto;
+  grid-template-rows: 20% auto;
   @media (min-width: 1600px) {
   }
 `;
@@ -115,7 +115,7 @@ export const Input = styled.input`
   height: ${(props) => props.heightInput || "28px"};
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
-  border: 2px solid #888c95;
+  border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
   position: relative;
@@ -134,15 +134,17 @@ export const Label = styled.label`
 export const DivDate = styled.div`
   grid-row: 1;
   width: 100%;
+  grid-column: 1;
 `;
 
 export const DivDateReturn = styled.div`
   grid-row: 1;
   width: 100%;
+  grid-column: 2;
 `;
 
 export const DivText = styled.div`
-  grid-row: 2;
+  grid-row: 3;
   width: 370%;
 `;
 
@@ -163,5 +165,26 @@ export const PositionButtonCancel = styled.div``;
 export const ClickButton = styled.div`
   display: block;
 `;
+export const DivTitle = styled.div`
+  width: 312%;
+  height: 100%;
+  display: grid;
+  grid-row: 2;
+`;
 
-
+export const TextArea = styled.textarea`
+  height: ${(props) => props.heightInput || "130px"};
+  width: ${(props) => props.widthInput || "83%"};
+  border-radius: 5px;
+  border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
+  background-color: ${(props) => props.backgroundInput || " #fff"};
+  display: block;
+  resize: none;
+  position: relative;
+  @media (min-width: 1355px) and (max-width: 1824px) {
+    height: 100px;
+  }
+  @media (min-width: 1824px) and (max-width: 2000px) {
+    height: 130px;
+  }
+`;

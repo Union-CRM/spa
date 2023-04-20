@@ -1,5 +1,19 @@
 import styled, { css } from "styled-components";
 
+// Overlay //
+export const Overlay = styled.div`
+  z-index: 1;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+`;
+
 // * Div Father * //
 
 export const ContainerFather = styled.div`
@@ -12,19 +26,18 @@ export const ContainerFather = styled.div`
 
 // Container ModalPopup //
 export const Container = styled.div`
-  left: 50%;
-  transform: ${(props) => props.subject || "translate(-50%, 200%)"};
   width: 25%;
   grid-column: 1;
   position: relative;
   grid-column: 1;
+  height: 40%;
   justify-content: center;
   box-sizing: border-box;
   z-index: 999999;
   min-width: 300px;
   max-width: 400px;
-  max-height: 150px;
-  min-height: 100px;
+  max-height: 231px;
+  min-height: 231px;
   border-left: 16.56px solid #007bff;
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
@@ -40,7 +53,6 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   display: flex;
-  height: fit-content;
   flex-direction: column;
   justify-content: center;
   padding-top: 0.5%;
@@ -51,8 +63,8 @@ export const Content = styled.div`
 export const Span = styled.span`
   font-weight: 600 !important;
   margin-top: 5%;
-  margin-bottom: 6%;
   font-size: 1rem;
+  margin-left: 5%;
   align-self: center;
   display: flex;
   flex-direction: row;
@@ -77,4 +89,18 @@ export const Circle = styled.div`
     color: #ffff;
     align-items: center;
   }
+`;
+
+// Div Buttons //
+export const DivSave = styled.div`
+  margin-top: 4%;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+`;
+
+export const DivCancel = styled.div`
+  margin-bottom: 10%;
+  display: flex;
+  align-self: center;
 `;

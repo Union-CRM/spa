@@ -27,7 +27,7 @@ import { useFetchSubject } from "../../../hook/useFetchSubject";
 
 const Subject = (props) => {
   const { setModal, title, id } = props;
-  const { client: clientList} = useClientContext();
+  const { client: clientList } = useClientContext();
 
   // CLOSE E SAVE ////////////
   const closeModal = () => {
@@ -44,8 +44,11 @@ const Subject = (props) => {
 
   /////////// SUBJECT ////////////////
 
-  const { subject: subjectsList, setSubject: setSubjectList, loadData } =
-    useSubjectContext();
+  const {
+    subject: subjectsList,
+    setSubject: setSubjectList,
+    loadData,
+  } = useSubjectContext();
 
   const [subject, setSubject] = useState();
   const [description, setDescription] = useState();
@@ -55,10 +58,10 @@ const Subject = (props) => {
   const [client, setClient] = useState();
   const [release, setRelease] = useState();
   const [ReleaseId, setReleaseId] = useState();
-  const [ClientId, setClientId] = useState()
+  const [ClientId, setClientId] = useState();
 
   // useFetch
-  const {insertSubject,updateSubject}= useFetchSubject();
+  const { insertSubject, updateSubject } = useFetchSubject();
 
   function getId() {
     let lastId = 1;
@@ -69,7 +72,6 @@ const Subject = (props) => {
 
     return lastId + 1;
   }
- 
 
   const createSubject = () => {
     const newSubject = {
@@ -79,13 +81,9 @@ const Subject = (props) => {
       subject_text: description,
     };
 
-    if (
-      ClientId &&
-      release &&
-      subject &&
-      description
-    ) {
+    if (ClientId && release && subject && description) {
       insertSubject(newSubject);
+      loadData();
       setModal(false);
     } else {
       setFlag(true);
@@ -97,7 +95,6 @@ const Subject = (props) => {
   const [selectedClient, setSelectedClient] = useState(null);
 
   useEffect(() => {
-    
     if (selectedClient) {
       const selectedSubject = clientList.find(
         (client) => client.client === selectedClient
@@ -209,7 +206,7 @@ const Subject = (props) => {
               <Label>
                 Description
                 <TextArea
-                  widthInput={"100% !important"}
+                  widthInput={"98% !important"}
                   placeholder={flag && !description ? "Required field" : ""}
                   name={description}
                   value={description}

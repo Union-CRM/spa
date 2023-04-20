@@ -1,9 +1,9 @@
 import { usePlannerContext } from "./usePlannerContent";
 import { useState, useEffect } from "react";
 
-export const useFetchSubjectPlanner=(props)=>{
-    const {planner} = usePlannerContext();
-    const {idSubject} = useState();
-    const plannerSubject = planner.filter((item) => item.subject_id === idSubject)[0];
-    
-}
+export const useFetchSubjectPlanner = () => {
+  const [idSubject] = useState();
+  const [subject_id] = useState();
+};
+
+/*Não utilizado, pode excluir o arquivo*/

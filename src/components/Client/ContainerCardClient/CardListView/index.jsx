@@ -24,6 +24,8 @@ import {
   ValueInfo,
   TitleInfo,
   ContainerFather,
+  ToggleContainer,
+  ToggleButton,
 } from "./styles";
 import IconSystem from "../../../../assets/IconSystem";
 import Body from "../../../../assets/FontSystem/Body";
@@ -32,10 +34,12 @@ import { useClientContext } from "../../../../hook/useClientContent";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
+import styled, { css } from "styled-components";
+
 const ClientCard = (props) => {
   const { openModal, openModalPopUp } = props;
 
-  const { client: clientList } = useClientContext();
+  const { client: clientList, updateClient } = useClientContext();
   const client = clientList.filter((item) => item.id === props.id)[0];
   const [tags] = useState(
     client.tags.map((tag) => {
@@ -52,10 +56,41 @@ const ClientCard = (props) => {
     props.setId(client.id);
   };
 
+  const [isActive, setIsActive] = useState(client.status === "Active");
+
+  /*const handleToggle = () => {
+    setIsActive(!isActive);
+    updateClient(client.id, { ...client, status: isActive ? "Inactive" : "Active" });
+  };*/
+
+  // TESTE //
+  const [previousStatus, setPreviousStatus] = useState(client.status);
+  const handleToggle = () => {
+    const newStatus = isActive ? "Inactive" : "Active";
+    setIsActive(!isActive);
+    updateClient(client.id, { ...client, status: newStatus });
+  };
+
+  const handleDeactivate = () => {
+    updateClient(client.id, { ...client, status: "Inactive" });
+    setIsActive(false);
+    setPreviousStatus(client.status);
+  };
+
+  const handleDeactivateCancel = () => {
+    setIsActive(client.status === "Active");
+    updateClient(client.id, { ...client, status: previousStatus });
+  };
+
   return (
     <ContainerFather>
       <Container>
-        <Card $mode={client.status}>
+        <Card
+          isActive={isActive}
+          active={isActive}
+          $mode={client.status}
+          checked={isActive}
+        >
           <Header>
             <DivPhoto>
               <DivPhotoI>
@@ -77,28 +112,34 @@ const ClientCard = (props) => {
               <Subtitle type={"TextDescription"} name={client.email} />
 
               <DivTagsStatus>
-                <Status $mode={client.status}>{client.status}</Status>
+                <Status
+                  isActive={isActive}
+                  $mode={client.status}
+                  checked={isActive}
+                >
+                  {client.status}
+                </Status>
                 <Tippy content={tags}>
-                   <TagsSpan $mode={client.tags}>
-                    tags
-                   </TagsSpan>
+                  <TagsSpan $mode={client.tags}>tags</TagsSpan>
                 </Tippy>
               </DivTagsStatus>
             </DivDadosCard>
 
             <DivIcons>
-              <DivToggle $mode={client.status}>
+              <ToggleContainer
+                isActive={isActive}
+                $mode={client.status}
+                checked={isActive}
+              >
                 <InputToggle
                   type="checkbox"
-                  name="option"
                   id={client.id}
+                  checked={client.status}
+                  onChange={handleToggle}
                   onClick={() => handleClick()}
                 />
-                <LabelToggle $mode={client.status}>
-                  <Span></Span>
-                </LabelToggle>
-              </DivToggle>
-
+                <ToggleButton checked={isActive} />
+              </ToggleContainer>
             </DivIcons>
           </Header>
           <DivInfo onClick={handleEdit}>

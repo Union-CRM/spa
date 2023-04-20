@@ -5,44 +5,45 @@ export const SubjectContext = createContext();
 export const SubjectContextProvider = ({ children }) => {
   const [subject, setSubject] = useState([{}]);
 
-  useEffect(()=>{
+  useEffect(() => {
     loadData();
-  },[])
-  
-  const loadData=async()=>{
-        var subjects;
-        try {
-            const response = await axios.get('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8089/union/v1/subjects/submissives',{
-                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
-                subjects = response;
-                
-        }catch (error) {
-            console.error(error);
-            
+  }, []);
+
+  const loadData = async () => {
+    var subjects;
+    try {
+      const response = await axios.get(
+        "http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8089/union/v1/subjects/submissives",
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
-       
-        setSubject(subjects.data.List.map((item)=>({
-          id:item.subject_id, 
-          status_id: item.status.status_id,
-          status:item.status.status_description,
-          subject_title:item.subject_title,
-          subject_text:item.Subject_text,
-          release_id:item.release_id,
-          release:item.release_name,
-          release_id:item.release_id,
-          business:item.business_name,
-          manager:item.user_name,
-          client: item.client_name,
-          client_id: item.client_id,
-          client_email: item.client_email,
-          
-        })
-        ))
-      }
+      );
+      subjects = response;
+    } catch (error) {
+      console.error(error);
+    }
+
+    setSubject(
+      subjects.data.List.map((item) => ({
+        id: item.subject_id,
+        status_id: item.status.status_id,
+        status: item.status.status_description,
+        subject_title: item.subject_title,
+        subject_text: item.Subject_text,
+        release_id: item.release_id,
+        release: item.release_name,
+        business: item.business_name,
+        manager: item.user_name,
+        client: item.client_name,
+        client_id: item.client_id,
+        client_email: item.client_email,
+      }))
+    );
+  };
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [modalDetails, setModalDetails] = useState(false);
   const [activeTab, setActiveTab] = useState(null);
-
+  const [modalDiscard, setModalDiscard] = useState(false);
   const [modal, setModal] = useState();
   const [modalEdit, setModalEdit] = useState(false);
   const [isEdit, setEdit] = useState(false);
@@ -74,6 +75,8 @@ export const SubjectContextProvider = ({ children }) => {
         setModal,
         modalEdit,
         setModalEdit,
+        modalDiscard,
+        setModalDiscard,
         isEdit,
         setEdit,
         modalPlanner,
