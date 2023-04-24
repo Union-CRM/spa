@@ -88,7 +88,7 @@ const SidBar =(props)=>{
             <Li>
               <Icon $mode={sidBarState}>
                 <IconSystem icon="Home" />
-                <Span $mode={sidBarState}>Home</Span>
+                <Span $mode={sidBarState}>Home //</Span>
               </Icon>
             </Li>
           </Slink>
