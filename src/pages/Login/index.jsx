@@ -13,23 +13,44 @@ function LoginPage() {
 
   const [email, setEmail] = useState(''); // Criar estado para email com o hook useState
   const [password, setPassword] = useState(''); // Criar estado para senha com o hook useState
-  const [forgotPassword,setForgotPassword] = useState(false);
   const [invalid,setInvalid] = useState(false);
+  const [loginQtd, setLoginQtd] = useState(1);
+  const [changeModal,setChangeModal] = useState(false);
+  const[isActive,setIsActive] = useState(false);
+  const [blocked,setBlocked] = useState(false); 
  
     localStorage.setItem("token","");
 
     async function handleLogin(event) { // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
-      
+    
       event.preventDefault(); // Impedir comportamento padrão de submissão do formulário
         
-
+       /* console.log("acesso", blocked);
+        setBlocked(true);
+        console.log("acesso true", blocked);
+        setBlocked(false)*/
         // O codigo abaixo representa a verificação do login via endpoint (FUNCIONANDO)
         //'http://ec2-18-230-74-206.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login'
         // Só utilizar quando for apresentar ao Giba.
 
         //teste
-     
-        if (email !== "" && password !== "") { // Verificar email e senha preenchidos e tamanho mínimo da senha
+      
+
+        if(loginQtd==1){
+          setBlocked(false);
+          setChangeModal(false);
+          
+         }
+
+         
+        if(loginQtd>=3){
+          setChangeModal(true);
+          setIsActive(true);  
+          setBlocked(true);
+          console.log(changeModal)
+          setInvalid(false);
+        }
+        else if (email !== "" && password !== "") { // Verificar email e senha preenchidos e tamanho mínimo da senha
             const { data } = await axios.post('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login', {
 
                 email,
@@ -37,7 +58,14 @@ function LoginPage() {
                 password,
   
             }).catch(function (error) {
+
+              console.log("Login ou senha incorreta");
+              setInvalid(true);
+              setLoginQtd(loginQtd+1)
+              console.log(loginQtd);
              
+              
+                /*
                 if (error.response) {
                 // el.style.visibility = "visible";
                 setEmail('');
@@ -46,32 +74,43 @@ function LoginPage() {
                 console.error(error.request);
                 } else {
                 console.error('Error', error.message);
-                }
+                }*/
             });
             
 
             localStorage.setItem('token', data.token);
             window.location.href = '/home';
+        }else{
+          console.log("Login ou senha incorreta ( Vazio )");
+          event.preventDefault();
+          setInvalid(true);
         }
+      
       
       /*localStorage.setItem('token', "data.token");
       window.location.href = '/home';
       console.log("teste");*/
 
-    }
-
+    } 
     function loginAdm(){
       window.location.href = '/';
     }
     function CloseModal(){
-      setForgotPassword(false);
+      
+      setIsActive(false);
+      setLoginQtd(1);
+         
+     
     }
     
     const handleBackgroundClick = (e)=>{
         if(e.target === e.currentTarget){
             CloseModal();
         }
+
       };
+
+    
   return(
     <>
      
@@ -118,7 +157,7 @@ function LoginPage() {
               <Input type="password" placeholder= '●●●●●●●●' value={password} onChange={(e) => setPassword(e.target.value)} />
            </Label>  
            
-           < ForgotPassword onClick={()=>setForgotPassword(true)}>Forgot password?</ForgotPassword>
+           < ForgotPassword onClick={()=>setIsActive(true)}>Forgot password?</ForgotPassword>
           
 
            <LoginBt>
@@ -129,11 +168,13 @@ function LoginPage() {
             </EnterAdmin>
         </Form>
         
-      <DivModal onClick={handleBackgroundClick} $mode={forgotPassword}>
-         { forgotPassword && <AcessBlocked/>}
+      <DivModal onClick={handleBackgroundClick} $mode={isActive}>
 
-         {/*<LoginProblems typeUser={"userSave"} iconColor={"#e41165"}/>  */} 
-         
+       {
+          changeModal ?  blocked && <AcessBlocked/>  : <LoginProblems typeUser={"user"} /> 
+          
+          
+       }  
       </DivModal>
        
       

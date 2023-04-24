@@ -6,13 +6,15 @@ import IconSystem from '../../../../assets/IconSystem';
 
 
 const LoginProblems = (props) =>{
+  const iconType = props.typeUser=="adm"  ? "Lock2Adm" :"Lock2";
+   const buttonType = props.typeUser=="adm" ? "adminSave" :"userSave";
   return (
     <Container>
       
         <Title>Problems logging in?</Title>
         <DivIcon>
-        <IconSystem icon={"Lock2"} width={"100px"} height={"100px"} 
-        color={props.iconColor}></IconSystem>
+        <IconSystem icon={iconType} width={"100px"} 
+        height={"100px"}></IconSystem>
         </DivIcon>
      
         <P>Enter your email address and we'll send you a link to acess
@@ -20,7 +22,7 @@ const LoginProblems = (props) =>{
         </P>
         <InputEmail></InputEmail>
         <DivButton>
-            <ButtonDefault type={props.typeUser} name={"Send login link"} sizeWidth={"280px"} sizeHeight={"45px"} sizeFont={"20px"}></ButtonDefault>
+            <ButtonDefault type={buttonType} name={"Send login link"} sizeWidth={"280px"} sizeHeight={"45px"} sizeFont={"20px"}></ButtonDefault>
         </DivButton>
        
     </Container>
