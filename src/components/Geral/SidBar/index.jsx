@@ -2,6 +2,9 @@ import React,{useState} from "react";
 import IconSystem from "../../../assets/IconSystem";
 import Body from "../../../assets/FontSystem/Body";
 import {useUserContext} from "../../../hook/useUserContext"
+import { ReactComponent as Client } from "../../../assets/svg/Client.svg"
+import { ReactComponent as Subject } from "../../../assets/svg/Subjects.svg"
+import { ReactComponent as Planner } from "../../../assets/svg/Planner.svg"
 import {
   Container,
   OpenClose,
@@ -17,6 +20,12 @@ import {
   Span,
   Icon,
   Logout,
+  DivDots,
+  Dot1,
+  Dot2,
+  Dot3,
+  Dot4,
+  Dot5,
 } from "./styles";
 
 
@@ -37,6 +46,9 @@ function handleLogin(event) { // Renomear função de teste para handleLogin e a
 const SidBar =(props)=>{
   const [sidBarState,setSidBarState]=useState(true);
   const {user}=useUserContext();
+  const isAdm = user.level > 1 ? true : false;
+  const colorAdm = user.level > 1 ? "#007BFF" : "#FFFFFF";
+ 
   return (
     <>
       <Container
@@ -58,6 +70,15 @@ const SidBar =(props)=>{
               <Body type={"Body1"} name={Split(user.name)} />
             </DivPhotoI>
           </Img>
+          {isAdm && (
+          <DivDots $mode={sidBarState}>
+            <Dot1 level={user.level}/>
+            <Dot2 level={user.level}/>
+            <Dot3 level={user.level}/>
+            <Dot4 level={user.level}/>
+            <Dot5 level={user.level}/>
+          </DivDots>
+          )}
           <Name $mode={sidBarState}>{user.name}</Name>
           <Email $mode={sidBarState}>{user.email}</Email>
           <Id $mode={sidBarState}>{user.tcs_id}</Id>
@@ -71,10 +92,54 @@ const SidBar =(props)=>{
               </Icon>
             </Li>
           </Slink>
+          {isAdm && (
+            <>
+            <Slink to="/usersAdm">
+              <Li>
+                <Icon $mode={sidBarState}>
+                  <IconSystem icon="User"/>
+                  <Span $mode={sidBarState}>User</Span>
+                </Icon>
+              </Li>
+              </Slink>
+              <Slink to="/groups">
+              <Li>
+              <Icon $mode={sidBarState}>
+                <IconSystem icon="Groups"/>
+                <Span $mode={sidBarState}>Groups</Span>
+              </Icon>
+            </Li>
+            </Slink>
+            <Slink to="/business">
+            <Li>
+              <Icon $mode={sidBarState}>
+                <IconSystem icon="Business"/>
+                <Span $mode={sidBarState}>Business</Span>
+              </Icon>
+            </Li>
+            </Slink>
+            <Slink to="/releasetrain">
+            <Li>
+              <Icon $mode={sidBarState}>
+                <IconSystem icon="Release"/>
+                <Span $mode={sidBarState}>Release train</Span>
+              </Icon>
+            </Li>
+            </Slink>
+            <Slink to="/customer">
+            <Li>
+              <Icon $mode={sidBarState}>
+                <IconSystem icon="Costumer"/>
+                <Span $mode={sidBarState}>Custumer</Span>
+              </Icon>
+            </Li>
+            </Slink>
+          </>
+            )}
           <Slink to="/client">
             <Li>
               <Icon $mode={sidBarState}>
-                <IconSystem icon="Client" />
+                <Client fill={colorAdm}/>
                 <Span $mode={sidBarState}>Client</Span>
               </Icon>
             </Li>
@@ -83,24 +148,22 @@ const SidBar =(props)=>{
           <Slink to="/subject">
             <Li>
               <Icon $mode={sidBarState}>
-                <IconSystem icon="Subjects" />
+                <Subject fill={colorAdm}/>
                 <Span $mode={sidBarState}>Subjects</Span>
               </Icon>
             </Li>
           </Slink>
-
           <Slink to="/planner">
             <Li>
               <Icon $mode={sidBarState}>
-                <IconSystem icon="Planner" />
+                <Planner fill={colorAdm} />
                 <Span $mode={sidBarState}>Planner</Span>
               </Icon>
             </Li>
           </Slink>
-
         </Ul>
         <Logout $mode={sidBarState} onClick={handleLogin}>
-            <Slink to="/loginClient">
+            <Slink to="/">
               <IconSystem icon="Logout"  />
               <Span $mode={sidBarState}>Logout</Span>
             </Slink>  

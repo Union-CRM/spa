@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
@@ -103,6 +103,7 @@ export const Ul = styled.ul`
   grid-row: 4/5;
   list-style-type: none;
   margin: 0;
+  margin-top: 10%;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -136,3 +137,75 @@ export const Span = styled.span`
 `;
 
 export const DivPhotoI = styled.div``;
+
+export const DivDots = styled.div`
+  display: flex;
+  margin: 0 auto;
+  width: 85px;
+  display: ${(props) => (props.$mode ? "none" : "flex")};
+`
+
+export const Dot1 = styled.div`
+  height: 15px;
+  width: 15px;
+  border-radius: 30px;
+  background-color: ${({ level }) => {
+    if (level >= 1) {
+      return "#E41165";
+    } else{
+      return "#FFFFFF";
+    } 
+  }};
+`;
+
+export const Dot2 = styled.div`
+  height: 15px;
+  width: 15px;
+  border-radius: 30px;
+  background-color: ${({ level }) => {
+    if (level >= 2) {
+      return "#E41165";
+    } else{
+      return "#FFFFFF";
+    } 
+  }};
+`
+export const Dot3 = styled.div`
+  height: 15px;
+  width: 15px;
+  border-radius: 30px;
+  background-color: ${({ level }) => {
+    if (level >= 3) {
+      return "#E41165";
+    } else{
+      return "#FFFFFF";
+    } 
+  }};
+`
+
+export const Dot4 = styled.div`
+  height: 15px;
+  width: 15px;
+  border-radius: 30px;
+  background-color: ${({ level }) => {
+    if (level >= 4) {
+      return "#E41165";
+    } else{
+      return "#FFFFFF";
+    } 
+  }};
+`
+
+export const Dot5 = styled.div`
+  height: 15px;
+  width: 15px;
+  border-radius: 30px;
+  background-color: ${({ level }) => {
+    if (level >= 5) {
+      return "#E41165";
+    } else{
+      return "#FFFFFF";
+    } 
+  }};
+`
+

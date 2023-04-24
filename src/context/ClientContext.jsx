@@ -6,13 +6,15 @@ export const ClientContextProvider = ({ children }) => {
   const [client, setClient] = useState([{}]);
 
   useEffect(() => {
+    if(localStorage.getItem("token")){
     loadData();
+    }
   }, []);
   const loadData = async () => {
     var clients;
     try {
       const response = await axios.get(
-        "http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/mygroups",
+        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8083/union/v1/clients/mygroups",
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }

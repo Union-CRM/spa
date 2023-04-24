@@ -24,24 +24,15 @@ function LoginPageAdmin() {
     async function handleLogin(event) { // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
     
       event.preventDefault(); // Impedir comportamento padrão de submissão do formulário
-        
-       /* console.log("acesso", blocked);
-        setBlocked(true);
-        console.log("acesso true", blocked);
-        setBlocked(false)*/
-        // O codigo abaixo representa a verificação do login via endpoint (FUNCIONANDO)
-        //'http://ec2-18-230-74-206.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login'
-        // Só utilizar quando for apresentar ao Giba.
-
-        //teste
-      
-
+              
+        /*
         if(loginQtd==1){
+          console.log("teste");
           setBlocked(false);
           setChangeModal(false);
           
-         }
-
+         }*/
+        
          
         if(loginQtd>=3){
           console.log("bloqueado");
@@ -49,13 +40,16 @@ function LoginPageAdmin() {
           setChangeModal(true);
           setIsActive(true);  
           setBlocked(true);
-          console.log(changeModal)
           setInvalid(false);
+          setLoginQtd(0);
+
           
            
         }
         else if (email !== "" && password !== "") { // Verificar email e senha preenchidos e tamanho mínimo da senha
-            const { data } = await axios.post('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login', {
+
+            
+            const { data } = await axios.post('http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/login', {
                 email,
                 password,
   
@@ -87,7 +81,7 @@ function LoginPageAdmin() {
           event.preventDefault();
           setInvalid(true);
         }
-      
+        
       
       /*localStorage.setItem('token', "data.token");
       window.location.href = '/home';
@@ -95,9 +89,6 @@ function LoginPageAdmin() {
 
     } 
 
-    function loginClient(){
-      window.location.href = '/loginClient';
-    }
     function CloseModal(){
         
       setIsActive(false);
@@ -137,7 +128,7 @@ function LoginPageAdmin() {
           <Form onSubmit={handleLogin}> {/* Adicionar evento de submissão de formulário */}
             <Label>
               <Span>Email</Span>
-              <Input placeholder='user@tcs.com' value={email} onChange={(e) => setEmail(e.target.value)} />
+              <Input type='email' placeholder='user@tcs.com' value={email} onChange={(e) => setEmail(e.target.value)} />
               <DivEmailIcon>
                 <IconSystem icon="Email2" />
               </DivEmailIcon>
@@ -155,14 +146,12 @@ function LoginPageAdmin() {
            <LoginBt>
                     <ButtonDefault name={"Login"} type={"adminSave"} sizeFont={"1.5em"}></ButtonDefault>
             </LoginBt>
-            <EnterUser>
-                <ButtonEnterUser onClick={loginClient}>Enter User</ButtonEnterUser>
-            </EnterUser>
         </Form>
         <DivModal onClick={handleBackgroundClick} $mode={isActive}>
         {
-          changeModal ?  blocked && <AcessBlocked/>  : <LoginProblems typeUser={"user"} /> 
-             
+          changeModal ?  blocked && 
+          <AcessBlocked/>  : <LoginProblems 
+          typeUser={"user"} />   
        }  
       </DivModal>
     </Content>

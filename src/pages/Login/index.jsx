@@ -25,24 +25,22 @@ function LoginPage() {
     
       event.preventDefault(); // Impedir comportamento padrão de submissão do formulário
         
-       /* console.log("acesso", blocked);
+        console.log("acesso", blocked);
         setBlocked(true);
         console.log("acesso true", blocked);
-        setBlocked(false)*/
+        setBlocked(false)
         // O codigo abaixo representa a verificação do login via endpoint (FUNCIONANDO)
         //'http://ec2-18-230-74-206.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login'
         // Só utilizar quando for apresentar ao Giba.
 
         //teste
       
-
         if(loginQtd==1){
           setBlocked(false);
           setChangeModal(false);
           
          }
 
-         
         if(loginQtd>=3){
           setChangeModal(true);
           setIsActive(true);  
@@ -79,6 +77,7 @@ function LoginPage() {
             
 
             localStorage.setItem('token', data.token);
+            console.log(token)
             window.location.href = '/home';
         }else{
           console.log("Login ou senha incorreta ( Vazio )");

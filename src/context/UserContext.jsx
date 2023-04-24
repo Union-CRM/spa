@@ -6,14 +6,16 @@ export const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState([{}]);
 
   useEffect(() => {
+    if(localStorage.getItem("token")){
     loadUserMe();
+    }
   }, []);
 
   const loadUserMe = async () => {
     var user;
     try {
       const response = await axios.get(
-        "http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8081/union/v1/users/me",
+        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/me",
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
