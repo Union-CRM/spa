@@ -1,15 +1,15 @@
 import React, { useState } from 'react'; // Importar useState para criar estado para email e senha
-import IconSystem from '../../../assets/IconSystem';
-import ButtonDefault from '../../../assets/Buttons/ButtonDefault';
-import LoginProblems from '../../../components/Geral/LoginModals/LoginProblems';
-import LoginInvalid from '../../../components/Geral/LoginModals/LoginInvalid';
-import AcessBlocked from '../../../components/Geral/LoginModals/AcessBlocked';
+import IconSystem from '../../assets/IconSystem';
+import ButtonDefault from '../../assets/Buttons/ButtonDefault';
 import { Container,DivTcs,Content,LogoDiv,Form,DivIcons,Label,Span,Input,DivTerms,
-    DivWelcome,TextTerm,LoginBt,DivImgs,DivEmailIcon,DivPassWIcon,EnterUser,ButtonEnterUser,ForgotPasswordADM,DivModal} from './styles';
-import Headline from '../../../assets/FontSystem/Headline'
+    DivWelcome,TextTerm,LoginBt,DivImgs,DivEmailIcon,DivPassWIcon,EnterAdmin, ForgotPassword,EnterAdminButton,DivModal} from './styles';
+import Headline from '../../assets/FontSystem/Headline';
 import axios from 'axios';
+import LoginProblems from '../../components/Geral/LoginModals/LoginProblems';
+import LoginInvalid from '../../components/Geral/LoginModals/LoginInvalid';
+import AcessBlocked from '../../components/Geral/LoginModals/AcessBlocked';
 
-function LoginPageAdmin() {
+function LoginPage() {
 
   const [email, setEmail] = useState(''); // Criar estado para email com o hook useState
   const [password, setPassword] = useState(''); // Criar estado para senha com o hook useState
@@ -18,7 +18,7 @@ function LoginPageAdmin() {
   const [changeModal,setChangeModal] = useState(false);
   const[isActive,setIsActive] = useState(false);
   const [blocked,setBlocked] = useState(false); 
-
+ 
     localStorage.setItem("token","");
 
     async function handleLogin(event) { // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
@@ -44,19 +44,17 @@ function LoginPageAdmin() {
 
          
         if(loginQtd>=3){
-          console.log("bloqueado");
-          
           setChangeModal(true);
           setIsActive(true);  
           setBlocked(true);
           console.log(changeModal)
           setInvalid(false);
-          
-           
         }
         else if (email !== "" && password !== "") { // Verificar email e senha preenchidos e tamanho mínimo da senha
             const { data } = await axios.post('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login', {
+
                 email,
+
                 password,
   
             }).catch(function (error) {
@@ -94,26 +92,32 @@ function LoginPageAdmin() {
       console.log("teste");*/
 
     } 
-
-    function loginClient(){
-      window.location.href = '/loginClient';
+    function loginAdm(){
+      window.location.href = '/';
     }
     function CloseModal(){
-        
+      
       setIsActive(false);
       setLoginQtd(1);
-    
+         
+     
     }
     
     const handleBackgroundClick = (e)=>{
-      if(e.target === e.currentTarget){
-          CloseModal();
-      }
-    };
+        if(e.target === e.currentTarget){
+            CloseModal();
+        }
+
+      };
+
+    
   return(
     <>
+     
     <Container>
+    
         <DivImgs>
+        
           <DivTcs>
             <IconSystem icon="LogoTataWhite" width={"100%"} height={"100%"} />
           </DivTcs>
@@ -128,8 +132,11 @@ function LoginPageAdmin() {
               <Headline type={"Headline5"} name={"Terms of Use | Browser and Display Compatibility Copyright © 2023 Tata Consultancy Services Entry to this is restricted to employees and affiliates."} colorFont={"#E5F2FF"} />
             </TextTerm>
           </DivTerms>
+       
         </DivImgs>
+       
         <Content>
+       
           <LogoDiv>
             <IconSystem icon="LogoUnion" />
           </LogoDiv>
@@ -149,28 +156,36 @@ function LoginPageAdmin() {
               </DivPassWIcon>
               <Input type="password" placeholder= '●●●●●●●●' value={password} onChange={(e) => setPassword(e.target.value)} />
            </Label>  
-
-           < ForgotPasswordADM onClick={()=>setIsActive(true)}>Forgot password?</ForgotPasswordADM>
+           
+           < ForgotPassword onClick={()=>setIsActive(true)}>Forgot password?</ForgotPassword>
+          
 
            <LoginBt>
-                    <ButtonDefault name={"Login"} type={"adminSave"} sizeFont={"1.5em"}></ButtonDefault>
+                    <ButtonDefault name={"Login"} type={"userSave"} sizeFont={"1.5em"}></ButtonDefault>
             </LoginBt>
-            <EnterUser>
-                <ButtonEnterUser onClick={loginClient}>Enter User</ButtonEnterUser>
-            </EnterUser>
+            <EnterAdmin>
+                <EnterAdminButton onClick={loginAdm}>Enter Administrator</EnterAdminButton>
+            </EnterAdmin>
         </Form>
-        <DivModal onClick={handleBackgroundClick} $mode={isActive}>
-        {
+        
+      <DivModal onClick={handleBackgroundClick} $mode={isActive}>
+
+       {
           changeModal ?  blocked && <AcessBlocked/>  : <LoginProblems typeUser={"user"} /> 
-             
+          
+          
        }  
       </DivModal>
+       
+      
+         
     </Content>
+   
  </Container> 
-                      
+               
 </>
 );
 }
 
    
-export default LoginPageAdmin;
+export default LoginPage;

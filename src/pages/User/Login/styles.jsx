@@ -188,6 +188,8 @@ export const DivModal = styled.div`
         width: 100%;
         background-color: rgba(0,0,0,0.5);
         `;
+
+    
      case false:
         return css`
          display: none;
