@@ -1,13 +1,35 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import axios from "axios";
 export const RemarkContext = createContext();
 
 export const RemarkContextProvider = ({ children }) => {
   const [idRemark, setIdRemark] = useState(null);
-  const [remark, setRemark] = useState(remarkList);
-
+  const [remark, setRemark] = useState();
+  const [remarkEdit, setRemarkEdit] = useState(remarkEntity);
   const [modalRemark, setModalRemark] = useState(false);
 
   const [activeTab, setActiveTab] = useState(0);
+
+  useEffect(() => {
+    loadRemarkList();
+  }, []);
+
+  const loadRemarkList = async () => {
+    let remarks;
+    try {
+      const response = await axios.get(
+        "http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8088/union/v1/remarks/submissives",
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+      remarks = response;
+    } catch (error) {
+      console.error(error);
+      //console.log("buscou")
+    }
+    setRemark(remarks.data.list);
+  };
 
   return (
     <RemarkContext.Provider
@@ -16,15 +38,37 @@ export const RemarkContextProvider = ({ children }) => {
         setModalRemark,
         remark,
         setRemark,
+        remarkEdit,
+        setRemarkEdit,
         idRemark,
         setIdRemark,
         activeTab,
         setActiveTab,
+        loadRemarkList,
       }}
     >
       {children}
     </RemarkContext.Provider>
   );
+};
+
+const remarkEntity = {
+  id: null,
+  remark_name: "",
+  text: "",
+  date: "",
+  date_return: "",
+  status_description: "",
+  client_id: null,
+  client_name: "",
+  user_name: "",
+  user_id: null,
+  release_id: null,
+  release_name: "",
+  subject_id: null,
+  subject_name: "",
+  business_id: null,
+  business_name: "",
 };
 
 const remarkList = [

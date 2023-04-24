@@ -28,6 +28,41 @@ export const ContainerPlanner = styled.div`
   height: 100%;
   position: relative;
   padding-top: 0%;
+  &::-webkit-scrollbar {
+    width: 18px;
+    height: 10px;
+    margin-right: 10px;
+    float: right;
+  }
+  &::-webkit-scrollbar-track {
+    box-shadow: 5px black;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background-color: #f5f7fa;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 80%;
+    background-color: #e3e6ed;
+    margin-left: 20px;
+    width: 15px;
+    border-right: 6px solid #f5f7fa;
+    border-top: 12px solid #f5f7fa;
+  }
+  border: 2 px solid black;
+  ${(props) => {
+    if (props.$mode > 3) {
+      return css`
+        height: 80vh;
+      `;
+    } else {
+      return css`
+        height: fit-content;
+      `;
+    }
+  }}
 `;
 
 //* BUTTON CREATE NEW PLANNER *//
@@ -105,9 +140,19 @@ export const ButtonAdd = styled.button`
 
 /// CONTAINER CARDS ///
 
+export const DivNoPlanner = styled.span`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding-top: 1%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const ContainerCards = styled.div`
   width: 98%;
-  height: 100%;
+  height: 300px;
   padding-top: 0;
   position: relative;
   background-color: ${(props) => (props.$mode ? "#fff" : "transparent")};
@@ -115,7 +160,7 @@ export const ContainerCards = styled.div`
   grid-row: 2;
   overflow-y: scroll;
   &::-webkit-scrollbar {
-    width: 0px;
+    width: 5px;
     height: 10px;
   }
 
@@ -124,31 +169,44 @@ export const ContainerCards = styled.div`
   }
 
   &::-webkit-scrollbar-track-piece {
-    background-color: white;
-    margin-top: 15px;
+    background-color: transparent;
+    margin-top: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
     height: 80%;
-    background-color: transparent;
+    background-color: #dfdfdf;
+  }
+  @media (min-width: 1500px) and (max-width: 2500px) {
+    height: 380px;
+  }
+  @media (min-width: 1500px) and (max-width: 2500px) {
+    height: 310px;
+  }
+  @media (min-height: 150px) and (max-height: 450px) {
+    height: 370px;
   }
 `;
+
 //* CARDS PLANNER *//
 
 export const CardPlanner = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "DONE":
         return css`
+          cursor: pointer;
           border-bottom: 8px solid #008585;
         `;
-      case "Scheduled":
+      case "SCHEDULED":
         return css`
           border: none;
+          cursor: default;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
+          cursor: pointer;
           border-bottom: 8px solid #771300;
         `;
 
@@ -159,7 +217,7 @@ export const CardPlanner = styled.div`
     }
   }}
   width:97%;
-  height: 70px;
+  height: 75px;
   z-index: 9999999;
   margin-top: 3%;
   padding-bottom: 1%;
@@ -177,16 +235,17 @@ export const CardPlanner = styled.div`
 export const Circle = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "DONE":
         return css`
           background-color: #fff;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           background-color: #fff;
         `;
-      case "Scheduled":
+      case "SCHEDULED":
         return css`
+          cursor: none;
           background-color: transparent;
         `;
 
@@ -209,16 +268,19 @@ export const Circle = styled.div`
 export const IconOpenClose = styled.div`
   ${(props) => {
     switch (props.$modes) {
-      case "Finished":
+      case "DONE":
         return css`
+          cursor: pointer;
           color: #008585;
         `;
-      case "Scheduled":
+      case "SCHEDULED":
         return css`
           color: transparent;
+          cursor: default;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
+          cursor: pointer;
           color: #771300;
         `;
       default:
@@ -230,7 +292,6 @@ export const IconOpenClose = styled.div`
   width:100%;
   height: 100%;
   border: none;
-  cursor: pointer;
   position: absolute;
   top: 0;
   align-items: end;
@@ -250,74 +311,116 @@ export const IconOpenClose = styled.div`
 /// CONTENTS CARDS ///
 
 export const DivDate = styled.div`
-height:50px;
-width:90%;
-padding-top:0%;
-text-align:left;
-padding-left:3%;
-border-right:2px solid #EFF1F6;
-svg {
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "DONE":
         return css`
           color: #008585;
         `;
-      case "Scheduled":
+      case "SCHEDULED":
         return css`
           color: transparent;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           color: #771300;
         `;
       default:
         return css`
-        background-color:transparent;
+          background-color: transparent;
         `;
     }
   }}
-  width:13px;
-  height:13px;
-}
-p {
-  font-size:0.9rem;
-  color:#000 !important;
-  font-weight:900;
-}
-@media (min-width: 1700px) and (max-width: 2500px) {
-  span {
-    font-size:1rem;
+  height: 50px;
+  font-size: 0.82rem;
+  width: 90%;
+  padding-top: 0%;
+  text-align: left;
+  padding-left: 3%;
+  border-right: 2px solid #eff1f6;
+  svg {
+    ${(props) => {
+      switch (props.$mode) {
+        case "DONE":
+          return css`
+            color: #008585;
+          `;
+        case "SCHEDULED":
+          return css`
+            color: transparent;
+          `;
+        case "CANCELED":
+          return css`
+            color: #771300;
+          `;
+        default:
+          return css`
+            background-color: transparent;
+          `;
+      }
+    }}
+    width:13px;
+    height: 13px;
   }
-}
+  p {
+    font-size: 0.9rem;
+    color: #000 !important;
+    font-weight: 900;
+  }
+  @media (min-width: 1700px) and (max-width: 2500px) {
+    span {
+      font-size: 1rem;
+    }
+  }
 `;
 
 export const DivTime = styled.div`
-height:50px;
-width:100%;
-padding-top:0%;
-text-align:left;
-padding-left:2%;
-svg {
-  width:13px;
-  height:13px;
-}
-
-p {
-  font-size:0.8rem;
-  color:#000;
-  font-weight:900;
-}
-@media (min-width: 1700px) and (max-width: 2500px) {
-  span {
-    font-size:1rem;
+  ${(props) => {
+    switch (props.$modes) {
+      case "DONE":
+        return css`
+          color: #008585;
+        `;
+      case "SCHEDULED":
+        return css`
+          color: transparent;
+        `;
+      case "CANCELED":
+        return css`
+          color: #771300;
+        `;
+      default:
+        return css`
+          background-color: transparent;
+        `;
+    }
+  }}
+  height: 50px;
+  width: 100%;
+  padding-top: 0%;
+  text-align: left;
+  padding-left: 2%;
+  font-size: 0.82rem;
+  svg {
+    width: 13px;
+    height: 13px;
   }
+
   p {
-  font-size:1rem;
-  color:#000;
-  font-weight:900;
-}
-}
+    font-size: 0.8rem;
+    color: #000;
+    font-weight: 900;
+  }
+  @media (min-width: 1700px) and (max-width: 2500px) {
+    span {
+      font-size: 1rem;
+    }
+    p {
+      font-size: 1rem;
+      color: #000;
+      font-weight: 900;
+    }
+  }
 `;
 
 // PHOTO //
@@ -337,16 +440,16 @@ export const DivPhotoII = styled.div`
 export const Photo = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "DONE":
         return css`
           border: 3px solid #008585;
           color: #000;
         `;
-      case "Scheduled":
+      case "SCHEDULED":
         return css`
           border: 3px solid #ffd012;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           border: 3px solid #771300;
         `;
@@ -400,17 +503,17 @@ export const NameEmail = styled.div`
 export const StatusPlanner = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "DONE":
         return css`
           background-color: #008585;
           color: #fff;
         `;
-      case "Scheduled":
+      case "SCHEDULED":
         return css`
           background-color: #ffd012;
           color: #000;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           background-color: #771300;
           color: #fff;
@@ -430,7 +533,9 @@ export const StatusPlanner = styled.div`
   align-items: center;
   justify-content: center;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-  span {
+  text-transform: lowercase;
+  span:first-letter {
+    text-transform: uppercase;
     font-size: 0.7rem;
   }
 `;
@@ -444,15 +549,15 @@ export const DivStatusPlanner = styled.div`
 export const Span = styled.span`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "DONE":
         return css`
           color: #008585;
         `;
-      case "Scheduled":
+      case "SCHEDULED":
         return css`
-          color:#000;
+          color: #000;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           color: #771300;
         `;
@@ -468,4 +573,3 @@ export const DivGlobalCard = styled.div`
   display: flex;
   padding-top: 2%;
 `;
-

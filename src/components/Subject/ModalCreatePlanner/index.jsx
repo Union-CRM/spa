@@ -16,15 +16,34 @@ import {
   DivButton,
   ClickButton,
   PositionButtonCancel,
+  InputTime,
+  ToBetween,
+  DivColumnOne,
+  DivColumnTwo,
 } from "./styles";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import Clock from "../../Geral/Input/clock";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { GuestComponent } from "../../Geral/Input/GuestsComponent";
 import { usePlannerContext } from "../../../hook/usePlannerContent";
+import { useUserContext } from "../../../hook/useUserContext";
+import { useFetchPlanner } from "../../../hook/useFetchPlanner";
+import { useClientContext } from "../../../hook/useClientContent";
 
 const ModalCreatePlanner = (props) => {
-  const { setModal, id } = props;
+  const { subject, id } = useSubjectContext();
+  const [subjectTarget] = useState(subject.filter((s) => s.id === id)[0]);
+  const { setModalSave } = usePlannerContext();
+  const { setModal } = props;
+  const [guest, setGuest] = useState([]);
+  const [clientOption, setClientOption] = useState([]);
+  const { client: clientList } = useClientContext();
+  const { user } = useUserContext();
+  const [timeStart, setTimeStart] = useState();
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  const [timeFinish, setTimeFinish] = useState();
+  const { createPlanner } = useFetchPlanner();
+  const [flag, setFlag] = useState(false);
 
   const closeModal = () => {
     setModalDetails(true);
@@ -38,103 +57,38 @@ const ModalCreatePlanner = (props) => {
 
   const { setModalPlanner } = usePlannerContext();
 
-  /*
-  const handleSubmit = () => {
-    if (props.title === "Planner") {
-      editClient();
-    } else {
-      createClient();
-    }
-  };
-
-  
-  function getId() {
-    let lastId = 1;
-
-    clientList.map((c) => {
-      lastId = c.id > lastId ? c.id : lastId;
-    });
-
-    return lastId + 1;
-  }
-
-  const { client: clientList, setClient: setClientList } = useClientContext();
-
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [customer, setCustomer] = useState();
-  const [business, setBusiness] = useState();
-  const [role, setRole] = useState();
-  const [status, setStatus] = useState();
-  const [release, setRelease] = useState();
-  const [tags, setTags] = useState([]);
-
-  const [flag, setFlag] = useState(false);
-
-  //console.log(tags);
-  useEffect(() => {
-    if (props.title === "Planner") {
-      const client = clientList.filter((item) => item.id === props.id)[0];
-      setName(client.client);
-      setStatus(client.status);
-      setEmail(client.email);
-      setBusiness(client.textBusiness);
-      setCustomer(client.textCustomer);
-      setRole(client.textRole);
-      setRelease(client.textRelease);
-      setTags(client.tags);
-    }
-  }, [id]);
-
-  const createClient = () => {
-    const newClient = {
-      id: getId(),
-      status: status,
-      email: email,
-      client: name,
-      textRole: role,
-      textCustomer: customer,
-      textBusiness: business,
-      textRelease: release,
-      tags: tags,
+  const HandleCreatePlanner = (e) => {
+    e.preventDefault();
+    const newPlanner = {
+      name: subjectTarget.subject_title,
+      date: date + " " + timeStart,
+      duration: timeFinish,
+      subject: subjectTarget.id,
+      client: subjectTarget.client_id,
+      release: subjectTarget.release_id,
+      user: user.id,
+      guest: guest.map((g) => ({ client_id: g.value })),
     };
-
-    if (name && email && role && customer && business && release) {
-      setClientList([...clientList, newClient]);
-      setModal(false);
+    if (date && timeFinish && timeStart) {
+      createPlanner(newPlanner);
+      setModalDetails(true);
+      setModalPlanner(false);
     } else {
       setFlag(true);
     }
+
+    console.log(newPlanner);
   };
 
-  const editClient = () => {
-    const newClient = {
-      id: id,
-      status: status,
-      email: email,
-      client: name,
-      textRole: role,
-      textCustomer: customer,
-      textBusiness: business,
-      textRelease: release,
-      tags: tags,
-    };
-    if (name && email && role && customer && business && release) {
-      const noId = clientList.filter((item) => item.id !== id);
-      setClientList([...noId, newClient]);
-      setModal(false);
-    } else {
-      setFlag(true);
+  /*useEffect(() => {
+    if (clientList) {
+      setClientOption(
+        clientList
+          .filter((c) => c.status === "Active")
+          .map((c) => ({ id: c.id, value: c.id, label: c.client }))
+      );
     }
-  };*/
-
-  const [tags, setTags] = useState([]);
-
-  const [flag, setFlag] = useState(false);
-
-  const [userChoice, setUserChoice] = useState("");
-
-  //console.log(userChoice);
+  }, []);*/
 
   return (
     <>
@@ -142,59 +96,61 @@ const ModalCreatePlanner = (props) => {
         <Container>
           <DivHeader>
             <Title>Create Planner</Title>
-
-            <SubTitle>Apresentação Institucional TCS</SubTitle>
           </DivHeader>
           <ContainerChildren>
             <Form>
-              <DivDate>
-                <Label>
-                  Date
-                  <Input
-                    type={"date"}
-                    widthInput={"100% !important"}
-                    value={new Date().toISOString().slice(0, 10)}
-                    /*placeholder={flag && !name ? "Required field" : ""}
+              <DivColumnOne>
+                <DivDate>
+                  <Label>
+                    Date
+                    <Input
+                      widthInput={"93%"}
+                      type="date"
+                      defaultValue={date}
+                      name="date"
+                      onChange={(e) => setDate(e.target.value)}
+                      required={flag && !date ? true : false}
+                      /*placeholder={flag && !name ? "Required field" : ""}
                     value={name}
                     required
                     onChange={(event) => setName(event.target.value)}*/
-                  />
-                </Label>
-              </DivDate>
+                    />
+                  </Label>
+                </DivDate>
 
-              <DivStart>
-                <Label>
-                  Start 
-                  <Clock widthClock={"100%"} />
-                </Label>
-              </DivStart>
+                <DivStart>
+                  <Label>
+                    Start
+                    <InputTime
+                      type="time"
+                      name="time"
+                      defaultValue={timeStart}
+                      onChange={(e) => setTimeStart(e.target.value)}
+                      required={flag && !timeStart ? true : false}
+                    />
+                  </Label>
+                </DivStart>
 
-              <DivFinish>
-                <Label>
-                  Finish
-                  <Clock widthClock={"100%"} />
-                </Label>
-              </DivFinish>
+                <DivFinish>
+                  <Label>
+                    Finish
+                    <InputTime
+                      defaultValue={timeFinish}
+                      type="time"
+                      name="time-finish"
+                      onChange={(e) => setTimeFinish(e.target.value)}
+                      required={flag && !timeFinish ? true : false}
+                    />
+                  </Label>
+                </DivFinish>
+              </DivColumnOne>
 
-              <DivGuest>
-                <Label>Select Guest</Label>
-                <GuestComponent
-                  set={(tags) => setTags(tags)}
-                  placeholder={flag && !tags ? "Required field" : ""}
-                  sizeSingle={"60%"}
-                  required
-                  sizeMenu={"90%"}
-                  options={options}
-                  top={"240%"}
-                  width={"230%"}
-                  widths={"93%"}
-                  heights={"16.2vh"}
-                  marginLeft={"0%"}
-                />
-              </DivGuest>
+              <DivColumnTwo>
+                <GuestComponent set={(guest) => setGuest(guest)} />
+              </DivColumnTwo>
             </Form>{" "}
             <DivButton>
-              <ClickButton>
+              <ClickButton onClick={(e) => HandleCreatePlanner(e)}>
                 <ButtonDefault
                   type="userSave"
                   weightFont={"500"}

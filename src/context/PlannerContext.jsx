@@ -3,9 +3,8 @@ import axios from "axios";
 export const PlannerContext = createContext();
 
 export const PlannerContextProvider = ({ children }) => {
-
   const [planner, setPlanner] = useState([{}]);
-  const [plannerEdit, setPlannerEdit]=useState();
+  const [plannerEdit, setPlannerEdit] = useState();
   const [modalPlanner, setModalPlanner] = useState(false);
   const [modalDetails, setModalDetails] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
@@ -20,50 +19,63 @@ export const PlannerContextProvider = ({ children }) => {
   const [modalSubject, setModalSubject] = useState(false);
   const [modalError, setModalError] = useState(false);
 
-  useEffect(()=>{
-      loadPlannerList()
-  },[]);
+  useEffect(() => {
+    loadPlannerList();
+  }, []);
 
-  const loadPlannerList=async()=>{
+  const loadPlannerList = async () => {
     let planners;
     try {
-      const response = await axios.get('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8086/union/v1/planners/submissives',{
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
-          planners = response;
-          
-    }catch (error) {
-      console.error(error)
+      const response = await axios.get(
+        "http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8086/union/v1/planners/submissives",
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+      planners = response;
+    } catch (error) {
+      console.error(error);
       //console.log("buscou")
     }
-    setPlanner(planners.data.list)
-
-  
-  }
-
-
+    setPlanner(planners.data.list);
+  };
 
   return (
     <PlannerContext.Provider
       value={{
-        planner,setPlanner, 
-        modalPlanner,setModalPlanner,
-        modalDetails, setModalDetails,
-        modalEdit, setModalEdit, 
-        modalDiscard, setModalDiscard,
-        modalSave, setModalSave, 
-        modalCreate, setModalCreate,
-        modalRemark, setModalRemark,
-        modalFollowUp, setModalFollowUp,
-        modalPopUpCanceled, setModalPopUpCanceled,
-        modalReschedule, setModalReschedule,
-        modalPopUpFinished, setModalPopUpFinished,
-        modalSubject, setModalSubject,
-        plannerEdit, setPlannerEdit,
-        loadPlannerList, modalError,
+        planner,
+        setPlanner,
+        modalPlanner,
+        setModalPlanner,
+        modalDetails,
+        setModalDetails,
+        modalEdit,
+        setModalEdit,
+        modalDiscard,
+        setModalDiscard,
+        modalSave,
+        setModalSave,
+        modalCreate,
+        setModalCreate,
+        modalRemark,
+        setModalRemark,
+        modalFollowUp,
+        setModalFollowUp,
+        modalPopUpCanceled,
+        setModalPopUpCanceled,
+        modalReschedule,
+        setModalReschedule,
+        modalPopUpFinished,
+        setModalPopUpFinished,
+        modalSubject,
+        setModalSubject,
+        plannerEdit,
+        setPlannerEdit,
+        loadPlannerList,
+        modalError,
         setModalError,
       }}
     >
-
       {children}
     </PlannerContext.Provider>
   );

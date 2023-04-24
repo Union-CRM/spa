@@ -9,11 +9,11 @@ export const Input = styled.input`
   height: ${(props) => props.heightInput || "28px"};
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
-  border: 2px solid #888c95;
   background-color: ${(props) => props.backgroundInput || " #fff"};
   display: block;
   position: relative;
   padding-left: 2%;
+  border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
   @media (min-width: 1355px) and (max-width: 1824px) {
     height: 25px;
   }
@@ -23,7 +23,7 @@ export const TextArea = styled.textarea`
   height: ${(props) => props.heightInput || "80px"};
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
-  border: 2px solid #888c95;
+  border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
   background-color: ${(props) => props.backgroundInput || " #fff"};
   display: block;
   resize: none;
@@ -51,16 +51,13 @@ export const ContainerCards = styled.div`
     width: 0px;
     height: 10px;
   }
-
   &::-webkit-scrollbar-track {
     border-radius: 10px;
   }
-
   &::-webkit-scrollbar-track-piece {
     background-color: white;
     margin-top: 15px;
   }
-
   &::-webkit-scrollbar-thumb {
     height: 80%;
     background-color: transparent;
@@ -87,12 +84,10 @@ export const ButtonAdd = styled.button`
         return css`
           border: 1px solid #00953b;
         `;
-
       case "CANCELED":
         return css`
           border: 1px solid #771300;
         `;
-
       default:
         return css`
           background-color: #6e6b6b;
@@ -120,12 +115,10 @@ export const ButtonAdd = styled.button`
           return css`
             color: #00953b;
           `;
-
         case "CANCELED":
           return css`
             color: #771300;
           `;
-
         default:
           return css`
             background-color: #6e6b6b;
@@ -154,12 +147,10 @@ export const CardRemark = styled.div`
         return css`
           border-bottom: 8px solid #00953b;
         `;
-
       case "CANCELED":
         return css`
           border-bottom: 8px solid #771300;
         `;
-
       default:
         return css`
           background-color: #6e6b6b;
@@ -200,12 +191,10 @@ export const IconOpenClose = styled.button`
         return css`
           background-color: #00953b;
         `;
-
       case "CANCELED":
         return css`
           color: #771300;
         `;
-
       default:
         return css`
           color: #6e6b6b;
@@ -232,12 +221,10 @@ export const IconOpenClose = styled.button`
           return css`
             color: #00953b;
           `;
-
         case "CANCELED":
           return css`
             color: #771300;
           `;
-
         default:
           return css`
             color: #6e6b6b;
@@ -260,39 +247,6 @@ export const DivGlobalCard = styled.div`
 `;
 
 export const DivDate = styled.div`
-${(props) => {
-  switch (props.$mode) {
-    case "FINISHED":
-      return css`
-        color: #008585;
-      `;
-    case "IN PROGRESS":
-      return css`
-        color: #00953b;
-      `;
-
-    case "CANCELED":
-      return css`
-        color: #771300;
-      `;
-
-    default:
-      return css`
-        color: #6e6b6b;
-      `;
-  }
-}}
-}
-height:50px;
-width:75%;
-padding-top:0%;
-text-align:left;
-padding-left:3%;
-border-right:2px solid #EFF1F6;
-svg {
-  width:13px;
-  height:13px;
-span {
   ${(props) => {
     switch (props.$mode) {
       case "FINISHED":
@@ -303,67 +257,63 @@ span {
         return css`
           color: #00953b;
         `;
-
       case "CANCELED":
         return css`
           color: #771300;
         `;
-
       default:
         return css`
           color: #6e6b6b;
         `;
     }
   }}
-}
-  font-size:0.82rem;
-}
-p {
-  font-size:0.9rem;
-  color:#000 !important;
-  font-weight:900;
-}
-@media (min-width: 1700px) and (max-width: 2500px) {
-  span {
-    font-size:1rem;
+
+  height:50px;
+  width: 100%;
+  padding-top: 0%;
+  text-align: left;
+  padding-left: 2%;
+  font-size: 0.82rem;
+  svg {
+    width: 13px;
+    height: 13px;
   }
-}
+  span {
+    ${(props) => {
+      switch (props.$mode) {
+        case "FINISHED":
+          return css`
+            color: #008585;
+          `;
+        case "IN PROGRESS":
+          return css`
+            color: #00953b;
+          `;
+        case "CANCELED":
+          return css`
+            color: #771300;
+          `;
+        default:
+          return css`
+            color: #6e6b6b;
+          `;
+      }
+    }}
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 900;
+  }
+  @media (min-width: 1700px) and (max-width: 2500px) {
+    span {
+      font-size: 1rem;
+    }
+  }
 `;
 
 export const DivDateReturn = styled.div`
-${(props) => {
-  switch (props.$mode) {
-    case "FINISHED":
-      return css`
-        color: #008585;
-      `;
-    case "IN PROGRESS":
-      return css`
-        color: #00953b;
-      `;
-
-    case "CANCELED":
-      return css`
-        color: #771300;
-      `;
-
-    default:
-      return css`
-        color: #6e6b6b;
-      `;
-  }
-}}
-}
-height:50px;
-width:100%;
-padding-top:0%;
-text-align:left;
-padding-left:2%;
-svg {
-  width:13px;
-  height:13px;
-}
-span {
   ${(props) => {
     switch (props.$mode) {
       case "FINISHED":
@@ -374,31 +324,61 @@ span {
         return css`
           color: #00953b;
         `;
-
       case "CANCELED":
         return css`
           color: #771300;
         `;
-
       default:
         return css`
           color: #6e6b6b;
         `;
     }
   }}
-}
-  font-size:0.82rem;
-}
-p {
-  font-size:0.9rem;
-  color:#000;
-  font-weight:900;
-}
-@media (min-width: 1700px) and (max-width: 2500px) {
-  span {
-    font-size:1rem;
+
+  height:50px;
+  width: 100%;
+  padding-top: 0%;
+  text-align: left;
+  padding-left: 2%;
+  svg {
+    width: 13px;
+    height: 13px;
   }
-}
+  span {
+    ${(props) => {
+      switch (props.$mode) {
+        case "FINISHED":
+          return css`
+            color: #008585;
+          `;
+        case "IN PROGRESS":
+          return css`
+            color: #00953b;
+          `;
+        case "CANCELED":
+          return css`
+            color: #771300;
+          `;
+        default:
+          return css`
+            color: #6e6b6b;
+          `;
+      }
+    }}
+  }
+  font-size: 0.82rem;
+
+  p {
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 900;
+  }
+
+  @media (min-width: 1700px) and (max-width: 2500px) {
+    span {
+      font-size: 1rem;
+    }
+  }
 `;
 
 // PHOTO //
@@ -417,34 +397,31 @@ export const DivPhotoII = styled.div`
 `;
 
 export const Photo = styled.div`
-${(props) => {
-  switch (props.$mode) {
-    case "FINISHED":
-      return css`
-        border: 2px solid #008585;
-      `;
-    case "IN PROGRESS":
-      return css`
-        border: 2px solid #00953b;
-      `;
-
-    case "CANCELED":
-      return css`
-        border: 2px solid #771300;
-      `;
-
-    default:
-      return css`
-        color: #6e6b6b;
-      `;
-  }
-}}
-}
+  ${(props) => {
+    switch (props.$mode) {
+      case "FINISHED":
+        return css`
+          border: 2px solid #008585;
+        `;
+      case "IN PROGRESS":
+        return css`
+          border: 2px solid #00953b;
+        `;
+      case "CANCELED":
+        return css`
+          border: 2px solid #771300;
+        `;
+      default:
+        return css`
+          color: #6e6b6b;
+        `;
+    }
+  }}
   width: 40px;
   height: 40px;
   display: flex;
-  font-size:0.8rem;
-  font-weight:600;
+  font-size: 0.8rem;
+  font-weight: 600;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -525,16 +502,13 @@ export const NoteText = styled.div`
       width: 10px;
       height: 10px;
     }
-
     &::-webkit-scrollbar-track {
       border-radius: 10px;
     }
-
     &::-webkit-scrollbar-track-piece {
       background-color: transparent;
       margin-top: 5px;
     }
-
     &::-webkit-scrollbar-thumb {
       height: 80%;
       background-color: #dfdfdf;
@@ -558,4 +532,40 @@ export const IconTag = styled.div`
   padding-left: 3%;
   padding-bottom: 10%;
   cursor: pointer;
+`;
+export const DivTitle = styled.div`
+  width: 122%;
+  position: relative;
+  padding-bottom: 2%;
+
+  span {
+    position: relative;
+    display: block;
+    opacity: 0.8;
+    padding-left: 0%;
+    font-weight: 600;
+    font-size: 0.84rem;
+    width: 100%;
+    height: 100%;
+
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+      background-color: transparent;
+      margin-top: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      height: 80%;
+      background-color: #dfdfdf;
+    }
+  }
 `;

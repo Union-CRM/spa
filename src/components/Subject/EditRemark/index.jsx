@@ -3,7 +3,7 @@ import { FaRegCalendarAlt, FaChevronCircleDown } from "react-icons/fa";
 import IconSystem from "../../../assets/IconSystem";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
-
+import { useFetchRemark } from "../../../hook/useFetchRemark";
 import {
   ContainerRemark,
   ContainerCards,
@@ -22,17 +22,24 @@ import {
   TextArea,
   ButtonCreateRemark,
   ButtonAdd,
+  DivTitle,
 } from "./styles";
 
 const EditRemark = (props) => {
   // Subject status
-
-  const { subject: subjectsList, setSubject: setSubjectList } =
-    useSubjectContext();
-
+  const { subject: subjectsList } = useSubjectContext();
+  const { remarkEdit } = useRemarkContext();
   const { id } = useSubjectContext();
-
   const [status, setStatus] = useState();
+  const { loadRemarkList } = useRemarkContext();
+  const [title, setTitle] = useState();
+  const [date, setDate] = useState();
+  const [dateReturn, setDateReturn] = useState();
+  const [noteText, setNoteText] = useState();
+  const { setToggleState } = useSubjectContext();
+  const [setActiveTab] = useState(0);
+  const [flag, setFlag] = useState(false);
+  const { updateRemark } = useFetchRemark();
 
   useEffect(() => {
     if (props.title === "Edit Remark") {
@@ -42,49 +49,45 @@ const EditRemark = (props) => {
   }, [id]);
 
   // Tabs
-  const { toggleState, setToggleState } = useSubjectContext();
 
-  const [activeTab, setActiveTab] = useState(0);
-
-  const toggleTab = (index) => {
-    setToggleState(index);
-    setActiveTab(index);
-    setActiveContent(index);
-  };
-  const [activeContent, setActiveContent] = useState(0);
+  const [setActiveContent] = useState(0);
 
   // Remark //
 
-  const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
-
-  const { idRemark, setIdRemark } = useRemarkContext();
-
-  const [date, setDate] = useState();
-  const [dateReturn, setDateReturn] = useState();
-  const [noteText, setNoteText] = useState();
-
   useEffect(() => {
-    if (props.title === "Edit Remark") {
-      const remark = remarkList.filter(
-        (item) => item.idRemark === props.idRemark
-      )[0];
-      setDate(remark.date);
-      setDateReturn(remark.dateReturn);
-      setNoteText(remark.noteText);
+    if (remarkEdit.date) {
+      setDate(remarkEdit.date.split("T")[0]);
+      setDateReturn(remarkEdit.date_return.split("T")[0]);
+      setTitle(remarkEdit.remark_name);
+      setNoteText(remarkEdit.text);
     }
-  }, [idRemark]);
+  }, [remarkEdit]);
 
   const editRemark = () => {
     const newRemark = {
-      id: id,
-      date: date,
-      dateReturn: dateReturn,
-      noteText: noteText,
+      remark_name: title,
+      text: noteText,
+      date: date + "T10:00:00.000Z",
+      date_return: dateReturn + "T10:00:00.000Z",
+      subject_id: remarkEdit.subject_id,
+      client_id: remarkEdit.client_id,
+      release_id: remarkEdit.release_id,
+      user_id: remarkEdit.user_id,
+      status_id: 21,
     };
-    if (date && dateReturn && noteText) {
-      const noId = remarkList.filter((item) => item.idRemark !== idRemark);
-      setRemarkList([...noId, newRemark]);
+    if (
+      newRemark.remark_name &&
+      newRemark.date &&
+      newRemark.date_return &&
+      newRemark.text
+    ) {
+      updateRemark(newRemark, remarkEdit.id).then(loadRemarkList());
+      loadRemarkList();
       setToggleState(3);
+      setActiveTab(3);
+      setActiveContent(3);
+    } else {
+      setFlag(true);
     }
   };
 
@@ -101,29 +104,32 @@ const EditRemark = (props) => {
           <DivGlobalCard>
             <DivDate $mode={status}>
               <FaRegCalendarAlt $mode={status} />
-              <span> Date </span>
+              <span> Initial Date </span>
               <p onChange={(event) => setDate(event.target.value)}>{date}</p>
             </DivDate>
 
             <DivDateReturn $mode={status}>
               <FaRegCalendarAlt $mode={status} />
-              <span> Date Return </span>
+              <span> Final Date </span>
               <Input
+                widthInput={"80%"}
                 type="date"
+                required={flag && !date ? true : false}
+                value={dateReturn}
                 onChange={(event) => setDateReturn(event.target.value)}
               />
             </DivDateReturn>
 
             <DivPhoto>
               <DivPhotoII>
-                <Photo $mode={status}>GA</Photo>
+                <Photo $mode={status}>{Split(remarkEdit.user_name)} </Photo>
               </DivPhotoII>
             </DivPhoto>
 
             <DivDadosRemark>
               <NameEmail>
-                Gilberto Anderson Teste
-                <span>2534659</span>
+                {SplitName(remarkEdit.user_name)}
+                <span>{remarkEdit.user_id}</span>
                 <ButtonCreateRemark onClick={handleSubmit}>
                   <ButtonAdd
                     $mode={status}
@@ -142,11 +148,25 @@ const EditRemark = (props) => {
           </DivGlobalCard>
 
           <ContainerComplete>
+            <DivTitle $mode={status}>
+              <span>
+                Title
+                <Input
+                  widthInput={"80%"}
+                  value={title}
+                  required={flag && !title ? true : false}
+                  onChange={(event) => setTitle(event.target.value)}
+                />{" "}
+              </span>
+            </DivTitle>
+
             <NoteText>
               Note Text:
-              <TextArea onChange={(event) => setNoteText(event.target.value)}>
-                {noteText}
-              </TextArea>
+              <TextArea
+                onChange={(event) => setNoteText(event.target.value)}
+                value={noteText}
+                required={flag && !noteText ? true : false}
+              />
             </NoteText>
           </ContainerComplete>
         </CardRemark>
@@ -156,3 +176,22 @@ const EditRemark = (props) => {
 };
 
 export default EditRemark;
+function Split(n) {
+  const user = n ? n : "";
+  var userSplit = user.split(" ");
+  var user2 =
+    userSplit[0].split("")[0] +
+    " " +
+    userSplit[userSplit.length - 1].split("")[0] +
+    "";
+
+  return user2.toUpperCase();
+}
+
+function SplitName(n) {
+  const user = n ? n : "";
+  var userSplit = user.split(" ");
+  var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
+
+  return user1;
+}

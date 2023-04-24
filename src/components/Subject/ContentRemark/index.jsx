@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { FaRegCalendarAlt, FaChevronCircleDown } from "react-icons/fa";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
-
+import { ReactComponent as Timer } from "../../../assets/svg/Timer.svg";
+import { ReactComponent as Calendar } from "../../../assets/svg/Calendar.svg";
+import { ReactComponent as RowDown } from "../../../assets/svg/RowDown.svg";
 import {
   ContainerRemark,
   ContainerCards,
@@ -19,21 +20,36 @@ import {
   Circle,
   DivGlobalCard,
   ButtonAdd,
+  DivNoRemark,
 } from "./styles";
 
 const ContentRemarks = (props) => {
   // Tabs //
 
   const { toggleState, setToggleState } = useSubjectContext();
-
   const { setModalDetails } = useSubjectContext();
-
-  const { subject: subjectsList, setSubject: setSubjectList } =
-    useSubjectContext();
-
+  const { subject: subjectsList } = useSubjectContext();
   const { id } = useSubjectContext();
-
   const [status, setStatus] = useState();
+
+  //Remark Context //
+
+  const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
+  const { setModalRemark } = useRemarkContext();
+  const { remarkEdit, setRemarkEdit } = useRemarkContext();
+  const [date, setDate] = useState();
+  const [dateReturn, setDateReturn] = useState();
+  const [noteText, setNoteText] = useState();
+  const [remark, setRemark] = useState([]);
+
+  const [activeTab, setActiveTab] = useState(1);
+  const [activeContent, setActiveContent] = useState(0);
+
+  useEffect(() => {
+    if (remarkList) {
+      setRemark(remarkList.filter((r) => r.subject_id === props.id));
+    }
+  }, [remarkList]);
 
   useEffect(() => {
     if (props.title === "Remark") {
@@ -41,8 +57,6 @@ const ContentRemarks = (props) => {
       setStatus(subject.status);
     }
   }, [id]);
-
-  const [activeTab, setActiveTab] = useState(1);
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -57,38 +71,23 @@ const ContentRemarks = (props) => {
     setModalDetails(false);
   };
 
-  const handleClick = () => {
+  const handleClick = (remark_id) => {
     setToggleState(3);
     props.setIdRemark(remark.idRemark);
+    setRemarkEdit(remark.filter((r) => r.id === remark_id)[0]);
   };
-  const [activeContent, setActiveContent] = useState(0);
 
-  //Remark Context //
+  function Split(n) {
+    const user = n ? n : "";
+    var userSplit = user.split(" ");
+    var user2 =
+      userSplit[0].split("")[0] +
+      " " +
+      userSplit[userSplit.length - 1].split("")[0] +
+      "";
 
-  const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
-
-  const { setModalRemark } = useRemarkContext();
-
-  const { idRemark, setIdRemark } = useRemarkContext();
-
-  const [date, setDate] = useState();
-  const [dateReturn, setDateReturn] = useState();
-  const [noteText, setNoteText] = useState();
-
-  useEffect(() => {
-    if (props.title === "Remark") {
-      const remark = remarkList.filter(
-        (item) => item.idRemark === props.idRemark
-      )[0];
-      setDate(remark.date);
-      setDateReturn(remark.dateReturn);
-      setNoteText(remark.noteText);
-    }
-  }, [idRemark]);
-
-  const remark = remarkList.filter(
-    (item) => item.idRemark === props.idRemark
-  )[0];
+    return user2.toUpperCase();
+  }
 
   return (
     <ContainerRemark>
@@ -109,46 +108,98 @@ const ContentRemarks = (props) => {
         )}
       </ButtonCreateRemark>
 
-      <ContainerCards>
-        <CardRemark $mode={status}>
-          <DivGlobalCard>
-            <DivDate $mode={status}>
-              <FaRegCalendarAlt $mode={status} />
-              <span> Date </span>
-              <p onChange={(event) => setDate(event.target.value)}>{date}</p>
-            </DivDate>
+      {remark && remark.length === 0 ? (
+        <DivNoRemark>
+          <span>There are no existing remarks.</span>
+        </DivNoRemark>
+      ) : (
+        <ContainerCards>
+          {remark.map((r) => (
+            <CardRemark $mode={status}>
+              <DivGlobalCard>
+                <DivDate $mode={status}>
+                  <Calendar
+                    style={{
+                      fill:
+                        status === "IN PROGRESS"
+                          ? "#00953B"
+                          : status === "FINISHED"
+                          ? "#008585"
+                          : status === "CANCELED"
+                          ? "#771300"
+                          : "",
+                    }}
+                  />
+                  <span> Initial Date </span>
+                  <p onChange={(event) => setDate(event.target.value)}>
+                    {r.date.split("T")[0]}
+                  </p>
+                </DivDate>
 
-            <DivDateReturn $mode={status}>
-              <FaRegCalendarAlt $mode={status} />
-              <span> Date Return </span>
-              <p onChange={(event) => setDateReturn(event.target.value)}>
-                {dateReturn}
-              </p>
-            </DivDateReturn>
+                <DivDateReturn $mode={status}>
+                  <Calendar
+                    style={{
+                      fill:
+                        status === "IN PROGRESS"
+                          ? "#00953B"
+                          : status === "FINISHED"
+                          ? "#008585"
+                          : status === "CANCELED"
+                          ? "#771300"
+                          : "",
+                    }}
+                  />
+                  <span> Final Date</span>
+                  <p onChange={(event) => setDateReturn(event.target.value)}>
+                    {r.date_return.split("T")[0]}
+                  </p>
+                </DivDateReturn>
 
-            <DivPhoto>
-              <DivPhotoII>
-                <Photo $mode={status}>GA</Photo>
-              </DivPhotoII>
-            </DivPhoto>
+                <DivPhoto>
+                  <DivPhotoII>
+                    <Photo $mode={status}>{Split(r.user_name)}</Photo>
+                  </DivPhotoII>
+                </DivPhoto>
 
-            <DivDadosRemark>
-              <NameEmail>
-                Gilberto Anderson Teste
-                <span>2534659</span>
-              </NameEmail>
-            </DivDadosRemark>
-          </DivGlobalCard>
+                <DivDadosRemark>
+                  <NameEmail>
+                    {SplitName(r.user_name)}
+                    <span>{r.user_id}</span>
+                  </NameEmail>
+                </DivDadosRemark>
+              </DivGlobalCard>
 
-          <IconOpenClose $mode={status}>
-            <Circle>
-              <FaChevronCircleDown onClick={handleClick} />
-            </Circle>
-          </IconOpenClose>
-        </CardRemark>
-      </ContainerCards>
+              <IconOpenClose $mode={status}>
+                <Circle>
+                  <RowDown
+                    onClick={() => handleClick(r.id)}
+                    style={{
+                      fill:
+                        status === "IN PROGRESS"
+                          ? "#00953B"
+                          : status === "FINISHED"
+                          ? "#008585"
+                          : status === "CANCELED"
+                          ? "#771300"
+                          : "",
+                    }}
+                  />
+                </Circle>
+              </IconOpenClose>
+            </CardRemark>
+          ))}
+        </ContainerCards>
+      )}
     </ContainerRemark>
   );
 };
 
 export default ContentRemarks;
+
+function SplitName(n) {
+  const user = n ? n : "";
+  var userSplit = user.split(" ");
+  var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
+
+  return user1;
+}

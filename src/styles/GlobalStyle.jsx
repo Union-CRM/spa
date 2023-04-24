@@ -65,5 +65,6 @@ body{
 }
 
 
+
 `;
 export default GlobalStyle;

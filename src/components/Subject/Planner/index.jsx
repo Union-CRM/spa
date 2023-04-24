@@ -6,11 +6,11 @@ import {
 } from "react-icons/fa";
 import IconSystem from "../../../assets/IconSystem";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
-
+import { usePlannerContext } from "../../../hook/usePlannerContent";
 import {
-  ContainerRemark,
+  ContainerPlanner,
   ContainerCards,
-  CardRemark,
+  CardPlanner,
   DivDate,
   DivTime,
   Span,
@@ -30,35 +30,44 @@ import {
 } from "./styles";
 
 const Planner = (props) => {
-  // subject status
-
+  // Subject status //
   const { subject: subjectsList, setSubject: setSubjectList } =
     useSubjectContext();
 
   const { id } = useSubjectContext();
-
   const [status, setStatus] = useState();
+  const { plannerEdit } = usePlannerContext();
+  const [planner, setPlanner] = useState(entityPlanner);
+  const [guests, setGuests] = useState("");
+  const [userSplit, setUserSplit] = useState();
+  const [time, setTime] = useState(["", ""]);
 
   useEffect(() => {
-    if (props.title === "DetalhesPlanner") {
+    if (props.title === "More Details Planner") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
       setStatus(subject.status);
     }
   }, [id]);
 
-  const statusPlanner = {
-    SCHEDULED: "Scheduled",
-    FINISHED: "Finished",
-    CANCELED: "Canceled",
-  };
+  useEffect(() => {
+    if (plannerEdit) {
+      setPlanner(plannerEdit);
+      setUserSplit(plannerEdit.user.split(" ").slice(0, 2).join(" "));
+      setTime(plannerEdit.date.split(" ")[1].split(":"));
+      setGuests(
+        plannerEdit.client +
+          "; " +
+          (plannerEdit.guest
+            ? plannerEdit.guest.map((g) => {
+                return g.client_name + "; ";
+              })
+            : "")
+      );
+    }
+  }, [plannerEdit]);
+  console.log(plannerEdit);
 
-  const [statusPlannerYellow] = ["Scheduled"];
-
-  const [statusPlannerTwo] = ["Finished"];
-
-  const [statusPlannerThree] = ["Canceled"];
-
-  // Tabs
+  // Tabs //
   const { toggleState, setToggleState } = useSubjectContext();
 
   const [activeTab, setActiveTab] = useState(0);
@@ -71,78 +80,93 @@ const Planner = (props) => {
   const [activeContent, setActiveContent] = useState(0);
 
   return (
-    <ContainerRemark>
+    <ContainerPlanner>
       <ContainerCards>
-        <CardRemark $mode={statusPlannerTwo}>
+        <CardPlanner $mode={planner.status}>
           <DivGlobalCard>
-            <DivDate $mode={statusPlannerTwo}>
-              <FaRegCalendarAlt $mode={statusPlannerTwo} />
+            <DivDate $mode={planner.status}>
+              <FaRegCalendarAlt $mode={planner.status} />
               <span> Date </span>
-              <p>03-03-23</p>
+              <p>{new Date(planner.date).toISOString().substring(0, 10)}</p>
             </DivDate>
 
-            <DivTime $mode={statusPlannerTwo}>
-              <FaRegClock color={"#008585"} />
-              <Span $mode={statusPlannerTwo}> Time </Span>
-              <p>16:00 - 17:00</p>
+            <DivTime $mode={planner.status}>
+              <FaRegClock $mode={planner.status} />
+              <span> Time </span>
+              <p>{`${time[0]}:${time[1]} - ${planner.duration}`}</p>
             </DivTime>
 
             <DivPhoto>
               <DivPhotoII>
-                <Photo $mode={statusPlannerTwo}>GA</Photo>
+                <Photo $mode={planner.status}>{Split(planner.user)}</Photo>
               </DivPhotoII>
             </DivPhoto>
 
             <DivDadosRemark>
               <NameEmail>
-                Gilberto Anderson Teste
-                <span>2534659</span>
+                {SplitName(planner.user)}
+
+                <span>{planner.user_id}</span>
               </NameEmail>
             </DivDadosRemark>
           </DivGlobalCard>
 
           <ContainerComplete>
             <Guest>
-              Guests <span>Flavio Martins, Gedson Souza, Eneiane Lopes</span>
+              {guests && (
+                <>
+                  Guests <span>{guests}</span>{" "}
+                </>
+              )}
             </Guest>
             <NoteText>
               Note Text:
-              <span>
-                Identificar as necessidades do cliente e compreender seus
-                objetivos; Apresentar a expertise da consultoria de TI em
-                serviços financeiros; Discutir as soluções personalizadas que
-                podem ser oferecidas para as necessidades específicas da
-                instituição financeira; Identificar as necessidades do cliente e
-                compreender seus objetivos; Apresentar a expertise da
-                consultoria de TI em serviços financeiros; Discutir as soluções
-                personalizadas que podem ser oferecidas para as necessidades
-                específicas da instituição financeira; Identificar as
-                necessidades do cliente e compreender seus objetivos; Apresentar
-                a expertise da consultoria de TI em serviços financeiros;
-                Discutir as soluções personalizadas que podem ser oferecidas
-                para as necessidades específicas da instituição financeira;
-                Identificar as necessidades do cliente e compreender seus
-                objetivos; Apresentar a expertise da consultoria de TI em
-                serviços financeiros; Discutir as soluções personalizadas que
-                podem ser oferecidas para as necessidades específicas da
-                instituição financeira; Identificar as necessidades do cliente e
-                compreender seus objetivos; Apresentar a expertise da
-                consultoria de TI em serviços financeiros; Discutir as soluções
-                personalizadas que podem ser oferecidas para as necessidades
-                específicas da instituição financeira;
-              </span>
+              <span>{planner.remark_text}</span>
             </NoteText>
           </ContainerComplete>
 
-          <IconOpenClose $mode={statusPlannerTwo}>
-            <Circle>
-              <FaChevronCircleDown onClick={() => toggleTab(2)} />
+          <IconOpenClose $mode={planner.status}>
+            <Circle $mode={planner.status}>
+              <FaChevronCircleDown
+                $mode={planner.status}
+                onClick={() => toggleTab(2)}
+              />
             </Circle>
           </IconOpenClose>
-        </CardRemark>
+        </CardPlanner>
       </ContainerCards>
-    </ContainerRemark>
+    </ContainerPlanner>
   );
 };
 
 export default Planner;
+
+const entityPlanner = {
+  status: "",
+  date: new Date(),
+  duration: "",
+  guest: [],
+  user: null,
+  user_id: null,
+  remark_text: "",
+};
+
+function Split(n) {
+  const user = n ? n : "";
+  var userSplit = user.split(" ");
+  var user2 =
+    userSplit[0].split("")[0] +
+    " " +
+    userSplit[userSplit.length - 1].split("")[0] +
+    "";
+
+  return user2.toUpperCase();
+}
+
+function SplitName(n) {
+  const user = n ? n : "";
+  var userSplit = user.split(" ");
+  var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
+
+  return user1;
+}

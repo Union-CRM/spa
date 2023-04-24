@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  FaRegCalendarAlt,
-  FaRegClock,
-  FaChevronCircleDown,
-} from "react-icons/fa";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { usePlannerContext } from "../../../hook/usePlannerContent";
-
+import { ReactComponent as Timer } from "../../../assets/svg/Timer.svg";
+import { ReactComponent as Calendar } from "../../../assets/svg/Calendar.svg";
+import { ReactComponent as RowDown } from "../../../assets/svg/RowDown.svg";
 import {
   DivContainerAll,
   ContainerPlanner,
@@ -27,24 +24,33 @@ import {
   Circle,
   Span,
   DivGlobalCard,
+  DivNoPlanner,
 } from "./styles";
 
-
-
-
 const ContentsPlanner = (props) => {
-  const { title, setModal } = props;
+  function Split(n) {
+    const user = n ? n : "";
+    var userSplit = user.split(" ");
+    var user2 =
+      userSplit[0].split("")[0] +
+      " " +
+      userSplit[userSplit.length - 1].split("")[0] +
+      "";
 
-  const { subject: subjectsList, setSubject: setSubjectList } =
-    useSubjectContext();
+    return user2.toUpperCase();
+  }
+
+  const { subject: subjectsList } = useSubjectContext();
 
   const { id } = useSubjectContext();
 
-  const { setId, isEdit, setEdit } = useSubjectContext();
+  // const { setId, isEdit, setEdit } = useSubjectContext();
 
-  const { setModalDetails, setModalEdit } = useSubjectContext();
+  const { setModalDetails } = useSubjectContext();
 
-  const { setModalPlanner, modalPlanner } = usePlannerContext();
+  const { setModalPlanner } = usePlannerContext();
+
+  const { planner, setPlannerEdit } = usePlannerContext();
 
   const [status, setStatus] = useState();
 
@@ -55,29 +61,33 @@ const ContentsPlanner = (props) => {
     }
   }, [id]);
 
+  const [plannerSubject, setPlannerSubject] = useState(
+    planner.filter((p) => p.subject_id === props.id)
+  );
+
+  useEffect(() => {
+    setPlannerSubject(planner.filter((p) => p.subject_id === props.id));
+  }, [planner]);
+  /*
   const statusPlanner = {
-    SCHEDULED: "Scheduled",
-    FINISHED: "Finished",
-    CANCELED: "Canceled",
+    SCHEDULED: "SCHEDULED",
+    FINISHED: "DONE",
+    CANCELED: "CANCELED",
   };
 
-  const [statusPlannerYellow] = ["Scheduled"];
+  const [statusPlannerYellow] = ["SCHEDULED"];
 
-  const [statusPlannerTwo] = ["Finished"];
+  const [statusPlannerTwo] = ["DONE"];
 
-  const [statusPlannerThree] = ["Canceled"];
-
+  const [statusPlannerThree] = ["CANCELED"];
+*/
   // Tabs
-  const { toggleState, setToggleState } = useSubjectContext();
+  const { setToggleState } = useSubjectContext();
 
-  const [activeTab, setActiveTab] = useState(0);
-
-  const toggleTab = (index) => {
+  const toggleTab = (index, planner_id) => {
     setToggleState(index);
-    setActiveTab(index);
-    setActiveContent(index);
+    setPlannerEdit(planner.filter((p) => p.id === planner_id)[0]);
   };
-  const [activeContent, setActiveContent] = useState(0);
 
   // Planner Create //
 
@@ -106,130 +116,105 @@ const ContentsPlanner = (props) => {
           )}
         </ButtonCreatePlanner>
 
-        <ContainerCards>
+        {plannerSubject && plannerSubject.length === 0 ? (
+          <DivNoPlanner>
+            <span>There are no existing planners.</span>
+          </DivNoPlanner>
+        ) : (
+          <ContainerCards $mode={plannerSubject.length}>
+            {plannerSubject.map((p) => {
+              const time = p.date.split(" ")[1].split(":");
 
-        <CardPlanner $mode={statusPlannerYellow}>
-            <DivGlobalCard>
-              <DivDate>
-                <FaRegCalendarAlt color={"#000"} />
-                <Span $mode={statusPlannerYellow}> Date </Span>
-                <p>03-03-23</p>
-              </DivDate>
+              return (
+                <CardPlanner
+                  $mode={p.status}
+                  onClick={() => toggleTab(4, p.id)}
+                >
+                  <DivGlobalCard>
+                    <DivDate>
+                      <Calendar
+                        style={{
+                          fill:
+                            p.status === "SCHEDULED"
+                              ? "#000"
+                              : p.status === "DONE"
+                              ? "#008585"
+                              : p.status === "CANCELED"
+                              ? "#771300"
+                              : "",
+                        }}
+                      />
+                      <Span $mode={p.status}> Date </Span>
+                      <p>{new Date(p.date).toISOString().substring(0, 10)}</p>
+                    </DivDate>
 
-              <DivTime>
-                <FaRegClock color={"#000"} />
-                <Span $mode={statusPlannerYellow}> Time </Span>
-                <p>16:00 - 17:00</p>
-              </DivTime>
+                    <DivTime>
+                      <Timer
+                        style={{
+                          fill:
+                            p.status === "SCHEDULED"
+                              ? "#000"
+                              : p.status === "DONE"
+                              ? "#008585"
+                              : p.status === "CANCELED"
+                              ? "#771300"
+                              : "",
+                        }}
+                      />
+                      <Span $mode={p.status}> Time </Span>
+                      <p>{`${time[0]}:${time[1]} - ${p.duration}`}</p>
+                    </DivTime>
 
-              <DivPhoto>
-                <DivPhotoII>
-                  <Photo $mode={statusPlannerYellow}>GA</Photo>
-                </DivPhotoII>
-              </DivPhoto>
+                    <DivPhoto>
+                      <DivPhotoII>
+                        <Photo $mode={p.status}>{Split(p.user)}</Photo>
+                      </DivPhotoII>
+                    </DivPhoto>
 
-              <DivDadosPlanner>
-                <NameEmail>
-                  Gilberto Anderson
-                  <span>2534659</span>
-                  <DivStatusPlanner>
-                    <StatusPlanner $mode={statusPlannerYellow}>
-                      <span>{statusPlannerYellow}</span>
-                    </StatusPlanner>
-                  </DivStatusPlanner>
-                </NameEmail>
-              </DivDadosPlanner>
-            </DivGlobalCard>
+                    <DivDadosPlanner>
+                      <NameEmail>
+                        {SplitName(p.user)}
+                        <span>{p.user_id}</span>
+                        <DivStatusPlanner>
+                          <StatusPlanner $mode={p.status}>
+                            <span>{p.status}</span>
+                          </StatusPlanner>
+                        </DivStatusPlanner>
+                      </NameEmail>
+                    </DivDadosPlanner>
+                  </DivGlobalCard>
 
-            <IconOpenClose $modes={statusPlannerYellow}>
-              <Circle $mode={statusPlannerYellow}>
-                <FaChevronCircleDown onClick={() => toggleTab(4)} />
-              </Circle>
-            </IconOpenClose>
-          </CardPlanner>
-
-          <CardPlanner $mode={statusPlannerTwo}>
-            <DivGlobalCard>
-              <DivDate>
-                <FaRegCalendarAlt color={"#008585"} />
-                <Span $mode={statusPlannerTwo}> Date </Span>
-                <p>03-03-23</p>
-              </DivDate>
-
-              <DivTime>
-                <FaRegClock color={"#008585"} />
-                <Span $mode={statusPlannerTwo}> Time </Span>
-                <p>16:00 - 17:00</p>
-              </DivTime>
-
-              <DivPhoto>
-                <DivPhotoII>
-                  <Photo $mode={statusPlannerTwo}>GA</Photo>
-                </DivPhotoII>
-              </DivPhoto>
-
-              <DivDadosPlanner>
-                <NameEmail>
-                  Gilberto Anderson
-                  <span>2534659</span>
-                  <DivStatusPlanner>
-                    <StatusPlanner $mode={statusPlannerTwo}>
-                      <span>{statusPlannerTwo}</span>
-                    </StatusPlanner>
-                  </DivStatusPlanner>
-                </NameEmail>
-              </DivDadosPlanner>
-            </DivGlobalCard>
-
-            <IconOpenClose $modes={statusPlannerTwo}>
-              <Circle $mode={statusPlannerTwo}>
-                <FaChevronCircleDown onClick={() => toggleTab(4)} />
-              </Circle>
-            </IconOpenClose>
-          </CardPlanner>
-
-          <CardPlanner $mode={statusPlannerThree}>
-            <DivGlobalCard>
-              <DivDate>
-                <FaRegCalendarAlt color={"#BB1E00"} />
-                <Span $mode={statusPlannerThree}> Date </Span>
-                <p>03-03-23</p>
-              </DivDate>
-
-              <DivTime>
-                <FaRegClock color={"#BB1E00"} />
-                <Span $mode={statusPlannerThree}> Time </Span>
-                <p>16:00 - 17:00</p>
-              </DivTime>
-
-              <DivPhoto>
-                <DivPhotoII>
-                  <Photo $mode={statusPlannerThree}>GA</Photo>
-                </DivPhotoII>
-              </DivPhoto>
-
-              <DivDadosPlanner>
-                <NameEmail>
-                  Gilberto Anderson
-                  <span>2534659</span>
-                  <DivStatusPlanner>
-                    <StatusPlanner $mode={statusPlannerThree}>
-                      <span>{statusPlannerThree}</span>
-                    </StatusPlanner>
-                  </DivStatusPlanner>
-                </NameEmail>
-              </DivDadosPlanner>
-            </DivGlobalCard>
-
-            <IconOpenClose $modes={statusPlannerThree}>
-              <Circle $mode={statusPlannerThree}>
-                <FaChevronCircleDown onClick={() => toggleTab(4)} />
-              </Circle>
-            </IconOpenClose>
-          </CardPlanner>
-        </ContainerCards>
+                  <IconOpenClose $mode={p.status}>
+                    <Circle $mode={p.status}>
+                      <RowDown
+                        style={{
+                          fill:
+                            p.status === "SCHEDULED"
+                              ? "none"
+                              : p.status === "DONE"
+                              ? "#008585"
+                              : p.status === "CANCELED"
+                              ? "#771300"
+                              : "",
+                        }}
+                      />
+                    </Circle>
+                  </IconOpenClose>
+                </CardPlanner>
+              );
+            })}
+          </ContainerCards>
+        )}
       </ContainerPlanner>
     </DivContainerAll>
   );
 };
 export default ContentsPlanner;
+
+function SplitName(n) {
+  const user = n ? n : "";
+  var userSplit = user.split(" ");
+  var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
+
+  return user1;
+}

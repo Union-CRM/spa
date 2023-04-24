@@ -85,6 +85,7 @@ export const Header = styled.div`
   grid-template-rows: 20% 80%;
   grid-template-columns: 1fr;
   position: relative;
+  cursor: pointer;
 `;
 
 // Status Subject //
@@ -113,10 +114,9 @@ export const Status = styled.div`
   height: 15px;
   border-radius: 8px;
   margin-top: 10px;
-  padding-bottom:2px;
+  padding-bottom: 2px;
   font-size: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
 `;
 
 export const LabelStatus = styled.div`
@@ -124,8 +124,8 @@ export const LabelStatus = styled.div`
   font-size: 0.8rem;
   margin-left: 0px;
   margin-top: 1px;
-  padding-left:5px;
-  padding-right:5px;
+  padding-left: 5px;
+  padding-right: 5px;
   text-transform: lowercase;
   span:first-letter {
     text-transform: uppercase;
@@ -142,6 +142,7 @@ export const DivDadosCard = styled.div`
   grid-row: 2;
   height: fit-content;
   align-items: center;
+  cursor: pointer;
 `;
 
 // Div Subject and CreatedBy {Name Manager} & Title Subject  //
@@ -204,6 +205,7 @@ export const DivInfo = styled.div`
   grid-template-rows: 50% 50%;
   height: 100%;
   z-index: 0;
+  cursor: pointer;
 `;
 
 export const DivReleaseAndBusiness = styled.div`

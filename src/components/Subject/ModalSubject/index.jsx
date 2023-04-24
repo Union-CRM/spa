@@ -19,39 +19,41 @@ import {
   TabButton,
   Content,
 } from "./styles";
-import ContentRemarks from "../ContentRemark";
-import ContentsPlanner from "../ContentPlanner";
 import ContentDetailsCard from "../ContentDetailsCard";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
-import { useRemarkContext } from "../../../hook/useRemarkContent";
 
+// Remark //
 import EditRemark from "../../Subject/EditRemark";
 import Remark from "../../Subject/Remark";
+import ContentRemarks from "../ContentRemark";
+import { useRemarkContext } from "../../../hook/useRemarkContent";
+
+// Planner //
+import ContentsPlanner from "../ContentPlanner";
 import Planner from "../../Subject/Planner";
+import { usePlannerContext } from "../../../hook/usePlannerContext";
 
 const ModalSubject = (props) => {
-  // Remark
-
   const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
-
   const { idRemark, setIdRemark } = useRemarkContext();
-
   const { setModal, id } = props;
-
-  const {setStatusId, statusId} = useState();
-
+  const { setStatusId, statusId } = useState();
   const { setId, isEdit, setEdit } = useSubjectContext();
-
   const { setModalDetails, setModalEdit } = useSubjectContext();
 
-  // UseEffect Details
-  const { subject: subjectsList, loadData } =useSubjectContext();
-
+  // UseEffect Details //
+  const { subject: subjectsList, loadData } = useSubjectContext();
   const subject = subjectsList.filter((item) => item.id === props.id)[0];
-
   const [statusCard, setStatus] = useState();
   const [subjectTitle, setSubjectTitle] = useState();
   const [manager, setManager] = useState();
+
+  // planner details //
+
+  const { planner } = usePlannerContext();
+  const [plannerSubject] = useState(
+    planner.filter((p) => p.subject_id === props.id)
+  );
 
   useEffect(() => {
     if (props.title === "Subject Details") {
@@ -59,42 +61,37 @@ const ModalSubject = (props) => {
       console.log(subject);
       setStatus(subject.status);
       setSubjectTitle(subject.subject_title);
-      setManager(subject.manager);      
+      setManager(subject.manager);
     }
   }, [id]);
 
-  //Close page
-  const closeModal = () => {
-    setModal(false);
-    setToggleState(0);
-    setActiveTab(0);
-  };
-
-  // Tabs
+  // Tabs //
   const { toggleState, setToggleState } = useSubjectContext();
-
   const { activeTab, setActiveTab } = useSubjectContext();
-
   const toggleTab = (index) => {
     setToggleState(index);
     setActiveTab(index);
     setActiveContent(index);
   };
 
-  //Content Tabs
-
   const [activeContent, setActiveContent] = useState(0);
 
-  //Edit
+  // Edit //
   const EditModal = () => {
     setModalDetails(false);
     setModalEdit(true);
-    
+  };
+
+  // Close page //
+  const closeModal = () => {
+    setModal(false);
+    setToggleState(0);
+    setActiveTab(0);
   };
 
   return (
     <ContainerFather>
-      <Container $mode= {subject.status}>
+      <Container $mode={subject.status}>
         <BodyAll>
           <ClickButton>
             <Close onClick={closeModal}>X</Close>
@@ -109,43 +106,43 @@ const ModalSubject = (props) => {
           </DivStatus>
 
           <DivTitle>
-            <TitleSubject onChange={(event) => setSubjectTitle(event.target.value)}>
+            <TitleSubject
+              onChange={(event) => setSubjectTitle(event.target.value)}
+            >
               {subject.subject_title}
             </TitleSubject>
 
-            {activeTab === 0 &&  subject.status !== "FINISHED" && subject.status !== "CANCELED" && (
-              
-              <IconTag onClick={EditModal}>
-              
-                <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
-              </IconTag>
-            )}
-
-        
+            {activeTab === 0 &&
+              subject.status !== "FINISHED" &&
+              subject.status !== "CANCELED" && (
+                <IconTag onClick={EditModal}>
+                  <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
+                </IconTag>
+              )}
 
             <CreatedBy onChange={(event) => setManager(event.target.value)}>
-              Created by on {manager} 20 February
+              Created by on {manager}
             </CreatedBy>
           </DivTitle>
 
           <DivPages>
             <Pages>
               <TabButton
-                $mode= {subject.status}
+                $mode={subject.status}
                 active={activeTab === 0}
                 onClick={() => toggleTab(0)}
               >
                 Subject Details
               </TabButton>
               <TabButton
-                $mode= {subject.status}
+                $mode={subject.status}
                 active={activeTab === 1}
                 onClick={() => toggleTab(1)}
               >
                 Remarks
               </TabButton>
               <TabButton
-                $mode= {subject.status}
+                $mode={subject.status}
                 active={activeTab === 2}
                 onClick={() => toggleTab(2)}
               >
@@ -186,7 +183,7 @@ const ModalSubject = (props) => {
                 setId={(i) => setId(i)}
                 setIdRemark={(i) => setIdRemark(i)}
                 id={id}
-                title={"DetalhesRemark"}
+                title={"More Details Remark"}
               />
             </Content>
 
@@ -194,7 +191,7 @@ const ModalSubject = (props) => {
               <Planner
                 setId={(i) => setId(i)}
                 id={id}
-                title={"DetalhesPlanner"}
+                title={"More Details Planner"}
               />
             </Content>
 

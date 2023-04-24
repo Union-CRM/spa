@@ -29,15 +29,14 @@ import ButtonAdd from "../../../assets/Buttons/ButtonAdd";
 
 //Components
 import Subject from "../CreateEditSubjectModal";
-
+import ModalDiscardChanges from "../ModalDiscardChanges";
 import ModalSubject from "../../Subject/ModalSubject";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
 import EditSubject from "../../Subject/EditSubject";
 import CreateRemark from "../../Subject/ModalCreateRemark";
 import ModalCreatePlanner from "../../Subject/ModalCreatePlanner";
-// Hooks
-
+import ModalSave from "../../Planner/ModalSuccessfuly";
 import { usePlannerContext } from "../../../hook/usePlannerContent";
 
 const cardStatus = {
@@ -46,32 +45,23 @@ const cardStatus = {
   CANCELED: "CANCELED",
 };
 
-
 const SubjectList = () => {
-  const { subject: subjectsList1 } = useSubjectContext();
-
-  const SubjectsId = subjectsList1.map((item) => item.id);
   const { subject } = useSubjectContext();
-  
   /*
   const SubjectsCancel = "";
-
   const SubjectsProgress ="";
-
   const SubjectsFinished = "" ;
   */
 
- 
   const SubjectsCancel = subject.filter(
-  (item) => item.status_description === "CANCELED"
+    (item) => item.status_description === "CANCELED"
   );
   const SubjectsFinished = subject.filter(
-  (item) => item.status_description === "FINISHED"
+    (item) => item.status_description === "FINISHED"
   );
   const SubjectsProgress = subject.filter(
-  (item) => item.status_description === "IN PROGRESS"
+    (item) => item.status_description === "IN PROGRESS"
   );
-
   const [modal, setModal] = useState(false);
   const [openModalD, openModalSubjects] = useState(false);
   const [cards, setCards] = useState(SubjectsProgress);
@@ -84,6 +74,8 @@ const SubjectList = () => {
     setEdit,
     modalEdit,
     setModalEdit,
+    modalDiscard,
+    setModalDiscard,
   } = useSubjectContext();
 
   // tabs status
@@ -109,8 +101,6 @@ const SubjectList = () => {
 
   // Subject //
   const { id, setId } = useSubjectContext();
-  
-  
 
   // Remark //
   const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
@@ -120,7 +110,7 @@ const SubjectList = () => {
 
   // Create Planner //
   const { idPlanner, setIdPlanner } = usePlannerContext();
-  const { modalPlanner, setModalPlanner } = usePlannerContext();
+  const { modalPlanner, setModalPlanner, modalSave } = usePlannerContext();
 
   return (
     <ContainerGlobal>
@@ -129,7 +119,7 @@ const SubjectList = () => {
           <Top>
             <DivTitlePage>
               <H1>Subjects List</H1>
-              <HowManySubjectList>({SubjectsId.length})</HowManySubjectList>
+              <HowManySubjectList>({subject.length})</HowManySubjectList>
             </DivTitlePage>
 
             <DivButton onClick={() => createSubject()}>
@@ -171,10 +161,7 @@ const SubjectList = () => {
               <Finished>
                 Finished (
                 <HowManyFinished>
-                  {
-                    subject.filter((item) => item.status === "FINISHED")
-                      .length
-                  }
+                  {subject.filter((item) => item.status === "FINISHED").length}
                 </HowManyFinished>
                 )
               </Finished>
@@ -188,10 +175,7 @@ const SubjectList = () => {
               <Canceled>
                 Canceled (
                 <HowManyCancel>
-                  {
-                    subject.filter((item) => item.status === "CANCELED")
-                      .length
-                  }
+                  {subject.filter((item) => item.status === "CANCELED").length}
                 </HowManyCancel>
                 )
               </Canceled>
@@ -229,12 +213,9 @@ const SubjectList = () => {
       )}
 
       <DivModal $mode={modal} />
-
-
       {modal && (
         <Subject id={id} setModal={setModal} title={"Create Subject"} />
       )}
-
 
       <DivModal $mode={modalDetails} />
 
@@ -254,6 +235,7 @@ const SubjectList = () => {
       {modalPlanner && (
         <ModalCreatePlanner
           idPlanner={idPlanner}
+          id={id}
           setModalPlanner={setModalPlanner}
           title={"Create Planner"}
         />
@@ -263,10 +245,23 @@ const SubjectList = () => {
 
       {modalRemark && (
         <CreateRemark
+          id={id}
           idRemark={idRemark}
           setModalRemark={setModalRemark}
           title={"Create Remark"}
         />
+      )}
+
+      {modalSave && (
+        <>
+          <ModalSave subject={"translate(75%, -350%)"} />
+        </>
+      )}
+
+      {modalDiscard && (
+        <>
+          <ModalDiscardChanges />
+        </>
       )}
     </ContainerGlobal>
   );
