@@ -65,7 +65,7 @@ const SidBar =(props)=>{
           <IconSystem icon="OpenClose" />
         </OpenClose>
         <User $mode={sidBarState}>
-          <Img $mode={sidBarState}>
+          <Img level={user.level} $mode={sidBarState}>
             <DivPhotoI>
               <Body type={"Body1"} name={Split(user.name)} />
             </DivPhotoI>
@@ -85,17 +85,17 @@ const SidBar =(props)=>{
         </User>
         <Ul $mode={sidBarState}>
           <Slink to="/home">
-            <Li>
+            <Li level={user.level}>
               <Icon $mode={sidBarState}>
                 <IconSystem icon="Home" />
-                <Span $mode={sidBarState}>Home //</Span>
+                <Span $mode={sidBarState}>Home</Span>
               </Icon>
             </Li>
           </Slink>
           {isAdm && (
             <>
             <Slink to="/usersAdm">
-              <Li>
+              <Li level={user.level}>
                 <Icon $mode={sidBarState}>
                   <IconSystem icon="User"/>
                   <Span $mode={sidBarState}>User</Span>
@@ -103,7 +103,7 @@ const SidBar =(props)=>{
               </Li>
               </Slink>
               <Slink to="/groups">
-              <Li>
+              <Li level={user.level}>
               <Icon $mode={sidBarState}>
                 <IconSystem icon="Groups"/>
                 <Span $mode={sidBarState}>Groups</Span>
@@ -111,7 +111,7 @@ const SidBar =(props)=>{
             </Li>
             </Slink>
             <Slink to="/business">
-            <Li>
+            <Li level={user.level}>
               <Icon $mode={sidBarState}>
                 <IconSystem icon="Business"/>
                 <Span $mode={sidBarState}>Business</Span>
@@ -119,7 +119,7 @@ const SidBar =(props)=>{
             </Li>
             </Slink>
             <Slink to="/releasetrain">
-            <Li>
+            <Li level={user.level}>
               <Icon $mode={sidBarState}>
                 <IconSystem icon="Release"/>
                 <Span $mode={sidBarState}>Release train</Span>
@@ -127,7 +127,7 @@ const SidBar =(props)=>{
             </Li>
             </Slink>
             <Slink to="/customer">
-            <Li>
+            <Li level={user.level}>
               <Icon $mode={sidBarState}>
                 <IconSystem icon="Costumer"/>
                 <Span $mode={sidBarState}>Custumer</Span>
@@ -137,16 +137,15 @@ const SidBar =(props)=>{
           </>
             )}
           <Slink to="/client">
-            <Li>
+            <Li level={user.level}>
               <Icon $mode={sidBarState}>
                 <Client fill={colorAdm}/>
                 <Span $mode={sidBarState}>Client</Span>
               </Icon>
             </Li>
           </Slink>
-
           <Slink to="/subject">
-            <Li>
+            <Li level={user.level}>
               <Icon $mode={sidBarState}>
                 <Subject fill={colorAdm}/>
                 <Span $mode={sidBarState}>Subjects</Span>
@@ -154,7 +153,7 @@ const SidBar =(props)=>{
             </Li>
           </Slink>
           <Slink to="/planner">
-            <Li>
+            <Li level={user.level}>
               <Icon $mode={sidBarState}>
                 <Planner fill={colorAdm} />
                 <Span $mode={sidBarState}>Planner</Span>
