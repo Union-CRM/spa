@@ -21,7 +21,6 @@ export const DivImgs = styled.div`
 `;
 
 export const Content = styled.div `
-   
     display:flex;
     align-items:center;
     width: 100%;
@@ -29,6 +28,7 @@ export const Content = styled.div `
     flex-direction: column;
     background-color: #FFFFFF;
 `;
+
 export const LogoDiv = styled.div `
 
 `;
@@ -188,7 +188,8 @@ export const DivModal = styled.div`
     switch (props.$mode) {
       case true:
         return css`
-         display: flex;
+        z-index: 0;
+        display: flex;
         position: fixed;
         top: 0;
         left: 0;

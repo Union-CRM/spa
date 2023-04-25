@@ -5,7 +5,7 @@ import GlobalStyle from "./styles/GlobalStyle";
 import SubjectPage from "./pages/User/Subject/index";
 import Client from "./pages/User/Client";
 import LoginPage from "./pages/User/Login/index";
-import LoginPageAdmin from "./components/Admin/Login/index";
+import LoginPageAdmin from "./pages/Login/index";
 import { ClientContextProvider } from "./context/ClientContext";
 import { UserContextProvider } from "./context/UserContext";
 import { PlannerContextProvider } from "./context/PlannerContext";
