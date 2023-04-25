@@ -11,14 +11,16 @@ export const RemarkContextProvider = ({ children }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
+    if(localStorage.getItem("token")){
     loadRemarkList();
+    }
   }, []);
 
   const loadRemarkList = async () => {
     let remarks;
     try {
       const response = await axios.get(
-        "http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8088/union/v1/remarks/submissives",
+        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8088/union/v1/remarks/submissives",
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }

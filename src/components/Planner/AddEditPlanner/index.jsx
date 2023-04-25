@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TagComponent } from "../../Geral/TagComponent";
+import { GuestComponent } from "../../Geral/Input/GuestsComponent";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import { useClientContext } from "../../../hook/useClientContent";
@@ -260,7 +261,7 @@ const ModalPlanner = ({ title }) => {
           </DivFinish>
         </DivClocks>
         <PositionTags>
-          <TagComponent
+        <TagComponent
             options={clientOption}
             placeholder={""}
             label={"Guests"}
