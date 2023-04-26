@@ -23,8 +23,8 @@ export const Card = styled.div`
   border-radius: 8px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
-  width: auto;
   cursor: pointer;
+  width: auto;
   height: 100%;
   z-index: 0 !important;
   padding-left: 10px;

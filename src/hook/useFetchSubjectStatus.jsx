@@ -8,7 +8,7 @@ export const useFetchSubjectStatus=()=>{
     const {loadData}=useSubjectContext() 
     const subjectFinished = async(subject_id,subject)=>{
         console.log(subject)
-        axios.put(`http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8089/union/v1/subjects/update/finished/${subject_id}` , {
+        axios.put(`http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/update/finished/${subject_id}` , {
           
         },
         {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
@@ -23,7 +23,7 @@ export const useFetchSubjectStatus=()=>{
     }
 
     const subjectCanceld = async(subject_id,subject)=>{
-        axios.put(`http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8089/union/v1/subjects/update/canceled/${subject_id}`, {
+        axios.put(`http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/update/canceled/${subject_id}`, {
           
         },
         {headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}})

@@ -5,12 +5,14 @@ import GlobalStyle from "./styles/GlobalStyle";
 import SubjectPage from "./pages/User/Subject/index";
 import Client from "./pages/User/Client";
 import LoginPage from "./pages/User/Login/index";
+import GroupsList from "./pages/Admin/GroupsList/index";
 import LoginPageAdmin from "./components/Admin/Login/index";
 import { ClientContextProvider } from "./context/ClientContext";
 import { UserContextProvider } from "./context/UserContext";
 import { PlannerContextProvider } from "./context/PlannerContext";
 import { SubjectContextProvider } from "./context/SubjectContext";
 import { RemarkContextProvider } from "./context/RemarkContext";
+import {GroupListContextProvider} from "./context/GroupListContext";
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
           <RemarkContextProvider>
             <PlannerContextProvider>
               <ClientContextProvider>
+                <GroupListContextProvider>
                 <Router>
                   <GlobalStyle />
                   <div className="App">
@@ -67,9 +70,20 @@ function App() {
                           )
                         }
                       />
+                        <Route
+                        path="/groups"
+                        element={
+                          localStorage.getItem("token") !== false ? (
+                            <GroupsList />
+                          ) : (
+                            <LoginPage />
+                          )
+                        }
+                      />
                     </Routes>
                   </div>
                 </Router>
+                </GroupListContextProvider>
               </ClientContextProvider>
             </PlannerContextProvider>
           </RemarkContextProvider>
