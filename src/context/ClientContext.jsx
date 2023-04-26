@@ -10,8 +10,10 @@ export const ClientContextProvider = ({ children }) => {
     loadData();
     }
   }, []);
+
   const loadData = async () => {
     var clients;
+    
     try {
       const response = await axios.get(
         "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8083/union/v1/clients/mygroups",
@@ -37,11 +39,17 @@ export const ClientContextProvider = ({ children }) => {
         textBusiness: item.business_name,
         release_id: item.release.release_id,
         textRelease: item.release.release_name,
+        user_id: item.user_id,
+        user_name: item.user_name,
         tags: item.tags
           ? item.tags.map((tag) => ({ value: tag.tag_id, label: tag.tag_name }))
           : [],
       }))
+
+      
     );
+   /* console.log(clients.data.list)*/
+    
   };
   return (
     <ClientContext.Provider value={{ client, setClient, loadData }}>

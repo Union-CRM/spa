@@ -23,8 +23,9 @@ import {
 import ClientCard from "./CardListView/index";
 import AddEditClient from "../AddEditClient";
 import ButtonAdd from "../../../assets/Buttons/ButtonAdd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useClientContext } from "../../../hook/useClientContent";
+import { useUserContext } from "../../../hook/useUserContext";
 import ModalPopUp from "../ModalPopUP";
 
 const abaStatus = {
@@ -32,19 +33,24 @@ const abaStatus = {
   INACTIVE: "Inactive",
 };
 
-const ContainerCards = () => {
+const ContainerCards = (props) => {
   // States modal//
   const [modal, setModal] = useState(false);
-
   const [modalPopUp, setModalPopUp] = useState(false);
-
   const [id, setId] = useState(null);
-
   const [isEdit, setEdit] = useState(false);
-
   const { client } = useClientContext();
-
+  const [clientList, setClientList] = useState();
   const [active, setActive] = useState(abaStatus.ACTIVE);
+  const { user, userTarget } = useUserContext();
+
+  useEffect(() => {
+    if (props.adimList) {
+      setClientList(client.filter((c) => c.user_id === userTarget.id));
+    } else {
+      setClientList(client.filter((c) => c.user_id === user.id));
+    }
+  }, [client]);
 
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
@@ -75,7 +81,9 @@ const ContainerCards = () => {
           <Top>
             <DivTitlePage>
               <H1>Client List </H1>
-              <HowManyClientList>({client.length})</HowManyClientList>{" "}
+              <HowManyClientList>
+                ({clientList ? clientList.length : 0})
+              </HowManyClientList>{" "}
             </DivTitlePage>
 
             <DivButton onClick={() => createClient()}>
@@ -98,7 +106,10 @@ const ContainerCards = () => {
               <Active>
                 Active (
                 <HowManyActive>
-                  {client.filter((item) => item.status === "Active").length}
+                  {clientList
+                    ? clientList.filter((item) => item.status === "Active")
+                        .length
+                    : 0}
                 </HowManyActive>
                 )
               </Active>
@@ -111,7 +122,10 @@ const ContainerCards = () => {
               <Inactive>
                 Inactive (
                 <HowManyInactive>
-                  {client.filter((item) => item.status === "Inactive").length}
+                  {clientList
+                    ? clientList.filter((item) => item.status === "Inactive")
+                        .length
+                    : 0}
                 </HowManyInactive>
                 )
               </Inactive>
@@ -123,8 +137,8 @@ const ContainerCards = () => {
           <LineDivisor />
 
           <BoardStyle>
-            {client &&
-              client
+            {clientList &&
+              clientList
                 .filter((item) => item.status === active)
                 .map((item) => (
                   <ClientCard

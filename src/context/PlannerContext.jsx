@@ -35,11 +35,14 @@ export const PlannerContextProvider = ({ children }) => {
         }
       );
       planners = response;
+ 
     } catch (error) {
       console.error(error);
       //console.log("buscou")
     }
-    setPlanner(planners.data.list);
+
+    
+    
   };
 
   return (
