@@ -10,7 +10,9 @@ export const UserContextProvider = ({ children }) => {
 
 
   useEffect(() => {
+    if(localStorage.getItem("token")){
     loadUserMe();
+    }
   }, []);
 
   const loadUserMe = async () => {

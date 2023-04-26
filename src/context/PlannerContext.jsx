@@ -20,7 +20,9 @@ export const PlannerContextProvider = ({ children }) => {
   const [modalError, setModalError] = useState(false);
 
   useEffect(() => {
+    if(localStorage.getItem("token")){
     loadPlannerList();
+    }
   }, []);
 
   const loadPlannerList = async () => {

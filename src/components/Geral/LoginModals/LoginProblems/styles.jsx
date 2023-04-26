@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: grid;
     grid-template-columns: 100%;
-    
+    z-index: 2;
     flex-direction: column;
     background-color: #FFF;
     border: 1px solid rgb(136, 140, 149);

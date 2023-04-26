@@ -6,8 +6,11 @@ export const SubjectContextProvider = ({ children }) => {
   const [subject, setSubject] = useState([{}]);
 
   useEffect(() => {
+    if(localStorage.getItem("token")){
     loadData();
+    }
   }, []);
+
 
   const loadData = async () => {
     var subjects;
