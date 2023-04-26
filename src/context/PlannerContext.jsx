@@ -20,14 +20,16 @@ export const PlannerContextProvider = ({ children }) => {
   const [modalError, setModalError] = useState(false);
 
   useEffect(() => {
-    loadPlannerList();
+    if (localStorage.getItem("token")) {
+      loadPlannerList();
+    }
   }, []);
 
   const loadPlannerList = async () => {
     let planners;
     try {
       const response = await axios.get(
-        "http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8086/union/v1/planners/submissives",
+        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8086/union/v1/planners/submissives",
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }

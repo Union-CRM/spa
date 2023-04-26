@@ -16,7 +16,7 @@ export const useFetchRemark = () => {
   const createRemark = async (remark) => {
     try {
       const response = await axios.post(
-        "http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8088/union/v1/remarks",
+        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8088/union/v1/remarks",
         remark,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -36,7 +36,7 @@ export const useFetchRemark = () => {
   const updateRemark = async (remark, remark_id) => {
     axios
       .put(
-        `http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8088/union/v1/remarks/update/${remark_id}`,
+        `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8088/union/v1/remarks/update/${remark_id}`,
         remark,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
