@@ -21,43 +21,43 @@ import {
   HowManyInactive,
 } from "./styles";
 import ClientCard from "./CardListView/index";
-import AddEditClient from "../AddEditClient";
-import ButtonAdd from "../../../assets/Buttons/ButtonAdd";
+import AddEditClient from "../AddEditUser";
+import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
 import { useState, useEffect } from "react";
-import { useClientContext } from "../../../hook/useClientContent";
-import { useUserContext } from "../../../hook/useUserContext";
+import { useClientContext } from "../../../../hook/useClientContent";
+import { useUserContext } from "../../../../hook/useUserContext";
 import ModalPopUp from "../ModalPopUP";
 
 const abaStatus = {
-  ACTIVE: "Active",
-  INACTIVE: "Inactive",
+  ACTIVE: "ACTIVE",
+  INACTIVE: "INACTIVE",
 };
 
-const ContainerCards = (props) => {
+const ContainerCards = () => {
+  const { loadUserList, userList } = useUserContext();
+
+  //console.log(userList);
+  useEffect(() => {
+    loadUserList();
+  }, []);
+
   // States modal//
   const [modal, setModal] = useState(false);
-  const [modalPopUp, setModalPopUp] = useState(false);
-  const [id, setId] = useState(null);
-  const [isEdit, setEdit] = useState(false);
-  const { client } = useClientContext();
-  const [clientList, setClientList] = useState();
-  const [active, setActive] = useState(abaStatus.ACTIVE);
-  const { user, userTarget } = useUserContext();
 
-  useEffect(() => {
-    if (props.adimList) {
-      setClientList(client.filter((c) => c.user_id === userTarget.id));
-    } else {
-      setClientList(client.filter((c) => c.user_id === user.id));
-    }
-  }, [client]);
+  const [modalPopUp, setModalPopUp] = useState(false);
+
+  const [id, setId] = useState(null);
+
+  const [isEdit, setEdit] = useState(false);
+
+  const [active, setActive] = useState(abaStatus.ACTIVE);
 
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
   };
 
   const getTabColor = (status) => {
-    return { borderBottom: active === status ? "2px solid #007BFF" : "" };
+    return { borderBottom: active === status ? "2px solid #E41165" : "" };
   };
 
   const createClient = () => {
@@ -70,28 +70,22 @@ const ContainerCards = (props) => {
     setEdit(true);
   };
 
-  const modalClose = () => {
-    setModalPopUp(true);
-  };
-
   return (
     <ContainerGlobal>
       <ContainerHeaderAndCards>
         <HeaderContainerCards>
           <Top>
             <DivTitlePage>
-              <H1>Client List </H1>
-              <HowManyClientList>
-                ({clientList ? clientList.length : 0})
-              </HowManyClientList>{" "}
+              <H1>User List </H1>
+              <HowManyClientList>({userList.length})</HowManyClientList>{" "}
             </DivTitlePage>
 
             <DivButton onClick={() => createClient()}>
               <ButtonAdd
-                mode="#007BFF"
+                mode="#E41165"
                 width="169px"
                 height="38px"
-                name="Create Client"
+                name="Create User"
                 color="white"
               />
             </DivButton>
@@ -106,10 +100,7 @@ const ContainerCards = (props) => {
               <Active>
                 Active (
                 <HowManyActive>
-                  {clientList
-                    ? clientList.filter((item) => item.status === "Active")
-                        .length
-                    : 0}
+                  {userList.filter((item) => item.status === "ACTIVE").length}
                 </HowManyActive>
                 )
               </Active>
@@ -122,10 +113,7 @@ const ContainerCards = (props) => {
               <Inactive>
                 Inactive (
                 <HowManyInactive>
-                  {clientList
-                    ? clientList.filter((item) => item.status === "Inactive")
-                        .length
-                    : 0}
+                  {userList.filter((item) => item.status === "INACTIVE").length}
                 </HowManyInactive>
                 )
               </Inactive>
@@ -137,15 +125,15 @@ const ContainerCards = (props) => {
           <LineDivisor />
 
           <BoardStyle>
-            {clientList &&
-              clientList
-                .filter((item) => item.status === active)
-                .map((item) => (
+            {userList &&
+              userList
+                .filter((u) => u.status === active)
+                .map((u) => (
                   <ClientCard
                     setId={(i) => setId(i)}
                     openModalPopUp={() => setModalPopUp(true)}
-                    key={item.id}
-                    id={item.id}
+                    key={u.id}
+                    id={u.id}
                     openModal={() => EditClient()}
                     //modalPopUp={() => PopUp()}
                   />
