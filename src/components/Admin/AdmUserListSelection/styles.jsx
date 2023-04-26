@@ -9,7 +9,7 @@ export const Box = styled.div`
   border-radius: 5px;
   border-left-style: solid;
   border-left-width: 18px;
-  border-left-color: #007bff;
+  border-left-color: #e41165;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
 `;
 export const Title = styled.div`
