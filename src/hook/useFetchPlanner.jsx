@@ -6,7 +6,7 @@ export const useFetchPlanner=()=>{
     
     const createPlanner = async(planner)=>{
         console.log(planner)
-        axios.post('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8086/union/v1/planners', planner,
+        axios.post('http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8086/union/v1/planners', planner,
         {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
         .then(function (response) {
             loadPlannerList();
@@ -26,7 +26,7 @@ export const useFetchPlanner=()=>{
 
     const updatePlanner = async(planner_id,planner)=>{
         
-        axios.put(`http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8086/union/v1/planners/update/${planner_id}`, 
+        axios.put(`http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8086/union/v1/planners/update/${planner_id}`, 
             planner,
             {headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}})
         .then(function (response) {

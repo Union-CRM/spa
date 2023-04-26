@@ -6,7 +6,7 @@ export const useFetchClient=()=>{
     const insertClient = async(client)=>{
         console.log(client)
 
-        axios.post('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/', 
+        axios.post('http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8083/union/v1/clients/', 
         {
 
             client_name: client.client,
@@ -29,7 +29,7 @@ export const useFetchClient=()=>{
     }
 
     const updateStatusClient=async(client_id)=>{
-        axios.put(`http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8083/union/v1/clients/update/status/${client_id}`,{},        
+        axios.put(`http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8083/union/v1/clients/update/status/${client_id}`,{},        
         {headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}})
         .then(function (response) {
             //console.log(response);
