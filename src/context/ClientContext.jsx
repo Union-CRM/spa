@@ -6,8 +6,8 @@ export const ClientContextProvider = ({ children }) => {
   const [client, setClient] = useState([{}]);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      loadData();
+    if(localStorage.getItem("token")){
+    loadData();
     }
   }, []);
 

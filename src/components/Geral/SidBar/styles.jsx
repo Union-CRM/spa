@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
@@ -65,17 +65,25 @@ export const User = styled.div`
   text-align: center;
 `;
 export const Img = styled.div`
-  margin-left: ${(props) => (props.$mode ? "15px" : "53px")};
+  margin: ${(props) => (props.$mode ? "15px" : "0 auto")};
   display: flex;
   align-items: center;
   justify-content: center;
   width: ${(props) => (props.$mode ? "50px" : "80px")};
   height: ${(props) => (props.$mode ? "50px" : "80px")};
   border-radius: 50%;
-  border: 3px solid #007bff;
+  border: ${({ level }) => {
+    if (level > 1) {
+      return "3px solid #E41165 ";
+    } else{
+      return "3px solid #007bff";
+    } 
+  }};
+  ;
   margin-bottom: 5px;
   background-color: white;
 `;
+
 export const Name = styled.h1`
   font-weight: 100;
   color: #ffff;
@@ -102,12 +110,15 @@ export const Ul = styled.ul`
   width: ${(props) => (props.$mode ? "80px" : "100%")};
   grid-row: 4/5;
   list-style-type: none;
-  margin: 0;
+  margin-top: 35%;
   padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   grid-template-rows: auto;
+  @media(max-width: 1367px){
+    margin-top: 55%;
+  }
 `;
 
 export const Li = styled.li`
@@ -118,9 +129,17 @@ export const Li = styled.li`
   text-align: center;
   vertical-align: middle;
   background-color: #1e2222;
-
+  @media(max-width: 1367px){
+    height: 45px;
+  }
   :hover {
-    background-color: #007bff;
+    background-color: ${({ level }) => {
+      if (level > 1) {
+        return "#E41165";
+      } else{
+        return "#007bff";
+      } 
+    }};
   }
 `;
 export const Slink = styled(Link)`
@@ -136,3 +155,75 @@ export const Span = styled.span`
 `;
 
 export const DivPhotoI = styled.div``;
+
+export const DivDots = styled.div`
+  display: flex;
+  margin: 0 auto;
+  width: 75px;
+  display: ${(props) => (props.$mode ? "none" : "flex")};
+`
+
+export const Dot1 = styled.div`
+  height: 15px;
+  width: 15px;
+  border-radius: 30px;
+  background-color: ${({ level }) => {
+    if (level >= 1) {
+      return "#E41165";
+    } else{
+      return "#FFFFFF";
+    } 
+  }};
+`;
+
+export const Dot2 = styled.div`
+  height: 15px;
+  width: 15px;
+  border-radius: 30px;
+  background-color: ${({ level }) => {
+    if (level >= 2) {
+      return "#E41165";
+    } else{
+      return "#FFFFFF";
+    } 
+  }};
+`
+export const Dot3 = styled.div`
+  height: 15px;
+  width: 15px;
+  border-radius: 30px;
+  background-color: ${({ level }) => {
+    if (level >= 3) {
+      return "#E41165";
+    } else{
+      return "#FFFFFF";
+    } 
+  }};
+`
+
+export const Dot4 = styled.div`
+  height: 15px;
+  width: 15px;
+  border-radius: 30px;
+  background-color: ${({ level }) => {
+    if (level >= 4) {
+      return "#E41165";
+    } else{
+      return "#FFFFFF";
+    } 
+  }};
+`
+
+export const Dot5 = styled.div`
+  height: 15px;
+  width: 15px;
+  border-radius: 30px;
+  background-color: ${({ level }) => {
+    if (level >= 5) {
+      return "#E41165";
+    } else{
+      return "#FFFFFF";
+    } 
+  }};
+`
+

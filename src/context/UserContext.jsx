@@ -10,8 +10,8 @@ export const UserContextProvider = ({ children }) => {
   const [modalPlanner, setModalPlanner] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      loadUserMe();
+    if(localStorage.getItem("token")){
+    loadUserMe();
     }
   }, []);
 

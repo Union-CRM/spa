@@ -20,8 +20,8 @@ export const PlannerContextProvider = ({ children }) => {
   const [modalError, setModalError] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      loadPlannerList();
+    if(localStorage.getItem("token")){
+    loadPlannerList();
     }
   }, []);
 

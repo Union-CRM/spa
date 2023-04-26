@@ -40,90 +40,69 @@ function LoginPage() {
 
   localStorage.setItem("token", "");
 
-  async function handleLogin(event) {
-    // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
+    async function handleLogin(event) { // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
+    
+      event.preventDefault(); // Impedir comportamento padrão de submissão do formulário
+      
+        if (email !== "" && password !== "" && loginQtd <= 3) { // Verificar email , senha preenchida e quantidade de tentativas.
+          console.log("teste")
+            
+            const { data } = await axios.post('http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/login', {
+                email,
+                password,
+            }).catch(function (error) {
 
-    event.preventDefault(); // Impedir comportamento padrão de submissão do formulário
+              console.log("Login ou senha incorreta");
+              setInvalid(true);
 
-    /* console.log("acesso", blocked);
-        setBlocked(true);
-        console.log("acesso true", blocked);
-        setBlocked(false)*/
-    // O codigo abaixo representa a verificação do login via endpoint (FUNCIONANDO)
-    //'http://ec2-18-230-74-206.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login'
-    // Só utilizar quando for apresentar ao Giba.
-
-    //teste
-
-    if (loginQtd == 1) {
-      setBlocked(false);
-      setChangeModal(false);
-    }
-
-    if (loginQtd >= 3) {
-      setChangeModal(true);
-      setIsActive(true);
-      setBlocked(true);
-      console.log(changeModal);
-      setInvalid(false);
-    } else if (email !== "" && password !== "") {
-      // Verificar email e senha preenchidos e tamanho mínimo da senha
-      const { data } = await axios
-        .post(
-          "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/login",
-          {
-            email,
-
-            password,
-          }
-        )
-        .catch(function (error) {
-          console.log("Login ou senha incorreta");
+              if(loginQtd==3){
+                console.log("bloqueado");
+                
+                setIsActive(true);  
+                setBlocked(true);
+                setInvalid(false);
+                setLoginQtd(0);
+                console.log(loginQtd);
+              }
+              else{
+                setLoginQtd(loginQtd+1)
+                console.log(loginQtd);
+              }
+  
+            });
+            
+            localStorage.setItem('token', data.token);
+            window.location.href = '/home';
+        
+        }      
+        else if (!loginProblems){
+          console.log("Login ou senha incorreta ( Vazio )");
+          event.preventDefault();
           setInvalid(true);
-          setLoginQtd(loginQtd + 1);
-          console.log(loginQtd);
-
-          /*
-                if (error.response) {
-                // el.style.visibility = "visible";
-                setEmail('');
-                setPassword('');
-                } else if (error.request) {
-                console.error(error.request);
-                } else {
-                console.error('Error', error.message);
-                }*/
-        });
-
-      localStorage.setItem("token", data.token);
-      window.location.href = "/home";
-    } else {
-      console.log("Login ou senha incorreta ( Vazio )");
-      event.preventDefault();
-      setInvalid(true);
-    }
-
-    /*localStorage.setItem('token', "data.token");
+        }
+        
+      
+      /*localStorage.setItem('token', "data.token");
       window.location.href = '/home';
       console.log("teste");*/
-  }
-  function loginAdm() {
-    window.location.href = "/";
-  }
-  function CloseModal() {
-    setIsActive(false);
-    setLoginQtd(1);
-  }
 
-  const handleBackgroundClick = (e) => {
-    if (e.target === e.currentTarget) {
-      CloseModal();
+    } 
+
+    function CloseModal(){
+        
+      setIsActive(false);
+      setLoginQtd(1);
+      setLoginProblems(false);
     }
-  };
-
-  return (
+    
+    const handleBackgroundClick = (e)=>{
+      if(e.target === e.currentTarget){
+          CloseModal();
+      }
+    };
+  return(
     <>
-      <Container>
+    <Container>
         <DivImgs>
           <DivTcs>
             <IconSystem icon="LogoTataWhite" width={"100%"} height={"100%"} />
@@ -175,41 +154,34 @@ function LoginPage() {
               <DivPassWIcon>
                 <IconSystem icon="Lock" width={"20px"} height={"20px"} />
               </DivPassWIcon>
-              <Input
-                type="password"
-                placeholder="●●●●●●●●"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Label>
-            <ForgotPassword onClick={() => setIsActive(true)}>
-              Forgot password?
-            </ForgotPassword>
-            <LoginBt>
-              <ButtonDefault
-                name={"Login"}
-                type={"userSave"}
-                sizeFont={"1.5em"}
-              ></ButtonDefault>
-            </LoginBt>
-            <EnterAdmin>
-              <EnterAdminButton onClick={loginAdm}>
-                Enter Administrator
-              </EnterAdminButton>
-            </EnterAdmin>
-          </Form>
+              <Input type="password" placeholder= '●●●●●●●●' value={password} onChange={(e) => setPassword(e.target.value)} />
+           </Label>  
 
-          <DivModal onClick={handleBackgroundClick} $mode={isActive}>
-            {changeModal ? (
-              blocked && <AcessBlocked />
-            ) : (
-              <LoginProblems typeUser={"user"} />
-            )}
-          </DivModal>
-        </Content>
-      </Container>
-    </>
-  );
+           < ForgotPasswordADM onClick={()=>setLoginProblems(true)}>Forgot password?</ForgotPasswordADM>
+           
+           {loginProblems && (       
+            <DivModal onClick={handleBackgroundClick} $mode={loginProblems}>    
+            <LoginProblems typeUser={"user"}/>
+            </DivModal>
+           )}
+           
+
+           <LoginBt>
+                    <ButtonDefault name={"Login"} type={"adminSave"} sizeFont={"1.5em"}></ButtonDefault>
+            </LoginBt>
+        </Form>
+        <DivModal onClick={handleBackgroundClick} $mode={isActive}>
+        {
+          blocked && (
+          <AcessBlocked/>
+       )}  
+      </DivModal>
+    </Content>
+ </Container> 
+                      
+</>
+);
 }
 
-export default LoginPage;
+   
+export default LoginPageAdmin;
