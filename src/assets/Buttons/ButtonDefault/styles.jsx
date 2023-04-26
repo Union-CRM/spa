@@ -37,7 +37,9 @@ export const Button = styled.button`
         `;
       case "cancelModalAdmin":
         return css`
-          color: #e41165;
+        background-color: #e3e6ed;
+        color:  #e41165;
+        border: solid 1px  #e41165;
         `;
       default:
         return css`

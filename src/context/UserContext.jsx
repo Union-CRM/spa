@@ -23,7 +23,9 @@ export const UserContextProvider = ({ children }) => {
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
+        
       );
+      
       user = response;
     } catch (error) {
       console.error(error);
@@ -64,4 +66,5 @@ export const UserContextProvider = ({ children }) => {
       {children}
     </UserContext.Provider>
   );
+  
 };

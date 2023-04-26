@@ -44,10 +44,26 @@ function LoginPage() {
     
       event.preventDefault(); // Impedir comportamento padrão de submissão do formulário
       
-        if (email !== "" && password !== "" && loginQtd <= 3) { // Verificar email , senha preenchida e quantidade de tentativas.
-          console.log("teste")
-            
+
+
+        if(loginQtd==1){
+          setBlocked(false);
+          setChangeModal(false);
+          
+         }
+
+         
+        if(loginQtd>=3){
+          setChangeModal(true);
+          setIsActive(true);  
+          setBlocked(true);
+          console.log(changeModal)
+          setInvalid(false);
+        }
+        else if (email !== "" && password !== "") { // Verificar email e senha preenchidos e tamanho mínimo da senha
             const { data } = await axios.post('http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/login', {
+
+
                 email,
                 password,
             }).catch(function (error) {
