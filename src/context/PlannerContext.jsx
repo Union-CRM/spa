@@ -35,7 +35,7 @@ export const PlannerContextProvider = ({ children }) => {
         }
       );
       planners = response;
- 
+      setPlanner(response.data.list);
     } catch (error) {
       console.error(error);
       //console.log("buscou")
