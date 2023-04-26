@@ -27,7 +27,6 @@ import {
   ToggleContainer,
   ToggleButton,
 } from "./styles";
-import IconSystem from "../../../../assets/IconSystem";
 import Body from "../../../../assets/FontSystem/Body";
 import Subtitle from "../../../../assets/FontSystem/Subtitle";
 import { useClientContext } from "../../../../hook/useClientContent";
@@ -56,7 +55,7 @@ const ClientCard = (props) => {
     props.setId(client.id);
   };
 
-  const [isActive, setIsActive] = useState(client.status === "Active");
+
 
   /*const handleToggle = () => {
     setIsActive(!isActive);
@@ -64,6 +63,7 @@ const ClientCard = (props) => {
   };*/
 
   // TESTE //
+  const [isActive, setIsActive] = useState(client.status === "Active");
   const [previousStatus, setPreviousStatus] = useState(client.status);
   const handleToggle = () => {
     const newStatus = isActive ? "Inactive" : "Active";
@@ -71,16 +71,6 @@ const ClientCard = (props) => {
     updateClient(client.id, { ...client, status: newStatus });
   };
 
-  const handleDeactivate = () => {
-    updateClient(client.id, { ...client, status: "Inactive" });
-    setIsActive(false);
-    setPreviousStatus(client.status);
-  };
-
-  const handleDeactivateCancel = () => {
-    setIsActive(client.status === "Active");
-    updateClient(client.id, { ...client, status: previousStatus });
-  };
 
   return (
     <ContainerFather>
