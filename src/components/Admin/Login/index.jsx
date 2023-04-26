@@ -1,6 +1,9 @@
 import React, { useState } from "react"; // Importar useState para criar estado para email e senha
 import IconSystem from "../../../assets/IconSystem";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
+import LoginProblems from "../../../components/Geral/LoginModals/LoginProblems";
+import LoginInvalid from "../../../components/Geral/LoginModals/LoginInvalid";
+import AcessBlocked from "../../../components/Geral/LoginModals/AcessBlocked";
 import {
   Container,
   DivTcs,
@@ -18,61 +21,87 @@ import {
   DivImgs,
   DivEmailIcon,
   DivPassWIcon,
-  EnterAdmin,
-  ForgotPassword,
-  EnterAdminButton,
+  EnterUser,
+  ButtonEnterUser,
+  ForgotPasswordADM,
   DivModal,
 } from "./styles";
 import Headline from "../../../assets/FontSystem/Headline";
 import axios from "axios";
-import LoginProblems from "../../../components/Geral/LoginModals/LoginProblems";
-import LoginInvalid from "../../../components/Geral/LoginModals/LoginInvalid";
-import AcessBlocked from "../../../components/Geral/LoginModals/AcessBlocked";
 
-function LoginPage() {
+function LoginPageAdmin() {
   const [email, setEmail] = useState(""); // Criar estado para email com o hook useState
   const [password, setPassword] = useState(""); // Criar estado para senha com o hook useState
-  const [forgotPassword, setForgotPassword] = useState(false);
   const [invalid, setInvalid] = useState(false);
+  const [loginQtd, setLoginQtd] = useState(1);
+  const [changeModal, setChangeModal] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [blocked, setBlocked] = useState(false);
 
-  localStorage.setItem("token", "");
+  localStorage.setItem("token", false);
 
   async function handleLogin(event) {
     // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
 
     event.preventDefault(); // Impedir comportamento padrão de submissão do formulário
 
+    /* console.log("acesso", blocked);
+        setBlocked(true);
+        console.log("acesso true", blocked);
+        setBlocked(false)*/
     // O codigo abaixo representa a verificação do login via endpoint (FUNCIONANDO)
     //'http://ec2-18-230-74-206.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login'
     // Só utilizar quando for apresentar ao Giba.
 
     //teste
 
-    if (email !== "" && password !== "") {
+    if (loginQtd == 1) {
+      setBlocked(false);
+      setChangeModal(false);
+    }
+
+    if (loginQtd >= 3) {
+      console.log("bloqueado");
+
+      setChangeModal(true);
+      setIsActive(true);
+      setBlocked(true);
+      console.log(changeModal);
+      setInvalid(false);
+    } else if (email !== "" && password !== "") {
       // Verificar email e senha preenchidos e tamanho mínimo da senha
       const { data } = await axios
         .post(
           "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/login",
           {
             email,
-
             password,
           }
         )
         .catch(function (error) {
-          if (error.response) {
-            // el.style.visibility = "visible";
-            setEmail("");
-            setPassword("");
-          } else if (error.request) {
-            console.error(error.request);
-          } else {
-            console.error("Error", error.message);
-          }
+          console.log("Login ou senha incorreta");
+          setInvalid(true);
+          setLoginQtd(loginQtd + 1);
+          console.log(loginQtd);
+
+          /*
+                if (error.response) {
+                // el.style.visibility = "visible";
+                setEmail('');
+                setPassword('');
+                } else if (error.request) {
+                console.error(error.request);
+                } else {
+                console.error('Error', error.message);
+                }*/
         });
 
       localStorage.setItem("token", data.token);
       window.location.href = "/home";
+    } else {
+      console.log("Login ou senha incorreta ( Vazio )");
+      event.preventDefault();
+      setInvalid(true);
     }
 
     /*localStorage.setItem('token', "data.token");
@@ -80,11 +109,12 @@ function LoginPage() {
       console.log("teste");*/
   }
 
-  function loginAdm() {
-    window.location.href = "/";
+  function loginClient() {
+    window.location.href = "/loginClient";
   }
   function CloseModal() {
-    setForgotPassword(false);
+    setIsActive(false);
+    setLoginQtd(1);
   }
 
   const handleBackgroundClick = (e) => {
@@ -121,7 +151,6 @@ function LoginPage() {
             </TextTerm>
           </DivTerms>
         </DivImgs>
-
         <Content>
           <LogoDiv>
             <IconSystem icon="LogoUnion" />
@@ -153,27 +182,28 @@ function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Label>
-            <ForgotPassword onClick={() => setForgotPassword(true)}>
+            <ForgotPasswordADM onClick={() => setIsActive(true)}>
               Forgot password?
-            </ForgotPassword>
+            </ForgotPasswordADM>
             <LoginBt>
               <ButtonDefault
                 name={"Login"}
-                type={"userSave"}
+                type={"adminSave"}
                 sizeFont={"1.5em"}
               ></ButtonDefault>
             </LoginBt>
-            <EnterAdmin>
-              <EnterAdminButton onClick={loginAdm}>
-                Enter Administrator
-              </EnterAdminButton>
-            </EnterAdmin>
+            <EnterUser>
+              <ButtonEnterUser onClick={loginClient}>
+                Enter User
+              </ButtonEnterUser>
+            </EnterUser>
           </Form>
-
-          <DivModal onClick={handleBackgroundClick} $mode={forgotPassword}>
-            {forgotPassword && <AcessBlocked />}
-
-            {/*<LoginProblems typeUser={"userSave"} iconColor={"#e41165"}/>  */}
+          <DivModal onClick={handleBackgroundClick} $mode={isActive}>
+            {changeModal ? (
+              blocked && <AcessBlocked />
+            ) : (
+              <LoginProblems typeUser={"user"} />
+            )}
           </DivModal>
         </Content>
       </Container>
@@ -181,4 +211,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default LoginPageAdmin;
