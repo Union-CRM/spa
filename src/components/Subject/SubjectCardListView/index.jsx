@@ -39,6 +39,11 @@ import ModalCreatePlanner from "../../Subject/ModalCreatePlanner";
 import ModalSave from "../../Planner/ModalSuccessfuly";
 import { usePlannerContext } from "../../../hook/usePlannerContent";
 
+
+
+
+
+
 const cardStatus = {
   INPROGRESS: "IN PROGRESS",
   FINISHED: "FINISHED",
@@ -46,7 +51,10 @@ const cardStatus = {
 };
 
 const SubjectList = () => {
+  
+  
   const { subject } = useSubjectContext();
+  
   /*
   const SubjectsCancel = "";
   const SubjectsProgress ="";

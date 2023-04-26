@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { Label, Container } from "./styles";
+import { Label, Container, DivSvg } from "./styles";
+import {ReactComponent as Contact} from "../../../assets/svg/Contact.svg"
 
 export const TagComponent = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
@@ -19,6 +20,15 @@ export const TagComponent = (props, placeholder, idTagOption) => {
   })); //props.options;
   //console.log(options.map((item)=>({value:item.value,label:item.label,color:colors[getRandomInt(colors.length-1)]})))
 
+  const DropdownIndicator = props => {
+    return (
+      <DivSvg>
+        <Contact fill={"#888C95"} width={"20px"}/>
+      </DivSvg>  
+    );
+  };
+
+
   return (
     <>
       <Container>
@@ -26,10 +36,10 @@ export const TagComponent = (props, placeholder, idTagOption) => {
           {props.label}
           <Select
             isMulti
+            components={{ DropdownIndicator, animatedComponents }}
             options={options}
             value={props.tags}
             id={props.idTagOption}
-            components={animatedComponents}
             placeholder={props.placeholder}
             onChange={(item) => props.set(item)}
             isClearable={false}

@@ -15,3 +15,8 @@ export const Label = styled.label`
   line-height: 22px;
   color: rgba(0, 0, 0, 0.8);
 `;
+
+export const DivSvg = styled.div`
+  margin-top: 5%;
+  margin-right: 2%;
+`
