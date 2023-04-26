@@ -7,7 +7,7 @@ export const UserContextProvider = ({ children }) => {
   const [userList, setUserList] = useState([{}]);
   const [viewProfile, setViewProfile] = useState(false);
   const [userTarget, setUserTarget] = useState({});
-
+  const [modalPlanner, setModalPlanner] = useState(false);
 
   useEffect(() => {
     if(localStorage.getItem("token")){
@@ -33,12 +33,7 @@ export const UserContextProvider = ({ children }) => {
     setUser(user.data);
   };
 
-
-
-  
-
   const loadUserList = async () => {
-    var users;
     try {
       const response = await axios.get(
         "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users",
@@ -46,18 +41,16 @@ export const UserContextProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
-      users = response;
+      setUserList(response.data.list);
     } catch (error) {
       console.error(error);
+      // to do modal error
     }
-    setUserList(users.data.list);
-    
   };
 
-
-
   return (
-    <UserContext.Provider value={{
+    <UserContext.Provider
+      value={{
         user,
         loadUserMe,
         userList,
@@ -66,7 +59,10 @@ export const UserContextProvider = ({ children }) => {
         setViewProfile,
         userTarget,
         setUserTarget,
- }}>
+        modalPlanner,
+        setModalPlanner,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import {
   SevenColGrid,
   Wrapper,
@@ -40,6 +39,7 @@ import {
 import ButtonAdd from "../../../assets/Buttons/ButtonAdd";
 import ModalPlanner from "../AddEditPlanner";
 import { usePlannerContext } from "../../../hook/usePlannerContext";
+import { useUserContext } from "../../../hook/useUserContext";
 import IconSystem from "../../../assets/IconSystem";
 import PlannerCard from "../PlannerCard";
 import Tippy from "@tippyjs/react";
@@ -53,13 +53,13 @@ import PopUpFinished from "../PopUpFinished";
 import Subject from "../../Subject/CreateEditSubjectModal";
 import ModalError from "../ModalError";
 
-export const BigCalender = () => {
+export const BigCalender = (props) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [numberOfEvents] = useState(2);
   const [setOpenModal] = useState(false);
   const [dateTarget, setDateTarget] = useState(new Date());
   const {
-    planner: plannerList,
+    planner,
     modalEdit,
     modalSave,
     setModalSave,
@@ -78,6 +78,16 @@ export const BigCalender = () => {
     modalError,
     setModalError,
   } = usePlannerContext();
+  const [plannerList, setPlannerList] = useState(planner);
+  const { user, userTarget } = useUserContext();
+
+  useEffect(() => {
+    if (props.adimList) {
+      setPlannerList(planner.filter((p) => p.user_id === userTarget.id));
+    } else {
+      setPlannerList(planner.filter((p) => p.user_id === user.id));
+    }
+  }, [planner]);
 
   const handleOnClickEvent = (d) => {
     setModalPlanner(true);
@@ -234,7 +244,7 @@ export const BigCalender = () => {
       {modalPlanner && (
         <>
           <DivClose onClick={() => setModalPlanner(false)}></DivClose>
-          <PlannerCard date={dateTarget} />
+          <PlannerCard date={dateTarget} adimList={props.adimList} />
         </>
       )}
 
