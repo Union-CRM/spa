@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 // Div Father
 export const ContainerCentral = styled.div`
@@ -75,7 +75,7 @@ export const Close = styled.button`
 export const Container = styled.div`
   grid-row: 1;
   grid-column: 2;
-  width: 85%;
+  width: 80%;
   min-width: 300px;
   height: 81vh;
   background: #fff;
@@ -111,6 +111,7 @@ export const Input = styled.input`
   height: ${(props) => props.heightInput || "28px"};
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
+  padding-left: 2%;
   border: 2px solid #888c95;
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;

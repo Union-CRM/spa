@@ -28,6 +28,41 @@ export const ContainerPlanner = styled.div`
   height: 100%;
   position: relative;
   padding-top: 0%;
+  &::-webkit-scrollbar {
+    width: 18px;
+    height: 10px;
+    margin-right: 10px;
+    float: right;
+  }
+  &::-webkit-scrollbar-track {
+    box-shadow: 5px black;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background-color: #f5f7fa;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 80%;
+    background-color: #e3e6ed;
+    margin-left: 20px;
+    width: 15px;
+    border-right: 6px solid #f5f7fa;
+    border-top: 12px solid #f5f7fa;
+  }
+  border: 2 px solid black;
+  ${(props) => {
+    if (props.$mode > 3) {
+      return css`
+        height: 80vh;
+      `;
+    } else {
+      return css`
+        height: fit-content;
+      `;
+    }
+  }}
 `;
 
 //* BUTTON CREATE NEW PLANNER *//
@@ -105,9 +140,19 @@ export const ButtonAdd = styled.button`
 
 /// CONTAINER CARDS ///
 
+export const DivNoPlanner = styled.span`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding-top: 1%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const ContainerCards = styled.div`
   width: 98%;
-  height: 100%;
+  height: 300px;
   padding-top: 0;
   position: relative;
   background-color: ${(props) => (props.$mode ? "#fff" : "transparent")};
@@ -115,7 +160,7 @@ export const ContainerCards = styled.div`
   grid-row: 2;
   overflow-y: scroll;
   &::-webkit-scrollbar {
-    width: 0px;
+    width: 5px;
     height: 10px;
   }
 
@@ -124,31 +169,44 @@ export const ContainerCards = styled.div`
   }
 
   &::-webkit-scrollbar-track-piece {
-    background-color: white;
-    margin-top: 15px;
+    background-color: transparent;
+    margin-top: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
     height: 80%;
-    background-color: transparent;
+    background-color: #dfdfdf;
+  }
+  @media (min-width: 1500px) and (max-width: 2500px) {
+    height: 380px;
+  }
+  @media (min-width: 1500px) and (max-width: 2500px) {
+    height: 310px;
+  }
+  @media (min-height: 150px) and (max-height: 450px) {
+    height: 370px;
   }
 `;
+
 //* CARDS PLANNER *//
 
 export const CardPlanner = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "DONE":
         return css`
+          cursor: pointer;
           border-bottom: 8px solid #008585;
         `;
-      case "Scheduled":
+      case "SCHEDULED":
         return css`
           border: none;
+          cursor: default;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
+          cursor: pointer;
           border-bottom: 8px solid #771300;
         `;
 
@@ -159,7 +217,7 @@ export const CardPlanner = styled.div`
     }
   }}
   width:97%;
-  height: 70px;
+  height: 75px;
   z-index: 9999999;
   margin-top: 3%;
   padding-bottom: 1%;
@@ -177,16 +235,17 @@ export const CardPlanner = styled.div`
 export const Circle = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "DONE":
         return css`
           background-color: #fff;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           background-color: #fff;
         `;
-      case "Scheduled":
+      case "SCHEDULED":
         return css`
+          cursor: none;
           background-color: transparent;
         `;
 
@@ -204,22 +263,24 @@ export const Circle = styled.div`
   position: relative;
   border-radius: 100%;
   align-items: end;
-  background-color: #fff;
 `;
 
 export const IconOpenClose = styled.div`
   ${(props) => {
     switch (props.$modes) {
-      case "Finished":
+      case "DONE":
         return css`
+          cursor: pointer;
           color: #008585;
         `;
-      case "Scheduled":
+      case "SCHEDULED":
         return css`
           color: transparent;
+          cursor: default;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
+          cursor: pointer;
           color: #771300;
         `;
       default:
@@ -231,7 +292,6 @@ export const IconOpenClose = styled.div`
   width:100%;
   height: 100%;
   border: none;
-  cursor: pointer;
   position: absolute;
   top: 0;
   align-items: end;
@@ -251,125 +311,116 @@ export const IconOpenClose = styled.div`
 /// CONTENTS CARDS ///
 
 export const DivDate = styled.div`
-${(props) => {
-  switch (props.$mode) {
-    case "Finished":
-      return css`
-        color: #008585;
-      `;
-    case "Progress":
-      return css`
-        color: #00953b;
-      `;
-
-    case "Canceled":
-      return css`
-        color: #771300;
-      `;
-
-    default:
-      return css`
-        color: #6e6b6b;
-      `;
-  }
-}}
-}
-height:50px;
-width:90%;
-padding-top:0%;
-text-align:left;
-padding-left:3%;
-border-right:2px solid #EFF1F6;
-svg {
-  width:13px;
-  height:13px;
-span {
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "DONE":
         return css`
           color: #008585;
         `;
-      case "Progress":
+      case "SCHEDULED":
         return css`
-          color: #00953b;
+          color: transparent;
         `;
-
-      case "Canceled":
+      case "CANCELED":
         return css`
           color: #771300;
         `;
-
       default:
         return css`
-          color: #6e6b6b;
+          background-color: transparent;
         `;
     }
   }}
-}
-  font-size:0.82rem;
-}
-p {
-  font-size:0.9rem;
-  color:#000 !important;
-  font-weight:900;
-}
-@media (min-width: 1700px) and (max-width: 2500px) {
-  span {
-    font-size:1rem;
+  height: 50px;
+  font-size: 0.82rem;
+  width: 90%;
+  padding-top: 0%;
+  text-align: left;
+  padding-left: 3%;
+  border-right: 2px solid #eff1f6;
+  svg {
+    ${(props) => {
+      switch (props.$mode) {
+        case "DONE":
+          return css`
+            color: #008585;
+          `;
+        case "SCHEDULED":
+          return css`
+            color: transparent;
+          `;
+        case "CANCELED":
+          return css`
+            color: #771300;
+          `;
+        default:
+          return css`
+            background-color: transparent;
+          `;
+      }
+    }}
+    width:13px;
+    height: 13px;
   }
-}
+  p {
+    font-size: 0.9rem;
+    color: #000 !important;
+    font-weight: 900;
+  }
+  @media (min-width: 1700px) and (max-width: 2500px) {
+    span {
+      font-size: 1rem;
+    }
+  }
 `;
 
 export const DivTime = styled.div`
-${(props) => {
-  switch (props.$mode) {
-    case "Finished":
-      return css`
-        color: #008585;
-      `;
-    case "Progress":
-      return css`
-        color: #00953b;
-      `;
-
-    case "Canceled":
-      return css`
-        color: #771300;
-      `;
-
-    default:
-      return css`
-        color: #6e6b6b;
-      `;
+  ${(props) => {
+    switch (props.$modes) {
+      case "DONE":
+        return css`
+          color: #008585;
+        `;
+      case "SCHEDULED":
+        return css`
+          color: transparent;
+        `;
+      case "CANCELED":
+        return css`
+          color: #771300;
+        `;
+      default:
+        return css`
+          background-color: transparent;
+        `;
+    }
+  }}
+  height: 50px;
+  width: 100%;
+  padding-top: 0%;
+  text-align: left;
+  padding-left: 2%;
+  font-size: 0.82rem;
+  svg {
+    width: 13px;
+    height: 13px;
   }
-}}
-}
-height:50px;
-width:100%;
-padding-top:0%;
-text-align:left;
-padding-left:2%;
-svg {
-  width:13px;
-  height:13px;
-}
 
-p {
-  font-size:0.8rem;
-  color:#000;
-  font-weight:900;
-}
-@media (min-width: 1700px) and (max-width: 2500px) {
-  span {
-    font-size:1rem;
-  }
   p {
-  font-size:1rem;
-  color:#000;
-  font-weight:900;
-}
-}
+    font-size: 0.8rem;
+    color: #000;
+    font-weight: 900;
+  }
+  @media (min-width: 1700px) and (max-width: 2500px) {
+    span {
+      font-size: 1rem;
+    }
+    p {
+      font-size: 1rem;
+      color: #000;
+      font-weight: 900;
+    }
+  }
 `;
 
 // PHOTO //
@@ -389,16 +440,16 @@ export const DivPhotoII = styled.div`
 export const Photo = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "DONE":
         return css`
           border: 3px solid #008585;
           color: #000;
         `;
-      case "Scheduled":
+      case "SCHEDULED":
         return css`
           border: 3px solid #ffd012;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           border: 3px solid #771300;
         `;
@@ -452,17 +503,17 @@ export const NameEmail = styled.div`
 export const StatusPlanner = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "DONE":
         return css`
           background-color: #008585;
           color: #fff;
         `;
-      case "Scheduled":
+      case "SCHEDULED":
         return css`
           background-color: #ffd012;
           color: #000;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           background-color: #771300;
           color: #fff;
@@ -482,7 +533,9 @@ export const StatusPlanner = styled.div`
   align-items: center;
   justify-content: center;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-  span {
+  text-transform: lowercase;
+  span:first-letter {
+    text-transform: uppercase;
     font-size: 0.7rem;
   }
 `;
@@ -496,15 +549,15 @@ export const DivStatusPlanner = styled.div`
 export const Span = styled.span`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "DONE":
         return css`
           color: #008585;
         `;
-      case "Scheduled":
+      case "SCHEDULED":
         return css`
-          color: #ffd012;
+          color: #000;
         `;
-      case "Canceled":
+      case "CANCELED":
         return css`
           color: #771300;
         `;
@@ -515,390 +568,8 @@ export const Span = styled.span`
     }
   }}
 `;
-export const ContainerComplete = styled.div`
-  width: 95%;
-  height: 100%;
-  position: relative;
-  display: ${(props) => (props.$mode ? "none" : "block")};
-  visibility: ${(props) => (props.$mode ? "hidden" : "visible")};
-  padding-top: 2%;
-  padding-left: 3%;
-  z-index: 99999999;
-`;
 
-export const NoteText = styled.div`
-  width: 98%;
-  height: 100%;
-  opacity: 0.8;
-  padding-left: 0%;
-  font-weight: 600;
-  font-size: 0.84rem;
-  position: relative;
-  visibility: ${(props) => (props.$mode ? "hidden" : "visible")};
-  z-index: 99999999;
-  span {
-    position: relative;
-    display: block;
-    font-size: 0.74rem;
-    padding-top: 2%;
-    padding-right: 5%;
-    text-align: justify;
-    width: 100%;
-    height: 100%;
-    min-height: 170px;
-    max-height: 180px;
-    font-weight: 500;
-    overflow-y: scroll;
-    &::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
-    }
-
-    &::-webkit-scrollbar-track {
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-track-piece {
-      background-color: transparent;
-      margin-top: 5px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      height: 80%;
-      background-color: #dfdfdf;
-    }
-  }
-`;
 export const DivGlobalCard = styled.div`
   display: flex;
   padding-top: 2%;
-`;
-
-export const Guest = styled.div`
-  width: 98%;
-  height: 100%;
-  padding-left: 0%;
-  padding-bottom: 3%;
-  font-weight: 550;
-  font-size: 0.84rem;
-  position: relative;
-  visibility: ${(props) => (props.$mode ? "hidden" : "visible")};
-
-  span {
-    position: relative;
-    font-size: 0.74rem;
-    padding-top: 2%;
-    padding-right: 5%;
-    text-align: justify;
-    width: 100%;
-    height: 100%;
-    min-height: 200px;
-    max-height: 220px;
-    font-weight: 400;
-    color: #888c95;
-  }
-`;
-
-//************* PLANNER SCHUDELED *****************//
-
-export const CardScheduled = styled.div`
-  ${(props) => {
-    switch (props.$mode) {
-      case "Finished":
-        return css`
-          border-bottom: 8px solid #008585;
-        `;
-      case "Scheduled":
-        return css`
-          border: none;
-        `;
-
-      case "Canceled":
-        return css`
-          border-bottom: 8px solid #771300;
-        `;
-
-      default:
-        return css`
-          background-color: #6e6b6b;
-        `;
-    }
-  }}
-  width:97%;
-  z-index: 9999999;
-  margin-top: 2%;
-  padding-bottom: 1%;
-  position: relative;
-  align-items: center;
-  padding-right: 2%;
-  border-radius: 6px;
-  background-color: #f5f7fa;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
-  position: relative;
-  justify-content: end;
-`;
-
-export const DivDateScheduled = styled.div`
-${(props) => {
-  switch (props.$mode) {
-    case "FINISHED":
-      return css`
-        color: #008585;
-      `;
-    case "IN PROGRESS":
-      return css`
-        color: #00953b;
-      `;
-
-    case "CANCELED":
-      return css`
-        color: #771300;
-      `;
-
-    default:
-      return css`
-        color: #6e6b6b;
-      `;
-  }
-}}
-}
-height:50px;
-width:90%;
-padding-top:0%;
-text-align:left;
-padding-left:3%;
-border-right:2px solid #EFF1F6;
-svg {
-  width:13px;
-  height:13px;
-span {
-  ${(props) => {
-    switch (props.$mode) {
-      case "FINISHED":
-        return css`
-          color: #008585;
-        `;
-      case "IN PROGRESS":
-        return css`
-          color: #00953b;
-        `;
-
-      case "CANCELED":
-        return css`
-          color: #771300;
-        `;
-
-      default:
-        return css`
-          color: #6e6b6b;
-        `;
-    }
-  }}
-}
-  font-size:0.82rem;
-}
-p {
-  font-size:0.9rem;
-  color:#000 !important;
-  font-weight:900;
-}
-@media (min-width: 1700px) and (max-width: 2500px) {
-  span {
-    font-size:1rem;
-  }
-}
-`;
-
-export const DivTimeScheduled = styled.div`
-${(props) => {
-  switch (props.$mode) {
-    case "FINISHED":
-      return css`
-        color: #008585;
-      `;
-    case "IN PROGRESS":
-      return css`
-        color: #00953b;
-      `;
-
-    case "CANCELED":
-      return css`
-        color: #771300;
-      `;
-
-    default:
-      return css`
-        color: #6e6b6b;
-      `;
-  }
-}}
-}
-height:50px;
-width:100%;
-padding-top:0%;
-text-align:left;
-padding-left:2%;
-svg {
-  width:13px;
-  height:13px;
-}
-
-p {
-  font-size:0.8rem;
-  color:#000;
-  font-weight:900;
-}
-@media (min-width: 1700px) and (max-width: 2500px) {
-  span {
-    font-size:1rem;
-  }
-  p {
-  font-size:1rem;
-  color:#000;
-  font-weight:900;
-}
-}
-`;
-
-// PHOTO //
-
-export const DivPhotoScheduled = styled.div`
-  width: 50%;
-  height: 100%;
-`;
-
-export const DivPhotoIIScheduled = styled.div`
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  padding-left: 2%;
-`;
-
-export const PhotoScheduled = styled.div`
-  ${(props) => {
-    switch (props.$mode) {
-      case "Finished":
-        return css`
-          border: 3px solid #008585;
-          color: #000;
-        `;
-      case "Scheduled":
-        return css`
-          border: 3px solid #ffd012;
-        `;
-      case "Canceled":
-        return css`
-          border: 3px solid #771300;
-        `;
-      default:
-        return css`
-          background-color: #6e6b6b;
-        `;
-    }
-  }}
-  background-color: #d9d9d9;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  font-size: 0.8rem;
-  font-weight: 600;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100%;
-  @media (min-width: 100px) and (max-width: 1700px) {
-    width: 28px;
-    height: 28px;
-  }
-`;
-
-////////////// Name and Email //////////////
-export const DivDadosPlannerScheduled = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-`;
-
-export const NameEmailScheduled = styled.div`
-  font-size: 0.8rem;
-  padding-left: 0%;
-  width: 98%;
-  font-weight: 600;
-  opacity: 0.8;
-  span {
-    display: block;
-    font-size: 0.74rem;
-    font-weight: 500;
-  }
-  @media (min-width: 1700px) and (max-width: 2500px) {
-    width: 90%;
-  }
-`;
-
-/// Status Planner ////
-export const StatusPlannerScheduled = styled.div`
-  ${(props) => {
-    switch (props.$mode) {
-      case "Finished":
-        return css`
-          background-color: #008585;
-          color: #fff;
-        `;
-      case "Scheduled":
-        return css`
-          background-color: #ffd012;
-          color: #000;
-        `;
-      case "Canceled":
-        return css`
-          background-color: #771300;
-          color: #fff;
-        `;
-      default:
-        return css`
-          background-color: #6e6b6b;
-        `;
-    }
-  }}
-  padding-left:4%;
-  padding-right: 4%;
-  display: flex;
-  width: fit-content;
-  height: fit-content;
-  border-radius: 3px;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-  span {
-    font-size: 0.7rem;
-  }
-`;
-
-export const DivStatusPlannerScheduled = styled.div`
-  padding-top: 2%;
-`;
-export const DivModal = styled.div`
-  ${(props) => {
-    switch (props.$mode) {
-      case true:
-        return css`
-          z-index: 1000;
-          height: 100vh;
-          width: 100vw;
-          background: rgba(0, 0, 0, 0.8);
-          position: fixed;
-          top: 0;
-          left: 0;
-        `;
-
-      default:
-        return css``;
-    }
-  }}
-  grid-template-columns:50% 50%;
-  @media (min-width: 50px) and (max-width: 500px) {
-    height: 100vh;
-    width: 100%;
-  }
 `;

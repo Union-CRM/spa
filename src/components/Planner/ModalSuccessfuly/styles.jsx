@@ -1,7 +1,5 @@
 import styled, { css } from "styled-components";
 
-
-
 // * Div Father * //
 
 export const ContainerFather = styled.div`
@@ -15,19 +13,18 @@ export const ContainerFather = styled.div`
 // Container ModalPopup //
 export const Container = styled.div`
   left: 50%;
-  transform: translate(-50%, -200%);
+  transform: ${(props) => props.subject || "translate(-50%, 200%)"};
   width: 25%;
   grid-column: 1;
   position: relative;
   grid-column: 1;
-  height:auto;
   justify-content: center;
   box-sizing: border-box;
   z-index: 999999;
   min-width: 300px;
   max-width: 400px;
-  max-height: 40%;
-  min-height: 20%;
+  max-height: 150px;
+  min-height: 100px;
   border-left: 16.56px solid #007bff;
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
@@ -81,5 +78,3 @@ export const Circle = styled.div`
     align-items: center;
   }
 `;
-
-

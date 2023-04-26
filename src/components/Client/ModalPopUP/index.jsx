@@ -10,16 +10,13 @@ import {
   ContainerFather,
 } from "./styles";
 import { useClientContext } from "../../../hook/useClientContent";
-import { useEffect, useRef } from "react";
-import axios from "axios";
+import { useFetchClient } from "../../../hook/useFetchClient";
 
 const ModalPopUp = (props) => {
   const { modalClose } = props;
-
-  const { client: clientList, setClient: setClientList } = useClientContext();
-
+  const { client: clientList } = useClientContext();
+  const { updateStatusClient } = useFetchClient();
   const client = clientList.filter((item) => item.id === props.id)[0];
-
   const p = client.status === "Active" ? "Inactivate" : "Activate";
 
   const span =
@@ -28,33 +25,13 @@ const ModalPopUp = (props) => {
       : "Do you want to activate this card?";
 
   const handleAlterStatus = () => {
-    
-    async function UpdateStatusClient(){
-
-
-        axios.put(`http://localhost:8083/union/v1/clients/update/status/${client.id}`,{},        
-        {headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}})
-        .then(function (response) {
-            console.log(response);
-    
-        })
-        .catch(function (error) {
-            console.log(error.response);
-        });
-    
-    }
-    UpdateStatusClient();
-
-    const noId = clientList.filter((item) => item.id !== client.id);
-    client.status = client.status === "Active" ? "Inactive" : "Active";
-
-    setClientList([...noId, client]);
-    
+    updateStatusClient(client.id);
     modalClose();
   };
 
   const handleCancel = () => {
     modalClose();
+    window.location.reload();
   };
 
   return (

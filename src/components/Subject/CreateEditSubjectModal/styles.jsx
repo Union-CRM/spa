@@ -139,6 +139,7 @@ export const TextArea = styled.textarea`
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
   resize: none;
+  padding-left: 2%;
   position: relative;
   @media (min-width: 1355px) and (max-width: 1824px) {
     height: 70px;
@@ -196,7 +197,7 @@ export const DivStatus = styled.div`
 `;
 
 export const DivDescription = styled.div`
-  grid-row: 6;
+  grid-row: 5;
   width: 90%;
   height: auto;
   display: grid;

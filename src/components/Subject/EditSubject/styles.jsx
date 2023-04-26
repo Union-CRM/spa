@@ -123,6 +123,7 @@ export const Input = styled.input`
   background-color: ${(props) => props.backgroundInput || "rgba(0, 0, 0, 0)"};
   display: block;
   position: relative;
+  padding-left: 2%;
   @media (min-width: 1355px) and (max-width: 1824px) {
     height: 25px;
   }
@@ -132,6 +133,7 @@ export const TextArea = styled.textarea`
   height: ${(props) => props.heightInput || "80px"};
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
+  padding-left: 2%;
   border: 2px solid #888c95;
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
@@ -186,7 +188,6 @@ export const DivSubject = styled.div`
 
 export const DivStatus = styled.div`
   grid-row: 5;
-  grid-template-columns: 50% 50%;
   width: 90%;
   height: 100%;
   display: grid;

@@ -86,7 +86,7 @@ export const Container = styled.div`
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   z-index: 1000;
-  grid-template-rows: 15% 75% 10%;
+  grid-template-rows: 10% 75% 10%;
   @media (min-width: 100px) and (max-width: 502px) {
     height: 81vh;
     width: 100%;
@@ -112,22 +112,20 @@ export const Form = styled.div`
   width: 93%;
   padding-left: 7%;
   grid-row: 2;
-  grid-template-columns: 40% 0.1% 60%;
-  grid-template-rows: 33.3% 33.3% 33.3%;
+  grid-template-columns: 30% 70%;
   @media (min-width: 1600px) {
   }
 `;
 
 export const Input = styled.input`
   height: ${(props) => props.heightInput || "28px"};
-  width: ${(props) => props.widthInput || "100%"};
+  width: ${(props) => props.widthInput || "90%"};
   border-radius: 5px;
   border: 2px solid #888c95;
-
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
+  border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
   @media (min-width: 1600px) {
-    width: 20px;
   }
 `;
 
@@ -139,35 +137,38 @@ export const Label = styled.label`
 `;
 
 // Divs
-
-export const DivDate = styled.div`
-  grid-row: 1;
-  width: 90%;
-  height: 100%;
+export const DivColumnOne = styled.div`
+  grid-column: 1;
   display: grid;
 `;
 
+export const DivColumnTwo = styled.div`
+  grid-column: 2;
+  padding-left: 3%;
+  display: grid;
+  width: 89%;
+`;
+
+export const DivDate = styled.div`
+  width: 93%;
+  height: 100%;
+  display: grid;
+  padding-top: 2.5%;
+`;
+
 export const DivStart = styled.div`
-  grid-row: 2;
   width: 93%;
   height: 100%;
   display: grid;
 `;
 
 export const DivFinish = styled.div`
-  grid-row: 3;
   width: 93%;
-  height: 100%;
-  display: grid;
-`;
-
-export const DivGuest = styled.div`
-  grid-row: 1;
-  width: 90%;
+  align-self: flex-end;
+  flex: 0;
+  display: flex;
   height: auto;
   display: grid;
-  grid-column: 3;
-  margin-bottom: 16%;
 `;
 
 // Button Save and Cancel
@@ -186,4 +187,12 @@ export const PositionButtonCancel = styled.div``;
 
 export const ClickButton = styled.div`
   display: block;
+`;
+
+export const InputTime = styled.input`
+  width: 100%;
+  border-radius: 5px;
+  height: 28px;
+  border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
+  background-color: rgba(0, 0, 0, 0);
 `;

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const ContainerCards = styled.li`
+export const ContainerCards = styled.div`
   
   margin-top: 15px;
   margin-left: 8%;
@@ -10,7 +10,7 @@ export const ContainerCards = styled.li`
   position: relative;
   display: grid;
   height: fit-content;
-  width: auto;
+  width: 30vw;  
   max-width: 100%;
   grid-template-columns: 60% 39%;
   grid-column-gap: 1%;
@@ -133,7 +133,6 @@ ${(props) => {
     justify-content: center;
     margin-bottom: 3%;
     margin-top:5px;
-    
 `
 
 export const DivPhoto = styled.div`
@@ -184,13 +183,11 @@ export const TextEmail = styled.div`
     display: inline-flex;
     box-sizing: border-box;
     position: relative;
-    
     grid-template-rows: auto;
    `;
 
 export const TextGuests = styled.div`
-    display: inline-flex;
-    box-sizing: border-box;
+    display: flex;
   `;
 
 
@@ -226,7 +223,7 @@ export const DivUserInformation = styled.div`
   height: fit-content;
   margin-top: 3%;
   max-width: 100%;
-  width: fit-content
+  width: fit-content;
   
 `
 
@@ -239,29 +236,28 @@ grid-template-rows: 30% 70%;
 
 `
 export const Email = styled.div`
-
-overflow-x: auto;
-width: auto;
-  
-&::-webkit-scrollbar {
+  overflow-x: auto;
   width: auto;
-  height: 8px;
+  
+  &::-webkit-scrollbar {
+    width: auto;
+    height: 8px;
 }
 
-&::-webkit-scrollbar-track {
-  border-radius: 10px;
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
 }
 
-&::-webkit-scrollbar-track-piece {
-  background-color: #949494;
-  border-radius: 10px;
+  &::-webkit-scrollbar-track-piece {
+    background-color: #949494;
+    border-radius: 10px;
 }
 
-&::-webkit-scrollbar-thumb {
-  height: 50%;
-  background-color: #4b4b4b;
-  width: 15px;
-  border-radius: 10px;
+  &::-webkit-scrollbar-thumb {
+    height: 50%;
+    background-color: #4b4b4b;
+    width: 15px;
+    border-radius: 10px;
 }
 
   
@@ -289,3 +285,18 @@ export const DivIcon = styled.div`
   z-index: 5;
 `
 
+export const DivGuests = styled.div`
+  width: fit-content;
+  color: #1E2222;
+  font-size: 12px;
+`
+
+export const SpanGuests = styled.span`
+  color: #888888;
+  font-size: 12px;
+  margin-left: 1%;
+`
+
+export const NameUser = styled.div`
+  font-size: 12px;
+`

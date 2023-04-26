@@ -61,6 +61,7 @@ export const DivSear = styled.div`
 export const Search = styled.div`
   width: 90%;
   height: 100%;
+  background: #ffffff;
 `;
 
 export const GoSearch = styled.input`
@@ -70,6 +71,7 @@ export const GoSearch = styled.input`
   border: none;
   padding-left: 5px;
   border-radius: 8px;
+  background: #ffffff;
   ::-webkit-input-placeholder {
     color: #9fa6bc;
   }

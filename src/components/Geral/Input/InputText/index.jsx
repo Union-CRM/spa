@@ -16,7 +16,8 @@ const InputTextArea = (props) => {
             placeholder={props.placeholder}
             widthInput={props.widthText}
             value={name}
-            onChange={(event) => setName(event.target.value)}
+            required={props.required}
+            onChange={props.onChange}
           />
         </Label>
       </Container>

@@ -9,18 +9,13 @@ import {
   Span,
   ContainerFather,
 } from "./styles";
-import { useClientContext } from "../../../hook/useClientContent";
-import { useEffect, useRef } from "react";
-import {usePlannerContext} from "../../../hook/usePlannerContext";
-
-
+import { usePlannerContext } from "../../../hook/usePlannerContext";
 
 const ModalDiscardChanges = () => {
-
-
-  const {planner: modalDiscard, 
-    setModalDiscard, setModal, 
-    setModalEdit, setModalCreate, 
+  const {
+    setModalDiscard,
+    setModalEdit,
+    setModalCreate,
     setModalReschedule,
     setModalSave,
     setModalFollowUp,
@@ -29,10 +24,7 @@ const ModalDiscardChanges = () => {
     setModalPopUpFinished,
   } = usePlannerContext();
 
-  
-
-  const handleModal= () => {
-    
+  const handleModal = () => {
     setModalEdit(false);
     setModalCreate(false);
     setModalReschedule(false);
@@ -42,8 +34,7 @@ const ModalDiscardChanges = () => {
     setModalRemark(false);
     setModalPopUpCanceled(false);
     setModalPopUpFinished(false);
-    
-  }
+  };
 
   return (
     <ContainerFather>
@@ -54,12 +45,8 @@ const ModalDiscardChanges = () => {
               <span>?!</span>
             </Circle>
             <Span>{`Discard Changes?`}</Span>
-            <DivSave onClick={handleModal}>
-              <ButtonDefault
-                type={"userSave"}
-                sizeFont={"1rem"}
-                name={`Yes,`}
-              />
+            <DivSave onClick={() => handleModal()}>
+              <ButtonDefault type={"userSave"} sizeFont={"1rem"} name={`Yes`} />
             </DivSave>
             <DivCancel onClick={() => setModalDiscard(false)}>
               <ButtonDefault

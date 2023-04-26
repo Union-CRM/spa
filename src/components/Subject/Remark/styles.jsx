@@ -40,16 +40,16 @@ export const ContainerCards = styled.div`
 export const CardRemark = styled.div`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           border-bottom: 8px solid #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           border-bottom: 8px solid #00953b;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
           border-bottom: 8px solid #771300;
         `;
@@ -86,16 +86,16 @@ export const Circle = styled.div`
 export const IconOpenClose = styled.button`
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           background-color: #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           background-color: #00953b;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
           color: #771300;
         `;
@@ -109,25 +109,29 @@ export const IconOpenClose = styled.button`
   width:100%;
   height: 100%;
   border: none;
-  cursor: pointer;
   justify-content: center;
   background-color: transparent;
   bottom: 0px;
+  cursor: pointer;
   display: flex;
   transform: rotateX(180deg);
+  @media (min-width: 1650px) and (max-width: 2500px) {
+    top: 0;
+    position: absolute;
+  }
   svg {
     ${(props) => {
       switch (props.$mode) {
-        case "Finished":
+        case "FINISHED":
           return css`
             color: #008585;
           `;
-        case "Progress":
+        case "IN PROGRESS":
           return css`
             color: #00953b;
           `;
 
-        case "Canceled":
+        case "CANCELED":
           return css`
             color: #771300;
           `;
@@ -154,51 +158,18 @@ export const DivGlobalCard = styled.div`
 `;
 
 export const DivDate = styled.div`
-${(props) => {
-  switch (props.$mode) {
-    case "Finished":
-      return css`
-        color: #008585;
-      `;
-    case "Progress":
-      return css`
-        color: #00953b;
-      `;
-
-    case "Canceled":
-      return css`
-        color: #771300;
-      `;
-
-    default:
-      return css`
-        color: #6e6b6b;
-      `;
-  }
-}}
-}
-height:50px;
-width:90%;
-padding-top:0%;
-text-align:left;
-padding-left:3%;
-border-right:2px solid #EFF1F6;
-svg {
-  width:13px;
-  height:13px;
-span {
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           color: #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           color: #00953b;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
           color: #771300;
         `;
@@ -209,67 +180,67 @@ span {
         `;
     }
   }}
-}
-  font-size:0.82rem;
-}
-p {
-  font-size:0.9rem;
-  color:#000 !important;
-  font-weight:900;
-}
-@media (min-width: 1700px) and (max-width: 2500px) {
-  span {
-    font-size:1rem;
+  height:50px;
+  width: 100%;
+  padding-top: 0%;
+  text-align: left;
+  padding-left: 2%;
+  svg {
+    width: 13px;
+    height: 13px;
   }
-}
+  span {
+    ${(props) => {
+      switch (props.$mode) {
+        case "FINISHED":
+          return css`
+            font-size: 0.82rem;
+            color: #008585;
+          `;
+        case "IN PROGRESS":
+          return css`
+            font-size: 0.82rem;
+            color: #00953b;
+          `;
+
+        case "CANCELED":
+          return css`
+            font-size: 0.82rem;
+            color: #771300;
+          `;
+
+        default:
+          return css`
+            color: #6e6b6b;
+          `;
+      }
+    }}
+  }
+  p {
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 900;
+  }
+  @media (min-width: 1700px) and (max-width: 2500px) {
+    span {
+      font-size: 1rem;
+    }
+  }
 `;
 
 export const DivDateReturn = styled.div`
-${(props) => {
-  switch (props.$mode) {
-    case "Finished":
-      return css`
-        color: #008585;
-      `;
-    case "Progress":
-      return css`
-        color: #00953b;
-      `;
-
-    case "Canceled":
-      return css`
-        color: #771300;
-      `;
-
-    default:
-      return css`
-        color: #6e6b6b;
-      `;
-  }
-}}
-}
-height:50px;
-width:100%;
-padding-top:0%;
-text-align:left;
-padding-left:2%;
-svg {
-  width:13px;
-  height:13px;
-}
-span {
   ${(props) => {
     switch (props.$mode) {
-      case "Finished":
+      case "FINISHED":
         return css`
           color: #008585;
         `;
-      case "Progress":
+      case "IN PROGRESS":
         return css`
           color: #00953b;
         `;
 
-      case "Canceled":
+      case "CANCELED":
         return css`
           color: #771300;
         `;
@@ -280,19 +251,52 @@ span {
         `;
     }
   }}
-}
-  font-size:0.82rem;
-}
-p {
-  font-size:0.9rem;
-  color:#000;
-  font-weight:900;
-}
-@media (min-width: 1700px) and (max-width: 2500px) {
-  span {
-    font-size:1rem;
+  height:50px;
+  width: 100%;
+  padding-top: 0%;
+  text-align: left;
+  padding-left: 2%;
+  svg {
+    width: 13px;
+    height: 13px;
   }
-}
+  span {
+    ${(props) => {
+      switch (props.$mode) {
+        case "FINISHED":
+          return css`
+            font-size: 0.82rem;
+            color: #008585;
+          `;
+        case "IN PROGRESS":
+          return css`
+            font-size: 0.82rem;
+            color: #00953b;
+          `;
+
+        case "CANCELED":
+          return css`
+            font-size: 0.82rem;
+            color: #771300;
+          `;
+
+        default:
+          return css`
+            color: #6e6b6b;
+          `;
+      }
+    }}
+  }
+  p {
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 900;
+  }
+  @media (min-width: 1700px) and (max-width: 2500px) {
+    span {
+      font-size: 1rem;
+    }
+  }
 `;
 
 // PHOTO //
@@ -310,34 +314,33 @@ export const DivPhotoII = styled.div`
 `;
 
 export const Photo = styled.div`
-${(props) => {
-  switch (props.$mode) {
-    case "Finished":
-      return css`
-        border: 2px solid #008585;
-      `;
-    case "Progress":
-      return css`
-        border: 2px solid #00953b;
-      `;
+  ${(props) => {
+    switch (props.$mode) {
+      case "FINISHED":
+        return css`
+          border: 2px solid #008585;
+        `;
+      case "IN PROGRESS":
+        return css`
+          border: 2px solid #00953b;
+        `;
 
-    case "Canceled":
-      return css`
-        border: 2px solid #771300;
-      `;
+      case "CANCELED":
+        return css`
+          border: 2px solid #771300;
+        `;
 
-    default:
-      return css`
-        color: #6e6b6b;
-      `;
-  }
-}}
-}
+      default:
+        return css`
+          color: #6e6b6b;
+        `;
+    }
+  }}
   width: 40px;
   height: 40px;
   display: flex;
-  font-size:0.8rem;
-  font-weight:600;
+  font-size: 0.8rem;
+  font-weight: 600;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -385,12 +388,33 @@ export const ContainerComplete = styled.div`
   position: relative;
   display: ${(props) => (props.$mode ? "none" : "block")};
   visibility: ${(props) => (props.$mode ? "hidden" : "visible")};
-  z-index: 99999999;
-  padding-top: 2%;
   padding-left: 3%;
   z-index: 99999999;
   padding-top: 2%;
   padding-left: 3%;
+`;
+
+export const NoteRemark = styled.div`
+  width: 98%;
+  height: 100%;
+  padding-left: 0%;
+  padding-bottom: 0%;
+  opacity: 0.8;
+  font-weight: 600;
+  font-size: 0.84rem;
+  position: relative;
+  visibility: ${(props) => (props.$mode ? "hidden" : "visible")};
+  span {
+    position: relative;
+    display: block;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding-top: 0%;
+    padding-right: 5%;
+    text-align: justify;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const NoteText = styled.div`
@@ -412,8 +436,8 @@ export const NoteText = styled.div`
     text-align: justify;
     width: 100%;
     height: 100%;
-    min-height: 200px;
-    max-height: 220px;
+    min-height: 185px;
+    max-height: 140px;
     font-weight: 500;
     overflow-y: scroll;
     &::-webkit-scrollbar {
@@ -453,4 +477,5 @@ export const IconTag = styled.div`
   padding-left: 3%;
   padding-bottom: 10%;
   cursor: pointer;
+  z-index: 100000;
 `;

@@ -1,58 +1,86 @@
 import React, { useState } from 'react'; // Importar useState para criar estado para email e senha
 import IconSystem from '../../assets/IconSystem';
 import ButtonDefault from '../../assets/Buttons/ButtonDefault';
+import LoginProblems from '../../components/Geral/LoginModals/LoginProblems';
+import LoginInvalid from '../../components/Geral/LoginModals/LoginInvalid';
+import AcessBlocked from '../../components/Geral/LoginModals/AcessBlocked';
 import { Container,DivTcs,Content,LogoDiv,Form,DivIcons,Label,Span,Input,DivTerms,
-    DivWelcome,TextTerm,LoginBt,DivImgs,DivEmailIcon,DivPassWIcon} from './styles';
-import Headline from '../../assets/FontSystem/Headline';
+    DivWelcome,TextTerm,LoginBt,DivImgs,DivEmailIcon,DivPassWIcon,EnterUser,ButtonEnterUser,ForgotPasswordADM,DivModal} from './styles';
+import Headline from '../../assets/FontSystem/Headline'
 import axios from 'axios';
 
-function LoginPage() {
+function LoginPageAdmin() {
 
   const [email, setEmail] = useState(''); // Criar estado para email com o hook useState
   const [password, setPassword] = useState(''); // Criar estado para senha com o hook useState
+  const [invalid,setInvalid] = useState(false);
+  const [loginQtd, setLoginQtd] = useState(1);
+  const [loginProblems, setLoginProblems] = useState(false);
+  const[isActive,setIsActive] = useState(false);
+  const [blocked,setBlocked] = useState(false); 
 
     localStorage.setItem("token","");
 
     async function handleLogin(event) { // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
-      
+    
       event.preventDefault(); // Impedir comportamento padrão de submissão do formulário
-        
-
-        // O codigo abaixo representa a verificação do login via endpoint (FUNCIONANDO)
-        //'http://ec2-18-230-74-206.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login'
-        // Só utilizar quando for apresentar ao Giba.
-
-        //teste
-     
-        if (email !== "" && password !== "") { // Verificar email e senha preenchidos e tamanho mínimo da senha
-            const { data } = await axios.post('http://ec2-18-230-74-206.sa-east-1.compute.amazonaws.com:8081/union/v1/users/login', {
+      
+        if (email !== "" && password !== "" && loginQtd <= 3) { // Verificar email , senha preenchida e quantidade de tentativas.
+          console.log("teste")
+            
+            const { data } = await axios.post('http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/login', {
                 email,
                 password,
-  
             }).catch(function (error) {
-             
-                if (error.response) {
-                // el.style.visibility = "visible";
-                setEmail('');
-                setPassword('');
-                } else if (error.request) {
-                console.error(error.request);
-                } else {
-                console.error('Error', error.message);
-                }
+
+              console.log("Login ou senha incorreta");
+              setInvalid(true);
+
+              if(loginQtd==3){
+                console.log("bloqueado");
+                
+                setIsActive(true);  
+                setBlocked(true);
+                setInvalid(false);
+                setLoginQtd(0);
+                console.log(loginQtd);
+              }
+              else{
+                setLoginQtd(loginQtd+1)
+                console.log(loginQtd);
+              }
+  
             });
             
-
-           /* localStorage.setItem('token', data.token);
-            window.location.href = '/home';*/
+            localStorage.setItem('token', data.token);
+            window.location.href = '/home';
+        
+        }      
+        else if (!loginProblems){
+          console.log("Login ou senha incorreta ( Vazio )");
+          event.preventDefault();
+          setInvalid(true);
         }
+        
       
-      localStorage.setItem('token', "data.token");
+      /*localStorage.setItem('token', "data.token");
       window.location.href = '/home';
-      console.log("teste");
+      console.log("teste");*/
 
+    } 
+
+    function CloseModal(){
+        
+      setIsActive(false);
+      setLoginQtd(1);
+      setLoginProblems(false);
     }
-  
+    
+    const handleBackgroundClick = (e)=>{
+      if(e.target === e.currentTarget){
+          CloseModal();
+      }
+    };
   return(
     <>
     <Container>
@@ -76,10 +104,11 @@ function LoginPage() {
           <LogoDiv>
             <IconSystem icon="LogoUnion" />
           </LogoDiv>
+          {invalid && <LoginInvalid/>}
           <Form onSubmit={handleLogin}> {/* Adicionar evento de submissão de formulário */}
             <Label>
               <Span>Email</Span>
-              <Input placeholder='user@tcs.com' value={email} onChange={(e) => setEmail(e.target.value)} />
+              <Input type='email' placeholder='user@tcs.com' value={email} onChange={(e) => setEmail(e.target.value)} />
               <DivEmailIcon>
                 <IconSystem icon="Email2" />
               </DivEmailIcon>
@@ -92,10 +121,25 @@ function LoginPage() {
               <Input type="password" placeholder= '●●●●●●●●' value={password} onChange={(e) => setPassword(e.target.value)} />
            </Label>  
 
+           < ForgotPasswordADM onClick={()=>setLoginProblems(true)}>Forgot password?</ForgotPasswordADM>
+           
+           {loginProblems && (       
+            <DivModal onClick={handleBackgroundClick} $mode={loginProblems}>    
+            <LoginProblems typeUser={"user"}/>
+            </DivModal>
+           )}
+           
+
            <LoginBt>
-                    <ButtonDefault name={"Login"} type={"userSave"} sizeFont={"1.5em"}></ButtonDefault>
+                    <ButtonDefault name={"Login"} type={"adminSave"} sizeFont={"1.5em"}></ButtonDefault>
             </LoginBt>
         </Form>
+        <DivModal onClick={handleBackgroundClick} $mode={isActive}>
+        {
+          blocked && (
+          <AcessBlocked/>
+       )}  
+      </DivModal>
     </Content>
  </Container> 
                       
@@ -104,4 +148,4 @@ function LoginPage() {
 }
 
    
-export default LoginPage;
+export default LoginPageAdmin;

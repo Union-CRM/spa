@@ -23,15 +23,17 @@ import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import subjectList from "../../../context/SubjectContext";
 import { useClientContext } from "../../../hook/useClientContent";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
+import { useFetchSubject } from "../../../hook/useFetchSubject";
+import { useFetchSubjectStatus } from "../../../hook/useFetchSubjectStatus";
 
 const Subject = (props) => {
   const { setModal, title, id } = props;
-  const { client: clientList} = useClientContext();
-
+  const { client: clientList } = useClientContext();
+  const { updateSubject } = useFetchSubject();
+  const { subjectFinished, subjectCanceld } = useFetchSubjectStatus();
   // CLOSE E SAVE ////////////
   const { setModalDetails, setModalEdit } = useSubjectContext();
-
-  const { toggleState, setToggleState } = useSubjectContext();
+  const { toggleState, setToggleState, loadData } = useSubjectContext();
 
   const closeModal = () => {
     setModalDetails(true);
@@ -77,14 +79,11 @@ const Subject = (props) => {
   useEffect(() => {
     if (props.title === "Edit Subject") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
+
       setStatus(subject.status);
       setSubject(subject.subject_title);
-      setManager(subject.manager);
       setSelectedClient(subject.client);
-      setEmail(subject.client_email);
-      setRelease(subject.release);
-      setBusiness(subject.business);
-      setDescription(subject.description);
+      setDescription(subject.subject_text);
     }
   }, [id]);
 
@@ -93,36 +92,28 @@ const Subject = (props) => {
   const editSubject = () => {
     const newSubject = {
       id: id,
-      status: status,
-      manager: manager,
-      client: selectedClient,
-      client_email: email,
-      release: release,
-      business: business,
-      subject_title: subject,
-      description: description,
+      title: subject,
+      text: description,
+      status_id: status,
     };
-    if (
-      status &&
-      manager &&
-      selectedClient &&
-      email &&
-      release &&
-      business &&
-      subject &&
-      description
-    ) {
-      const noId = subjectsList.filter((item) => item.id !== id);
-      setSubjectList([...noId, newSubject]);
-      setModalDetails(true);
+
+    console.log(newSubject);
+    if (subject && description && status) {
+      if (status === "FINISHED") {
+        subjectFinished(id, newSubject);
+      } else if (status === "CANCELED") {
+        subjectCanceld(id, newSubject);
+      }
+      updateSubject(id, newSubject);
       setModalEdit(false);
+      setModalDetails(true);
       setToggleState(0);
     } else {
       setFlag(true);
     }
   };
 
-  // PUXANDO OS CLIENTS DO CLIENT LIST
+  // PUXANDO OS CLIENTS DO CLIENT LIST //
 
   useEffect(() => {
     if (selectedClient) {
@@ -164,20 +155,18 @@ const Subject = (props) => {
             <H1>{title} </H1>
           </PositionTitle>
 
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <DivName>
               <Label>
                 Client Name
-                <SingleSelect
-                  set={(client) => setSelectedClient(client)}
-                  sizeSingle={"100%"}
-                  sizeMenu={"100%"}
-                  name={client}
+                <Input
+                  onChange={(event) => setSelectedClient(event.target.value)}
+                  widthInput={"98% !important"}
+                  backgroundInput={"#D9D9D9"}
                   options={optionsClient}
                   value={selectedClient}
-                  onChange={{ value: selectedClient }}
                   placeholder={flag && !selectedClient ? "" : ""}
-                  required
+                  disabled
                 />
               </Label>
             </DivName>
@@ -199,7 +188,7 @@ const Subject = (props) => {
                 ReleaseTrain
                 <Input
                   onChange={(event) => setRelease(event.target.value)}
-                  widthInput={"100% !important"}
+                  widthInput={"98% !important"}
                   backgroundInput={"#D9D9D9"}
                   value={release}
                   disabled
@@ -211,7 +200,7 @@ const Subject = (props) => {
               <Label>
                 Email
                 <Input
-                  widthInput={"100% !important"}
+                  widthInput={"98% !important"}
                   backgroundInput={"#D9D9D9"}
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
@@ -224,7 +213,7 @@ const Subject = (props) => {
               <Label>
                 Subject
                 <Input
-                  widthInput={"100% !important"}
+                  widthInput={"98% !important"}
                   name={subject}
                   value={subject}
                   set={(subject) => setSubject(subject)}
@@ -239,8 +228,8 @@ const Subject = (props) => {
               <Label>
                 Status
                 <SingleSelect
-                  sizeMenu={"90%"}
-                  sizeSingle={"90%"}
+                  sizeMenu={"100%"}
+                  sizeSingle={"100%"}
                   options={status_mok}
                   onChange={(event) => setStatus(event.target.value)}
                   set={(status) => setStatus(status)}
@@ -248,25 +237,13 @@ const Subject = (props) => {
                   placeholder={flag && !status ? "" : ""}
                 />
               </Label>
-
-              <SingleSelect
-                label={"Manager"}
-                value={manager}
-                placeholder={flag && !manager ? "Required field" : ""}
-                sizeMenu={"100%"}
-                sizeSingle={"100%"}
-                required
-                options={manager_mok}
-                onChange={(choice) => setUserChoice(choice)}
-                set={(manager) => setManager(manager)}
-              />
             </DivStatus>
 
             <DivDescription>
               <Label>
                 Description
                 <TextArea
-                  widthInput={"100% !important"}
+                  widthInput={"98% !important"}
                   name={description}
                   value={description}
                   placeholder={flag && !description ? "Required field" : ""}
@@ -280,7 +257,7 @@ const Subject = (props) => {
           </Form>
 
           <DivButton>
-            <ClickButton onClick={handleSubmit}>
+            <ClickButton onClick={() => handleSubmit()}>
               <ButtonDefault
                 type={"userSave"}
                 weightFont={"500"}
@@ -306,14 +283,8 @@ const Subject = (props) => {
 
 export default Subject;
 
-const manager_mok = [
-  { id: 1, value: "Helio Endo", label: "Helio Endo" },
-  { id: 2, value: "Felipe Flaibam", label: "Felipe Flaibam" },
-  { id: 3, value: "Gilberto Anderson", label: "Gilberto Anderson" },
-];
-
 const status_mok = [
-  { id: 1, value: "Progress", label: "Progress" },
-  { id: 2, value: "Finished", label: "Finishedl" },
-  { id: 3, value: "Canceled", label: "Canceled" },
+  { id: 1, value: "IN PROGRESS", label: "IN PROGRESS" },
+  { id: 2, value: "FINISHED", label: "FINISHED" },
+  { id: 3, value: "CANCELED", label: "CANCELED" },
 ];

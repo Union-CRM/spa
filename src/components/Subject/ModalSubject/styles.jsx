@@ -70,7 +70,7 @@ export const Container = styled.div`
     }
   }}
   width:75%;
-  min-width: 350px;
+  min-width: 390px;
   height: 100%;
   z-index: 1000;
   grid-column: 2;
@@ -95,7 +95,7 @@ export const Container = styled.div`
 /// CONTAINER GLOBAL BORDER ///
 
 export const BodyAll = styled.div`
-  width: 92%;
+  width: 95%;
   height: 100%;
   position: relative;
   align-items: center;
@@ -111,6 +111,9 @@ export const ContainerBorder = styled.div`
   box-shadow: 1px 0px 4px rgba(0, 0, 0, 0.25);
   background-color: transparent;
   @media (min-width: 1700px) and (max-width: 2500px) {
+  }
+  @media (min-width: 100px) and (max-width: 1500px) {
+    height: 68%;
   }
 `;
 
@@ -169,7 +172,10 @@ export const Status = styled.div`
   align-items: center;
   justify-content: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  span {
+  color: #fff;
+  text-transform: lowercase;
+  span:first-letter {
+    text-transform: uppercase;
     font-size: 0.8rem;
     color: #fff;
   }

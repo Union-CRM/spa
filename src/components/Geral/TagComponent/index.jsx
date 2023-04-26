@@ -1,22 +1,34 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { Label, Container } from "./styles";
+import { Label, Container, DivSvg } from "./styles";
+import {ReactComponent as Contact} from "../../../assets/svg/Contact.svg"
 
 export const TagComponent = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const colors=["#FFC0CB","#DDA0DD","#F5DEB3","#98FB98","#87CEEB"]
-  
+  const colors = ["#FFC0CB", "#DDA0DD", "#F5DEB3", "#98FB98", "#87CEEB"];
+
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
- 
 
-
-  const options = props.options.map((item)=>({value:item.value,label:item.label,color:colors[Math.floor(Math.random() * (colors.length-1))]}));//props.options;
+  const options = props.options.map((item) => ({
+    value: item.value,
+    label: item.label,
+    color: colors[Math.floor(Math.random() * (colors.length - 1))],
+  })); //props.options;
   //console.log(options.map((item)=>({value:item.value,label:item.label,color:colors[getRandomInt(colors.length-1)]})))
-  
+
+  const DropdownIndicator = props => {
+    return (
+      <DivSvg>
+        <Contact fill={"#888C95"} width={"20px"}/>
+      </DivSvg>  
+    );
+  };
+
+
   return (
     <>
       <Container>
@@ -24,10 +36,10 @@ export const TagComponent = (props, placeholder, idTagOption) => {
           {props.label}
           <Select
             isMulti
+            components={{ DropdownIndicator, animatedComponents }}
             options={options}
             value={props.tags}
             id={props.idTagOption}
-            components={animatedComponents}
             placeholder={props.placeholder}
             onChange={(item) => props.set(item)}
             isClearable={false}

@@ -5,6 +5,16 @@ export const ContainerRemark = styled.div`
   position: relative;
 `;
 
+export const DivNoRemark = styled.span`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding-top: 1%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+`;
+
 //* BUTTON CREATE NEW REMARK *//
 export const ButtonCreateRemark = styled.div`
   display: flex;
@@ -26,12 +36,10 @@ export const ButtonAdd = styled.button`
         return css`
           border: 1px solid #00953b;
         `;
-
       case "CANCELED":
         return css`
           border: 1px solid #771300;
         `;
-
       default:
         return css`
           background-color: #6e6b6b;
@@ -58,12 +66,10 @@ export const ButtonAdd = styled.button`
           return css`
             color: #00953b;
           `;
-
         case "CANCELED":
           return css`
             color: #771300;
           `;
-
         default:
           return css`
             background-color: #6e6b6b;
@@ -81,7 +87,7 @@ export const ButtonAdd = styled.button`
 
 export const ContainerCards = styled.div`
   width: 98%;
-  height: 100%;
+  height: 300px;
   padding-top: 0%;
   position: relative;
   background-color: ${(props) => (props.$mode ? "#fff" : "transparent")};
@@ -89,7 +95,7 @@ export const ContainerCards = styled.div`
   grid-row: ${(props) => (props.$mode ? "2" : "1")};
   overflow-y: scroll;
   &::-webkit-scrollbar {
-    width: 0px;
+    width: 5px;
     height: 10px;
   }
 
@@ -98,13 +104,22 @@ export const ContainerCards = styled.div`
   }
 
   &::-webkit-scrollbar-track-piece {
-    background-color: white;
-    margin-top: 15px;
+    background-color: transparent;
+    margin-top: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
     height: 80%;
-    background-color: transparent;
+    background-color: #dfdfdf;
+  }
+  @media (min-width: 1500px) and (max-width: 2500px) {
+    height: 380px;
+  }
+  @media (min-width: 1500px) and (max-width: 2500px) {
+    height: 310px;
+  }
+  @media (min-height: 350px) and (max-height: 650px) {
+    height: 385px;
   }
 `;
 
@@ -120,12 +135,10 @@ export const CardRemark = styled.div`
         return css`
           border-bottom: 8px solid #00953b;
         `;
-
       case "CANCELED":
         return css`
           border-bottom: 8px solid #771300;
         `;
-
       default:
         return css`
           background-color: #6e6b6b;
@@ -164,16 +177,14 @@ export const IconOpenClose = styled.button`
         return css`
           background-color: #008585;
         `;
-      case "IN PROGRESS":
+      case "ACTIVE":
         return css`
           background-color: #00953b;
         `;
-
       case "CANCELED":
         return css`
           color: #771300;
         `;
-
       default:
         return css`
           color: #6e6b6b;
@@ -201,12 +212,10 @@ export const IconOpenClose = styled.button`
           return css`
             color: #00953b;
           `;
-
         case "CANCELED":
           return css`
             color: #771300;
           `;
-
         default:
           return css`
             color: #6e6b6b;
@@ -229,39 +238,6 @@ export const DivGlobalCard = styled.div`
 `;
 
 export const DivDate = styled.div`
-${(props) => {
-  switch (props.$mode) {
-    case "FINISHED":
-      return css`
-        color: #008585;
-      `;
-    case "IN PROGRESS":
-      return css`
-        color: #00953b;
-      `;
-
-    case "CANCELED":
-      return css`
-        color: #771300;
-      `;
-
-    default:
-      return css`
-        color: #6e6b6b;
-      `;
-  }
-}}
-}
-height:50px;
-width:90%;
-padding-top:0%;
-text-align:left;
-padding-left:3%;
-border-right:2px solid #EFF1F6;
-svg {
-  width:13px;
-  height:13px;
-span {
   ${(props) => {
     switch (props.$mode) {
       case "FINISHED":
@@ -272,67 +248,61 @@ span {
         return css`
           color: #00953b;
         `;
-
       case "CANCELED":
         return css`
           color: #771300;
         `;
-
       default:
         return css`
           color: #6e6b6b;
         `;
     }
   }}
-}
-  font-size:0.82rem;
-}
-p {
-  font-size:0.9rem;
-  color:#000 !important;
-  font-weight:900;
-}
-@media (min-width: 1700px) and (max-width: 2500px) {
-  span {
-    font-size:1rem;
+  height:50px;
+  width: 100%;
+  padding-top: 0%;
+  text-align: left;
+  padding-left: 2%;
+  svg {
+    width: 13px;
+    height: 13px;
   }
-}
+  span {
+    ${(props) => {
+      switch (props.$mode) {
+        case "FINISHED":
+          return css`
+            color: #008585;
+          `;
+        case "IN PROGRESS":
+          return css`
+            color: #00953b;
+          `;
+        case "CANCELED":
+          return css`
+            color: #771300;
+          `;
+        default:
+          return css`
+            color: #6e6b6b;
+          `;
+      }
+    }}
+    font-size:0.82rem;
+  }
+  p {
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 900;
+  }
+  @media (min-width: 1700px) and (max-width: 2500px) {
+    span {
+      font-size: 1rem;
+    }
+  }
 `;
 
 export const DivDateReturn = styled.div`
-${(props) => {
-  switch (props.$mode) {
-    case "FINISHED":
-      return css`
-        color: #008585;
-      `;
-    case "IN PROGRESS":
-      return css`
-        color: #00953b;
-      `;
-
-    case "CANCELED":
-      return css`
-        color: #771300;
-      `;
-
-    default:
-      return css`
-        color: #6e6b6b;
-      `;
-  }
-}}
-}
-height:50px;
-width:100%;
-padding-top:0%;
-text-align:left;
-padding-left:2%;
-svg {
-  width:13px;
-  height:13px;
-}
-span {
   ${(props) => {
     switch (props.$mode) {
       case "FINISHED":
@@ -343,31 +313,58 @@ span {
         return css`
           color: #00953b;
         `;
-
       case "CANCELED":
         return css`
           color: #771300;
         `;
-
       default:
         return css`
           color: #6e6b6b;
         `;
     }
   }}
-}
-  font-size:0.82rem;
-}
-p {
-  font-size:0.9rem;
-  color:#000;
-  font-weight:900;
-}
-@media (min-width: 1700px) and (max-width: 2500px) {
-  span {
-    font-size:1rem;
+  height:50px;
+  width: 100%;
+  padding-top: 0%;
+  text-align: left;
+  padding-left: 2%;
+  svg {
+    width: 13px;
+    height: 13px;
   }
-}
+  span {
+    ${(props) => {
+      switch (props.$mode) {
+        case "FINISHED":
+          return css`
+            color: #008585;
+          `;
+        case "IN PROGRESS":
+          return css`
+            color: #00953b;
+          `;
+        case "CANCELED":
+          return css`
+            color: #771300;
+          `;
+        default:
+          return css`
+            color: #6e6b6b;
+          `;
+      }
+    }}
+    font-size:0.82rem;
+  }
+  p {
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 900;
+  }
+  @media (min-width: 1700px) and (max-width: 2500px) {
+    span {
+      font-size: 1rem;
+    }
+  }
 `;
 
 // PHOTO //
@@ -385,34 +382,31 @@ export const DivPhotoII = styled.div`
 `;
 
 export const Photo = styled.div`
-${(props) => {
-  switch (props.$mode) {
-    case "FINISHED":
-      return css`
-        border: 2px solid #008585;
-      `;
-    case "IN PROGRESS":
-      return css`
-        border: 2px solid #00953b;
-      `;
-
-    case "CANCELED":
-      return css`
-        border: 2px solid #771300;
-      `;
-
-    default:
-      return css`
-        color: #6e6b6b;
-      `;
-  }
-}}
-}
+  ${(props) => {
+    switch (props.$mode) {
+      case "FINISHED":
+        return css`
+          border: 2px solid #008585;
+        `;
+      case "IN PROGRESS":
+        return css`
+          border: 2px solid #00953b;
+        `;
+      case "CANCELED":
+        return css`
+          border: 2px solid #771300;
+        `;
+      default:
+        return css`
+          color: #6e6b6b;
+        `;
+    }
+  }}
   width: 40px;
   height: 40px;
   display: flex;
-  font-size:0.8rem;
-  font-weight:600;
+  font-size: 0.8rem;
+  font-weight: 600;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -495,16 +489,13 @@ export const NoteText = styled.div`
       width: 10px;
       height: 10px;
     }
-
     &::-webkit-scrollbar-track {
       border-radius: 10px;
     }
-
     &::-webkit-scrollbar-track-piece {
       background-color: transparent;
       margin-top: 5px;
     }
-
     &::-webkit-scrollbar-thumb {
       height: 80%;
       background-color: #dfdfdf;

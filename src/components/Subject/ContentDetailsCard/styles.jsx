@@ -70,7 +70,7 @@ export const DivBusiness = styled.div`
   padding-bottom: 1%;
   span {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: #656464;
   }
   @media (min-width: 1700px) and (max-width: 2500px) {

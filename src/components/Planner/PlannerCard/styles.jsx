@@ -1,35 +1,28 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 export const DivP = styled.div`
   overflow: auto;
   background-color: #f5f7fa;
-
-  width: 40vw;
-  height: fit-content;
-  border-left: 15px solid #007BFF;
+  width: 35vw;
   border-radius: 8px;
   margin-top: -10px;
   overflow: auto;
   position: fixed;
   top: 10%;
-  left: 30%;
-  z-index: 5;
-
+  left: 35%;
+  z-index: 1;
+  @media (max-height: 300px) {
+    height: 75vh;
+  }
   //@media (min-width: 1200px) {
     //width: 100px
-
-
-
 //}
-  
-  
   &::-webkit-scrollbar {
     width: 18px;
     height: 10px;
     margin-right: 10px;
     float: right;
   }
-  
   &::-webkit-scrollbar-track {
     box-shadow: 5px black;
   }
@@ -41,14 +34,36 @@ export const DivP = styled.div`
 
   &::-webkit-scrollbar-thumb {
     height: 80%;
-    background-color: #afb2bb;
+    background-color: #E3E6ED;
     margin-left: 20px;
     width: 15px;
     border-right: 6px solid #f5f7fa;
     border-top: 12px solid #f5f7fa;
   }
+  ${(props) => {
+    if(props.$mode > 3){
+      return css`
+      height: 80vh;
+      `;
+    }else {
+      return css`
+        height: fit-content;
+      `
+    }
+    /*switch (props.$mode) {
+      case (props.$mode >= 3) :
+        return css`
+          height: 80vh;
+        `;
+      case 1:
+        return css`
+          height: fit-content;
+        `;
+    }*/}
 
+  }
   `;
+
   export const Ddata = styled.div`
   display: flex;
   justify-content: right;
@@ -83,3 +98,7 @@ font-size: 20px;
 line-height: 24px;
 `
 
+export const DivCard = styled.div`
+  align-self: center;
+  margin: 0 auto;
+`

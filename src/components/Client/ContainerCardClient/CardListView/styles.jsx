@@ -13,34 +13,59 @@ export const Container = styled.div`
 
 //Cards Clients //
 export const Card = styled.div`
-  ${(props) => {
-    switch (props.$mode) {
-      case "Active":
-        return css`
-          border-left: 7px solid #00953b;
-        `;
-
-      case "Inactive":
-        return css`
-          border-left: 7px solid #7a7a7a;
-        `;
-      default:
-        return css`
-          border-left: 7px solid #6e6b6b;
-        `;
-    }
-  }}
-
-  grid-template-rows:40% 60%;
+  border-left: ${(props) =>
+    props.isActive ? "7px solid #00953b" : "7px solid #7a7a7a"};
+  //border-left: 7px solid ${(props) =>
+    props.checked ? "Active" : "Inactive"};
+  border-left: 7px solid ${(props) => (props.isActive ? "green" : "gray")};
+  grid-template-rows: 40% 60%;
   display: grid;
   border-radius: 8px;
-  background-color: #ffffff;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
   width: auto;
+  cursor: pointer;
   height: 100%;
   z-index: 0 !important;
   padding-left: 10px;
+`;
+
+export const ToggleContainer = styled.label`
+  background-color: ${(props) => (props.isActive ? "#00953b" : "#7a7a7a")};
+  display: inline-block;
+  height: 17.5px;
+  width: 37px;
+  top: 40%;
+  border-radius: 30px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+`;
+
+export const ToggleButton = styled.span`
+  display: inline-block;
+  position: absolute;
+  top: 1px;
+  left: 0px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: ${(props) => (props.checked ? "translateX(22px)" : "")};
+  transition: transform 0.2s ease-in;
+`;
+
+export const InputToggle = styled.input`
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  opacity: 0;
+  cursor: pointer;
 `;
 
 // Div Grid Header the Card //
@@ -124,24 +149,6 @@ export const DivTagsStatus = styled.div`
 `;
 
 export const Status = styled.div`
-  ${(props) => {
-    switch (props.$mode) {
-      case "Active":
-        return css`
-          background-color: #00953b;
-          text-transform: lowercase;
-        `;
-
-      case "Inactive":
-        return css`
-          background-color: #7a7a7a;
-        `;
-      default:
-        return css`
-          background-color: #6e6b6b;
-        `;
-    }
-  }}
   display: flex;
   color: #ffffff;
   width: fit-content;
@@ -152,6 +159,7 @@ export const Status = styled.div`
   justify-content: center;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 2%;
+  background-color: ${(props) => (props.isActive ? "#00953b" : "#7a7a7a")};
 `;
 
 export const TagsSpan = styled.div`
@@ -204,19 +212,6 @@ export const DivToggle = styled.div`
   }}
 `;
 
-export const InputToggle = styled.input`
-  display: block;
-  width: 100%;
-  height: 100%;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-
-  opacity: 0;
-  cursor: pointer;
-`;
 export const LabelToggle = styled.label`
   display: block;
   width: 100%;

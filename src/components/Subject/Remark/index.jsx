@@ -21,57 +21,43 @@ import {
   Circle,
   DivGlobalCard,
   IconTag,
+  NoteRemark,
 } from "./styles";
 
 const Remark = (props) => {
-  // subject status
-
-  const { subject: subjectsList, setSubject: setSubjectList } =
-    useSubjectContext();
-
+  const { subject: subjectsList } = useSubjectContext();
+  const { remarkEdit } = useRemarkContext();
   const { id } = useSubjectContext();
-
   const [status, setStatus] = useState();
+  const { toggleState, setToggleState } = useSubjectContext();
+  const [activeTab, setActiveTab] = useState(0);
+  const [activeContent, setActiveContent] = useState(0);
+  const [date, setDate] = useState();
+  const [dateReturn, setDateReturn] = useState();
 
   useEffect(() => {
-    if (props.title === "DetalhesRemark") {
+    if (props.title === "More Details Remark") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
       setStatus(subject.status);
     }
   }, [id]);
 
-  // Tabs
-  const { toggleState, setToggleState } = useSubjectContext();
-
-  const [activeTab, setActiveTab] = useState(0);
+  useEffect(() => {
+    if (remarkEdit.date) {
+      setDate(remarkEdit.date.split("T")[0]);
+      setDateReturn(remarkEdit.date_return.split("T")[0]);
+    }
+  }, [remarkEdit]);
 
   const toggleTab = (index) => {
     setToggleState(index);
     setActiveTab(index);
     setActiveContent(index);
   };
-  const [activeContent, setActiveContent] = useState(0);
 
-  // Remark //
-
-  const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
-
-  const { idRemark, setIdRemark } = useRemarkContext();
-
-  const [date, setDate] = useState();
-  const [dateReturn, setDateReturn] = useState();
-  const [noteText, setNoteText] = useState();
-
-  useEffect(() => {
-    if (props.title === "DetalhesRemark") {
-      const remark = remarkList.filter(
-        (item) => item.idRemark === props.idRemark
-      )[0];
-      setDate(remark.date);
-      setDateReturn(remark.dateReturn);
-      setNoteText(remark.noteText);
-    }
-  }, [idRemark]);
+  const handleClick = () => {
+    setToggleState(1);
+  };
 
   return (
     <ContainerRemark>
@@ -80,48 +66,51 @@ const Remark = (props) => {
           <DivGlobalCard>
             <DivDate $mode={status}>
               <FaRegCalendarAlt $mode={status} />
-              <span> Date </span>
-              <p onChange={(event) => setDate(event.target.value)}>{date}</p>
+              <span> Initial Date</span>
+
+              <p>{date}</p>
             </DivDate>
 
             <DivDateReturn $mode={status}>
               <FaRegCalendarAlt $mode={status} />
-              <span> Date Return </span>
-              <p onChange={(event) => setDateReturn(event.target.value)}>
-                {dateReturn}
-              </p>
+              <span> Final Date</span>
+              <p>{dateReturn}</p>
             </DivDateReturn>
 
             <DivPhoto>
               <DivPhotoII>
-                <Photo $mode={status}>GA</Photo>
+                <Photo $mode={status}>{Split(remarkEdit.user_name)}</Photo>
               </DivPhotoII>
             </DivPhoto>
 
             <DivDadosRemark>
               <NameEmail>
-                Gilberto Anderson Teste
-                <span>2534659</span>
+                {SplitName(remarkEdit.user_name)}
+                <span>{remarkEdit.user_id}</span>
               </NameEmail>
             </DivDadosRemark>
 
-            <IconTag onClick={() => toggleTab(5)}>
-              <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
-            </IconTag>
+            {status !== "FINISHED" && status !== "CANCELED" && (
+              <IconTag onClick={() => toggleTab(5)}>
+                <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
+              </IconTag>
+            )}
           </DivGlobalCard>
 
           <ContainerComplete>
+            <NoteRemark>
+              Remark title:
+              <span>{remarkEdit.remark_name}</span>
+            </NoteRemark>
             <NoteText>
               Note Text:
-              <span onChange={(event) => setNoteText(event.target.value)}>
-                {noteText}
-              </span>
+              <span>{remarkEdit.text}</span>
             </NoteText>
           </ContainerComplete>
 
           <IconOpenClose $mode={status}>
             <Circle>
-              <FaChevronCircleDown onClick={() => toggleTab(1)} />
+              <FaChevronCircleDown onClick={() => handleClick()} />
             </Circle>
           </IconOpenClose>
         </CardRemark>
@@ -131,3 +120,23 @@ const Remark = (props) => {
 };
 
 export default Remark;
+
+function Split(n) {
+  const user = n ? n : "";
+  var userSplit = user.split(" ");
+  var user2 =
+    userSplit[0].split("")[0] +
+    " " +
+    userSplit[userSplit.length - 1].split("")[0] +
+    "";
+
+  return user2.toUpperCase();
+}
+
+function SplitName(n) {
+  const user = n ? n : "";
+  var userSplit = user.split(" ");
+  var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
+
+  return user1;
+}
