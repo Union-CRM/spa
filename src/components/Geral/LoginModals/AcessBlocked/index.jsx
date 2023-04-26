@@ -8,6 +8,12 @@ import IconSystem from '../../../../assets/IconSystem';
 const AcessBlocked = (props) =>{
   const iconType = props.typeUser=="adm"  ? "Lock2Adm" :"Lock2";
   const buttonType = props.typeUser=="adm" ? "adminSave" :"userSave";
+
+  function reset(){
+    window.location.href = '/';
+   }
+
+
   return (
     <Container>
         <Title>Acess blocked</Title>
@@ -20,7 +26,7 @@ const AcessBlocked = (props) =>{
         </P>
        
         <DivButton>
-            <ButtonDefault type={buttonType} name={"Reset"} sizeWidth={"250px"} sizeHeight={"47px"} sizeFont={"20px"}></ButtonDefault>
+            <ButtonDefault type={buttonType} name={"Reset"} sizeWidth={"250px"} sizeHeight={"47px"} sizeFont={"20px"} onClick={reset}></ButtonDefault>
         </DivButton>
        
     </Container>

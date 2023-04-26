@@ -6,14 +6,17 @@ export const SubjectContextProvider = ({ children }) => {
   const [subject, setSubject] = useState([{}]);
 
   useEffect(() => {
+    if(localStorage.getItem("token")){
     loadData();
+    }
   }, []);
+
 
   const loadData = async () => {
     var subjects;
     try {
       const response = await axios.get(
-        "http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8089/union/v1/subjects/submissives",
+        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/submissives",
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
