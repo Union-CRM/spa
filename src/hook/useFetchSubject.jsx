@@ -9,7 +9,7 @@ export const useFetchSubject = () => {
   const insertSubject = async (subject) => {
     axios
       .post(
-        `http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8089/union/v1/subjects/create/user/${user.id}`,
+        `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/create/user/${user.id}`,
         {
           subject_title: subject.subject_title,
           subject_text: subject.subject_text,
@@ -34,7 +34,7 @@ export const useFetchSubject = () => {
     //console.log(subject.title + "teste" + subject.text + subject_id);
     axios
       .put(
-        `http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8089/union/v1/subjects/update/${subject_id}`,
+        `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/update/${subject_id}`,
         {
           subject_title: subject.title,
           subject_text: subject.text,

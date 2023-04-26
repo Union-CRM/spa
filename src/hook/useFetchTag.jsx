@@ -10,7 +10,7 @@ export const useFetchTag=(tag)=>{
             var tags;
             try {
 
-                const response = await axios.get('http://ec2-15-229-154-134.sa-east-1.compute.amazonaws.com:8090/union/v1/tags',{
+                const response = await axios.get('http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8090/union/v1/tags',{
                     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
                     tags = response;
             }catch (error) {
