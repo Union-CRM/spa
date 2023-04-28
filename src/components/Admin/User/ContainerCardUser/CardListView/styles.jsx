@@ -97,7 +97,7 @@ export const DivPhoto = styled.div`
 
 export const DivPhotoI = styled.div`
   background-color: #d9d9d9;
-  border: 5px solid #e41165;
+  border: 5px solid ${(props) => (props.isActive ? "#E41165" : "#7a7a7a")};
   width: 50px;
   height: 50px;
   border-radius: 100%;
@@ -195,14 +195,7 @@ export const IconTag = styled.span`
   margin-left: 2px;
 `;
 
-// Styles Icons Edit and Toggle //
-
-export const IconEdit = styled.span`
-  width: 12px;
-  height: 12px;
-  margin-top: 8px;
-  cursor: pointer;
-`;
+// Styles Toggle //
 
 export const DivToggle = styled.div`
   width: 30px;
@@ -305,6 +298,7 @@ export const Dot = styled.div`
   align-self: center;
   margin-right: 3px;
   //overflow-x: visible;
+
   background-color: ${({ bgColor }) => bgColor};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
@@ -413,12 +407,4 @@ export const ContainerFather = styled.div`
 export const DivButton = styled.div`
   padding-top: 1%;
   padding-bottom: 5%;
-  margin-left: 100px;
-`;
-export const PositionEdit = styled.div`
-  width: 12px;
-  height: 12px;
-  margin-top: 8px;
-  cursor: pointer;
-  display: flex;
 `;

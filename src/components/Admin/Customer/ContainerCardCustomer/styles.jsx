@@ -42,7 +42,7 @@ export const ContainerHeaderAndCards = styled.div`
 //* Header Container *//
 
 export const HeaderContainerCards = styled.div`
-  //z-index: 4;
+  z-index: 4;
   grid-row: 1;
   width: auto;
   height: 100%;
@@ -200,7 +200,7 @@ export const DivButton = styled.div`
   width: 90%;
   justify-content: end;
   align-items: center;
-  text-align: center;
+  text-align: left;
 `;
 
 /// Div Buttons Status ///
@@ -257,6 +257,7 @@ export const ButtonActive = styled.button`
   height: fit-content;
   background-color: white;
   margin-right: 3%;
+
   &:hover {
     border-bottom: 2px solid #e41165;
   }
@@ -271,6 +272,7 @@ export const ButtonInactive = styled.button`
     border-bottom: 2px solid #e41165;
   }
 `;
+
 export const DivClose = styled.div`
   position: fixed;
   top: 0px;
@@ -279,5 +281,5 @@ export const DivClose = styled.div`
   height: 100%;
   background-color: black;
   opacity: 55%;
-  z-index: 0;
+  z-index: 5;
 `;

@@ -14,9 +14,8 @@ export const Container = styled.div`
 //Cards Clients //
 export const Card = styled.div`
   border-left: ${(props) =>
-    props.isActive ? "7px solid #00953b" : "7px solid #7a7a7a"};
+    props.isActive ? "7px solid #E5F2FF" : "7px solid #7a7a7a"};
   border-left: 7px solid ${(props) => (props.checked ? "Active" : "Inactive")};
-  border-left: 7px solid ${(props) => (props.isActive ? "green" : "gray")};
   grid-template-rows: 40% 60%;
   display: grid;
   border-radius: 8px;
@@ -107,13 +106,16 @@ export const DivPhotoI = styled.div`
 // Div Name Client, Email and Status/Tags //
 export const DivDadosCard = styled.div`
   text-align: left;
-  width: 96%;
+  width: fit-content;
   height: fit-content;
   display: grid;
   grid-row: 2;
+  border-bottom: ${(props) =>
+    props.isActive ? "2px solid  #e41165" : "2px solid #7a7a7a"};
   align-items: center;
   grid-column: 2;
-  padding-left: 3%;
+
+  padding-top: 40px;
 `;
 
 // Div Icons //
@@ -125,6 +127,7 @@ export const DivIcons = styled.div`
   grid-gap: 5px;
   height: 100%;
   grid-column: 2;
+  padding-top: 7px;
   align-items: center;
 `;
 
@@ -137,42 +140,32 @@ export const DivInfo = styled.div`
   display: grid;
   width: 98%;
   height: auto;
+
   z-index: 0;
   grid-template-rows: auto;
 `;
 
 // Styles Status and tags //
 export const DivTagsStatus = styled.div`
-  margin-top: 2px;
-  display: flex;
-`;
-
-export const Status = styled.div`
-  display: flex;
-  color: #ffffff;
-  width: fit-content;
-  height: 15px;
-  border-radius: 8px;
-  font-size: 14px;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 2%;
-  background-color: ${(props) => (props.isActive ? "#00953b" : "#7a7a7a")};
+  margin-top: 7px;
+  display: grid;
+  justify-content: left;
 `;
 
 export const TagsSpan = styled.div`
   display: flex;
   color: #ffffff;
-  background-color: #007bff !important;
+
+  background-color: ${(props) => (props.isActive ? "#007bff" : "#7a7a7a")};
+
   width: fit-content;
-  height: 15px;
-  border-radius: 8px;
-  font-size: 14px;
+  height: 12px;
+  width: 50px;
+  border-radius: 4px;
+  font-size: 12px;
   align-items: center;
   justify-content: center;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 2%;
   margin-left: 2%;
 `;
 
@@ -369,4 +362,12 @@ export const Span = styled.span`
 
 export const ContainerFather = styled.div`
   z-index: 10;
+`;
+
+export const PositionEdit = styled.div`
+  width: 12px;
+  height: 12px;
+  margin-top: 8px;
+  cursor: pointer;
+  display: flex;
 `;

@@ -18,6 +18,7 @@ import {
   Label,
   DivCalendar,
   DivClose,
+  DivSubject,
 } from "./styles";
 import Grafico from "../../../Grafico";
 import Subtitle from "../../../../assets/FontSystem/Subtitle";
@@ -26,6 +27,7 @@ import { BigCalender } from "../../../Planner/Calendar/index";
 import { useUserContext } from "../../../../hook/useUserContext";
 import Body from "../../../../assets/FontSystem/Body";
 import IconSystem from "../../../../assets/IconSystem";
+import SubjectList from "../../../Subject/SubjectCardListView";
 // hook/usePlannerContext
 
 import "react-tippy/dist/tippy.css";
@@ -37,7 +39,13 @@ import "react-tippy/dist/tippy.css";
 const dateOfTheDay = new Date();
 
 const UserProfile = () => {
-  const { userTarget, modalPlanner, setModalPlanner } = useUserContext();
+  const {
+    userTarget,
+    modalPlanner,
+    setModalPlanner,
+    modalSubject,
+    setModalSubject,
+  } = useUserContext();
 
   const handleClickPlanner = () => {
     setModalPlanner(true);
@@ -45,6 +53,11 @@ const UserProfile = () => {
 
   const handleCloseModal = () => {
     setModalPlanner(false);
+    setModalSubject(false);
+  };
+
+  const handleClickSubject = () => {
+    setModalSubject(true);
   };
   return (
     <>
@@ -52,8 +65,16 @@ const UserProfile = () => {
         <>
           <DivClose onClick={handleCloseModal} />
           <DivCalendar>
-            <BigCalender adimList={true} />
+            <BigCalender adminList={true} />
           </DivCalendar>
+        </>
+      )}
+      {modalSubject && (
+        <>
+          <DivClose onClick={handleCloseModal} />
+          <DivSubject>
+            <SubjectList adminList={true} />
+          </DivSubject>
         </>
       )}{" "}
       <Header>
@@ -78,7 +99,7 @@ const UserProfile = () => {
           <Dot bgColor={userTarget.level > 4 ? "#007bff" : "#F5F7FA"}></Dot>
         </DivLevel>
         <DivButtonUser>
-          <Button>
+          <Button onClick={handleClickSubject}>
             <Label>SUBJECT</Label>
             <Circle>
               <DivIcon>
@@ -99,11 +120,11 @@ const UserProfile = () => {
       </Header>
       <Content>
         <DivClient>
-          <ContainerCards adimList={true} />
+          <ContainerCards adminList={true} />
         </DivClient>
 
         <DivPlanner>
-          <PlannerCard adimList={true} date={dateOfTheDay} />
+          <PlannerCard adminList={true} date={dateOfTheDay} />
         </DivPlanner>
       </Content>
       <Graph1>

@@ -22,13 +22,12 @@ import { useUserContext } from "../../../../hook/useUserContext";
 import { useFetchUser } from "../../../../hook/useFetchUser";
 
 const AddEditUser = (props) => {
-  const { user } = useUserContext();
+  const { user, userTarget, setModalPassword } = useUserContext();
   const [newUser, setNewUser] = useState(entityUser);
   const { createUser } = useFetchUser();
-
-  const [status, setStatus] = useState({ value: "Active" });
+  const [newPSW, setNewPSW] = useState();
   const levelOptions = levels
-    .map((l, index) => {
+    .map((l) => {
       if (l < user.level) {
         return { value: l, label: l };
       }
@@ -52,6 +51,7 @@ const AddEditUser = (props) => {
 
   useEffect(() => {
     if (props.title === "Edit User") {
+      setNewUser(userTarget);
     }
   }, []);
 
@@ -62,7 +62,15 @@ const AddEditUser = (props) => {
     };
     console.log(u);
     if (newUser.name && newUser.email && newUser.tcs_id && newUser.level) {
-      createUser(u);
+      createUser(u)
+        .then(function (variavel) {
+          setNewPSW(variavel);
+          setModalPassword(variavel);
+        })
+        .catch(function (error) {
+          console.error("Error at create an user!", error);
+          return false;
+        });
       closeModal();
     } else {
       setFlag(true);
@@ -82,6 +90,13 @@ const AddEditUser = (props) => {
     } else {
       setFlag(true);
     }
+  };
+
+  const handleSetStatus = (s) => {
+    setNewUser({
+      ...newUser,
+      status: s,
+    });
   };
 
   const handleSelectLevel = (l) => {
@@ -161,18 +176,17 @@ const AddEditUser = (props) => {
             </DivEmail>
 
             <DivStatus>
-              <SingleSelect
-                key="2"
-                sizeSingle={"100%"}
-                required
-                sizeMenu={"100%"}
-                set={(status) => setStatus(status)}
-                label={"Status"}
-                value={status}
-                placeholder={flag && !status ? "Required field" : ""}
-                options={status_mok}
-                disabled
-              />
+              {props.title === "Create User" && (
+                <Label>
+                  Status
+                  <Input
+                    widthInput={"98% !important"}
+                    placeholder={""}
+                    value={"Active"}
+                    disabled
+                  />
+                </Label>
+              )}
             </DivStatus>
           </Form>{" "}
           <DivButton>
@@ -197,8 +211,8 @@ const AddEditUser = (props) => {
 export default AddEditUser;
 
 const status_mok = [
-  { id: 1, value: "Active", label: "Active" },
-  { id: 2, value: "Inactive", label: "Inactive" },
+  { id: 1, value: "ACTIVE", label: "ACTIVE" },
+  { id: 2, value: "INACTIVE", label: "INACTIVE" },
 ];
 
 const entityUser = {

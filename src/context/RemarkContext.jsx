@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { remarkGetSubmissivesRemarks } from "../api/routesAPI";
 export const RemarkContext = createContext();
 
 export const RemarkContextProvider = ({ children }) => {
@@ -11,20 +12,17 @@ export const RemarkContextProvider = ({ children }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
-    if(localStorage.getItem("token")){
-    loadRemarkList();
+    if (localStorage.getItem("token")) {
+      //loadRemarkList();
     }
   }, []);
 
   const loadRemarkList = async () => {
     let remarks;
     try {
-      const response = await axios.get(
-        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8088/union/v1/remarks/submissives",
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      );
+      const response = await axios.get(remarkGetSubmissivesRemarks, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
       remarks = response;
     } catch (error) {
       console.error(error);
