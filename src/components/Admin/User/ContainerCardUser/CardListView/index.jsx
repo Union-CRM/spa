@@ -79,12 +79,12 @@ const UserCard = (props) => {
           <Header>
             <DivPhoto>
               <DivPhotoI isActive={isActive}>
-                <Body type={"Body1"} name={Split(user.name)} />
+                <Body type={"Body2"} name={Split(user.name)} />
               </DivPhotoI>
             </DivPhoto>
 
             <DivDadosCard>
-              <Body type={"Body1"} name={user.name} />
+              <Body type={"Body2"} name={user.name} />
 
               <Subtitle type={"TextDescription"} name={user.email} />
             </DivDadosCard>
@@ -152,6 +152,7 @@ const UserCard = (props) => {
             </DivLevel>
             <DivButton>
               <ButtonDefault
+                isActive={isActive}
                 onClick={() => handleClickViewProfile()}
                 type={user.status === "ACTIVE" ? "adminSave" : "userDisable"}
                 weightFont={"135"}

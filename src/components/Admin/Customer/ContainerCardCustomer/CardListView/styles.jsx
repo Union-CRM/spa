@@ -21,11 +21,10 @@ export const Card = styled.div`
   border-radius: 8px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
-  cursor: pointer;
+
   width: auto;
-  height: 100%;
+  height: 135px;
   z-index: 0 !important;
-  padding-left: 10px;
 `;
 
 export const ToggleContainer = styled.label`
@@ -33,7 +32,8 @@ export const ToggleContainer = styled.label`
   display: inline-block;
   height: 17.5px;
   width: 37px;
-  top: 40%;
+  top: 15%;
+  margin-right: 3px;
   border-radius: 30px;
   position: relative;
   cursor: pointer;
@@ -46,6 +46,7 @@ export const ToggleButton = styled.span`
   top: 1px;
   left: 0px;
   width: 14px;
+
   height: 14px;
   border-radius: 50%;
   background-color: white;
@@ -70,11 +71,9 @@ export const InputToggle = styled.input`
 
 export const Header = styled.div`
   grid-row: 1;
-  display: grid;
+  display: flex;
   width: 100%;
   height: 100%;
-  grid-template-rows: 20% auto;
-  grid-template-columns: 60px auto;
   position: relative;
 `;
 
@@ -103,32 +102,26 @@ export const DivPhotoI = styled.div`
   top: 30%;
 `;
 
-// Div Name Client, Email and Status/Tags //
 export const DivDadosCard = styled.div`
-  text-align: left;
+  text-align: center;
   width: fit-content;
   height: fit-content;
-  display: grid;
-  grid-row: 2;
+  display: block;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
   border-bottom: ${(props) =>
     props.isActive ? "2px solid  #e41165" : "2px solid #7a7a7a"};
   align-items: center;
-  grid-column: 2;
-
-  padding-top: 40px;
 `;
 
 // Div Icons //
 export const DivIcons = styled.div`
   display: flex;
-  grid-row: 1;
   justify-content: end;
   padding-right: 5%;
-  grid-gap: 5px;
   height: 100%;
-  grid-column: 2;
-  padding-top: 7px;
-  align-items: center;
+  width: 100%;
 `;
 
 // Div Info client //
@@ -140,8 +133,9 @@ export const DivInfo = styled.div`
   display: grid;
   width: 98%;
   height: auto;
-
   z-index: 0;
+  align-items: center;
+
   grid-template-rows: auto;
 `;
 
@@ -149,15 +143,15 @@ export const DivInfo = styled.div`
 export const DivTagsStatus = styled.div`
   margin-top: 7px;
   display: grid;
+  margin-left: 10px;
   justify-content: left;
+  cursor: pointer;
 `;
 
 export const TagsSpan = styled.div`
   display: flex;
   color: #ffffff;
-
   background-color: ${(props) => (props.isActive ? "#007bff" : "#7a7a7a")};
-
   width: fit-content;
   height: 12px;
   width: 50px;
@@ -167,6 +161,7 @@ export const TagsSpan = styled.div`
   justify-content: center;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   margin-left: 2%;
+  cursor: pointer;
 `;
 
 export const IconTag = styled.span`
@@ -180,14 +175,13 @@ export const IconTag = styled.span`
 export const IconEdit = styled.span`
   width: 12px;
   height: 12px;
-  margin-top: 8px;
   cursor: pointer;
 `;
 
 export const DivToggle = styled.div`
   width: 30px;
   height: 13px;
-  margin-top: 8px;
+
   ${(props) => {
     switch (props.$mode) {
       case "Active":
@@ -370,4 +364,38 @@ export const PositionEdit = styled.div`
   margin-top: 8px;
   cursor: pointer;
   display: flex;
+`;
+
+export const DivTag = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  //align-items: center;
+  position: relative;
+  flex-wrap: wrap;
+  cursor: pointer;
+  p {
+    text-align: center;
+    font-size: 14px;
+    margin-left: 10px;
+    align-items: center;
+  }
+`;
+export const DivContentTags = styled.div`
+  text-align: center;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  padding: 2px;
+  position: relative;
+  top: -20px;
+  align-items: center;
+  background-color: ${(props) => (props.colorTag ? props.colorTag : "pink")};
+  border-radius: 8px;
+  margin-right: 10px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  margin-left: 10px;
+  justify-content: center;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 `;

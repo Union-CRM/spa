@@ -12,6 +12,8 @@ import {
   ToggleContainer,
   ToggleButton,
   PositionEdit,
+  DivContentTags,
+  DivTag,
 } from "./styles";
 import Body from "../../../../../assets/FontSystem/Body";
 import Tippy from "@tippyjs/react";
@@ -21,16 +23,21 @@ import { useFetchCustomer } from "../../../../../hook/useFetchCustomer";
 import { useCustomerContext } from "../../../../../hook/useCustomerContext";
 
 const CustomerCard = (props) => {
-  const { openModal, openModalPopUp } = props;
+  const { openModal } = props;
   const { customer: customerList, setCustomerTarget } = useCustomerContext();
   const customer = customerList.filter((item) => item.id === props.id)[0];
   const { updateStatusCustumer } = useFetchCustomer();
-  const [tags] = useState(
+  const [tagIcon, setTagIcon] = useState(false);
+  const [moreTags] = useState(
     customer.tags
-      ? customer.tags.map((tag) => {
-          return tag.tag_name + ";";
-        })
-      : []
+      ? customer.tags
+          .map((t, index) => {
+            if (index >= 3) {
+              return t.tag_name + "; ";
+            }
+          })
+          .filter((t) => t)
+      : ""
   );
 
   const handleEdit = () => {
@@ -39,21 +46,12 @@ const CustomerCard = (props) => {
   };
 
   const handleClick = () => {
-    console.log("Clicou");
     updateStatusCustumer(customer.id);
-    //openModalPopUp();
   };
 
-  /*const handleToggle = () => {
-    setIsActive(!isActive);
-    updateClient(client.id, { ...client, status: isActive ? "Inactive" : "Active" });
-  };*/
-
-  // TESTE //
   const [isActive, setIsActive] = useState(customer.status === "ATIVO");
 
   const handleToggle = () => {
-    const newStatus = isActive ? "INATIVO" : "ATIVO";
     setIsActive(!isActive);
   };
 
@@ -67,16 +65,16 @@ const CustomerCard = (props) => {
           checked={isActive}
         >
           <Header>
-            <DivDadosCard isActive={isActive}>
-              <Body type={"Body1"} name={customer.name} />
-            </DivDadosCard>
             <DivTagsStatus>
-              <Tippy content={tags}>
-                <TagsSpan isActive={isActive} $mode={customer.tags}>
-                  tags
-                </TagsSpan>
-              </Tippy>
+              <TagsSpan
+                onClick={() => setTagIcon(!tagIcon)}
+                isActive={isActive}
+                $mode={customer.tags}
+              >
+                tags
+              </TagsSpan>
             </DivTagsStatus>
+
             <DivIcons>
               <ToggleContainer
                 isActive={isActive}
@@ -98,6 +96,43 @@ const CustomerCard = (props) => {
               </PositionEdit>
             </DivIcons>
           </Header>
+
+          {!tagIcon && (
+            <DivDadosCard isActive={isActive}>
+              <Body type={"Body1"} name={customer.name} />
+            </DivDadosCard>
+          )}
+          {tagIcon && (
+            <DivTag>
+              {customer.tags ? (
+                customer.tags.map((t, index) => {
+                  if (index < 3) {
+                    return (
+                      <DivContentTags
+                        key={index}
+                        colorTag={isActive ? colors[index] : "#7a7a7a"}
+                      >
+                        {t.tag_name}
+                      </DivContentTags>
+                    );
+                  } else if (index === 3) {
+                    return (
+                      <Tippy key={index} content={moreTags}>
+                        <DivContentTags
+                          key={index}
+                          colorTag={isActive ? colors[index] : "#7a7a7a"}
+                        >
+                          see more tags
+                        </DivContentTags>
+                      </Tippy>
+                    );
+                  }
+                })
+              ) : (
+                <p>Does not have Tags</p>
+              )}
+            </DivTag>
+          )}
         </Card>
       </Container>
     </ContainerFather>
@@ -105,3 +140,24 @@ const CustomerCard = (props) => {
 };
 
 export default CustomerCard;
+
+const colors = [
+  "#836FFF",
+  "#00BFFF",
+  "#7FFFD4",
+  "#00FA9A",
+  "#00FF00",
+  "#ADFF2F",
+  "#BDB76B",
+  "#FFDEAD",
+  "#DEB887",
+  "#9370DB",
+  "#EE82EE",
+  "#FFB6C1",
+  "#F08080",
+  "#FA8072",
+  "#FFA07A",
+  "#FFFF00",
+  "#7B68EE",
+  "#BC8F8F",
+];
