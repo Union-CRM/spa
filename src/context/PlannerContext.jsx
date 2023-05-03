@@ -29,9 +29,11 @@ export const PlannerContextProvider = ({ children }) => {
 
   const loadPlannerList = async () => {
     try {
+
       const response = await axios.get(plannerGetSubmissivesPlanners, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
+
       setPlanner(response.data.list);
     } catch (error) {
       console.error(error);
