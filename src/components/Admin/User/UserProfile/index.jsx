@@ -18,14 +18,18 @@ import {
   Label,
   DivCalendar,
   DivClose,
+  DivSubject,
 } from "./styles";
-import Grafico from "../../../Grafico";
+import Subject from "../../../Grafico/Subject";
 import Subtitle from "../../../../assets/FontSystem/Subtitle";
 import PlannerCard from "../../../Planner/PlannerCard";
 import { BigCalender } from "../../../Planner/Calendar/index";
 import { useUserContext } from "../../../../hook/useUserContext";
+import { useSubjectContext } from "../../../../hook/useSubjectContent";
+import { usePlannerContext } from "../../../../hook/usePlannerContext";
 import Body from "../../../../assets/FontSystem/Body";
 import IconSystem from "../../../../assets/IconSystem";
+import SubjectList from "../../../Subject/SubjectCardListView";
 // hook/usePlannerContext
 
 import "react-tippy/dist/tippy.css";
@@ -37,7 +41,53 @@ import "react-tippy/dist/tippy.css";
 const dateOfTheDay = new Date();
 
 const UserProfile = () => {
-  const { userTarget, modalPlanner, setModalPlanner } = useUserContext();
+  const {
+    userTarget,
+    modalPlanner,
+    setModalPlanner,
+    modalSubject,
+    setModalSubject,
+  } = useUserContext();
+  const { subject } = useSubjectContext();
+  const { planner } = usePlannerContext();
+  // numberOfPlanner [0]-canceled | [1]- Scheduled | [2] Done
+  const numberOfPlanner = [
+    planner
+      ? planner.filter(
+          (p) => p.status === "CANCELED" && p.user_id === userTarget.id
+        ).length
+      : 0,
+    planner
+      ? planner.filter(
+          (p) => p.status === "SCHEDULED" && p.user_id === userTarget.id
+        ).length
+      : 0,
+    planner
+      ? planner.filter(
+          (p) => p.status === "DONE" && p.user_id === userTarget.id
+        ).length
+      : 0,
+  ];
+  const numberOfSubject = [
+    subject
+      ? subject.filter(
+          (s) => s.status === "CANCELED" && s.user_id === userTarget.id
+        ).length
+      : 0,
+    subject
+      ? subject.filter(
+          (s) => s.status === "FINISHED" && s.user_id === userTarget.id
+        ).length
+      : 0,
+    subject
+      ? subject.filter(
+          (s) => s.status === "IN PROGRESS" && s.user_id === userTarget.id
+        ).length
+      : 0,
+  ];
+
+  /* Quantidades de subjects cancelados finalizados e em progresso
+   */
 
   const handleClickPlanner = () => {
     setModalPlanner(true);
@@ -45,6 +95,11 @@ const UserProfile = () => {
 
   const handleCloseModal = () => {
     setModalPlanner(false);
+    setModalSubject(false);
+  };
+
+  const handleClickSubject = () => {
+    setModalSubject(true);
   };
   return (
     <>
@@ -52,8 +107,16 @@ const UserProfile = () => {
         <>
           <DivClose onClick={handleCloseModal} />
           <DivCalendar>
-            <BigCalender adimList={true} />
+            <BigCalender adminList={true} />
           </DivCalendar>
+        </>
+      )}
+      {modalSubject && (
+        <>
+          <DivClose onClick={handleCloseModal} />
+          <DivSubject>
+            <SubjectList adminList={true} />
+          </DivSubject>
         </>
       )}{" "}
       <Header>
@@ -78,7 +141,7 @@ const UserProfile = () => {
           <Dot bgColor={userTarget.level > 4 ? "#007bff" : "#F5F7FA"}></Dot>
         </DivLevel>
         <DivButtonUser>
-          <Button>
+          <Button onClick={handleClickSubject}>
             <Label>SUBJECT</Label>
             <Circle>
               <DivIcon>
@@ -99,16 +162,19 @@ const UserProfile = () => {
       </Header>
       <Content>
         <DivClient>
-          <ContainerCards adimList={true} />
+          <ContainerCards adminList={true} />
         </DivClient>
 
         <DivPlanner>
-          <PlannerCard adimList={true} date={dateOfTheDay} />
+          <PlannerCard adminList={true} date={dateOfTheDay} />
         </DivPlanner>
       </Content>
       <Graph1>
-        <Grafico value={0} />
-        <Grafico value={1} />
+        <Subject
+          numberOfSubjeccts={numberOfSubject}
+          numberOfPlanner={numberOfPlanner}
+          value={0}
+        />
       </Graph1>
     </>
   );

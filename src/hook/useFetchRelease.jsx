@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { realiseGetRealiseTrains } from "../api/routesAPI";
 
 export const useFetchRelease = (release) => {
   const [releaseList, setReleaseList] = useState(null);
@@ -9,14 +10,11 @@ export const useFetchRelease = (release) => {
     async function loadDate() {
       var releases;
       try {
-        const response = await axios.get(
-          "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8087/union/v1/releasetrains",
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        const response = await axios.get(realiseGetRealiseTrains, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
         releases = response;
       } catch (error) {
         console.error(error);

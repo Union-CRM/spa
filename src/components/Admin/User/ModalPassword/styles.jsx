@@ -3,27 +3,30 @@ import styled, { css } from "styled-components";
 // * Div Father * //
 
 export const ContainerFather = styled.div`
-  z-index: 999999;
+  //z-index: 10;
   justify-content: center;
   align-items: center;
   grid-column: 1;
-  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 // Container ModalPopup //
 export const Container = styled.div`
-  left: 50%;
-  transform: ${(props) => props.subject || "translate(-50%, 200%)"};
+  //left: 50%;
+  //transform: "translate(-50%, -50%)";
   width: 25%;
   grid-column: 1;
   position: relative;
   grid-column: 1;
   justify-content: center;
   box-sizing: border-box;
-  z-index: 999999;
+  z-index: 20;
   min-width: 300px;
   max-width: 400px;
-  max-height: 150px;
+  max-height: 300px;
   min-height: 100px;
   border-left: 16.56px solid #e41165;
   border-radius: 8px;
@@ -31,6 +34,7 @@ export const Container = styled.div`
   border-radius: 8px;
   background-color: #f5f7fa;
   border-left: 7px solid #e41165;
+  padding-bottom: 10px;
   @media (min-width: 100px) and (max-width: 500px) {
     justify-content: center;
   }
@@ -51,7 +55,7 @@ export const Content = styled.div`
 export const Span = styled.span`
   font-weight: 600 !important;
   margin-top: 5%;
-  margin-bottom: 6%;
+  //margin-bottom: 6%;
   font-size: 1rem;
   align-self: center;
   display: flex;
@@ -77,4 +81,10 @@ export const Circle = styled.div`
     color: #ffff;
     align-items: center;
   }
+`;
+export const DivAdd = styled.div`
+  margin-top: 4%;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
 `;

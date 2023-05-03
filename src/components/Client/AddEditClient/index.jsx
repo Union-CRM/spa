@@ -19,7 +19,6 @@ import {
   ClickButton,
   PositionButtonCancel,
 } from "./styles";
-
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import { TagComponent } from "../../Geral/TagComponent";
@@ -32,11 +31,7 @@ import { useFetchRole } from "../../../hook/useFetchRole";
 import { useFetchTag } from "../../../hook/useFetchTag";
 
 const AddEditClient = (props) => {
-  const {
-    client: clientList,
-    setClient: setClientList,
-    loadData,
-  } = useClientContext();
+  const { client: clientList, loadData } = useClientContext();
   const { user } = useUserContext();
   const [clientId, setClientId] = useState();
   const [name, setName] = useState("");
@@ -46,7 +41,8 @@ const AddEditClient = (props) => {
   const [role, setRole] = useState({});
   const [status, setStatus] = useState({ value: "Active" });
   const { releaseList } = useFetchRelease("release");
-  const { customerList } = useFetchCustomer("Customer");
+  const { loadCustomerOptions } = useFetchCustomer();
+  const [customerList] = useState(loadCustomerOptions());
   const { roleList } = useFetchRole("Role");
   const { tagList } = useFetchTag("Tag");
   const [releaseObj, setReleaseObj] = useState({
@@ -82,26 +78,6 @@ const AddEditClient = (props) => {
 
   useEffect(() => {
     if (props.title === "Edit Client") {
-      const colors = [
-        "#836FFF",
-        "#00BFFF",
-        "#7FFFD4",
-        "#00FA9A",
-        "#00FF00",
-        "#ADFF2F",
-        "#BDB76B",
-        "#FFDEAD",
-        "#DEB887",
-        "#9370DB",
-        "#EE82EE",
-        "#FFB6C1",
-        "#F08080",
-        "#FA8072",
-        "#FFA07A",
-        "#FFFF00",
-        "#7B68EE",
-        "#BC8F8F",
-      ];
       const client = clientList.filter((item) => item.id === props.id)[0];
       setClientId(client.id);
       setName(client.client);
@@ -330,4 +306,25 @@ export default AddEditClient;
 const status_mok = [
   { id: 1, value: "Active", label: "Active" },
   { id: 2, value: "Inactive", label: "Inactive" },
+];
+
+const colors = [
+  "#836FFF",
+  "#00BFFF",
+  "#7FFFD4",
+  "#00FA9A",
+  "#00FF00",
+  "#ADFF2F",
+  "#BDB76B",
+  "#FFDEAD",
+  "#DEB887",
+  "#9370DB",
+  "#EE82EE",
+  "#FFB6C1",
+  "#F08080",
+  "#FA8072",
+  "#FFA07A",
+  "#FFFF00",
+  "#7B68EE",
+  "#BC8F8F",
 ];

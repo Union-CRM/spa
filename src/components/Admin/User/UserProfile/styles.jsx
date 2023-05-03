@@ -4,6 +4,7 @@ import { DivButton } from "../../../../components/Client/ContainerCardClient/sty
 import { CardsContainer as ContainerClient } from "../../../../components/Client/ContainerCardClient/styles";
 import { BoardStyle as BoardStyleClient } from "../../../../components/Client/ContainerCardClient/styles";
 import { ContainerGlobal } from "../ContainerCardUser/styles";
+
 import { DivIcons } from "../../../../components/Client/ContainerCardClient/CardListView/styles";
 import { DivP } from "../../../../components/Planner/PlannerCard/styles";
 import { ContainerCentral } from "../../../../components/Client/AddEditClient/styles";
@@ -11,6 +12,7 @@ import { DivModal } from "../../../../components/Client/ContainerCardClient/styl
 import { Card as ContainerCard } from "../../../../components/Client/ContainerCardClient/CardListView/styles";
 import { DivCard as ModaClient } from "../../../../components/Planner/PlannerCard/styles";
 import { Container as BigCalender } from "../../../Planner/Calendar/styles";
+import { SubjectList } from "../../../Subject/SubjectCardListView/styles";
 //* PAGE GLOBAL *//
 
 export const Header = styled.div`
@@ -106,8 +108,9 @@ export const DivClient = styled.div`
   ${DivButton} {
     display: none;
   }
+
   ${DivIcons} {
-    display: none;
+    display: flex;
   }
 
   ${ContainerCard} {
@@ -220,6 +223,7 @@ export const DivPhotoI = styled.div`
 
 export const DivDadosCard = styled.div`
   text-align: left;
+
   width: 96%;
   height: fit-content;
   display: grid;
@@ -270,6 +274,7 @@ export const DivButtonUser = styled.div`
   position: relative;
   flex-direction: row;
   justify-content: center;
+  cursor: pointer;
 `;
 
 export const Button = styled.button`
@@ -285,10 +290,10 @@ export const Button = styled.button`
   line-height: 52px;
   display: grid;
   grid-template-columns: 70% 30%;
-  color: red;
+  cursor: pointer;
   border: none;
   box-shadow: 5px 5px 5px rgba(18, 38, 63, 0.0313726);
-  cursor: pointer;
+
   :hover {
     opacity: 0.8;
   }
@@ -328,7 +333,7 @@ export const Label = styled.label`
   line-height: 52px;
   grid-template-columns: 1;
   font-family: "Houschka Rounded Alt";
-
+  cursor: pointer;
   color: #000000;
 `;
 
@@ -360,6 +365,14 @@ export const DivClose = styled.div`
   top: 0;
   left: 0;
   background-color: #00000034;
-
   z-index: 20;
+`;
+
+export const DivSubject = styled.div`
+  position: fixed;
+  width: 80%;
+  height: 100%;
+  top: 15%;
+  left: 12.5%;
+  z-index: 25;
 `;
