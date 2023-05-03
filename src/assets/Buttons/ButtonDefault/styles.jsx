@@ -28,6 +28,13 @@ export const Button = styled.button`
           color: #007bff;
           border: solid 1px #007bff;
         `;
+
+      case "userDisable":
+        return css`
+          background-color: #7a7a7a;
+          color: #fff;
+          border: none;
+        `;
       case "cancelModalUser":
         return css`
           border: none;
@@ -37,9 +44,9 @@ export const Button = styled.button`
         `;
       case "cancelModalAdmin":
         return css`
-        background-color: #e3e6ed;
-        color:  #e41165;
-        border: solid 1px  #e41165;
+          background-color: #e3e6ed;
+          color: #e41165;
+          border: solid 1px #e41165;
         `;
       default:
         return css`

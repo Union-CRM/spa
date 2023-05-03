@@ -42,7 +42,7 @@ export const ContainerHeaderAndCards = styled.div`
 //* Header Container *//
 
 export const HeaderContainerCards = styled.div`
-  z-index: 4;
+  //z-index: 4;
   grid-row: 1;
   width: auto;
   height: 100%;
@@ -270,4 +270,14 @@ export const ButtonInactive = styled.button`
   &:hover {
     border-bottom: 2px solid #e41165;
   }
+`;
+export const DivClose = styled.div`
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 55%;
+  z-index: 0;
 `;
