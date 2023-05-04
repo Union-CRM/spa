@@ -7,7 +7,7 @@ export const GroupListContextProvider = ({ children }) => {
   const [team, setTeamList] = useState([{}]);
 
   useEffect(() => {
-    loadData();
+    //loadData();
   }, []);
 
   const loadData = async () => {
@@ -36,7 +36,7 @@ export const GroupListContextProvider = ({ children }) => {
       }))
       
     );
-    console.log(groups.data.group_list)
+   
   };
 
   const loadTeamMembers = async () => {

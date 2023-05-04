@@ -273,6 +273,7 @@ const ModalPlanner = ({ title }) => {
             heights={"12vh"}
             sizeMenuList={"10vw"}
             sizeMenu={"35%"}
+            indicator={"guest"}
           />
         </PositionTags>
         <PositionStatus>
