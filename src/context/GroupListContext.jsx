@@ -1,18 +1,22 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { useUserContext } from "../hook/useUserContext";
 export const GroupListContext = createContext();
 
 export const GroupListContextProvider = ({ children }) => {
   const [group, setGroup] = useState([{}]);
+  const [idGroups, setIdGroups] = useState([{}]);
   const [team, setTeamList] = useState([{}]);
+  const { user } = useUserContext();
+  const [infoGroup, setInfoGroup] = useState(true);
+  const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    loadData();
+ useEffect(() => {
+  loadData();
   }, []);
 
   const loadData = async () => {
-    var groups;
-    
+    let groups;
     try {
       const response = await axios.get(
         "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/user/1",
@@ -24,8 +28,8 @@ export const GroupListContextProvider = ({ children }) => {
     } catch (error) {
    console.error(error);
     }
-
-    setGroup(
+    console.log(groups.data.group_list)
+  setGroup(
       groups.data.group_list.map((item) => ({
         id: item.group_id,
         status_id: item.status.status_id,
@@ -33,50 +37,16 @@ export const GroupListContextProvider = ({ children }) => {
         group_name: item.group_name,
         customer_id: item.customers.customer_id,
         textCustomer: item.customers.customer_name,
+        usersId: item.users.map((user) => user.user_id),
+        usersNames: item.users.map((user) => user.user_name),
+        usersCount:item.users.map((user) => user.user_id).length,
+        usuarios: item.users
       }))
-      
     );
-    console.log(groups.data.group_list)
   };
-
-  const loadTeamMembers = async () => {
-    var team;
-    
-    try {
-      const response = await axios.get(
-        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/usersGroup/2",
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      );
-      console.log(response)
-      team = response;
-    } catch (error) {
-   console.error(error);
-    };
-
-    setTeamList(team.data.user_list);
-    
-  };
-    /*
-    console.log(groups)
-   setGroup(groups.data.group_list);*/
-    
-    
-     /*
-    setGroup(groups.data.List.map((item) => ({
-        group_id: item.group_id,
-        group_name:item.group_name,
-        
-      }))
-    );*/
-
-
   return (
-    <GroupListContext.Provider value={{ group, setGroup, loadData, team, setTeamList, loadTeamMembers }}>
+    <GroupListContext.Provider value={{ group, setGroup, loadData, team, setTeamList, infoGroup, setInfoGroup, users }}>
       {children}
     </GroupListContext.Provider>
   );
 };
-
-

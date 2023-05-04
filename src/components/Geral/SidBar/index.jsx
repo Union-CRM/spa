@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import IconSystem from "../../../assets/IconSystem";
+import { ReactComponent as Groups } from "../../../assets/svg/Groups.svg";
 import Body from "../../../assets/FontSystem/Body";
 import {useUserContext} from "../../../hook/useUserContext"
 import { ReactComponent as Client } from "../../../assets/svg/Client.svg"
@@ -105,7 +106,13 @@ const SidBar =(props)=>{
               <Slink to="/groups">
               <Li level={user.level}>
               <Icon $mode={sidBarState}>
-                <IconSystem icon="Groups"/>
+              <Groups
+                  style={{
+                    fill: "#FFF",
+                    width: "26",
+                    height: "30",
+                  }}
+                />
                 <Span $mode={sidBarState}>Groups</Span>
               </Icon>
             </Li>

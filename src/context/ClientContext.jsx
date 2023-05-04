@@ -51,8 +51,21 @@ export const ClientContextProvider = ({ children }) => {
    /* console.log(clients.data.list)*/
     
   };
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [toggleState, setToggleState] = useState(1);
+  const [activeTab, setActiveTab] = useState(null);
+  const [modal, setModal] = useState();
+  const [id, setId] = useState(null);
+  const [modalEditClient, setModalEditClient] = useState(false);
+  
+  const openModalDetails = (id) => {
+    setSelectedClient(id);
+  };
+
   return (
-    <ClientContext.Provider value={{ client, setClient, loadData }}>
+    <ClientContext.Provider value={{ openModalDetails, client, setClient, loadData, id,
+      setId, toggleState, setToggleState, activeTab, setActiveTab, modal, setModal,
+      modalEditClient, setModalEditClient }}>
       {children}
     </ClientContext.Provider>
   );

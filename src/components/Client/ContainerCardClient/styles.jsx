@@ -60,6 +60,14 @@ export const HeaderContainerCards = styled.div`
   }
 `;
 
+
+export const DivInfo = styled.div`
+position:relative;
+top:6%;
+left:1%;
+`;
+
+
 // Div Title and Button //
 export const Top = styled.div`
   display: grid;

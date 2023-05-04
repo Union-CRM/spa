@@ -3,6 +3,7 @@ import {
   ContainerGlobal,
   ContainerHeaderAndCards,
   HeaderContainerCards,
+  DivInfo,
   ContainerCards,
   DivModal,
   LineDivisor,
@@ -39,6 +40,9 @@ import ModalCreatePlanner from "../../Subject/ModalCreatePlanner";
 import ModalSave from "../../Planner/ModalSuccessfuly";
 import { usePlannerContext } from "../../../hook/usePlannerContent";
 
+import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
 
 
 
@@ -128,6 +132,19 @@ const SubjectList = () => {
             <DivTitlePage>
               <H1>Subjects List</H1>
               <HowManySubjectList>({subject.length})</HowManySubjectList>
+
+              <Tippy content="List of all subjects.">
+              <DivInfo>
+              
+                  <Info
+                  width="25px"
+                  style={{
+                    fill: "#007BFF",
+                  }}
+                />
+                     </DivInfo>
+              </Tippy>
+
             </DivTitlePage>
 
             <DivButton onClick={() => createSubject()}>
