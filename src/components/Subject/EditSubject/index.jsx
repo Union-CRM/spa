@@ -23,6 +23,7 @@ import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import subjectList from "../../../context/SubjectContext";
 import { useClientContext } from "../../../hook/useClientContent";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
+import { useUserContext } from "../../../hook/useUserContext";
 import { useFetchSubject } from "../../../hook/useFetchSubject";
 import { useFetchSubjectStatus } from "../../../hook/useFetchSubjectStatus";
 
@@ -53,7 +54,7 @@ const Subject = (props) => {
 
   const { subject: subjectsList, setSubject: setSubjectList } =
     useSubjectContext();
-
+  const { userTarget } = useUserContext();
   const [subject, setSubject] = useState();
   const [manager, setManager] = useState();
   const [description, setDescription] = useState();
@@ -127,7 +128,7 @@ const Subject = (props) => {
   }, [selectedClient]);
 
   const activeClients = clientList.filter(
-    (client) => client.status === "Active"
+    (client) => client.status === "Active" && client.user_id === userTarget.id
   );
 
   const optionsClient = activeClients.map((client) => {

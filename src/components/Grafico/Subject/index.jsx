@@ -9,6 +9,8 @@ import {
   NearSquare,
   OnTimeSquare,
   H1,
+  Subject,
+  Planner,
 } from "./styles";
 
 const Grafic = (props) => {

@@ -68,6 +68,13 @@ export const FontBody = styled.p`
           font-weight: 600;
           line-height: 22px;
         `;
+      case "Body3":
+        return css`
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 24px;
+        `;
 
       default:
     }

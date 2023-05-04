@@ -45,31 +45,6 @@ export const H1 = styled.h1`
   }
 `;
 
-/// Button Close
-
-export const DivClose = styled.div`
-  align-items: center;
-  display: grid;
-  width: 50%;
-  @media (min-width: 50px) and (max-width: 500px) {
-  }
-`;
-
-export const Close = styled.button`
-  background-color: #2b2b2b;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  display: grid;
-  width: 100%;
-  height: 20px;
-  :hover {
-    opacity: 0.8;
-  }
-`;
-
 // Children
 
 export const Container = styled.div`
