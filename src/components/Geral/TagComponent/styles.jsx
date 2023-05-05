@@ -20,3 +20,7 @@ export const DivSvg = styled.div`
   margin-top: 5%;
   margin-right: 2%;
 `
+export const DivSvg2 = styled.div`
+  margin-right: 3%;
+  margin-top: 2%;
+`

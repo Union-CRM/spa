@@ -37,7 +37,7 @@ export const GroupListContextProvider = ({ children }) => {
         textCustomer: item.customers.customer_name,
       }))
     );
-    console.log(groups.data.group_list);
+
   };
 
   const loadTeamMembers = async () => {
