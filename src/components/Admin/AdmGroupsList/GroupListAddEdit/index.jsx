@@ -70,7 +70,7 @@ const AddEditGroup = (props) => {
       const newGroup = {
         group_name: groupName,
         customer_id: customer.id,
-        users: users.map((g) => ({ user_id: g.value })),
+        users: users.users_id.map((g) => ({ user_id: g.value })),
       };
       console.log(newGroup);
       if (groupName && customer.id && users) {
