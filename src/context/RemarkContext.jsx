@@ -13,10 +13,12 @@ export const RemarkContextProvider = ({ children }) => {
 
   useEffect(() => {
 
-    if(localStorage.getItem("token")){
-    //loadRemarkList();
+    if (localStorage.getItem("token")) {
+      loadRemarkList();
 
+    }
   }, []);
+
 
   const loadRemarkList = async () => {
     let remarks;
