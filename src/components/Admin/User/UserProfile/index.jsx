@@ -1,26 +1,30 @@
 import React from "react";
 import ContainerCards from "../../../Client/ContainerCardClient";
 import {
-  Content,
-  DivClient,
-  DivPlanner,
-  Graph1,
-  Header,
-  DivPhoto,
-  DivPhotoI,
-  DivDadosCard,
-  DivLevel,
-  Dot,
-  DivButtonUser,
   Button,
   Circle,
-  DivIcon,
-  Label,
+  Content,
+  CurrentPath,
+  DivButtonUser,
   DivCalendar,
+  DivClient,
   DivClose,
+  DivDadosCard,
+  DivIcon,
+  DivLevel,
+  DivPath,
+  DivPhoto,
+  DivPhotoI,
+  DivPlanner,
   DivSubject,
+  Dot,
+  Graph1,
+  Header,
+  Label,
+  PreviousPath,
 } from "./styles";
 import Subject from "../../../Grafico/Subject";
+import Group from "../../../Grafico/Group";
 import Subtitle from "../../../../assets/FontSystem/Subtitle";
 import PlannerCard from "../../../Planner/PlannerCard";
 import { BigCalender } from "../../../Planner/Calendar/index";
@@ -30,14 +34,9 @@ import { usePlannerContext } from "../../../../hook/usePlannerContext";
 import Body from "../../../../assets/FontSystem/Body";
 import IconSystem from "../../../../assets/IconSystem";
 import SubjectList from "../../../Subject/SubjectCardListView";
-// hook/usePlannerContext
 
 import "react-tippy/dist/tippy.css";
 
-/*const funcClientInfo =()=>{
-  const [clientInfo,setClientInfo] = useState("Client Information"); 
-  return {clientInfo,setClientInfo};
-}*/
 const dateOfTheDay = new Date();
 
 const UserProfile = () => {
@@ -47,7 +46,9 @@ const UserProfile = () => {
     setModalPlanner,
     modalSubject,
     setModalSubject,
+    setViewProfile,
   } = useUserContext();
+
   const { subject } = useSubjectContext();
   const { planner } = usePlannerContext();
   // numberOfPlanner [0]-canceled | [1]- Scheduled | [2] Done
@@ -68,6 +69,7 @@ const UserProfile = () => {
         ).length
       : 0,
   ];
+  // numberOfSubject [0]-canceled | [1]- Finished | [2] In progress
   const numberOfSubject = [
     subject
       ? subject.filter(
@@ -86,9 +88,6 @@ const UserProfile = () => {
       : 0,
   ];
 
-  /* Quantidades de subjects cancelados finalizados e em progresso
-   */
-
   const handleClickPlanner = () => {
     setModalPlanner(true);
   };
@@ -103,6 +102,11 @@ const UserProfile = () => {
   };
   return (
     <>
+      <DivPath>
+        <PreviousPath onClick={() => setViewProfile(false)}>User</PreviousPath>{" "}
+        {">"}
+        <CurrentPath> View Profile</CurrentPath>{" "}
+      </DivPath>
       {modalPlanner && (
         <>
           <DivClose onClick={handleCloseModal} />
@@ -175,12 +179,14 @@ const UserProfile = () => {
           numberOfPlanner={numberOfPlanner}
           value={0}
         />
+        <Group />
       </Graph1>
     </>
   );
 };
 
 export default UserProfile;
+
 function Split(n) {
   const name = n ? n : "";
   var nameSplit = name.split(" ");
@@ -192,4 +198,3 @@ function Split(n) {
 
   return name2.toUpperCase();
 }
-//<BigCalender adimList={true} />

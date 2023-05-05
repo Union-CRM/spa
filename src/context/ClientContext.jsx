@@ -8,7 +8,7 @@ export const ClientContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      //loadData();
+      loadData();
     }
   }, []);
 

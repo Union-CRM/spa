@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import ContainerCards from "../../../components/Client/ContainerCardClient";
 import { Content, DivClient, DivPlanner, Graph1, DivInfo } from "./styles";
 import Grafico from "../../../components/Grafico";

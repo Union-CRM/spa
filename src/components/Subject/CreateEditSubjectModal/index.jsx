@@ -24,6 +24,7 @@ import subjectList from "../../../context/SubjectContext";
 import { useClientContext } from "../../../hook/useClientContent";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useFetchSubject } from "../../../hook/useFetchSubject";
+import { useUserContext } from "../../../hook/useUserContext";
 
 const Subject = (props) => {
   const { setModal, title, id } = props;
@@ -62,16 +63,7 @@ const Subject = (props) => {
 
   // useFetch
   const { insertSubject, updateSubject } = useFetchSubject();
-
-  function getId() {
-    let lastId = 1;
-
-    subjectsList.map((s) => {
-      lastId = s.id > lastId ? s.id : lastId;
-    });
-
-    return lastId + 1;
-  }
+  const { userTarget } = useUserContext();
 
   const createSubject = () => {
     const newSubject = {
@@ -109,7 +101,7 @@ const Subject = (props) => {
   }, [selectedClient]);
 
   const activeClients = clientList.filter(
-    (client) => client.status === "Active"
+    (client) => client.status === "Active" && client.user_id === userTarget.id
   );
 
   const optionsClient = activeClients.map((client) => {

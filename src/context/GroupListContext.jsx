@@ -14,9 +14,9 @@ export const GroupListContextProvider = ({ children }) => {
   const [infoGroup, setInfoGroup] = useState(true);
   const [users, setUsers] = useState([]);
 
-
  useEffect(() => {
   loadData();
+
   }, []);
 
   const loadData = async () => {
@@ -24,8 +24,7 @@ export const GroupListContextProvider = ({ children }) => {
 
     try {
       const response = await axios.get(
-        groupGetUser,
-
+        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/user/1",
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -34,8 +33,10 @@ export const GroupListContextProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
+
     console.log(groups.data.group_list)
   setGroup(
+
       groups.data.group_list.map((item) => ({
         id: item.group_id,
         status_id: item.status.status_id,
@@ -45,6 +46,8 @@ export const GroupListContextProvider = ({ children }) => {
         textCustomer: item.customers.customer_name,
         usersId: item.users.map((user) => user.user_id),
         usersNames: item.users.map((user) => user.user_name),
+
+
         usersCount:item.users.map((user) => user.user_id).length,
         usuarios: item.users
       }))

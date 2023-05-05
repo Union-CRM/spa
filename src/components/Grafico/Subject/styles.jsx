@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   margin-left: 1vw;
   background-color: #ffffff;
-  height: 22vh;
+  height: 20vh;
   width: 40vw;
   border: 1px groove;
   border-radius: 12px;
