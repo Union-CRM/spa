@@ -1,18 +1,17 @@
 import axios from "axios";
 import { useGroupListContext } from "./useGroupListContext";
 import { useUserContext } from "./useUserContext";
-
+import { groupCreate } from "../api/routesAPI";
 export const useFetchAdmGroupList = () => {
-  
   const { loadData } = useGroupListContext();
   const insertGroup = async (group) => {
     axios
       .post(
-        `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups`,
+        groupCreate,
         {
-            group_name: group.group_name,
-            customer_id: group.customer_id,
-            users: group.users.users_id.id,
+          group_name: group.group_name,
+          customer_id: group.customer_id,
+          users: group.users.users_id.id,
         },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -29,6 +28,5 @@ export const useFetchAdmGroupList = () => {
 
   return {
     insertGroup,
-   
   };
 };

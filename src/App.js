@@ -8,6 +8,9 @@ import Client from "./pages/User/Client";
 import LoginPage from "./pages/Login/index";
 import GroupsList from "./pages/Admin/GroupsList/index";
 
+import AdmUser from "./pages/Admin/User/index";
+import Customer from "./pages/Adm/Customer/index";
+
 import { ClientContextProvider } from "./context/ClientContext";
 import { UserContextProvider } from "./context/UserContext";
 import { PlannerContextProvider } from "./context/PlannerContext";
@@ -17,8 +20,9 @@ import {GroupListContextProvider} from "./context/GroupListContext";
 import { BusinessContextProvider } from "./context/BusinessContext";
 import { ReleaseContextProvider } from "./context/ReleaseContext";
 import UsersAdm from "./pages/Adm/Users/index";
+
 import Groups from "./pages/Adm/Groups";
-import Customer from "./pages/Adm/Customer";
+
 import Business from "./pages/Adm/Business";
 
 import ReleaseTrainPage from "./pages/Adm/ReleaseTrain";
@@ -33,6 +37,7 @@ function App() {
             <PlannerContextProvider>
               <ClientContextProvider>
                 <GroupListContextProvider>
+
 
                    <BusinessContextProvider>
                     <ReleaseContextProvider>
@@ -67,26 +72,31 @@ function App() {
                             localStorage.getItem("token") ? (
                               <Business />
                             ) : (
+
                               <LoginPage/>
                             )
                           }
                           />
                           <Route 
+
                           path="/customer"
                           element={
                             localStorage.getItem("token") ? (
                               <Customer />
                             ) : (
+
                               <LoginPage/>
                             )
                           }
                           />
                           <Route 
+
                           path="/groups"
                           element={
                             localStorage.getItem("token") ? (
                               <Groups />
                             ) : (
+
                               <LoginPage/>
                             )
                           }
@@ -148,6 +158,7 @@ function App() {
                     </Router>
                     </ReleaseContextProvider>  
                 </BusinessContextProvider>
+
                 </GroupListContextProvider>
               </ClientContextProvider>
             </PlannerContextProvider>

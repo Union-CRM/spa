@@ -1,14 +1,19 @@
 import axios from "axios";
 import { useClientContext } from "./useClientContent";
-
+import {
+  clientCreate,
+  clientUpdateStatus,
+  clientUpdate,
+} from "../api/routesAPI";
 export const useFetchClient = () => {
   const { loadData } = useClientContext();
+
   const insertClient = async (client) => {
     console.log(client);
 
     axios
       .post(
-        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8083/union/v1/clients/",
+        clientCreate,
         {
           client_name: client.client,
           client_email: client.email,
@@ -35,7 +40,7 @@ export const useFetchClient = () => {
   const updateStatusClient = async (client_id) => {
     axios
       .put(
-        `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8083/union/v1/clients/update/status/${client_id}`,
+        `${clientUpdateStatus}${client_id}`,
         {},
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -53,7 +58,7 @@ export const useFetchClient = () => {
   const updateClient = async (client_id, client) => {
     axios
       .put(
-        `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8083/union/v1/clients/update/${client_id}`,
+        `${clientUpdate}${client_id}`,
         {
           client_name: client.client,
           client_email: client.email,

@@ -272,6 +272,7 @@ export const MonthYear = styled.p`
 export const Container = styled.div`
   width: 85vw;
   height: 82vh;
+  background-color: #f5f7fa;
   border: 1px solid #f5f7fa;
   border-radius: 20px;
   box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 2px 4px rgba(0, 0, 0, 0.3);
@@ -319,7 +320,7 @@ export const DivIconS = styled.div`
 `;
 
 export const DivClose = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   width: 100vw;

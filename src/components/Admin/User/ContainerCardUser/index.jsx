@@ -8,6 +8,7 @@ import {
   LineDivisor,
   BoardStyle,
   DivTitlePage,
+  DivClose,
   Top,
   H1,
   DivButton,
@@ -24,9 +25,9 @@ import ClientCard from "./CardListView/index";
 import AddEditClient from "../AddEditUser";
 import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
 import { useState, useEffect } from "react";
-import { useClientContext } from "../../../../hook/useClientContent";
 import { useUserContext } from "../../../../hook/useUserContext";
 import ModalPopUp from "../ModalPopUP";
+import ModalPassword from "../ModalPassword";
 
 const abaStatus = {
   ACTIVE: "ACTIVE",
@@ -34,7 +35,7 @@ const abaStatus = {
 };
 
 const ContainerCards = () => {
-  const { loadUserList, userList } = useUserContext();
+  const { loadUserList, userList, modalPassword } = useUserContext();
 
   //console.log(userList);
   useEffect(() => {
@@ -135,7 +136,6 @@ const ContainerCards = () => {
                     key={u.id}
                     id={u.id}
                     openModal={() => EditClient()}
-                    //modalPopUp={() => PopUp()}
                   />
                 ))}
           </BoardStyle>
@@ -148,11 +148,17 @@ const ContainerCards = () => {
         <AddEditClient
           id={id}
           setModal={setModal}
-          title={isEdit ? "Edit Client" : "Create Client"}
+          title={isEdit ? "Edit User" : "Create User"}
         />
       )}
       {modalPopUp && (
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
+      )}
+      {modalPassword && (
+        <>
+          <DivClose />
+          <ModalPassword />
+        </>
       )}
     </ContainerGlobal>
   );

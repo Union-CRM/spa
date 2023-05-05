@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { getTags } from "../api/routesAPI";
 
 export const useFetchTag = (tag) => {
   const [tagList, setTagList] = useState(null);
@@ -10,14 +11,11 @@ export const useFetchTag = (tag) => {
     async function loadDate() {
       var tags;
       try {
-        const response = await axios.get(
-          "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8090/union/v1/tags",
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        const response = await axios.get(getTags, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
         tags = response;
       } catch (error) {
         console.error(error);
