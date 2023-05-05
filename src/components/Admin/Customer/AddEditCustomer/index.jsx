@@ -23,7 +23,7 @@ import { useCustomerContext } from "../../../../hook/useCustomerContext";
 import { useFetchTag } from "../../../../hook/useFetchTag";
 import { useFetchCustomer } from "../../../../hook/useFetchCustomer";
 
-const AddEditClient = (props) => {
+const AddEditCustomer = (props) => {
   const [newCustomer, setNewCustomer] = useState(entityCustomer);
   const [status, setStatus] = useState({ value: "ATIVO" });
   const { tagList } = useFetchTag("Tag");
@@ -174,7 +174,7 @@ const AddEditClient = (props) => {
   );
 };
 
-export default AddEditClient;
+export default AddEditCustomer;
 
 const status_mok = [
   { id: 1, value: "Active", label: "Active" },

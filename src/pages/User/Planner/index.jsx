@@ -11,6 +11,7 @@ import {
   Title,
 } from "./styles";
 import IconSystem from "../../../assets/IconSystem";
+import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
@@ -28,11 +29,12 @@ class PlannerPage extends React.Component {
               <Tippy content="Agenda, calendar with activites and appointments of the day">
                 <DivIconTitle>
                   {" "}
-                  <IconSystem
-                    icon={"Info"}
-                    width={"1rem"}
-                    height={"1rem"}
-                  />{" "}
+                  <Info
+                  width="25px"
+                  style={{
+                    fill: "#007BFF",
+                  }}
+                />
                 </DivIconTitle>
               </Tippy>
             </DivTitle>

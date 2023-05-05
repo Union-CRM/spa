@@ -23,7 +23,7 @@ export const Card = styled.div`
   position: relative;
 
   width: auto;
-  height: 135px;
+  height: 150px;
   z-index: 0 !important;
 `;
 
@@ -77,31 +77,6 @@ export const Header = styled.div`
   position: relative;
 `;
 
-// Photo Client //
-
-export const DivPhoto = styled.div`
-  display: grid;
-  grid-column: 1;
-  grid-row: 1;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const DivPhotoI = styled.div`
-  background-color: #d9d9d9;
-  border: 5px solid #007bff;
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  top: 30%;
-`;
-
 export const DivDadosCard = styled.div`
   text-align: center;
   width: fit-content;
@@ -110,8 +85,7 @@ export const DivDadosCard = styled.div`
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
-  border-bottom: ${(props) =>
-    props.isActive ? "2px solid  #e41165" : "2px solid #7a7a7a"};
+
   align-items: center;
 `;
 
@@ -122,21 +96,6 @@ export const DivIcons = styled.div`
   padding-right: 5%;
   height: 100%;
   width: 100%;
-`;
-
-// Div Info client //
-
-export const DivInfo = styled.div`
-  grid-row: 2;
-  margin-top: 3%;
-  position: relative;
-  display: grid;
-  width: 98%;
-  height: auto;
-  z-index: 0;
-  align-items: center;
-
-  grid-template-rows: auto;
 `;
 
 // Styles Status and tags //
@@ -162,196 +121,7 @@ export const TagsSpan = styled.div`
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   margin-left: 2%;
   cursor: pointer;
-`;
-
-export const IconTag = styled.span`
-  display: flex;
-  margin-top: 2px;
-  margin-left: 2px;
-`;
-
-// Styles Icons Edit and Toggle //
-
-export const IconEdit = styled.span`
-  width: 12px;
-  height: 12px;
-  cursor: pointer;
-`;
-
-export const DivToggle = styled.div`
-  width: 30px;
-  height: 13px;
-
-  ${(props) => {
-    switch (props.$mode) {
-      case "Active":
-        return css`
-          transform: rotateY(180deg);
-        `;
-      case "Inactive":
-        return css`
-          transform: rotateY(180deg);
-        `;
-      default:
-        return css``;
-    }
-  }}
-`;
-
-export const LabelToggle = styled.label`
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 40px;
-  ${(props) => {
-    switch (props.$mode) {
-      case "Active":
-        return css`
-          background: #00953b;
-          left: 2px;
-        `;
-
-      case "Inactive":
-        return css`
-          background: #7a7a7a;
-          :checked ~ label span {
-            right: 2px;
-            background: #7a7a7a;
-          }
-        `;
-      default:
-        return css`
-          background-color: #6e6b6b;
-        `;
-    }
-  }}
-
-  :after {
-    content: "";
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    bottom: -10px;
-    left: -10px;
-    border-radius: inherit;
-  }
-`;
-
-// Infos Clients //
-export const Line = styled.p`
-  color: #007bff;
-  padding-right: 5px;
-  padding-left: 3px;
-  font-weight: 600;
-`;
-
-export const DivRole = styled.span`
-  display: flex;
-  height: fit-content;
-  width: 100%;
-  position: relative;
-  flex-direction: row;
-  justify-content: flex-start;
-  span {
-    color: rgba(0, 0, 0, 0.7);
-  }
-`;
-
-export const DivCustomer = styled.span`
-  display: flex;
-  height: fit-content;
-  width: 100%;
-  position: relative;
-  flex-direction: row;
-  justify-content: flex-start;
-  span {
-    color: rgba(0, 0, 0, 0.7);
-  }
-`;
-
-export const DivBusiness = styled.span`
-  display: flex;
-  height: fit-content;
-  width: 100%;
-  position: relative;
-  flex-direction: row;
-  justify-content: flex-start;
-  span {
-    color: rgba(0, 0, 0, 0.7);
-  }
-`;
-
-export const DivRelease = styled.span`
-  display: flex;
-  height: fit-content;
-  width: 90%;
-  position: relative;
-  flex-direction: row;
-  justify-content: flex-start;
-  color: rgba(0, 0, 0, 0.7);
-`;
-
-// * Title and Value Infos* //
-export const TitleInfo = styled.span`
-  display: flex;
-  font-weight: 900;
-  font-style: bold;
-  font-size: 1rem;
-  span {
-    color: #007bff;
-    font-weight: 700;
-    margin-right: 2px;
-    margin-left: 5px;
-  }
-`;
-
-export const ValueInfo = styled.span`
-  font-weight: 500;
-  font-size: 1rem;
-`;
-
-// VERIFICAR //
-export const Span = styled.span`
-  display: block;
-  width: 12px;
-  height: 12px;
-  background: #ffffff;
-  position: absolute;
-  z-index: 2;
-  right: 50%;
-  top: 0;
-  border: 1px solid grey;
-  border-radius: 50%;
-
-  :after {
-    content: "";
-
-    position: absolute;
-    left: 15%;
-    top: 25%;
-
-    width: 70%;
-    height: 50%;
-
-    background: white;
-    border-radius: inherit;
-  }
-
-  :before {
-    content: "";
-
-    position: absolute;
-    top: 50%;
-    margin-top: -12px;
-    right: -50%;
-
-    text-transform: uppercase;
-    font-weight: bold;
-    font-family: Arial, sans-serif;
-    font-size: 24px;
-
-    color: #fff;
-  }
+  text-transform: lowercase;
 `;
 
 export const ContainerFather = styled.div`
@@ -398,4 +168,29 @@ export const DivContentTags = styled.div`
   margin-left: 10px;
   justify-content: center;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+export const DivImg = styled.div`
+  position: relative;
+  align-items: center;
+  margin-top: -10%;
+  border-bottom: ${(props) =>
+    props.isActive ? "2px solid  #e41165" : "2px solid #7a7a7a"};
+
+  filter: ${(props) => (props.isActive ? "" : "grayscale(100%)")};
+`;
+
+export const Img = styled.img`
+  height: 60px;
+  width: 65px;
+  border-radius: 4px;
+`;
+export const DivImgTag = styled.div`
+  position: relative;
+  align-items: center;
+  filter: ${(props) => (props.isActive ? "" : "grayscale(100%)")};
+`;
+
+export const ImgTag = styled.img`
+  height: 22px;
+  width: 27px;
 `;

@@ -80,7 +80,7 @@ export const DivP = styled.div`
   margin-right: 5.5%;
   margin-top: 5%;
   margin-bottom: 8%;
-  `
+  `;
   
   export const DivPlanner = styled.div`
   display: flex;
@@ -96,9 +96,16 @@ font-style: normal;
 font-weight: 600;
 font-size: 20px;
 line-height: 24px;
-`
+`;
 
 export const DivCard = styled.div`
   align-self: center;
   margin: 0 auto;
-`
+`;
+
+export const DivInfo = styled.div`
+position:relative;
+top:15%;
+left:1%;
+`;
+

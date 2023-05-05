@@ -8,11 +8,9 @@ import { ContainerGlobal } from "../ContainerCardUser/styles";
 import { DivIcons } from "../../../../components/Client/ContainerCardClient/CardListView/styles";
 import { DivP } from "../../../../components/Planner/PlannerCard/styles";
 import { ContainerCentral } from "../../../../components/Client/AddEditClient/styles";
-import { DivModal } from "../../../../components/Client/ContainerCardClient/styles";
 import { Card as ContainerCard } from "../../../../components/Client/ContainerCardClient/CardListView/styles";
 import { DivCard as ModaClient } from "../../../../components/Planner/PlannerCard/styles";
 import { Container as BigCalender } from "../../../Planner/Calendar/styles";
-import { SubjectList } from "../../../Subject/SubjectCardListView/styles";
 //* PAGE GLOBAL *//
 
 export const Header = styled.div`
@@ -375,4 +373,17 @@ export const DivSubject = styled.div`
   top: 15%;
   left: 12.5%;
   z-index: 25;
+`;
+
+export const DivPath = styled.div`
+  font: Houschka Rounded Alt;
+`;
+
+export const PreviousPath = styled.span`
+  cursor: pointer;
+`;
+
+export const CurrentPath = styled.span`
+  cursor: pointer;
+  color: #e41165;
 `;

@@ -15,6 +15,7 @@ export const ContainerCentral = styled.div`
   }
 `;
 
+
 // Div Title
 export const PositionTitle = styled.div`
   margin-left: 0px;
@@ -76,20 +77,23 @@ export const Container = styled.div`
   grid-row: 1;
   grid-column: 2;
   width: 80%;
-  min-width: 300px;
-  height: 55vh;
+  min-width: 350px;
+  height: 100%;
   background: #fff;
   display: grid;
-  border-left: 16.56px solid #e41165;
+  border-left: 16.56px solid #007bff;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   z-index: 1000;
-  grid-template-rows: 20% 50% 30%;
-  @media (min-width: 100px) and (max-width: 502px) {
-    height: 81vh;
-    width: 100%;
+  grid-template-rows: 10% 75% 15%;
+  @media (width: 500px) {
+    width: 375px;
+    height: 100%;
     flex-direction: flex-start;
     position: relative;
+  }
+  @media (min-width: 1355px) and (max-width: 1824px) {
+    width: 80%;
   }
 `;
 
@@ -102,7 +106,7 @@ export const Form = styled.div`
   width: 93%;
   padding-left: 7%;
   grid-row: 2;
-  grid-template-rows: 33.3% 33.3% 33.3%;
+  grid-template-rows: 14.2% 14.2% 14.2% 14.2% 14.2% 14.2% 14.2%;
   @media (min-width: 1600px) {
   }
 `;
@@ -139,16 +143,44 @@ export const DivName = styled.div`
   display: grid;
 `;
 
-export const DivStatus = styled.div`
-  width: 72%;
+export const DivEmail = styled.div`
+  width: 90%;
   height: 100%;
   grid-template-columns: 50% 50%;
   display: grid;
+  grid-row: 2;
+`;
+
+export const DivCustomer = styled.div`
   grid-row: 3;
+  width: 90%;
+  height: auto;
+  display: grid;
+`;
+
+export const DivBusiness = styled.div`
+  grid-row: 5;
+  width: 90%;
+  height: auto;
+  display: grid;
+`;
+
+export const DivRelease = styled.div`
+  grid-row: 4;
+  width: 90%;
+  height: auto;
+  display: grid;
 `;
 
 export const DivTag = styled.div`
-  grid-row: 2;
+  grid-row: 6;
+  width: 90%;
+  height: auto;
+  display: grid;
+`;
+
+export const DivStatus = styled.div`
+  grid-row: 7;
   width: 90%;
   height: auto;
   display: grid;

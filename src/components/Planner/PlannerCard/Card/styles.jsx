@@ -204,7 +204,12 @@ export const ClientContent = styled.div`
   align-items: right;
   
   `
-
+  export const DivIconTitle = styled.div`
+  display: flex;
+  margin-left: 1%;
+  width: fit-content;
+  height: 100%;
+`;
 
 export const DivStatusTime = styled.div`
   display: inline-flex;
@@ -272,7 +277,6 @@ p {
 export const Email2 = styled.p`
 
 `
-
 
 export const DivIcon = styled.div`
   display: flex;

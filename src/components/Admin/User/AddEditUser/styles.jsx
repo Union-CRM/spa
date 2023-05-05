@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 // Div Father
+//ok
 export const ContainerCentral = styled.div`
   justify-content: end;
   display: flex;
@@ -14,7 +15,7 @@ export const ContainerCentral = styled.div`
     justify-content: start;
   }
 `;
-
+//ok
 // Div Title
 export const PositionTitle = styled.div`
   margin-left: 0px;
@@ -27,7 +28,7 @@ export const PositionTitle = styled.div`
     grid-template-columns: 70% 10%;
   }
 `;
-
+//ok
 export const H1 = styled.h1`
   font-size: 32px;
   font-style: normal;
@@ -45,33 +46,8 @@ export const H1 = styled.h1`
   }
 `;
 
-/// Button Close
-
-export const DivClose = styled.div`
-  align-items: center;
-  display: grid;
-  width: 50%;
-  @media (min-width: 50px) and (max-width: 500px) {
-  }
-`;
-
-export const Close = styled.button`
-  background-color: #2b2b2b;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  display: grid;
-  width: 100%;
-  height: 20px;
-  :hover {
-    opacity: 0.8;
-  }
-`;
-
 // Children
-
+//ok
 export const Container = styled.div`
   grid-row: 1;
   grid-column: 2;
@@ -94,7 +70,7 @@ export const Container = styled.div`
 `;
 
 // Div Content
-
+//ok
 export const Form = styled.div`
   position: relative;
   display: grid;
@@ -106,7 +82,7 @@ export const Form = styled.div`
   @media (min-width: 1600px) {
   }
 `;
-
+//ok
 export const Input = styled.input`
   height: ${(props) => props.heightInput || "28px"};
   width: ${(props) => props.widthInput || "100%"};
@@ -121,7 +97,7 @@ export const Input = styled.input`
     width: 40px;
   }
 `;
-
+//ok
 export const Label = styled.label`
   padding-left: 0px;
   font-style: normal;
@@ -131,14 +107,14 @@ export const Label = styled.label`
 `;
 
 // Divs
-
+//ok
 export const DivName = styled.div`
   grid-row: 1;
   width: 90%;
   height: 100%;
   display: grid;
 `;
-
+//ok
 export const DivId = styled.div`
   width: 90%;
   height: 100%;
@@ -146,12 +122,14 @@ export const DivId = styled.div`
   display: grid;
   grid-row: 2;
 `;
+//ok
 export const DivEmail = styled.div`
   grid-row: 3;
   width: 90%;
   height: auto;
   display: grid;
 `;
+//ok
 export const DivStatus = styled.div`
   grid-row: 4;
   width: 90%;
@@ -160,7 +138,7 @@ export const DivStatus = styled.div`
 `;
 
 // Button Save and Cancel
-
+//ok
 export const DivButton = styled.div`
   justify-content: center;
   display: grid;
@@ -170,9 +148,9 @@ export const DivButton = styled.div`
   height: 100%;
   grid-row: 3;
 `;
-
+//ok
 export const PositionButtonCancel = styled.div``;
-
+//ok
 export const ClickButton = styled.div`
   display: block;
 `;

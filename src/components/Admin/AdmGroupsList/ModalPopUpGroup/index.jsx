@@ -9,23 +9,23 @@ import {
   Span,
   ContainerFather,
 } from "./styles";
-import { useClientContext } from "../../../../hook/useClientContent";
-import { useFetchClient } from "../../../../hook/useFetchClient";
+import { useGroupListContext } from "../../../../hook/useGroupListContext";
+import { useFetchAdmGroupList } from "../../../../hook/useFetchAdmGroupList";
 
-const ModalPopUp = (props) => {
+const ModalPopUpGroup = (props) => {
   const { modalClose } = props;
-  const { client: clientList } = useClientContext();
-  const { updateStatusClient } = useFetchClient();
-  const client = clientList.filter((item) => item.id === props.id)[0];
-  const p = client.status === "Active" ? "Inactivate" : "Activate";
+  const { group: groupList } = useGroupListContext();
+  const { updateStatus } = useFetchAdmGroupList();
+  const group = groupList.filter((item) => item.id === props.id)[0];
+  const p = group.status === "ATIVO" ? "Inactivate" : "Activate";
 
   const span =
-    client.status === "Active"
-      ? "Do you want do deactivate this card?"
+    group.status === "ATIVO"
+      ? "Do you want do desactivate this card?"
       : "Do you want to activate this card?";
 
   const handleAlterStatus = () => {
-    updateStatusClient(client.id);
+    updateStatus(group.id);
     modalClose();
   };
 
@@ -64,4 +64,4 @@ const ModalPopUp = (props) => {
   );
 };
 
-export default ModalPopUp;
+export default ModalPopUpGroup;

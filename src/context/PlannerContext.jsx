@@ -23,8 +23,8 @@ export const PlannerContextProvider = ({ children }) => {
 
   useEffect(() => {
 
-    if(localStorage.getItem("token")){
-    //loadPlannerList();
+    if (localStorage.getItem("token")) {
+      loadPlannerList();
 
     }
   }, []);

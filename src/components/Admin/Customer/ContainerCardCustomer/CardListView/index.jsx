@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Container,
   Card,
@@ -14,6 +14,10 @@ import {
   PositionEdit,
   DivContentTags,
   DivTag,
+  DivImg,
+  Img,
+  DivImgTag,
+  ImgTag,
 } from "./styles";
 import Body from "../../../../../assets/FontSystem/Body";
 import Tippy from "@tippyjs/react";
@@ -39,6 +43,19 @@ const CustomerCard = (props) => {
           .filter((t) => t)
       : ""
   );
+  const [Image, setImage] = useState("");
+
+  useEffect(() => {
+    try {
+      setImage(
+        require(`../../../../../assets/Image/${customer.name
+          .split(" ")[0]
+          .toLowerCase()}.png`)
+      );
+    } catch {
+      setImage(require(`../../../../../assets/Image/customer.png`));
+    }
+  }, []);
 
   const handleEdit = () => {
     setCustomerTarget(customer);
@@ -66,13 +83,24 @@ const CustomerCard = (props) => {
         >
           <Header>
             <DivTagsStatus>
-              <TagsSpan
-                onClick={() => setTagIcon(!tagIcon)}
-                isActive={isActive}
-                $mode={customer.tags}
-              >
-                tags
-              </TagsSpan>
+              {!tagIcon && (
+                <TagsSpan
+                  onClick={() => setTagIcon(!tagIcon)}
+                  isActive={isActive}
+                  $mode={customer.tags}
+                >
+                  tags
+                </TagsSpan>
+              )}
+              {tagIcon && (
+                <DivImgTag isActive={isActive}>
+                  <ImgTag
+                    onClick={() => setTagIcon(!tagIcon)}
+                    src={Image}
+                    alt=""
+                  />
+                </DivImgTag>
+              )}
             </DivTagsStatus>
 
             <DivIcons>
@@ -99,6 +127,9 @@ const CustomerCard = (props) => {
 
           {!tagIcon && (
             <DivDadosCard isActive={isActive}>
+              <DivImg isActive={isActive}>
+                <Img img src={Image} alt="" />
+              </DivImg>
               <Body type={"Body1"} name={customer.name} />
             </DivDadosCard>
           )}

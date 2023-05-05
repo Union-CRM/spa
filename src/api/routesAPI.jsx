@@ -1,6 +1,6 @@
 //User
 export const userGetSubmissiveUsers =
-  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users";
+  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/submissives";
 
 export const userGetUsersMe =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/me";
