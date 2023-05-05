@@ -79,7 +79,7 @@ export const Dropdown = styled.ul`
   overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 10px;
-    background-color: #ccc;
+    background-color: #fff;
     height: 10px;
   }
 
@@ -93,7 +93,7 @@ export const Dropdown = styled.ul`
   }
 
   &::-webkit-scrollbar-thumb {
-    height: 80%;
+    height: 80%;background-color: #fff;
   }
 `;
 

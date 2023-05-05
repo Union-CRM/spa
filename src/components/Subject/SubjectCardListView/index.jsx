@@ -3,6 +3,7 @@ import {
   ContainerGlobal,
   ContainerHeaderAndCards,
   HeaderContainerCards,
+  DivInfo,
   ContainerCards,
   DivModal,
   LineDivisor,
@@ -38,7 +39,11 @@ import CreateRemark from "../../Subject/ModalCreateRemark";
 import ModalCreatePlanner from "../../Subject/ModalCreatePlanner";
 import ModalSave from "../../Planner/ModalSuccessfuly";
 import { usePlannerContext } from "../../../hook/usePlannerContent";
+import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
 import { useUserContext } from "../../../hook/useUserContext";
+
 
 const cardStatus = {
   INPROGRESS: "IN PROGRESS",
@@ -131,7 +136,24 @@ const SubjectList = (props) => {
           <Top>
             <DivTitlePage>
               <H1>Subjects List</H1>
-              <HowManySubjectList>({subjectList.length})</HowManySubjectList>
+
+              <HowManySubjectList>({subject.length})</HowManySubjectList>
+
+              <Tippy content="List of all subjects.">
+              <DivInfo>
+              
+                  <Info
+                  width="25px"
+                  style={{
+                    fill: "#007BFF",
+                  }}
+                />
+                     </DivInfo>
+              </Tippy>
+
+
+             
+
             </DivTitlePage>
 
             <DivButton onClick={() => createSubject()}>

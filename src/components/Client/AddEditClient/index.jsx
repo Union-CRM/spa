@@ -151,6 +151,7 @@ const AddEditClient = (props) => {
   };
 
   const handleSelectRelease = (release_id) => {
+    console.log(release_id);
     setReleaseObj(releaseList.filter((item) => item.id === release_id)[0]);
   };
 
@@ -237,7 +238,6 @@ const AddEditClient = (props) => {
                 options={releaseList ? releaseList : []}
               />
             </DivRelease>
-
             <DivBusiness>
               <Label>
                 Business

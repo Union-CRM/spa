@@ -5,32 +5,44 @@ import GlobalStyle from "./styles/GlobalStyle";
 import SubjectPage from "./pages/User/Subject/index";
 import Client from "./pages/User/Client";
 
-import GroupsList from "./pages/Admin/GroupsList/index";
 import LoginPage from "./pages/Login/index";
+import GroupsList from "./pages/Admin/GroupsList/index";
+
 import AdmUser from "./pages/Admin/User/index";
 import Customer from "./pages/Adm/Customer/index";
+
 import HomeAdm from "./pages/Adm/Home";
+
 import { ClientContextProvider } from "./context/ClientContext";
 import { PlannerContextProvider } from "./context/PlannerContext";
 import { SubjectContextProvider } from "./context/SubjectContext";
 import { RemarkContextProvider } from "./context/RemarkContext";
 import { GroupListContextProvider } from "./context/GroupListContext";
-import { useUserContext } from "./hook/useUserContext";
+import { BusinessContextProvider } from "./context/BusinessContext";
+import { ReleaseContextProvider } from "./context/ReleaseContext";
+import UsersAdm from "./pages/Adm/Users/index";
+
+
 import Groups from "./pages/Adm/Groups";
 
 import Business from "./pages/Adm/Business";
-import ReleaseTrain from "./pages/Adm/ReleaseTrain";
-//
+
+import ReleaseTrainPage from "./pages/Adm/ReleaseTrain";
+
 
 function App() {
   const { user } = useUserContext();
   return (
     <>
+
       <SubjectContextProvider>
         <RemarkContextProvider>
           <PlannerContextProvider>
             <ClientContextProvider>
               <GroupListContextProvider>
+                  <BusinessContextProvider>
+                    <ReleaseContextProvider>
+              
                 <Router>
                   <GlobalStyle />
                   <div className="App">
@@ -143,11 +155,16 @@ function App() {
                     </Routes>
                   </div>
                 </Router>
-              </GroupListContextProvider>
-            </ClientContextProvider>
-          </PlannerContextProvider>
-        </RemarkContextProvider>
-      </SubjectContextProvider>
+              
+                    </ReleaseContextProvider>  
+                </BusinessContextProvider>
+
+                </GroupListContextProvider>
+              </ClientContextProvider>
+            </PlannerContextProvider>
+          </RemarkContextProvider>
+        </SubjectContextProvider>
+
     </>
   );
 }

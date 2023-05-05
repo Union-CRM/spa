@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const DivInfo = styled.div`
+position:relative;
+top:15%;
+left:1%;
+`;
+
+
 export const DivHeader = styled.div`
    display: grid;
    grid-template-columns: repeat(2, 50%);
@@ -23,8 +30,7 @@ export const DivIconTitle = styled.div`
    margin-left: 1%;
    width: fit-content;
    height: auto;
-   margin-top: 3%;
-   
+
 `;
 
 export const DivLogo = styled.div`

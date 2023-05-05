@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { Label, Container, DivSvg } from "./styles";
+import { Label, Container, DivSvg, DivSvg2 } from "./styles";
 import {ReactComponent as Contact} from "../../../assets/svg/Contact.svg"
+import {ReactComponent as Drop} from "../../../assets/svg/Drop.svg"
 
 export const TagComponent = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
@@ -20,12 +21,22 @@ export const TagComponent = (props, placeholder, idTagOption) => {
   })); //props.options;
   //console.log(options.map((item)=>({value:item.value,label:item.label,color:colors[getRandomInt(colors.length-1)]})))
 
-  const DropdownIndicator = props => {
-    return (
-      <DivSvg>
-        <Contact fill={"#888C95"} width={"20px"}/>
-      </DivSvg>  
-    );
+
+  const DropdownIndicator = () => {
+    if (props.indicator){
+      if(props.indicator === "guest")
+        return (
+          <DivSvg>
+          <Contact fill={"#888C95"} width={"20px"}/>
+        </DivSvg>  
+        )
+    }else{
+      return (
+        <DivSvg2>
+        <Drop width={"15px"}/>
+      </DivSvg2>  
+      )
+    }
   };
 
 
@@ -36,7 +47,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
           {props.label}
           <Select
             isMulti
-            components={{ DropdownIndicator, animatedComponents }}
+            components={{ DropdownIndicator, animatedComponents, IndicatorSeparator: () => null }}
             options={options}
             value={props.tags}
             id={props.idTagOption}

@@ -11,17 +11,36 @@ export const ContainerGlobal = styled.div`
   grid-template-rows: 100%;
   @media (width: 500px) {
     width: 790px;
+    display: flex;
+    flex-direction: column;
   }
   @media (min-width: 1824px) and (max-width: 2000px) {
     width: 100%;
     height: 85vh;
   }
+
 `;
+
+export const Routes = styled.div`
+grid-column:1;
+position:absolute;
+top:-3%;
+grid-row:1;
+left:0;
+z-index:1000;
+span {
+  color:#E41165;
+}
+@media (width: 500px) {
+  top:-4%;
+}
+`;
+
 
 //* Container father and children *//
 export const ContainerHeaderAndCards = styled.div`
   width: 100%;
-  min-width: 340px;
+  min-width: 330px;
   height: 100%;
   grid-column: 1;
   grid-row: 1;
@@ -36,7 +55,15 @@ export const ContainerHeaderAndCards = styled.div`
   }
   @media (min-width: 1355px) and (max-width: 1824px) {
     width: 100%;
+  } 
+  @media (min-width: 100px) and (max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+    width:385px;
+    height:240px;
   }
+
+  
 `;
 
 //* Header Container *//
@@ -56,9 +83,17 @@ export const HeaderContainerCards = styled.div`
     position: relative;
     grid-column: 1;
     width: 100%;
-    height: 100%;
+    height: 50%;
   }
+  
 `;
+
+export const DivInfo = styled.div`
+position:relative;
+top:6%;
+left:1%;
+`;
+
 
 // Div Title and Button //
 export const Top = styled.div`
@@ -66,6 +101,7 @@ export const Top = styled.div`
   grid-row: 2;
   grid-template-columns: 50% 50%;
   width: 100%;
+
 `;
 
 //** Line **//
@@ -75,7 +111,12 @@ export const LineDivisor = styled.div`
   margin-left: 5%;
   background-color: #e3e6ed;
   position: absolute;
+  @media (min-width: 100px) and (max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
+
 
 //* CONTAINER CARDS *//
 export const CardsContainer = styled.div`
@@ -113,6 +154,7 @@ export const CardsContainer = styled.div`
     background-color: #d9d9d9;
     border-right: 6px solid white;
   }
+  
 `;
 
 // Cards //
@@ -201,6 +243,10 @@ export const DivButton = styled.div`
   justify-content: end;
   align-items: center;
   text-align: center;
+  @media (min-width: 100px) and (max-width: 919px) {
+    padding-left:15%;
+  }
+
 `;
 
 /// Div Buttons Status ///
