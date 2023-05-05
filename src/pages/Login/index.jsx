@@ -9,7 +9,9 @@ import { Container,DivTcs,Content,LogoDiv,Form,DivIcons,Label,Span,Input,DivTerm
 import Headline from '../../assets/FontSystem/Headline'
 import axios from 'axios';
 
+
 function LoginPage() {
+
 
   const [email, setEmail] = useState(''); // Criar estado para email com o hook useState
   const [password, setPassword] = useState(''); // Criar estado para senha com o hook useState
@@ -36,9 +38,8 @@ function LoginPage() {
               console.log("Login ou senha incorreta");
               setInvalid(true);
 
-              if(loginQtd==3){
+              if(loginQtd===3){
                 console.log("bloqueado");
-                
                 setIsActive(true);  
                 setBlocked(true);
                 setInvalid(false);

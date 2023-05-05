@@ -4,8 +4,10 @@ import Home from "./pages/User/Home";
 import GlobalStyle from "./styles/GlobalStyle";
 import SubjectPage from "./pages/User/Subject/index";
 import Client from "./pages/User/Client";
+
 import LoginPage from "./pages/Login/index";
 import GroupsList from "./pages/Admin/GroupsList/index";
+
 import { ClientContextProvider } from "./context/ClientContext";
 import { UserContextProvider } from "./context/UserContext";
 import { PlannerContextProvider } from "./context/PlannerContext";
@@ -18,7 +20,9 @@ import UsersAdm from "./pages/Adm/Users/index";
 import Groups from "./pages/Adm/Groups";
 import Customer from "./pages/Adm/Customer";
 import Business from "./pages/Adm/Business";
+
 import ReleaseTrainPage from "./pages/Adm/ReleaseTrain";
+
 
 function App() {
   return (
@@ -29,6 +33,7 @@ function App() {
             <PlannerContextProvider>
               <ClientContextProvider>
                 <GroupListContextProvider>
+
                    <BusinessContextProvider>
                     <ReleaseContextProvider>
                     <Router>
@@ -106,6 +111,7 @@ function App() {
                               )
                             }
                           />
+
 
                           <Route
                             path="/subject"
