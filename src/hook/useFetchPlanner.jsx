@@ -1,6 +1,6 @@
 import axios from "axios";
 import { usePlannerContext } from "./usePlannerContext";
-
+import { plannerCreate, plannerUpdate } from "../api/routesAPI";
 export const useFetchPlanner = () => {
   const {
     loadPlannerList,
@@ -14,13 +14,9 @@ export const useFetchPlanner = () => {
 
   const createPlanner = async (planner) => {
     axios
-      .post(
-        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8086/union/v1/planners",
-        planner,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      )
+      .post(plannerCreate, planner, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
       .then(function (response) {
         loadPlannerList();
         setModalSave(true);
@@ -39,13 +35,9 @@ export const useFetchPlanner = () => {
 
   const updatePlanner = async (planner_id, planner) => {
     axios
-      .put(
-        `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8086/union/v1/planners/update/${planner_id}`,
-        planner,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      )
+      .put(`${plannerUpdate}${planner_id}`, planner, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
       .then(function (response) {
         loadPlannerList();
         setModalEdit(false);

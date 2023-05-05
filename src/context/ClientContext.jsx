@@ -1,26 +1,24 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { clientGetClientsMyGroups } from "../api/routesAPI";
 export const ClientContext = createContext();
 
 export const ClientContextProvider = ({ children }) => {
   const [client, setClient] = useState([{}]);
 
   useEffect(() => {
-    if(localStorage.getItem("token")){
-    loadData();
+    if (localStorage.getItem("token")) {
+      //loadData();
     }
   }, []);
 
   const loadData = async () => {
     var clients;
-    
+
     try {
-      const response = await axios.get(
-        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8083/union/v1/clients/mygroups",
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      );
+      const response = await axios.get(clientGetClientsMyGroups, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
       clients = response;
     } catch (error) {
       console.error(error.response);
@@ -45,11 +43,8 @@ export const ClientContextProvider = ({ children }) => {
           ? item.tags.map((tag) => ({ value: tag.tag_id, label: tag.tag_name }))
           : [],
       }))
-
-      
     );
-   /* console.log(clients.data.list)*/
-    
+    /* console.log(clients.data.list)*/
   };
   const [selectedClient, setSelectedClient] = useState(null);
   const [toggleState, setToggleState] = useState(1);

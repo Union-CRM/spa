@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { roleCreate } from "../api/routesAPI";
 
 export const useFetchRole = (role) => {
   const [roleList, setRoleList] = useState(null);
@@ -9,14 +10,11 @@ export const useFetchRole = (role) => {
     async function loadDate() {
       var roles;
       try {
-        const response = await axios.get(
-          "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8083/union/v1/clients/roles",
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        const response = await axios.get(roleCreate, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
         roles = response;
       } catch (error) {
         console.error(error);

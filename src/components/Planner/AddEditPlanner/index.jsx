@@ -194,7 +194,7 @@ const ModalPlanner = ({ title }) => {
               <InputPlanner
                 type="text"
                 placeholder="Client Name"
-                value={subjectObj.subject_title}
+                value={subjectObj ? subjectObj.subject_title : ""}
                 disabled
               />
             </>
@@ -203,28 +203,28 @@ const ModalPlanner = ({ title }) => {
           <InputPlanner
             type="text"
             placeholder="Client Name"
-            value={subjectObj.client}
+            value={subjectObj ? subjectObj.client : ""}
             disabled
           />
           <PositionLabel>Email</PositionLabel>
           <InputPlanner
             type="text"
             placeholder="Email"
-            value={subjectObj.client_email}
+            value={subjectObj ? subjectObj.client_email : ""}
             disabled
           />
           <PositionLabel>Business</PositionLabel>
           <InputPlanner
             type="text"
             placeholder="Business"
-            value={subjectObj.business}
+            value={subjectObj ? subjectObj.business : ""}
             disabled
           />
           <PositionLabel>Release Train</PositionLabel>
           <InputPlanner
             type="text"
             placeholder="Business"
-            value={subjectObj.release}
+            value={subjectObj ? subjectObj.release : ""}
             disabled
           />
         </PositionInputs>
@@ -261,7 +261,7 @@ const ModalPlanner = ({ title }) => {
           </DivFinish>
         </DivClocks>
         <PositionTags>
-        <TagComponent
+          <TagComponent
             options={clientOption}
             placeholder={""}
             label={"Guests"}
@@ -273,6 +273,7 @@ const ModalPlanner = ({ title }) => {
             heights={"12vh"}
             sizeMenuList={"10vw"}
             sizeMenu={"35%"}
+            indicator={"guest"}
           />
         </PositionTags>
         <PositionStatus>

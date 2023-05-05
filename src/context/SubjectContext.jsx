@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { subjectGetSubmissivesSubjects } from "../api/routesAPI";
 import axios from "axios";
 export const SubjectContext = createContext();
 
@@ -6,21 +7,19 @@ export const SubjectContextProvider = ({ children }) => {
   const [subject, setSubject] = useState([{}]);
 
   useEffect(() => {
+
     if(localStorage.getItem("token")){
-    loadData();
+    //loadData();
+
     }
   }, []);
-
 
   const loadData = async () => {
     var subjects;
     try {
-      const response = await axios.get(
-        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/submissives",
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      );
+      const response = await axios.get(subjectGetSubmissivesSubjects, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
       subjects = response;
     } catch (error) {
       console.error(error);
@@ -40,6 +39,8 @@ export const SubjectContextProvider = ({ children }) => {
         client: item.client_name,
         client_id: item.client_id,
         client_email: item.client_email,
+        user_id: item.user_id,
+        user_name: item.user_name,
       }))
     );
   };

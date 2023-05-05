@@ -59,7 +59,7 @@ const [modalInfo, setModalInfo] = useState(false);
 const {modalEditClient, setModalEditClient } = useClientContext();
 
   useEffect(() => {
-    if (props.adimList) {
+    if (props.adminList) {
       setClientList(client.filter((c) => c.user_id === userTarget.id));
     } else {
       setClientList(client.filter((c) => c.user_id === user.id));

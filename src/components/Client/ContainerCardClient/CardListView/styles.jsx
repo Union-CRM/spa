@@ -15,8 +15,7 @@ export const Container = styled.div`
 export const Card = styled.div`
   border-left: ${(props) =>
     props.isActive ? "7px solid #00953b" : "7px solid #7a7a7a"};
-  //border-left: 7px solid ${(props) =>
-    props.checked ? "Active" : "Inactive"};
+  border-left: 7px solid ${(props) => (props.checked ? "Active" : "Inactive")};
   border-left: 7px solid ${(props) => (props.isActive ? "green" : "gray")};
   grid-template-rows: 40% 60%;
   display: grid;
