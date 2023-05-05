@@ -24,8 +24,6 @@ export const CustomerContextProvider = ({ children }) => {
     } catch (error) {
       console.error(error.response);
     }
-
-    /* console.log(clients.data.list)*/
   };
   return (
     <CustomerContext.Provider

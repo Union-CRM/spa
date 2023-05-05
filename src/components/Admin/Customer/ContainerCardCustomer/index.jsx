@@ -20,6 +20,7 @@ import {
   Inactive,
   HowManyInactive,
   DivClose,
+  DivInfo,
 } from "./styles";
 import CustomerCard from "./CardListView/index";
 import AddEditCustomer from "../AddEditCustomer";
@@ -30,6 +31,10 @@ import { useUserContext } from "../../../../hook/useUserContext";
 import { useCustomerContext } from "../../../../hook/useCustomerContext";
 import ModalError from "../ModalError";
 import ModalSuccessfuly from "../ModalSuccessfuly";
+import { ReactComponent as Info } from "../../../../assets/svg/Info.svg";
+
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
 
 const abaStatus = {
   ACTIVE: "ATIVO",
@@ -86,6 +91,16 @@ const ContainerCards = (props) => {
               <HowManyClientList>
                 ({customer ? customer.length : 0})
               </HowManyClientList>{" "}
+              <Tippy content="Current, past or potencial customer.">
+                <DivInfo>
+                  <Info
+                    width="25px"
+                    style={{
+                      fill: "#E41165",
+                    }}
+                  />
+                </DivInfo>
+              </Tippy>
             </DivTitlePage>
 
             <DivButton onClick={() => createClient()}>
