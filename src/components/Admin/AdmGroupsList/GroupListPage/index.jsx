@@ -19,16 +19,24 @@ import {
   HowManyActive,
   Inactive,
   HowManyInactive,
+  DivInfo,
+  Routes,
 } from "./styles";
 import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useClientContext } from "../../../../hook/useClientContent";
-import ModalPopUp from "../../../Client/ModalPopUP";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import IconSystem from "../../../../assets/IconSystem";
+import { ReactComponent as Info } from "../../../../assets/svg/Info.svg";
 
 // Group
 import AddEditGroup from "../../AdmGroupsList/GroupListAddEdit";
 import AdmGroupCardListView from "../GroupCardListView/index";
 import { useGroupListContext } from "../../../../hook/useGroupListContext";
+import InfoGroup from "../../AdmGroupsList/ModalInfoGroup";
+
+import ModalPopUpGroup from "../ModalPopUpGroup";
 
 const abaStatus = {
   ATIVO: "ATIVO",
@@ -36,18 +44,18 @@ const abaStatus = {
 };
 
 const GroupListView = () => {
+ 
 
   // States modal//
 
+  const [groupList, setGroupList] = useState();
   const [modalPopUp, setModalPopUp] = useState(false);
   const [modal, setModal] = useState(false);
-
   const [id, setId] = useState(null);
   const [isEdit, setEdit] = useState(false);
+  const { group, infoGroup, setInfoGroup } = useGroupListContext();
 
-  const { group } = useGroupListContext();
-
- /* const { client } = useClientContext();*/
+  //const [infoGroup, setInfoGroup] = useState(true);
   
   const [active, setActive] = useState(abaStatus.ATIVO);
 
@@ -62,11 +70,13 @@ const GroupListView = () => {
   const createGroup = () => {
     setModal(true);
     setEdit(false);
+    setInfoGroup(false);
   };
 
   const EditGroup = () => {
     setModal(true);
     setEdit(true);
+    setInfoGroup(false);
   };
 
   const modalClose = () => {
@@ -74,15 +84,35 @@ const GroupListView = () => {
   };
 
   return (
+    
     <ContainerGlobal>
+ 
+<Routes>Home {">"} <span> Group List</span></Routes>
+
       <ContainerHeaderAndCards>
+        
         <HeaderContainerCards>
           <Top>
             <DivTitlePage>
               <H1>Group List </H1>
               <HowManyClientList>({group.length})</HowManyClientList>{" "}
+
+              <Tippy content="List of all groups.">
+              <DivInfo>
+              
+                  <Info
+                  width="25px"
+                  style={{
+                    fill: "#E41165",
+                  }}
+                />
+                     </DivInfo>
+              </Tippy>
+         
+
             </DivTitlePage>
 
+           
             <DivButton onClick={() => createGroup()}>
               <ButtonAdd
                 mode="#E41165"
@@ -100,10 +130,13 @@ const GroupListView = () => {
               onClick={() => handleClick(abaStatus.ATIVO)}
               style={getTabColor(abaStatus.ATIVO)}
             >
-              <Active>
+            <Active>
                 Active (
                 <HowManyActive>
-                  {group.filter((item) => item.status === "ATIVO").length}
+                  {group
+                    ? group.filter((item) => item.status === "ATIVO")
+                        .length
+                    : 0}
                 </HowManyActive>
                 )
               </Active>
@@ -116,7 +149,10 @@ const GroupListView = () => {
               <Inactive>
                 Inactive (
                 <HowManyInactive>
-                  {group.filter((item) => item.status === "INATIVO").length}
+                  {group
+                    ? group.filter((item) => item.status === "INATIVO")
+                        .length
+                    : 0}
                 </HowManyInactive>
                 )
               </Inactive>
@@ -130,7 +166,7 @@ const GroupListView = () => {
           <BoardStyle>
           {group &&
               group
-              .filter((item) => item.status === active)
+             .filter((item) => item.status === active)
                 .map((item) => (
                   <AdmGroupCardListView
                     setId={(i) => setId(i)}
@@ -154,8 +190,17 @@ const GroupListView = () => {
           title={isEdit ? "Edit Group" : "Create Group"}
         />
       )}
+
+{infoGroup && (
+        <InfoGroup
+          id={id}
+          setInfoGroup={setInfoGroup}
+          title={ "Info Group" }
+        />
+      )}
+
       {modalPopUp && (
-        <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
+        <ModalPopUpGroup id={id} modalClose={() => setModalPopUp(false)} />
       )}
     </ContainerGlobal>
   );

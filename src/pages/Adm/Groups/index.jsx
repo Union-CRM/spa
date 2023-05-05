@@ -1,13 +1,18 @@
-import React from 'react'
-import PageBody from '../../../components/Geral/PageBody'
+import React from "react";
+import GroupListView from "../../../components/Admin/AdmGroupsList/GroupListPage";
+import PageBody from "../../../components/Geral/PageBody";
+import {GroupListContextProvider} from "../../../context/GroupListContext";
 
-
-const Groups = () => {
+const GroupList = () => {
   return (
-    <PageBody>
+    <>
 
-    </PageBody>
-  )
-}
+      <PageBody>
+        <GroupListView />
+      </PageBody>
+       
+    </>
+  );
+};
 
-export default Groups
+export default GroupList;

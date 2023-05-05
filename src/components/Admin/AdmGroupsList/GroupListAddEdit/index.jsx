@@ -22,60 +22,92 @@ import SingleSelect from "../../../Geral/Input/SingleSelect";
 import { useFetchCustomer } from "../../../../hook/useFetchCustomer";
 import { useFetchAdmGroupList } from "../../../../hook/useFetchAdmGroupList";
 import {useGroupListContext} from "../../../../hook/useGroupListContext";
+import { useFetchUsersNotin } from "../../../../hook/useFetchUsersNotin";
+
 
 
 
 const AddEditGroup = (props) => {
 
+  const handleSubmit = () => {
+    if (props.title === "Create Group") {
+      createGroup();
+    } else {
+      //createGroup();
+    }
+  };
 
-
+  
     const { setModal, id } = props;
 
     const closeModal = () => {
         setModal(false);
+        setInfoGroup(true);
       };
     
       const [flag, setFlag] = useState(false);
 
       const [groupName, setGroupName] = useState("");
-      const [user, setUser] = useState("");
-      const [users_id, setUserId] = useState({});
-
-      //Customer//
+      const [users, setUser] = useState();
       const [customer, setCustomer] = useState({});
       const [customer_id, setCustomerId] = useState();
       const { customerList } = useFetchCustomer("Customer");
+      console.log(users)
 
-      const handleSelectCustomer = (customer_id) => {
-        setCustomer(customerList.filter((c) => c.id === customer_id)[0]);
-      };
     
     const {insertGroup} = useFetchAdmGroupList();
     const { group: groupList} = useGroupListContext();
+    const {  infoGroup, setInfoGroup } = useGroupListContext();
+
+    
     const group = groupList.filter((item) => item.id === props.id)[0];
 
-    /*
-    const createGroup = () => {
+    
+    const handleSelectCustomer = (customer_id) => {
+      setCustomer(customerList.filter((c) => c.id === customer_id)[0]);
+    };
+    
+
+    
+     const createGroup = () => {
       const newGroup = {
         group_name: groupName,
-        customer_id: customer_id,
-        users: users_id,  
+        customer_id: customer.id,
+        user_id: users.id,
       };
-  
-      if (groupName && customer_id && users_id) {
+      
+      if (groupName && customer.id && users.id) {
         insertGroup(newGroup);
-        loadData();
         setModal(false);
       } else {
         setFlag(true);
       }
-    };*/
-      
+      console.log(newGroup)
+    };
+ 
+    
+  
+    
+    /*
     useEffect(() => {
       if (props.title === "Edit Group") {
-    
+        const editGroup = () => {
+          const newGroup = {
+            group_name: groupName,
+            customer_id: customer_id,
+            users: users_id,  
+          };
+      
+          if (groupName && customer_id && users_id) {
+            insertGroup(newGroup);
+            loadData();
+            setModal(false);
+          } else {
+            setFlag(true);
+          }
+        };
       }
-    }, []);
+    }, []);*/
   
 
   return (
@@ -106,8 +138,8 @@ const AddEditGroup = (props) => {
                  key="2"
                  set={(customer_id) => handleSelectCustomer(customer_id)}
                  label={"Customer"}
-                 value={customer.label}
-                 placeholder={flag && !customer.id ? "Required field" : ""}
+                 value={customer_id}
+                 placeholder={flag && !customer.label ? "Required field" : ""}
                  sizeSingle={"100%"}
                  required
                  sizeMenu={"100%"}
@@ -118,17 +150,20 @@ const AddEditGroup = (props) => {
 
 
             <DivUser>
-              <UsersComponents set={(user) => setUser(user)} />
+              <UsersComponents
+               set={(user) => setUser(user)}
+            />
               </DivUser>
           </Form>{" "}
           <DivButton>
-           
+          <ClickButton onClick={handleSubmit}>
               <ButtonDefault
                 type="adminSave"
                 weightFont={"500"}
                 sizeFont={"18px"}
                 name={"Save"}
-              />
+                
+              /> </ClickButton>
          
             <PositionButtonCancel onClick={closeModal}>
               <ButtonDefault type="cancelModalAdmin" name={"Cancel"} />

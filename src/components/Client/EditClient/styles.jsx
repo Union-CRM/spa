@@ -1,19 +1,20 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 // Div Father
 export const ContainerCentral = styled.div`
   justify-content: end;
   display: flex;
   grid-row: 1;
-  @media (min-width: 100px) and (max-width: 590px) {
+  @media (min-width: 100px) and (max-width: 500px) {
     grid-column: 1;
     display: grid;
     position: relative;
     top: 0px;
-    left: 0;s
+    left: 0;
     justify-content: start;
   }
 `;
+
 
 // Div Title
 export const PositionTitle = styled.div`
@@ -105,13 +106,8 @@ export const Form = styled.div`
   width: 93%;
   padding-left: 7%;
   grid-row: 2;
-  grid-template-rows: 14.2% 14.2% 14.2% 14.2% 14.2% 29%;
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    width: 95%;
-    height: 100%;
-  }
-  @media (min-width: 1824px) and (max-width: 2000px) {
-    width: 95%;
+  grid-template-rows: 14.2% 14.2% 14.2% 14.2% 14.2% 14.2% 14.2%;
+  @media (min-width: 1600px) {
   }
 `;
 
@@ -119,31 +115,14 @@ export const Input = styled.input`
   height: ${(props) => props.heightInput || "28px"};
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
-  border: 2px solid #888c95;
-  background-color: ${(props) => props.backgroundInput || "rgba(0, 0, 0, 0)"};
-  display: block;
-  position: relative;
-  padding-left: 2%;
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    height: 25px;
-  }
-`;
-
-export const TextArea = styled.textarea`
-  height: ${(props) => props.heightInput || "80px"};
-  width: ${(props) => props.widthInput || "100%"};
-  border-radius: 5px;
   padding-left: 2%;
   border: 2px solid #888c95;
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
-  resize: none;
   position: relative;
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    height: 70px;
-  }
-  @media (min-width: 1824px) and (max-width: 2000px) {
-    height: 100px;
+
+  @media (min-width: 1600px) {
+    width: 40px;
   }
 `;
 
@@ -164,37 +143,44 @@ export const DivName = styled.div`
   display: grid;
 `;
 
-export const DivBusiness = styled.div`
-  grid-row: 2;
-  grid-template-columns: 50% 50%;
-  width: 90%;
-  height: 100%;
-  display: grid;
-`;
-
 export const DivEmail = styled.div`
   width: 90%;
   height: 100%;
+  grid-template-columns: 50% 50%;
   display: grid;
-  grid-row: 3;
+  grid-row: 2;
 `;
 
-export const DivSubject = styled.div`
+export const DivCustomer = styled.div`
+  grid-row: 3;
+  width: 90%;
+  height: auto;
+  display: grid;
+`;
+
+export const DivBusiness = styled.div`
+  grid-row: 5;
+  width: 90%;
+  height: auto;
+  display: grid;
+`;
+
+export const DivRelease = styled.div`
   grid-row: 4;
   width: 90%;
   height: auto;
   display: grid;
 `;
 
-export const DivStatus = styled.div`
-  grid-row: 5;
+export const DivTag = styled.div`
+  grid-row: 6;
   width: 90%;
-  height: 100%;
+  height: auto;
   display: grid;
 `;
 
-export const DivDescription = styled.div`
-  grid-row: 6;
+export const DivStatus = styled.div`
+  grid-row: 7;
   width: 90%;
   height: auto;
   display: grid;
@@ -210,14 +196,6 @@ export const DivButton = styled.div`
   width: 100%;
   height: 100%;
   grid-row: 3;
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    bottom: 10%;
-    position: relative;
-    height: 100%;
-  }
-  @media (min-width: 1824px) and (max-width: 2000px) {
-    height: 85%;
-  }
 `;
 
 export const PositionButtonCancel = styled.div``;

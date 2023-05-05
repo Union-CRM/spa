@@ -8,6 +8,7 @@ import {
   LineDivisor,
   BoardStyle,
   DivTitlePage,
+  DivInfo,
   Top,
   H1,
   DivButton,
@@ -27,6 +28,14 @@ import { useState, useEffect } from "react";
 import { useClientContext } from "../../../hook/useClientContent";
 import { useUserContext } from "../../../hook/useUserContext";
 import ModalPopUp from "../ModalPopUP";
+import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+
+// Modal Client //
+import ModalClientDetails from "../ModalClientDetails";
+import ModalClientEdit from "../EditClient";
+
 
 const abaStatus = {
   ACTIVE: "Active",
@@ -37,12 +46,17 @@ const ContainerCards = (props) => {
   // States modal//
   const [modal, setModal] = useState(false);
   const [modalPopUp, setModalPopUp] = useState(false);
-  const [id, setId] = useState(null);
+  //const [id, setId] = useState(null);
   const [isEdit, setEdit] = useState(false);
-  const { client } = useClientContext();
   const [clientList, setClientList] = useState();
   const [active, setActive] = useState(abaStatus.ACTIVE);
   const { user, userTarget } = useUserContext();
+
+  const { client } = useClientContext();
+  const { id, setId } = useClientContext();
+ //const {modalInfo, setModalInfo} = useClientContext();
+const [modalInfo, setModalInfo] = useState(false);
+const {modalEditClient, setModalEditClient } = useClientContext();
 
   useEffect(() => {
     if (props.adminList) {
@@ -65,13 +79,17 @@ const ContainerCards = (props) => {
     setEdit(false);
   };
 
-  const EditClient = () => {
-    setModal(true);
-    setEdit(true);
-  };
+ // const EditClient = () => {
+   // setModal(true);
+   // setEdit(true);
+  //};
 
   const modalClose = () => {
     setModalPopUp(true);
+  };
+
+  const detailsModal = () => {
+    setModalInfo(true);
   };
 
   return (
@@ -84,6 +102,20 @@ const ContainerCards = (props) => {
               <HowManyClientList>
                 ({clientList ? clientList.length : 0})
               </HowManyClientList>{" "}
+
+              <Tippy content="List of all clients.">
+              <DivInfo>
+              
+                  <Info
+                  width="25px"
+                  style={{
+                    fill: "#007BFF",
+                  }}
+                />
+                     </DivInfo>
+              </Tippy>
+         
+
             </DivTitlePage>
 
             <DivButton onClick={() => createClient()}>
@@ -137,16 +169,16 @@ const ContainerCards = (props) => {
           <LineDivisor />
 
           <BoardStyle>
-            {clientList &&
-              clientList
+            {client &&
+              client
                 .filter((item) => item.status === active)
                 .map((item) => (
                   <ClientCard
                     setId={(i) => setId(i)}
                     openModalPopUp={() => setModalPopUp(true)}
+                    openModal={() => detailsModal()}
                     key={item.id}
                     id={item.id}
-                    openModal={() => EditClient()}
                     //modalPopUp={() => PopUp()}
                   />
                 ))}
@@ -154,15 +186,39 @@ const ContainerCards = (props) => {
         </CardsContainer>
       </ContainerHeaderAndCards>
 
-      <DivModal $mode={modal} />
+      <DivModal $mode={modalEditClient} />
+{modalEditClient && (
+    <AddEditClient
+      id={id}
+      setModalEditClient={setModalEditClient}
+      title={"Edit Client"}
+    />
+)}
 
-      {modal && (
-        <AddEditClient
+      <DivModal $mode={modalInfo} />
+
+       {modalInfo && (
+        <ModalClientDetails
           id={id}
-          setModal={setModal}
-          title={isEdit ? "Edit Client" : "Create Client"}
+          openModal={() => detailsModal()}
+          setModal={setModalInfo}
+          title={"Client Details"}
         />
       )}
+
+      <DivModal $mode={modal} />
+
+    {modal && (
+        <ModalClientEdit
+          id={id}
+          setModal={setModal}
+          title={"Create Client"}
+        />
+    )}
+
+
+
+
       {modalPopUp && (
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
       )}
