@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useSubjectContext } from "./useSubjectContent";
 import { useUserContext } from "./useUserContext";
+import { subjectCreate, subjectUpdate } from "../api/routesAPI";
 
 export const useFetchSubject = () => {
   const { user } = useUserContext();
@@ -9,7 +10,7 @@ export const useFetchSubject = () => {
   const insertSubject = async (subject) => {
     axios
       .post(
-        `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/create/user/${user.id}`,
+        `${subjectCreate}${user.id}`,
         {
           subject_title: subject.subject_title,
           subject_text: subject.subject_text,
@@ -34,7 +35,7 @@ export const useFetchSubject = () => {
     //console.log(subject.title + "teste" + subject.text + subject_id);
     axios
       .put(
-        `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/update/${subject_id}`,
+        `${subjectUpdate}${subject_id}`,
         {
           subject_title: subject.title,
           subject_text: subject.text,

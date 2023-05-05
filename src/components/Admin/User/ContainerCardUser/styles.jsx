@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 // Container father and children
+//ok
 export const ContainerGlobal = styled.div`
   width: 100%;
   height: 80vh;
@@ -17,7 +18,7 @@ export const ContainerGlobal = styled.div`
     height: 85vh;
   }
 `;
-
+//ok
 //* Container father and children *//
 export const ContainerHeaderAndCards = styled.div`
   width: 100%;
@@ -40,9 +41,9 @@ export const ContainerHeaderAndCards = styled.div`
 `;
 
 //* Header Container *//
-
+//ok
 export const HeaderContainerCards = styled.div`
-  z-index: 4;
+  //z-index: 4;
   grid-row: 1;
   width: auto;
   height: 100%;
@@ -59,7 +60,7 @@ export const HeaderContainerCards = styled.div`
     height: 100%;
   }
 `;
-
+//ok
 // Div Title and Button //
 export const Top = styled.div`
   display: grid;
@@ -67,7 +68,7 @@ export const Top = styled.div`
   grid-template-columns: 50% 50%;
   width: 100%;
 `;
-
+//ok
 //** Line **//
 export const LineDivisor = styled.div`
   width: 92%;
@@ -76,7 +77,7 @@ export const LineDivisor = styled.div`
   background-color: #e3e6ed;
   position: absolute;
 `;
-
+//ok
 //* CONTAINER CARDS *//
 export const CardsContainer = styled.div`
   padding-left: 2%;
@@ -116,7 +117,7 @@ export const CardsContainer = styled.div`
 `;
 
 // Cards //
-
+//ok
 export const BoardStyle = styled.div`
   position: relative;
   z-index: 0 !important;
@@ -128,7 +129,7 @@ export const BoardStyle = styled.div`
   display: grid;
   height: fit-content;
 `;
-
+//ok
 //* Modal Edit and Add Client *//
 export const DivModal = styled.div`
   ${(props) => {
@@ -156,7 +157,7 @@ export const DivModal = styled.div`
 `;
 
 // *** ITEMS HEADER ***//
-
+//ok
 // Div Title Page //
 export const DivTitlePage = styled.div`
   padding-left: 10%;
@@ -165,7 +166,7 @@ export const DivTitlePage = styled.div`
   grid-column: 1;
   width: 100%;
 `;
-
+//ok
 // Title Subject List //
 export const H1 = styled.h1`
   width: fit-content;
@@ -181,7 +182,7 @@ export const H1 = styled.h1`
     font-size: 1.2rem;
   }
 `;
-
+//ok
 // Number of cards Clients //
 export const HowManyClientList = styled.span`
   font-size: 24px;
@@ -191,7 +192,7 @@ export const HowManyClientList = styled.span`
     font-size: 1.4rem;
   }
 `;
-
+//ok
 /// Div Buttons Create ///
 export const DivButton = styled.div`
   display: grid;
@@ -202,7 +203,7 @@ export const DivButton = styled.div`
   align-items: center;
   text-align: center;
 `;
-
+//ok
 /// Div Buttons Status ///
 export const DivSpans = styled.div`
   display: flex;
@@ -217,7 +218,7 @@ export const DivSpans = styled.div`
 `;
 
 //*** Status: ACTIVE AND INACTIVE ***//
-
+//ok
 //* Title Status Active and Inactive *//
 export const Active = styled.span`
   font-family: "Houschka Rounded Alt";
@@ -225,14 +226,14 @@ export const Active = styled.span`
   font-weight: 600;
   color: #525b75;
 `;
-
+//ok
 export const Inactive = styled.span`
   font-family: "Houschka Rounded Alt";
   font-size: 14px;
   font-weight: 600;
   color: #525b75;
 `;
-
+//ok
 //* Number of status => ("") *//
 export const HowManyActive = styled.span`
   color: #00953b;
@@ -241,6 +242,7 @@ export const HowManyActive = styled.span`
     display: inline;
   }
 `;
+//ok
 export const HowManyInactive = styled.span`
   color: #771300;
   font-weight: 600;
@@ -248,7 +250,7 @@ export const HowManyInactive = styled.span`
     display: inline;
   }
 `;
-
+//ok
 /// Buttons Active and Inactive ///
 export const ButtonActive = styled.button`
   cursor: pointer;
@@ -261,6 +263,7 @@ export const ButtonActive = styled.button`
     border-bottom: 2px solid #e41165;
   }
 `;
+//ok
 export const ButtonInactive = styled.button`
   cursor: pointer;
   border: none;
@@ -270,4 +273,15 @@ export const ButtonInactive = styled.button`
   &:hover {
     border-bottom: 2px solid #e41165;
   }
+`;
+//ok
+export const DivClose = styled.div`
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 55%;
+  z-index: 0;
 `;

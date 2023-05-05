@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
 import {
+  ClickButton,
   ContainerCentral,
   Container,
-  PositionTitle,
+  DivButton,
+  DivEmail,
+  DivId,
+  DivName,
+  DivStatus,
+  Form,
   H1,
   Input,
-  Form,
   Label,
-  DivName,
-  DivEmail,
-  DivStatus,
-  DivButton,
-  ClickButton,
   PositionButtonCancel,
-  DivId,
+  PositionTitle,
 } from "./styles";
 import SingleSelect from "../../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../../assets/Buttons/ButtonDefault";
@@ -22,13 +22,12 @@ import { useUserContext } from "../../../../hook/useUserContext";
 import { useFetchUser } from "../../../../hook/useFetchUser";
 
 const AddEditUser = (props) => {
-  const { user } = useUserContext();
+  const { user, setModalPassword } = useUserContext();
   const [newUser, setNewUser] = useState(entityUser);
   const { createUser } = useFetchUser();
 
-  const [status, setStatus] = useState({ value: "Active" });
   const levelOptions = levels
-    .map((l, index) => {
+    .map((l) => {
       if (l < user.level) {
         return { value: l, label: l };
       }
@@ -36,24 +35,15 @@ const AddEditUser = (props) => {
     .filter((l) => l);
 
   const [flag, setFlag] = useState(false);
-  const { setModal, id } = props;
+  const { setModal } = props;
 
   const closeModal = () => {
     setModal(false);
   };
 
   const handleSubmit = () => {
-    if (props.title === "Edit User") {
-      editUser();
-    } else {
-      handleCreateUser();
-    }
+    handleCreateUser();
   };
-
-  useEffect(() => {
-    if (props.title === "Edit User") {
-    }
-  }, []);
 
   const handleCreateUser = () => {
     const u = {
@@ -62,23 +52,15 @@ const AddEditUser = (props) => {
     };
     console.log(u);
     if (newUser.name && newUser.email && newUser.tcs_id && newUser.level) {
-      createUser(u);
+      createUser(u)
+        .then(function (variavel) {
+          setModalPassword(variavel);
+        })
+        .catch(function (error) {
+          console.error("Error at create an user!", error);
+          return false;
+        });
       closeModal();
-    } else {
-      setFlag(true);
-    }
-  };
-
-  const editUser = () => {
-    const newUser2 = {
-      name: "Luan Saatos",
-      tcs_id: 3134256,
-      email: "luansantos@tcs.com",
-      level: 1,
-    };
-
-    if (true) {
-      setModal(false);
     } else {
       setFlag(true);
     }
@@ -161,18 +143,17 @@ const AddEditUser = (props) => {
             </DivEmail>
 
             <DivStatus>
-              <SingleSelect
-                key="2"
-                sizeSingle={"100%"}
-                required
-                sizeMenu={"100%"}
-                set={(status) => setStatus(status)}
-                label={"Status"}
-                value={status}
-                placeholder={flag && !status ? "Required field" : ""}
-                options={status_mok}
-                disabled
-              />
+              {props.title === "Create User" && (
+                <Label>
+                  Status
+                  <Input
+                    widthInput={"98% !important"}
+                    placeholder={""}
+                    value={"Active"}
+                    disabled
+                  />
+                </Label>
+              )}
             </DivStatus>
           </Form>{" "}
           <DivButton>
@@ -195,11 +176,6 @@ const AddEditUser = (props) => {
 };
 
 export default AddEditUser;
-
-const status_mok = [
-  { id: 1, value: "Active", label: "Active" },
-  { id: 2, value: "Inactive", label: "Inactive" },
-];
 
 const entityUser = {
   name: "",

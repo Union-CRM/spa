@@ -9,7 +9,9 @@ import { Container,DivTcs,Content,LogoDiv,Form,DivIcons,Label,Span,Input,DivTerm
 import Headline from '../../assets/FontSystem/Headline'
 import axios from 'axios';
 
-function LoginPageAdmin() {
+
+function LoginPage() {
+
 
   const [email, setEmail] = useState(''); // Criar estado para email com o hook useState
   const [password, setPassword] = useState(''); // Criar estado para senha com o hook useState
@@ -63,8 +65,7 @@ function LoginPageAdmin() {
         
       
       /*localStorage.setItem('token', "data.token");
-      window.location.href = '/home';
-      console.log("teste");*/
+      window.location.href = '/home';*/
 
     } 
 
@@ -146,5 +147,4 @@ function LoginPageAdmin() {
 );
 }
 
-   
-export default LoginPageAdmin;
+export default LoginPage;

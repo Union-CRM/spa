@@ -41,9 +41,7 @@ const ModalPlanner = ({ title }) => {
   const { subject: subjectList } = useSubjectContext();
   const [subjectOption, setSubjectOption] = useState([]);
   const { client: clientList } = useClientContext();
-  const clientOption = clientList
-    .filter((c) => c.status === "Active")
-    .map((c) => ({ id: c.id, value: c.id, label: c.client }));
+
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [timeStart, setTimeStart] = useState();
   const [timeFinish, setTimeFinish] = useState();
@@ -60,13 +58,17 @@ const ModalPlanner = ({ title }) => {
     modalReschedule,
   } = usePlannerContext();
   const { createPlanner, updatePlanner } = useFetchPlanner();
-  const { user } = useUserContext();
+  const { user, userTarget } = useUserContext();
   const [flag, setFlag] = useState(false);
-
+  const clientOption = clientList
+    .filter((c) => c.status === "Active" && c.user_id === userTarget.id)
+    .map((c) => ({ id: c.id, value: c.id, label: c.client }));
   useEffect(() => {
     setSubjectOption(
       subjectList
-        .filter((s) => s.status === "IN PROGRESS")
+        .filter(
+          (s) => s.status === "IN PROGRESS" && s.user_id === userTarget.id
+        )
         .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
     );
   }, [subjectList]);
@@ -194,7 +196,7 @@ const ModalPlanner = ({ title }) => {
               <InputPlanner
                 type="text"
                 placeholder="Client Name"
-                value={subjectObj.subject_title}
+                value={subjectObj ? subjectObj.subject_title : ""}
                 disabled
               />
             </>
@@ -203,28 +205,28 @@ const ModalPlanner = ({ title }) => {
           <InputPlanner
             type="text"
             placeholder="Client Name"
-            value={subjectObj.client}
+            value={subjectObj ? subjectObj.client : ""}
             disabled
           />
           <PositionLabel>Email</PositionLabel>
           <InputPlanner
             type="text"
             placeholder="Email"
-            value={subjectObj.client_email}
+            value={subjectObj ? subjectObj.client_email : ""}
             disabled
           />
           <PositionLabel>Business</PositionLabel>
           <InputPlanner
             type="text"
             placeholder="Business"
-            value={subjectObj.business}
+            value={subjectObj ? subjectObj.business : ""}
             disabled
           />
           <PositionLabel>Release Train</PositionLabel>
           <InputPlanner
             type="text"
             placeholder="Business"
-            value={subjectObj.release}
+            value={subjectObj ? subjectObj.release : ""}
             disabled
           />
         </PositionInputs>
@@ -261,7 +263,7 @@ const ModalPlanner = ({ title }) => {
           </DivFinish>
         </DivClocks>
         <PositionTags>
-        <TagComponent
+          <TagComponent
             options={clientOption}
             placeholder={""}
             label={"Guests"}
@@ -273,6 +275,7 @@ const ModalPlanner = ({ title }) => {
             heights={"12vh"}
             sizeMenuList={"10vw"}
             sizeMenu={"35%"}
+            indicator={"guest"}
           />
         </PositionTags>
         <PositionStatus>

@@ -1,5 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { plannerGetSubmissivesPlanners } from "../api/routesAPI";
+
 export const PlannerContext = createContext();
 
 export const PlannerContextProvider = ({ children }) => {
@@ -20,29 +22,25 @@ export const PlannerContextProvider = ({ children }) => {
   const [modalError, setModalError] = useState(false);
 
   useEffect(() => {
-    if(localStorage.getItem("token")){
-    loadPlannerList();
+
+    if (localStorage.getItem("token")) {
+      loadPlannerList();
+
     }
   }, []);
 
   const loadPlannerList = async () => {
-    let planners;
     try {
-      const response = await axios.get(
-        "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8086/union/v1/planners/submissives",
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      );
-      planners = response;
- 
+
+      const response = await axios.get(plannerGetSubmissivesPlanners, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+
+      setPlanner(response.data.list);
     } catch (error) {
       console.error(error);
       //console.log("buscou")
     }
-
-    
-    
   };
 
   return (
@@ -86,22 +84,4 @@ export const PlannerContextProvider = ({ children }) => {
   );
 };
 
-/*
-business:"Prevencao A Fraudes"
-business_id:45
-client:"Pamela"
-client_id:8
-date:"2023-04-02 00:00:00.000"
-id:6
-duration: "10:10"
-name:"Diagrama de uso"
-release:"Protecao E Comunicacao Com O Cliente"
-release_id:9
-remark_subject:"Prioridades"
-remark_text:"Aceitação"
-status:"DONE"
-subject:"Simulação"
-subject_id:8
-user:"Pedro"
-user_id:7
-*/
+

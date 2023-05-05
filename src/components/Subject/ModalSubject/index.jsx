@@ -58,7 +58,6 @@ const ModalSubject = (props) => {
   useEffect(() => {
     if (props.title === "Subject Details") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
-      console.log(subject);
       setStatus(subject.status);
       setSubjectTitle(subject.subject_title);
       setManager(subject.manager);

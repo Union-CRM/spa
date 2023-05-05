@@ -24,19 +24,40 @@ export const DivIconItau = styled.div`
 
 // Cards
 
+//Cards Clients //
 export const CardGroup = styled.div`
+  border-left: ${(props) =>
+    props.isActive ? "7px solid #e41165" : "7px solid #7a7a7a"};
+  //border-left: 7px solid ${(props) =>
+    props.checked ? "Active" : "Inactive"};
+  border-left: 7px solid ${(props) => (props.isActive ? "#e41165" : "gray")};
+  border-radius: 8px;
+  display: flex;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+  position: relative;
+  justify-content: space-between;
+  min-height: 160px;
+  width:auto;
+  height:auto;
+  padding: 6px 16px;
+  padding-right: 8px;
+  position: relative;
+  flex-direction: column;
+`;
+
+/*export const CardGroup = styled.div`
   background: #ffffff;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
   min-height: 160px;
-  width: auto;
+  width:auto;
+  height:auto;
   padding: 6px 16px;
   padding-right: 8px;
   position: relative;
   flex-direction: column;
-
   ::before {
     content: "";
     left: 0;
@@ -47,7 +68,8 @@ export const CardGroup = styled.div`
     width: 7px;
     height: 100%;
   }
-`;
+`;*/
+
 export const Content = styled.div`
   text-align: center;
 `;
@@ -58,13 +80,23 @@ export const TopContainer = styled.div`
   padding-left:0.5%;
 `;
 
+export const DivToggleIcon = styled.div`
+  display: flex;
+  grid-row: 1;
+  justify-content: end;
+  grid-gap: 2px;
+  height: 100%;
+  grid-column: 2;
+  align-items: center;
+`;
 
 export const ToggleContainer = styled.label`
   background-color: ${(props) => (props.isActive ? "#00953b" : "#7a7a7a")};
   display: inline-block;
-  height: 17.5px;
-  width: 37px;
+  height: 15.5px;
+  width: 36px;
   top: 40%;
+  right:0;
   border-radius: 30px;
   position: relative;
   cursor: pointer;
@@ -76,8 +108,8 @@ export const ToggleButton = styled.span`
   position: absolute;
   top: 1px;
   left: 0px;
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12.5px;
   border-radius: 50%;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -101,7 +133,7 @@ export const InputToggle = styled.input`
 // Tag
 export const Tag = styled.div`
   color: #fff;
-  background-color: #e41165;
+  background-color: ${(props) => (props.isActive ? "#e41165" : "#7a7a7a")};
   padding: 1px 16px;
   font-size: 10px;
   width: fit-content;

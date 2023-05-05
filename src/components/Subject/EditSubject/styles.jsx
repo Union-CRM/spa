@@ -10,7 +10,7 @@ export const ContainerCentral = styled.div`
     display: grid;
     position: relative;
     top: 0px;
-    left: 0;
+    left: 0;s
     justify-content: start;
   }
 `;
