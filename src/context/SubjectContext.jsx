@@ -8,8 +8,8 @@ export const SubjectContextProvider = ({ children }) => {
 
   useEffect(() => {
 
-    if(localStorage.getItem("token")){
-    //loadData();
+    if (localStorage.getItem("token")) {
+      loadData();
 
     }
   }, []);

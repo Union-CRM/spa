@@ -1,25 +1,19 @@
 import ButtonDefault from "../../../../assets/Buttons/ButtonDefault";
 import {
+  Circle,
   Container,
-  Overlay,
+  ContainerFather,
   Content,
   DivAdd,
-  Circle,
   Span,
-  ContainerFather,
 } from "./styles";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import IconSystem from "../../../../assets/IconSystem";
 import { useUserContext } from "../../../../hook/useUserContext";
 
 const ModalPassword = (props) => {
   const { modalPassword, setModalPassword } = useUserContext();
-  /*const [aux,setAux]=useState()
-  useEffect(()=>{
-    setAux(modalPassword)
-    setModalPassword(true)
-  },[])*/
+
   return (
     <ContainerFather>
       <Container user={props.user}>
