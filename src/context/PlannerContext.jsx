@@ -21,7 +21,7 @@ export const PlannerContextProvider = ({ children }) => {
 
   useEffect(() => {
     if(localStorage.getItem("token")){
-    loadPlannerList();
+    //loadPlannerList();
     }
   }, []);
 
@@ -86,22 +86,4 @@ export const PlannerContextProvider = ({ children }) => {
   );
 };
 
-/*
-business:"Prevencao A Fraudes"
-business_id:45
-client:"Pamela"
-client_id:8
-date:"2023-04-02 00:00:00.000"
-id:6
-duration: "10:10"
-name:"Diagrama de uso"
-release:"Protecao E Comunicacao Com O Cliente"
-release_id:9
-remark_subject:"Prioridades"
-remark_text:"Aceitação"
-status:"DONE"
-subject:"Simulação"
-subject_id:8
-user:"Pedro"
-user_id:7
-*/
+

@@ -213,6 +213,4 @@ export const DivModal = styled.div`
     }
   }}
      
-        
-   
 `;

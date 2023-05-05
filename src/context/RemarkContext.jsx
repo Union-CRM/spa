@@ -12,7 +12,7 @@ export const RemarkContextProvider = ({ children }) => {
 
   useEffect(() => {
     if(localStorage.getItem("token")){
-    loadRemarkList();
+    //loadRemarkList();
     }
   }, []);
 
