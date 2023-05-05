@@ -29,6 +29,7 @@ import { useReleaseContext } from "../../../../hook/useReleaseContent";
 import ModalSave from "../../../Planner/ModalSuccessfuly";
 import ClientCard from "./CardListView/index";
 import CreateEditRelease from "../CreateEditRelease";
+import ModalStatusRelease from "../ModalStatusRelease";
 const abaStatus = {
   ACTIVE: "ATIVO",
   INACTIVE: "INATIVO",
@@ -36,7 +37,10 @@ const abaStatus = {
 
 const ReleaseTrain = (props) => {
   // States modal//
-  const { modalCreateRelease, setModalCreateRelease, modalEditRelease, setModalEditRelease,setIdRelease,idRelease,modalSaveRelease, release} = useReleaseContext();
+  const { modalCreateRelease, setModalCreateRelease, 
+    modalEditRelease, setModalEditRelease, 
+    setIdRelease, idRelease, modalSaveRelease, 
+    release, modalStatusRelease} = useReleaseContext();
   //const { client } = useClientContext();
   const [active, setActive] = useState(abaStatus.ACTIVE);
   //const { user, userTarget } = useUserContext();
@@ -157,6 +161,9 @@ const ReleaseTrain = (props) => {
       )}
       {modalSaveRelease && (
         <ModalSave />
+      )}
+      {modalStatusRelease && (
+        <ModalStatusRelease />
       )}
     </ContainerGlobal>
   )
