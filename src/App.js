@@ -20,6 +20,7 @@ import { RemarkContextProvider } from "./context/RemarkContext";
 import { GroupListContextProvider } from "./context/GroupListContext";
 import { BusinessContextProvider } from "./context/BusinessContext";
 import { ReleaseContextProvider } from "./context/ReleaseContext";
+import { useUserContext } from "./hook/useUserContext";
 import UsersAdm from "./pages/Adm/Users/index";
 
 
@@ -105,7 +106,7 @@ function App() {
                         path="/releasetrain"
                         element={
                           localStorage.getItem("token") ? (
-                            <ReleaseTrain />
+                            <ReleaseTrainPage/>
                           ) : (
                             <LoginPage />
                           )
