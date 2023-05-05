@@ -20,6 +20,7 @@ import {
 } from "./styles";
 
 import { useUserContext } from "../../../../hook/useUserContext";
+import { useFetchUsersNotin } from "../../../../hook/useFetchUsersNotin";
 
 export const UsersComponents = (props, placeholder, idTagOption) => {
   const colors = ["#FFC0CB", "#DDA0DD", "#F5DEB3", "#98FB98", "#87CEEB"];
@@ -37,10 +38,19 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
   
   //Users//
   const [userOption, setUserOption] = useState([]);
+  
+  const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin()
 
+    
+  const{loadUserSub,loadUserNotin} = useFetchUsersNotin()
+ 
+  useEffect(()=>{
+    loadUserNotin()
+    loadUserSub()
+  }, [])
  
 
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const {selectedOptions, setSelectedOptions} = useFetchUsersNotin();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleOptionChange = (userOption) => {
@@ -59,16 +69,18 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
     (userOption) => !selectedOptions.includes(userOption)
   );
   
-  const {userList, loadUserList} = useUserContext()
+  const usersList = userSub.concat(usersNotin)
+  console.log(usersList);
+ 
+
   useEffect(() => {
-  loadUserList()
-    if (userList) {
+    if (usersList) {
       setUserOption(
-        userList
+        usersList
           .map((c) => ({ id: c.id, value: c.id, label: c.name }))
       );
     }
-  }, [0]);
+  }, [usersNotin, userSub]);
 
   return (
     <>

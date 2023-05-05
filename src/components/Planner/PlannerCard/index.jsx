@@ -1,5 +1,5 @@
 import React from "react";
-import { DivP, Ddata, Header, DivPlanner, TextMonDay, DivCard } from "./styles";
+import { DivP, Ddata, Header, DivPlanner, TextMonDay, DivCard, DivInfo } from "./styles";
 import Card from "./Card";
 import Headline from "../../../assets/FontSystem/Headline";
 import { useState, useEffect } from "react";
@@ -7,6 +7,9 @@ import { usePlannerContext } from "../../../hook/usePlannerContext";
 import { useUserContext } from "../../../hook/useUserContext";
 import { datesAreOnSameDay } from "../Calendar/utils/utils";
 import { month } from "../Calendar/utils/conts";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
 
 const PlannerCard = (props) => {
   const { planner, setPlannerEdit, setModalEdit } = usePlannerContext();
@@ -14,7 +17,7 @@ const PlannerCard = (props) => {
   const [plannerList, setPlannerList] = useState();
 
   useEffect(() => {
-    if (props.adimList) {
+    if (props.adminList) {
       setPlannerList(planner.filter((p) => p.user_id === userTarget.id));
     } else {
       setPlannerList(planner.filter((p) => p.user_id === user.id));
@@ -44,6 +47,17 @@ const PlannerCard = (props) => {
       <Header>
         <DivPlanner>
           <Headline type={"Headline3"} name={"Planner Of Day"} />
+          <Tippy content="Agenda, calendar with activites and appointments of the day">
+              <DivInfo>
+              
+                  <Info
+                  width="25px"
+                  style={{
+                    fill:  "#007BFF",
+                  }}
+                />
+                     </DivInfo>
+              </Tippy>
         </DivPlanner>
         <Ddata>
           <TextMonDay>

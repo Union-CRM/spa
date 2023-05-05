@@ -46,9 +46,8 @@ export const FontHeadline = styled.p`
       default:
     }
   }}
-  
-  color: ${(props) => props.colorFont || "#141824"};
 
+  color: ${(props) => props.colorFont || "#141824"};
 `;
 
 export const FontBody = styled.p`
@@ -56,18 +55,25 @@ export const FontBody = styled.p`
     switch (props.$mode) {
       case "Body1":
         return css`
-          font-size: 18px;
+          font-size: 20px;
           font-style: normal;
-          font-weight: 500;
-          line-height: 22x;
+          font-weight: 600;
+          line-height: 19px;
         `;
 
       case "Body2":
         return css`
           font-size: 16px;
           font-style: normal;
-          font-weight: 500;
+          font-weight: 600;
           line-height: 22px;
+        `;
+      case "Body3":
+        return css`
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 24px;
         `;
 
       default:

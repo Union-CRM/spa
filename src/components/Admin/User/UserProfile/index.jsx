@@ -1,43 +1,92 @@
 import React from "react";
 import ContainerCards from "../../../Client/ContainerCardClient";
 import {
-  Content,
-  DivClient,
-  DivPlanner,
-  Graph1,
-  Header,
-  DivPhoto,
-  DivPhotoI,
-  DivDadosCard,
-  DivLevel,
-  Dot,
-  DivButtonUser,
   Button,
   Circle,
-  DivIcon,
-  Label,
+  Content,
+  CurrentPath,
+  DivButtonUser,
   DivCalendar,
+  DivClient,
   DivClose,
+  DivDadosCard,
+  DivIcon,
+  DivLevel,
+  DivPath,
+  DivPhoto,
+  DivPhotoI,
+  DivPlanner,
+  DivSubject,
+  Dot,
+  Graph1,
+  Header,
+  Label,
+  PreviousPath,
 } from "./styles";
-import Grafico from "../../../Grafico";
+import Subject from "../../../Grafico/Subject";
+import Group from "../../../Grafico/Group";
 import Subtitle from "../../../../assets/FontSystem/Subtitle";
 import PlannerCard from "../../../Planner/PlannerCard";
 import { BigCalender } from "../../../Planner/Calendar/index";
 import { useUserContext } from "../../../../hook/useUserContext";
+import { useSubjectContext } from "../../../../hook/useSubjectContent";
+import { usePlannerContext } from "../../../../hook/usePlannerContext";
 import Body from "../../../../assets/FontSystem/Body";
 import IconSystem from "../../../../assets/IconSystem";
-// hook/usePlannerContext
+import SubjectList from "../../../Subject/SubjectCardListView";
 
 import "react-tippy/dist/tippy.css";
 
-/*const funcClientInfo =()=>{
-  const [clientInfo,setClientInfo] = useState("Client Information"); 
-  return {clientInfo,setClientInfo};
-}*/
 const dateOfTheDay = new Date();
 
 const UserProfile = () => {
-  const { userTarget, modalPlanner, setModalPlanner } = useUserContext();
+  const {
+    userTarget,
+    modalPlanner,
+    setModalPlanner,
+    modalSubject,
+    setModalSubject,
+    setViewProfile,
+  } = useUserContext();
+
+  const { subject } = useSubjectContext();
+  const { planner } = usePlannerContext();
+  // numberOfPlanner [0]-canceled | [1]- Scheduled | [2] Done
+  const numberOfPlanner = [
+    planner
+      ? planner.filter(
+          (p) => p.status === "CANCELED" && p.user_id === userTarget.id
+        ).length
+      : 0,
+    planner
+      ? planner.filter(
+          (p) => p.status === "SCHEDULED" && p.user_id === userTarget.id
+        ).length
+      : 0,
+    planner
+      ? planner.filter(
+          (p) => p.status === "DONE" && p.user_id === userTarget.id
+        ).length
+      : 0,
+  ];
+  // numberOfSubject [0]-canceled | [1]- Finished | [2] In progress
+  const numberOfSubject = [
+    subject
+      ? subject.filter(
+          (s) => s.status === "CANCELED" && s.user_id === userTarget.id
+        ).length
+      : 0,
+    subject
+      ? subject.filter(
+          (s) => s.status === "FINISHED" && s.user_id === userTarget.id
+        ).length
+      : 0,
+    subject
+      ? subject.filter(
+          (s) => s.status === "IN PROGRESS" && s.user_id === userTarget.id
+        ).length
+      : 0,
+  ];
 
   const handleClickPlanner = () => {
     setModalPlanner(true);
@@ -45,15 +94,33 @@ const UserProfile = () => {
 
   const handleCloseModal = () => {
     setModalPlanner(false);
+    setModalSubject(false);
+  };
+
+  const handleClickSubject = () => {
+    setModalSubject(true);
   };
   return (
     <>
+      <DivPath>
+        <PreviousPath onClick={() => setViewProfile(false)}>User</PreviousPath>{" "}
+        {">"}
+        <CurrentPath> View Profile</CurrentPath>{" "}
+      </DivPath>
       {modalPlanner && (
         <>
           <DivClose onClick={handleCloseModal} />
           <DivCalendar>
-            <BigCalender adimList={true} />
+            <BigCalender adminList={true} />
           </DivCalendar>
+        </>
+      )}
+      {modalSubject && (
+        <>
+          <DivClose onClick={handleCloseModal} />
+          <DivSubject>
+            <SubjectList adminList={true} />
+          </DivSubject>
         </>
       )}{" "}
       <Header>
@@ -78,7 +145,7 @@ const UserProfile = () => {
           <Dot bgColor={userTarget.level > 4 ? "#007bff" : "#F5F7FA"}></Dot>
         </DivLevel>
         <DivButtonUser>
-          <Button>
+          <Button onClick={handleClickSubject}>
             <Label>SUBJECT</Label>
             <Circle>
               <DivIcon>
@@ -99,22 +166,27 @@ const UserProfile = () => {
       </Header>
       <Content>
         <DivClient>
-          <ContainerCards adimList={true} />
+          <ContainerCards adminList={true} />
         </DivClient>
 
         <DivPlanner>
-          <PlannerCard adimList={true} date={dateOfTheDay} />
+          <PlannerCard adminList={true} date={dateOfTheDay} />
         </DivPlanner>
       </Content>
       <Graph1>
-        <Grafico value={0} />
-        <Grafico value={1} />
+        <Subject
+          numberOfSubjeccts={numberOfSubject}
+          numberOfPlanner={numberOfPlanner}
+          value={0}
+        />
+        <Group />
       </Graph1>
     </>
   );
 };
 
 export default UserProfile;
+
 function Split(n) {
   const name = n ? n : "";
   var nameSplit = name.split(" ");
@@ -126,4 +198,3 @@ function Split(n) {
 
   return name2.toUpperCase();
 }
-//<BigCalender adimList={true} />

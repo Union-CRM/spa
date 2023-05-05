@@ -3,6 +3,7 @@ import {
   ContainerGlobal,
   ContainerHeaderAndCards,
   HeaderContainerCards,
+  DivInfo,
   ContainerCards,
   DivModal,
   LineDivisor,
@@ -24,7 +25,7 @@ import {
   HowManyCancel,
 } from "./styles";
 import SubjectCard from "../CardListView/index";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ButtonAdd from "../../../assets/Buttons/ButtonAdd";
 
 //Components
@@ -38,10 +39,10 @@ import CreateRemark from "../../Subject/ModalCreateRemark";
 import ModalCreatePlanner from "../../Subject/ModalCreatePlanner";
 import ModalSave from "../../Planner/ModalSuccessfuly";
 import { usePlannerContext } from "../../../hook/usePlannerContent";
-
-
-
-
+import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import { useUserContext } from "../../../hook/useUserContext";
 
 
 const cardStatus = {
@@ -50,24 +51,32 @@ const cardStatus = {
   CANCELED: "CANCELED",
 };
 
-const SubjectList = () => {
-  
-  
+const SubjectList = (props) => {
   const { subject } = useSubjectContext();
-  
+  const { user, userTarget, setUserTarget } = useUserContext();
+  const [subjectList, setSubjectList] = useState([]);
+
   /*
   const SubjectsCancel = "";
   const SubjectsProgress ="";
   const SubjectsFinished = "" ;
   */
+  useEffect(() => {
+    if (props.adminList) {
+      setSubjectList(subject.filter((s) => s.user_id === userTarget.id));
+    } else {
+      setSubjectList(subject.filter((s) => s.user_id === user.id));
+      setUserTarget(user);
+    }
+  }, [subject, userTarget]);
 
-  const SubjectsCancel = subject.filter(
+  const SubjectsCancel = subjectList.filter(
     (item) => item.status_description === "CANCELED"
   );
-  const SubjectsFinished = subject.filter(
+  const SubjectsFinished = subjectList.filter(
     (item) => item.status_description === "FINISHED"
   );
-  const SubjectsProgress = subject.filter(
+  const SubjectsProgress = subjectList.filter(
     (item) => item.status_description === "IN PROGRESS"
   );
   const [modal, setModal] = useState(false);
@@ -127,7 +136,24 @@ const SubjectList = () => {
           <Top>
             <DivTitlePage>
               <H1>Subjects List</H1>
+
               <HowManySubjectList>({subject.length})</HowManySubjectList>
+
+              <Tippy content="List of all subjects.">
+              <DivInfo>
+              
+                  <Info
+                  width="25px"
+                  style={{
+                    fill: "#007BFF",
+                  }}
+                />
+                     </DivInfo>
+              </Tippy>
+
+
+             
+
             </DivTitlePage>
 
             <DivButton onClick={() => createSubject()}>
@@ -153,7 +179,7 @@ const SubjectList = () => {
                 Progress (
                 <HowManyProgress>
                   {
-                    subject.filter((item) => item.status === "IN PROGRESS")
+                    subjectList.filter((item) => item.status === "IN PROGRESS")
                       .length
                   }
                 </HowManyProgress>
@@ -169,7 +195,10 @@ const SubjectList = () => {
               <Finished>
                 Finished (
                 <HowManyFinished>
-                  {subject.filter((item) => item.status === "FINISHED").length}
+                  {
+                    subjectList.filter((item) => item.status === "FINISHED")
+                      .length
+                  }
                 </HowManyFinished>
                 )
               </Finished>
@@ -183,7 +212,10 @@ const SubjectList = () => {
               <Canceled>
                 Canceled (
                 <HowManyCancel>
-                  {subject.filter((item) => item.status === "CANCELED").length}
+                  {
+                    subjectList.filter((item) => item.status === "CANCELED")
+                      .length
+                  }
                 </HowManyCancel>
                 )
               </Canceled>
@@ -194,8 +226,8 @@ const SubjectList = () => {
         <ContainerCards>
           <LineDivisor />
           <BoardStyle>
-            {subject &&
-              subject
+            {subjectList &&
+              subjectList
                 .filter((item) => item.status === active)
                 .map((item) => (
                   <SubjectCard

@@ -79,13 +79,14 @@ export const BigCalender = (props) => {
     setModalError,
   } = usePlannerContext();
   const [plannerList, setPlannerList] = useState(planner);
-  const { user, userTarget } = useUserContext();
+  const { user, userTarget, setUserTarget } = useUserContext();
 
   useEffect(() => {
-    if (props.adimList) {
+    if (props.adminList) {
       setPlannerList(planner.filter((p) => p.user_id === userTarget.id));
     } else {
       setPlannerList(planner.filter((p) => p.user_id === user.id));
+      setUserTarget(user);
     }
   }, [planner]);
 
@@ -244,7 +245,7 @@ export const BigCalender = (props) => {
       {modalPlanner && (
         <>
           <DivClose onClick={() => setModalPlanner(false)}></DivClose>
-          <PlannerCard date={dateTarget} adimList={props.adimList} />
+          <PlannerCard date={dateTarget} adminList={props.adminList} />
         </>
       )}
 

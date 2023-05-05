@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
@@ -75,11 +75,10 @@ export const Img = styled.div`
   border: ${({ level }) => {
     if (level > 1) {
       return "3px solid #E41165 ";
-    } else{
+    } else {
       return "3px solid #007bff";
-    } 
+    }
   }};
-  ;
   margin-bottom: 5px;
   background-color: white;
 `;
@@ -116,7 +115,7 @@ export const Ul = styled.ul`
   flex-direction: column;
   justify-content: center;
   grid-template-rows: auto;
-  @media(max-width: 1367px){
+  @media (max-width: 1367px) {
     margin-top: 55%;
   }
 `;
@@ -129,16 +128,16 @@ export const Li = styled.li`
   text-align: center;
   vertical-align: middle;
   background-color: #1e2222;
-  @media(max-width: 1367px){
+  @media (max-width: 1367px) {
     height: 45px;
   }
   :hover {
     background-color: ${({ level }) => {
       if (level > 1) {
         return "#E41165";
-      } else{
+      } else {
         return "#007bff";
-      } 
+      }
     }};
   }
 `;
@@ -161,7 +160,7 @@ export const DivDots = styled.div`
   margin: 0 auto;
   width: 75px;
   display: ${(props) => (props.$mode ? "none" : "flex")};
-`
+`;
 
 export const Dot1 = styled.div`
   height: 15px;
@@ -170,9 +169,9 @@ export const Dot1 = styled.div`
   background-color: ${({ level }) => {
     if (level >= 1) {
       return "#E41165";
-    } else{
+    } else {
       return "#FFFFFF";
-    } 
+    }
   }};
 `;
 
@@ -183,11 +182,11 @@ export const Dot2 = styled.div`
   background-color: ${({ level }) => {
     if (level >= 2) {
       return "#E41165";
-    } else{
+    } else {
       return "#FFFFFF";
-    } 
+    }
   }};
-`
+`;
 export const Dot3 = styled.div`
   height: 15px;
   width: 15px;
@@ -195,11 +194,11 @@ export const Dot3 = styled.div`
   background-color: ${({ level }) => {
     if (level >= 3) {
       return "#E41165";
-    } else{
+    } else {
       return "#FFFFFF";
-    } 
+    }
   }};
-`
+`;
 
 export const Dot4 = styled.div`
   height: 15px;
@@ -208,11 +207,11 @@ export const Dot4 = styled.div`
   background-color: ${({ level }) => {
     if (level >= 4) {
       return "#E41165";
-    } else{
+    } else {
       return "#FFFFFF";
-    } 
+    }
   }};
-`
+`;
 
 export const Dot5 = styled.div`
   height: 15px;
@@ -221,9 +220,8 @@ export const Dot5 = styled.div`
   background-color: ${({ level }) => {
     if (level >= 5) {
       return "#E41165";
-    } else{
+    } else {
       return "#FFFFFF";
-    } 
+    }
   }};
-`
-
+`;

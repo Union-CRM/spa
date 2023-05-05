@@ -38,6 +38,10 @@ import styled, { css } from "styled-components";
 const ClientCard = (props) => {
   const { openModal, openModalPopUp } = props;
 
+    
+  const { toggleState, setToggleState } = useClientContext();
+  const { activeTab, setActiveTab } = useClientContext();
+
   const { client: clientList, updateClient } = useClientContext();
   const client = clientList.filter((item) => item.id === props.id)[0];
   const [tags] = useState(
@@ -47,6 +51,8 @@ const ClientCard = (props) => {
   );
   const handleEdit = () => {
     openModal();
+    setToggleState(0);
+    setActiveTab(0);
     props.setId(client.id);
   };
 
@@ -132,7 +138,7 @@ const ClientCard = (props) => {
               </ToggleContainer>
             </DivIcons>
           </Header>
-          <DivInfo onClick={handleEdit}>
+          <DivInfo  onClick={handleEdit}>
             <DivRole>
               <TitleInfo>
                 Role <span> | </span>{" "}

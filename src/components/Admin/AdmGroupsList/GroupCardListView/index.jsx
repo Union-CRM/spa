@@ -14,6 +14,7 @@ import {
   ToggleContainer,
   InputToggle,
   ToggleButton,
+  DivToggleIcon,
 } from "./styles";
 import FontSubtitle from "../../../../assets/FontSystem/Subtitle";
 import Body from "../../../../assets/FontSystem/Body";
@@ -22,109 +23,101 @@ import { ReactComponent as PeopleTeams } from "../../../../assets/svg/PeopleTeam
 import { useClientContext } from "../../../../hook/useClientContent";
 import { useFetchCustomer } from "../../../../hook/useFetchCustomer";
 import { useUserContext } from "../../../../hook/useUserContext";
+import { useFetchAdmGroupList } from "../../../../hook/useFetchAdmGroupList";
 
 
 // Group List //
 import {useGroupListContext} from "../../../../hook/useGroupListContext";
 
 const AdmGroupCardListView = (props) => {
-  
-  const{loadTeamMembers,team} = useGroupListContext()
 
-  /*const [users, setUsers]= useState();
-  useEffect(() => {
-    loadTeamMembers()
-    setUsers(group.filter((item) => item.user_id === props.id).length)
-}, [])*/
-
-  const { openModal, openModalPopUp } = props;
-
-  /*const {customerList} = useFetchCustomer();
-  const [customer, setCustomer] = useState();
-
-  console.log(customerList)*/
-
-  const { group: groupList} = useGroupListContext();
-  const group = groupList.filter((item) => item.id === props.id)[0];
-  
   const handleEdit = () => {
     openModal();
   };
 
-
-  
-  // mok imagens //
-  
-  console.log(users)
-  const users = [1, 2, 3, 4, 5, 6];
-  const amountUsersToShow = 4;
-  const showingUsers = users.slice(0, amountUsersToShow);
-  const totalHiddenUsers = users.length - amountUsersToShow;
-  const hiddenUsersText = totalHiddenUsers > 0 ? ` +${totalHiddenUsers}` : "";
-
- 
- //**********************************************//
-
- const { client: clientList, updateClient } = useClientContext();
-  const client = clientList.filter((item) => item.id === props.id)[0];
-
-  /* Toggle Status
-  const [isActive, setIsActive] = useState(client.status === "Active");
-  
-  const handleToggle = () => {
-    const newStatus = isActive ? "Inactive" : "Active";
-    setIsActive(!isActive);
-    updateClient(client.id, { ...client, status: newStatus });
+  const handleClick = () => {
+    openModalPopUp();
+    props.setId(group.id);
   };
-*/
-/*useEffect(() => {
-  if (customer) {
-    setCustomer(customerList.filter((item) => item.customer_id === group.customer_id));
-    console.log("passeia aqui")
-  }
-}, []);
-console.log(customer)
 
-useEffect(() => {
-    loadUserList()
-}, [])*/
+
+  const { openModal, openModalPopUp } = props;
+
+  const [userOption, setUserOption] = useState([{}]);
+  const { group: groupList, updateGroup} = useGroupListContext();
+  //const { updateStatus } = useFetchAdmGroupList();
+  const group = groupList.filter((item) => item.id === props.id)[0];
+  
+    
+  const [isActive, setIsActive] = useState(group.status === "ATIVO");
+  const [previousStatus, setPreviousStatus] = useState(group.status);
+  const handleToggle = () => {
+    const newStatus = isActive ? "INATIVO" : "ATIVO";
+    setIsActive(!isActive);
+    updateGroup(group.id, { ...group, status: newStatus });
+  };
+
+ //  mok imagens //
+
+ //const usersList = parseInt(group.usersCount);
+ //const numDigitos = usersList.toString().length;
+ //const users = [];
+ 
+ //for(let i = 0; i <= numDigitos; i++) {
+  // users.push(i);
+ //}
+
+ //const users = [1,2,3,4]
+ //const amountUsersToShow = 4;
+ //const showingUsers = users.slice(0, amountUsersToShow);
+ //const totalHiddenUsers = users.length - amountUsersToShow;
+ //const hiddenUsersText = totalHiddenUsers > 0 ? ` +${totalHiddenUsers}` : "";
+
+  //Toggle//
+
+
 
   return (
 
     <ContainerFather>
     <Container>
     
-    <CardGroup>
+    <CardGroup
+          isActive={isActive}
+          active={isActive}
+          $mode={group.status}
+          checked={isActive}>
       <TopContainer>
-        <Tag>
+        <Tag
+        isActive={isActive}
+        $mode={group.status}
+        checked={isActive}>
           <span>{group.textCustomer}</span>
         </Tag>
-
-        <div>
-          
-        <IconButton onClick={handleEdit}>
-            <IconSystem  icon={"PaperEdit"} height={"14px"} />
-        </IconButton>
-
-
-
-        {/*<ToggleContainer
+  <DivToggleIcon>
+        <ToggleContainer
                 isActive={isActive}
-                $mode={client.status}
+                $mode={group.status}
                 checked={isActive}
               >
                 <InputToggle
                   type="checkbox"
-                  id={client.id}
-                  checked={client.status}
+                  id={group.id}
+                  checked={group.status}
                   onChange={handleToggle}
+                  onClick={() => handleClick()}
                 />
                 <ToggleButton checked={isActive} />
-  </ToggleContainer>*/}
+  </ToggleContainer>    
 
-       
-        </div>
+
+        <IconButton onClick={handleEdit}>
+            <IconSystem  icon={"Edit"} height={"13px"} />
+        </IconButton>
+        </DivToggleIcon> 
       </TopContainer>
+
+   
 
       <Content>
         <DivIconItau>
@@ -136,18 +129,20 @@ useEffect(() => {
         <TeamsContainer>
           <FontSubtitle type={"TextDescription"} name={"Team members"} />
 
-          <AvatarContainer>
+          {/*<AvatarContainer>
             {showingUsers.map((item, index) => (
               <Avatar key={index} position={index} />
             ))}
             {hiddenUsersText}
-          </AvatarContainer>
+            </AvatarContainer>*/}
+
+
+     {group.usersCount} members
+
         </TeamsContainer>
       </Content>
       
-    </CardGroup>
-
-
+      </CardGroup>
     </Container>
     </ContainerFather>
   );
