@@ -1,38 +1,28 @@
 import { useState } from "react";
 import {
-  Container,
   Card,
-  Header,
-  DivPhoto,
-  DivPhotoI,
+  Container,
+  ContainerFather,
   DivDadosCard,
-  Status,
-  DivTagsStatus,
-  TagsSpan,
   DivIcons,
-  IconTag,
-  IconEdit,
-  DivToggle,
-  InputToggle,
   DivInfo,
   DivLevel,
+  DivPhoto,
+  DivPhotoI,
   Dot,
-  ContainerFather,
+  Header,
+  InputToggle,
   ToggleContainer,
   ToggleButton,
 } from "./styles";
 import Body from "../../../../../assets/FontSystem/Body";
 import Subtitle from "../../../../../assets/FontSystem/Subtitle";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
 import { useUserContext } from "../../../../../hook/useUserContext";
-import styled, { css } from "styled-components";
-import { ClickButton, DivButton } from "../../AddEditUser/styles";
+import { DivButton } from "../../AddEditUser/styles";
 import { useFetchUser } from "../../../../../hook/useFetchUser";
 import ButtonDefault from "../../../../../assets/Buttons/ButtonDefault";
 
 const UserCard = (props) => {
-  const { openModal, openModalPopUp, openUserProfile } = props;
   const { userList, setViewProfile, setUserTarget } = useUserContext();
   const { updateStatusUser } = useFetchUser();
   const user = userList.filter((u) => u.id === props.id)[0];
@@ -49,20 +39,6 @@ const UserCard = (props) => {
     setIsActive(!isActive);
   };
 
-  // TESTE //
-  //const [previousStatus, setPreviousStatus] = useState(client.status);
-
-  /*
-  const handleDeactivate = () => {
-    updateClient(client.id, { ...client, status: "Inactive" });
-    setIsActive(false);
-    setPreviousStatus(client.status);
-  };
-
-  const handleDeactivateCancel = () => {
-    setIsActive(client.status === "Active");
-    updateClient(client.id, { ...client, status: previousStatus });
-  };*/
   const handleClickAlterStatus = () => {
     updateStatusUser(props.id);
   };

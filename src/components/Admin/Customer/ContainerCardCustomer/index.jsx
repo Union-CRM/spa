@@ -22,11 +22,11 @@ import {
   DivClose,
 } from "./styles";
 import CustomerCard from "./CardListView/index";
-import AddEditClient from "../AddEditClient";
+import AddEditCustomer from "../AddEditCustomer";
 import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
 import { useState, useEffect } from "react";
 import { useUserContext } from "../../../../hook/useUserContext";
-import ModalPopUp from "../ModalPopUP";
+
 import { useCustomerContext } from "../../../../hook/useCustomerContext";
 import ModalError from "../ModalError";
 import ModalSuccessfuly from "../ModalSuccessfuly";
@@ -39,21 +39,12 @@ const abaStatus = {
 const ContainerCards = (props) => {
   // States modal//
   const [modal, setModal] = useState(false);
-  const [modalPopUp, setModalPopUp] = useState(false);
+
   const [id, setId] = useState(null);
   const { customer, popUpSuccess, popUpError } = useCustomerContext();
   const [isEdit, setEdit] = useState(false);
 
   const [active, setActive] = useState(abaStatus.ACTIVE);
-  const { user } = useUserContext();
-
-  /*useEffect(() => {
-    if (props.adminList) {
-      setClientList(client.filter((c) => c.user_id === userTarget.id));
-    } else {
-      setClientList(client.filter((c) => c.user_id === user.id));
-    }
-  }, [client]);*/
 
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
@@ -71,10 +62,6 @@ const ContainerCards = (props) => {
   const EditClient = () => {
     setModal(true);
     setEdit(true);
-  };
-
-  const modalClose = () => {
-    setModalPopUp(true);
   };
 
   return (
@@ -157,11 +144,9 @@ const ContainerCards = (props) => {
                 .map((item) => (
                   <CustomerCard
                     setId={(i) => setId(i)}
-                    openModalPopUp={() => setModalPopUp(true)}
                     key={item.id}
                     id={item.id}
                     openModal={() => EditClient()}
-                    //modalPopUp={() => PopUp()}
                   />
                 ))}
           </BoardStyle>
@@ -171,14 +156,11 @@ const ContainerCards = (props) => {
       <DivModal $mode={modal} />
 
       {modal && (
-        <AddEditClient
+        <AddEditCustomer
           id={id}
           setModal={setModal}
           title={isEdit ? "Edit Customer" : "Create Customer"}
         />
-      )}
-      {modalPopUp && (
-        <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
       )}
     </ContainerGlobal>
   );

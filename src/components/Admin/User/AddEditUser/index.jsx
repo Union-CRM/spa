@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
 import {
+  ClickButton,
   ContainerCentral,
   Container,
-  PositionTitle,
+  DivButton,
+  DivEmail,
+  DivId,
+  DivName,
+  DivStatus,
+  Form,
   H1,
   Input,
-  Form,
   Label,
-  DivName,
-  DivEmail,
-  DivStatus,
-  DivButton,
-  ClickButton,
   PositionButtonCancel,
-  DivId,
+  PositionTitle,
 } from "./styles";
 import SingleSelect from "../../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../../assets/Buttons/ButtonDefault";
@@ -22,10 +22,10 @@ import { useUserContext } from "../../../../hook/useUserContext";
 import { useFetchUser } from "../../../../hook/useFetchUser";
 
 const AddEditUser = (props) => {
-  const { user, userTarget, setModalPassword } = useUserContext();
+  const { user, setModalPassword } = useUserContext();
   const [newUser, setNewUser] = useState(entityUser);
   const { createUser } = useFetchUser();
-  const [newPSW, setNewPSW] = useState();
+
   const levelOptions = levels
     .map((l) => {
       if (l < user.level) {
@@ -35,25 +35,15 @@ const AddEditUser = (props) => {
     .filter((l) => l);
 
   const [flag, setFlag] = useState(false);
-  const { setModal, id } = props;
+  const { setModal } = props;
 
   const closeModal = () => {
     setModal(false);
   };
 
   const handleSubmit = () => {
-    if (props.title === "Edit User") {
-      editUser();
-    } else {
-      handleCreateUser();
-    }
+    handleCreateUser();
   };
-
-  useEffect(() => {
-    if (props.title === "Edit User") {
-      setNewUser(userTarget);
-    }
-  }, []);
 
   const handleCreateUser = () => {
     const u = {
@@ -64,7 +54,6 @@ const AddEditUser = (props) => {
     if (newUser.name && newUser.email && newUser.tcs_id && newUser.level) {
       createUser(u)
         .then(function (variavel) {
-          setNewPSW(variavel);
           setModalPassword(variavel);
         })
         .catch(function (error) {
@@ -75,28 +64,6 @@ const AddEditUser = (props) => {
     } else {
       setFlag(true);
     }
-  };
-
-  const editUser = () => {
-    const newUser2 = {
-      name: "Luan Saatos",
-      tcs_id: 3134256,
-      email: "luansantos@tcs.com",
-      level: 1,
-    };
-
-    if (true) {
-      setModal(false);
-    } else {
-      setFlag(true);
-    }
-  };
-
-  const handleSetStatus = (s) => {
-    setNewUser({
-      ...newUser,
-      status: s,
-    });
   };
 
   const handleSelectLevel = (l) => {
@@ -209,11 +176,6 @@ const AddEditUser = (props) => {
 };
 
 export default AddEditUser;
-
-const status_mok = [
-  { id: 1, value: "ACTIVE", label: "ACTIVE" },
-  { id: 2, value: "INACTIVE", label: "INACTIVE" },
-];
 
 const entityUser = {
   name: "",

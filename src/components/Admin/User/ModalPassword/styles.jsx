@@ -1,7 +1,7 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 // * Div Father * //
-
+//ok
 export const ContainerFather = styled.div`
   //z-index: 10;
   justify-content: center;
@@ -12,7 +12,7 @@ export const ContainerFather = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 `;
-
+//ok
 // Container ModalPopup //
 export const Container = styled.div`
   //left: 50%;
@@ -41,7 +41,7 @@ export const Container = styled.div`
 `;
 
 // Content container //
-
+//ok
 export const Content = styled.div`
   display: flex;
   height: fit-content;
@@ -51,7 +51,7 @@ export const Content = styled.div`
   margin-bottom: 2%;
   box-sizing: border-box;
 `;
-
+//ok
 export const Span = styled.span`
   font-weight: 600 !important;
   margin-top: 5%;
@@ -61,7 +61,7 @@ export const Span = styled.span`
   display: flex;
   flex-direction: row;
 `;
-
+//ok
 export const Circle = styled.div`
   background: #e41165;
   border-radius: 100%;
@@ -82,6 +82,7 @@ export const Circle = styled.div`
     align-items: center;
   }
 `;
+//ok
 export const DivAdd = styled.div`
   margin-top: 4%;
   display: flex;

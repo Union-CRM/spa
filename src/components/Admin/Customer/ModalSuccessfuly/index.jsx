@@ -1,14 +1,4 @@
-import ButtonDefault from "../../../../assets/Buttons/ButtonDefault";
-import {
-  Container,
-  Overlay,
-  Content,
-  DivSave,
-  DivCancel,
-  Circle,
-  Span,
-  ContainerFather,
-} from "./styles";
+import { Container, Content, Circle, Span, ContainerFather } from "./styles";
 import IconSystem from "../../../../assets/IconSystem";
 import { useCustomerContext } from "../../../../hook/useCustomerContext";
 

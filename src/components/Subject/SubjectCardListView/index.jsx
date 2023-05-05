@@ -48,7 +48,7 @@ const cardStatus = {
 
 const SubjectList = (props) => {
   const { subject } = useSubjectContext();
-  const { user, userTarget } = useUserContext();
+  const { user, userTarget, setUserTarget } = useUserContext();
   const [subjectList, setSubjectList] = useState([]);
 
   /*
@@ -61,11 +61,9 @@ const SubjectList = (props) => {
       setSubjectList(subject.filter((s) => s.user_id === userTarget.id));
     } else {
       setSubjectList(subject.filter((s) => s.user_id === user.id));
+      setUserTarget(user);
     }
   }, [subject, userTarget]);
-
-  console.log(subject.filter((s) => s.user_id === userTarget.id));
-  console.log(userTarget);
 
   const SubjectsCancel = subjectList.filter(
     (item) => item.status_description === "CANCELED"

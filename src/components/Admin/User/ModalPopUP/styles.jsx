@@ -1,6 +1,7 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 // Overlay //
+//ok
 export const Overlay = styled.div`
   z-index: 1;
   height: 100vh;
@@ -15,7 +16,7 @@ export const Overlay = styled.div`
 `;
 
 // * Div Father * //
-
+//ok
 export const ContainerFather = styled.div`
   z-index: 999999;
   justify-content: center;
@@ -23,7 +24,7 @@ export const ContainerFather = styled.div`
   grid-column: 1;
   position: relative;
 `;
-
+//ok
 // Container ModalPopup //
 export const Container = styled.div`
   width: 25%;
@@ -50,7 +51,7 @@ export const Container = styled.div`
 `;
 
 // Content container //
-
+//ok
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -59,7 +60,7 @@ export const Content = styled.div`
   margin-bottom: 2%;
   box-sizing: border-box;
 `;
-
+//ok
 export const Span = styled.span`
   font-weight: 600 !important;
   margin-top: 5%;
@@ -69,7 +70,7 @@ export const Span = styled.span`
   display: flex;
   flex-direction: row;
 `;
-
+//ok
 export const Circle = styled.div`
   background: #007bff;
   border-radius: 100%;
@@ -90,7 +91,7 @@ export const Circle = styled.div`
     align-items: center;
   }
 `;
-
+//ok
 // Div Buttons //
 export const DivSave = styled.div`
   margin-top: 4%;
@@ -98,7 +99,7 @@ export const DivSave = styled.div`
   flex-direction: row;
   align-self: center;
 `;
-
+//ok
 export const DivCancel = styled.div`
   margin-bottom: 10%;
   display: flex;
