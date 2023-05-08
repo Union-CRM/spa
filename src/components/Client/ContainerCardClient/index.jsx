@@ -31,7 +31,7 @@ import ModalPopUp from "../ModalPopUP";
 import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
-
+import { useSearchContext } from "../../../hook/useSearchContext";
 // Modal Client //
 import ModalClientDetails from "../ModalClientDetails";
 import ModalClientEdit from "../EditClient";
@@ -57,14 +57,30 @@ const ContainerCards = (props) => {
  //const {modalInfo, setModalInfo} = useClientContext();
 const [modalInfo, setModalInfo] = useState(false);
 const {modalEditClient, setModalEditClient } = useClientContext();
+const { search } = useSearchContext();
 
-  useEffect(() => {
+useEffect(() => {
     if (props.adminList) {
       setClientList(client.filter((c) => c.user_id === userTarget.id));
     } else {
       setClientList(client.filter((c) => c.user_id === user.id));
     }
   }, [client]);
+
+  console.log(client)
+useEffect(()=>{
+  if(search){
+    console.log(search.toLowerCase())
+    setClientList(client.filter((c) => c.client.toLowerCase().includes(search.toLowerCase())));
+    
+  }else{
+    if (props.adminList) {
+      setClientList(client.filter((c) => c.user_id === userTarget.id));
+    } else {
+      setClientList(client.filter((c) => c.user_id === user.id));
+    }
+  }
+},[search])
 
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
@@ -79,10 +95,10 @@ const {modalEditClient, setModalEditClient } = useClientContext();
     setEdit(false);
   };
 
- // const EditClient = () => {
-   // setModal(true);
-   // setEdit(true);
-  //};
+  const EditClient = () => {
+    setModal(true);
+    setEdit(true);
+  };
 
   const modalClose = () => {
     setModalPopUp(true);
@@ -169,8 +185,8 @@ const {modalEditClient, setModalEditClient } = useClientContext();
           <LineDivisor />
 
           <BoardStyle>
-            {client &&
-              client
+            {clientList &&
+              clientList
                 .filter((item) => item.status === active)
                 .map((item) => (
                   <ClientCard
@@ -198,23 +214,23 @@ const {modalEditClient, setModalEditClient } = useClientContext();
       <DivModal $mode={modalInfo} />
 
        {modalInfo && (
-        <ModalClientDetails
+        <ModalClientEdit
           id={id}
           openModal={() => detailsModal()}
           setModal={setModalInfo}
-          title={"Client Details"}
+          title={"Edit Client"}
         />
       )}
 
       <DivModal $mode={modal} />
 
-    {modal && (
+    {/* {modal && (
         <ModalClientEdit
           id={id}
           setModal={setModal}
           title={"Create Client"}
         />
-    )}
+    )} */}
 
 
 

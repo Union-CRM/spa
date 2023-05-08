@@ -43,7 +43,6 @@ export const GroupListContextProvider = ({ children }) => {
         textCustomer: item.customers.customer_name,
         usersId: item.users.map((user) => user.user_id),
         usersNames: item.users.map((user) => user.user_name),
-
         usersCount: item.users.map((user) => user.user_id).length,
         usuarios: item.users,
       }))
