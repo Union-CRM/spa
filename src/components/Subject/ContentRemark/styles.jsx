@@ -428,18 +428,17 @@ export const DivDadosRemark = styled.div`
 
 export const NameEmail = styled.div`
   font-size: 0.8rem;
-  padding-left: 2%;
   width: 98%;
   height: 100%;
   font-weight: 600;
   opacity: 0.8;
+  margin-top: 5px;
   span {
-    display: block;
     font-size: 0.74rem;
     align-items: center;
     justify-content: center;
     height: 100%;
-    font-weight: 500;
+    font-weight: 200;
   }
   @media (min-width: 1700px) and (max-width: 2500px) {
     width: 90%;
