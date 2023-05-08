@@ -48,7 +48,7 @@ const ContainerCardsGroup = () => {
               {group &&
                 group
                   .filter((g) => g.status === active)
-                  .map((g) => <Group key={g.group_id} id={g.id} />)}
+                  .map((g, index) => <Group key={index} id={g.id} />)}
             </BoardStyle>
           </CardsContainer>
         </ContainerHeaderAndCards>

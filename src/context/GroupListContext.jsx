@@ -14,9 +14,8 @@ export const GroupListContextProvider = ({ children }) => {
   const [infoGroup, setInfoGroup] = useState(true);
   const [users, setUsers] = useState([]);
 
- useEffect(() => {
-  loadData();
-
+  useEffect(() => {
+    loadData();
   }, []);
 
   const loadData = async () => {
@@ -34,9 +33,7 @@ export const GroupListContextProvider = ({ children }) => {
       console.error(error);
     }
 
-    console.log(groups.data.group_list)
-  setGroup(
-
+    setGroup(
       groups.data.group_list.map((item) => ({
         id: item.group_id,
         status_id: item.status.status_id,
@@ -46,16 +43,25 @@ export const GroupListContextProvider = ({ children }) => {
         textCustomer: item.customers.customer_name,
         usersId: item.users.map((user) => user.user_id),
         usersNames: item.users.map((user) => user.user_name),
-        usersCount:item.users.map((user) => user.user_id).length,
-        usuarios: item.users
+        usersCount: item.users.map((user) => user.user_id).length,
+        usuarios: item.users,
       }))
     );
-
   };
   return (
-    <GroupListContext.Provider value={{ group, setGroup, loadData, team, setTeamList, infoGroup, setInfoGroup, users }}>
+    <GroupListContext.Provider
+      value={{
+        group,
+        setGroup,
+        loadData,
+        team,
+        setTeamList,
+        infoGroup,
+        setInfoGroup,
+        users,
+      }}
+    >
       {children}
     </GroupListContext.Provider>
   );
 };
-

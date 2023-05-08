@@ -285,3 +285,9 @@ export const DivClose = styled.div`
   opacity: 55%;
   z-index: 0;
 `;
+
+export const DivInfo = styled.div`
+  position: relative;
+  top: 15%;
+  left: 1%;
+`;
