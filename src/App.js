@@ -22,7 +22,7 @@ import { BusinessContextProvider } from "./context/BusinessContext";
 import { ReleaseContextProvider } from "./context/ReleaseContext";
 import { useUserContext } from "./hook/useUserContext";
 import UsersAdm from "./pages/Adm/Users/index";
-
+import { useUserContext } from "./hook/useUserContext";
 
 import Groups from "./pages/Adm/Groups";
 
@@ -107,6 +107,7 @@ function App() {
                         element={
                           localStorage.getItem("token") ? (
                             <ReleaseTrainPage/>
+
                           ) : (
                             <LoginPage />
                           )
