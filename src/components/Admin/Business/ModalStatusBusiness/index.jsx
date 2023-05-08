@@ -1,4 +1,4 @@
-import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
+import ButtonDefault from "../../../../assets/Buttons/ButtonDefault";
 import {
   Container,
   Overlay,
@@ -9,8 +9,8 @@ import {
   Span,
   ContainerFather,
 } from "./styles";
-import { useBusinessContext } from "../../../hook/useBusinessContent";
-import { useFetchBusiness } from "../../../hook/useFetchBusiness";
+import { useBusinessContext } from "../../../../hook/useBusinessContent";
+import { useFetchBusiness } from "../../../../hook/useFetchBusiness";
 import { useEffect } from "react";
 
 const ModalStatusBusiness = (props) => {
