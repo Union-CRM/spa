@@ -39,6 +39,7 @@ export const CustomerContextProvider = ({ children }) => {
         setPopUpSuccess,
         popUpError,
         setPopUpError,
+        
       }}
     >
       {children}

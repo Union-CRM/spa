@@ -13,7 +13,7 @@ export const useFetchAdmGroupList = () => {
 
             group_name: group.group_name,
             customer_id: parseInt(group.customer_id),
-            users: parseInt(group.users.users_id.id),
+            users: parseInt(group.users),
         },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
