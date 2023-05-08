@@ -89,7 +89,7 @@ export const DivSubjPlanner = styled.div`
 export const DivPlanner = styled.div`
   position: relative;
   width: 100%;
-  height: 65%;
+  height: 100%;
   grid-column: 2;
   margin-top: 10%;
 

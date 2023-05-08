@@ -1,13 +1,15 @@
 import React from "react";
 import { Container, Logo, GoSearch, DivSear, DivIcon } from "./styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchContext } from "../../../hook/useSearchContext";
 import IconSystem from "../../../assets/IconSystem";
 
 const NavBar = () => {
   const { setSearch } = useSearchContext();
   const [searchtState, setSearchtState] = useState(false);
-
+  useEffect(() => {
+    setSearch(false);
+  }, []);
   return (
     <>
       <Container>

@@ -67,12 +67,11 @@ useEffect(() => {
     }
   }, [client]);
 
-  console.log(client)
+  console.log(client);
+  
 useEffect(()=>{
   if(search){
-    console.log(search.toLowerCase())
     setClientList(client.filter((c) => c.client.toLowerCase().includes(search.toLowerCase())));
-    
   }else{
     if (props.adminList) {
       setClientList(client.filter((c) => c.user_id === userTarget.id));
