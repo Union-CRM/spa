@@ -15,9 +15,13 @@ import { BusinessContextProvider } from "./context/BusinessContext";
 import { ReleaseContextProvider } from "./context/ReleaseContext";
 import { useUserContext } from "./hook/useUserContext";
 
+
 //Page
 import Home from "./pages/User/Home";
 import HomeAdm from "./pages/Adm/Home";
+
+import UsersAdm from "./pages/Adm/Users/index";
+
 import Groups from "./pages/Adm/Groups";
 import Client from "./pages/User/Client";
 import Business from "./pages/Adm/Business";

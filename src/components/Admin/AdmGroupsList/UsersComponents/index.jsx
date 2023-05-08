@@ -37,7 +37,7 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
 
   
   //Users//
-  const [userOption, setUserOption] = useState([]);
+ /* const [userOption, setUserOption] = useState([]);
   
   const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin()
 
@@ -51,6 +51,43 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
  
 
   const {selectedOptions, setSelectedOptions} = useFetchUsersNotin();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleOptionChange = (userOption) => {
+    
+    setSelectedOptions([...selectedOptions, userOption]);
+    setDropdownOpen(true);
+    
+  };
+
+  const handleRemoveOption = (optionToRemove) => {
+    const updatedSelectedOptions = selectedOptions.filter(
+      (userOption) => userOption !== optionToRemove
+    );
+    setSelectedOptions(updatedSelectedOptions);
+  };
+
+  const availableOptions = userOption.filter(
+    (userOption) => !selectedOptions.includes(userOption)
+  );
+
+  
+  const usersList = userSub.concat(usersNotin)
+  
+  useEffect(() => {
+    if (usersList) {
+      setUserOption(
+        usersList
+          .map((c) => ({ id: c.id, value: c.id, label: c.name }))
+      );
+    }
+  }, [usersNotin, userSub]);*/
+
+
+  const [userOption, setUserOption] = useState([]);
+  const { users: userList } = useUserContext();
+
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleOptionChange = (userOption) => {
@@ -68,19 +105,15 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
   const availableOptions = userOption.filter(
     (userOption) => !selectedOptions.includes(userOption)
   );
-  
-  const usersList = userSub.concat(usersNotin)
-  console.log(usersList);
- 
 
   useEffect(() => {
-    if (usersList) {
+    if (userList) {
       setUserOption(
-        usersList
-          .map((c) => ({ id: c.id, value: c.id, label: c.name }))
+        userList
+          .map((c) => ({ id: c.id, value: c.id, label: c.name  }))
       );
     }
-  }, [usersNotin, userSub]);
+  }, []);
 
   return (
     <>

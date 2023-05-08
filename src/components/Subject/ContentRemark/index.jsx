@@ -66,7 +66,7 @@ const ContentRemarks = (props) => {
   };
 
   // Remark //
-
+  
   const RemarkModal = () => {
     setModalRemark(true);
     setModalDetails(false);
@@ -156,17 +156,14 @@ const ContentRemarks = (props) => {
                   </p>
                 </DivDateReturn>
 
-                <DivPhoto>
-                  <DivPhotoII>
-                    <Photo $mode={status}>{Split(r.user_name)}</Photo>
-                  </DivPhotoII>
-                </DivPhoto>
-
+                
+                    
                 <DivDadosRemark>
-                  <NameEmail>
-                    {SplitName(r.user_name)}
-                    <span>{r.user_id}</span>
-                  </NameEmail>
+                <NameEmail>
+                    {"Remark Title: "}<span>{remarkEdit.remark_name}</span>
+                    {" Create by: "}<span>{SplitName(r.user_name)}</span>
+                </NameEmail>
+                 
                 </DivDadosRemark>
               </DivGlobalCard>
 
