@@ -100,7 +100,7 @@ const ClientCard = (props) => {
             </DivPhoto>
 
             <DivDadosCard>
-              <Body type={"Body1"} name={client.client} />
+              <Body type={"Body2"} name={client.client} />
 
               <Subtitle type={"TextDescription"} name={client.email} />
 

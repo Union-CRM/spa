@@ -31,8 +31,8 @@ import ClientDetails from "../ClientsDetails"
 import SubjectClient from "../SubjectsClient"
 
 const ModalClientDetails = (props) => {
-  const { setModal, id, modalEditClient, setModalEditClient } = props;
-  const { setModalInfo, setId } = useClientContext();
+  const { setModal, id, modalEditClient } = props;
+  const { setModalInfo, setId,setModalEditClient } = useClientContext();
   
   // UseEffect Clients //
 
