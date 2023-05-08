@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Container,
   Card,
@@ -37,8 +37,7 @@ import styled, { css } from "styled-components";
 
 const ClientCard = (props) => {
   const { openModal, openModalPopUp } = props;
-
-    
+  const [manager, setManager] = useState();
   const { toggleState, setToggleState } = useClientContext();
   const { activeTab, setActiveTab } = useClientContext();
 
@@ -60,8 +59,6 @@ const ClientCard = (props) => {
     openModalPopUp();
     props.setId(client.id);
   };
-
-
 
   /*const handleToggle = () => {
     setIsActive(!isActive);
@@ -162,9 +159,9 @@ const ClientCard = (props) => {
 
             <DivRelease>
               <TitleInfo>
-                Release Train <span>|</span>{" "}
+                Create by <span>|</span>{" "}
               </TitleInfo>
-              <ValueInfo>{client.textRelease} </ValueInfo>
+              <ValueInfo>{client.user_name}</ValueInfo>
             </DivRelease>
           </DivInfo>
         </Card>
