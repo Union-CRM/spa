@@ -135,9 +135,15 @@ const ClientCard = (props) => {
 
             <DivRelease>
               <TitleInfo>
+<<<<<<< Updated upstream
                 Release Train <span>|</span>{" "}
               </TitleInfo>
               <ValueInfo>{client.textRelease} </ValueInfo>
+=======
+                Manager <span>|</span>{" "}
+              </TitleInfo>
+              <ValueInfo>{SplitName(client.user_name)}</ValueInfo>
+>>>>>>> Stashed changes
             </DivRelease>
           </DivInfo>
         </Card>
@@ -147,3 +153,11 @@ const ClientCard = (props) => {
 };
 
 export default ClientCard;
+
+function SplitName(n) {
+  const user = n ? n : "";
+  var userSplit = user.split(" ");
+  var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
+
+  return user1;
+}

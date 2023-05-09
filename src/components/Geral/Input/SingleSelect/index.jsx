@@ -56,6 +56,7 @@ export const SingleSelect = (props) => {
               border: `2px solid ${
                 props.placeholder === "" ? "#888C95" : "#b03535"
               }`,
+              fontSize:"0.9rem",
               height: "28px !important",
               position: "relative !important",
               cursor: "pointer",
@@ -76,7 +77,7 @@ export const SingleSelect = (props) => {
             singleValue: (baseStyles, state) => ({
               ...baseStyles,
               color: "#656464",
-              width: props.sizeSingle || "512px",
+              width: props.sizeSingle || "500px",
             }),
             menu: (baseStyles, state) => ({
               ...baseStyles,

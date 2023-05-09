@@ -29,6 +29,7 @@ import {useFetchCustomer} from "../../../hook/useFetchCustomer"
 import {useFetchClient} from "../../../hook/useFetchClient"
 import { useFetchRole } from "../../../hook/useFetchRole";
 import { useFetchTag } from "../../../hook/useFetchTag";
+import {useCustomerContext} from "../../../hook/useCustomerContext";
 
 const AddEditClient = (props) => {
   const { client: clientList, setClient: setClientList } = useClientContext();
@@ -39,12 +40,25 @@ const AddEditClient = (props) => {
   const [customer, setCustomer] = useState({});
   const [business, setBusiness] = useState("");
   const [role, setRole] = useState({});
+<<<<<<< Updated upstream
   const [status, setStatus] = useState();
   const {releaseList} =useFetchRelease("release");
   const {customerList} = useFetchCustomer("Customer");
   const {roleList} = useFetchRole("Role");
   const {tagList} = useFetchTag("Tag")
   const [releaseObj, setReleaseObj]=  useState({release_name:"",business_name:""});
+=======
+  const [status, setStatus] = useState({ value: "Active" });
+  const { releaseList } = useFetchRelease("release");
+  const { loadCustomerList} = useCustomerContext();
+  const { customer: customerList } = useFetchCustomer("Customer");
+  const { roleList } = useFetchRole("Role");
+  const { tagList } = useFetchTag("Tag");
+  const [releaseObj, setReleaseObj] = useState({
+    release_name: "",
+    business_name: "",
+  });
+>>>>>>> Stashed changes
   const [tags, setTags] = useState([]);
   const {insertClient,updateClient}= useFetchClient();
   const [flag, setFlag] = useState(false);
@@ -191,7 +205,7 @@ const AddEditClient = (props) => {
                   onChange={(event) => setEmail(event.target.value)}
                 />
               </Label>
-
+          
               <SingleSelect
                 key="1"
                 set={(role) => handleSelectRole(role)}
@@ -234,7 +248,11 @@ const AddEditClient = (props) => {
                 options={releaseList ? releaseList:[]}
               />
             </DivRelease>
+<<<<<<< Updated upstream
             
+=======
+           
+>>>>>>> Stashed changes
             <DivBusiness>
               <Label>
                 Business

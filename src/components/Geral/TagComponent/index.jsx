@@ -83,8 +83,10 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                   width: props.widths || "90%",
                   height: "12.5vh",
                   left: "11%",
-                  paddingTop: "5px",
-                  paddingBottom: "5px",
+                  paddingTop: "0px",
+                  paddingBottom: "0px",
+                  flexWrap:"wrap",
+                  display:"flex",
                   overflowY: "scroll",
                   "&::-webkit-scrollbar": {
                     backgroundColor: "#FFF",
@@ -136,12 +138,15 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                 overflowY: "scroll",
                 "&::-webkit-scrollbar": {
                   backgroundColor: "#DFDFDF",
+                  width:"5%",
                 },
                 "&::-webkit-scrollbar-thumb ": {
                   backgroundColor: "#DFDFDF",
+             
                 },
-                "&::-webkit-scrollbar--track-piece": {
+                "&::-webkit-scrollbar-track-piece": {
                   backgroundColor: "#DFDFDF",
+                  
                 },
               }),
 
@@ -151,12 +156,18 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                   backgroundColor: data.color,
                   borderRadius: "7px",
                   color: "red",
+                  fontSize:"0.9rem",
+                  width:"fit-content",
+                
+                  height:"fit-content",
+                  
                 };
               },
               multiValueLabel: (styles, { data }) => {
                 return {
                   ...styles,
                   color: "#000",
+                  
                 };
               },
 

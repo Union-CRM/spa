@@ -5,6 +5,7 @@ export const ClientContext = createContext();
 
 export const ClientContextProvider = ({ children }) => {
   const [client, setClient] = useState([{}]);
+  
 
 
   useEffect(()=>{
@@ -37,12 +38,54 @@ export const ClientContextProvider = ({ children }) => {
           })
         ))
     }
+<<<<<<< Updated upstream
     loadDate();
     
   },[])
 
   return (
     <ClientContext.Provider value={{ client, setClient }}>
+=======
+    setClient(
+      clients.data.list.map((item) => ({
+        id: item.client_id,
+        status: item.status_description,
+        email: item.client_email,
+        client: item.client_name,
+        role_id: item.role_id,
+        textRole: item.role_name,
+        customer_id: item.customer_id,
+        textCustomer: item.customer_name,
+        business_id: item.business_id,
+        textBusiness: item.business_name,
+        release_id: item.release.release_id,
+        textRelease: item.release.release_name,
+        user_id: item.user_id,
+        user_name: item.user_name,
+        tags: item.tags
+          ? item.tags.map((tag) => ({ value: tag.tag_id, label: tag.tag_name }))
+          : [],
+      }))
+    );
+    /* console.log(clients.data.list)*/
+  };
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [toggleState, setToggleState] = useState(1);
+  const [activeTab, setActiveTab] = useState(null);
+  const [modal, setModal] = useState();
+  const [id, setId] = useState(null);
+  const [modalEditClient, setModalEditClient] = useState(false);
+  const [modalInfo, setModalInfo] = useState(false);
+  
+  const openModalDetails = (id) => {
+    setSelectedClient(id);
+  };
+
+  return (
+    <ClientContext.Provider value={{ openModalDetails, client, setClient, loadData, id,
+      setId, toggleState, setToggleState, activeTab, setActiveTab, modal, setModal,
+      modalEditClient, setModalEditClient, modalInfo, setModalInfo }}>
+>>>>>>> Stashed changes
       {children}
     </ClientContext.Provider>
   );
