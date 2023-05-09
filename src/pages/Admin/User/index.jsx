@@ -5,11 +5,16 @@ import UserProfile from "../../../components/Admin/User/UserProfile";
 import { useUserContext } from "../../../hook/useUserContext";
 
 const AdmUser = () => {
-  const { viewProfile, setViewProfile } = useUserContext();
+  const { viewProfile, setViewProfile, home, setHome } = useUserContext();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setViewProfile(false);
-    setLoading(false);
+    if (!home) {
+      setViewProfile(false);
+      setLoading(false);
+    } else {
+      setHome(false);
+      setLoading(false);
+    }
   }, []);
   return (
     <>

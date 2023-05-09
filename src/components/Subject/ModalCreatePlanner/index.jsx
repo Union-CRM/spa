@@ -38,7 +38,7 @@ const ModalCreatePlanner = (props) => {
   const [guest, setGuest] = useState([]);
   const [clientOption, setClientOption] = useState([]);
   const { client: clientList } = useClientContext();
-  const { user } = useUserContext();
+  const { user, userTarget } = useUserContext();
   const [timeStart, setTimeStart] = useState();
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [timeFinish, setTimeFinish] = useState();
@@ -66,7 +66,7 @@ const ModalCreatePlanner = (props) => {
       subject: subjectTarget.id,
       client: subjectTarget.client_id,
       release: subjectTarget.release_id,
-      user: user.id,
+      user: userTarget.id,
       guest: guest.map((g) => ({ client_id: g.value })),
     };
     if (date && timeFinish && timeStart) {

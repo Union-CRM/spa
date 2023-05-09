@@ -252,14 +252,14 @@ export const BigCalender = (props) => {
       {modalCreate && (
         <>
           <DivClose onClick={handleCloseModal}></DivClose>
-          <ModalPlanner title={"Create Planner"} />
+          <ModalPlanner adminList={props.adminList} title={"Create Planner"} />
         </>
       )}
 
       {modalEdit && (
         <>
           <DivClose onClick={handleCloseModal}></DivClose>
-          <ModalPlanner title={"Edit Planner"} />
+          <ModalPlanner adminList={props.adminList} title={"Edit Planner"} />
         </>
       )}
 
@@ -285,14 +285,17 @@ export const BigCalender = (props) => {
       {modalFollowUp && (
         <>
           <DivClose />
-          <FollowUpModal />
+          <FollowUpModal adminList={props.adminList} />
         </>
       )}
 
       {modalReschedule && (
         <>
           <DivClose onClick={handleCloseModal}></DivClose>
-          <ModalPlanner title={"Reschedule Planner"} />
+          <ModalPlanner
+            adminList={props.adminList}
+            title={"Reschedule Planner"}
+          />
         </>
       )}
 
@@ -314,7 +317,7 @@ export const BigCalender = (props) => {
       {modalRemark && (
         <>
           <DivClose onClick={handleCloseModal}></DivClose>
-          <RemarkModal title={"Create Remark"} />
+          <RemarkModal adminList={props.adminList} title={"Create Remark"} />
         </>
       )}
 

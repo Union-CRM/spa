@@ -180,5 +180,5 @@ export const Dot = styled.div`
 
 //ok
 export const ContainerFather = styled.div`
-  z-index: 10;
+  z-index: 4;
 `;

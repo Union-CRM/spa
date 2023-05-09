@@ -9,6 +9,7 @@ export const UserContextProvider = ({ children }) => {
   const [userList, setUserList] = useState([{}]);
   const [viewProfile, setViewProfile] = useState(false);
   const [userTarget, setUserTarget] = useState({});
+  const [home, setHome] = useState(false);
   const [modalPlanner, setModalPlanner] = useState(false);
   const [modalSubject, setModalSubject] = useState(false);
   const [modalPassword, setModalPassword] = useState(false);
@@ -48,6 +49,8 @@ export const UserContextProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
+        home,
+        setHome,
         user,
         loadUserMe,
         userList,

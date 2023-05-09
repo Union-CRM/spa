@@ -30,11 +30,11 @@ class PlannerPage extends React.Component {
                 <DivIconTitle>
                   {" "}
                   <Info
-                  width="25px"
-                  style={{
-                    fill: "#007BFF",
-                  }}
-                />
+                    width="25px"
+                    style={{
+                      fill: "#007BFF",
+                    }}
+                  />
                 </DivIconTitle>
               </Tippy>
             </DivTitle>
