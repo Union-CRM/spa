@@ -4,7 +4,7 @@ import { realiseGetRealiseTrains } from "../api/routesAPI";
 
 
 export const useFetchRelease = () => {
-  const {loadData,setModalSaveRelease,setModalCreateRelease,setModalEditRelease} = useReleaseContext();
+  const {loadData,setModalSaveRelease,setModalCreateRelease,setModalEditRelease,setModalStatusRelease} = useReleaseContext();
 
 
   const createRelease = async (release) => {
@@ -52,7 +52,7 @@ export const useFetchRelease = () => {
         }
       )
       .then(function (response) {
-         loadData();
+        loadData();
       })
       .catch(function (error) {
        console.error(error.response); 

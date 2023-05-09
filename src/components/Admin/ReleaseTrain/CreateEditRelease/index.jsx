@@ -26,7 +26,7 @@ import { useBusinessContext } from '../../../../hook/useBusinessContent';
 
 const CreateEditRelease = (props) => {
   const { setModalCreateRelease, setModalEditRelease ,loadData,modalDiscard,
-    setModalDiscard,modalEditRelease,setIdRelease,idRelease} = useReleaseContext(); 
+    setModalDiscard,modalEditRelease,setIdRelease,idRelease, releaseTarget} = useReleaseContext(); 
   const { business } = useBusinessContext();
   const { createRelease, updateRelease, updateStatusRelease} = useFetchRelease();
   const [flag, setFlag] = useState(false);
@@ -47,22 +47,22 @@ const CreateEditRelease = (props) => {
 
   useEffect(() => {
     
-    setBusinessList(
+    /*setBusinessList(
       business.map((item) => ({
         id: item.id,
         value: item.id,
         label: item.name,
       }))   
-    );   
+    );  */ 
 
     if(props.title === "Edit Release"){
-      setReleaseName(idRelease.name)
-      setReleaseCode(idRelease.code)
-      setReleaseStatus(idRelease.status)
-      setBusinessRelease(idRelease.business)
-      setTags(idRelease.Tag)
+      setReleaseName(releaseTarget.name)
+      setReleaseCode(releaseTarget.code)
+      setReleaseStatus(releaseTarget.status)
+      setBusinessRelease(releaseTarget.business)
+      setTags(releaseTarget.Tag)
     }
-  }, []);
+  }, [releaseTarget]);
 
   const handleSubmit = () => {
     if(!modalDiscard){
@@ -127,11 +127,6 @@ const CreateEditRelease = (props) => {
 
   const handleSelectBusiness = (id) => {
     setBusinessRelease(id);
-  };
-
-  const handleChange = (id) => {
-    //setBusinessStatus(id);
-    console.log(id);
   };
 
 
@@ -223,6 +218,7 @@ const CreateEditRelease = (props) => {
             </DivSegment>
             <TagComponent
               options={tagList ? tagList : []}
+              tags={tags}
               placeholder={""}
               label={"Tag"}
               width={"90%"}

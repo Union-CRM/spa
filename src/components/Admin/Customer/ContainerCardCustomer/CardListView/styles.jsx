@@ -85,7 +85,6 @@ export const DivDadosCard = styled.div`
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
-
   align-items: center;
 `;
 

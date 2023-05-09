@@ -28,6 +28,13 @@ import {
   ToggleButton,
   DivTeste,
   NameBusiness,
+  HeaderTags,
+  TagsStatus,
+  DivTagsSpan,
+  DivImgTag,
+  DivCenter,
+  DivTag,
+  DivContentTags,
 } from "./styles";
 import Body from "../../../../../assets/FontSystem/Body";
 import Subtitle from "../../../../../assets/FontSystem/Subtitle";
@@ -48,9 +55,9 @@ const ReleaseCard = (props) => {
     setModalStatusRelease} = useReleaseContext();
   const { openModal, openModalPopUp } = props;
   const {updateStatusRelease} = useFetchRelease();
-  const { release: releaseList, updateRelease} = useReleaseContext();
+  const { release: releaseList, updateRelease, setReleaseTarget} = useReleaseContext();
   const release = releaseList.filter((item) => item.id === props.id)[0];
-
+  const [tagIcon, setTagIcon] = useState(false);
   const [tags] = useState(
     release.tags.map((tag) => {
       return tag.label + "; ";
@@ -63,10 +70,9 @@ const ReleaseCard = (props) => {
   };
 
   const handleClick = () => {
-    //updateStatusRelease(release.id);
     setModalStatusRelease(true);
-    //openModalPopUp();
     props.setId(release.id);
+    setIdRelease(release.id);
   };
 
 
@@ -83,13 +89,12 @@ const ReleaseCard = (props) => {
   function handleModal(id){
     setIdRelease(id);
     props.openModal()
-    setModalEditRelease(true)
     setModalCreateRelease(false)
+    setReleaseTarget(release)
   }
-  
 
   return (
-    <ContainerFather>
+    <ContainerFather onClick={() => handleModal()}>
       <Container>
         <Card
           isActive={isActive}
@@ -97,51 +102,84 @@ const ReleaseCard = (props) => {
           $mode={release.status}
           checked={isActive}
         >
-          <Header>
-            
-            <DivDadosCard>
-            <DivIcons>
-                  <ToggleContainer
+          <Header name="Header Geral">
+            <HeaderTags name="ButtonTags">
+              <TagsStatus>
+                {!tagIcon && (
+                  <DivTagsSpan
+                    onClick={() => setTagIcon(!tagIcon)}
                     isActive={isActive}
-                    $mode={release.status}
-                    checked={isActive}
+                    $mode={release.tags}
                   >
-                    <InputToggle
-                      type="checkbox"
-                      id={release.status}
-                      checked={release.status}
-                      onChange={handleToggle}
-                      onClick={() => handleClick()}
-                    />
-                    <ToggleButton checked={isActive} />
-                    </ToggleContainer>
-                    <Edit onClick={() => handleModal()}/>
-              </DivIcons>
-              <DivTeste >
-                <Body type={"Body1"} name={release.code} />
-                <TitleInfo>
-                    <span> | </span>{" "}
-                </TitleInfo>
-                <Tippy content={tags}>
-                    <TagsSpan $mode={release.status}>tags</TagsSpan>
-                </Tippy>
-              </DivTeste>
-              
-              <NameBusiness >
-                    {release.name}
-                </NameBusiness>
-
-              <DivTagsStatus>
-                <Status
-                  isActive={isActive}
-                  $mode={release.status}
-                  checked={isActive}
-                >
-                  {release.status}
-                </Status>
-              </DivTagsStatus>
-            </DivDadosCard>
+                    tags
+                  </DivTagsSpan>
+                )}
+                {tagIcon && (
+                  <DivImgTag isActive={isActive}>
+                    <DivTagsSpan onClick={() => setTagIcon(!tagIcon)}>tags</DivTagsSpan>
+                  </DivImgTag>
+                )}
+              </TagsStatus>
+            </HeaderTags>
+            <DivIcons name="Toggle">
+              <ToggleContainer
+                isActive={isActive}
+                $mode={release.status}
+                checked={isActive}
+              >
+                <InputToggle
+                  type="checkbox"
+                  id={release.status}
+                  checked={release.status}
+                  onChange={handleToggle}
+                  onClick={() => handleClick()}
+                />
+                <ToggleButton checked={isActive} />
+              </ToggleContainer>
+            </DivIcons>
           </Header>
+          <DivDadosCard onClick={() => setModalEditRelease(true)} name="DivDadosCard">
+            {!tagIcon && (
+              <>  <DivCenter>
+                  <NameBusiness>{release.name}</NameBusiness>
+                  <DivTeste>
+                    <p>{release.code}</p>
+                  </DivTeste>
+                  </DivCenter>
+              </>
+            )}
+            {tagIcon && (
+              <DivTag>
+                {release.tags.length > 0 ? (
+                  release.tags.map((t, index) => {
+                    if (index < 3) {
+                      return (
+                        <DivContentTags
+                          key={index}
+                          colorTag={isActive ? t.color : "#7a7a7a"}
+                        >
+                          {t.label}
+                        </DivContentTags>
+                      );
+                    } else if (index === 3) {
+                      return (
+                        <Tippy key={index} content={tags}>
+                          <DivContentTags
+                            key={index}
+                            colorTag={isActive ? t.color : "#7a7a7a"}
+                          >
+                            <p>see more tags</p>
+                          </DivContentTags>
+                        </Tippy>
+                      );
+                    }
+                  })
+                ) : (
+                  <p>Does not have Tags</p>
+                )}
+              </DivTag>
+            )}
+          </DivDadosCard>
         </Card>
       </Container>
     </ContainerFather>
