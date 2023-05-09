@@ -58,6 +58,10 @@ const AddEditClient = (props) => {
     release_name: "",
     business_name: "",
   });
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+
 >>>>>>> Stashed changes
   const [tags, setTags] = useState([]);
   const {insertClient,updateClient}= useFetchClient();
@@ -249,6 +253,7 @@ const AddEditClient = (props) => {
               />
             </DivRelease>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             
 =======
            
@@ -293,6 +298,9 @@ const AddEditClient = (props) => {
                 options={status_mok}
               />}
             </DivStatus>
+=======
+            
+>>>>>>> Stashed changes
           </Form>{" "}
           <DivButton>
             <ClickButton onClick={handleSubmit}>
