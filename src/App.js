@@ -15,22 +15,19 @@ import { BusinessContextProvider } from "./context/BusinessContext";
 import { ReleaseContextProvider } from "./context/ReleaseContext";
 import { useUserContext } from "./hook/useUserContext";
 
-
 //Page
 import Home from "./pages/User/Home";
 import HomeAdm from "./pages/Adm/Home";
-import UsersAdm from "./pages/Adm/Users/index";
-
 import Groups from "./pages/Adm/Groups";
 import Client from "./pages/User/Client";
 import Business from "./pages/Adm/Business";
 import LoginPage from "./pages/Login/index";
 import PlannerPage from "./pages/User/Planner";
+import RemarkPage from "./pages/User/Remark";
 import AdmUser from "./pages/Admin/User/index";
 import Customer from "./pages/Adm/Customer/index";
 import ReleaseTrainPage from "./pages/Adm/ReleaseTrain";
 import GroupsList from "./pages/Admin/GroupsList/index";
-
 
 function App() {
   const { user } = useUserContext();
@@ -71,6 +68,7 @@ function App() {
                               )
                             }
                           />
+
                           <Route
                             path="/business"
                             element={
@@ -127,6 +125,16 @@ function App() {
                             element={
                               localStorage.getItem("token") ? (
                                 <SubjectPage />
+                              ) : (
+                                <LoginPage />
+                              )
+                            }
+                          />
+                          <Route
+                            path="/remark"
+                            element={
+                              localStorage.getItem("token") ? (
+                                <RemarkPage />
                               ) : (
                                 <LoginPage />
                               )

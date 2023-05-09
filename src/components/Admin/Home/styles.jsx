@@ -89,7 +89,7 @@ export const DivSubjPlanner = styled.div`
 export const DivPlanner = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 41.5vh;
   grid-column: 2;
   margin-top: 10%;
 
@@ -107,12 +107,7 @@ export const DivPlanner = styled.div`
     position: relative;
     border-color: white;
     background-color: #fff;
-    border: 1px groove;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  }
-  @media screen and (max-width: 1090) {
-    width: 50%;
-    min-width: 300px;
   }
 `;
 export const ContainerLowLeft = styled.div`

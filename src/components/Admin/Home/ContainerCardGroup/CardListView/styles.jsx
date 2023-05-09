@@ -8,7 +8,7 @@ export const ContainerCards = styled.div`
   border: 1px groove;
   border-radius: 12px;
   display: flex;
-  margin-bottom: 10%;
+  margin-bottom: 1.5%;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   filter: drop-shadow;
 `;

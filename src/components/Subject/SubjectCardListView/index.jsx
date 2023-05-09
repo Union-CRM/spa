@@ -44,7 +44,6 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { useUserContext } from "../../../hook/useUserContext";
 
-
 const cardStatus = {
   INPROGRESS: "IN PROGRESS",
   FINISHED: "FINISHED",
@@ -137,23 +136,18 @@ const SubjectList = (props) => {
             <DivTitlePage>
               <H1>Subjects List</H1>
 
-              <HowManySubjectList>({subject.length})</HowManySubjectList>
+              <HowManySubjectList>({subjectList.length})</HowManySubjectList>
 
               <Tippy content="List of all subjects.">
-              <DivInfo>
-              
+                <DivInfo>
                   <Info
-                  width="25px"
-                  style={{
-                    fill: "#007BFF",
-                  }}
-                />
-                     </DivInfo>
+                    width="25px"
+                    style={{
+                      fill: "#007BFF",
+                    }}
+                  />
+                </DivInfo>
               </Tippy>
-
-
-             
-
             </DivTitlePage>
 
             <DivButton onClick={() => createSubject()}>
@@ -254,7 +248,12 @@ const SubjectList = (props) => {
 
       <DivModal $mode={modal} />
       {modal && (
-        <Subject id={id} setModal={setModal} title={"Create Subject"} />
+        <Subject
+          id={id}
+          adminList={props.adminList}
+          setModal={setModal}
+          title={"Create Subject"}
+        />
       )}
 
       <DivModal $mode={modalDetails} />
