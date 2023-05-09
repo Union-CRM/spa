@@ -135,7 +135,6 @@ const Subject = (props) => {
                 Client Name
                 <SingleSelect
                   set={(client) => setSelectedClient(client)}
-                  onChange={(choice) => setUserChoice(choice)}
                   placeholder={flag && !selectedClient ? "" : ""}
                   sizeSingle={"100%"}
                   sizeMenu={"100%"}

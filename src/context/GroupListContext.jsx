@@ -35,6 +35,7 @@ export const GroupListContextProvider = ({ children }) => {
     }
 
     console.log(groups.data.group_list)
+    
   setGroup(
 
       groups.data.group_list.map((item) => ({
@@ -53,7 +54,7 @@ export const GroupListContextProvider = ({ children }) => {
 
   };
   return (
-    <GroupListContext.Provider value={{ group, setGroup, loadData, team, setTeamList, infoGroup, setInfoGroup, users }}>
+    <GroupListContext.Provider value={{ group, setGroup, loadData, team, setTeamList, infoGroup, setInfoGroup, users, idGroups, setIdGroups }}>
       {children}
     </GroupListContext.Provider>
   );

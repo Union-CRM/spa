@@ -59,7 +59,7 @@ const [modalInfo, setModalInfo] = useState(false);
 const {modalEditClient, setModalEditClient } = useClientContext();
 
   useEffect(() => {
-    if (props.adminList) {
+    if (props.adimList) {
       setClientList(client.filter((c) => c.user_id === userTarget.id));
     } else {
       setClientList(client.filter((c) => c.user_id === user.id));
@@ -202,7 +202,7 @@ const {modalEditClient, setModalEditClient } = useClientContext();
           id={id}
           openModal={() => detailsModal()}
           setModal={setModalInfo}
-          title={"Client Details"}
+          title={"Edit Client"}
         />
       )}
 

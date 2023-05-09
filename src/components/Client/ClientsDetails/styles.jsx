@@ -144,12 +144,12 @@ export const DivBusiness = styled.div`
   }
 `;
 export const DivTags = styled.span`
-width: 95%;
 height: fit-content;
 font-size: 1rem;
-display: block;
+display: flex;
 padding-bottom: 1%;
 padding-top:1%;
+
 `;
 
 export const DivColors = styled.span`
@@ -158,13 +158,16 @@ text-transform:lowercase;
 border-radius:5px;
 padding:0.6%;
 margin-right:1%;
-margin-top:5%;
+position:relative;
 height:fit-content;
+margin-top:1%;
+text-align:center;
+width:auto;
 `;
 
 export const TagsClient = styled.span`
-display:block;
-background:red;
+display:flex;
+flex-wrap: wrap;
 `;
 
 export const IconTag = styled.span`

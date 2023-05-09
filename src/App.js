@@ -107,6 +107,7 @@ function App() {
                         element={
                           localStorage.getItem("token") ? (
                             <ReleaseTrainPage/>
+
                           ) : (
                             <LoginPage />
                           )
