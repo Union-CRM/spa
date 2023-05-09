@@ -40,14 +40,6 @@ const AddEditClient = (props) => {
   const [customer, setCustomer] = useState({});
   const [business, setBusiness] = useState("");
   const [role, setRole] = useState({});
-<<<<<<< Updated upstream
-  const [status, setStatus] = useState();
-  const {releaseList} =useFetchRelease("release");
-  const {customerList} = useFetchCustomer("Customer");
-  const {roleList} = useFetchRole("Role");
-  const {tagList} = useFetchTag("Tag")
-  const [releaseObj, setReleaseObj]=  useState({release_name:"",business_name:""});
-=======
   const [status, setStatus] = useState({ value: "Active" });
   const { releaseList } = useFetchRelease("release");
   const { loadCustomerList} = useCustomerContext();
@@ -58,11 +50,6 @@ const AddEditClient = (props) => {
     release_name: "",
     business_name: "",
   });
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
   const [tags, setTags] = useState([]);
   const {insertClient,updateClient}= useFetchClient();
   const [flag, setFlag] = useState(false);
@@ -252,55 +239,6 @@ const AddEditClient = (props) => {
                 options={releaseList ? releaseList:[]}
               />
             </DivRelease>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            
-=======
-           
->>>>>>> Stashed changes
-            <DivBusiness>
-              <Label>
-                Business
-                <Input
-                  disabled
-                  widthInput={"100% !important"}
-                  value={releaseObj.business_name}
-                  placeholder={flag && !releaseObj.business ? "Required field" : ""}
-                  required
-                  name={business}
-                />
-              </Label>
-            </DivBusiness>
-
-
-            <DivTag>
-              <TagComponent
-                set={(tags) => setTags(tags)}
-                tags={tags}
-                label={"Tags"}
-                placeholder={flag && !tags ? "Required field" : ""}
-                sizeSingle={"40%"}
-                required
-                sizeMenu={"40%"}
-                options={tagList ? tagList:release_mok}
-              />
-            </DivTag>
-
-            <DivStatus>
-              {false && <SingleSelect
-                set={(status) => setStatus(status)}
-                label={"Status"}
-                value={status}
-                placeholder={flag && !status ? "Required field" : ""}
-                sizeSingle={"40%"}
-                required
-                sizeMenu={"40%"}
-                options={status_mok}
-              />}
-            </DivStatus>
-=======
-            
->>>>>>> Stashed changes
           </Form>{" "}
           <DivButton>
             <ClickButton onClick={handleSubmit}>

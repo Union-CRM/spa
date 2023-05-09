@@ -135,15 +135,11 @@ const ClientCard = (props) => {
 
             <DivRelease>
               <TitleInfo>
-<<<<<<< Updated upstream
-                Release Train <span>|</span>{" "}
-              </TitleInfo>
-              <ValueInfo>{client.textRelease} </ValueInfo>
-=======
+
                 Manager <span>|</span>{" "}
               </TitleInfo>
               <ValueInfo>{SplitName(client.user_name)}</ValueInfo>
->>>>>>> Stashed changes
+
             </DivRelease>
           </DivInfo>
         </Card>
