@@ -29,7 +29,7 @@ import { useState, useEffect } from "react";
 //import ModalPopUp from "../ModalPopUP";
 import { useBusinessContext } from "../../../../hook/useBusinessContent";
 import ModalSave from "../../../Planner/ModalSuccessfuly";
-import ModalStatusBusiness from "../../ModalStatusBusiness";
+import ModalStatusBusiness from "../ModalStatusBusiness";
 
 const abaStatus = {
   ACTIVE: "ATIVO",

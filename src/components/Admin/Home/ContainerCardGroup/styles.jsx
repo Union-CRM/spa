@@ -4,19 +4,19 @@ import styled, { css } from "styled-components";
 //* Container father and children *//
 export const ContainerHeaderAndCards = styled.div`
   width: 100%;
-  height: 95.5%;
+  height: 46.5vh;
   position: relative;
   display: grid;
   border-radius: 8px;
   grid-template-rows: 15% 85%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
-  @media (min-width: 50px) and (max-width: 1360px) {
-    height: 50%;
+  /*@media (min-width: 50px) and (max-width: 1360px) {
+    height: 100%;
     width: 100%;
   }
   @media (min-width: 1355px) and (max-width: 1824px) {
     width: 100%;
-  }
+  }*/
 `;
 
 //* Header Container *//

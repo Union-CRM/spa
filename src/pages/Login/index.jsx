@@ -134,12 +134,12 @@ function LoginPage() {
                     <ButtonDefault name={"Login"} type={"adminSave"} sizeFont={"1.5em"}></ButtonDefault>
             </LoginBt>
         </Form>
-        <DivModal onClick={handleBackgroundClick} $mode={isActive}>
+        {/* <DivModal onClick={handleBackgroundClick} $mode={isActive}>
         {
           blocked && (
           <AcessBlocked/>
        )}  
-      </DivModal>
+      </DivModal> */}
     </Content>
  </Container> 
                       

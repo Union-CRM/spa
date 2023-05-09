@@ -20,6 +20,7 @@ import {
   Inactive,
   LineDivisor,
   Top,
+  DivInfo,
 } from "./styles";
 import ClientCard from "./CardListView/index";
 import AddEditClient from "../AddEditUser";
@@ -28,6 +29,9 @@ import { useState, useEffect } from "react";
 import { useUserContext } from "../../../../hook/useUserContext";
 import ModalPopUp from "../ModalPopUP";
 import ModalPassword from "../ModalPassword";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import { ReactComponent as Info } from "../../../../assets/svg/Info.svg";
 
 const abaStatus = {
   ACTIVE: "ACTIVE",
@@ -79,6 +83,16 @@ const ContainerCards = () => {
             <DivTitlePage>
               <H1>User List </H1>
               <HowManyClientList>({userList.length})</HowManyClientList>{" "}
+              <Tippy content="List of all system users">
+                <DivInfo>
+                  <Info
+                    width="25px"
+                    style={{
+                      fill: "#E41165",
+                    }}
+                  />
+                </DivInfo>
+              </Tippy>
             </DivTitlePage>
 
             <DivButton onClick={() => createClient()}>

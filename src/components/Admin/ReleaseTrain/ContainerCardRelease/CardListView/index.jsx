@@ -43,7 +43,9 @@ const ReleaseCard = (props) => {
 
   
   
-  const { setModalEditRelease, setModalCreateRelease, idRelease, setIdRelease} = useReleaseContext();
+  const { setModalEditRelease, setModalCreateRelease, 
+    idRelease, setIdRelease,
+    setModalStatusRelease} = useReleaseContext();
   const { openModal, openModalPopUp } = props;
   const {updateStatusRelease} = useFetchRelease();
   const { release: releaseList, updateRelease} = useReleaseContext();
@@ -61,9 +63,9 @@ const ReleaseCard = (props) => {
   };
 
   const handleClick = () => {
-    updateStatusRelease(release.id);
-
-    openModalPopUp();
+    //updateStatusRelease(release.id);
+    setModalStatusRelease(true);
+    //openModalPopUp();
     props.setId(release.id);
   };
 
@@ -137,11 +139,8 @@ const ReleaseCard = (props) => {
                 >
                   {release.status}
                 </Status>
-                
               </DivTagsStatus>
             </DivDadosCard>
-
-            
           </Header>
         </Card>
       </Container>

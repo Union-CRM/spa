@@ -9,6 +9,7 @@ export const ReleaseContextProvider = ({ children }) => {
   const [modalSaveRelease, setModalSaveRelease] = useState(false);
   const [modalEditRelease, setModalEditRelease] = useState(false);
   const [idRelease,setIdRelease] = useState();
+  const [modalStatusRelease, setModalStatusRelease] = useState(false);
 
   useEffect(() => {
     if(localStorage.getItem("token")){
@@ -51,7 +52,7 @@ export const ReleaseContextProvider = ({ children }) => {
       setModalCreateRelease,modalEditRelease, setModalEditRelease,
       modalDiscard,setModalDiscard,idRelease,setIdRelease,
       modalSaveRelease,
-      setModalSaveRelease
+      setModalSaveRelease, modalStatusRelease, setModalStatusRelease,
     }}>
       {children}
     </ReleaseContext.Provider>
