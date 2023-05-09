@@ -92,7 +92,6 @@ export const DivBusinessName = styled.div`
 `;
 
 export const Label = styled.label`
-
 ` ;
 
 export const Input = styled.input`
@@ -120,6 +119,7 @@ export const DivCode = styled.div`
 
 export const DivStatus = styled.div`
   width: 40%;
+
 `;
 
 export const DivSegment = styled.div`

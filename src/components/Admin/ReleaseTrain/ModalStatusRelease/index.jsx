@@ -15,15 +15,15 @@ import { useEffect } from "react";
 
 const ModalStatusRelease = (props) => {
   const { modalClose } = props;
-  const { releases: release } = useReleaseContext();
+  const { release , idRelease, setIdRelease, setModalStatusRelease } = useReleaseContext();
   const { updateStatusRelease } = useFetchRelease();
-  const releases = release.filter((item) => item.id === props.id)[0];
-  const p = release.status === "ATIVO" ? "Inativo" : "Ativo";
+  const releases = release.filter((item) => item.id === idRelease.id)[0];
+  const p = releases.status === "ATIVO" ? "Deactivate" : "Active";
 
   useEffect(() => {
-    console.log(releases.status);
+    //console.log(idRelease.id + "teste");
   }, []);
-
+  
   const span =
     releases.status === "ATIVO"
       ? "Do you want do deactivate this card?"
@@ -31,14 +31,13 @@ const ModalStatusRelease = (props) => {
  
   const handleAlterStatus = () => {
     updateStatusRelease(releases.id);
-    modalClose();
+    setModalStatusRelease(false);
   };
-
+  
   const handleCancel = () => {
-    modalClose();
     window.location.reload();
   };
-
+  
   return (
     <ContainerFather>
       <Overlay>
