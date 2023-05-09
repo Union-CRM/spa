@@ -18,9 +18,11 @@ export const useFetchRemark = () => {
       const response = await axios.post(remarkCreate, remark, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
+      loadRemarkList();
       return response.data.id;
     } catch (error) {
       console.log(error);
+
       setModalError(true);
       setModalRemark(false);
       setModalPopUpFinished(false);

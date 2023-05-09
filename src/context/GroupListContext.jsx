@@ -45,6 +45,8 @@ export const GroupListContextProvider = ({ children }) => {
         usersNames: item.users.map((user) => user.user_name),
         usersCount: item.users.map((user) => user.user_id).length,
         usuarios: item.users,
+        responsible_id: item.responsible_id,
+        responsible_name: item.responsible_name,
       }))
     );
   };

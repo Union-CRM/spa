@@ -36,7 +36,6 @@ import { useSearchContext } from "../../../hook/useSearchContext";
 import ModalClientDetails from "../ModalClientDetails";
 import ModalClientEdit from "../EditClient";
 
-
 const abaStatus = {
   ACTIVE: "Active",
   INACTIVE: "Inactive",
@@ -54,12 +53,12 @@ const ContainerCards = (props) => {
 
   const { client } = useClientContext();
   const { id, setId } = useClientContext();
- //const {modalInfo, setModalInfo} = useClientContext();
-const [modalInfo, setModalInfo] = useState(false);
-const {modalEditClient, setModalEditClient } = useClientContext();
-const { search } = useSearchContext();
+  //const {modalInfo, setModalInfo} = useClientContext();
+  const [modalInfo, setModalInfo] = useState(false);
+  const { modalEditClient, setModalEditClient } = useClientContext();
+  const { search } = useSearchContext();
 
-useEffect(() => {
+  useEffect(() => {
     if (props.adminList) {
       setClientList(client.filter((c) => c.user_id === userTarget.id));
     } else {
@@ -67,19 +66,21 @@ useEffect(() => {
     }
   }, [client]);
 
-  console.log(client);
-  
-useEffect(()=>{
-  if(search){
-    setClientList(client.filter((c) => c.client.toLowerCase().includes(search.toLowerCase())));
-  }else{
-    if (props.adminList) {
-      setClientList(client.filter((c) => c.user_id === userTarget.id));
+  useEffect(() => {
+    if (search) {
+      setClientList(
+        client.filter((c) =>
+          c.client.toLowerCase().includes(search.toLowerCase())
+        )
+      );
     } else {
-      setClientList(client.filter((c) => c.user_id === user.id));
+      if (props.adminList) {
+        setClientList(client.filter((c) => c.user_id === userTarget.id));
+      } else {
+        setClientList(client.filter((c) => c.user_id === user.id));
+      }
     }
-  }
-},[search])
+  }, [search]);
 
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
@@ -117,20 +118,16 @@ useEffect(()=>{
               <HowManyClientList>
                 ({clientList ? clientList.length : 0})
               </HowManyClientList>{" "}
-
               <Tippy content="List of all clients.">
-              <DivInfo>
-              
+                <DivInfo>
                   <Info
-                  width="25px"
-                  style={{
-                    fill: "#007BFF",
-                  }}
-                />
-                     </DivInfo>
+                    width="25px"
+                    style={{
+                      fill: "#007BFF",
+                    }}
+                  />
+                </DivInfo>
               </Tippy>
-         
-
             </DivTitlePage>
 
             <DivButton onClick={() => createClient()}>
@@ -202,17 +199,17 @@ useEffect(()=>{
       </ContainerHeaderAndCards>
 
       <DivModal $mode={modalEditClient} />
-{modalEditClient && (
-    <AddEditClient
-      id={id}
-      setModalEditClient={setModalEditClient}
-      title={"Edit Client"}
-    />
-)}
+      {modalEditClient && (
+        <AddEditClient
+          id={id}
+          setModalEditClient={setModalEditClient}
+          title={"Edit Client"}
+        />
+      )}
 
       <DivModal $mode={modalInfo} />
 
-       {modalInfo && (
+      {modalInfo && (
         <ModalClientEdit
           id={id}
           openModal={() => detailsModal()}
@@ -223,16 +220,13 @@ useEffect(()=>{
 
       <DivModal $mode={modal} />
 
-    {/* {modal && (
+      {/* {modal && (
         <ModalClientEdit
           id={id}
           setModal={setModal}
           title={"Create Client"}
         />
     )} */}
-
-
-
 
       {modalPopUp && (
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />

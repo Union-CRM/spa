@@ -29,7 +29,7 @@ import {
   PositionButtons,
 } from "./styles";
 
-const ModalPlanner = ({ title }) => {
+const ModalPlanner = (props) => {
   const [subjectObj, setSubjectObj] = useState({
     id: false,
     subject_title: "",
@@ -41,7 +41,6 @@ const ModalPlanner = ({ title }) => {
   const { subject: subjectList } = useSubjectContext();
   const [subjectOption, setSubjectOption] = useState([]);
   const { client: clientList } = useClientContext();
-
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [timeStart, setTimeStart] = useState();
   const [timeFinish, setTimeFinish] = useState();
@@ -130,7 +129,7 @@ const ModalPlanner = ({ title }) => {
       subject: subjectObj.id,
       client: subjectObj.client_id,
       release: subjectObj.release_id,
-      user: user.id,
+      user: userTarget.id,
       guest: guest.map((g) => ({ client_id: g.value })),
     };
     if (subjectObj.id && date && timeFinish && timeStart) {
@@ -160,7 +159,7 @@ const ModalPlanner = ({ title }) => {
       release: subjectObj.release_id,
       release_title: subjectObj.release,
       business: subjectObj.business,
-      user: user.id,
+      user: userTarget.id,
       status: StatusOption.filter((s) => s.label === status)[0].id,
       guest: guest.map((g) => ({ client_id: g.value, client_name: g.label })),
     };
@@ -174,7 +173,7 @@ const ModalPlanner = ({ title }) => {
   };
   return (
     <Container>
-      <PositionTitle>{title}</PositionTitle>
+      <PositionTitle>{props.title}</PositionTitle>
       <Form>
         <PositionInputs>
           {!modalEdit && !modalReschedule && (
