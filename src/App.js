@@ -41,121 +41,123 @@ function App() {
           <PlannerContextProvider>
             <ClientContextProvider>
               <GroupListContextProvider>
-                <BusinessContextProvider>
-                  <ReleaseContextProvider>
-                    <Router>
-                      <GlobalStyle />
-                      <div className="App">
-                        <Routes>
-                          <Route path="/" element={<LoginPage />} />
+                  <BusinessContextProvider>
+                    <ReleaseContextProvider>
+              
+                <Router>
+                  <GlobalStyle />
+                  <div className="App">
+                    <Routes>
+                      <Route path="/" element={<LoginPage />} />
 
-                          <Route
-                            path="/home"
-                            element={
-                              !localStorage.getItem("token") ? (
-                                <LoginPage />
-                              ) : user.level > 1 ? (
-                                <HomeAdm />
-                              ) : (
-                                <Home />
-                              )
-                            }
-                          />
-                          <Route
-                            path="/usersAdm"
-                            element={
-                              localStorage.getItem("token") ? (
-                                <AdmUser />
-                              ) : (
-                                <LoginPage />
-                              )
-                            }
-                          />
-                          <Route
-                            path="/business"
-                            element={
-                              localStorage.getItem("token") ? (
-                                <Business />
-                              ) : (
-                                <LoginPage />
-                              )
-                            }
-                          />
-                          <Route
-                            path="/customer"
-                            element={
-                              localStorage.getItem("token") ? (
-                                <Customer />
-                              ) : (
-                                <LoginPage />
-                              )
-                            }
-                          />
-                          <Route
-                            path="/groups"
-                            element={
-                              localStorage.getItem("token") ? (
-                                <Groups />
-                              ) : (
-                                <LoginPage />
-                              )
-                            }
-                          />
-                          <Route
-                            path="/releasetrain"
-                            element={
-                              localStorage.getItem("token") ? (
-                                <ReleaseTrainPage />
-                              ) : (
-                                <LoginPage />
-                              )
-                            }
-                          />
-                          <Route
-                            path="/client"
-                            element={
-                              localStorage.getItem("token") ? (
-                                <Client />
-                              ) : (
-                                <LoginPage />
-                              )
-                            }
-                          />
+                      <Route
+                        path="/home"
+                        element={
+                          !localStorage.getItem("token") ? (
+                            <LoginPage />
+                          ) : user.level > 1 ? (
+                            <HomeAdm />
+                          ) : (
+                            <Home />
+                          )
+                        }
+                      />
+                      <Route
+                        path="/usersAdm"
+                        element={
+                          localStorage.getItem("token") ? (
+                            <AdmUser />
+                          ) : (
+                            <LoginPage />
+                          )
+                        }
+                      />
+                      <Route
+                        path="/business"
+                        element={
+                          localStorage.getItem("token") ? (
+                            <Business />
+                          ) : (
+                            <LoginPage />
+                          )
+                        }
+                      />
+                      <Route
+                        path="/customer"
+                        element={
+                          localStorage.getItem("token") ? (
+                            <Customer />
+                          ) : (
+                            <LoginPage />
+                          )
+                        }
+                      />
+                      <Route
+                        path="/groups"
+                        element={
+                          localStorage.getItem("token") ? (
+                            <Groups />
+                          ) : (
+                            <LoginPage />
+                          )
+                        }
+                      />
+                      <Route
+                        path="/releasetrain"
+                        element={
+                          localStorage.getItem("token") ? (
+                            <ReleaseTrainPage/>
 
-                          <Route
-                            path="/subject"
-                            element={
-                              localStorage.getItem("token") ? (
-                                <SubjectPage />
-                              ) : (
-                                <LoginPage />
-                              )
-                            }
-                          />
-                          <Route
-                            path="/planner"
-                            element={
-                              localStorage.getItem("token") ? (
-                                <PlannerPage />
-                              ) : (
-                                <LoginPage />
-                              )
-                            }
-                          />
-                          <Route
-                            path="/groups"
-                            element={
-                              localStorage.getItem("token") !== false ? (
-                                <GroupsList />
-                              ) : (
-                                <LoginPage />
-                              )
-                            }
-                          />
-                        </Routes>
-                      </div>
-                    </Router>
-                  </ReleaseContextProvider>
+                          ) : (
+                            <LoginPage />
+                          )
+                        }
+                      />
+                      <Route
+                        path="/client"
+                        element={
+                          localStorage.getItem("token") ? (
+                            <Client />
+                          ) : (
+                            <LoginPage />
+                          )
+                        }
+                      />
+
+                      <Route
+                        path="/subject"
+                        element={
+                          localStorage.getItem("token") ? (
+                            <SubjectPage />
+                          ) : (
+                            <LoginPage />
+                          )
+                        }
+                      />
+                      <Route
+                        path="/planner"
+                        element={
+                          localStorage.getItem("token") ? (
+                            <PlannerPage />
+                          ) : (
+                            <LoginPage />
+                          )
+                        }
+                      />
+                      <Route
+                        path="/groups"
+                        element={
+                          localStorage.getItem("token") !== false ? (
+                            <GroupsList />
+                          ) : (
+                            <LoginPage />
+                          )
+                        }
+                      />
+                    </Routes>
+                  </div>
+                </Router>
+                 </ReleaseContextProvider> 
                 </BusinessContextProvider>
               </GroupListContextProvider>
             </ClientContextProvider>

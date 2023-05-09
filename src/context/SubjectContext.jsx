@@ -24,14 +24,14 @@ export const SubjectContextProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-
+    
     setSubject(
       subjects.data.List.map((item) => ({
         id: item.subject_id,
         status_id: item.status.status_id,
         status: item.status.status_description,
         subject_title: item.subject_title,
-        subject_text: item.Subject_text,
+        subjectText: item.subject_text,
         release_id: item.release_id,
         release: item.release_name,
         business: item.business_name,
@@ -43,6 +43,8 @@ export const SubjectContextProvider = ({ children }) => {
         user_name: item.user_name,
       }))
     );
+
+   
   };
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [modalDetails, setModalDetails] = useState(false);

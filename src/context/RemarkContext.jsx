@@ -12,10 +12,9 @@ export const RemarkContextProvider = ({ children }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
-
-    if (localStorage.getItem("token")) {
-      loadRemarkList();
-    }
+    if(localStorage.getItem("token")){
+     loadRemarkList();
+      }
 
   }, []);
 
