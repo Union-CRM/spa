@@ -5,7 +5,7 @@ export const DivModal = styled.div``;
 //Container Father //
 export const Container = styled.div`
   padding: 0px;
-  height: 100%;
+  height: 150px;
   padding-left: 0px;
   width: 96%;
   z-index: 0 !important;
@@ -15,10 +15,10 @@ export const Container = styled.div`
 export const Card = styled.div`
   border-left: ${(props) =>
     props.isActive ? "7px solid #00953b" : "7px solid #7a7a7a"};
-  //border-left: 7px solid ${(props) =>
-    props.checked ? "Active" : "Inactive"};
+  border-left: 7px solid ${(props) =>
+  (props.checked ? "Active" : "Inactive")};
   border-left: 7px solid ${(props) => (props.isActive ? "green" : "gray")};
-  grid-template-rows: 40% 60%;
+  grid-template-rows: 25% 75%;
   display: grid;
   border-radius: 8px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
@@ -35,7 +35,7 @@ export const ToggleContainer = styled.label`
   display: inline-block;
   height: 17.5px;
   width: 37px;
-  top: 40%;
+  top: 20%;
   border-radius: 30px;
   position: relative;
   cursor: pointer;
@@ -72,12 +72,9 @@ export const InputToggle = styled.input`
 
 export const Header = styled.div`
   grid-row: 1;
-
   width: 100%;
   height: 100%;
-  grid-template-rows: 20% auto;
-  grid-template-columns: 60px auto;
-  position: relative;
+  display: flex;
 `;
 
 // Photo Client //
@@ -107,20 +104,19 @@ export const DivPhotoI = styled.div`
 
 // Div Name Client, Email and Status/Tags //
 export const DivDadosCard = styled.div`
-  padding-top:3%;
   text-align: left;
-  width: 96%;
-  height: fit-content;
-  align-items: center;
+  margin-top: 5%;
+  width: 100%;
+  height: 87px;
+  cursor: pointer;
 `;
 
 // Div Icons //
 export const DivIcons = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
   grid-gap: 5px;
-  height: 100%;
+  width: 15%;
 `;
 
 // Div Info client //
@@ -162,7 +158,7 @@ export const TagsSpan = styled.div`
   color: #ffffff;
   background-color: #007bff !important;
   width: fit-content;
-  height: 15px;
+  height:15px;
   border-radius: 8px;
   font-size: 14px;
   align-items: center;
@@ -370,14 +366,99 @@ export const ContainerFather = styled.div`
 export const DivTeste = styled.span`
   display: flex;
   height: fit-content;
-  width: 90%;
-  position: relative;
   flex-direction: row;
-  justify-content: flex-start;
+  align-self: center;
   color: rgba(0, 0, 0, 0.7);
-  margin-left:10%;
 `;
 
 export const NameBusiness = styled.div`
-  margin-left: 10%;
+  font-style: bold;
+  font-weight: 600;
+  align-self: center;
+`
+
+export const HeaderTags = styled.div`
+  grid-row: 1;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
+
+export const TagsStatus = styled.div`
+  margin-top:3.5%;
+  display: grid;
+  margin-left: 10px;
+  justify-content: left;
+  cursor: pointer;
+  z-index: 2;
+`;
+
+export const DivTagsSpan = styled.div`
+  display: flex;
+  color: #ffffff;
+  background-color: ${(props) => (props.isActive ? "#007bff" : "#007bff")};
+  width: fit-content;
+  height:20px;
+  width: 50px;
+  border-radius: 4px;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-left: 2%;
+  cursor: pointer;
+  text-transform: lowercase;
+`;
+
+export const DivImgTag = styled.div`
+  position: relative;
+  align-items: center;
+  filter: ${(props) => (props.isActive ? "" : "grayscale(100%)")};
+`;
+
+export const ImgTag = styled.img`
+  height: 22px;
+  width: 27px;
+`;
+
+export const DivTag = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  //align-items: center;
+  position: relative;
+  flex-wrap: wrap;
+  cursor: pointer;
+  p {
+    text-align: center;
+    font-size: 14px;
+    margin-left: 10px;
+    align-items: center;
+  }
+`;
+
+export const DivContentTags = styled.div`
+  text-align: center;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  padding: 2px;
+  position: relative;
+  top: -20px;
+  align-items: center;
+  background-color: ${(props) => (props.colorTag ? props.colorTag : "pink")};
+  border-radius: 8px;
+  margin-right: 10px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  margin-left: 10px;
+  justify-content: center;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+
+export const DivCenter = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `

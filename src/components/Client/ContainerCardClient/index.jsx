@@ -60,6 +60,7 @@ const ContainerCards = (props) => {
 
   useEffect(() => {
     if (props.adminList) {
+
       setClientList(client.filter((c) => c.user_id === userTarget.id));
     } else {
       setClientList(client.filter((c) => c.user_id === user.id));

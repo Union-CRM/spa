@@ -24,16 +24,10 @@ import { useFetchAdmGroupList } from "../../../../hook/useFetchAdmGroupList";
 import {useGroupListContext} from "../../../../hook/useGroupListContext";
 import { useFetchUsersNotin } from "../../../../hook/useFetchUsersNotin";
 
+
 const AddEditGroup = (props) => {
 
-  const handleSubmit = () => {
-    if (props.title === "Create Group") {
-      createGroup();
-    } else {
-      //createGroup();
-    }
-  };
-
+  
     const { setModal, id } = props;
 
     const closeModal = () => {
@@ -43,34 +37,37 @@ const AddEditGroup = (props) => {
     
       const [flag, setFlag] = useState(false);
 
-      const [groupName, setGroupName] = useState("");
+      const [groupName, setGroupName] = useState();
       const [users, setUsers] = useState([]);
+      const [groupId, setGroupId] = useState();
       const [customer, setCustomer] = useState({});
-      const [customer_id, setCustomerId] = useState();
       const { customerList } = useFetchCustomer("Customer");
+      const [userOptions, setUserOptions] = useState([]);
       
-
     
-    const {insertGroup} = useFetchAdmGroupList();
+      
+      const handleSelectCustomer = (customer_id) => {
+        setCustomer(customerList.filter((c) => c.id === customer_id)[0]);
+      };
+
+      const handleSelectUsers = (users) => {
+        setUsers(groupList.filter((c) => c.id === users.id)[0]);
+      };
+  
+    
+    const {insertGroup, updateGroup} = useFetchAdmGroupList();
     const { group: groupList} = useGroupListContext();
     const {  infoGroup, setInfoGroup } = useGroupListContext();
 
     
     const group = groupList.filter((item) => item.id === props.id)[0];
-
-    
-    const handleSelectCustomer = (customer_id) => {
-      setCustomer(customerList.filter((c) => c.id === customer_id)[0]);
-    };
-    
-
     
      const createGroup = () => {
       console.log(users);
       const newGroup = {
         group_name: groupName,
         customer_id: customer.id,
-        users: users.users_id.map((g) => ({ user_id: g.value })),
+        users: users.map((g) => ({ id: g.value })),
       };
       console.log(newGroup);
       if (groupName && customer.id && users) {
@@ -79,28 +76,72 @@ const AddEditGroup = (props) => {
       } else {
         setFlag(true);
       }
+      
     };
 
-    /*
+    // Edit GROUP //
+   
+
     useEffect(() => {
+      console.log(props.id)
       if (props.title === "Edit Group") {
-        const editGroup = () => {
-          const newGroup = {
-            group_name: groupName,
-            customer_id: customer_id,
-            users: users_id,  
-          };
-      
-          if (groupName && customer_id && users_id) {
-            insertGroup(newGroup);
-            loadData();
-            setModal(false);
-          } else {
-            setFlag(true);
-          }
-        };
+        const group = groupList.filter((item) => item.id === props.id)[0];
+
+        setGroupName(group.group_name);
+        setCustomer({ id: group.customer_id, label: group.textCustomer });
+        setUsers(group.users)
       }
-    }, []);*/
+
+     
+    }, [id]);
+    
+      const editGroup = () => {
+        const newGroup = {
+        group_id: groupId,
+        group_name: groupName,
+        customer_id: customer.id,
+        users: users.map((g) => ({ id: g.value })),  
+        };
+    
+        if (groupName && customer.id && users) {
+          updateGroup(groupId, newGroup);
+          setModal(false);
+        } else {
+          setFlag(true);
+        }
+      };
+    
+
+    const handleSubmit = () => {
+      if (props.title === "Create Group") {
+        createGroup();
+      } else {
+        editGroup();
+      }
+    };
+   
+
+    // Users List //
+    const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin();
+  
+    const{loadUserSub,loadUserNotin} = useFetchUsersNotin()
+    useEffect(()=>{
+      loadUserNotin()
+      loadUserSub()
+    }, [])
+   
+    const usersList = userSub.concat(usersNotin)
+  
+    useEffect(() => {
+      if (usersList) {
+        setUserOptions(
+          usersList
+            .map((c) => ({ id: c.id, value: c.id, label: c.name }))
+        );
+      }
+    }, [usersNotin, userSub]);
+    
+    
   
 
   return (
@@ -131,21 +172,27 @@ const AddEditGroup = (props) => {
                  key="2"
                  set={(customer_id) => handleSelectCustomer(customer_id)}
                  label={"Customer"}
-                 value={customer_id}
+                 value={customer.label}
                  placeholder={flag && !customer.label ? "Required field" : ""}
                  sizeSingle={"100%"}
                  required
                  sizeMenu={"100%"}
                  options={customerList ? customerList : []}
+
                 />
   
               </DivCustomer>
 
-
             <DivUser>
-              <UsersComponents 
-               set={(users) => setUsers(users)}
-            />
+            <UsersComponents 
+            set={(users) => handleSelectCustomer(users)}
+            /*set={(users) => setUsers(users)}*/
+            options={userOptions}
+            label={"Users"}
+            tags={users}
+            indicator={"guest"}
+            value={users.label}
+             />
               </DivUser>
           </Form>{" "}
           <DivButton>

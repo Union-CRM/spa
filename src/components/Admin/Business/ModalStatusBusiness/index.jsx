@@ -18,10 +18,10 @@ const ModalStatusBusiness = (props) => {
   const { business: businessList } = useBusinessContext();
   const { updateStatusBusiness } = useFetchBusiness();
   const business = businessList.filter((item) => item.id === props.id)[0];
-  const p = business.status === "ATIVO" ? "Inativo" : "Ativo";
+  const p = business.status === "ATIVO" ? "Deactivate" : "Active";
 
   useEffect(() => {
-    console.log(business.status);
+    console.log(business);
   }, []);
 
   const span =
