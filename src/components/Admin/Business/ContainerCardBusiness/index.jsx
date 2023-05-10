@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect, React} from "react";
 import {
   ContainerGlobal,
   ContainerHeaderAndCards,
@@ -20,16 +20,13 @@ import {
   Inactive,
   HowManyInactive,
 } from "./styles";
-import CreateEditBusiness from "../CreateEditBusiness";
+
 import ClientCard from "./CardListView/index";
-import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
-import { useState, useEffect } from "react";
-//import { useClientContext } from "../../../hook/useClientContent";
-//import { useUserContext } from "../../../hook/useUserContext";
-//import ModalPopUp from "../ModalPopUP";
-import { useBusinessContext } from "../../../../hook/useBusinessContent";
-import ModalSave from "../../../Planner/ModalSuccessfuly";
+import CreateEditBusiness from "../CreateEditBusiness";
 import ModalStatusBusiness from "../ModalStatusBusiness";
+import ModalSave from "../../../Planner/ModalSuccessfuly";
+import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
+import { useBusinessContext } from "../../../../hook/useBusinessContent";
 
 const abaStatus = {
   ACTIVE: "ATIVO",
@@ -37,38 +34,32 @@ const abaStatus = {
 };
 
 const ContainerCardsBusiness = (props) => {
-  // States modal//
-  const { modalCreateBusiness, setModalCreateBusiness, modalEditBusiness, setModalEditBusiness,setIdBusiness,idBusiness,modalSaveBusiness, modalStatus, setModalStatus} = useBusinessContext();
-  //const { client } = useClientContext();
-  const [active, setActive] = useState(abaStatus.ACTIVE);
-  //const { user, userTarget } = useUserContext();
+  
+  // Context
   const { business} = useBusinessContext();
-  const [businessList, setBusinessList] = useState();
+  const { modalCreateBusiness, setModalCreateBusiness, modalEditBusiness, setModalEditBusiness,setIdBusiness,idBusiness,modalSaveBusiness, modalStatus, setModalStatus} = useBusinessContext();
 
-  const [modal, setModal] = useState(false);
-  const [modalPopUp, setModalPopUp] = useState(false);
+  // UseState
   const [id, setId] = useState(null);
+  const [modal, setModal] = useState(false);
   const [isEdit, setEdit] = useState(false);
+  const [businessList, setBusinessList] = useState();
+  const [modalPopUp, setModalPopUp] = useState(false);
+  const [active, setActive] = useState(abaStatus.ACTIVE);
 
-  const [createBusiness, setCreateBusiness] = useState(false)
-
+  // ModalEditBusiness
   const EditBusiness = (id) => {
     setIdBusiness(businessList.filter((b) => b.id === id)[0]);
     setModal(true);
     setEdit(true);
   };
-  /*
-  const handleEdit = (id) => {
-    setPlannerEdit(plannerList.filter((p) => p.id === id)[0]);
-    setModalEdit(id);
-  };*/
 
-
+  // Set business in businessList
   useEffect(() => {
       setBusinessList(business);   
   }, [business]);
-  
 
+  // Select Tab
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
   };
@@ -77,6 +68,7 @@ const ContainerCardsBusiness = (props) => {
     return { borderBottom: active === status ? "2px solid #E41165" : "" };
   };
 
+  // Managing status of Modals create and edit Business
   const handleModal = () => {
     setModalCreateBusiness(true);
     setModalEditBusiness(false);
@@ -153,12 +145,14 @@ const ContainerCardsBusiness = (props) => {
                     key={item.id}
                     id={item.id}
                     openModal={() => EditBusiness(item.id)}
-                    //modalPopUp={() => PopUp()}
                   />
                 ))}
           </BoardStyle>
         </CardsContainer>
       </ContainerHeaderAndCards>
+
+      <DivModal $mode={modalCreateBusiness || modalEditBusiness || modalSaveBusiness || modalStatus} />            
+      
       {modalCreateBusiness && (
         <CreateEditBusiness title={"Create Business"}/>
       )}
@@ -166,7 +160,7 @@ const ContainerCardsBusiness = (props) => {
         <CreateEditBusiness title={"Edit Business"}/>
       )}
       {modalSaveBusiness && (
-        <ModalSave />
+        <ModalSave subject={"translate(60%, -400%)"}/>
       )}
       {modalStatus && (
         <ModalStatusBusiness id={id} modalClose={() => setModalStatus(false)} />
