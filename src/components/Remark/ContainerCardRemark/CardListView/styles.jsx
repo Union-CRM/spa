@@ -208,14 +208,6 @@ export const BoxClient = styled.span`
   display: flex;
   background-color: #fff;
   border: 1px solid #888c95;
-  @media (min-width: 1355px) and (max-width: 1824px) {
-    margin-top: 1.5%;
-    padding-bottom: 3%;
-    padding-top: 2%;
-  }
-  @media (min-width: 1825px) and (max-width: 2000px) {
-    margin-top: 1.5%;
-  }
 `;
 
 //ok
@@ -260,7 +252,7 @@ export const CardDate = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
   justify-content: center;
-  text-align: center;
+  text-align: left;
   margin-bottom: 35px;
 `;
 //ok
@@ -269,7 +261,9 @@ export const Date1 = styled.div`
   grid-template-columns: 1% 100%;
   font-weight: bold;
   font-size: 12px;
-  margin-left: 7%;
+  p {
+    margin-left: 1.5em;
+  }
 `;
 //ok
 export const Date2 = styled.div`
@@ -277,5 +271,7 @@ export const Date2 = styled.div`
   grid-template-columns: 1% 100%;
   font-weight: bold;
   font-size: 12px;
-  margin-left: 7%;
+  p {
+    margin-left: 1.5em;
+  }
 `;
