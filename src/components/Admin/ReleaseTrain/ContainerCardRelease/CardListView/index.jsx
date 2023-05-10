@@ -75,22 +75,18 @@ const ReleaseCard = (props) => {
     setIdRelease(release.id);
   };
 
-
-  // TESTE //
   const [isActive, setIsActive] = useState(release.status === "ATIVO");
   const [previousStatus, setPreviousStatus] = useState(release.status);
   const handleToggle = () => {
     const newStatus = isActive ? "INATIVO" : "ATIVO";
     setIsActive(!isActive);
-    //updateBusiness(business.id, { ...business, status: newStatus });
-    //console.log(business.id);
   };
 
   function handleModal(id){
     setIdRelease(id);
-    props.openModal()
-    setModalCreateRelease(false)
-    setReleaseTarget(release)
+    props.openModal();
+    setModalCreateRelease(false);
+    setReleaseTarget(release);
   }
 
   return (
