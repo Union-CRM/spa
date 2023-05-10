@@ -8,6 +8,7 @@ export const BusinessContextProvider = ({ children }) => {
   const [modalCreateBusiness, setModalCreateBusiness] = useState(false)
   const [modalSaveBusiness, setModalSaveBusiness] = useState(false);
   const [modalEditBusiness, setModalEditBusiness] = useState(false)
+  const [sucessBusiness, setSucessBusiness] = useState(false)
   const [idBusiness,setIdBusiness] = useState();
   const [modalStatus, setModalStatus] = useState();
   const [businessTarget, setBusinessTarget] = useState({});
@@ -33,7 +34,7 @@ export const BusinessContextProvider = ({ children }) => {
     } catch (error) {
       console.error(error.response);
     }
-    console.log(busines.data.business_list[2])
+
     setBusiness(
         busines.data.business_list.map((item) => ({
             id: item.business_id,
@@ -55,6 +56,7 @@ export const BusinessContextProvider = ({ children }) => {
       modalDiscard,setModalDiscard,idBusiness,setIdBusiness,
       modalCreateBusiness,setModalCreateBusiness,modalSaveBusiness,
       setModalSaveBusiness, modalStatus, setModalStatus, businessTarget, setBusinessTarget,
+      sucessBusiness, setSucessBusiness
     }}>
       {children}
     </BusinessContext.Provider>

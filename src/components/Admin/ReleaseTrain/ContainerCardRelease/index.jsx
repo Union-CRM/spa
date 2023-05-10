@@ -4,12 +4,12 @@ import {
   ContainerHeaderAndCards,
   HeaderContainerCards,
   CardsContainer,
-  DivModal,
   LineDivisor,
   BoardStyle,
   DivTitlePage,
   Top,
   H1,
+  DivModal,
   DivButton,
   DivSpans,
   ButtonInactive,
@@ -153,6 +153,7 @@ const ReleaseTrain = (props) => {
           </BoardStyle>
         </CardsContainer>
       </ContainerHeaderAndCards>
+      <DivModal $mode={modalCreateRelease || modalEditRelease || modalSaveRelease || modalStatusRelease}/>
       {modalCreateRelease && (
         <CreateEditRelease title={"Create Release"}/>
       )}
@@ -160,7 +161,7 @@ const ReleaseTrain = (props) => {
         <CreateEditRelease title={"Edit Release"}/>
       )}
       {modalSaveRelease && (
-        <ModalSave />
+        <ModalSave subject={"translate(60%, -400%)"}/>
       )}
       {modalStatusRelease && (
         <ModalStatusRelease />

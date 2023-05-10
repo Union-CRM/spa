@@ -26,7 +26,7 @@ import { useBusinessContext } from '../../../../hook/useBusinessContent';
 
 const CreateEditRelease = (props) => {
   const { setModalCreateRelease, setModalEditRelease ,loadData,modalDiscard,
-    setModalDiscard,modalEditRelease,setIdRelease,idRelease, releaseTarget} = useReleaseContext(); 
+    setModalDiscard,modalEditRelease,setIdRelease,idRelease, releaseTarget, setSucessRelease} = useReleaseContext(); 
   const { business } = useBusinessContext();
   const { createRelease, updateRelease, updateStatusRelease} = useFetchRelease();
   const [flag, setFlag] = useState(false);
@@ -41,29 +41,30 @@ const CreateEditRelease = (props) => {
   const [businessList,setBusinessList] = useState("");
 
   const status = [
-    { id: 1, value: "Ativo", label: "Ativo" },
-    { id: 2, value: "Inativo", label: "Inativo" },
+    { id: 1, value: "ATIVO", label: "ATIVO" },
+    { id: 2, value: "INATIVO", label: "INATIVO" },
   ];
 
   useEffect(() => {
-    
-    /*setBusinessList(
+    setBusinessList(
       business.map((item) => ({
         id: item.id,
         value: item.id,
         label: item.name,
       }))   
-    );  */ 
+    );  
 
     if(props.title === "Edit Release"){
+      console.log(releaseTarget)
       setReleaseName(releaseTarget.name)
       setReleaseCode(releaseTarget.code)
       setReleaseStatus(releaseTarget.status)
-      setBusinessRelease(releaseTarget.business)
-      setTags(releaseTarget.Tag)
+      setBusinessRelease({ value: releaseTarget.businessID,label : releaseTarget.businessName})
+      setTags(releaseTarget.tags)  
+      
     }
   }, [releaseTarget]);
-
+  
   const handleSubmit = () => {
     if(!modalDiscard){
       if(!modalEditRelease){
@@ -76,41 +77,59 @@ const CreateEditRelease = (props) => {
   };
 
   const insertRelease = () =>{
+    
+    var tag = [];
 
+    if(tags){
+      tag = tags.map((tag) => ({ tag_id: tag.value}));
+    }
+      
     const newRelease = {
       release_name: releaseName,
       release_code: releaseCode,
-      business_id: businessRelease,
-      tags: tags.map((tag) => ({ tag_id: tag.value}))
+      business_id: parseInt(businessRelease.value),
+      tags: tag
     }
 
-    if(releaseName, releaseCode, businessRelease){
+    console.log(newRelease)
+
+    if(releaseName && releaseCode && businessRelease.value){
       createRelease(newRelease);
       loadData()
       setModalCreateRelease(false)
-    }
-    else{
+    }else{
       setFlag(true);
     }
+
   }
 
-  const editRelease = () => {
+  
+  const editRelease = () =>{
+    
+    var tag = [];
+
+    if(tags){
+      tag = tags.map((tag) => ({ tag_id: tag.value}));
+    }
+      
     const newRelease = {
       release_name: releaseName,
       release_code: releaseCode,
-      status: releaseStatus,
-      business_id: businessRelease,
-      tags: tags.map((tag) => ({ tag_id: tag.value}))
+      business_id: parseInt(businessRelease.value),
+      tags: tag
     }
-    if(releaseName, releaseCode, releaseStatus, businessRelease){
+
+    console.log(newRelease)
+
+    if(releaseName && releaseCode && businessRelease.value){
+      setSucessRelease(true);
       updateRelease(newRelease,idRelease.id);
+
       if(newRelease.status != idRelease.status){
-        updateStatusRelease(idRelease.id);
+        updateStatusRelease(idRelease.id); // Verificar depois
       }
-      loadData()
-      setModalEditRelease(false)
-    }
-    else{
+
+    }else{
       setFlag(true);
     }
 
@@ -125,10 +144,10 @@ const CreateEditRelease = (props) => {
     setReleaseStatus(id);
   };
 
-  const handleSelectBusiness = (id) => {
-    setBusinessRelease(id);
-  };
 
+  const handleSelectBusiness =(id)=>{
+    setBusinessRelease(businessList.filter(s => s.value === id)[0])
+  }
 
 
   return (
@@ -169,11 +188,10 @@ const CreateEditRelease = (props) => {
                     <Label>Status</Label>
                     {modalEditRelease && (
                         <SingleSelect
-                        onChange={(event) => handleSelectRelease(event.value)}
-                        set={(releaseStatus) => handleSelectRelease(releaseStatus)}
+                        set={(releaseStatus) => setReleaseStatus(releaseStatus)}
                         placeholder={flag && !releaseStatus ? "Required field" : ""}
                         options={status}
-                        value={releaseStatus}
+                        value={releaseStatus ? releaseStatus : ("")}
                         sizeSingle={"87%"}
                         sizeMenu={"100%"}
                         isDisabled={false}
@@ -193,7 +211,6 @@ const CreateEditRelease = (props) => {
                 <Label>Business</Label>
                 {!modalEditRelease && (
                   <SingleSelect
-                  onChange={(s) => handleSelectBusiness(s)}
                   set={(s) => handleSelectBusiness(s)}
                   placeholder={flag && !businessRelease ? "Required field" : ""}
                   options={businessList ? businessList : []}
@@ -205,10 +222,10 @@ const CreateEditRelease = (props) => {
                 )}
                 {modalEditRelease && (
                   <SingleSelect
-                    onChange={(s) => handleSelectBusiness(s)}
                     set={(s) => handleSelectBusiness(s)}
                     placeholder={flag && !businessRelease ? "Required field" : ""}
                     options={businessList ? businessList : []}
+                    value={businessRelease.label}
                     sizeSingle={"86.5%"}
                     sizeMenu={"100%"}
                     isDisabled={false}

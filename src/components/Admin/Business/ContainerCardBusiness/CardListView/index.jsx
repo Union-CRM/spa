@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import {
   Container,
   Card,
@@ -37,59 +37,50 @@ import {
   DivContentTags,
   DivCenter,
 } from "./styles";
-import Body from "../../../../../assets/FontSystem/Body";
-import Subtitle from "../../../../../assets/FontSystem/Subtitle";
-import { useBusinessContext } from "../../../../../hook/useBusinessContent";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-import {ReactComponent as Edit} from "../../../../../assets/svg/Edit.svg"
 
-import styled, { css } from "styled-components";
-import { useFetchBusiness } from '../../../../../hook/useFetchBusiness';
+// Style
+import "tippy.js/dist/tippy.css";
+import Tippy from "@tippyjs/react";
+
+
+import { useBusinessContext } from "../../../../../hook/useBusinessContent";
+
 const BusinessCard = (props) => {
 
-  const { setModalEditBusiness, setModalCreateBusiness,idBusiness,setIdBusiness, setModalStatus, setBusinessTarget} = useBusinessContext();
+  // Context and props
   const { openModal, openModalPopUp } = props;
-  const { updateStatusBusiness} = useFetchBusiness();
   const { business: businessList} = useBusinessContext();
-  const [tagIcon, setTagIcon] = useState(false);
   const business = businessList.filter((item) => item.id === props.id)[0];
+  const { setModalEditBusiness, setModalCreateBusiness,setIdBusiness, setModalStatus, setBusinessTarget} = useBusinessContext();
+  
+  // UseState
+  const [tagIcon, setTagIcon] = useState(false);
+  const [isActive, setIsActive] = useState(business.status === "ATIVO");
 
+  // Mapping the tags
   const [tags] = useState(
     business.tags ? business.tags.map((tag) => {
       return tag.label + "; ";
     }) : ""
   );
 
-  const handleEdit = () => {
-    openModal();
-    props.setId(business.id);
-  };
-
   const handleClick = () => {
-    
     setModalStatus(true)
     props.setId(business.id);
-    //updateStatusBusiness(business.id);
   };
 
-  // TESTE //
-  const [isActive, setIsActive] = useState(business.status === "ATIVO");
-  const [previousStatus, setPreviousStatus] = useState(business.status);
+  
+
   const handleToggle = () => {
     const newStatus = isActive ? "INATIVO" : "ATIVO";
     setIsActive(!isActive);
-    //updateBusiness(business.id, { ...business, status: newStatus });
-    //console.log(business.id);
   };
 
   function handleModal(id){
-
     setIdBusiness(id);
     props.openModal() 
     setModalCreateBusiness(false)
     setBusinessTarget(business)
-    console.log(business)
   }
 
   const handleTags = () => {
