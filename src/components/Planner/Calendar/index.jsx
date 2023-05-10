@@ -78,15 +78,19 @@ export const BigCalender = (props) => {
     modalError,
     setModalError,
   } = usePlannerContext();
-  const [plannerList, setPlannerList] = useState(planner);
+  const [plannerList, setPlannerList] = useState([]);
   const { user, userTarget, setUserTarget } = useUserContext();
 
   useEffect(() => {
-    if (props.adminList) {
-      setPlannerList(planner.filter((p) => p.user_id === userTarget.id));
+    if (planner) {
+      if (props.adminList) {
+        setPlannerList(planner.filter((p) => p.user_id === userTarget.id));
+      } else {
+        setPlannerList(planner.filter((p) => p.user_id === user.id));
+        setUserTarget(user);
+      }
     } else {
-      setPlannerList(planner.filter((p) => p.user_id === user.id));
-      setUserTarget(user);
+      setPlannerList([]);
     }
   }, [planner]);
 
