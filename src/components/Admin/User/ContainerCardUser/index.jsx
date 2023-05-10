@@ -22,7 +22,7 @@ import {
   Top,
   DivInfo,
 } from "./styles";
-import ClientCard from "./CardListView/index";
+import UserCard from "./CardListView/index";
 import AddEditClient from "../AddEditUser";
 import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
 import { useState, useEffect } from "react";
@@ -32,29 +32,21 @@ import ModalPassword from "../ModalPassword";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { ReactComponent as Info } from "../../../../assets/svg/Info.svg";
-
+import { useSearchContext } from "../../../../hook/useSearchContext";
 const abaStatus = {
   ACTIVE: "ACTIVE",
   INACTIVE: "INACTIVE",
 };
 
 const ContainerCards = () => {
-  const { loadUserList, userList, modalPassword } = useUserContext();
-
-  //console.log(userList);
-  useEffect(() => {
-    loadUserList();
-  }, []);
-
+  const { loadUserList, userList: users, modalPassword } = useUserContext();
+  const [userList, setUserList] = useState([]);
+  const { search } = useSearchContext();
   // States modal//
   const [modal, setModal] = useState(false);
-
   const [modalPopUp, setModalPopUp] = useState(false);
-
   const [id, setId] = useState(null);
-
   const [isEdit, setEdit] = useState(false);
-
   const [active, setActive] = useState(abaStatus.ACTIVE);
 
   const handleClick = (selectedTab) => {
@@ -74,6 +66,27 @@ const ContainerCards = () => {
     setModal(true);
     setEdit(true);
   };
+
+  useEffect(() => {
+    loadUserList();
+  }, []);
+
+  useEffect(() => {
+    setUserList(users);
+  }, [users]);
+
+  useEffect(() => {
+    if (users)
+      if (search) {
+        setUserList(
+          users.filter((u) =>
+            u.name.toLowerCase().includes(search.toLowerCase())
+          )
+        );
+      } else {
+        setUserList(users);
+      }
+  }, [search, users]);
 
   return (
     <ContainerGlobal>
@@ -144,7 +157,7 @@ const ContainerCards = () => {
               userList
                 .filter((u) => u.status === active)
                 .map((u) => (
-                  <ClientCard
+                  <UserCard
                     setId={(i) => setId(i)}
                     openModalPopUp={() => setModalPopUp(true)}
                     key={u.id}

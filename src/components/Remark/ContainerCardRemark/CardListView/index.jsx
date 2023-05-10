@@ -21,6 +21,7 @@ import {
 } from "./styles";
 
 import { useRemarkContext } from "../../../../hook/useRemarkContent";
+import { useSearchContext } from "../../../../hook/useSearchContext";
 import IconSystem from "../../../../assets/IconSystem";
 
 const RemarkCard = (props) => {
