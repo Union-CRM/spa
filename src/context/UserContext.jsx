@@ -21,17 +21,14 @@ export const UserContextProvider = ({ children }) => {
   }, []);
 
   const loadUserMe = async () => {
-    var user;
     try {
       const response = await axios.get(userGetUsersMe, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
-
-      user = response;
+      setUser(response.data);
     } catch (error) {
       console.error(error);
     }
-    setUser(user.data);
   };
 
   const loadUserList = async () => {
