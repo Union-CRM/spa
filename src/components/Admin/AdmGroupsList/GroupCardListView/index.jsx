@@ -26,18 +26,23 @@ import { useUserContext } from "../../../../hook/useUserContext";
 import { useFetchAdmGroupList } from "../../../../hook/useFetchAdmGroupList";
 
 
+
 // Group List //
 import {useGroupListContext} from "../../../../hook/useGroupListContext";
 
 const AdmGroupCardListView = (props) => {
+  const {setIdGroups} = useGroupListContext()
 
   const handleEdit = () => {
     openModal();
+    props.setId(group.id);
   };
 
   const handleClick = () => {
     openModalPopUp();
     props.setId(group.id);
+    
+    
   };
 
 

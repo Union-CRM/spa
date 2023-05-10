@@ -23,8 +23,9 @@ import { useFetchBusiness } from '../../../../hook/useFetchBusiness';
 import {useFetchTag} from '../../../../hook/useFetchTag';
 import { useFetchSegment } from '../../../../hook/useFetchSegment';
 const CreateEditBusiness = (props) => {
+  const { id } = props;
   const { setModalCreateBusiness, setModalEditBusiness ,loadData,modalDiscard,
-    setModalDiscard,modalEditBusiness, idBusiness} = useBusinessContext(); 
+    setModalDiscard,modalEditBusiness, idBusiness, business, businessTarget} = useBusinessContext(); 
   const { createBusiness, updateBusiness, updateStatusBusiness} = useFetchBusiness();
   const [flag, setFlag] = useState(false);
   const [businessName, setBusinessName] = useState("");
@@ -40,20 +41,26 @@ const CreateEditBusiness = (props) => {
   const { segmentList } = useFetchSegment("Seg");
 
   const status = [
-    { id: 1, value: "Ativo", label: "Ativo" },
-    { id: 2, value: "Inativo", label: "Inativo" },
+    { id: 1, value: "Ativo", label: "ATIVO" },
+    { id: 2, value: "Inativo", label: "INATIVO" },
   ];
 
   useEffect(() => {
+    
     if(props.title === "Edit Business"){
+      
+      //const businessList = business.filter((item) => item.id === props.id)[0];
       //console.log(idBusiness);
-      setBusinessName(idBusiness.name)
-      setBusinessCode(idBusiness.code)
-      setBusinessStatus(idBusiness.status)
-      setBusinessSegment(idBusiness.Segment)
-      setTags(idBusiness.Tag)
+      console.log(businessTarget)
+      setBusinessName(businessTarget.name);
+      console.log(businessTarget)
+      setBusinessCode(businessTarget.code);
+      setBusinessStatus(businessTarget.status);
+      setBusinessSegment(businessTarget.segment_description);
+      setTags(businessTarget.tags);
     }
-  }, []);
+  }, [businessTarget]);
+
 
   const handleSubmit = () => {
     if(!modalDiscard){
@@ -86,6 +93,7 @@ const CreateEditBusiness = (props) => {
   }
 
   const editBusiness = () => {
+    
     const newBusiness = {
       business_name: businessName,
       business_code: businessCode,
@@ -116,15 +124,14 @@ const CreateEditBusiness = (props) => {
     setBusinessStatus(id);
   };
 
-  const handleSelectSegment = (id) => {
-    setBusinessSegment(id);
+  const handleSelectSegment = () => {
+    setBusinessSegment(businessStatus);
   };
 
   const handleChange = (id) => {
     //setBusinessStatus(id);
     console.log(id);
   };
-
 
 
   return (
@@ -142,7 +149,7 @@ const CreateEditBusiness = (props) => {
                   widthInput={"98% !important"}
                   name={businessName}
                   flag={flag}
-                  value={businessName}
+                  value={businessName ? businessName : ("")}
                   onChange={(event) => setBusinessName(event.target.value)}
                   required
                 /> )}
@@ -155,7 +162,7 @@ const CreateEditBusiness = (props) => {
                       widthInput={"98% !important"}
                       name={businessCode}
                       flag={flag}
-                      value={businessCode}
+                      value={businessCode ? businessCode : ("")}
                       onChange={(event) => setBusinessCode(event.target.value)}
                       required
                     />
@@ -165,11 +172,11 @@ const CreateEditBusiness = (props) => {
                     <Label>Status</Label>
                       {modalEditBusiness && (
                       <SingleSelect
-                      onChange={(event) => handleSelectBusiness(event.value)}
-                      set={(businessStatus) => handleSelectBusiness(businessStatus)}
+                      set={(businessStatus) => setBusinessStatus(businessStatus)}
+                      onChange={(event) => setBusinessStatus(event.target.value)}
                       placeholder={flag && !businessStatus ? "Required field" : ""}
                       options={status}
-                      value={businessStatus}
+                      value={businessStatus ? businessStatus : ("")}
                       sizeSingle={"87%"}
                       sizeMenu={"100%"}
                       isDisabled={false}
@@ -189,8 +196,7 @@ const CreateEditBusiness = (props) => {
                 <Label>Segment</Label>
                 {!modalEditBusiness && (
                   <SingleSelect
-                  onChange={(s) => handleSelectSegment(s)}
-                  set={(s) => handleSelectSegment(s)}
+                  set={(s) => setBusinessSegment(s)}
                   placeholder={flag && !businessSegment ? "Required field" : ""}
                   options={segmentList ? segmentList : []}
                   sizeSingle={"86.5%"}
@@ -201,11 +207,10 @@ const CreateEditBusiness = (props) => {
                 )}
                 {modalEditBusiness && (
                   <SingleSelect
-                  onChange={(event) => handleSelectSegment(event.value)}
-                  set={(businessSegment) => handleSelectSegment(businessSegment)}
+                  set={(businessSegment) => setBusinessSegment(businessSegment)}
                   placeholder={flag && !businessSegment ? "Required field" : ""}
                   options={segmentList ? segmentList : []}
-                  value={businessSegment}
+                  value={businessSegment ? businessSegment : ("")}
                   sizeSingle={"86.5%"}
                   sizeMenu={"100%"}
                   isDisabled={false}
@@ -215,6 +220,7 @@ const CreateEditBusiness = (props) => {
             </DivSegment>
             <TagComponent
               options={tagBusinessList ? tagBusinessList : []}
+              tags={tags}
               placeholder={""}
               label={"Tag"}
               width={"90%"}

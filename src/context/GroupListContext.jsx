@@ -49,21 +49,11 @@ export const GroupListContextProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
+
   };
   return (
-    <GroupListContext.Provider
-      value={{
-        group,
-        setGroup,
-        loadData,
-        team,
-        setTeamList,
-        infoGroup,
-        setInfoGroup,
-        users,
-      }}
-    >
-      {children}
+    <GroupListContext.Provider value={{ group, setGroup, loadData, team, setTeamList, infoGroup, setInfoGroup, users, idGroups, setIdGroups }}>
+    {children}
     </GroupListContext.Provider>
   );
 };

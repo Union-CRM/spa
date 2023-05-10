@@ -78,13 +78,14 @@ const Subject = (props) => {
   ////////// EDIT SUBJECT ////////////
 
   useEffect(() => {
+    
     if (props.title === "Edit Subject") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
 
       setStatus(subject.status);
       setSubject(subject.subject_title);
       setSelectedClient(subject.client);
-      setDescription(subject.subject_text);
+      setDescription(subject.subjectText);
     }
   }, [id]);
 
@@ -94,7 +95,7 @@ const Subject = (props) => {
     const newSubject = {
       id: id,
       title: subject,
-      text: description,
+      subject_text: description,
       status_id: status,
     };
 

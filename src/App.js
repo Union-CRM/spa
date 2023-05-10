@@ -38,13 +38,14 @@ function App() {
           <PlannerContextProvider>
             <ClientContextProvider>
               <GroupListContextProvider>
-                <BusinessContextProvider>
-                  <ReleaseContextProvider>
-                    <Router>
-                      <GlobalStyle />
-                      <div className="App">
-                        <Routes>
-                          <Route path="/" element={<LoginPage />} />
+                  <BusinessContextProvider>
+                    <ReleaseContextProvider>
+              
+                <Router>
+                  <GlobalStyle />
+                  <div className="App">
+                    <Routes>
+                      <Route path="/" element={<LoginPage />} />
 
                           <Route
                             path="/home"
