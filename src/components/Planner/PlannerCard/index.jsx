@@ -26,9 +26,13 @@ const PlannerCard = (props) => {
 
   useEffect(() => {
     if (props.adminList) {
-      setPlannerList(planner.filter((p) => p.user_id === userTarget.id));
+      setPlannerList(
+        planner ? planner.filter((p) => p.user_id === userTarget.id) : []
+      );
     } else {
-      setPlannerList(planner.filter((p) => p.user_id === user.id));
+      setPlannerList(
+        planner ? planner.filter((p) => p.user_id === user.id) : []
+      );
     }
   }, [planner]);
 

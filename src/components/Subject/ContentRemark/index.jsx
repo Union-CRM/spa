@@ -38,7 +38,7 @@ const ContentRemarks = (props) => {
   const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
 
   const { setModalRemark } = useRemarkContext();
-  const { remarkEdit, setRemarkEdit } = useRemarkContext();
+  const { remarkEdit, setRemarkEdit } = useRemarkContext([]);
   const [date, setDate] = useState();
   const [dateReturn, setDateReturn] = useState();
   const [noteText, setNoteText] = useState();
