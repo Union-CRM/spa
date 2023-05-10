@@ -79,8 +79,7 @@ export const Img = styled.div`
       return "3px solid #007bff";
     }
   }};
-  margin-top: ${(props) => (props.$mode ? "-25%" : "-32%")};
-
+  margin-top: ${(props) => (props.$mode ? "-24px" : "-32%")};
   margin-bottom: 5px;
   background-color: white;
 `;

@@ -16,10 +16,9 @@ export const H1 = styled.h1`
   line-height: 36px;
   font-size: 26px;
   font-weight: 600;
+  margin-left: 1.5em;
   color: rgba(0, 0, 0, 0.8);
-  padding-left: 50%;
-  display: inline;
-  word-spacing: normal;
+  margin-top: 0.4rem;
 `;
 
 export const TitleDiv = styled.div`
@@ -27,8 +26,6 @@ export const TitleDiv = styled.div`
   height: fit-content;
   display: flex;
   align-items: center;
-  top: 5%;
-  margin-left: 5%;
   white-space: nowrap;
 `;
 
@@ -37,16 +34,16 @@ export const Box = styled.div`
   width: 100%;
   height: 100%;
   top: 35%;
-  align-items: center;
 `;
 
 export const TextBox = styled.h1`
   font-family: Houschka Rounded Alt;
   color: #000000;
   display: flex;
-  position: relative;
+  margin: 0;
   text-align: center;
-  margin-left: 11%;
+  justify-content: center;
+  text-align: center;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
@@ -55,6 +52,7 @@ export const TextBox = styled.h1`
 export const BoxInactive = styled.div`
   position: relative;
   display: flex;
+  margin: auto;
   background-color: #ff2b02;
   width: 4.5vw;
   height: 57px;
@@ -70,6 +68,7 @@ export const BoxInactive = styled.div`
 export const BoxActive = styled.div`
   position: relative;
   display: flex;
+  margin: auto;
   background-color: #07d95a;
   width: 4.5vw;
   height: 57px;
@@ -84,7 +83,7 @@ export const BoxActive = styled.div`
 `;
 
 export const Line = styled.div`
-  height: 100px;
+  height: 15vh;
   align-items: right;
   justify-content: center;
   border: 1px solid #787777;

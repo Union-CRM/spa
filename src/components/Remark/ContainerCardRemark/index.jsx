@@ -39,7 +39,7 @@ import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { useUserContext } from "../../../hook/useUserContext";
-
+import { useSearchContext } from "../../../hook/useSearchContext";
 const cardStatus = {
   ACTIVE: "ACTIVE",
   FINISHED: "FINISHED",
@@ -48,8 +48,9 @@ const cardStatus = {
 
 const RemarkList = (props) => {
   const { user, userTarget, setUserTarget } = useUserContext();
-  const { remark } = useRemarkContext();
+  const { remark } = useRemarkContext([]);
   const [remarkList, setRemarkList] = useState([]);
+  const { search } = useSearchContext();
 
   const [modal, setModal] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
@@ -69,6 +70,26 @@ const RemarkList = (props) => {
       setUserTarget(user);
     }
   }, [remark, userTarget]);
+
+  useEffect(() => {
+    if (remark)
+      if (search) {
+        setRemarkList(
+          remark.filter(
+            (r) =>
+              (r.remark_name.toLowerCase().includes(search.toLowerCase()) ||
+                r.client_name.toLowerCase().includes(search.toLowerCase())) &&
+              r.user_id === user.id
+          )
+        );
+      } else {
+        if (props.adminList) {
+          setRemarkList(remark.filter((r) => r.user_id === userTarget.id));
+        } else {
+          setRemarkList(remark.filter((r) => r.user_id === user.id));
+        }
+      }
+  }, [search]);
 
   const getTabColor = (status) => {
     return { borderBottom: active === status ? "2px solid #007BFF" : "" };
