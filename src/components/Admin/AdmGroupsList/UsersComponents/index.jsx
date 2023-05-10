@@ -22,6 +22,7 @@ import {
 import { useUserContext } from "../../../../hook/useUserContext";
 import { useFetchUsersNotin } from "../../../../hook/useFetchUsersNotin";
 
+export const selectedOptions = [];
 export const UsersComponents = (props, placeholder, idTagOption) => {
   const colors = ["#FFC0CB", "#DDA0DD", "#F5DEB3", "#98FB98", "#87CEEB"];
 
@@ -36,10 +37,11 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
   const { client: clientList } = useClientContext();*/
 
   
-  //Users//
- /* const [userOption, setUserOption] = useState([]);
   
-  const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin()
+ 
+  
+  const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin();
+  
 
     
   const{loadUserSub,loadUserNotin} = useFetchUsersNotin()
@@ -49,29 +51,6 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
     loadUserSub()
   }, [])
  
-
-  const {selectedOptions, setSelectedOptions} = useFetchUsersNotin();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const handleOptionChange = (userOption) => {
-    
-    setSelectedOptions([...selectedOptions, userOption]);
-    setDropdownOpen(true);
-    
-  };
-
-  const handleRemoveOption = (optionToRemove) => {
-    const updatedSelectedOptions = selectedOptions.filter(
-      (userOption) => userOption !== optionToRemove
-    );
-    setSelectedOptions(updatedSelectedOptions);
-  };
-
-  const availableOptions = userOption.filter(
-    (userOption) => !selectedOptions.includes(userOption)
-  );
-
-  
   const usersList = userSub.concat(usersNotin)
   
   useEffect(() => {
@@ -81,13 +60,14 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
           .map((c) => ({ id: c.id, value: c.id, label: c.name }))
       );
     }
-  }, [usersNotin, userSub]);*/
+  }, [usersNotin, userSub]);
 
 
   const [userOption, setUserOption] = useState([]);
   const { users: userList } = useUserContext();
 
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [setSelectedOptions] = useState([]);
+  
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleOptionChange = (userOption) => {
@@ -106,6 +86,8 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
     (userOption) => !selectedOptions.includes(userOption)
   );
 
+  
+console.log(selectedOptions)
   useEffect(() => {
     if (userList) {
       setUserOption(

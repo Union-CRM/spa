@@ -54,15 +54,14 @@ const ContainerCards = (props) => {
 
   const { client } = useClientContext();
   const { id, setId } = useClientContext();
- //const {modalInfo, setModalInfo} = useClientContext();
-const [modalInfo, setModalInfo] = useState(false);
-const {modalEditClient, setModalEditClient } = useClientContext();
+  const {modalInfo, setModalInfo} = useClientContext();
+  const {modalEditClient, setModalEditClient } = useClientContext();
 
   useEffect(() => {
     if (props.adminList) {
       setClientList(client.filter((c) => c.user_id === userTarget.id));
     } else {
-      setClientList(client.filter((c) => c.user_id === user.id));
+      setClientList(client);
     }
   }, [client]);
 
@@ -186,12 +185,12 @@ const {modalEditClient, setModalEditClient } = useClientContext();
         </CardsContainer>
       </ContainerHeaderAndCards>
 
-      <DivModal $mode={modalEditClient} />
-{modalEditClient && (
+      <DivModal $mode={modal} />
+{modal && (
     <AddEditClient
       id={id}
-      setModalEditClient={setModalEditClient}
-      title={"Edit Client"}
+      setModal={setModal}
+      title={"Create Client"}
     />
 )}
 
@@ -201,28 +200,25 @@ const {modalEditClient, setModalEditClient } = useClientContext();
         <ModalClientDetails
           id={id}
           openModal={() => detailsModal()}
-          setModal={setModalInfo}
+          setModalInfo={setModalInfo}
           title={"Client Details"}
         />
       )}
 
-      <DivModal $mode={modal} />
+      <DivModal $mode={modalEditClient} />
 
-    {modal && (
+    {modalEditClient && (
         <ModalClientEdit
           id={id}
-          setModal={setModal}
-          title={"Create Client"}
+          setModalEditClient={setModalEditClient}
+          title={"Edit Client"}
         />
     )}
-
-
-
 
       {modalPopUp && (
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
       )}
-    </ContainerGlobal>
-  );
-};
+   </ContainerGlobal>  
+ )   
+}
 export default ContainerCards;

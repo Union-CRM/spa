@@ -61,14 +61,16 @@ const ClientCard = (props) => {
     props.setId(client.id);
   };
 
+<<<<<<< Updated upstream
 
 
   /*const handleToggle = () => {
     setIsActive(!isActive);
     updateClient(client.id, { ...client, status: isActive ? "Inactive" : "Active" });
   };*/
+=======
+>>>>>>> Stashed changes
 
-  // TESTE //
   const [isActive, setIsActive] = useState(client.status === "Active");
   const [previousStatus, setPreviousStatus] = useState(client.status);
   const handleToggle = () => {
@@ -77,7 +79,7 @@ const ClientCard = (props) => {
     updateClient(client.id, { ...client, status: newStatus });
   };
 
-
+  
   return (
     <ContainerFather>
       <Container>
@@ -89,7 +91,11 @@ const ClientCard = (props) => {
         >
           <Header>
             <DivPhoto>
-              <DivPhotoI>
+              <DivPhotoI
+               isActive={isActive}
+               active={isActive}
+               $mode={client.status}
+               checked={isActive}>
                 <Body
                   type={"Body1"}
                   name={client.client
@@ -115,10 +121,21 @@ const ClientCard = (props) => {
                 >
                   {client.status}
                 </Status>
-                <Tippy content={tags}>
-                  <TagsSpan $mode={client.tags}>tags</TagsSpan>
+    
+                <Tippy content= {tags && tags.length === 0 ? (
+     "It has no tags" ) : (tags)}>
+    
+    
+                <TagsSpan
+                $mode={client.tags}
+                isActive={isActive}
+               active={isActive}
+               checked={isActive}>tags</TagsSpan>
                 </Tippy>
+
+
               </DivTagsStatus>
+ 
             </DivDadosCard>
 
             <DivIcons>
@@ -162,9 +179,15 @@ const ClientCard = (props) => {
 
             <DivRelease>
               <TitleInfo>
+<<<<<<< Updated upstream
                 Release Train <span>|</span>{" "}
               </TitleInfo>
               <ValueInfo>{client.textRelease} </ValueInfo>
+=======
+                Manager <span>|</span>{" "}
+              </TitleInfo>
+              <ValueInfo>{SplitName(client.user_name)}</ValueInfo>
+>>>>>>> Stashed changes
             </DivRelease>
           </DivInfo>
         </Card>
@@ -174,3 +197,11 @@ const ClientCard = (props) => {
 };
 
 export default ClientCard;
+
+function SplitName(n) {
+  const user = n ? n : "";
+  var userSplit = user.split(" ");
+  var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
+
+  return user1;
+}

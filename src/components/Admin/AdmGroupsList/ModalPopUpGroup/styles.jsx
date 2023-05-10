@@ -38,12 +38,12 @@ export const Container = styled.div`
   max-width: 400px;
   max-height: 231px;
   min-height: 231px;
-  border-left: 16.56px solid #007bff;
+  border-left: 16.56px solid #E41165;
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   background-color: #f5f7fa;
-  border-left: 7px solid #007bff;
+  border-left: 7px solid #E41165;
   @media (min-width: 100px) and (max-width: 500px) {
     justify-content: center;
   }
@@ -71,7 +71,7 @@ export const Span = styled.span`
 `;
 
 export const Circle = styled.div`
-  background: #007bff;
+  background: #E41165;
   border-radius: 100%;
   width: 63px;
   height: 63px;

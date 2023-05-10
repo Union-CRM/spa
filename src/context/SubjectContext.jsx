@@ -31,7 +31,7 @@ export const SubjectContextProvider = ({ children }) => {
         status_id: item.status.status_id,
         status: item.status.status_description,
         subject_title: item.subject_title,
-        subject_text: item.Subject_text,
+        subjectText: item.subject_text,
         release_id: item.release_id,
         release: item.release_name,
         business: item.business_name,
@@ -41,6 +41,7 @@ export const SubjectContextProvider = ({ children }) => {
         client_email: item.client_email,
         user_id: item.user_id,
         user_name: item.user_name,
+        created_at: item.created_at
       }))
     );
   };

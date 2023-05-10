@@ -133,6 +133,7 @@ const CustomerCard = (props) => {
               <Body type={"Body1"} name={customer.name} />
             </DivDadosCard>
           )}
+
           {tagIcon && (
             <DivTag>
               {customer.tags ? (

@@ -36,8 +36,8 @@ export const ReleaseContextProvider = ({ children }) => {
             id: item.release_id,
             code: item.release_code,
             name: item.release_name,
-            businessName: item.business_name,
-            businessID: item.business_id,
+            business_id:item.business_id,
+            business_name:item.business_name,
             status: item.status_description,
             tags: item.tags
             ? item.tags.map((tag) => ({ value: tag.tag_id, label: tag.tag_name }))

@@ -154,6 +154,7 @@ export const DivEmail = styled.div`
 export const DivCustomer = styled.div`
   grid-row: 3;
   width: 90%;
+  grid-template-columns: 50% 50%;
   height: auto;
   display: grid;
 `;

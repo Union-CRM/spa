@@ -86,7 +86,6 @@ export const DivClient = styled.div`
 
   ${ContainerClient} {
     display: grid;
-
     background: #fff;
     top: -15px;
     width: 98%;

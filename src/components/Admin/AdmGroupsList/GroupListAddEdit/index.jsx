@@ -23,7 +23,7 @@ import { useFetchCustomer } from "../../../../hook/useFetchCustomer";
 import { useFetchAdmGroupList } from "../../../../hook/useFetchAdmGroupList";
 import {useGroupListContext} from "../../../../hook/useGroupListContext";
 import { useFetchUsersNotin } from "../../../../hook/useFetchUsersNotin";
-
+import { selectedOptions } from "../UsersComponents";
 const AddEditGroup = (props) => {
 
   const handleSubmit = () => {
@@ -70,7 +70,7 @@ const AddEditGroup = (props) => {
       const newGroup = {
         group_name: groupName,
         customer_id: customer.id,
-        users: users.users_id.map((g) => ({ user_id: g.value })),
+        users: selectedOptions.map((g) => ({ user_id: g.value })),
       };
       console.log(newGroup);
       if (groupName && customer.id && users) {
@@ -80,6 +80,7 @@ const AddEditGroup = (props) => {
         setFlag(true);
       }
     };
+    console.log(selectedOptions)
 
     /*
     useEffect(() => {
