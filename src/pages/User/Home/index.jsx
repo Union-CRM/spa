@@ -1,28 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import ContainerCards from "../../../components/Client/ContainerCardClient";
-import { Content, DivClient, DivPlanner, Graph1, DivInfo } from "./styles";
+import { Content, DivClient, DivPlanner, Graph1} from "./styles";
 import Grafico from "../../../components/Grafico";
 import PageBodyHome from "../../../components/Geral/PageBody/PageBodyHome";
 import PlannerCard from "../../../components/Planner/PlannerCard";
-import { usePlannerContext } from "../../../hook/usePlannerContext";
-
-
-
-// hook/usePlannerContext
-
 import "react-tippy/dist/tippy.css";
 
-/*const funcClientInfo =()=>{
-  const [clientInfo,setClientInfo] = useState("Client Information"); 
-  return {clientInfo,setClientInfo};
-}*/
-
 const dateOfTheDay = new Date();
-
-function PlannerCount() {
-  const { Planner } = usePlannerContext();
-  return Planner;
-}
 
 class Home extends React.Component {
   render() {

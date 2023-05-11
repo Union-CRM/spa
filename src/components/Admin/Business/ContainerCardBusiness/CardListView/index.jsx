@@ -49,10 +49,10 @@ const BusinessCard = (props) => {
 
   // Context and props
   const { openModal, openModalPopUp } = props;
-  const { business: businessList} = useBusinessContext();
+  const { business: businessList } = useBusinessContext();
   const business = businessList.filter((item) => item.id === props.id)[0];
-  const { setModalEditBusiness, setModalCreateBusiness,setIdBusiness, setModalStatus, setBusinessTarget} = useBusinessContext();
-  
+  const { setModalEditBusiness, setModalCreateBusiness, setIdBusiness, setModalStatus, setBusinessTarget } = useBusinessContext();
+
   // UseState
   const [tagIcon, setTagIcon] = useState(false);
   const [isActive, setIsActive] = useState(business.status === "ATIVO");
@@ -64,30 +64,25 @@ const BusinessCard = (props) => {
     }) : ""
   );
 
+  // Function that is receiving the business id by props to change the status in toggle
   const handleClick = () => {
     setModalStatus(true)
     props.setId(business.id);
   };
 
-  
-
+  // Toggle function to change card status
   const handleToggle = () => {
     const newStatus = isActive ? "INATIVO" : "ATIVO";
     setIsActive(!isActive);
   };
 
-  function handleModal(id){
+  // Function to open edit release modal
+  function handleModal(id) {
     setIdBusiness(id);
-    props.openModal() 
+    props.openModal()
     setModalCreateBusiness(false)
     setBusinessTarget(business)
   }
-
-  const handleTags = () => {
-    setModalEditBusiness(false)
-    setTagIcon(!tagIcon)
-  }
-  
 
   return (
     <ContainerFather onClick={() => handleModal()}>
@@ -103,7 +98,7 @@ const BusinessCard = (props) => {
               <TagsStatus>
                 {!tagIcon && (
                   <DivTagsSpan
-                    onClick={() => handleTags()}
+                    onClick={() => setTagIcon(!tagIcon)}
                     isActive={isActive}
                     $mode={business.tags}
                   >
@@ -112,7 +107,7 @@ const BusinessCard = (props) => {
                 )}
                 {tagIcon && (
                   <DivImgTag isActive={isActive}>
-                    <DivTagsSpan onClick={() => handleTags()}>tags</DivTagsSpan>
+                    <DivTagsSpan onClick={() => setTagIcon(!tagIcon)}>tags</DivTagsSpan>
                   </DivImgTag>
                 )}
               </TagsStatus>
@@ -137,11 +132,11 @@ const BusinessCard = (props) => {
           <DivDadosCard onClick={() => setModalEditBusiness(true)} name="DivDadosCard">
             {!tagIcon && (
               <>  <DivCenter>
-                  <NameBusiness>{business.name}</NameBusiness>
-                  <DivTeste>
-                    <p>{business.code}</p>
-                  </DivTeste>
-                  </DivCenter>
+                <NameBusiness>{business.name}</NameBusiness>
+                <DivTeste>
+                  <p>{business.code}</p>
+                </DivTeste>
+              </DivCenter>
               </>
             )}
             {tagIcon && (
@@ -152,7 +147,7 @@ const BusinessCard = (props) => {
                       return (
                         <DivContentTags
                           key={index}
-                          colorTag={isActive ? t.color : "#7a7a7a"}
+                          colorTag={t.color}
                         >
                           {t.label}
                         </DivContentTags>
@@ -162,7 +157,7 @@ const BusinessCard = (props) => {
                         <Tippy key={index} content={tags}>
                           <DivContentTags
                             key={index}
-                            colorTag={isActive ? t.color : "#7a7a7a"}
+                            colorTag={t.color}
                           >
                             <p>see more tags</p>
                           </DivContentTags>
