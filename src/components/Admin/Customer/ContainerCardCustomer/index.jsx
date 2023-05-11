@@ -59,17 +59,21 @@ const ContainerCards = (props) => {
   }, [customer]);
 
   useEffect(() => {
-    if (customer)
+    
+    if (customer){
+   
       if (search) {
         setCustomerList(
+          customer?
           customer.filter((c) =>
             c.name.toLowerCase().includes(search.toLowerCase())
-          )
+          ): customer
         );
       } else {
         setCustomerList(customer);
       }
-  }, [search]);
+    }
+  }, [search,customer]);
 
   const handleClick = (selectedTab) => {
     setActive(selectedTab);

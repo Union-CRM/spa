@@ -16,8 +16,9 @@ export const useFetchCustomer = () => {
   //  const [popUpError, setPopUpError] = useState(false);
 
   const loadCustomerOptions = () => {
+    console.log(customer)
     return customer
-      ? customer.map((item) => ({
+      ? customer.filter((c)=>c.status==="ATIVO").map((item) => ({
           id: item.id,
           value: item.id,
           label: item.name,

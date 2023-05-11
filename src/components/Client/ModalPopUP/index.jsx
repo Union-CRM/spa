@@ -14,7 +14,7 @@ import { useFetchClient } from "../../../hook/useFetchClient";
 
 const ModalPopUp = (props) => {
   const { modalClose } = props;
-  const { client: clientList } = useClientContext();
+  const { client: clientList} = useClientContext();
   const { updateStatusClient } = useFetchClient();
   const client = clientList.filter((item) => item.id === props.id)[0];
   const p = client.status === "Active" ? "Inactivate" : "Activate";
@@ -31,7 +31,7 @@ const ModalPopUp = (props) => {
 
   const handleCancel = () => {
     modalClose();
-    window.location.reload();
+    //window.location.reload();
   };
 
   return (

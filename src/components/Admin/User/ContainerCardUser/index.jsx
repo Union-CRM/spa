@@ -77,6 +77,7 @@ const ContainerCards = () => {
 
   useEffect(() => {
     if (users)
+    console.log(users);
       if (search) {
         setUserList(
           users.filter((u) =>

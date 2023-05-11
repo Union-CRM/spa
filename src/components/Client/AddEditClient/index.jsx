@@ -45,7 +45,8 @@ const AddEditClient = (props) => {
   const [status, setStatus] = useState({ value: "Active" });
   const { release: releaseList } = useReleaseContext("release");
   const { loadCustomerList} = useCustomerContext();
-  const { customerList } = useFetchCustomer("Customer");
+  const [customerList,setCustomerList] = useState([])
+  const { loadCustomerOptions } = useFetchCustomer();
   const { roleList } = useFetchRole("Role");
   const { tagList } = useFetchTag("Tag");
   const [releaseObj, setReleaseObj] = useState({
@@ -62,6 +63,7 @@ const AddEditClient = (props) => {
 
   useEffect(() =>{
     loadCustomerList()
+    setCustomerList(loadCustomerOptions())
   }, [])
 
   useEffect(() =>{
