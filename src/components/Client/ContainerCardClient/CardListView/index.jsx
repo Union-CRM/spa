@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Container,
   Card,
@@ -37,7 +37,8 @@ import styled, { css } from "styled-components";
 
 const ClientCard = (props) => {
   const { openModal, openModalPopUp } = props;
-  const [manager, setManager] = useState();
+
+    
   const { toggleState, setToggleState } = useClientContext();
   const { activeTab, setActiveTab } = useClientContext();
 
@@ -62,6 +63,10 @@ const ClientCard = (props) => {
 
 
 
+  /*const handleToggle = () => {
+    setIsActive(!isActive);
+    updateClient(client.id, { ...client, status: isActive ? "Inactive" : "Active" });
+  };*/
 
   const [isActive, setIsActive] = useState(client.status === "Active");
   const [previousStatus, setPreviousStatus] = useState(client.status);
@@ -101,7 +106,7 @@ const ClientCard = (props) => {
             </DivPhoto>
 
             <DivDadosCard>
-              <Body type={"Body2"} name={client.client} />
+              <Body type={"Body1"} name={client.client} />
 
               <Subtitle type={"TextDescription"} name={client.email} />
 
@@ -171,11 +176,9 @@ const ClientCard = (props) => {
 
             <DivRelease>
               <TitleInfo>
-
                 Manager <span>|</span>{" "}
               </TitleInfo>
               <ValueInfo>{SplitName(client.user_name)}</ValueInfo>
-
             </DivRelease>
           </DivInfo>
         </Card>

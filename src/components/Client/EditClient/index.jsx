@@ -60,7 +60,7 @@ const ModalClientEdit = (props) => {
 
   const { release: releaseList } = useReleaseContext("release");
   
-  const { customerList } = useFetchCustomer("Customer");
+  const [customerList,setCustomerList] = useState([])
   const { roleList } = useFetchRole("Role");
   const { tagList } = useFetchTag("Tag");
   const {usersGlobal} = useUserContext();
@@ -74,8 +74,12 @@ const ModalClientEdit = (props) => {
   const { setModal, id, title } = props;
   const {loadUsers} = useUserContext();
   const [releaseOptions, setReleaseOptions] = useState([])
-
+  const { loadCustomerOptions } = useFetchCustomer();
   
+  useEffect(() =>{
+    setCustomerList(loadCustomerOptions())
+  }, [])
+
 
   useEffect(() =>{
 
