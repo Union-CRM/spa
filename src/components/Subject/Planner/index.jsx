@@ -65,7 +65,6 @@ const Planner = (props) => {
       );
     }
   }, [plannerEdit]);
-  console.log(plannerEdit);
 
   // Tabs //
   const { toggleState, setToggleState } = useSubjectContext();

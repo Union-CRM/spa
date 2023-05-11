@@ -107,20 +107,15 @@ const Group = (props) => {
           </DivResponsible>
           <DivUserInformation>
             <DivPhoto>
-              <Body
-                type={"Body2"}
-                name={Split("Phellype Matheus Giacoia Flaibam Massarente")}
-              />
+              <Body type={"Body2"} name={Split(group.responsible_name)} />
             </DivPhoto>
             <DivNameEmail>
-              <NameUser>
-                {"Phellype Matheus Giacoia Flaibam Massarente"}
-              </NameUser>
-              <Subtitle
+              <NameUser>{group.responsible_name}</NameUser>
+              {/*<Subtitle
                 type={"TextDescription"}
                 name={"props.emailUser"}
                 colorFont={"#888888"}
-              ></Subtitle>
+              ></Subtitle>*/}
             </DivNameEmail>
           </DivUserInformation>
         </UserContent>

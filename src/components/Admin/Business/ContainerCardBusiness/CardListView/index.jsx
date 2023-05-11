@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import {
   Container,
   Card,
@@ -28,63 +28,69 @@ import {
   ToggleButton,
   DivTeste,
   NameBusiness,
+  HeaderTags,
+  TagsStatus,
+  DivTagsSpan,
+  DivImgTag,
+  ImgTag,
+  DivTag,
+  DivContentTags,
+  DivCenter,
 } from "./styles";
-import Body from "../../../../../assets/FontSystem/Body";
-import Subtitle from "../../../../../assets/FontSystem/Subtitle";
-import { useBusinessContext } from "../../../../../hook/useBusinessContent";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-import {ReactComponent as Edit} from "../../../../../assets/svg/Edit.svg"
 
-import styled, { css } from "styled-components";
-import { useFetchBusiness } from '../../../../../hook/useFetchBusiness';
+// Style
+import "tippy.js/dist/tippy.css";
+import Tippy from "@tippyjs/react";
+
+
+import { useBusinessContext } from "../../../../../hook/useBusinessContent";
+
 const BusinessCard = (props) => {
 
-  const { setModalEditBusiness, setModalCreateBusiness,idBusiness,setIdBusiness, setModalStatus} = useBusinessContext();
+  // Context and props
   const { openModal, openModalPopUp } = props;
-  const { updateStatusBusiness} = useFetchBusiness();
   const { business: businessList} = useBusinessContext();
-
   const business = businessList.filter((item) => item.id === props.id)[0];
+  const { setModalEditBusiness, setModalCreateBusiness,setIdBusiness, setModalStatus, setBusinessTarget} = useBusinessContext();
+  
+  // UseState
+  const [tagIcon, setTagIcon] = useState(false);
+  const [isActive, setIsActive] = useState(business.status === "ATIVO");
 
+  // Mapping the tags
   const [tags] = useState(
-    business.tags.map((tag) => {
+    business.tags ? business.tags.map((tag) => {
       return tag.label + "; ";
-    })
+    }) : ""
   );
 
-  const handleEdit = () => {
-    openModal();
-    props.setId(business.id);
-  };
-
   const handleClick = () => {
-    
     setModalStatus(true)
     props.setId(business.id);
-    //updateStatusBusiness(business.id);
   };
 
-  // TESTE //
-  const [isActive, setIsActive] = useState(business.status === "ATIVO");
-  const [previousStatus, setPreviousStatus] = useState(business.status);
+  
+
   const handleToggle = () => {
     const newStatus = isActive ? "INATIVO" : "ATIVO";
     setIsActive(!isActive);
-    //updateBusiness(business.id, { ...business, status: newStatus });
-    //console.log(business.id);
   };
 
   function handleModal(id){
     setIdBusiness(id);
-    props.openModal()
-    setModalEditBusiness(true)
+    props.openModal() 
     setModalCreateBusiness(false)
+    setBusinessTarget(business)
+  }
+
+  const handleTags = () => {
+    setModalEditBusiness(false)
+    setTagIcon(!tagIcon)
   }
   
 
   return (
-    <ContainerFather>
+    <ContainerFather onClick={() => handleModal()}>
       <Container>
         <Card
           isActive={isActive}
@@ -92,54 +98,84 @@ const BusinessCard = (props) => {
           $mode={business.status}
           checked={isActive}
         >
-          <Header>
-            
-            <DivDadosCard>
-            <DivIcons>
-                  <ToggleContainer
+          <Header name="Header Geral">
+            <HeaderTags name="ButtonTags">
+              <TagsStatus>
+                {!tagIcon && (
+                  <DivTagsSpan
+                    onClick={() => handleTags()}
                     isActive={isActive}
-                    $mode={business.status}
-                    checked={isActive}
+                    $mode={business.tags}
                   >
-                    <InputToggle
-                      type="checkbox"
-                      id={business.status}
-                      checked={business.status}
-                      onChange={handleToggle}
-                      onClick={() => handleClick()}
-                    />
-                    <ToggleButton checked={isActive} />
-                    </ToggleContainer>
-                    <Edit onClick={() => handleModal()}/>
-              </DivIcons>
-              <DivTeste >
-                <Body type={"Body1"} name={business.code} />
-                <TitleInfo>
-                    <span> | </span>{" "}
-                </TitleInfo>
-                <Tippy content={tags}>
-                    <TagsSpan $mode={business.status}>tags</TagsSpan>
-                </Tippy>
-              </DivTeste>
-              
-              <NameBusiness >
-                    {business.name}
-                </NameBusiness>
-
-              <DivTagsStatus>
-                <Status
-                  isActive={isActive}
-                  $mode={business.status}
-                  checked={isActive}
-                >
-                  {business.status}
-                </Status>
-                
-              </DivTagsStatus>
-            </DivDadosCard>
-
-            
+                    tags
+                  </DivTagsSpan>
+                )}
+                {tagIcon && (
+                  <DivImgTag isActive={isActive}>
+                    <DivTagsSpan onClick={() => handleTags()}>tags</DivTagsSpan>
+                  </DivImgTag>
+                )}
+              </TagsStatus>
+            </HeaderTags>
+            <DivIcons name="Toggle">
+              <ToggleContainer
+                isActive={isActive}
+                $mode={business.status}
+                checked={isActive}
+              >
+                <InputToggle
+                  type="checkbox"
+                  id={business.status}
+                  checked={business.status}
+                  onChange={handleToggle}
+                  onClick={() => handleClick()}
+                />
+                <ToggleButton checked={isActive} />
+              </ToggleContainer>
+            </DivIcons>
           </Header>
+          <DivDadosCard onClick={() => setModalEditBusiness(true)} name="DivDadosCard">
+            {!tagIcon && (
+              <>  <DivCenter>
+                  <NameBusiness>{business.name}</NameBusiness>
+                  <DivTeste>
+                    <p>{business.code}</p>
+                  </DivTeste>
+                  </DivCenter>
+              </>
+            )}
+            {tagIcon && (
+              <DivTag>
+                {business.tags.length > 0 ? (
+                  business.tags.map((t, index) => {
+                    if (index < 3) {
+                      return (
+                        <DivContentTags
+                          key={index}
+                          colorTag={isActive ? t.color : "#7a7a7a"}
+                        >
+                          {t.label}
+                        </DivContentTags>
+                      );
+                    } else if (index === 3) {
+                      return (
+                        <Tippy key={index} content={tags}>
+                          <DivContentTags
+                            key={index}
+                            colorTag={isActive ? t.color : "#7a7a7a"}
+                          >
+                            <p>see more tags</p>
+                          </DivContentTags>
+                        </Tippy>
+                      );
+                    }
+                  })
+                ) : (
+                  <p>Does not have Tags</p>
+                )}
+              </DivTag>
+            )}
+          </DivDadosCard>
         </Card>
       </Container>
     </ContainerFather>

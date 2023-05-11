@@ -262,7 +262,7 @@ export const DivDate = styled.div`
   width: 100%;
   padding-top: 0%;
   text-align: left;
-  padding-left: 2%;
+  padding-left: 5%;
   svg {
     width: 13px;
     height: 13px;
@@ -420,26 +420,49 @@ export const Photo = styled.div`
 
 ////////////// Name and Email //////////////
 export const DivDadosRemark = styled.div`
-  display: flex;
+  display: grid;
   width: 100%;
   height: 100%;
   align-items: center;
+  margin-left: -10%;
 `;
 
 export const NameEmail = styled.div`
   font-size: 0.8rem;
-  padding-left: 2%;
   width: 98%;
   height: 100%;
   font-weight: 600;
   opacity: 0.8;
+  margin-top: 5px;
+  position: relative;
   span {
-    display: block;
+    position: relative;
     font-size: 0.74rem;
     align-items: center;
     justify-content: center;
     height: 100%;
-    font-weight: 500;
+    font-weight: 200;
+  }
+  @media (min-width: 1700px) and (max-width: 2500px) {
+    width: 90%;
+  }
+`;
+
+export const Create = styled.div`
+  font-size: 0.8rem;
+  width: 98%;
+  height: 100%;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-top: 5px;
+  position: relative;
+  span {
+    position: relative;
+    font-size: 0.74rem;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-weight: 200;
   }
   @media (min-width: 1700px) and (max-width: 2500px) {
     width: 90%;

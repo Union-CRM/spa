@@ -11,6 +11,7 @@ export const UserContextProvider = ({ children }) => {
   const [usersGlobal, setUsersGlobal] = useState([{}]);
   const [viewProfile, setViewProfile] = useState(false);
   const [userTarget, setUserTarget] = useState({});
+  const [home, setHome] = useState(false);
   const [modalPlanner, setModalPlanner] = useState(false);
   const [modalSubject, setModalSubject] = useState(false);
   const [modalPassword, setModalPassword] = useState(false);
@@ -23,17 +24,14 @@ export const UserContextProvider = ({ children }) => {
   }, []);
 
   const loadUserMe = async () => {
-    var user;
     try {
       const response = await axios.get(userGetUsersMe, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
-
-      user = response;
+      setUser(response.data);
     } catch (error) {
       console.error(error);
     }
-    setUser(user.data);
   };
 
   const loadUserList = async () => {
@@ -72,6 +70,8 @@ export const UserContextProvider = ({ children }) => {
 
     <UserContext.Provider
       value={{
+        home,
+        setHome,
         user,
         loadUserMe,
         userList,

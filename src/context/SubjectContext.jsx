@@ -24,7 +24,7 @@ export const SubjectContextProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-
+    
     setSubject(
       subjects.data.List.map((item) => ({
         id: item.subject_id,
@@ -44,6 +44,8 @@ export const SubjectContextProvider = ({ children }) => {
         created_at: item.created_at
       }))
     );
+
+   
   };
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [modalDetails, setModalDetails] = useState(false);

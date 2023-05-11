@@ -8,15 +8,16 @@ export const RemarkContextProvider = ({ children }) => {
   const [remark, setRemark] = useState();
   const [remarkEdit, setRemarkEdit] = useState(remarkEntity);
   const [modalRemark, setModalRemark] = useState(false);
+  const [remarkTarget, setRemarkTarget] = useState();
 
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
-    if(localStorage.getItem("token")){
-     loadRemarkList();
-      }
-  }, []);
 
+    if (localStorage.getItem("token")) {
+      loadRemarkList();
+    }
+  }, []);
 
   const loadRemarkList = async () => {
     let remarks;
@@ -27,7 +28,6 @@ export const RemarkContextProvider = ({ children }) => {
       remarks = response;
     } catch (error) {
       console.error(error);
-      //console.log("buscou")
     }
     setRemark(remarks.data.list);
   };
@@ -39,6 +39,8 @@ export const RemarkContextProvider = ({ children }) => {
         setModalRemark,
         remark,
         setRemark,
+        remarkTarget,
+        setRemarkTarget,
         remarkEdit,
         setRemarkEdit,
         idRemark,

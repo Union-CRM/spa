@@ -1,5 +1,13 @@
 import React from "react";
-import { DivP, Ddata, Header, DivPlanner, TextMonDay, DivCard, DivInfo } from "./styles";
+import {
+  DivP,
+  Ddata,
+  Header,
+  DivPlanner,
+  TextMonDay,
+  DivCard,
+  DivInfo,
+} from "./styles";
 import Card from "./Card";
 import Headline from "../../../assets/FontSystem/Headline";
 import { useState, useEffect } from "react";
@@ -18,9 +26,13 @@ const PlannerCard = (props) => {
 
   useEffect(() => {
     if (props.adminList) {
-      setPlannerList(planner.filter((p) => p.user_id === userTarget.id));
+      setPlannerList(
+        planner ? planner.filter((p) => p.user_id === userTarget.id) : []
+      );
     } else {
-      setPlannerList(planner.filter((p) => p.user_id === user.id));
+      setPlannerList(
+        planner ? planner.filter((p) => p.user_id === user.id) : []
+      );
     }
   }, [planner]);
 
@@ -47,17 +59,18 @@ const PlannerCard = (props) => {
       <Header>
         <DivPlanner>
           <Headline type={"Headline3"} name={"Planner Of Day"} />
-          <Tippy content="Agenda, calendar with activites and appointments of the day">
+          {!props.home && (
+            <Tippy content="Agenda, calendar with activites and appointments of the day">
               <DivInfo>
-              
-                  <Info
+                <Info
                   width="25px"
                   style={{
-                    fill:  "#007BFF",
+                    fill: "#007BFF",
                   }}
                 />
-                     </DivInfo>
-              </Tippy>
+              </DivInfo>
+            </Tippy>
+          )}
         </DivPlanner>
         <Ddata>
           <TextMonDay>
@@ -70,6 +83,7 @@ const PlannerCard = (props) => {
         {plannerDay &&
           plannerDay.map((item) => (
             <Card
+              home={props.home}
               key={item.id}
               subject={item.subject}
               releaseTrain={item.release}

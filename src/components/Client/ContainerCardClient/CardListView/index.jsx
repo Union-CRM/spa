@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Container,
   Card,
@@ -37,8 +37,7 @@ import styled, { css } from "styled-components";
 
 const ClientCard = (props) => {
   const { openModal, openModalPopUp } = props;
-
-    
+  const [manager, setManager] = useState();
   const { toggleState, setToggleState } = useClientContext();
   const { activeTab, setActiveTab } = useClientContext();
 
@@ -61,15 +60,8 @@ const ClientCard = (props) => {
     props.setId(client.id);
   };
 
-<<<<<<< Updated upstream
 
 
-  /*const handleToggle = () => {
-    setIsActive(!isActive);
-    updateClient(client.id, { ...client, status: isActive ? "Inactive" : "Active" });
-  };*/
-=======
->>>>>>> Stashed changes
 
   const [isActive, setIsActive] = useState(client.status === "Active");
   const [previousStatus, setPreviousStatus] = useState(client.status);
@@ -109,7 +101,7 @@ const ClientCard = (props) => {
             </DivPhoto>
 
             <DivDadosCard>
-              <Body type={"Body1"} name={client.client} />
+              <Body type={"Body2"} name={client.client} />
 
               <Subtitle type={"TextDescription"} name={client.email} />
 
@@ -179,15 +171,11 @@ const ClientCard = (props) => {
 
             <DivRelease>
               <TitleInfo>
-<<<<<<< Updated upstream
-                Release Train <span>|</span>{" "}
-              </TitleInfo>
-              <ValueInfo>{client.textRelease} </ValueInfo>
-=======
+
                 Manager <span>|</span>{" "}
               </TitleInfo>
               <ValueInfo>{SplitName(client.user_name)}</ValueInfo>
->>>>>>> Stashed changes
+
             </DivRelease>
           </DivInfo>
         </Card>

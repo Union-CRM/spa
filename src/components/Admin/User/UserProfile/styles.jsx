@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import { ContainerHeaderAndCards } from "../../../../components/Client/ContainerCardClient/styles";
 import { DivButton } from "../../../../components/Client/ContainerCardClient/styles";
 import { CardsContainer as ContainerClient } from "../../../../components/Client/ContainerCardClient/styles";
 import { BoardStyle as BoardStyleClient } from "../../../../components/Client/ContainerCardClient/styles";
@@ -41,16 +42,15 @@ export const Content = styled.div`
   display: grid;
   grid-template-rows: 100%;
   grid-template-columns: 50% 50%;
-
   top: 0;
   height: 55vh;
   width: 100%;
-  min-width: 900px;
+  min-width: 400px;
   position: relative;
-  @media screen and (max-width: 755px) {
+  @media (min-width: 10px) and (max-width: 1006px) {
     display: flex;
-
     flex-direction: column;
+    width: 95%;
   }
 `;
 
@@ -61,13 +61,18 @@ export const Content = styled.div`
 export const DivClient = styled.div`
   width: 200%;
   height: 90%;
-
+  
   margin: 0;
   grid-column: 1;
   min-width: 400px;
   @media screen and (max-width: 755px) {
     width: 65%;
   }
+
+  ${ContainerHeaderAndCards}{
+    box-shadow: none;
+  }
+
   ${ModaClient} {
     display: none;
     grid-template-columns: 0%;
@@ -87,14 +92,22 @@ export const DivClient = styled.div`
   ${ContainerClient} {
     display: grid;
     background: #fff;
-    top: -15px;
+
     width: 98%;
-    height: 62.8%;
+    height: 40.3vh;
     grid-column: 1;
     position: relative;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 0px 0px 8px 0px;
     overflow-y: scroll;
+    @media (min-width: 50px) and (max-width: 1006px) {
+      height: 39%;
+    }
+    @media (min-width: 1007px) and (max-width: 1360px) {
+      height: 80%;
+    }
+    @media (min-width:701px) and (max-width: 1006px) {
+      height: 54%;
   }
   ${BoardStyleClient} {
     width: 100%;
@@ -112,7 +125,7 @@ export const DivClient = styled.div`
 
   ${ContainerCard} {
     width: auto;
-    height: 150px auto;
+    height: 204px;
   }
 `;
 

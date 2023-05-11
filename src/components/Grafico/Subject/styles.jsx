@@ -18,22 +18,24 @@ export const H1 = styled.h1`
   line-height: 36px;
   font-size: 30px;
   font-weight: 600;
+  margin-left: 0.8em;
   color: rgba(0, 0, 0, 0.8);
+  margin-top: 0.4rem;
 `;
 
 export const TitleDiv = styled.div`
-  position: relative;
-  width: 100%;
-  margin-top: 1%;
-  margin-left: 2.5%;
+  width: 1%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
 `;
 
 export const SquareDiv = styled.div`
   position: relative;
-  margin-left: 1.5%;
   width: 100%;
-  top: 35%;
-  left: -19.5%;
+  height: 100%;
+  top: 37%;
 `;
 
 export const SquareText = styled.h1`
@@ -64,7 +66,6 @@ export const LateSquare = styled.div`
   justify-content: center;
   align-items: center;
   padding-bottom: 2%;
-  padding-top: 2%;
 `;
 
 export const NearSquare = styled.div`
@@ -82,7 +83,6 @@ export const NearSquare = styled.div`
   justify-content: center;
   align-items: center;
   padding-bottom: 2%;
-  padding-top: 2%;
 `;
 
 export const OnTimeSquare = styled.div`
@@ -98,7 +98,6 @@ export const OnTimeSquare = styled.div`
   font-size: 32px;
   line-height: 36px;
   padding-bottom: 2%;
-  padding-top: 2%;
   justify-content: center;
   align-items: center;
 `;

@@ -63,7 +63,7 @@ const Subject = (props) => {
 
   // useFetch
   const { insertSubject, updateSubject } = useFetchSubject();
-  const { userTarget } = useUserContext();
+  const { user, userTarget } = useUserContext();
 
   const createSubject = () => {
     const newSubject = {
@@ -74,7 +74,7 @@ const Subject = (props) => {
     };
 
     if (ClientId && release && subject && description) {
-      insertSubject(newSubject);
+      insertSubject(newSubject, userTarget.id);
       loadData();
       setModal(false);
     } else {
@@ -101,7 +101,8 @@ const Subject = (props) => {
   }, [selectedClient]);
 
   const activeClients = clientList.filter(
-    (client) => client.status === "Active" && client.user_id === userTarget.id
+    (client) =>
+      client.status === "Active" /*&& client.user_id === userTarget.id*/
   );
 
   const optionsClient = activeClients.map((client) => {
@@ -135,7 +136,6 @@ const Subject = (props) => {
                 Client Name
                 <SingleSelect
                   set={(client) => setSelectedClient(client)}
-                  onChange={(choice) => setUserChoice(choice)}
                   placeholder={flag && !selectedClient ? "" : ""}
                   sizeSingle={"100%"}
                   sizeMenu={"100%"}

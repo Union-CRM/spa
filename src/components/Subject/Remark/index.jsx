@@ -76,17 +76,9 @@ const Remark = (props) => {
               <span> Final Date</span>
               <p>{dateReturn}</p>
             </DivDateReturn>
-
-            <DivPhoto>
-              <DivPhotoII>
-                <Photo $mode={status}>{Split(remarkEdit.user_name)}</Photo>
-              </DivPhotoII>
-            </DivPhoto>
-
             <DivDadosRemark>
               <NameEmail>
                 {SplitName(remarkEdit.user_name)}
-                <span>{remarkEdit.user_id}</span>
               </NameEmail>
             </DivDadosRemark>
 

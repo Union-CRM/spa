@@ -3,8 +3,8 @@ import Body from "../../../../assets/FontSystem/Body";
 import Headline from "../../../../assets/FontSystem/Headline";
 import Subtitle from "../../../../assets/FontSystem/Subtitle";
 import IconSystem from "../../../../assets/IconSystem";
-import { useState } from 'react'
-import { usePlannerContext } from '../../../../hook/usePlannerContext'
+import { useState } from "react";
+import { usePlannerContext } from "../../../../hook/usePlannerContext";
 import {
   ContainerCards,
   DivStatus,
@@ -29,20 +29,24 @@ import {
 } from "./styles";
 
 function Split(n) {
-  const name= n? n:""
-  var nameSplit=name.split(" ")
-  var name2=nameSplit[0].split("")[0]+" "+nameSplit[nameSplit.length-1].split("")[0]+"";
+  const name = n ? n : "";
+  var nameSplit = name.split(" ");
+  var name2 =
+    nameSplit[0].split("")[0] +
+    " " +
+    nameSplit[nameSplit.length - 1].split("")[0] +
+    "";
   return name2.toUpperCase();
 }
 
 const Card = (props) => {
   const { setModalPlanner } = usePlannerContext();
-  const time=props.initial.split(" ")[1].split(":");
+  const time = props.initial.split(" ")[1].split(":");
   const [timeStart] = useState(`${time[0]}:${time[1]}`);
   const handleEdit = () => {
     props.OpenModal();
     setModalPlanner(false);
-  }
+  };
 
   return (
     <>
@@ -75,17 +79,25 @@ const Card = (props) => {
               />
               <SpanGuests>{props.emailClient}</SpanGuests>
             </TextEmail>
-            {props.guests && <TextGuests>
-              <DivGuests>Guests</DivGuests>
-                <SpanGuests>{props.guests ? props.guests.map((g)=> {return g.client_name + " , "}):""}</SpanGuests>
-            </TextGuests>}
+            {props.guests && (
+              <TextGuests>
+                <DivGuests>Guests</DivGuests>
+                <SpanGuests>
+                  {props.guests
+                    ? props.guests.map((g) => {
+                        return g.client_name + " , ";
+                      })
+                    : ""}
+                </SpanGuests>
+              </TextGuests>
+            )}
           </DivTextCard>
         </ClientContent>
         <UserContent>
-          {props.status === "SCHEDULED" && (
-            <DivIcon  onClick={()=> handleEdit()}>
-            <IconSystem icon={"Edit"} width={"11px"} height={"11px"}/>
-          </DivIcon >
+          {props.status === "SCHEDULED" && !props.home && (
+            <DivIcon onClick={() => handleEdit()}>
+              <IconSystem icon={"Edit"} width={"11px"} height={"11px"} />
+            </DivIcon>
           )}
           <DivStatusTime>
             <DivStatus $mode={props.status} />
@@ -93,15 +105,10 @@ const Card = (props) => {
           </DivStatusTime>
           <DivUserInformation>
             <DivPhoto>
-              <Body
-                type={"Body1"}
-                name={Split(props.userName)}
-              />
+              <Body type={"Body1"} name={Split(props.userName)} />
             </DivPhoto>
             <DivNameEmail>
-              <NameUser>
-                {props.userName}
-              </NameUser>
+              <NameUser>{props.userName}</NameUser>
               <Subtitle
                 type={"TextDescription"}
                 name={props.emailUser}

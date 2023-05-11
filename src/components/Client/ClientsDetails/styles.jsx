@@ -150,6 +150,7 @@ display: flex;
 padding-bottom: 1%;
 padding-top:1%;
 display:block;
+
 `;
 
 export const DivColors = styled.span`

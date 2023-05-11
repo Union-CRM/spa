@@ -5,15 +5,15 @@ import { useUserContext } from "./useUserContext";
 import { groupCreate } from "../api/routesAPI";
 export const useFetchAdmGroupList = () => {
   const { loadData } = useGroupListContext();
+  
   const insertGroup = async (group) => {
     axios
       .post(
         groupCreate,
         {
-
             group_name: group.group_name,
             customer_id: parseInt(group.customer_id),
-            users: parseInt(group.users),
+            users: group.users.users_id,
         },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -34,7 +34,7 @@ export const useFetchAdmGroupList = () => {
         {
             group_name: group.group_name,
             customer_id: group.customer_id,
-            users: group.users.users_id.id,
+            users: group.users.users_id,
 
         },
         {

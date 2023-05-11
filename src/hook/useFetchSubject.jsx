@@ -7,10 +7,10 @@ export const useFetchSubject = () => {
   const { user } = useUserContext();
 
   const { loadData } = useSubjectContext();
-  const insertSubject = async (subject) => {
+  const insertSubject = async (subject, user_id) => {
     axios
       .post(
-        `${subjectCreate}${user.id}`,
+        `${subjectCreate}${user_id}`,
         {
           subject_title: subject.subject_title,
           subject_text: subject.subject_text,

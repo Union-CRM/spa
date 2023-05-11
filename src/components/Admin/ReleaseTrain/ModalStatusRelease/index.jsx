@@ -1,4 +1,4 @@
-import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
+import ButtonDefault from "../../../../assets/Buttons/ButtonDefault";
 import {
   Container,
   Overlay,
@@ -9,36 +9,35 @@ import {
   Span,
   ContainerFather,
 } from "./styles";
-import { useBusinessContext } from "../../../hook/useBusinessContent";
-import { useFetchBusiness } from "../../../hook/useFetchBusiness";
+import { useReleaseContext } from "../../../../hook/useReleaseContent";
+import { useFetchRelease } from "../../../../hook/useFetchRelease";
 import { useEffect } from "react";
 
-const ModalStatusBusiness = (props) => {
+const ModalStatusRelease = (props) => {
   const { modalClose } = props;
-  const { business: businessList } = useBusinessContext();
-  const { updateStatusBusiness } = useFetchBusiness();
-  const business = businessList.filter((item) => item.id === props.id)[0];
-  const p = business.status === "ATIVO" ? "Inativo" : "Ativo";
+  const { release , idRelease, setIdRelease, setModalStatusRelease } = useReleaseContext();
+  const { updateStatusRelease } = useFetchRelease();
+  const releases = release.filter((item) => item.id === idRelease.id)[0];
+  const p = releases.status === "ATIVO" ? "Deactivate" : "Active";
 
   useEffect(() => {
-    console.log(business.status);
+    //console.log(idRelease.id + "teste");
   }, []);
-
+  
   const span =
-    business.status === "ATIVO"
+    releases.status === "ATIVO"
       ? "Do you want do deactivate this card?"
       : "Do you want to activate this card?";
  
   const handleAlterStatus = () => {
-    updateStatusBusiness(business.id);
-    modalClose();
+    updateStatusRelease(releases.id);
+    setModalStatusRelease(false);
   };
-
+  
   const handleCancel = () => {
-    modalClose();
     window.location.reload();
   };
-
+  
   return (
     <ContainerFather>
       <Overlay>
@@ -69,4 +68,4 @@ const ModalStatusBusiness = (props) => {
   );
 };
 
-export default ModalStatusBusiness;
+export default ModalStatusRelease;

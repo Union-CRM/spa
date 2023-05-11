@@ -4,7 +4,7 @@ import { realiseGetRealiseTrains } from "../api/routesAPI";
 
 
 export const useFetchRelease = () => {
-  const {loadData,setModalSaveRelease,setModalCreateRelease,setModalEditRelease} = useReleaseContext();
+  const {loadData,setModalSaveRelease,setModalCreateRelease,setModalEditRelease,setModalStatusRelease} = useReleaseContext();
 
 
   const createRelease = async (release) => {
@@ -27,6 +27,7 @@ export const useFetchRelease = () => {
   };
 
   const updateRelease = async (release,id) => {
+    console.log(release);
     axios
       .put(
         `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8087/union/v1/releasetrains/update/${id}`,
@@ -52,7 +53,7 @@ export const useFetchRelease = () => {
         }
       )
       .then(function (response) {
-         loadData();
+        loadData();
       })
       .catch(function (error) {
        console.error(error.response); 

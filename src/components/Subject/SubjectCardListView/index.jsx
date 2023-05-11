@@ -43,7 +43,7 @@ import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { useUserContext } from "../../../hook/useUserContext";
-
+import { useSearchContext } from "../../../hook/useSearchContext";
 
 const cardStatus = {
   INPROGRESS: "IN PROGRESS",
@@ -55,7 +55,7 @@ const SubjectList = (props) => {
   const { subject } = useSubjectContext();
   const { user, userTarget, setUserTarget } = useUserContext();
   const [subjectList, setSubjectList] = useState([]);
-
+  const { search } = useSearchContext();
   /*
   const SubjectsCancel = "";
   const SubjectsProgress ="";
@@ -69,6 +69,25 @@ const SubjectList = (props) => {
       setUserTarget(user);
     }
   }, [subject, userTarget]);
+
+  useEffect(() => {
+    if (search) {
+      setSubjectList(
+        subject.filter(
+          (s) =>
+            (s.subject_title.toLowerCase().includes(search.toLowerCase()) ||
+              s.client.toLowerCase().includes(search.toLowerCase())) &&
+            s.user_id === user.id
+        )
+      );
+    } else {
+      if (props.adminList) {
+        setSubjectList(subject.filter((s) => s.user_id === userTarget.id));
+      } else {
+        setSubjectList(subject.filter((s) => s.user_id === user.id));
+      }
+    }
+  }, [search]);
 
   const SubjectsCancel = subjectList.filter(
     (item) => item.status_description === "CANCELED"
@@ -137,23 +156,18 @@ const SubjectList = (props) => {
             <DivTitlePage>
               <H1>Subjects List</H1>
 
-              <HowManySubjectList>({subject.length})</HowManySubjectList>
+              <HowManySubjectList>({subjectList.length})</HowManySubjectList>
 
               <Tippy content="List of all subjects.">
-              <DivInfo>
-              
+                <DivInfo>
                   <Info
-                  width="25px"
-                  style={{
-                    fill: "#007BFF",
-                  }}
-                />
-                     </DivInfo>
+                    width="25px"
+                    style={{
+                      fill: "#007BFF",
+                    }}
+                  />
+                </DivInfo>
               </Tippy>
-
-
-             
-
             </DivTitlePage>
 
             <DivButton onClick={() => createSubject()}>
@@ -254,7 +268,12 @@ const SubjectList = (props) => {
 
       <DivModal $mode={modal} />
       {modal && (
-        <Subject id={id} setModal={setModal} title={"Create Subject"} />
+        <Subject
+          id={id}
+          adminList={props.adminList}
+          setModal={setModal}
+          title={"Create Subject"}
+        />
       )}
 
       <DivModal $mode={modalDetails} />

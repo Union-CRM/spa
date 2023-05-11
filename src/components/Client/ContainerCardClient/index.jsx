@@ -31,11 +31,10 @@ import ModalPopUp from "../ModalPopUP";
 import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
-
+import { useSearchContext } from "../../../hook/useSearchContext";
 // Modal Client //
 import ModalClientDetails from "../ModalClientDetails";
 import ModalClientEdit from "../EditClient";
-
 
 const abaStatus = {
   ACTIVE: "Active",
@@ -56,14 +55,33 @@ const ContainerCards = (props) => {
   const { id, setId } = useClientContext();
   const {modalInfo, setModalInfo} = useClientContext();
   const {modalEditClient, setModalEditClient } = useClientContext();
+  const { search } = useSearchContext();
+
 
   useEffect(() => {
     if (props.adminList) {
+
       setClientList(client.filter((c) => c.user_id === userTarget.id));
     } else {
       setClientList(client);
     }
   }, [client]);
+
+  useEffect(() => {
+    if (search) {
+      setClientList(
+        client.filter((c) =>
+          c.client.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    } else {
+      if (props.adminList) {
+        setClientList(client.filter((c) => c.user_id === userTarget.id));
+      } else {
+        setClientList(client.filter((c) => c.user_id === user.id));
+      }
+    }
+  }, [search]);
 
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
@@ -78,10 +96,10 @@ const ContainerCards = (props) => {
     setEdit(false);
   };
 
- // const EditClient = () => {
-   // setModal(true);
-   // setEdit(true);
-  //};
+  const EditClient = () => {
+    setModal(true);
+    setEdit(true);
+  };
 
   const modalClose = () => {
     setModalPopUp(true);
@@ -101,20 +119,16 @@ const ContainerCards = (props) => {
               <HowManyClientList>
                 ({clientList ? clientList.length : 0})
               </HowManyClientList>{" "}
-
               <Tippy content="List of all clients.">
-              <DivInfo>
-              
+                <DivInfo>
                   <Info
-                  width="25px"
-                  style={{
-                    fill: "#007BFF",
-                  }}
-                />
-                     </DivInfo>
+                    width="25px"
+                    style={{
+                      fill: "#007BFF",
+                    }}
+                  />
+                </DivInfo>
               </Tippy>
-         
-
             </DivTitlePage>
 
             <DivButton onClick={() => createClient()}>
@@ -168,8 +182,8 @@ const ContainerCards = (props) => {
           <LineDivisor />
 
           <BoardStyle>
-            {client &&
-              client
+            {clientList &&
+              clientList
                 .filter((item) => item.status === active)
                 .map((item) => (
                   <ClientCard
@@ -185,6 +199,7 @@ const ContainerCards = (props) => {
         </CardsContainer>
       </ContainerHeaderAndCards>
 
+
       <DivModal $mode={modal} />
 {modal && (
     <AddEditClient
@@ -194,26 +209,35 @@ const ContainerCards = (props) => {
     />
 )}
 
+
       <DivModal $mode={modalInfo} />
 
-       {modalInfo && (
-        <ModalClientDetails
+      {modalInfo && (
+        <ModalClientEdit
           id={id}
           openModal={() => detailsModal()}
           setModalInfo={setModalInfo}
           title={"Client Details"}
+
         />
       )}
 
       <DivModal $mode={modalEditClient} />
 
     {modalEditClient && (
+
+      {/* {modal && (
+
         <ModalClientEdit
           id={id}
           setModalEditClient={setModalEditClient}
           title={"Edit Client"}
         />
+
     )}
+
+    )} */}
+
 
       {modalPopUp && (
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
