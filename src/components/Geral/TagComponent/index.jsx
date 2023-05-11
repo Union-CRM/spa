@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { Label, Container, DivSvg, DivSvg2 } from "./styles";
-import {ReactComponent as Contact} from "../../../assets/svg/Contact.svg"
-import {ReactComponent as Drop} from "../../../assets/svg/Drop.svg"
+import { ReactComponent as Contact } from "../../../assets/svg/Contact.svg";
+import { ReactComponent as Drop } from "../../../assets/svg/Drop.svg";
 
 export const TagComponent = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
@@ -21,24 +21,22 @@ export const TagComponent = (props, placeholder, idTagOption) => {
   })); //props.options;
   //console.log(options.map((item)=>({value:item.value,label:item.label,color:colors[getRandomInt(colors.length-1)]})))
 
-
   const DropdownIndicator = () => {
-    if (props.indicator){
-      if(props.indicator === "guest")
+    if (props.indicator) {
+      if (props.indicator === "guest")
         return (
           <DivSvg>
-          <Contact fill={"#888C95"} width={"20px"}/>
-        </DivSvg>  
-        )
-    }else{
+            <Contact fill={"#888C95"} width={"20px"} />
+          </DivSvg>
+        );
+    } else {
       return (
         <DivSvg2>
-        <Drop width={"15px"}/>
-      </DivSvg2>  
-      )
+          <Drop width={"15px"} />
+        </DivSvg2>
+      );
     }
   };
-
 
   return (
     <>
@@ -47,7 +45,11 @@ export const TagComponent = (props, placeholder, idTagOption) => {
           {props.label}
           <Select
             isMulti
-            components={{ DropdownIndicator, animatedComponents, IndicatorSeparator: () => null }}
+            components={{
+              DropdownIndicator,
+              animatedComponents,
+              IndicatorSeparator: () => null,
+            }}
             options={options}
             value={props.tags}
             id={props.idTagOption}
@@ -126,7 +128,6 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                 styles,
                 { data, isDisabled, isFocused, isSelected }
               ) => {
-                console.log("options", data, isFocused, isSelected, isDisabled);
                 return { ...styles, color: data.color };
               },
 

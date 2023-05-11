@@ -72,21 +72,22 @@ const ContainerCards = () => {
   }, []);
 
   useEffect(() => {
-    setUserList(users);
+    if (users) {
+      setUserList(users);
+    } else {
+      setUserList([]);
+    }
   }, [users]);
 
   useEffect(() => {
-    if (users)
-    console.log(users);
-      if (search) {
-        setUserList(
-          users.filter((u) =>
-            u.name.toLowerCase().includes(search.toLowerCase())
-          )
-        );
-      } else {
-        setUserList(users);
-      }
+    if (users) console.log(users);
+    if (search) {
+      setUserList(
+        users.filter((u) => u.name.toLowerCase().includes(search.toLowerCase()))
+      );
+    } else {
+      setUserList(users);
+    }
   }, [search, users]);
 
   return (
@@ -96,7 +97,9 @@ const ContainerCards = () => {
           <Top>
             <DivTitlePage>
               <H1>User List </H1>
-              <HowManyClientList>({userList.length})</HowManyClientList>{" "}
+              <HowManyClientList>
+                ({userList ? userList.length : 0})
+              </HowManyClientList>{" "}
               <Tippy content="List of all system users">
                 <DivInfo>
                   <Info
@@ -129,7 +132,9 @@ const ContainerCards = () => {
               <Active>
                 Active (
                 <HowManyActive>
-                  {userList.filter((item) => item.status === "ACTIVE").length}
+                  {userList
+                    ? userList.filter((item) => item.status === "ACTIVE").length
+                    : 0}
                 </HowManyActive>
                 )
               </Active>
@@ -142,7 +147,10 @@ const ContainerCards = () => {
               <Inactive>
                 Inactive (
                 <HowManyInactive>
-                  {userList.filter((item) => item.status === "INACTIVE").length}
+                  {userList
+                    ? userList.filter((item) => item.status === "INACTIVE")
+                        .length
+                    : 0}
                 </HowManyInactive>
                 )
               </Inactive>

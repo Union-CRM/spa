@@ -5,7 +5,6 @@ import { userCreate, userUpdateStatus } from "../api/routesAPI";
 export const useFetchUser = () => {
   const { loadUserList } = useUserContext();
   const createUser = async (user) => {
-    //console.log(user);
     try {
       const response = await axios.post(userCreate, user, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -27,11 +26,10 @@ export const useFetchUser = () => {
         }
       )
       .then(function (response) {
-        //console.log(response);
         loadUserList();
       })
       .catch(function (error) {
-        console.log(error.response);
+        console.error(error.response);
       });
   };
 

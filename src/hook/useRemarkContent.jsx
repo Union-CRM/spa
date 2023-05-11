@@ -4,7 +4,7 @@ import { RemarkContext } from "../context/RemarkContext";
 export const useRemarkContext = () => {
   const context = useContext(RemarkContext);
   if (!context) {
-    console.log("Contexto não encontrado");
+    console.error("Contexto não encontrado");
   }
   return context;
 };

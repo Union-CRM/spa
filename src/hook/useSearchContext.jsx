@@ -4,7 +4,7 @@ import { SearchContext } from "../context/SearchContext";
 export const useSearchContext = () => {
   const context = useContext(SearchContext);
   if (!context) {
-    console.log("Contexto não encontrado");
+    console.error("Contexto não encontrado");
   }
   return context;
 };

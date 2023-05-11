@@ -40,7 +40,11 @@ const ContainerCards = () => {
             <DivTitlePage>
               <H1>Users </H1>
               <HowManyClientList>
-                ({userList.filter((item) => item.status === active).length})
+                (
+                {userList
+                  ? userList.filter((item) => item.status === active).length
+                  : 0}
+                )
               </HowManyClientList>{" "}
             </DivTitlePage>
 

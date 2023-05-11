@@ -78,7 +78,6 @@ const Subject = (props) => {
   ////////// EDIT SUBJECT ////////////
 
   useEffect(() => {
-    
     if (props.title === "Edit Subject") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
 
@@ -99,7 +98,6 @@ const Subject = (props) => {
       status_id: status,
     };
 
-    console.log(newSubject);
     if (subject && description && status) {
       if (status === "FINISHED") {
         subjectFinished(id, newSubject);

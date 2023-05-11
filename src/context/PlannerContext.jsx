@@ -22,16 +22,13 @@ export const PlannerContextProvider = ({ children }) => {
   const [modalError, setModalError] = useState(false);
 
   useEffect(() => {
-
     if (localStorage.getItem("token")) {
       loadPlannerList();
-
     }
   }, []);
 
   const loadPlannerList = async () => {
     try {
-
       const response = await axios.get(plannerGetSubmissivesPlanners, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
@@ -39,7 +36,6 @@ export const PlannerContextProvider = ({ children }) => {
       setPlanner(response.data.list);
     } catch (error) {
       console.error(error);
-      //console.log("buscou")
     }
   };
 
@@ -83,5 +79,3 @@ export const PlannerContextProvider = ({ children }) => {
     </PlannerContext.Provider>
   );
 };
-
-

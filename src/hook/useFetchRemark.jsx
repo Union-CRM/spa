@@ -1,10 +1,8 @@
 import axios from "axios";
-import { useState } from "react";
 import { usePlannerContext } from "./usePlannerContext";
 import { useRemarkContext } from "./useRemarkContent";
 import { remarkCreate, remarkUpdate } from "../api/routesAPI";
 export const useFetchRemark = () => {
-  const [remarkId, setRemarkId] = useState();
   const {
     setModalError,
     setModalRemark,
@@ -21,7 +19,7 @@ export const useFetchRemark = () => {
       loadRemarkList();
       return response.data.id;
     } catch (error) {
-      console.log(error);
+      console.error(error);
 
       setModalError(true);
       setModalRemark(false);

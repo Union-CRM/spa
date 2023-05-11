@@ -42,10 +42,8 @@ const ClientDetails = (props) => {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    
     if (props.title === "Details Clients") {
       const client = clientList.filter((item) => item.id === props.id)[0];
-      console.log(client)
       setEmail(client.client_email);
       setReleaseObj({
         id: client.release_id,
@@ -103,30 +101,24 @@ const ClientDetails = (props) => {
       <DivBusiness>
         Business
         <span onChange={(event) => setBusiness(event.target.value)}>
-            {client.textBusiness}
-          </span>
+          {client.textBusiness}
+        </span>
       </DivBusiness>
 
       <DivTags>
-       Tags
-
-       {tags && tags.length === 0 ? (
-     
-     <NoTags>
-     It has no tags.</NoTags>
-
- ) : (
-  
-        <TagsClient>
-       {tags ? tags.map ((t) => 
-          <DivColors colors={t.color}>
-            {t.label}
-          </DivColors>
-         ) : "" }
-         </TagsClient>
-          )}
+        Tags
+        {tags && tags.length === 0 ? (
+          <NoTags>It has no tags.</NoTags>
+        ) : (
+          <TagsClient>
+            {tags
+              ? tags.map((t) => (
+                  <DivColors colors={t.color}>{t.label}</DivColors>
+                ))
+              : ""}
+          </TagsClient>
+        )}
       </DivTags>
-
     </ContainerDetails>
   );
 };
