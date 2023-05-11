@@ -1,26 +1,27 @@
-import{ React, useState, useEffect} from 'react';
-import {useFetchTag} from '../../../../hook/useFetchTag';
+import { React, useState, useEffect } from 'react';
+import { useFetchTag } from '../../../../hook/useFetchTag';
 import { TagComponent } from '../../../Geral/TagComponent';
 import { useFetchSegment } from '../../../../hook/useFetchSegment';
 import { useFetchBusiness } from '../../../../hook/useFetchBusiness';
 import { useBusinessContext } from '../../../../hook/useBusinessContent';
 
-import { Container, 
-    ContainerCentral,
-    PositionTitle, 
-    Form,
-    H1,
-    DivButton,
-    ClickButton,
-    PositionButtonCancel,
-    DivBusinessName,
-    Label,
-    Input,
-    DivCodeStatus,
-    DivCode,
-    DivStatus,
-    DivSegment,
-    DivAtivo
+import {
+  Container,
+  ContainerCentral,
+  PositionTitle,
+  Form,
+  H1,
+  DivButton,
+  ClickButton,
+  PositionButtonCancel,
+  DivBusinessName,
+  Label,
+  Input,
+  DivCodeStatus,
+  DivCode,
+  DivStatus,
+  DivSegment,
+  DivAtivo
 } from "./styles"
 
 import SingleSelect from '../../../Geral/Input/SingleSelect';
@@ -32,15 +33,18 @@ const CreateEditBusiness = (props) => {
   const { id } = props;
   const { tagBusinessList } = useFetchTag("Tag");
   const { segmentList } = useFetchSegment("Seg");
-  const { createBusiness, updateBusiness, updateStatusBusiness} = useFetchBusiness();
-  const { setModalCreateBusiness, setModalEditBusiness ,loadData,modalDiscard,modalEditBusiness,
-    idBusiness, businessTarget, setModalSaveBusiness,setSucessBusiness} = useBusinessContext(); 
+  const { createBusiness, updateBusiness, updateStatusBusiness } = useFetchBusiness();
+  const { setModalCreateBusiness, setModalEditBusiness, loadData, modalDiscard, modalEditBusiness,
+    idBusiness, businessTarget, setModalSaveBusiness, setSucessBusiness } = useBusinessContext();
 
   // UseStates  
   const [tags, setTags] = useState("");
-  const [flag, setFlag] = useState(false);
+  const [flagName, setFlagName] = useState(false);
+  const [flagCode, setFlagCode] = useState(false);
+  const [flagStatus, setFlagStatus] = useState(false);
   const [businessName, setBusinessName] = useState("");
   const [businessCode, setBusinessCode] = useState("");
+  const [flagSegment, setFlagSegment] = useState(false);
   const [businessStatus, setBusinessStatus] = useState("");
   const [businessSegment, setBusinessSegment] = useState("");
 
@@ -52,61 +56,73 @@ const CreateEditBusiness = (props) => {
 
   // If edit Modal, set BusinessTarget in Business
   useEffect(() => {
-    
-    if(props.title === "Edit Business"){
+
+    if (props.title === "Edit Business") {
 
       setBusinessName(businessTarget.name);
       setBusinessCode(businessTarget.code);
       setBusinessStatus(businessTarget.status);
-      setBusinessSegment({value: businessTarget.segment_id,label : businessTarget.segment_description});
+      setBusinessSegment({ value: businessTarget.segment_id, label: businessTarget.segment_description });
       setTags(businessTarget.tags);
-      
+
     }
   }, [businessTarget]);
 
   // Checking which modal is opened
   const handleSubmit = () => {
-    if(!modalDiscard){
-      if(!modalEditBusiness){
+    if (!modalDiscard) {
+      if (!modalEditBusiness) {
         insertBusiness()
       }
-      else{
+      else {
         editBusiness()
       }
     }
   };
 
-  //  CREATE AND EDIT ANOTATION
-
   // Insert new Business
-  const insertBusiness = () =>{
-    
+  const insertBusiness = () => {
+
     var tag = [];
 
-    if(tags){
-      tag = tags.map((tag) => ({ tag_id: tag.value}));
+    if (tags) {
+      tag = tags.map((tag) => ({ tag_id: tag.value }));
     }
-      
+
+    if (!businessName) {
+      setFlagName(true);
+    } else {
+      setFlagName(false);
+    }
+
+    if (!businessCode) {
+      setFlagCode(true);
+    } else {
+      setFlagCode(false);
+    }
+
+    if (!businessSegment) {
+      setFlagSegment(true);
+    } else {
+      setFlagSegment(false);
+    }
+
     const newBusiness = {
       business_name: businessName,
       business_code: businessCode,
       segment_id: businessSegment,
       tags: tag
-    }  
-    console.log(newBusiness)
-
-    if(businessName && businessCode && businessSegment){
-      createBusiness(newBusiness);
-      loadData()
-    }else{
-      setFlag(true);
     }
 
+    if (businessName && businessCode && businessSegment) {
+      createBusiness(newBusiness);
+      loadData()
+    }
   }
 
   // Edit selected business
   const editBusiness = () => {
-
+    /*
     var tag = [];
 
     if(tags){
@@ -121,10 +137,10 @@ const CreateEditBusiness = (props) => {
       tags: tag
     }  
     console.log(newBusiness)
-
+    
     if(businessName && businessCode && businessSegment.value){
       setSucessBusiness(true);
-      updateBusiness(newBusiness,idBusiness);
+      updateBusiness(newBusiness,idBusiness.id);
 
       if(newBusiness.status != idBusiness.status){
         updateStatusBusiness(idBusiness.id);
@@ -133,7 +149,7 @@ const CreateEditBusiness = (props) => {
     }else{
       setFlag(true);
     }
-  
+  */
   }
 
   // Button cancel in modalCreateBusiness
@@ -141,123 +157,125 @@ const CreateEditBusiness = (props) => {
     setModalCreateBusiness(false)
     setModalEditBusiness(false)
   };
-  
+
   // Set segment selected in modalEditBusiness
-  const handleSelectedSegment =(id)=>{
+  const handleSelectedSegment = (id) => {
     setBusinessSegment(segmentList.filter(s => s.value === id)[0])
   }
 
   return (
     <ContainerCentral>
-        <Container>
-            <PositionTitle>
-                <H1>{props.title}</H1>
-            </PositionTitle>
-            <Form>
-            <DivBusinessName>
-                <Label>Business Name</Label> 
-                {(
+      <Container>
+        <PositionTitle>
+          <H1>{props.title}</H1>
+        </PositionTitle>
+        <Form>
+          <DivBusinessName>
+            <Label>Business Name</Label>
+            {(
+              <Input
+                widthInput={"98% !important"}
+                name={businessName}
+                flag={flagName}
+                value={businessName ? businessName : ("")}
+                onChange={(event) => setBusinessName(event.target.value)}
+                placeholder={flagName && !businessName ? "Required field" : ""}
+                required
+              />)}
+          </DivBusinessName>
+          <DivCodeStatus>
+            <DivCode>
+              <Label>Code</Label>
+              {(
                 <Input
                   widthInput={"98% !important"}
-                  name={businessName}
-                  flag={flag}
-                  value={businessName ? businessName : ("")}
-                  onChange={(event) => setBusinessName(event.target.value)}
+                  name={businessCode}
+                  flag={flagCode}
+                  value={businessCode ? businessCode : ("")}
+                  onChange={(event) => setBusinessCode(event.target.value)}
+                  placeholder={flagCode && !businessCode ? "Required field" : ""}
                   required
-                />)}
-            </DivBusinessName> 
-            <DivCodeStatus>
-                <DivCode>
-                    <Label>Code</Label>
-                    {(
-                    <Input 
-                      widthInput={"98% !important"}
-                      name={businessCode}
-                      flag={flag}
-                      value={businessCode ? businessCode : ("")}
-                      onChange={(event) => setBusinessCode(event.target.value)}
-                      required
-                    />
-                    )}
-                </DivCode>
-                <DivStatus>
-                    <Label>Status</Label>
-                      {modalEditBusiness && (
-                      <SingleSelect
-                      set={(businessStatus) => setBusinessStatus(businessStatus)}
-                      onChange={(event) => setBusinessStatus(event.target.value)}
-                      placeholder={flag && !businessStatus ? "Required field" : ""}
-                      options={status}
-                      value={businessStatus ? businessStatus : ("")}
-                      sizeSingle={"87%"}
-                      sizeMenu={"100%"}
-                      isDisabled={false}
-                      required
-                      />
-                      )}
-                      {!modalEditBusiness && (
-                        <>
-                          <DivAtivo>
-                            <Input placeholder="Status" value="Ativo" disabled />
-                          </DivAtivo>
-                        </>
-                        )}
-                </DivStatus>    
-            </DivCodeStatus>
-            <DivSegment>
-                <Label>Segment</Label>
-                {!modalEditBusiness && (
-                  <SingleSelect
-                  set={(s) => setBusinessSegment(s)}
-                  placeholder={flag && !businessSegment ? "Required field" : ""}
-                  options={segmentList ? segmentList : []}
-                  sizeSingle={"86.5%"}
+                />
+              )}
+            </DivCode>
+            <DivStatus>
+              <Label>Status</Label>
+              {modalEditBusiness && (
+                <SingleSelect
+                  set={(businessStatus) => setBusinessStatus(businessStatus)}
+                  onChange={(event) => setBusinessStatus(event.target.value)}
+                  placeholder={flagStatus && !businessStatus ? "Required field" : ""}
+                  options={status}
+                  value={businessStatus ? businessStatus : ("")}
+                  sizeSingle={"87%"}
                   sizeMenu={"100%"}
                   isDisabled={false}
                   required
-                  />
-                )}
-                {modalEditBusiness && (
-                  <SingleSelect
-                  set={(bs) => handleSelectedSegment(bs)}
-                  placeholder={flag && !businessSegment ? "Required field" : ""}
-                  options={segmentList ? segmentList : []}
-                  value={businessSegment ? businessSegment.label : ("")}
-                  sizeSingle={"86.5%"}
-                  sizeMenu={"100%"}
-                  isDisabled={false}
-                  required
-                  />
-                )}
-            </DivSegment>
-            <TagComponent
-              options={tagBusinessList ? tagBusinessList : []}
-              tags={tags}
-              placeholder={""}
-              label={"Tag"}
-              width={"90%"}
-              widths={"73.9%"}
-              sizeHeight={"3.5vh"}
-              heights={"12vh"}
-              sizeMenuList={"10vw"}
-              sizeMenu={"35%"}
-              set={(t) => setTags(t)}
-            />   
-            </Form>
-            <DivButton>
-            <ClickButton onClick={() => handleSubmit()}>
-              <ButtonDefault
-                type="adminSave"
-                weightFont={"500"}
-                sizeFont={"18px"}
-                name={"Save"}
+                />
+              )}
+              {!modalEditBusiness && (
+                <>
+                  <DivAtivo>
+                    <Input placeholder="Status" value="Ativo" disabled />
+                  </DivAtivo>
+                </>
+              )}
+            </DivStatus>
+          </DivCodeStatus>
+          <DivSegment>
+            <Label>Segment</Label>
+            {!modalEditBusiness && (
+              <SingleSelect
+                set={(s) => setBusinessSegment(s)}
+                placeholder={flagSegment && !businessSegment ? "Required field" : ""}
+                options={segmentList ? segmentList : []}
+                sizeSingle={"86.5%"}
+                sizeMenu={"100%"}
+                isDisabled={false}
+                required
               />
-            </ClickButton>
-            <PositionButtonCancel onClick={() => handleCancel()}>
-              <ButtonDefault type="adminCancel" name={"Cancel"} />
-            </PositionButtonCancel> 
-            </DivButton>  
-        </Container>
+            )}
+            {modalEditBusiness && (
+              <SingleSelect
+                set={(bs) => handleSelectedSegment(bs)}
+                placeholder={flagSegment && !businessSegment ? "Required field" : ""}
+                options={segmentList ? segmentList : []}
+                value={businessSegment ? businessSegment.label : ("")}
+                sizeSingle={"86.5%"}
+                sizeMenu={"100%"}
+                isDisabled={false}
+                required
+              />
+            )}
+          </DivSegment>
+          <TagComponent
+            options={tagBusinessList ? tagBusinessList : []}
+            tags={tags}
+            placeholder={""}
+            label={"Tag"}
+            width={"90%"}
+            widths={"73.9%"}
+            sizeHeight={"3.5vh"}
+            heights={"12vh"}
+            sizeMenuList={"10vw"}
+            sizeMenu={"35%"}
+            set={(t) => setTags(t)}
+          />
+        </Form>
+        <DivButton>
+          <ClickButton onClick={() => handleSubmit()}>
+            <ButtonDefault
+              type="adminSave"
+              weightFont={"500"}
+              sizeFont={"18px"}
+              name={"Save"}
+            />
+          </ClickButton>
+          <PositionButtonCancel onClick={() => handleCancel()}>
+            <ButtonDefault type="adminCancel" name={"Cancel"} />
+          </PositionButtonCancel>
+        </DivButton>
+      </Container>
     </ContainerCentral>
   )
 }
