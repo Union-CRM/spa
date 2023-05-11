@@ -62,7 +62,7 @@ const ClientDetails = (props) => {
         }))
       );
     }
-  }, [id]);
+  }, [id, clientList]);
 
   return (
     <ContainerDetails>

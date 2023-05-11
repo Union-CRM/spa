@@ -28,7 +28,9 @@ export const useFetchRelease = () => {
       });
   };
 
+
   const updateRelease = async (release, id) => {
+
     axios
       .put(
         `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8087/union/v1/releasetrains/update/${id}`,

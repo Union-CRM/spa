@@ -39,6 +39,9 @@ export const ToggleContainer = styled.label`
   position: relative;
   cursor: pointer;
   transition: background-color 0.2s ease-in;
+  @media(max-width: 1367px){
+    margin-left: -15%;
+  }
 `;
 
 export const ToggleButton = styled.span`
@@ -117,6 +120,9 @@ export const DivIcons = styled.div`
   flex-direction: row;
   grid-gap: 5px;
   width: 15%;
+  @media(max-width: 1367px){
+    margin: 3%;
+  }
 `;
 
 // Div Info client //
@@ -414,7 +420,7 @@ export const DivTagsSpan = styled.div`
 export const DivImgTag = styled.div`
   position: relative;
   align-items: center;
-  filter: ${(props) => (props.isActive ? "" : "grayscale(100%)")};
+  filter: ${(props) => (props.isActive ? "#007bff" : "#007bff")};
 `;
 
 export const ImgTag = styled.img`
