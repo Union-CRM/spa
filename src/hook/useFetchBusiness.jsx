@@ -19,17 +19,14 @@ export const useFetchBusiness = () => {
         setModalCreateBusiness(false);
      })
       .catch(function (error) {
-        
         console.error(error);
-        //setModalError(true);
-
      });
   };
 
   const updateBusiness = async (business,id) => {
     axios
       .put(
-        `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8082/union/v1/business/update/${id.id}`,
+        `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8082/union/v1/business/update/${id}`,
         business,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -39,18 +36,9 @@ export const useFetchBusiness = () => {
         loadData();
         setModalSaveBusiness(true);
         setModalEditBusiness(false);
-        /*
-        loadPlannerList();
-        setModalEdit(false);
-        setModalCreate(false);*/
       })
       .catch(function (error) {
-        /*
-        setModalError(true);
-        setModalFollowUp(false);
-        setModalCreate(false);
-        setModalReschedule(false);
-        console.error(error);*/
+        console.error(error);
       });
   };
 
@@ -64,13 +52,7 @@ export const useFetchBusiness = () => {
          loadData();
       })
       .catch(function (error) {
-        /*
-        setModalError(true);
-        setModalFollowUp(false);
-        setModalCreate(false);
-        setModalReschedule(false);*/
-       // console.error(error.response);
-        
+       console.error(error.response); 
       });
     
   };
