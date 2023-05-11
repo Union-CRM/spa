@@ -49,6 +49,8 @@ const CustomerCard = (props) => {
     try {
       setImage(
         require(`../../../../../assets/Image/${customer.name
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
           .split(" ")[0]
           .toLowerCase()}.png`)
       );
@@ -118,21 +120,18 @@ const CustomerCard = (props) => {
                 />
                 <ToggleButton checked={isActive} />
               </ToggleContainer>
-
-              <PositionEdit onClick={handleEdit}>
-                <IconSystem icon={"Edit"} height={"15px"} width={"15px"} />
-              </PositionEdit>
             </DivIcons>
           </Header>
 
           {!tagIcon && (
-            <DivDadosCard isActive={isActive}>
+            <DivDadosCard onClick={handleEdit} isActive={isActive}>
               <DivImg isActive={isActive}>
                 <Img img src={Image} alt="" />
               </DivImg>
               <Body type={"Body1"} name={customer.name} />
             </DivDadosCard>
           )}
+
           {tagIcon && (
             <DivTag>
               {customer.tags ? (

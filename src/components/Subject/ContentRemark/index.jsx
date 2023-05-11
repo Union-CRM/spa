@@ -21,6 +21,7 @@ import {
   DivGlobalCard,
   ButtonAdd,
   DivNoRemark,
+  Create,
 } from "./styles";
 
 const ContentRemarks = (props) => {
@@ -35,13 +36,12 @@ const ContentRemarks = (props) => {
   //Remark Context //
   const [remark, setRemark] = useState([]);
   const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
-  
+
   const { setModalRemark } = useRemarkContext();
-  const { remarkEdit, setRemarkEdit } = useRemarkContext();
+  const { remarkEdit, setRemarkEdit } = useRemarkContext([]);
   const [date, setDate] = useState();
   const [dateReturn, setDateReturn] = useState();
   const [noteText, setNoteText] = useState();
- 
 
   const [activeTab, setActiveTab] = useState(1);
   const [activeContent, setActiveContent] = useState(0);
@@ -137,36 +137,15 @@ const ContentRemarks = (props) => {
                   </p>
                 </DivDate>
 
-                <DivDateReturn $mode={status}>
-                  <Calendar
-                    style={{
-                      fill:
-                        status === "IN PROGRESS"
-                          ? "#00953B"
-                          : status === "FINISHED"
-                          ? "#008585"
-                          : status === "CANCELED"
-                          ? "#771300"
-                          : "",
-                    }}
-                  />
-                  <span> Final Date</span>
-                  <p onChange={(event) => setDateReturn(event.target.value)}>
-                    {r.date_return.split("T")[0]}
-                  </p>
-                </DivDateReturn>
-
-                <DivPhoto>
-                  <DivPhotoII>
-                    <Photo $mode={status}>{Split(r.user_name)}</Photo>
-                  </DivPhotoII>
-                </DivPhoto>
-
                 <DivDadosRemark>
                   <NameEmail>
-                    {SplitName(r.user_name)}
-                    <span>{r.user_id}</span>
+                    {"Remark Title: "}
+                    <span>{r.remark_name}</span>
                   </NameEmail>
+                  <Create>
+                    {" Create by: "}
+                    <span>{SplitName(r.user_name)}</span>
+                  </Create>
                 </DivDadosRemark>
               </DivGlobalCard>
 

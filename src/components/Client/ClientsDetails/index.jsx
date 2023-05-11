@@ -7,6 +7,7 @@ import {
   DivCustomer,
   DivRelease,
   DivBusiness,
+  NoTags,
   DivTags,
   TagsClient,
   DivColors,
@@ -19,35 +20,6 @@ import { useFetchTag } from "../../../hook/useFetchTag";
 
 const ClientDetails = (props) => {
   const { setModal, id } = props;
-
-  /*const { setModal } = props;
-  const closeModal = () => {
-    setModal(false);
-  };
-
-  // UseEffect Details
-  const { subject: subjectsList, loadData } = useSubjectContext();
-  const subject = subjectsList.filter((item) => item.id === props.id)[0];
-
-  const { id, setId } = useSubjectContext();
-
-  const [client, setClient] = useState();
-  const [email, setEmail] = useState();
-  const [release, setRelease] = useState();
-  const [business, setBusiness] = useState();
-  const [description, setDescription] = useState();
-
-  useEffect(() => {
-    
-    if (props.title === "Details") {
-      const subject = subjectsList.filter((item) => item.id === props.id)[0];
-      setClient(subject.client);
-      setEmail(subject.client_email);
-      setRelease(subject.release);
-      setBusiness(subject.business);
-      setDescription(subject.subject_text);
-    }
-  }, [id]);*/
 
   const { releaseList } = useFetchRelease("release");
   const { customerList } = useFetchCustomer("Customer");
@@ -62,8 +34,6 @@ const ClientDetails = (props) => {
   const client = clientList.filter((item) => item.id === props.id)[0];
 
   const { setId } = useClientContext();
-
-
   const [email, setEmail] = useState();
   const [release, setRelease] = useState();
   const [rose, setRole] = useState();
@@ -75,6 +45,7 @@ const ClientDetails = (props) => {
     
     if (props.title === "Details Clients") {
       const client = clientList.filter((item) => item.id === props.id)[0];
+      console.log(client)
       setEmail(client.client_email);
       setReleaseObj({
         id: client.release_id,
@@ -93,9 +64,7 @@ const ClientDetails = (props) => {
         }))
       );
     }
-  }, [id]);
-
-
+  }, [id, clientList]);
 
   return (
     <ContainerDetails>
@@ -139,7 +108,15 @@ const ClientDetails = (props) => {
       </DivBusiness>
 
       <DivTags>
-       
+       Tags
+
+       {tags && tags.length === 0 ? (
+     
+     <NoTags>
+     It has no tags.</NoTags>
+
+ ) : (
+  
         <TagsClient>
        {tags ? tags.map ((t) => 
           <DivColors colors={t.color}>
@@ -147,7 +124,9 @@ const ClientDetails = (props) => {
           </DivColors>
          ) : "" }
          </TagsClient>
+          )}
       </DivTags>
+
     </ContainerDetails>
   );
 };

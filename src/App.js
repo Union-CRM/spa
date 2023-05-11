@@ -23,6 +23,7 @@ import Client from "./pages/User/Client";
 import Business from "./pages/Adm/Business";
 import LoginPage from "./pages/Login/index";
 import PlannerPage from "./pages/User/Planner";
+import RemarkPage from "./pages/User/Remark";
 import AdmUser from "./pages/Admin/User/index";
 import Customer from "./pages/Adm/Customer/index";
 import ReleaseTrainPage from "./pages/Adm/ReleaseTrain";
@@ -37,13 +38,14 @@ function App() {
           <PlannerContextProvider>
             <ClientContextProvider>
               <GroupListContextProvider>
-                <BusinessContextProvider>
-                  <ReleaseContextProvider>
-                    <Router>
-                      <GlobalStyle />
-                      <div className="App">
-                        <Routes>
-                          <Route path="/" element={<LoginPage />} />
+                  <BusinessContextProvider>
+                    <ReleaseContextProvider>
+              
+                <Router>
+                  <GlobalStyle />
+                  <div className="App">
+                    <Routes>
+                      <Route path="/" element={<LoginPage />} />
 
                           <Route
                             path="/home"
@@ -67,6 +69,7 @@ function App() {
                               )
                             }
                           />
+
                           <Route
                             path="/business"
                             element={
@@ -123,6 +126,16 @@ function App() {
                             element={
                               localStorage.getItem("token") ? (
                                 <SubjectPage />
+                              ) : (
+                                <LoginPage />
+                              )
+                            }
+                          />
+                          <Route
+                            path="/remark"
+                            element={
+                              localStorage.getItem("token") ? (
+                                <RemarkPage />
                               ) : (
                                 <LoginPage />
                               )

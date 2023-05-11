@@ -4,7 +4,7 @@ import { customersGet } from "../api/routesAPI";
 export const CustomerContext = createContext();
 
 export const CustomerContextProvider = ({ children }) => {
-  const [customer, setCustomer] = useState([{}]);
+  const [customer, setCustomer] = useState([]);
   const [customerTarget, setCustomerTarget] = useState({});
   const [popUpSuccess, setPopUpSuccess] = useState(false);
   const [popUpError, setPopUpError] = useState(false);
@@ -24,8 +24,6 @@ export const CustomerContextProvider = ({ children }) => {
     } catch (error) {
       console.error(error.response);
     }
-
-    /* console.log(clients.data.list)*/
   };
   return (
     <CustomerContext.Provider
@@ -39,6 +37,7 @@ export const CustomerContextProvider = ({ children }) => {
         setPopUpSuccess,
         popUpError,
         setPopUpError,
+        
       }}
     >
       {children}

@@ -37,8 +37,9 @@ const SubjectsDetails = (props) => {
       setEmail(subject.client_email);
       setRelease(subject.release);
       setBusiness(subject.business);
-      setDescription(subject.subject_text);
+      setDescription(subject.subjectText);
     }
+
   }, [id]);
 
   return (
@@ -78,7 +79,7 @@ const SubjectsDetails = (props) => {
       <DivDescription>
         Description
         <span onChange={(event) => setDescription(event.target.value)}>
-        {subject.subject_text}
+        {description}
         </span>
       </DivDescription>
     </ContainerDetails>

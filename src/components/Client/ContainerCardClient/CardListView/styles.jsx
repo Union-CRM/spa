@@ -93,7 +93,10 @@ export const DivPhoto = styled.div`
 
 export const DivPhotoI = styled.div`
   background-color: #d9d9d9;
-  border: 5px solid #007bff;
+  border: ${(props) =>
+    props.isActive ? "5px solid #007bff" : "7px solid #7a7a7a"};
+  border: 5px solid ${(props) => (props.checked ? "Active" : "Inactive")};
+  border: 5px solid ${(props) => (props.isActive ? "#007bff" : "gray")};
   width: 50px;
   height: 50px;
   border-radius: 100%;
@@ -164,7 +167,9 @@ export const Status = styled.div`
 export const TagsSpan = styled.div`
   display: flex;
   color: #ffffff;
-  background-color: #007bff !important;
+  //background-color: #007bff !important;
+  background-color: ${(props) => (props.checked ? "Active" : "Inactive")};
+  background-color: ${(props) => (props.isActive ? "#007bff" : "gray")};
   width: fit-content;
   height: 15px;
   border-radius: 8px;
@@ -180,6 +185,40 @@ export const IconTag = styled.span`
   display: flex;
   margin-top: 2px;
   margin-left: 2px;
+`;
+
+export const DivTag = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  //align-items: center;
+  position: relative;
+  flex-wrap: wrap;
+  cursor: pointer;
+  p {
+    text-align: center;
+    font-size: 14px;
+    margin-left: 10px;
+    align-items: center;
+  }
+`;
+export const DivContentTags = styled.div`
+  text-align: center;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  padding: 2px;
+  position: relative;
+  top: -20px;
+  align-items: center;
+  background-color: ${(props) => (props.colorTag ? props.colorTag : "pink")};
+  border-radius: 8px;
+  margin-right: 10px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  margin-left: 10px;
+  justify-content: center;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 // Styles Icons Edit and Toggle //

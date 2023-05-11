@@ -20,16 +20,22 @@ import {
   Inactive,
   HowManyInactive,
   DivClose,
+  DivInfo,
 } from "./styles";
 import CustomerCard from "./CardListView/index";
 import AddEditCustomer from "../AddEditCustomer";
 import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
 import { useState, useEffect } from "react";
 import { useUserContext } from "../../../../hook/useUserContext";
+import { useSearchContext } from "../../../../hook/useSearchContext";
 
 import { useCustomerContext } from "../../../../hook/useCustomerContext";
 import ModalError from "../ModalError";
 import ModalSuccessfuly from "../ModalSuccessfuly";
+import { ReactComponent as Info } from "../../../../assets/svg/Info.svg";
+
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
 
 const abaStatus = {
   ACTIVE: "ATIVO",
@@ -43,8 +49,31 @@ const ContainerCards = (props) => {
   const [id, setId] = useState(null);
   const { customer, popUpSuccess, popUpError } = useCustomerContext();
   const [isEdit, setEdit] = useState(false);
+  const { search } = useSearchContext();
+  const [customerList, setCustomerList] = useState([]);
 
   const [active, setActive] = useState(abaStatus.ACTIVE);
+
+  useEffect(() => {
+    setCustomerList(customer);
+  }, [customer]);
+
+  useEffect(() => {
+    
+    if (customer){
+   
+      if (search) {
+        setCustomerList(
+          customer?
+          customer.filter((c) =>
+            c.name.toLowerCase().includes(search.toLowerCase())
+          ): customer
+        );
+      } else {
+        setCustomerList(customer);
+      }
+    }
+  }, [search,customer]);
 
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
@@ -84,8 +113,18 @@ const ContainerCards = (props) => {
             <DivTitlePage>
               <H1>Customer List </H1>
               <HowManyClientList>
-                ({customer ? customer.length : 0})
+                ({customerList ? customerList.length : 0})
               </HowManyClientList>{" "}
+              <Tippy content="Current, past or potencial customer.">
+                <DivInfo>
+                  <Info
+                    width="25px"
+                    style={{
+                      fill: "#E41165",
+                    }}
+                  />
+                </DivInfo>
+              </Tippy>
             </DivTitlePage>
 
             <DivButton onClick={() => createClient()}>
@@ -108,8 +147,9 @@ const ContainerCards = (props) => {
               <Active>
                 Active (
                 <HowManyActive>
-                  {customer
-                    ? customer.filter((item) => item.status === "ATIVO").length
+                  {customerList
+                    ? customerList.filter((item) => item.status === "ATIVO")
+                        .length
                     : 0}
                 </HowManyActive>
                 )
@@ -123,8 +163,8 @@ const ContainerCards = (props) => {
               <Inactive>
                 Inactive (
                 <HowManyInactive>
-                  {customer
-                    ? customer.filter((item) => item.status === "INATIVO")
+                  {customerList
+                    ? customerList.filter((item) => item.status === "INATIVO")
                         .length
                     : 0}
                 </HowManyInactive>
@@ -138,8 +178,8 @@ const ContainerCards = (props) => {
           <LineDivisor />
 
           <BoardStyle>
-            {customer &&
-              customer
+            {customerList &&
+              customerList
                 .filter((item) => item.status === active)
                 .map((item) => (
                   <CustomerCard

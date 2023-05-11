@@ -15,6 +15,7 @@ export const ContainerCentral = styled.div`
   }
 `;
 
+
 // Div Title
 export const PositionTitle = styled.div`
   margin-left: 0px;
@@ -76,8 +77,8 @@ export const Container = styled.div`
   grid-row: 1;
   grid-column: 2;
   width: 80%;
-  min-width: 300px;
-  height: 81vh;
+  min-width: 350px;
+  height: 100%;
   background: #fff;
   display: grid;
   border-left: 16.56px solid #007bff;
@@ -85,11 +86,14 @@ export const Container = styled.div`
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   z-index: 1000;
   grid-template-rows: 10% 75% 15%;
-  @media (min-width: 100px) and (max-width: 502px) {
-    height: 81vh;
-    width: 100%;
+  @media (width: 500px) {
+    width: 375px;
+    height: 100%;
     flex-direction: flex-start;
     position: relative;
+  }
+  @media (min-width: 1355px) and (max-width: 1824px) {
+    width: 80%;
   }
 `;
 

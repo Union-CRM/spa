@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import { DivCard as ModaClient } from "../../Planner/PlannerCard/styles";
+import { DivP } from "../../Planner/PlannerCard/styles";
 
 export const Container = styled.div`
   display: grid;
   grid-template-rows: 100%;
-  top: 0;
-  height: 55vh;
+  top: 2%;
+  height: 40%;
   width: 100%;
   min-width: 900px;
   position: relative;
@@ -21,13 +23,15 @@ export const ContainerUp = styled.div`
 `;
 export const ContainerLow = styled.div`
   display: grid;
-  grid-column: 1;
+  grid-template-rows: 40% 100%;
+  grid-template-columns: 50% 50%;
+  height: 50%;
 `;
 export const DivUser = styled.div`
   display: grid;
   grid-column: 1;
   width: 90%;
-  height: 50vh;
+  height: 45%;
 `;
 
 export const H1 = styled.h1`
@@ -66,6 +70,47 @@ export const DivGroup = styled.div`
   display: grid;
   grid-column: 2;
   width: 100%;
+  height: 100%;
 `;
-export const DivRealise = styled.div``;
-export const DivBusiness = styled.div``;
+export const DivRealise = styled.div`
+  display: grid;
+  grid-column: 1;
+  grid-row: 2;
+  width: 100%;
+  top: 0;
+`;
+export const DivSubjPlanner = styled.div`
+  display: grid;
+  grid-column: 1;
+  grid-row: 3;
+  width: 100%;
+  margin-top: 1.5%;
+`;
+export const DivPlanner = styled.div`
+  position: relative;
+  width: 100%;
+  height: 41.5vh;
+  grid-column: 2;
+  margin-top: 10%;
+
+  ${ModaClient} {
+    position: relative;
+    left: 4%;
+  }
+  ${DivP} {
+    width: 100%;
+    height: 100%;
+    min-width: 400px;
+    margin-top: 0px;
+    top: 0%;
+    left: 0%;
+    position: relative;
+    border-color: white;
+    background-color: #fff;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  }
+`;
+export const ContainerLowLeft = styled.div`
+  height: 80%;
+  margin-top: 10%;
+`;

@@ -30,6 +30,9 @@ import { useFetchCustomer } from "../../../hook/useFetchCustomer";
 import { useFetchClient } from "../../../hook/useFetchClient";
 import { useFetchRole } from "../../../hook/useFetchRole";
 import { useFetchTag } from "../../../hook/useFetchTag";
+import {useFetchUser} from "../../../hook/useFetchUser";
+import { useFetchUsersNotin } from "../../../hook/useFetchUsersNotin";
+import { useReleaseContext } from "../../../hook/useReleaseContent";
 
 const ModalClientEdit = (props) => {
 
@@ -38,18 +41,29 @@ const ModalClientEdit = (props) => {
     setClient: setClientList,
     loadData,
   } = useClientContext();
+
   const { user } = useUserContext();
   const [clientId, setClientId] = useState();
+
+  const { setModalInfo, setId, modalEditClient, setModalEditClient,
+  toggleState, setToggleState, } = useClientContext();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [customer, setCustomer] = useState({});
   const [business, setBusiness] = useState("");
   const [role, setRole] = useState({});
   const [status, setStatus] = useState({ value: "Active" });
-  const { releaseList } = useFetchRelease("release");
-  const { customerList } = useFetchCustomer("Customer");
+  const [users, setUsers] = useState([]);
+  
+  
+  //const {userList} = useFetchUser("Users");
+
+  const { release: releaseList } = useReleaseContext("release");
+  
+  const [customerList,setCustomerList] = useState([])
   const { roleList } = useFetchRole("Role");
   const { tagList } = useFetchTag("Tag");
+  const {usersGlobal} = useUserContext();
   const [releaseObj, setReleaseObj] = useState({
     release_name: "",
     business_name: "",
@@ -58,14 +72,40 @@ const ModalClientEdit = (props) => {
   const { insertClient, updateClient } = useFetchClient();
   const [flag, setFlag] = useState(false);
   const { setModal, id, title } = props;
+  const {loadUsers} = useUserContext();
+  const [releaseOptions, setReleaseOptions] = useState([])
+  const { loadCustomerOptions } = useFetchCustomer();
+  
+  useEffect(() =>{
+    setCustomerList(loadCustomerOptions())
+  }, [])
+
+
+  useEffect(() =>{
+
+    if(releaseList){
+    setReleaseOptions(
+      releaseList.map((item) => ({
+        id: item.id,
+        value: item.id,
+        label: item.name,
+      })))
+      }
+     
+  },[releaseList])
+
+  
 
   const closeModal = () => {
-    setModal(false);
+    setModalEditClient(false);
+    setModalInfo(true);
+    setToggleState(0);
   };
 
   const handleSubmit = () => {
     if (props.title === "Edit Client") {
       editClient();
+      
     } else {
       //createClient();
     }
@@ -110,13 +150,14 @@ const ModalClientEdit = (props) => {
       setEmail(client.email);
       setReleaseObj({
         id: client.release_id,
-        label: client.textRelease,
+        name: client.textRelease,
         business_id: client.business_id,
         business_name: client.textBusiness,
       });
       setBusiness(client.textBusiness);
       setCustomer({ id: client.customer_id, label: client.textCustomer });
       setRole({ id: client.role_id, label: client.textRole });
+      setUsers({id: client.user_id, label: client.user_name})
       setTags(
         client.tags.map((item) => ({
           value: item.value,
@@ -127,7 +168,6 @@ const ModalClientEdit = (props) => {
     }
   }, []);
 
-
   const editClient = () => {
     const newClient = {
       id: clientId,
@@ -137,14 +177,19 @@ const ModalClientEdit = (props) => {
       role_id: role.id,
       customer_id: customer.id,
       business_id: releaseObj.business_id,
-      release_id: releaseObj.release_id,
+      release_id: releaseObj.id,
+      textRelease: releaseObj.name,
       tags: tags,
-      user_id: user.id,
+      user_id: users.id,
+      
     };
-
-    if (name && email && role.id && customer.id && releaseObj.id) {
+    
+    
+    if (name && email && role.id && customer.id && users && releaseObj.id) {
       updateClient(clientId, newClient);
-      setModal(false);
+      setModalEditClient(false);
+      setToggleState(0);
+      setModalInfo(true);
     } else {
       setFlag(true);
     }
@@ -153,6 +198,7 @@ const ModalClientEdit = (props) => {
   const handleSelectRelease = (release_id) => {
     setReleaseObj(releaseList.filter((item) => item.id === release_id)[0]);
   };
+ 
 
   const handleSelectCustomer = (customer_id) => {
     setCustomer(customerList.filter((c) => c.id === customer_id)[0]);
@@ -162,6 +208,20 @@ const ModalClientEdit = (props) => {
     setRole(roleList.filter((c) => c.id === role_id)[0]);
   };
 
+  const handleSelectUsers = (user_id) => {
+    setUsers(optionsUser.filter((item) => item.id === user_id)[0]);
+  };
+
+   const optionsUser = usersGlobal.map((u) => {
+    return {
+      id: u.id,
+      value: u.id,
+      label: u.name,
+    };
+  });
+
+
+  
   return (
     <>
       <ContainerCentral>
@@ -217,11 +277,23 @@ const ModalClientEdit = (props) => {
                 label={"Customer"}
                 value={customer.label}
                 placeholder={flag && !customer.id ? "Required field" : ""}
-                sizeSingle={"100%"}
+                sizeSingle={"93%"}
                 required
-                sizeMenu={"100%"}
+                sizeMenu={"93%"}
                 options={customerList ? customerList : []}
               />
+
+              <SingleSelect
+                key="4"
+                set={(us) => handleSelectUsers(us)}
+                label={"Manager"}
+                placeholder={flag && !user.id ? "Required field" : ""}
+                value={users.label}
+                sizeSingle={"100%"}
+                sizeMenu={"100%"}
+                options={optionsUser}
+                />
+
             </DivCustomer>
 
             <DivRelease>
@@ -229,12 +301,12 @@ const ModalClientEdit = (props) => {
                 key="3"
                 set={(release_id) => handleSelectRelease(release_id)}
                 label={"Release Train"}
-                value={releaseObj.label}
+                value={releaseObj.name}  
                 placeholder={flag && !releaseObj.id ? "Required field" : ""}
                 sizeSingle={"100%"}
                 required
                 sizeMenu={"100%"}
-                options={releaseList ? releaseList : []}
+                options={releaseOptions}
               />
             </DivRelease>
 

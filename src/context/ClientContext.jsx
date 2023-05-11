@@ -5,6 +5,7 @@ export const ClientContext = createContext();
 
 export const ClientContextProvider = ({ children }) => {
   const [client, setClient] = useState([{}]);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -47,11 +48,12 @@ export const ClientContextProvider = ({ children }) => {
     /* console.log(clients.data.list)*/
   };
   const [selectedClient, setSelectedClient] = useState(null);
-  const [toggleState, setToggleState] = useState(1);
+  const [toggleState, setToggleState] = useState(0);
   const [activeTab, setActiveTab] = useState(null);
   const [modal, setModal] = useState();
   const [id, setId] = useState(null);
   const [modalEditClient, setModalEditClient] = useState(false);
+  const [modalInfo, setModalInfo] = useState(false);
   
   const openModalDetails = (id) => {
     setSelectedClient(id);
@@ -59,8 +61,8 @@ export const ClientContextProvider = ({ children }) => {
 
   return (
     <ClientContext.Provider value={{ openModalDetails, client, setClient, loadData, id,
-      setId, toggleState, setToggleState, activeTab, setActiveTab, modal, setModal,
-      modalEditClient, setModalEditClient }}>
+      setId, toggleState, setToggleState, activeTab, setActiveTab, modal, setModal, isActive, setIsActive,
+      modalEditClient, setModalEditClient, modalInfo, setModalInfo }}>
       {children}
     </ClientContext.Provider>
   );

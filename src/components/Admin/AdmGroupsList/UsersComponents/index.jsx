@@ -22,6 +22,7 @@ import {
 import { useUserContext } from "../../../../hook/useUserContext";
 import { useFetchUsersNotin } from "../../../../hook/useFetchUsersNotin";
 
+export const selectedOptions = [];
 export const UsersComponents = (props, placeholder, idTagOption) => {
   const colors = ["#FFC0CB", "#DDA0DD", "#F5DEB3", "#98FB98", "#87CEEB"];
 
@@ -36,10 +37,11 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
   const { client: clientList } = useClientContext();*/
 
   
-  //Users//
-  const [userOption, setUserOption] = useState([]);
   
-  const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin()
+ 
+  
+  const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin();
+  
 
     
   const{loadUserSub,loadUserNotin} = useFetchUsersNotin()
@@ -49,8 +51,23 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
     loadUserSub()
   }, [])
  
+  const usersList = userSub.concat(usersNotin)
+  
+  useEffect(() => {
+    if (usersList) {
+      setUserOption(
+        usersList
+          .map((c) => ({ id: c.id, value: c.id, label: c.name }))
+      );
+    }
+  }, [usersNotin, userSub]);
 
-  const {selectedOptions, setSelectedOptions} = useFetchUsersNotin();
+
+  const [userOption, setUserOption] = useState([]);
+  const { users: userList } = useUserContext();
+
+  const [setSelectedOptions] = useState([]);
+  
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleOptionChange = (userOption) => {
@@ -68,19 +85,17 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
   const availableOptions = userOption.filter(
     (userOption) => !selectedOptions.includes(userOption)
   );
-  
-  const usersList = userSub.concat(usersNotin)
-  console.log(usersList);
- 
 
+  
+console.log(selectedOptions)
   useEffect(() => {
-    if (usersList) {
+    if (userList) {
       setUserOption(
-        usersList
-          .map((c) => ({ id: c.id, value: c.id, label: c.name }))
+        userList
+          .map((c) => ({ id: c.id, value: c.id, label: c.name  }))
       );
     }
-  }, [usersNotin, userSub]);
+  }, []);
 
   return (
     <>

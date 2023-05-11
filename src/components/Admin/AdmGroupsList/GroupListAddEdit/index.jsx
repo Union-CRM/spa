@@ -23,10 +23,7 @@ import { useFetchCustomer } from "../../../../hook/useFetchCustomer";
 import { useFetchAdmGroupList } from "../../../../hook/useFetchAdmGroupList";
 import {useGroupListContext} from "../../../../hook/useGroupListContext";
 import { useFetchUsersNotin } from "../../../../hook/useFetchUsersNotin";
-
-
-
-
+import { selectedOptions } from "../UsersComponents";
 const AddEditGroup = (props) => {
 
   const handleSubmit = () => {
@@ -37,7 +34,6 @@ const AddEditGroup = (props) => {
     }
   };
 
-  
     const { setModal, id } = props;
 
     const closeModal = () => {
@@ -48,11 +44,11 @@ const AddEditGroup = (props) => {
       const [flag, setFlag] = useState(false);
 
       const [groupName, setGroupName] = useState("");
-      const [users, setUser] = useState();
+      const [users, setUsers] = useState([]);
       const [customer, setCustomer] = useState({});
       const [customer_id, setCustomerId] = useState();
       const { customerList } = useFetchCustomer("Customer");
-      console.log(users)
+      
 
     
     const {insertGroup} = useFetchAdmGroupList();
@@ -70,24 +66,22 @@ const AddEditGroup = (props) => {
 
     
      const createGroup = () => {
+      console.log(users);
       const newGroup = {
         group_name: groupName,
         customer_id: customer.id,
-        user_id: users.id,
+        users: selectedOptions.map((g) => ({ user_id: g.value })),
       };
-      
-      if (groupName && customer.id && users.id) {
+      console.log(newGroup);
+      if (groupName && customer.id && users) {
         insertGroup(newGroup);
         setModal(false);
       } else {
         setFlag(true);
       }
-      console.log(newGroup)
     };
- 
-    
-  
-    
+    console.log(selectedOptions)
+
     /*
     useEffect(() => {
       if (props.title === "Edit Group") {
@@ -150,8 +144,8 @@ const AddEditGroup = (props) => {
 
 
             <DivUser>
-              <UsersComponents
-               set={(user) => setUser(user)}
+              <UsersComponents 
+               set={(users) => setUsers(users)}
             />
               </DivUser>
           </Form>{" "}

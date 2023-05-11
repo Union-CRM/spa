@@ -11,13 +11,20 @@ import {
 import Body from "../../../../../assets/FontSystem/Body";
 import Subtitle from "../../../../../assets/FontSystem/Subtitle";
 import { useUserContext } from "../../../../../hook/useUserContext";
+import { Link } from "react-router-dom";
 
 const UserCard = (props) => {
-  const { userList } = useUserContext();
+  const { userList, setViewProfile, setUserTarget, setHome } = useUserContext();
 
   const user = userList.filter((u) => u.id === props.id)[0];
 
-  const [isActive, setIsActive] = useState(user.status === "ACTIVE");
+  const [isActive] = useState(user.status === "ACTIVE");
+
+  const handleClickViewProfile = () => {
+    setViewProfile(true);
+    setUserTarget(user);
+    setHome(true);
+  };
 
   return (
     <ContainerFather>
@@ -35,8 +42,14 @@ const UserCard = (props) => {
               </DivPhotoI>
             </DivPhoto>
             <DivDadosCard>
-              <Body type={"Body2"} name={user.name} />
-              <Subtitle type={"TextDescription"} name={user.tcs_id} />
+              <Link
+                to="/usersAdm"
+                onClick={() => handleClickViewProfile()}
+                style={{ textDecoration: "none" }}
+              >
+                <Body type={"Body2"} name={user.name} />
+                <Subtitle type={"TextDescription"} name={user.tcs_id} />
+              </Link>
             </DivDadosCard>
           </Header>
         </Card>

@@ -427,6 +427,7 @@ export const NoteText = styled.div`
   position: relative;
   visibility: ${(props) => (props.$mode ? "hidden" : "visible")};
   z-index: 99999999;
+  margin-top: 3%;
   span {
     position: relative;
     display: block;

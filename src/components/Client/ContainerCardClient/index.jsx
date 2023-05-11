@@ -31,11 +31,10 @@ import ModalPopUp from "../ModalPopUP";
 import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
-
+import { useSearchContext } from "../../../hook/useSearchContext";
 // Modal Client //
 import ModalClientDetails from "../ModalClientDetails";
 import ModalClientEdit from "../EditClient";
-
 
 const abaStatus = {
   ACTIVE: "Active",
@@ -44,6 +43,7 @@ const abaStatus = {
 
 const ContainerCards = (props) => {
   // States modal//
+const { search } = useSearchContext();
   const [modal, setModal] = useState(false);
   const [modalPopUp, setModalPopUp] = useState(false);
   //const [id, setId] = useState(null);
@@ -54,17 +54,33 @@ const ContainerCards = (props) => {
 
   const { client } = useClientContext();
   const { id, setId } = useClientContext();
- //const {modalInfo, setModalInfo} = useClientContext();
-const [modalInfo, setModalInfo] = useState(false);
-const {modalEditClient, setModalEditClient } = useClientContext();
+  const {modalInfo, setModalInfo} = useClientContext();
+  const {modalEditClient, setModalEditClient } = useClientContext();
 
   useEffect(() => {
     if (props.adminList) {
       setClientList(client.filter((c) => c.user_id === userTarget.id));
     } else {
-      setClientList(client.filter((c) => c.user_id === user.id));
+      setClientList(client);
     }
   }, [client]);
+
+  useEffect(() => {
+    if (search) {
+      setClientList(
+        client.filter((c) =>
+          c.client.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    } else {
+      if (props.adminList) {
+        setClientList(client.filter((c) => c.user_id === userTarget.id));
+      } else {
+        setClientList(client);
+      }
+    }
+  }, [search]);
+
 
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
@@ -169,8 +185,8 @@ const {modalEditClient, setModalEditClient } = useClientContext();
           <LineDivisor />
 
           <BoardStyle>
-            {client &&
-              client
+            {clientList  &&
+              clientList 
                 .filter((item) => item.status === active)
                 .map((item) => (
                   <ClientCard
@@ -186,12 +202,12 @@ const {modalEditClient, setModalEditClient } = useClientContext();
         </CardsContainer>
       </ContainerHeaderAndCards>
 
-      <DivModal $mode={modalEditClient} />
-{modalEditClient && (
+      <DivModal $mode={modal} />
+{modal && (
     <AddEditClient
       id={id}
-      setModalEditClient={setModalEditClient}
-      title={"Edit Client"}
+      setModal={setModal}
+      title={"Create Client"}
     />
 )}
 
@@ -201,28 +217,25 @@ const {modalEditClient, setModalEditClient } = useClientContext();
         <ModalClientDetails
           id={id}
           openModal={() => detailsModal()}
-          setModal={setModalInfo}
+          setModalInfo={setModalInfo}
           title={"Client Details"}
         />
       )}
 
-      <DivModal $mode={modal} />
+      <DivModal $mode={modalEditClient} />
 
-    {modal && (
+    {modalEditClient && (
         <ModalClientEdit
           id={id}
-          setModal={setModal}
-          title={"Create Client"}
+          setModalEditClient={setModalEditClient}
+          title={"Edit Client"}
         />
     )}
-
-
-
 
       {modalPopUp && (
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
       )}
-    </ContainerGlobal>
-  );
-};
+   </ContainerGlobal>  
+ )   
+}
 export default ContainerCards;
