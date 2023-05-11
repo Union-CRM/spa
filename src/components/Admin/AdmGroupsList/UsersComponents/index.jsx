@@ -36,38 +36,30 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
   const [clientOption, setClientOption] = useState([]);
   const { client: clientList } = useClientContext();*/
 
-  
-  
- 
-  
-  const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin();
-  
+  const { userNotin: usersNotin, userListSub: userSub } = useFetchUsersNotin();
 
-    
-  const{loadUserSub,loadUserNotin} = useFetchUsersNotin()
- 
-  useEffect(()=>{
-    loadUserNotin()
-    loadUserSub()
-  }, [])
- 
-  const usersList = userSub.concat(usersNotin)
-  
+  const { loadUserSub, loadUserNotin } = useFetchUsersNotin();
+
+  useEffect(() => {
+    loadUserNotin();
+    loadUserSub();
+  }, []);
+
+  const usersList = userSub.concat(usersNotin);
+
   useEffect(() => {
     if (usersList) {
       setUserOption(
-        usersList
-          .map((c) => ({ id: c.id, value: c.id, label: c.name }))
+        usersList.map((c) => ({ id: c.id, value: c.id, label: c.name }))
       );
     }
   }, [usersNotin, userSub]);
-
 
   const [userOption, setUserOption] = useState([]);
   const { users: userList } = useUserContext();
 
   const [setSelectedOptions] = useState([]);
-  
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleOptionChange = (userOption) => {
@@ -86,13 +78,10 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
     (userOption) => !selectedOptions.includes(userOption)
   );
 
-  
-console.log(selectedOptions)
   useEffect(() => {
     if (userList) {
       setUserOption(
-        userList
-          .map((c) => ({ id: c.id, value: c.id, label: c.name  }))
+        userList.map((c) => ({ id: c.id, value: c.id, label: c.name }))
       );
     }
   }, []);

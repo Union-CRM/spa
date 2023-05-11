@@ -9,22 +9,16 @@ export const useFetchClient = () => {
   const { loadData } = useClientContext();
 
   const insertClient = async (client) => {
-    console.log(client);
-
     axios
-      .post(
-        clientCreate,
-        client,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      )
+      .post(clientCreate, client, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
       .then(function (response) {
         loadData();
         //console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -42,7 +36,7 @@ export const useFetchClient = () => {
         loadData();
       })
       .catch(function (error) {
-        console.log(error.response);
+        console.error(error.response);
       });
   };
 
@@ -72,7 +66,7 @@ export const useFetchClient = () => {
         loadData();
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   };
 
