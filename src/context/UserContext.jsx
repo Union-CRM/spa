@@ -1,12 +1,14 @@
+
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { userGetSubmissiveUsers } from "../api/routesAPI";
+import { userGetSubmissiveUsers, userCreate } from "../api/routesAPI";
 import { userGetUsersMe } from "../api/routesAPI";
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState([{}]);
   const [userList, setUserList] = useState([{}]);
+  const [usersGlobal, setUsersGlobal] = useState([{}]);
   const [viewProfile, setViewProfile] = useState(false);
   const [userTarget, setUserTarget] = useState({});
   const [home, setHome] = useState(false);
@@ -17,6 +19,7 @@ export const UserContextProvider = ({ children }) => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       loadUserMe();
+      loadUsers();
     }
   }, []);
 
@@ -37,13 +40,34 @@ export const UserContextProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setUserList(response.data.list);
+      console.log(response)
     } catch (error) {
       console.error(error);
       // to do modal error
     }
+    
   };
 
+
+  const loadUsers = async () => {
+    console.log("Aquiiiiii")
+    try {
+      const response = await axios.get(userCreate, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      setUsersGlobal(response.data.list);
+      console.log(response)
+      
+    } catch (error) {
+      console.error(error);
+      // to do modal error
+    }
+    
+  };
+
+
   return (
+
     <UserContext.Provider
       value={{
         home,
@@ -62,8 +86,12 @@ export const UserContextProvider = ({ children }) => {
         setModalSubject,
         modalPassword,
         setModalPassword,
+        loadUsers,
+        usersGlobal, 
+        setUsersGlobal
       }}
     >
+
       {children}
     </UserContext.Provider>
   );

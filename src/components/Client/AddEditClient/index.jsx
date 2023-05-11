@@ -29,40 +29,64 @@ import { useFetchCustomer } from "../../../hook/useFetchCustomer";
 import { useFetchClient } from "../../../hook/useFetchClient";
 import { useFetchRole } from "../../../hook/useFetchRole";
 import { useFetchTag } from "../../../hook/useFetchTag";
+import {useCustomerContext} from "../../../hook/useCustomerContext";
+import { useReleaseContext } from "../../../hook/useReleaseContent";
 
 const AddEditClient = (props) => {
-  const { client: clientList, loadData } = useClientContext();
-  const { user } = useUserContext();
-  const [clientId, setClientId] = useState();
+  const { client: clientList, setClient: setClientList } = useClientContext();
+
+  const [clientId,setClientId]=useState()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [customer, setCustomer] = useState({});
+  const {user} = useUserContext();
   const [business, setBusiness] = useState("");
   const [role, setRole] = useState({});
   const [status, setStatus] = useState({ value: "Active" });
-  const { releaseList } = useFetchRelease("release");
-  const { loadCustomerOptions } = useFetchCustomer();
-  const [customerList] = useState(loadCustomerOptions());
+  const { release: releaseList } = useReleaseContext("release");
+  const { loadCustomerList} = useCustomerContext();
+  const { customerList } = useFetchCustomer("Customer");
   const { roleList } = useFetchRole("Role");
   const { tagList } = useFetchTag("Tag");
   const [releaseObj, setReleaseObj] = useState({
     release_name: "",
     business_name: "",
   });
+  const [releaseOptions, setReleaseOptions] = useState([])
+
+  
   const [tags, setTags] = useState([]);
-  const { insertClient, updateClient } = useFetchClient();
+  const {insertClient,updateClient}= useFetchClient();
   const [flag, setFlag] = useState(false);
   const { setModal, id } = props;
+
+  useEffect(() =>{
+    loadCustomerList()
+  }, [])
+
+  useEffect(() =>{
+
+    if(releaseList){
+    setReleaseOptions(
+      releaseList.map((item) => ({
+        id: item.id,
+        value: item.id,
+        label: item.name,
+      })))
+      }
+     
+  },[releaseList])
+
 
   const closeModal = () => {
     setModal(false);
   };
 
   const handleSubmit = () => {
-    if (props.title === "Edit Client") {
-      editClient();
-    } else {
+    if (props.title === "Create Client") {
       createClient();
+    } else {
+      
     }
   };
 
@@ -76,51 +100,20 @@ const AddEditClient = (props) => {
     return lastId + 1;
   }
 
-  useEffect(() => {
-    if (props.title === "Edit Client") {
-      const client = clientList.filter((item) => item.id === props.id)[0];
-      setClientId(client.id);
-      setName(client.client);
-      setStatus(client.status);
-      setEmail(client.email);
-      setReleaseObj({
-        id: client.release_id,
-        label: client.textRelease,
-        business_id: client.business_id,
-        business_name: client.textBusiness,
-      });
-      setBusiness(client.textBusiness);
-      setCustomer({ id: client.customer_id, label: client.textCustomer });
-      setRole({ id: client.role_id, label: client.textRole });
-      setTags(
-        client.tags.map((item) => ({
-          value: item.value,
-          label: item.label,
-          color: colors[Math.floor(Math.random() * (colors.length - 1))],
-        }))
-      );
-    }
-  }, []);
 
   const createClient = () => {
     const newClient = {
-      id: getId(),
-      status: status,
-      email: email,
-      client: name,
-      role_id: role.id,
-      textRole: role.label,
+      client_email: email,
+      client_name: name,
+      client_role: role.id,
       customer_id: customer.id,
-      textCustomer: customer.label,
-      business_id: releaseObj.business_id,
-      textBusiness: releaseObj.business_name,
+      business_id: parseInt(releaseObj.business_id),
       release_id: releaseObj.id,
-      textRelease: releaseObj.release_label,
-      tags: tags,
       user_id: user.id,
+      tags:tags.map((tag) => ({ tag_id: tag.value})),
     };
-
-    if (name && email && role.id && customer.id && releaseObj.id) {
+    console.log(newClient)
+    if (name && email && role.id && customer.id && releaseObj.id ) {
       insertClient(newClient);
       setModal(false);
     } else {
@@ -128,27 +121,6 @@ const AddEditClient = (props) => {
     }
   };
 
-  const editClient = () => {
-    const newClient = {
-      id: clientId,
-      email: email,
-      status: status,
-      client: name,
-      role_id: role.id,
-      customer_id: customer.id,
-      business_id: releaseObj.business_id,
-      release_id: releaseObj.release_id,
-      tags: tags,
-      user_id: user.id,
-    };
-
-    if (name && email && role.id && customer.id && releaseObj.id) {
-      updateClient(clientId, newClient);
-      setModal(false);
-    } else {
-      setFlag(true);
-    }
-  };
 
   const handleSelectRelease = (release_id) => {
     console.log(release_id);
@@ -230,12 +202,12 @@ const AddEditClient = (props) => {
                 key="3"
                 set={(release_id) => handleSelectRelease(release_id)}
                 label={"Release Train"}
-                value={releaseObj.label}
+                value={releaseObj.name}               
                 placeholder={flag && !releaseObj.id ? "Required field" : ""}
                 sizeSingle={"100%"}
                 required
                 sizeMenu={"100%"}
-                options={releaseList ? releaseList : []}
+                options={releaseOptions}
               />
             </DivRelease>
             <DivBusiness>

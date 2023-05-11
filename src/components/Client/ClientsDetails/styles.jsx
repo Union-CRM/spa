@@ -149,6 +149,7 @@ font-size: 1rem;
 display: flex;
 padding-bottom: 1%;
 padding-top:1%;
+display:block;
 
 `;
 
@@ -159,10 +160,12 @@ border-radius:5px;
 padding:0.6%;
 margin-right:1%;
 position:relative;
-height:fit-content;
+height:auto;
 margin-top:1%;
 text-align:center;
+font-size:0.9rem;
 width:auto;
+display: flex;
 `;
 
 export const TagsClient = styled.span`
@@ -175,4 +178,12 @@ export const IconTag = styled.span`
   display: flex;
   height: 100%;
   justify-content: end;
+`;
+
+export const NoTags = styled.span`
+display:block;
+background-color:#F5F5F5;
+border-radius:5px;
+padding:0.7%;
+width:fit-content;
 `;

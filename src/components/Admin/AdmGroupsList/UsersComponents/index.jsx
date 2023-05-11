@@ -3,9 +3,15 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { Label, Container, DivSvg, DivSvg2 } from "./styles";
 
+export const selectedOptions = [];
+export const UsersComponents = (props, placeholder, idTagOption) => {
+  const colors = ["#FFC0CB", "#DDA0DD", "#F5DEB3", "#98FB98", "#87CEEB"];
+
+  /*const option = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10", "Option 11",
+  "Option 12", "Option 13", "Option 14", "Option 15", "Option 16"];*/
+
 import {ReactComponent as Contact} from "../../../../assets/svg/Contact.svg"
 import {ReactComponent as Drop} from "../../../../assets/svg/Drop.svg"
-
 
 export const UsersComponents = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
@@ -51,10 +57,18 @@ const DropdownIndicator = () => {
    
   }));
 
- 
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
+
+  
+console.log(selectedOptions)
+  useEffect(() => {
+    if (userList) {
+      setUserOption(
+        userList
+          .map((c) => ({ id: c.id, value: c.id, label: c.name  }))
+      );
+    }
+  }, []);
+
 
   return (
     <>

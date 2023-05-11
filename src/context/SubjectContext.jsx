@@ -41,6 +41,7 @@ export const SubjectContextProvider = ({ children }) => {
         client_email: item.client_email,
         user_id: item.user_id,
         user_name: item.user_name,
+        created_at: item.created_at
       }))
     );
 

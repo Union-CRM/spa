@@ -31,8 +31,10 @@ import ClientDetails from "../ClientsDetails"
 import SubjectClient from "../SubjectsClient"
 
 const ModalClientDetails = (props) => {
-  const { setModal, id, modalEditClient } = props;
-  const { setModalInfo, setId,setModalEditClient } = useClientContext();
+
+  const { setModal, id } = props;
+  const { setModalInfo, setId,  modalEditClient, setModalEditClient, loadData } = useClientContext();
+
   
   // UseEffect Clients //
 
@@ -72,7 +74,7 @@ console.log(EditModal)
 
   // Close page //
   const closeModal = () => {
-    setModal(false);
+    setModalInfo(false);
   };
 
   return (
@@ -111,13 +113,14 @@ console.log(EditModal)
             onChange={(event) => setClientName(event.target.value)}>
             {client.client}
             </ClientName>
-
+            {activeTab === 0 &&
+          (
            <IconTag onClick={EditModal}>
           <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
           </IconTag>
-        
+            )}
             <CreatedBy>
-            Created by on {manager}
+            Created by on {client.user_name}
             </CreatedBy>
             </DivNameManager>
 

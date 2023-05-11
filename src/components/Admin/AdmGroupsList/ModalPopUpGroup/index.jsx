@@ -45,14 +45,14 @@ const ModalPopUpGroup = (props) => {
             <Span>{`${span}`}</Span>
             <DivSave onClick={handleAlterStatus}>
               <ButtonDefault
-                type={"userSave"}
+                type={"adminSave"}
                 sizeFont={"1rem"}
                 name={`Yes, ${p}`}
               />
             </DivSave>
             <DivCancel onClick={handleCancel}>
               <ButtonDefault
-                type={"cancelModalUser"}
+                type={"cancelModalAdmin"}
                 sizeFont={"1rem"}
                 name={"Cancel"}
               />

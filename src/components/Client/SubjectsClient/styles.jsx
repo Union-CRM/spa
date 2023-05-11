@@ -2,11 +2,40 @@ import styled, { css } from "styled-components";
 
 //* CONTAINER SUBJECT DETAILS *//
 export const ContainerDetails = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 98%;
+  height: 50vh;
   padding-left: 2%;
+  background:transparent;
   padding-top: 1%;
   position: relative;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+    margin-top: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 80%;
+    background-color: #dfdfdf;
+  }
+  @media (min-width: 1500px) and (max-width: 2500px) {
+    height: 380px;
+  }
+  @media (min-width: 1500px) and (max-width: 2500px) {
+    height: 310px;
+  }
+  @media (min-height: 150px) and (max-height: 450px) {
+    height: 370px;
+  }
 `;
 
 /// INFO SUBJECTS ///
@@ -35,6 +64,12 @@ export const DivGlobalCard = styled.div`
   padding-top: 2%;
 `;
 
+export const DivSubject = styled.span`
+display:flex;
+align-items:center;
+justify-content:center;
+`;
+
 
 /// Status Subject ////
 export const StatusSubject = styled.div`
@@ -42,12 +77,12 @@ export const StatusSubject = styled.div`
     switch (props.$mode) {
       case "IN PROGRESS":
         return css`
-          background-color: #008585;
+          background-color:#00953b ;
           color: #fff;
         `;
       case "FINISHED":
         return css`
-          background-color: #ffd012;
+          background-color: #008585;
           color: #fff;
         `;
       case "CANCELED":
@@ -99,4 +134,16 @@ font-weight:800;
 opacity:0.80;}
 `;
 
-
+export const CreatedAt = styled.div`
+position:relative;
+display:flex;
+width:100%;
+height:100%;
+justify-content:flex-end;
+font-weight:700;
+span {
+  font-size:1rem;
+  font-weight:700;
+  margin-right:1%;
+}
+`;

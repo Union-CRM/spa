@@ -14,16 +14,7 @@ export const useFetchClient = () => {
     axios
       .post(
         clientCreate,
-        {
-          client_name: client.client,
-          client_email: client.email,
-          client_role: parseInt(client.role_id),
-          customer_id: parseInt(client.customer_id),
-          release_id: parseInt(client.release_id),
-          business_id: parseInt(client.business_id),
-          user_id: parseInt(client.user_id),
-          tags: client.tags.map((t) => ({ tag_id: parseInt(t.id) })),
-        },
+        client,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }

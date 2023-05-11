@@ -23,6 +23,8 @@ import { useFetchCustomer } from "../../../../hook/useFetchCustomer";
 import { useFetchAdmGroupList } from "../../../../hook/useFetchAdmGroupList";
 import {useGroupListContext} from "../../../../hook/useGroupListContext";
 import { useFetchUsersNotin } from "../../../../hook/useFetchUsersNotin";
+import { selectedOptions } from "../UsersComponents";
+const AddEditGroup = (props) => {
 
 
 const AddEditGroup = (props) => {
@@ -67,7 +69,9 @@ const AddEditGroup = (props) => {
       const newGroup = {
         group_name: groupName,
         customer_id: customer.id,
-        users: users.map((g) => ({ id: g.value })),
+
+        users: selectedOptions.map((g) => ({ user_id: g.value })),
+
       };
       console.log(newGroup);
       if (groupName && customer.id && users) {
@@ -78,6 +82,7 @@ const AddEditGroup = (props) => {
       }
       
     };
+    console.log(selectedOptions)
 
     // Edit GROUP //
    

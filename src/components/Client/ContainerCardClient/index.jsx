@@ -53,17 +53,17 @@ const ContainerCards = (props) => {
 
   const { client } = useClientContext();
   const { id, setId } = useClientContext();
-  //const {modalInfo, setModalInfo} = useClientContext();
-  const [modalInfo, setModalInfo] = useState(false);
-  const { modalEditClient, setModalEditClient } = useClientContext();
+  const {modalInfo, setModalInfo} = useClientContext();
+  const {modalEditClient, setModalEditClient } = useClientContext();
   const { search } = useSearchContext();
+
 
   useEffect(() => {
     if (props.adminList) {
 
       setClientList(client.filter((c) => c.user_id === userTarget.id));
     } else {
-      setClientList(client.filter((c) => c.user_id === user.id));
+      setClientList(client);
     }
   }, [client]);
 
@@ -199,14 +199,16 @@ const ContainerCards = (props) => {
         </CardsContainer>
       </ContainerHeaderAndCards>
 
-      <DivModal $mode={modalEditClient} />
-      {modalEditClient && (
-        <AddEditClient
-          id={id}
-          setModalEditClient={setModalEditClient}
-          title={"Edit Client"}
-        />
-      )}
+
+      <DivModal $mode={modal} />
+{modal && (
+    <AddEditClient
+      id={id}
+      setModal={setModal}
+      title={"Create Client"}
+    />
+)}
+
 
       <DivModal $mode={modalInfo} />
 
@@ -214,25 +216,33 @@ const ContainerCards = (props) => {
         <ModalClientEdit
           id={id}
           openModal={() => detailsModal()}
-          setModal={setModalInfo}
-          title={"Edit Client"}
+          setModalInfo={setModalInfo}
+          title={"Client Details"}
+
         />
       )}
 
-      <DivModal $mode={modal} />
+      <DivModal $mode={modalEditClient} />
+
+    {modalEditClient && (
 
       {/* {modal && (
+
         <ModalClientEdit
           id={id}
-          setModal={setModal}
-          title={"Create Client"}
+          setModalEditClient={setModalEditClient}
+          title={"Edit Client"}
         />
+
+    )}
+
     )} */}
+
 
       {modalPopUp && (
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
       )}
-    </ContainerGlobal>
-  );
-};
+   </ContainerGlobal>  
+ )   
+}
 export default ContainerCards;

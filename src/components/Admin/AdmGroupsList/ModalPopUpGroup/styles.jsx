@@ -71,7 +71,7 @@ export const Span = styled.span`
 `;
 
 export const Circle = styled.div`
-  background: #007bff;
+  background: #E41165;
   border-radius: 100%;
   width: 63px;
   height: 63px;
