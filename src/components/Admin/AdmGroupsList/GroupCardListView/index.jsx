@@ -23,12 +23,10 @@ import { ReactComponent as PeopleTeams } from "../../../../assets/svg/PeopleTeam
 import { useClientContext } from "../../../../hook/useClientContent";
 import { useFetchCustomer } from "../../../../hook/useFetchCustomer";
 import { useUserContext } from "../../../../hook/useUserContext";
-import { useFetchAdmGroupList } from "../../../../hook/useFetchAdmGroupList";
-
 
 // Group List //
 import {useGroupListContext} from "../../../../hook/useGroupListContext";
-
+import { useFetchAdmGroupList } from "../../../../hook/useFetchAdmGroupList";
 const AdmGroupCardListView = (props) => {
 
   const handleEdit = () => {
@@ -36,13 +34,13 @@ const AdmGroupCardListView = (props) => {
   };
 
   const handleClick = () => {
-    openModalPopUp();
+    updateStatus(group.id);
     props.setId(group.id);
   };
 
 
   const { openModal, openModalPopUp } = props;
-
+  const { updateStatus } = useFetchAdmGroupList();
   const [userOption, setUserOption] = useState([{}]);
   const { group: groupList, updateGroup} = useGroupListContext();
   //const { updateStatus } = useFetchAdmGroupList();
