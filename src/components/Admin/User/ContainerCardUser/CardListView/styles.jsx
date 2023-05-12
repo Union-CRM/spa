@@ -23,7 +23,7 @@ export const Card = styled.div`
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
   width: auto;
-  cursor: pointer;
+
   height: 100%;
   z-index: 0 !important;
   padding-left: 10px;
@@ -91,6 +91,7 @@ export const DivPhoto = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 //ok
 export const DivPhotoI = styled.div`
@@ -118,6 +119,7 @@ export const DivDadosCard = styled.div`
   grid-column: 2;
   padding-left: 3%;
   margin-top: 5%;
+  cursor: pointer;
 `;
 
 //ok
@@ -164,6 +166,7 @@ export const DivLevel = styled.span`
   margin-top: 5px;
   flex-direction: row;
   justify-content: flex-start;
+  cursor: pointer;
   span {
     color: rgba(0, 0, 0, 0.7);
   }
@@ -180,6 +183,7 @@ export const Dot = styled.div`
   margin-right: 3px;
   //overflow-x: visible;
 
+  //background-color: ${(props) => (props.isActive ? "#E41165" : "#7a7a7a")};
   background-color: ${({ bgColor }) => bgColor};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;

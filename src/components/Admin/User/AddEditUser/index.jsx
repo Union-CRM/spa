@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   ClickButton,
@@ -22,9 +22,9 @@ import { useUserContext } from "../../../../hook/useUserContext";
 import { useFetchUser } from "../../../../hook/useFetchUser";
 
 const AddEditUser = (props) => {
-  const { user, setModalPassword } = useUserContext();
+  const { user, setModalPassword, userTarget } = useUserContext();
   const [newUser, setNewUser] = useState(entityUser);
-  const { createUser } = useFetchUser();
+  const { createUser, updateUserNoPSW } = useFetchUser();
 
   const levelOptions = levels
     .map((l) => {
@@ -42,7 +42,25 @@ const AddEditUser = (props) => {
   };
 
   const handleSubmit = () => {
-    handleCreateUser();
+    if (props.title === "Edit User") {
+      handleEditUser();
+    } else {
+      handleCreateUser();
+    }
+  };
+  useEffect(() => {
+    if (props.title === "Edit User") {
+      setNewUser(userTarget);
+    }
+  }, []);
+
+  const handleEditUser = () => {
+    if (true) {
+      updateUserNoPSW(userTarget.id, newUser);
+      setModal(false);
+    } else {
+      setFlag(true);
+    }
   };
 
   const handleCreateUser = () => {
@@ -50,7 +68,7 @@ const AddEditUser = (props) => {
       ...newUser,
       tcs_id: parseInt(newUser.tcs_id),
     };
-    console.log(u);
+
     if (newUser.name && newUser.email && newUser.tcs_id && newUser.level) {
       createUser(u)
         .then(function (variavel) {
