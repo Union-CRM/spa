@@ -9,39 +9,35 @@ import {
   Span,
   ContainerFather,
 } from "./styles";
-
-import { useEffect } from "react";
-import { useFetchRelease } from "../../../../hook/useFetchRelease";
 import { useReleaseContext } from "../../../../hook/useReleaseContent";
-
-
+import { useFetchRelease } from "../../../../hook/useFetchRelease";
+import { useEffect } from "react";
 
 const ModalStatusRelease = (props) => {
-
-  // Context and props
   const { modalClose } = props;
+  const { release , idRelease, setIdRelease, setModalStatusRelease } = useReleaseContext();
   const { updateStatusRelease } = useFetchRelease();
   const releases = release.filter((item) => item.id === idRelease.id)[0];
   const p = releases.status === "ATIVO" ? "Deactivate" : "Active";
-  const { release, idRelease, setModalStatusRelease } = useReleaseContext();
 
-  // Managing confirmation modal (changing status)
+  useEffect(() => {
+    //console.log(idRelease.id + "teste");
+  }, []);
+  
   const span =
     releases.status === "ATIVO"
       ? "Do you want do deactivate this card?"
       : "Do you want to activate this card?";
-
-  // Button to change status       
+ 
   const handleAlterStatus = () => {
     updateStatusRelease(releases.id);
     setModalStatusRelease(false);
   };
-
-  // Button cancel in modalStatusRelease
+  
   const handleCancel = () => {
     window.location.reload();
   };
-
+  
   return (
     <ContainerFather>
       <Overlay>

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import {
+  customersGet,
   customerCreate,
   customerUpdate,
   customerUpdateStatus,
@@ -15,14 +16,13 @@ export const useFetchCustomer = () => {
   //  const [popUpError, setPopUpError] = useState(false);
 
   const loadCustomerOptions = () => {
+    console.log(customer)
     return customer
-      ? customer
-          .filter((c) => c.status === "ATIVO")
-          .map((item) => ({
-            id: item.id,
-            value: item.id,
-            label: item.name,
-          }))
+      ? customer.filter((c)=>c.status==="ATIVO").map((item) => ({
+          id: item.id,
+          value: item.id,
+          label: item.name,
+        }))
       : [];
   };
 

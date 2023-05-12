@@ -29,53 +29,56 @@ import { useFetchCustomer } from "../../../hook/useFetchCustomer";
 import { useFetchClient } from "../../../hook/useFetchClient";
 import { useFetchRole } from "../../../hook/useFetchRole";
 import { useFetchTag } from "../../../hook/useFetchTag";
-import { useCustomerContext } from "../../../hook/useCustomerContext";
+import {useCustomerContext} from "../../../hook/useCustomerContext";
 import { useReleaseContext } from "../../../hook/useReleaseContent";
 
 const AddEditClient = (props) => {
   const { client: clientList, setClient: setClientList } = useClientContext();
 
-  const [clientId, setClientId] = useState();
+  const [clientId,setClientId]=useState()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [customer, setCustomer] = useState({});
-  const { user } = useUserContext();
+  const {user} = useUserContext();
   const [business, setBusiness] = useState("");
   const [role, setRole] = useState({});
   const [status, setStatus] = useState({ value: "Active" });
   const { release: releaseList } = useReleaseContext("release");
-  const { loadCustomerList } = useCustomerContext();
-  const [customerList, setCustomerList] = useState([]);
+  const { loadCustomerList} = useCustomerContext();
   const { loadCustomerOptions } = useFetchCustomer();
+  const [customerList,setCustomerList] = useState([])
   const { roleList } = useFetchRole("Role");
   const { tagList } = useFetchTag("Tag");
   const [releaseObj, setReleaseObj] = useState({
     release_name: "",
     business_name: "",
   });
-  const [releaseOptions, setReleaseOptions] = useState([]);
+  const [releaseOptions, setReleaseOptions] = useState([])
 
+  
   const [tags, setTags] = useState([]);
-  const { insertClient, updateClient } = useFetchClient();
+  const {insertClient,updateClient}= useFetchClient();
   const [flag, setFlag] = useState(false);
   const { setModal, id } = props;
 
-  useEffect(() => {
-    loadCustomerList();
-    setCustomerList(loadCustomerOptions());
-  }, []);
+  useEffect(() =>{
+    loadCustomerList()
+    setCustomerList(loadCustomerOptions())
+  }, [])
 
-  useEffect(() => {
-    if (releaseList) {
-      setReleaseOptions(
-        releaseList.map((item) => ({
-          id: item.id,
-          value: item.id,
-          label: item.name,
-        }))
-      );
-    }
-  }, [releaseList]);
+  useEffect(() =>{
+
+    if(releaseList){
+    setReleaseOptions(
+      releaseList.map((item) => ({
+        id: item.id,
+        value: item.id,
+        label: item.name,
+      })))
+      }
+     
+  },[releaseList])
+
 
   const closeModal = () => {
     setModal(false);
@@ -85,6 +88,7 @@ const AddEditClient = (props) => {
     if (props.title === "Create Client") {
       createClient();
     } else {
+      
     }
   };
 
@@ -98,6 +102,7 @@ const AddEditClient = (props) => {
     return lastId + 1;
   }
 
+
   const createClient = () => {
     const newClient = {
       client_email: email,
@@ -107,10 +112,10 @@ const AddEditClient = (props) => {
       business_id: parseInt(releaseObj.business_id),
       release_id: releaseObj.id,
       user_id: user.id,
-      tags: tags.map((tag) => ({ tag_id: tag.value })),
+      tags:tags.map((tag) => ({ tag_id: tag.value})),
     };
-    console.log(newClient);
-    if (name && email && role.id && customer.id && releaseObj.id) {
+    console.log(newClient)
+    if (name && email && role.id && customer.id && releaseObj.id ) {
       insertClient(newClient);
       setModal(false);
     } else {
@@ -118,7 +123,9 @@ const AddEditClient = (props) => {
     }
   };
 
+
   const handleSelectRelease = (release_id) => {
+    console.log(release_id);
     setReleaseObj(releaseList.filter((item) => item.id === release_id)[0]);
   };
 
@@ -197,7 +204,7 @@ const AddEditClient = (props) => {
                 key="3"
                 set={(release_id) => handleSelectRelease(release_id)}
                 label={"Release Train"}
-                value={releaseObj.name}
+                value={releaseObj.name}               
                 placeholder={flag && !releaseObj.id ? "Required field" : ""}
                 sizeSingle={"100%"}
                 required

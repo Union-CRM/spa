@@ -13,20 +13,19 @@ import {
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useClientContext } from "../../../hook/useClientContent";
 
-
 const SubjectsClient = (props) => {
   const { setModal, id } = props;
 
   const {
     client: clientList,
     setClient: setClientList,
-    loadData,
+    loadData, setModalInfo,
   } = useClientContext();
-
-
+  const { setModalEdit } = useSubjectContext();
+  //const {setEditSubject} = useSubjectContext();
   const [status, setStatus] = useState();
-  const { subject: subjectsList } = useSubjectContext();
-   const [subjects, setSubjects] = useState([]);
+  const { subject: subjectsList,setIdSubject } = useSubjectContext();
+  const [subjects, setSubjects] = useState([]);
 
   useEffect(() => {
     if (subjectsList) {
@@ -42,6 +41,11 @@ const SubjectsClient = (props) => {
     }
   }, [id]);
 
+  const handleEdit = (id) => {
+    setIdSubject(id);
+    setModalEdit(true);
+    setModalInfo(false);
+  }
 
   return (
 
@@ -49,7 +53,7 @@ const SubjectsClient = (props) => {
 
 
   {subjects.map((s) => (
-  <CardSubject >
+  <CardSubject onClick={() => handleEdit(s.id)}>
 
     <DivGlobalCard>
       <DivStatusSubject>

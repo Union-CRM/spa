@@ -35,6 +35,13 @@ import { useSearchContext } from "../../../hook/useSearchContext";
 // Modal Client //
 import ModalClientDetails from "../ModalClientDetails";
 import ModalClientEdit from "../EditClient";
+//import Subject from "../../Subject/EditSubject/index";
+import Subject from "../../../components/Subject/EditSubject";
+//import { useSubjectContext } from "../../../hook/useSubjectContent";
+
+import { useSubjectContext } from "../../../hook/useSubjectContent";
+  //const { setEditSubject } = SubjectContext();
+
 
 const abaStatus = {
   ACTIVE: "Active",
@@ -46,12 +53,11 @@ const ContainerCards = (props) => {
 const { search } = useSearchContext();
   const [modal, setModal] = useState(false);
   const [modalPopUp, setModalPopUp] = useState(false);
-  //const [id, setId] = useState(null);
   const [isEdit, setEdit] = useState(false);
   const [clientList, setClientList] = useState();
   const [active, setActive] = useState(abaStatus.ACTIVE);
   const { user, userTarget } = useUserContext();
-
+  const { modalEdit } = useSubjectContext();
   const { client } = useClientContext();
   const { id, setId } = useClientContext();
   const {modalInfo, setModalInfo} = useClientContext();
@@ -94,11 +100,6 @@ const { search } = useSearchContext();
     setModal(true);
     setEdit(false);
   };
-
- // const EditClient = () => {
-   // setModal(true);
-   // setEdit(true);
-  //};
 
   const modalClose = () => {
     setModalPopUp(true);
@@ -211,7 +212,7 @@ const { search } = useSearchContext();
     />
 )}
 
-      <DivModal $mode={modalInfo} />
+      <DivModal $mode={modalInfo || modalEdit || modalEditClient || modalPopUp} />
 
        {modalInfo && (
         <ModalClientDetails
@@ -221,8 +222,6 @@ const { search } = useSearchContext();
           title={"Client Details"}
         />
       )}
-
-      <DivModal $mode={modalEditClient} />
 
     {modalEditClient && (
         <ModalClientEdit
@@ -234,6 +233,9 @@ const { search } = useSearchContext();
 
       {modalPopUp && (
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
+      )}
+      {modalEdit && (
+        <Subject/>
       )}
    </ContainerGlobal>  
  )   

@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const useFetchSegment = (seg) => {
   const [segmentList, setSegmentList] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadDate() {
@@ -20,19 +21,22 @@ export const useFetchSegment = (seg) => {
       } catch (error) {
         console.error(error);
       }
+      //console.log(tags);
       setSegmentList(
         segment.data.domain_list.map((item) => ({
           id: item.domain_id,
           value: item.domain_id,
           label: item.domain_value,
-          code: item.domain_code,
+          code:item.domain_code
         }))
-      );
+      );            
     }
     loadDate();
   }, []);
 
   return {
     segmentList,
+    loading,
   };
 };
+

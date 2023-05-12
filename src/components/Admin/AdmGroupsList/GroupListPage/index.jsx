@@ -31,12 +31,12 @@ import IconSystem from "../../../../assets/IconSystem";
 import { ReactComponent as Info } from "../../../../assets/svg/Info.svg";
 
 // Group
+import {useGroupListContext} from "../../../../hook/useGroupListContext";
 import AddEditGroup from "../../AdmGroupsList/GroupListAddEdit";
 import AdmGroupCardListView from "../GroupCardListView/index";
-import { useGroupListContext } from "../../../../hook/useGroupListContext";
 import InfoGroup from "../../AdmGroupsList/ModalInfoGroup";
+import ModalGroupDetails from "../ModalGroupDetails";
 
-import ModalPopUpGroup from "../ModalPopUpGroup";
 
 const abaStatus = {
   ATIVO: "ATIVO",
@@ -51,11 +51,14 @@ const GroupListView = () => {
   const [groupList, setGroupList] = useState();
   const [modalPopUp, setModalPopUp] = useState(false);
   const [modal, setModal] = useState(false);
-  const [id, setId] = useState(null);
   const [isEdit, setEdit] = useState(false);
-  const { group, infoGroup, setInfoGroup } = useGroupListContext();
+  const { group, infoGroup, setInfoGroup, setIdEdit } = useGroupListContext();
 
   //const [infoGroup, setInfoGroup] = useState(true);
+
+  const { id, setId } = useGroupListContext();
+  const {modalInfo, setModalInfo} = useGroupListContext();
+  const {modalEditGroup, setModalEditGroup } = useGroupListContext();
   
   const [active, setActive] = useState(abaStatus.ATIVO);
 
@@ -73,7 +76,8 @@ const GroupListView = () => {
     setInfoGroup(false);
   };
 
-  const EditGroup = () => {
+  const EditGroup = (item) => {
+    setIdEdit(item.id)
     setModal(true);
     setEdit(true);
     setInfoGroup(false);
@@ -82,6 +86,11 @@ const GroupListView = () => {
   const modalClose = () => {
     setModalPopUp(true);
   };
+
+  const detailsModal = () => {
+    setModalInfo(true);
+  };
+
 
   return (
     
@@ -170,11 +179,10 @@ const GroupListView = () => {
                 .map((item) => (
                   <AdmGroupCardListView
                     setId={(i) => setId(i)}
-                    openModalPopUp={() => setModalPopUp(true)}
+                    //openModal={() => detailsModal()}
                     key={item.id}
                     id={item.id}
-                    openModal={() => EditGroup()}
-                    //modalPopUp={() => PopUp()}
+                    openModal={() => EditGroup(item)}
                   />
                 ))}
           </BoardStyle>
@@ -191,6 +199,16 @@ const GroupListView = () => {
         />
       )}
 
+<DivModal $mode={modalInfo} />
+{modalInfo && (
+        <ModalGroupDetails
+          id={id}
+          openModal={() => detailsModal()}
+          setModalInfo={setModalInfo}
+          title={"Group Details"}
+        />
+      )}
+
 {infoGroup && (
         <InfoGroup
           id={id}
@@ -199,9 +217,7 @@ const GroupListView = () => {
         />
       )}
 
-      {modalPopUp && (
-        <ModalPopUpGroup id={id} modalClose={() => setModalPopUp(false)} />
-      )}
+      
     </ContainerGlobal>
   );
 };
