@@ -80,16 +80,18 @@ const ContainerCards = () => {
   }, [users]);
 
   useEffect(() => {
-    if (users) console.log(users);
-    if (search) {
-      setUserList(
-        users.filter((u) => u.name.toLowerCase().includes(search.toLowerCase()))
-      );
-    } else {
-      setUserList(users);
+    if (users) {
+      if (search) {
+        setUserList(
+          users.filter((u) =>
+            u.name.toLowerCase().includes(search.toLowerCase())
+          )
+        );
+      } else {
+        setUserList(users);
+      }
     }
   }, [search, users]);
-
   return (
     <ContainerGlobal>
       <ContainerHeaderAndCards>
@@ -165,11 +167,11 @@ const ContainerCards = () => {
             {userList &&
               userList
                 .filter((u) => u.status === active)
-                .map((u) => (
+                .map((u, index) => (
                   <UserCard
                     setId={(i) => setId(i)}
                     openModalPopUp={() => setModalPopUp(true)}
-                    key={u.id}
+                    key={u.id * Math.random()}
                     id={u.id}
                     openModal={() => EditClient()}
                   />

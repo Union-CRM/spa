@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Card,
   Container,
@@ -26,7 +26,7 @@ const UserCard = (props) => {
   const { userList, setViewProfile, setUserTarget } = useUserContext();
   const { updateStatusUser } = useFetchUser();
   const user = userList.filter((u) => u.id === props.id)[0];
-
+  console.log(user);
   const handleClickViewProfile = () => {
     setViewProfile(true);
     setUserTarget(user);
@@ -42,6 +42,14 @@ const UserCard = (props) => {
   const handleClickAlterStatus = () => {
     updateStatusUser(props.id);
   };
+  useEffect(() => {
+    setIsActive(user.status === "ACTIVE");
+  }, [userList]);
+
+  const handleEdit = () => {
+    setUserTarget(user);
+    props.openModal();
+  };
 
   return (
     <ContainerFather>
@@ -53,13 +61,13 @@ const UserCard = (props) => {
           checked={isActive}
         >
           <Header>
-            <DivPhoto>
+            <DivPhoto onClick={handleEdit}>
               <DivPhotoI isActive={isActive}>
                 <Body type={"Body2"} name={Split(user.name)} />
               </DivPhotoI>
             </DivPhoto>
 
-            <DivDadosCard>
+            <DivDadosCard onClick={handleEdit}>
               <Body type={"Body2"} name={user.name} />
 
               <Subtitle type={"TextDescription"} name={user.email} />
@@ -84,14 +92,15 @@ const UserCard = (props) => {
           </Header>
 
           <DivInfo>
-            <DivLevel>
+            <DivLevel onClick={handleEdit}>
               <Dot
                 isActive={isActive}
-                bgColor={user.status === "ACTIVE" ? "#e41165" : "#7a7a7a"}
+                bgColor={isActive ? "#e41165" : "#7a7a7a"}
               ></Dot>
               <Dot
+                isActive={isActive}
                 bgColor={
-                  user.level > 1 && user.status === "ACTIVE"
+                  user.level > 1 && isActive
                     ? "#e41165"
                     : user.level > 1
                     ? "#7a7a7a"
@@ -99,8 +108,9 @@ const UserCard = (props) => {
                 }
               ></Dot>
               <Dot
+                isActive={isActive}
                 bgColor={
-                  user.level > 2 && user.status === "ACTIVE"
+                  user.level > 2 && isActive
                     ? "#e41165"
                     : user.level > 2
                     ? "#7a7a7a"
@@ -108,8 +118,9 @@ const UserCard = (props) => {
                 }
               ></Dot>{" "}
               <Dot
+                isActive={isActive}
                 bgColor={
-                  user.level > 3 && user.status === "ACTIVE"
+                  user.level > 3 && isActive
                     ? "#e41165"
                     : user.level > 3
                     ? "#7a7a7a"
@@ -117,8 +128,9 @@ const UserCard = (props) => {
                 }
               ></Dot>{" "}
               <Dot
+                isActive={isActive}
                 bgColor={
-                  user.level > 4 && user.status === "ACTIVE"
+                  user.level > 4 && isActive
                     ? "#e41165"
                     : user.level > 4
                     ? "#7a7a7a"
@@ -130,7 +142,7 @@ const UserCard = (props) => {
               <ButtonDefault
                 isActive={isActive}
                 onClick={() => handleClickViewProfile()}
-                type={user.status === "ACTIVE" ? "adminSave" : "userDisable"}
+                type={isActive ? "adminSave" : "userDisable"}
                 weightFont={"135"}
                 sizeFont={"14px"}
                 name={"View Profile"}

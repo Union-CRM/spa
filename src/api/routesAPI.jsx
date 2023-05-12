@@ -10,6 +10,9 @@ export const userUpdateStatus =
 
 export const userCreate =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users";
+
+export const userUpdateNoPSW =
+  "crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/update/";
 //Subject
 export const subjectGetSubmissivesSubjects =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/submissives";
