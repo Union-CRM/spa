@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSubjectContext } from "./useSubjectContent";
 import {
@@ -8,6 +9,7 @@ import {
 export const useFetchSubjectStatus = () => {
   const { loadData } = useSubjectContext();
   const subjectFinished = async (subject_id, subject) => {
+    console.log(subject);
     axios
       .put(
         `${subjectUpdateStatusFinished}${subject_id}`,
@@ -18,9 +20,10 @@ export const useFetchSubjectStatus = () => {
       )
       .then(function (response) {
         loadData();
+        //console.log(response);
       })
       .catch(function (error) {
-        console.error(error);
+        console.log(error);
       });
   };
 
@@ -37,7 +40,7 @@ export const useFetchSubjectStatus = () => {
         loadData();
       })
       .catch(function (error) {
-        console.error(error);
+        console.log(error);
       });
   };
 

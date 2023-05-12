@@ -62,13 +62,11 @@ const ContentsPlanner = (props) => {
   }, [id]);
 
   const [plannerSubject, setPlannerSubject] = useState(
-    planner ? planner.filter((p) => p.subject_id === props.id) : []
+    planner.filter((p) => p.subject_id === props.id)
   );
 
   useEffect(() => {
-    setPlannerSubject(
-      planner ? planner.filter((p) => p.subject_id === props.id) : []
-    );
+    setPlannerSubject(planner.filter((p) => p.subject_id === props.id));
   }, [planner]);
   /*
   const statusPlanner = {
@@ -88,7 +86,7 @@ const ContentsPlanner = (props) => {
 
   const toggleTab = (index, planner_id) => {
     setToggleState(index);
-    setPlannerEdit(planner ? planner.filter((p) => p.id === planner_id)[0] : 0);
+    setPlannerEdit(planner.filter((p) => p.id === planner_id)[0]);
   };
 
   // Planner Create //

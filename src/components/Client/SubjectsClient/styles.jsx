@@ -130,7 +130,9 @@ export const TitleSubject = styled.div`
 display:block;
 padding-top:0.5%;
 span {
+font-size:0.9rem;
 font-weight:800;
+display:flex;
 opacity:0.80;}
 `;
 

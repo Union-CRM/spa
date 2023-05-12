@@ -10,9 +10,6 @@ export const userUpdateStatus =
 
 export const userCreate =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users";
-
-export const userUpdateNoPSW =
-  "crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/update/";
 //Subject
 export const subjectGetSubmissivesSubjects =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/submissives";
@@ -49,6 +46,8 @@ export const plannerUpdate =
 
 export const groupCreate = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups`;
 
+export const groupUpdate = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/update/status/`;
+
 //client
 export const clientGetClientsMyGroups =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8083/union/v1/clients/mygroups";
@@ -75,7 +74,7 @@ export const customerUpdateStatus =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8084/union/v1/customers/update/status/";
 
 export const groupGetUser =
-  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/user/1"; //adicionar id usuario
+  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/user/"; //adicionar id usuario
 
 //FetchRealise
 export const realiseGetRealiseTrains =

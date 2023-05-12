@@ -6,6 +6,7 @@ import { ContainerGlobal } from "../../../components/Client/ContainerCardClient/
 import { DivIcons } from "../../../components/Client/ContainerCardClient/CardListView/styles";
 import { DivP } from "../../../components/Planner/PlannerCard/styles";
 import { ContainerCentral } from "../../../components/Client/AddEditClient/styles";
+import { DivModal } from "../../../components/Client/ContainerCardClient/styles";
 import { Card as ContainerCard } from "../../../components/Client/ContainerCardClient/CardListView/styles";
 import { DivCard as ModaClient } from "../../../components/Planner/PlannerCard/styles";
 import { Container as ContainerGraphic } from "../../../components/Grafico/styles";

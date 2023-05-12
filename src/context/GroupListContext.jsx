@@ -13,6 +13,13 @@ export const GroupListContextProvider = ({ children }) => {
   const { user } = useUserContext();
   const [infoGroup, setInfoGroup] = useState(true);
   const [users, setUsers] = useState([]);
+  const [toggleState, setToggleState] = useState(0);
+  const [activeTab, setActiveTab] = useState(null);
+  const [modal, setModal] = useState();
+  const [id, setId] = useState(null);
+  const [idEdit,setIdEdit] = useState();
+  const [modalEditGroup, setModalEditGroup] = useState(false);
+  const [modalInfo, setModalInfo] = useState(false);
 
   useEffect(() => {
     if (user.level > 1) {
@@ -52,7 +59,10 @@ export const GroupListContextProvider = ({ children }) => {
 
   };
   return (
-    <GroupListContext.Provider value={{ group, setGroup, loadData, team, setTeamList, infoGroup, setInfoGroup, users, idGroups, setIdGroups }}>
+    <GroupListContext.Provider value={{ group, setGroup, loadData, team, setTeamList, infoGroup, setInfoGroup, users, idGroups,
+      setIdGroups, modalEditGroup, setModalEditGroup, modalInfo, setModalInfo, id, setId, modal, setModal, activeTab, setActiveTab,
+      toggleState, setToggleState,idEdit,setIdEdit
+     }}>
     {children}
     </GroupListContext.Provider>
   );

@@ -4,6 +4,7 @@ import { roleCreate } from "../api/routesAPI";
 
 export const useFetchRole = (role) => {
   const [roleList, setRoleList] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadDate() {
@@ -31,5 +32,6 @@ export const useFetchRole = (role) => {
 
   return {
     roleList,
+    loading,
   };
 };

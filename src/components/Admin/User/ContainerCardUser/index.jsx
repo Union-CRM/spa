@@ -72,15 +72,12 @@ const ContainerCards = () => {
   }, []);
 
   useEffect(() => {
-    if (users) {
-      setUserList(users);
-    } else {
-      setUserList([]);
-    }
+    setUserList(users);
   }, [users]);
 
   useEffect(() => {
-    if (users) {
+    if (users)
+    console.log(users);
       if (search) {
         setUserList(
           users.filter((u) =>
@@ -90,8 +87,8 @@ const ContainerCards = () => {
       } else {
         setUserList(users);
       }
-    }
   }, [search, users]);
+
   return (
     <ContainerGlobal>
       <ContainerHeaderAndCards>
@@ -99,9 +96,7 @@ const ContainerCards = () => {
           <Top>
             <DivTitlePage>
               <H1>User List </H1>
-              <HowManyClientList>
-                ({userList ? userList.length : 0})
-              </HowManyClientList>{" "}
+              <HowManyClientList>({userList.length})</HowManyClientList>{" "}
               <Tippy content="List of all system users">
                 <DivInfo>
                   <Info
@@ -134,9 +129,7 @@ const ContainerCards = () => {
               <Active>
                 Active (
                 <HowManyActive>
-                  {userList
-                    ? userList.filter((item) => item.status === "ACTIVE").length
-                    : 0}
+                  {userList.filter((item) => item.status === "ACTIVE").length}
                 </HowManyActive>
                 )
               </Active>
@@ -149,10 +142,7 @@ const ContainerCards = () => {
               <Inactive>
                 Inactive (
                 <HowManyInactive>
-                  {userList
-                    ? userList.filter((item) => item.status === "INACTIVE")
-                        .length
-                    : 0}
+                  {userList.filter((item) => item.status === "INACTIVE").length}
                 </HowManyInactive>
                 )
               </Inactive>
@@ -167,11 +157,11 @@ const ContainerCards = () => {
             {userList &&
               userList
                 .filter((u) => u.status === active)
-                .map((u, index) => (
+                .map((u) => (
                   <UserCard
                     setId={(i) => setId(i)}
                     openModalPopUp={() => setModalPopUp(true)}
-                    key={u.id * Math.random()}
+                    key={u.id}
                     id={u.id}
                     openModal={() => EditClient()}
                   />

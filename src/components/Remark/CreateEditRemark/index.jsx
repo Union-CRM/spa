@@ -90,6 +90,12 @@ const CreateEditRemark = (props) => {
   };
   // status 19: Finished,  20: canceled, 21: Active
   const handleEditRemark = () => {
+    console.log({
+      ...newRemark,
+      status_id: 21,
+      date: newRemark.date.split("T")[0] + "T12:00:00.000Z",
+      date_return: newRemark.date_return.split("T")[0] + "T12:00:00.000Z",
+    });
     if (
       newRemark.remark_name &&
       newRemark.subject_id &&

@@ -3,9 +3,26 @@ import {
   Container,
   Card,
   Header,
+  DivPhoto,
+  DivPhotoI,
   DivDadosCard,
+  Status,
+  DivTagsStatus,
+  TagsSpan,
   DivIcons,
+  IconTag,
+  IconEdit,
+  DivToggle,
   InputToggle,
+  LabelToggle,
+  Span,
+  DivInfo,
+  DivRole,
+  DivCustomer,
+  DivBusiness,
+  DivRelease,
+  ValueInfo,
+  TitleInfo,
   ContainerFather,
   ToggleContainer,
   ToggleButton,
@@ -19,25 +36,27 @@ import {
   DivTag,
   DivContentTags,
 } from "./styles";
-
-// Style
-import "tippy.js/dist/tippy.css";
-import Tippy from "@tippyjs/react";
-
-import { useFetchRelease } from "../../../../../hook/useFetchRelease";
+import Body from "../../../../../assets/FontSystem/Body";
+import Subtitle from "../../../../../assets/FontSystem/Subtitle";
 import { useReleaseContext } from "../../../../../hook/useReleaseContent";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import {ReactComponent as Edit} from "../../../../../assets/svg/Edit.svg"
+
+import styled, { css } from "styled-components";
+import { useFetchRelease } from "../../../../../hook/useFetchRelease";
 
 const ReleaseCard = (props) => {
 
   
-  // Context and props
-  const { openModal, openModalPopUp } = props;
-  const { setModalEditRelease, setModalCreateRelease,setIdRelease,
+  
+  const { setModalEditRelease, setModalCreateRelease, 
+    idRelease, setIdRelease,
     setModalStatusRelease} = useReleaseContext();
-  const { release: releaseList, setReleaseTarget} = useReleaseContext();
+  const { openModal, openModalPopUp } = props;
+  const {updateStatusRelease} = useFetchRelease();
+  const { release: releaseList, updateRelease, setReleaseTarget} = useReleaseContext();
   const release = releaseList.filter((item) => item.id === props.id)[0];
-
-  // UseState
   const [tagIcon, setTagIcon] = useState(false);
   const [tags] = useState(
     release.tags.map((tag) => {
@@ -45,7 +64,11 @@ const ReleaseCard = (props) => {
     })
   );
 
-  // Function that is receiving the release id by props to change the status in toggle
+  const handleEdit = () => {
+    openModal();
+    props.setId(release.id);
+  };
+
   const handleClick = () => {
     setModalStatusRelease(true);
     props.setId(release.id);
@@ -53,14 +76,12 @@ const ReleaseCard = (props) => {
   };
 
   const [isActive, setIsActive] = useState(release.status === "ATIVO");
-
-  // Toggle function to change card status
+  const [previousStatus, setPreviousStatus] = useState(release.status);
   const handleToggle = () => {
     const newStatus = isActive ? "INATIVO" : "ATIVO";
     setIsActive(!isActive);
   };
 
-  // Function to open edit release modal
   function handleModal(id){
     setIdRelease(id);
     props.openModal();
@@ -131,7 +152,7 @@ const ReleaseCard = (props) => {
                       return (
                         <DivContentTags
                           key={index}
-                          colorTag={t.color}
+                          colorTag={isActive ? t.color : "#7a7a7a"}
                         >
                           {t.label}
                         </DivContentTags>
@@ -141,7 +162,7 @@ const ReleaseCard = (props) => {
                         <Tippy key={index} content={tags}>
                           <DivContentTags
                             key={index}
-                            colorTag={t.color}
+                            colorTag={isActive ? t.color : "#7a7a7a"}
                           >
                             <p>see more tags</p>
                           </DivContentTags>

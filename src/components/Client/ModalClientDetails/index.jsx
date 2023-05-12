@@ -27,15 +27,15 @@ import {
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useClientContext } from "../../../hook/useClientContent";
 
-import ClientDetails from "../ClientsDetails";
-import SubjectClient from "../SubjectsClient";
+import ClientDetails from "../ClientsDetails"
+import SubjectClient from "../SubjectsClient"
 
 const ModalClientDetails = (props) => {
   const { setModal, id } = props;
-  const { setModalInfo, setId, modalEditClient, setModalEditClient, loadData } =
-    useClientContext();
-
+  const { setModalInfo, setId,  modalEditClient, setModalEditClient, loadData } = useClientContext();
+  
   // UseEffect Clients //
+
 
   const { client: clientList } = useClientContext();
   const client = clientList.filter((item) => item.id === props.id)[0];
@@ -43,7 +43,8 @@ const ModalClientDetails = (props) => {
   const [clientName, setClientName] = useState();
   const [manager, setManager] = useState();
 
-  useEffect(() => {
+
+ useEffect(() => {
     if (props.title === "Client Details") {
       const client = clientList.filter((item) => item.id === props.id)[0];
       setStatus(client.status);
@@ -51,7 +52,7 @@ const ModalClientDetails = (props) => {
       setManager(client.user_name);
     }
   }, [id]);
-
+  
   const [activeContent, setActiveContent] = useState(0);
   const { toggleState, setToggleState } = useClientContext();
   const { activeTab, setActiveTab } = useClientContext();
@@ -61,11 +62,13 @@ const ModalClientDetails = (props) => {
     setActiveContent(index);
   };
 
-  // Edit //
-  const EditModal = () => {
-    setModalInfo(false);
-    setModalEditClient(true);
-  };
+    // Edit //
+    const EditModal = () => {
+      setModalInfo(false);
+      setModalEditClient(true);
+    };
+
+console.log(EditModal)
 
   // Close page //
   const closeModal = () => {
@@ -77,19 +80,19 @@ const ModalClientDetails = (props) => {
       <Container $mode={client.status}>
         <BodyAll>
           <ClickButton>
-            <Close onClick={closeModal}>X</Close>
+          <Close onClick={closeModal}>X</Close>
           </ClickButton>
 
           <DivStatus>
             <Status $mode={client.status}>
-              <span onChange={(event) => setStatus(event.target.value)}>
+            <span onChange={(event) => setStatus(event.target.value)}>
                 {client.status}
               </span>
             </Status>
           </DivStatus>
 
           <DivTitle>
-            <DivPhoto>
+          <DivPhoto>
               <DivPhotoI>
                 <Body
                   type={"Body1"}
@@ -103,21 +106,24 @@ const ModalClientDetails = (props) => {
               </DivPhotoI>
             </DivPhoto>
 
-            <DivNameManager>
-              <ClientName
-                onChange={(event) => setClientName(event.target.value)}
-              >
-                {client.client}
-              </ClientName>
-              {activeTab === 0 && (
-                <IconTag onClick={EditModal}>
-                  <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
-                </IconTag>
-              )}
-              <CreatedBy>Created by on {client.user_name}</CreatedBy>
+<DivNameManager>
+            <ClientName
+            onChange={(event) => setClientName(event.target.value)}>
+            {client.client}
+            </ClientName>
+            {activeTab === 0 &&
+          (
+           <IconTag onClick={EditModal}>
+          <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
+          </IconTag>
+            )}
+            <CreatedBy>
+            Created by on {client.user_name}
+            </CreatedBy>
             </DivNameManager>
-          </DivTitle>
 
+          </DivTitle>
+    
           <DivPages>
             <Pages>
               <TabButton
@@ -134,11 +140,12 @@ const ModalClientDetails = (props) => {
               >
                 Subjects
               </TabButton>
+    
             </Pages>
           </DivPages>
 
           <ContainerBorder>
-            <Content active={toggleState === 0}>
+          <Content active={toggleState === 0}>
               <ClientDetails
                 setId={(i) => setId(i)}
                 id={id}
@@ -153,6 +160,7 @@ const ModalClientDetails = (props) => {
                 title={"Subject Clients"}
               />
             </Content>
+
           </ContainerBorder>
         </BodyAll>
       </Container>

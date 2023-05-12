@@ -35,6 +35,8 @@ const PlannerCard = (props) => {
       );
     }
   }, [planner]);
+
+  // console.log();
   const [plannerDay, setPlannerDay] = useState();
 
   useEffect(() => {

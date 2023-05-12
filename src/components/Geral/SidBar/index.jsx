@@ -196,6 +196,7 @@ class SidBar extends React.Component {
   
   render() {
     const {user} = useUserContext()
+    console.log(user)
 
     return (
       <>

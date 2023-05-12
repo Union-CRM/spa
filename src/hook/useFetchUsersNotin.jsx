@@ -1,14 +1,20 @@
-import { useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import axios from "axios";
+
 
 export const useFetchUsersNotin = () => {
   const [userNotin, setUserNotin] = useState([{}]);
   const [userListSub, setUserListSub] = useState([{}]);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  
+  
 
   useEffect(() => {
+    
     loadUserNotin();
     loadUserSub();
+
+    
   }, []);
 
   const loadUserNotin = async () => {
@@ -21,10 +27,11 @@ export const useFetchUsersNotin = () => {
         }
       );
       user = response;
+     
     } catch (error) {
       console.error(error);
     }
-
+    
     setUserNotin(user.data.list);
   };
 
@@ -36,22 +43,25 @@ export const useFetchUsersNotin = () => {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
-
+      
       setUserListSub(response.data.list);
+      
     } catch (error) {
       console.error(error);
       // to do modal error
     }
+    
   };
 
   return {
     loadUserSub,
     loadUserNotin,
-    userNotin,
+    userNotin, 
     setUserNotin,
-    userListSub,
+    userListSub, 
     setUserListSub,
-    selectedOptions,
-    setSelectedOptions,
-  };
+    selectedOptions, 
+    setSelectedOptions
+  }
+  
 };

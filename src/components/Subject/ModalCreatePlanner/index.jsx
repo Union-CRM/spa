@@ -76,6 +76,8 @@ const ModalCreatePlanner = (props) => {
     } else {
       setFlag(true);
     }
+
+    console.log(newPlanner);
   };
 
   /*useEffect(() => {
@@ -87,6 +89,7 @@ const ModalCreatePlanner = (props) => {
       );
     }
   }, []);*/
+  
 
   return (
     <>
