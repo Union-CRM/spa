@@ -3,6 +3,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { Label, Container, DivSvg, DivSvg2 } from "./styles";
 import {ReactComponent as Contact} from "../../../../assets/svg/Contact.svg"
+import {ReactComponent as Drop} from "../../../../assets/svg/Drop.svg"
 
 
 export const UsersComponents = (props, placeholder, idTagOption) => {

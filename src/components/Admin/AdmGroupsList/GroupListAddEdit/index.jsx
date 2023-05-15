@@ -63,9 +63,6 @@ const AddEditGroup = (props) => {
   }, [usersNotin, userSub]);
 
    
-  const handleSelectCustomer = (customer_id) => {
-        setCustomer(customerList.filter((c) => c.id === customer_id)[0]);
-      };
   
   
   
@@ -90,10 +87,7 @@ const AddEditGroup = (props) => {
 
 
   
-    const handleSelectCustomer = (cs) => {
-      setCustomer(customerList.filter((c) => cs.id === customer_id)[0]);
-    };
-    console.log(customerList)
+    
 
     const group = groupList.filter((item) => item.id === props.id)[0];
     

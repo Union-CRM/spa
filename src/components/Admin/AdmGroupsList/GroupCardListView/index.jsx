@@ -46,14 +46,6 @@ const AdmGroupCardListView = (props) => {
     props.setId(group.id);
   };
 
-  const handleInfo = () => {
-    setModalInfo(true);
-    setInfoGroup(false);
-    setToggleState(0);
-    setActiveTab(0);
-    props.setId(group.id);
-  };
-
 
   const { openModal, openModalPopUp } = props;
   const { updateStatus } = useFetchAdmGroupList();
