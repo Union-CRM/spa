@@ -122,13 +122,31 @@ const CreateEditBusiness = (props) => {
 
   // Edit selected business
   const editBusiness = () => {
-    /*
+    
     var tag = [];
 
     if(tags){
       tag = tags.map((tag) => ({ tag_id: tag.value}));
     }
-      
+
+    if (!businessName) {
+      setFlagName(true);
+    } else {
+      setFlagName(false);
+    }
+
+    if (!businessCode) {
+      setFlagCode(true);
+    } else {
+      setFlagCode(false);
+    }
+
+    if (!businessSegment) {
+      setFlagSegment(true);
+    } else {
+      setFlagSegment(false);
+    }
+  
     const newBusiness = {
       business_name: businessName,
       business_code: businessCode,
@@ -136,7 +154,6 @@ const CreateEditBusiness = (props) => {
       status: businessStatus,
       tags: tag
     }  
-    console.log(newBusiness)
     
     if(businessName && businessCode && businessSegment.value){
       setSucessBusiness(true);
@@ -146,12 +163,9 @@ const CreateEditBusiness = (props) => {
         updateStatusBusiness(idBusiness.id);
       }
 
-    }else{
-      setFlag(true);
-    }
-  */
+    }  
   }
-
+  //15-05
   // Button cancel in modalCreateBusiness
   const handleCancel = () => {
     setModalCreateBusiness(false)
