@@ -34,8 +34,10 @@ const Subject = (props) => {
   const { updateSubject } = useFetchSubject();
   const { subjectFinished, subjectCanceld } = useFetchSubjectStatus();
   // CLOSE E SAVE ////////////
+
   const { setModalDetails, setModalEdit, setEditModal, idSubject } = useSubjectContext();
   const { toggleState, setToggleState, loadData} = useSubjectContext();
+
 
   const closeModal = () => {
     setModalDetails(true);

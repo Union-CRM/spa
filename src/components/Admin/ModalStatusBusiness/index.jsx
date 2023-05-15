@@ -9,29 +9,34 @@ import {
   Span,
   ContainerFather,
 } from "./styles";
-import { useClientContext } from "../../../hook/useClientContent";
-import { useFetchClient } from "../../../hook/useFetchClient";
+import { useBusinessContext } from "../../../hook/useBusinessContent";
+import { useFetchBusiness } from "../../../hook/useFetchBusiness";
+import { useEffect } from "react";
 
-const ModalPopUp = (props) => {
+const ModalStatusBusiness = (props) => {
   const { modalClose } = props;
-  const { client: clientList} = useClientContext();
-  const { updateStatusClient } = useFetchClient();
-  const client = clientList.filter((item) => item.id === props.id)[0];
-  const p = client.status === "Active" ? "Inactivate" : "Activate";
+  const { business: businessList } = useBusinessContext();
+  const { updateStatusBusiness } = useFetchBusiness();
+  const business = businessList.filter((item) => item.id === props.id)[0];
+  const p = business.status === "ATIVO" ? "Inativo" : "Ativo";
+
+  useEffect(() => {
+    console.log(business.status);
+  }, []);
 
   const span =
-    client.status === "Active"
+    business.status === "ATIVO"
       ? "Do you want do deactivate this card?"
       : "Do you want to activate this card?";
-
+ 
   const handleAlterStatus = () => {
-    updateStatusClient(client.id);
+    updateStatusBusiness(business.id);
     modalClose();
   };
 
   const handleCancel = () => {
     modalClose();
-    //window.location.reload();
+    window.location.reload();
   };
 
   return (
@@ -64,4 +69,4 @@ const ModalPopUp = (props) => {
   );
 };
 
-export default ModalPopUp;
+export default ModalStatusBusiness;

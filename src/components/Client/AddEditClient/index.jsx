@@ -45,12 +45,9 @@ const AddEditClient = (props) => {
   const [status, setStatus] = useState("");
   const { release: releaseList } = useReleaseContext("release");
   const { loadCustomerList} = useCustomerContext();
-<<<<<<< Updated upstream
-  const { customerList } = useFetchCustomer("Customer");
-=======
+
   const { loadCustomerOptions } = useFetchCustomer();
   const [customerList,setCustomerList] = useState([])
->>>>>>> Stashed changes
   const { roleList } = useFetchRole("Role");
   const { tagList } = useFetchTag("Tag");
   const [releaseObj, setReleaseObj] = useState({
@@ -67,6 +64,7 @@ const AddEditClient = (props) => {
 
   useEffect(() =>{
     loadCustomerList()
+    setCustomerList(loadCustomerOptions())
   }, [])
 
   useEffect(() =>{

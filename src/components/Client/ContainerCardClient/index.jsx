@@ -50,6 +50,7 @@ const abaStatus = {
 
 const ContainerCards = (props) => {
   // States modal//
+const { search } = useSearchContext();
   const [modal, setModal] = useState(false);
   const [modalPopUp, setModalPopUp] = useState(false);
   const [isEdit, setEdit] = useState(false);
@@ -61,13 +62,10 @@ const ContainerCards = (props) => {
   const { id, setId } = useClientContext();
   const {modalInfo, setModalInfo} = useClientContext();
   const {modalEditClient, setModalEditClient } = useClientContext();
-  const { search } = useSearchContext();
-
 
 
   useEffect(() => {
     if (props.adminList) {
-
       setClientList(client.filter((c) => c.user_id === userTarget.id));
     } else {
       setClientList(client);
@@ -85,10 +83,11 @@ const ContainerCards = (props) => {
       if (props.adminList) {
         setClientList(client.filter((c) => c.user_id === userTarget.id));
       } else {
-        setClientList(client.filter((c) => c.user_id === user.id));
+        setClientList(client);
       }
     }
   }, [search]);
+
 
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
@@ -103,14 +102,6 @@ const ContainerCards = (props) => {
     setEdit(false);
   };
 
-<<<<<<< Updated upstream
-  const EditClient = () => {
-    setModal(true);
-    setEdit(true);
-  };
-
-=======
->>>>>>> Stashed changes
   const modalClose = () => {
     setModalPopUp(true);
   };
@@ -129,16 +120,20 @@ const ContainerCards = (props) => {
               <HowManyClientList>
                 ({clientList ? clientList.length : 0})
               </HowManyClientList>{" "}
+
               <Tippy content="List of all clients.">
-                <DivInfo>
+              <DivInfo>
+              
                   <Info
-                    width="25px"
-                    style={{
-                      fill: "#007BFF",
-                    }}
-                  />
-                </DivInfo>
+                  width="25px"
+                  style={{
+                    fill: "#007BFF",
+                  }}
+                />
+                     </DivInfo>
               </Tippy>
+         
+
             </DivTitlePage>
 
             <DivButton onClick={() => createClient()}>
@@ -192,8 +187,8 @@ const ContainerCards = (props) => {
           <LineDivisor />
 
           <BoardStyle>
-            {clientList &&
-              clientList
+            {clientList  &&
+              clientList 
                 .filter((item) => item.status === active)
                 .map((item) => (
                   <ClientCard
@@ -209,7 +204,6 @@ const ContainerCards = (props) => {
         </CardsContainer>
       </ContainerHeaderAndCards>
 
-
       <DivModal $mode={modal} />
 {modal && (
     <AddEditClient
@@ -219,37 +213,24 @@ const ContainerCards = (props) => {
     />
 )}
 
-<<<<<<< Updated upstream
-
-      <DivModal $mode={modalInfo} />
-=======
       <DivModal $mode={modalInfo || modalEdit || modalEditClient || modalPopUp} />
->>>>>>> Stashed changes
 
-      {modalInfo && (
-        <ModalClientEdit
+       {modalInfo && (
+        <ModalClientDetails
           id={id}
           openModal={() => detailsModal()}
           setModalInfo={setModalInfo}
           title={"Client Details"}
-
         />
       )}
 
     {modalEditClient && (
-
-      {/* {modal && (
-
         <ModalClientEdit
           id={id}
           setModalEditClient={setModalEditClient}
           title={"Edit Client"}
         />
-
     )}
-
-    )} */}
-
 
       {modalPopUp && (
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />

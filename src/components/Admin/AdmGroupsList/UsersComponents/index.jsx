@@ -1,46 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { Label, Container, DivSvg, DivSvg2 } from "./styles";
-<<<<<<< Updated upstream
-=======
 import {ReactComponent as Contact} from "../../../../assets/svg/Contact.svg"
 
->>>>>>> Stashed changes
 
 export const UsersComponents = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
   const [selectedOptions, setSelectedOptions] = useState([]);
 
-<<<<<<< Updated upstream
-  /*const option = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10", "Option 11",
-  "Option 12", "Option 13", "Option 14", "Option 15", "Option 16"];*/
 
-import {ReactComponent as Contact} from "../../../../assets/svg/Contact.svg"
-import {ReactComponent as Drop} from "../../../../assets/svg/Drop.svg"
-
-export const UsersComponents = (props, placeholder, idTagOption) => {
-  const animatedComponents = makeAnimated();
-  const [selectedOptions, setSelectedOptions] = useState([]);
-
-  /*const colors = ["#FFC0CB", "#DDA0DD", "#F5DEB3", "#98FB98", "#87CEEB"];
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-
-  }s
-
-
-  const options = props.options.map((item) => ({
-    value: item.value,
-    label: item.label,
-    color: colors[Math.floor(Math.random() * (colors.length - 1))],
-  })); //props.options;
-  //console.log(options.map((item)=>({value:item.value,label:item.label,color:colors[getRandomInt(colors.length-1)]})))
-
-*/
-  
-=======
->>>>>>> Stashed changes
 const DropdownIndicator = () => {
     if (props.indicator){
       if(props.indicator === "guest")
@@ -50,36 +19,20 @@ const DropdownIndicator = () => {
         </DivSvg>  
         )
     }else{
-<<<<<<< Updated upstream
       return (
         <DivSvg2>
         <Drop width={"15px"}/>
       </DivSvg2>  
       )
+
     }
   };
-  
-
-  const options = props.options.map((item) => ({
-    value: item.value,
-    label: item.label,
-   
-  }));
-
-
-=======
-     
-    }
-  };
->>>>>>> Stashed changes
   
   const options = props.options.map((item) => ({
     value: item.value,
     label: item.label,
    
   }));
-
-
 
   return (
     <>
@@ -142,11 +95,7 @@ const DropdownIndicator = () => {
                   display: "grid",
                   position: props.positions || "absolute",
                   borderRadius: "5px",
-<<<<<<< Updated upstream
-                  top: props.top || "85%",
-=======
                   top: props.top || "9px",
->>>>>>> Stashed changes
                   border: "2px solid  #888C95",
                   width: props.widths || "100%",
                   height: props.heights || "90px",

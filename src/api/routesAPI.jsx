@@ -46,12 +46,12 @@ export const plannerUpdate =
 
 export const groupCreate = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups`;
 
+
 export const groupUpdate = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/update/`;
 
 export const attachUser = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/update/attach/`;
 
 export const detachUser = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/update/detach/`;
-
 
 
 //client

@@ -1,11 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  box-sizing: border-box;
-  width: auto;
-  height: auto;
-  background-color: rgba(0, 0, 0, 0);
-`;
+// Select Label //
 
 export const Label = styled.label`
   padding-left: 0px;
@@ -16,10 +11,7 @@ export const Label = styled.label`
   color: rgba(0, 0, 0, 0.8);
 `;
 
-<<<<<<< Updated upstream
-export const DivSvg = styled.div`
-  margin-top: 2%;
-=======
+
 export const Container = styled.div`
   box-sizing: border-box;
   width: auto;
@@ -30,15 +22,9 @@ export const Container = styled.div`
 export const DivSvg = styled.div`
   padding-top: 2%;
   padding-bottom:0.9%;
->>>>>>> Stashed changes
   margin-right: 2%;
-`
+`;
 export const DivSvg2 = styled.div`
   margin-right: 3%;
-<<<<<<< Updated upstream
-  margin-top: 2%;
-`
-=======
   margin-top: 0%;
-`
->>>>>>> Stashed changes
+`;

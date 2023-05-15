@@ -26,6 +26,7 @@ import {useGroupListContext} from "../../../../hook/useGroupListContext";
 import GroupDetails from "../GroupDetails";
 import TeamMembers from "../TeamMembers"
 
+
 const ModalGroupDetails = (props) => {
   const { setModal, id } = props;
   const { setModalInfo, setId,  modalEditGroup, setModalEditGroup, loadData } = useGroupListContext();
@@ -148,6 +149,7 @@ console.log(EditModal)
                 id={id}
                 title={"Team Members"}
             />
+
             </Content>
 
           </ContainerBorder>

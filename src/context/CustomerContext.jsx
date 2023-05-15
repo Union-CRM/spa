@@ -4,7 +4,7 @@ import { customersGet } from "../api/routesAPI";
 export const CustomerContext = createContext();
 
 export const CustomerContextProvider = ({ children }) => {
-  const [customer, setCustomer] = useState([{}]);
+  const [customer, setCustomer] = useState([]);
   const [customerTarget, setCustomerTarget] = useState({});
   const [popUpSuccess, setPopUpSuccess] = useState(false);
   const [popUpError, setPopUpError] = useState(false);

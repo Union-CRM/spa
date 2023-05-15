@@ -30,6 +30,7 @@ import {
 import Body from "../../../../assets/FontSystem/Body";
 import Subtitle from "../../../../assets/FontSystem/Subtitle";
 import { useClientContext } from "../../../../hook/useClientContent";
+import { useFetchClient } from "../../../../hook/useFetchClient";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
@@ -37,11 +38,12 @@ import styled, { css } from "styled-components";
 
 const ClientCard = (props) => {
   const { openModal, openModalPopUp } = props;
-  const [manager, setManager] = useState();
+
+  const { updateStatusClient } = useFetchClient();    
   const { toggleState, setToggleState } = useClientContext();
   const { activeTab, setActiveTab } = useClientContext();
 
-  const { client: clientList, updateClient } = useClientContext();
+  const { client: clientList, updateClient} = useClientContext();
   const client = clientList.filter((item) => item.id === props.id)[0];
   const [tags] = useState(
     client.tags.map((tag) => {
@@ -56,15 +58,19 @@ const ClientCard = (props) => {
   };
 
   const handleClick = () => {
-    openModalPopUp();
+    updateStatusClient(client.id);
     props.setId(client.id);
   };
 
 
 
+  /*const handleToggle = () => {
+    setIsActive(!isActive);
+    updateClient(client.id, { ...client, status: isActive ? "Inactive" : "Active" });
+  };*/
+  const [ isActive, setIsActive ] =useState(client.status === "Active")
+  
 
-  const [isActive, setIsActive] = useState(client.status === "Active");
-  const [previousStatus, setPreviousStatus] = useState(client.status);
   const handleToggle = () => {
     const newStatus = isActive ? "Inactive" : "Active";
     setIsActive(!isActive);
@@ -101,7 +107,7 @@ const ClientCard = (props) => {
             </DivPhoto>
 
             <DivDadosCard>
-              <Body type={"Body2"} name={client.client} />
+              <Body type={"Body1"} name={client.client} />
 
               <Subtitle type={"TextDescription"} name={client.email} />
 
@@ -171,11 +177,9 @@ const ClientCard = (props) => {
 
             <DivRelease>
               <TitleInfo>
-
                 Manager <span>|</span>{" "}
               </TitleInfo>
               <ValueInfo>{SplitName(client.user_name)}</ValueInfo>
-
             </DivRelease>
           </DivInfo>
         </Card>
