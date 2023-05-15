@@ -5,8 +5,7 @@ import Grafico from "../../../components/Grafico";
 import PageBodyHome from "../../../components/Geral/PageBody/PageBodyHome";
 import PlannerCard from "../../../components/Planner/PlannerCard";
 import { usePlannerContext } from "../../../hook/usePlannerContext";
-
-
+import { CustomerContextProvider } from "../../../context/CustomerContext";
 
 // hook/usePlannerContext
 
@@ -29,23 +28,22 @@ class Home extends React.Component {
     return (
       <>
         <PageBodyHome>
-          <Content>
-            <DivClient>
-              <ContainerCards />
-            </DivClient>
+          <CustomerContextProvider>
+            <Content>
+              <DivClient>
+                <ContainerCards />
+              </DivClient>
 
-            <DivPlanner>
-              <PlannerCard date={dateOfTheDay} />
-              
-            </DivPlanner>
+              <DivPlanner>
+                <PlannerCard date={dateOfTheDay} />
+              </DivPlanner>
+            </Content>
 
-            
-          </Content>
-
-          <Graph1>
-            <Grafico value={0} />
-            <Grafico value={1} />
-          </Graph1>
+            <Graph1>
+              <Grafico value={0} />
+              <Grafico value={1} />
+            </Graph1>
+          </CustomerContextProvider>
         </PageBodyHome>
       </>
     );
