@@ -120,7 +120,7 @@ const CreateEditBusiness = (props) => {
       status: businessStatus,
       tags: tag
     }  
-    console.log(newBusiness)
+   
 
     if(businessName && businessCode && businessSegment.value){
       setSucessBusiness(true);
@@ -130,12 +130,11 @@ const CreateEditBusiness = (props) => {
         updateStatusBusiness(idBusiness.id);
       }
 
-    }else{
-      setFlag(true);
-    }
-  
-  }
 
+    }  
+
+  }
+  //15-05
   // Button cancel in modalCreateBusiness
   const handleCancel = () => {
     setModalCreateBusiness(false)
