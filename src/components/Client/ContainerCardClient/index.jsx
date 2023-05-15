@@ -35,6 +35,13 @@ import { useSearchContext } from "../../../hook/useSearchContext";
 // Modal Client //
 import ModalClientDetails from "../ModalClientDetails";
 import ModalClientEdit from "../EditClient";
+//import Subject from "../../Subject/EditSubject/index";
+import Subject from "../../../components/Subject/EditSubject";
+//import { useSubjectContext } from "../../../hook/useSubjectContent";
+
+import { useSubjectContext } from "../../../hook/useSubjectContent";
+  //const { setEditSubject } = SubjectContext();
+
 
 const abaStatus = {
   ACTIVE: "Active",
@@ -45,17 +52,17 @@ const ContainerCards = (props) => {
   // States modal//
   const [modal, setModal] = useState(false);
   const [modalPopUp, setModalPopUp] = useState(false);
-  //const [id, setId] = useState(null);
   const [isEdit, setEdit] = useState(false);
   const [clientList, setClientList] = useState();
   const [active, setActive] = useState(abaStatus.ACTIVE);
   const { user, userTarget } = useUserContext();
-
+  const { modalEdit, idSubject } = useSubjectContext();
   const { client } = useClientContext();
   const { id, setId } = useClientContext();
   const {modalInfo, setModalInfo} = useClientContext();
   const {modalEditClient, setModalEditClient } = useClientContext();
   const { search } = useSearchContext();
+
 
 
   useEffect(() => {
@@ -96,11 +103,14 @@ const ContainerCards = (props) => {
     setEdit(false);
   };
 
+<<<<<<< Updated upstream
   const EditClient = () => {
     setModal(true);
     setEdit(true);
   };
 
+=======
+>>>>>>> Stashed changes
   const modalClose = () => {
     setModalPopUp(true);
   };
@@ -209,8 +219,12 @@ const ContainerCards = (props) => {
     />
 )}
 
+<<<<<<< Updated upstream
 
       <DivModal $mode={modalInfo} />
+=======
+      <DivModal $mode={modalInfo || modalEdit || modalEditClient || modalPopUp} />
+>>>>>>> Stashed changes
 
       {modalInfo && (
         <ModalClientEdit
@@ -221,8 +235,6 @@ const ContainerCards = (props) => {
 
         />
       )}
-
-      <DivModal $mode={modalEditClient} />
 
     {modalEditClient && (
 
@@ -241,6 +253,9 @@ const ContainerCards = (props) => {
 
       {modalPopUp && (
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
+      )}
+      {modalEdit && (
+        <Subject id={idSubject} title={"Edit Subject"}/>
       )}
    </ContainerGlobal>  
  )   

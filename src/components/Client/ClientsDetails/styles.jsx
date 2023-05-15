@@ -183,6 +183,8 @@ export const IconTag = styled.span`
 export const NoTags = styled.span`
 display:block;
 background-color:#F5F5F5;
+font-size: 0.9rem;
+color: #656464;
 border-radius:5px;
 padding:0.7%;
 width:fit-content;

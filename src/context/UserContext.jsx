@@ -6,9 +6,9 @@ import { userGetUsersMe } from "../api/routesAPI";
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState([{}]);
-  const [userList, setUserList] = useState([{}]);
-  const [usersGlobal, setUsersGlobal] = useState([{}]);
+  const [user, setUser] = useState([]);
+  const [userList, setUserList] = useState([]);
+  const [usersGlobal, setUsersGlobal] = useState([]);
   const [viewProfile, setViewProfile] = useState(false);
   const [userTarget, setUserTarget] = useState({});
   const [home, setHome] = useState(false);
@@ -50,7 +50,7 @@ export const UserContextProvider = ({ children }) => {
 
 
   const loadUsers = async () => {
-    console.log("Aquiiiiii")
+   
     try {
       const response = await axios.get(userCreate, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

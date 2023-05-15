@@ -38,11 +38,11 @@ export const ContainerDetails = styled.div`
   }
 `;
 
-/// INFO SUBJECTS ///
+/// INFO TEAM MEMBERS ///
 
-//* CARDS PLANNER *//
+//* CARDS *//
 
-export const CardSubject = styled.div`
+export const CardMembers = styled.div`
   width:94%;
   height: 56px;
   z-index: 9999999;
@@ -57,18 +57,72 @@ export const CardSubject = styled.div`
   position: relative;
   justify-content: end;
   cursor: pointer;
+  border-left: 6px solid #E41165;
 `;
 
 
-export const DivGlobalCard = styled.div`
+export const GlobalCard = styled.div`
   display: flex;
   padding-top: 2%;
+  padding-left:1%;
+  width:100%;
+  position:relative;
 `;
 
-export const DivSubject = styled.span`
+export const DivDadosCard = styled.span`
 display:flex;
-align-items:center;
-justify-content:center;
+width:100%;
+`;
+
+// PHOTO USER //
+
+export const DivPhoto = styled.div`
+  display: flex;
+  width: auto;
+  height: auto;
+`;
+
+export const DivPhotoI = styled.div`
+  background-color: #d9d9d9;
+  border: 3px solid #888c95;
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+`;
+
+// NAME USER //
+
+export const NameUser = styled.div`
+padding-top:0.5%;
+padding-left:2%;
+width:100%;
+position:relative;
+span {
+display:flex;
+justify-content:flex-start;
+font-size:0.9rem;
+width:100%;
+font-weight:800;
+opacity:0.80;}
+`;
+
+
+export const IDUser = styled.div`
+padding-top:0.5%;
+padding-left:0%;
+width:100%;
+position:relative;
+span {
+display:flex;
+justify-content:flex-start;
+font-size:0.8rem;
+width:100%;
+font-weight:500;
+opacity:0.80;}
 `;
 
 
@@ -114,39 +168,3 @@ export const StatusSubject = styled.div`
   }
 `;
 
-export const DivStatusSubject = styled.div`
-  padding-left:2%;
-  align-items: center;
-  justify-content: center;
-  height:fit-content;
-`;
-
-/// Title Subject ////
-
-export const DivTitleSubject = styled.div`
-
-`;
-
-export const TitleSubject = styled.div`
-display:block;
-padding-top:0.5%;
-span {
-font-size:0.9rem;
-font-weight:800;
-display:flex;
-opacity:0.80;}
-`;
-
-export const CreatedAt = styled.div`
-position:relative;
-display:flex;
-width:100%;
-height:100%;
-justify-content:flex-end;
-font-weight:700;
-span {
-  font-size:1rem;
-  font-weight:700;
-  margin-right:1%;
-}
-`;

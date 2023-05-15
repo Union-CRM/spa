@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-
 import {
   ContainerCentral,
   Container,
@@ -20,25 +19,77 @@ import ButtonDefault from "../../../../assets/Buttons/ButtonDefault";
 import { UsersComponents } from "../UsersComponents";
 import SingleSelect from "../../../Geral/Input/SingleSelect";
 import { useFetchCustomer } from "../../../../hook/useFetchCustomer";
+import {useCustomerContext} from "../../../../hook/useCustomerContext";
 import { useFetchAdmGroupList } from "../../../../hook/useFetchAdmGroupList";
 import {useGroupListContext} from "../../../../hook/useGroupListContext";
 import { useFetchUsersNotin } from "../../../../hook/useFetchUsersNotin";
-import { selectedOptions } from "../UsersComponents";
-const AddEditGroup = (props) => {
+import { useUserContext } from "../../../../hook/useUserContext";
+import { attachUser, detachUser } from "../../../../api/routesAPI";
 
+
+const AddEditGroup = (props) => {
+  const [flag, setFlag] = useState(false);
+  const [groupName, setGroupName] = useState("");
+  const [users, setUsers] = useState([]);
+  const [customer, setCustomer] = useState({});
+  const [customer_id, setCustomerId] = useState();
+  const { loadCustomerOptions } = useFetchCustomer();
+  const [customerList,setCustomerList] = useState([])
+  const {insertGroup, updateGroup, attachUser, detachUser} = useFetchAdmGroupList();
+  const { group: groupList} = useGroupListContext();
+  const {  infoGroup, setInfoGroup, idEdit } = useGroupListContext();
+  const [userOptions, setUserOptions] = useState([]);
+  const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin();
+  const { setModal, id } = props;
+  const {user} = useUserContext();
+  
+  
+  const{loadUserSub,loadUserNotin} = useFetchUsersNotin()
+  useEffect(()=>{
+   
+    loadUserNotin()
+    loadUserSub()
+  }, [])
+ 
+  const usersList = userSub.concat(usersNotin)
+
+  useEffect(() => {
+    if (usersList) {
+      setUserOptions(
+        usersList
+          .map((c) => ({ id: c.id, value: c.id, label: c.name }))
+      );
+    }
+  }, [usersNotin, userSub]);
+
+
+<<<<<<< Updated upstream
 
 const AddEditGroup = (props) => {
 
   
     const { setModal, id } = props;
 
+=======
+  const handleSubmit = () => {
+    if (props.title === "Create Group") {
+      createGroup();
+    } else {
+      editGroup();
+    }
+  };
+
+>>>>>>> Stashed changes
     const closeModal = () => {
         setModal(false);
         setInfoGroup(true);
       };
     
-      const [flag, setFlag] = useState(false);
+    useEffect(() =>{
+      setCustomerList(loadCustomerOptions())
+    }, [])
 
+<<<<<<< Updated upstream
       const [groupName, setGroupName] = useState();
       const [users, setUsers] = useState([]);
       const [groupId, setGroupId] = useState();
@@ -65,15 +116,29 @@ const AddEditGroup = (props) => {
     const group = groupList.filter((item) => item.id === props.id)[0];
     
      const createGroup = () => {
+=======
+  
+    const handleSelectCustomer = (cs) => {
+      setCustomer(customerList.filter((c) => cs.id === customer_id)[0]);
+    };
+    
+
+  
+    const createGroup = () => {
+>>>>>>> Stashed changes
       console.log(users);
       const newGroup = {
         group_name: groupName,
         customer_id: customer.id,
+<<<<<<< Updated upstream
 
         users: selectedOptions.map((g) => ({ user_id: g.value })),
 
+=======
+        users:{users_id:[...(users.map((g) => ({ id: g.value }))), {id:user.id}]},    
+>>>>>>> Stashed changes
       };
-      console.log(newGroup);
+     
       if (groupName && customer.id && users) {
         insertGroup(newGroup);
         setModal(false);
@@ -82,8 +147,8 @@ const AddEditGroup = (props) => {
       }
       
     };
-    console.log(selectedOptions)
 
+<<<<<<< Updated upstream
     // Edit GROUP //
    
 
@@ -147,6 +212,37 @@ const AddEditGroup = (props) => {
     }, [usersNotin, userSub]);
     
     
+=======
+    const editGroup = () => {
+        const newGroup = {
+          group_name: groupName,
+          customer: customer.id,
+          user:[...(users.map((g) => ({ id: g.value }))), {id:user.id}],
+          
+        };
+        console.log(newGroup)
+        if (groupName) {
+          updateGroup(newGroup, props.id) 
+          attachUser(newGroup)
+          setModal(false);
+        } else {
+          setFlag(true);
+          }
+        };
+     
+  
+
+    useEffect(() => {
+      
+      console.log(idEdit)
+      if (props.title === "Edit Group") {
+        const group = groupList.filter((item) => item.id === idEdit)[0];
+        setGroupName(group.group_name)
+        setCustomer({ id: group.customer_id, label: group.textCustomer })
+        
+      }
+    }, [id]);
+>>>>>>> Stashed changes
   
 
   return (
@@ -175,23 +271,31 @@ const AddEditGroup = (props) => {
 
                 <SingleSelect
                  key="2"
-                 set={(customer_id) => handleSelectCustomer(customer_id)}
+                 set={(cs) => handleSelectCustomer(cs)}
                  label={"Customer"}
                  value={customer.label}
                  placeholder={flag && !customer.label ? "Required field" : ""}
                  sizeSingle={"100%"}
                  required
                  sizeMenu={"100%"}
+<<<<<<< Updated upstream
                  options={customerList ? customerList : []}
 
+=======
+                 options={customerList}
+>>>>>>> Stashed changes
                 />
   
               </DivCustomer>
 
             <DivUser>
             <UsersComponents 
+<<<<<<< Updated upstream
             set={(users) => handleSelectCustomer(users)}
             /*set={(users) => setUsers(users)}*/
+=======
+            set={(users) => setUsers(users)}
+>>>>>>> Stashed changes
             options={userOptions}
             label={"Users"}
             tags={users}
@@ -226,3 +330,4 @@ const status_mok = [
   { id: 1, value: "Active", label: "Active" },
   { id: 2, value: "Inactive", label: "Inactive" },
 ];
+ 
