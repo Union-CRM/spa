@@ -104,7 +104,7 @@ export const Container = styled.div`
   }
   @media (width: 500px) {
     height:40vh;
-    width:96%;
+    width:100%;
     top:3%;
     overflow-y: scroll;
     &::-webkit-scrollbar {

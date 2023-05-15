@@ -33,7 +33,7 @@ import {useCustomerContext} from "../../../hook/useCustomerContext";
 import { useReleaseContext } from "../../../hook/useReleaseContent";
 
 const AddEditClient = (props) => {
-  const { client: clientList, setClient: setClientList } = useClientContext();
+  const { client: clientList, setClient: setClientList, updateStatusClient } = useClientContext();
 
   const [clientId,setClientId]=useState()
   const [name, setName] = useState("");
@@ -42,11 +42,12 @@ const AddEditClient = (props) => {
   const {user} = useUserContext();
   const [business, setBusiness] = useState("");
   const [role, setRole] = useState({});
-  const [status, setStatus] = useState({ value: "Active" });
+  const [status, setStatus] = useState("");
   const { release: releaseList } = useReleaseContext("release");
   const { loadCustomerList} = useCustomerContext();
-  const [customerList,setCustomerList] = useState([])
+
   const { loadCustomerOptions } = useFetchCustomer();
+  const [customerList,setCustomerList] = useState([])
   const { roleList } = useFetchRole("Role");
   const { tagList } = useFetchTag("Tag");
   const [releaseObj, setReleaseObj] = useState({
@@ -74,6 +75,7 @@ const AddEditClient = (props) => {
         id: item.id,
         value: item.id,
         label: item.name,
+        //status: item.status,
       })))
       }
      
@@ -108,6 +110,7 @@ const AddEditClient = (props) => {
       client_email: email,
       client_name: name,
       client_role: role.id,
+      status_description: status,
       customer_id: customer.id,
       business_id: parseInt(releaseObj.business_id),
       release_id: releaseObj.id,
@@ -118,6 +121,11 @@ const AddEditClient = (props) => {
     if (name && email && role.id && customer.id && releaseObj.id ) {
       insertClient(newClient);
       setModal(false);
+
+      /*if(createClient.status != client.status){
+        updateStatusClient(client.id);
+      }*/
+
     } else {
       setFlag(true);
     }
@@ -278,8 +286,8 @@ const AddEditClient = (props) => {
 export default AddEditClient;
 
 const status_mok = [
-  { id: 1, value: "Active", label: "Active" },
-  { id: 2, value: "Inactive", label: "Inactive" },
+  { id: 1, value: "ATIVO", label: "ATIVO" },
+  { id: 2, value: "INATIVO", label: "INATIVO" },
 ];
 
 const colors = [

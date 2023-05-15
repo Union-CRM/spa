@@ -34,6 +34,7 @@ import { usePlannerContext } from "../../../../hook/usePlannerContext";
 import Body from "../../../../assets/FontSystem/Body";
 import IconSystem from "../../../../assets/IconSystem";
 import SubjectList from "../../../Subject/SubjectCardListView";
+import { CustomerContextProvider } from "../../../../context/CustomerContext";
 
 import "react-tippy/dist/tippy.css";
 
@@ -164,15 +165,17 @@ const UserProfile = () => {
           </Button>
         </DivButtonUser>
       </Header>
-      <Content>
-        <DivClient>
-          <ContainerCards adminList={true} />
-        </DivClient>
+      <CustomerContextProvider>
+        <Content>
+          <DivClient>
+            <ContainerCards adminList={true} />
+          </DivClient>
 
-        <DivPlanner>
-          <PlannerCard adminList={true} date={dateOfTheDay} />
-        </DivPlanner>
-      </Content>
+          <DivPlanner>
+            <PlannerCard adminList={true} date={dateOfTheDay} />
+          </DivPlanner>
+        </Content>
+      </CustomerContextProvider>
       <Graph1>
         <Subject
           numberOfSubjeccts={numberOfSubject}

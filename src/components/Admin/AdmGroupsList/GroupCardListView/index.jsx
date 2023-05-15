@@ -38,15 +38,25 @@ const AdmGroupCardListView = (props) => {
     props.setId(group.id);
   };
 
+  const handleInfo = () => {
+    setModalInfo(true);
+    setInfoGroup(false);
+    setToggleState(0);
+    setActiveTab(0);
+    props.setId(group.id);
+  };
+
 
   const { openModal, openModalPopUp } = props;
   const { updateStatus } = useFetchAdmGroupList();
   const [userOption, setUserOption] = useState([{}]);
   const { group: groupList, updateGroup} = useGroupListContext();
-  //const { updateStatus } = useFetchAdmGroupList();
   const group = groupList.filter((item) => item.id === props.id)[0];
-  
-    
+
+  const { toggleState, setToggleState } = useGroupListContext();
+  const { activeTab, setActiveTab } = useGroupListContext();
+  const { setModalInfo, setInfoGroup } = useGroupListContext();
+
   const [isActive, setIsActive] = useState(group.status === "ATIVO");
   const [previousStatus, setPreviousStatus] = useState(group.status);
   const handleToggle = () => {
@@ -54,24 +64,6 @@ const AdmGroupCardListView = (props) => {
     setIsActive(!isActive);
     updateGroup(group.id, { ...group, status: newStatus });
   };
-
- //  mok imagens //
-
- //const usersList = parseInt(group.usersCount);
- //const numDigitos = usersList.toString().length;
- //const users = [];
- 
- //for(let i = 0; i <= numDigitos; i++) {
-  // users.push(i);
- //}
-
- //const users = [1,2,3,4]
- //const amountUsersToShow = 4;
- //const showingUsers = users.slice(0, amountUsersToShow);
- //const totalHiddenUsers = users.length - amountUsersToShow;
- //const hiddenUsersText = totalHiddenUsers > 0 ? ` +${totalHiddenUsers}` : "";
-
-  //Toggle//
 
 
 
@@ -117,7 +109,7 @@ const AdmGroupCardListView = (props) => {
 
    
 
-      <Content>
+      <Content onClick={() => handleInfo()}>
         <DivIconItau>
         <PeopleTeams 
         style={{
@@ -126,14 +118,6 @@ const AdmGroupCardListView = (props) => {
         <Body type={"Body1"} name={group.group_name} />
         <TeamsContainer>
           <FontSubtitle type={"TextDescription"} name={"Team members"} />
-
-          {/*<AvatarContainer>
-            {showingUsers.map((item, index) => (
-              <Avatar key={index} position={index} />
-            ))}
-            {hiddenUsersText}
-            </AvatarContainer>*/}
-
 
      {group.usersCount} members
 

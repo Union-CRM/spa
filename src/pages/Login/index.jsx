@@ -5,7 +5,7 @@ import LoginProblems from '../../components/Geral/LoginModals/LoginProblems';
 import LoginInvalid from '../../components/Geral/LoginModals/LoginInvalid';
 import AcessBlocked from '../../components/Geral/LoginModals/AcessBlocked';
 import { Container,DivTcs,Content,LogoDiv,Form,DivIcons,Label,Span,Input,DivTerms,
-    DivWelcome,TextTerm,LoginBt,DivImgs,DivEmailIcon,DivPassWIcon,ForgotPasswordADM,DivModal} from './styles';
+    DivWelcome,TextTerm,LoginBt,DivImgs,DivEmailIcon,DivPassWIcon,EnterUser,ButtonEnterUser,ForgotPasswordADM,DivModal} from './styles';
 import Headline from '../../assets/FontSystem/Headline'
 import axios from 'axios';
 
