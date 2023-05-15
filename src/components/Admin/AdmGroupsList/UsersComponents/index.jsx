@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { Label, Container, DivSvg, DivSvg2 } from "./styles";
+<<<<<<< Updated upstream
+=======
+import {ReactComponent as Contact} from "../../../../assets/svg/Contact.svg"
 
-export const selectedOptions = [];
+>>>>>>> Stashed changes
+
 export const UsersComponents = (props, placeholder, idTagOption) => {
-  const colors = ["#FFC0CB", "#DDA0DD", "#F5DEB3", "#98FB98", "#87CEEB"];
+  const animatedComponents = makeAnimated();
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
+<<<<<<< Updated upstream
   /*const option = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10", "Option 11",
   "Option 12", "Option 13", "Option 14", "Option 15", "Option 16"];*/
 
@@ -33,6 +39,8 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
 
 */
   
+=======
+>>>>>>> Stashed changes
 const DropdownIndicator = () => {
     if (props.indicator){
       if(props.indicator === "guest")
@@ -42,6 +50,7 @@ const DropdownIndicator = () => {
         </DivSvg>  
         )
     }else{
+<<<<<<< Updated upstream
       return (
         <DivSvg2>
         <Drop width={"15px"}/>
@@ -58,16 +67,18 @@ const DropdownIndicator = () => {
   }));
 
 
-  
-console.log(selectedOptions)
-  useEffect(() => {
-    if (userList) {
-      setUserOption(
-        userList
-          .map((c) => ({ id: c.id, value: c.id, label: c.name  }))
-      );
+=======
+     
     }
-  }, []);
+  };
+>>>>>>> Stashed changes
+  
+  const options = props.options.map((item) => ({
+    value: item.value,
+    label: item.label,
+   
+  }));
+
 
 
   return (
@@ -131,7 +142,11 @@ console.log(selectedOptions)
                   display: "grid",
                   position: props.positions || "absolute",
                   borderRadius: "5px",
+<<<<<<< Updated upstream
                   top: props.top || "85%",
+=======
+                  top: props.top || "9px",
+>>>>>>> Stashed changes
                   border: "2px solid  #888C95",
                   width: props.widths || "100%",
                   height: props.heights || "90px",

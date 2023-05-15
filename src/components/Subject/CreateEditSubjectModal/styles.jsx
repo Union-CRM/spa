@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 
+
 // Div Father
 export const ContainerCentral = styled.div`
   justify-content: end;
@@ -77,9 +78,10 @@ export const Close = styled.button`
 export const Container = styled.div`
   grid-row: 1;
   grid-column: 2;
-  width: 75%;
+  transform: ${(props) => (props.$mode ? "translate(-50%, 10%)" : (""))};
+  width: ${(props) => (props.$mode ? "40%" : "75%")};
   min-width: 350px;
-  height: 100%;
+  height: ${(props) => (props.$mode ? "700px" : "100%")};
   background: #fff;
   display: grid;
   border-left: 16.56px solid #007bff;

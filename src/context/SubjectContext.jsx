@@ -5,6 +5,7 @@ export const SubjectContext = createContext();
 
 export const SubjectContextProvider = ({ children }) => {
   const [subject, setSubject] = useState([{}]);
+  const [editSubject, setEditSubject] = useState(false);
 
   useEffect(() => {
 
@@ -54,6 +55,7 @@ export const SubjectContextProvider = ({ children }) => {
   const [modal, setModal] = useState();
   const [modalEdit, setModalEdit] = useState(false);
   const [isEdit, setEdit] = useState(false);
+  const [idSubject,setIdSubject]= useState();
 
   const [toggleState, setToggleState] = useState(1);
 
@@ -91,6 +93,10 @@ export const SubjectContextProvider = ({ children }) => {
         activeTab,
         setActiveTab,
         loadData,
+        editSubject,
+        setEditSubject,
+        idSubject,
+        setIdSubject
       }}
     >
       {children}

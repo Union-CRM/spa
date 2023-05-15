@@ -45,33 +45,9 @@ export const CardGroup = styled.div`
   flex-direction: column;
 `;
 
-/*export const CardGroup = styled.div`
-  background: #ffffff;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  min-height: 160px;
-  width:auto;
-  height:auto;
-  padding: 6px 16px;
-  padding-right: 8px;
-  position: relative;
-  flex-direction: column;
-  ::before {
-    content: "";
-    left: 0;
-    top: 0;
-    position: absolute;
-    background: #e41165;
-    border-radius: 8px 0px 0px 8px;
-    width: 7px;
-    height: 100%;
-  }
-`;*/
-
 export const Content = styled.div`
   text-align: center;
+  cursor:pointer;
 `;
 export const TopContainer = styled.div`
   display: flex;
