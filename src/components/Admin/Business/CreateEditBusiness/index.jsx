@@ -122,7 +122,7 @@ const CreateEditBusiness = (props) => {
 
   // Edit selected business
   const editBusiness = () => {
-    
+
     var tag = [];
 
     if(tags){
@@ -146,15 +146,16 @@ const CreateEditBusiness = (props) => {
     } else {
       setFlagSegment(false);
     }
-  
+
     const newBusiness = {
       business_name: businessName,
       business_code: businessCode,
       segment_id: parseInt(businessSegment.value),
       status: businessStatus,
       tags: tag
-    }  
-    
+
+    }
+
     if(businessName && businessCode && businessSegment.value){
       setSucessBusiness(true);
       updateBusiness(newBusiness,idBusiness.id);
@@ -163,7 +164,9 @@ const CreateEditBusiness = (props) => {
         updateStatusBusiness(idBusiness.id);
       }
 
+
     }  
+
   }
   //15-05
   // Button cancel in modalCreateBusiness
