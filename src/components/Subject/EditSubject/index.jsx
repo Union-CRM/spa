@@ -27,14 +27,17 @@ import { useUserContext } from "../../../hook/useUserContext";
 import { useFetchSubject } from "../../../hook/useFetchSubject";
 import { useFetchSubjectStatus } from "../../../hook/useFetchSubjectStatus";
 
+
 const Subject = (props) => {
   const { setModal, title, id } = props;
   const { client: clientList } = useClientContext();
   const { updateSubject } = useFetchSubject();
   const { subjectFinished, subjectCanceld } = useFetchSubjectStatus();
   // CLOSE E SAVE ////////////
-  const { setModalDetails, setModalEdit, setEditModal } = useSubjectContext();
-  const { toggleState, setToggleState, loadData, } = useSubjectContext();
+
+  const { setModalDetails, setModalEdit, setEditModal, idSubject } = useSubjectContext();
+  const { toggleState, setToggleState, loadData} = useSubjectContext();
+
 
   const closeModal = () => {
     setModalDetails(true);
@@ -78,10 +81,14 @@ const Subject = (props) => {
   ////////// EDIT SUBJECT ////////////
 
   useEffect(() => {
-    
     if (props.title === "Edit Subject") {
-      const subject = subjectsList.filter((item) => item.id === props.id)[0];
-
+    
+      /*if(idSubject){
+        const subject = subjectsList.filter((item) => item.id === idSubject);
+        console.log(subject)
+      }else{*/
+        const subject = subjectsList.filter((item) => item.id === props.id)[0];
+          
       setStatus(subject.status);
       setSubject(subject.subject_title);
       setSelectedClient(subject.client);

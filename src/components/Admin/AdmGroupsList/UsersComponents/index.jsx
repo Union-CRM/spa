@@ -9,6 +9,7 @@ export const UsersComponents = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
   const [selectedOptions, setSelectedOptions] = useState([]);
 
+
 const DropdownIndicator = () => {
     if (props.indicator){
       if(props.indicator === "guest")
@@ -18,7 +19,12 @@ const DropdownIndicator = () => {
         </DivSvg>  
         )
     }else{
-     
+      return (
+        <DivSvg2>
+        <Drop width={"15px"}/>
+      </DivSvg2>  
+      )
+
     }
   };
   
@@ -27,7 +33,6 @@ const DropdownIndicator = () => {
     label: item.label,
    
   }));
-
 
   return (
     <>

@@ -23,6 +23,8 @@ import {
 import { useSubjectContext } from "../../../../hook/useSubjectContent";
 import { useClientContext } from "../../../../hook/useClientContent";
 import {useGroupListContext} from "../../../../hook/useGroupListContext";
+import GroupDetails from "../GroupDetails";
+import TeamMembers from "../TeamMembers"
 
 
 const ModalGroupDetails = (props) => {
@@ -119,8 +121,8 @@ console.log(EditModal)
                 Group Details
               </TabButton>
               <TabButton
-                 width="100%"
-                 fontSize="0.9rem"
+                width="100%"
+                fontSize="0.9rem"
                 $mode={group.status}
                 active={activeTab === 1}
                 onClick={() => toggleTab(1)}
@@ -134,11 +136,20 @@ console.log(EditModal)
 
           <ContainerBorder>
           <Content active={toggleState === 0}>
-             
-            </Content>
+          <GroupDetails
+                setId={(i) => setId(i)}
+                id={id}
+                title={"Group Content"}
+            />
+          </Content>
 
             <Content active={toggleState === 1}>
-           
+            <TeamMembers
+                setId={(i) => setId(i)}
+                id={id}
+                title={"Team Members"}
+            />
+
             </Content>
 
           </ContainerBorder>

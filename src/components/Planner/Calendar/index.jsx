@@ -77,6 +77,7 @@ export const BigCalender = (props) => {
     modalPlanner,
     modalError,
     setModalError,
+    setModalSubject,
   } = usePlannerContext();
   const [plannerList, setPlannerList] = useState([]);
   const { user, userTarget, setUserTarget } = useUserContext();
@@ -313,7 +314,7 @@ export const BigCalender = (props) => {
       {modalSubject && (
         <>
           <PositionSubject>
-            <Subject title={"Create Subject"} />
+            <Subject setModal={() => setModalSubject(false)} planner={"planner"} title={"Create Subject"} />
           </PositionSubject>
         </>
       )}

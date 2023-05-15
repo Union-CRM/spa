@@ -57,11 +57,12 @@ const { search } = useSearchContext();
   const [clientList, setClientList] = useState();
   const [active, setActive] = useState(abaStatus.ACTIVE);
   const { user, userTarget } = useUserContext();
-  const { modalEdit } = useSubjectContext();
+  const { modalEdit, idSubject } = useSubjectContext();
   const { client } = useClientContext();
   const { id, setId } = useClientContext();
   const {modalInfo, setModalInfo} = useClientContext();
   const {modalEditClient, setModalEditClient } = useClientContext();
+
 
   useEffect(() => {
     if (props.adminList) {
@@ -235,7 +236,7 @@ const { search } = useSearchContext();
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
       )}
       {modalEdit && (
-        <Subject/>
+        <Subject id={idSubject} title={"Edit Subject"}/>
       )}
    </ContainerGlobal>  
  )   

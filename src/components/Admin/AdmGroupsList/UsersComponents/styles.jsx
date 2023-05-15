@@ -11,6 +11,7 @@ export const Label = styled.label`
   color: rgba(0, 0, 0, 0.8);
 `;
 
+
 export const Container = styled.div`
   box-sizing: border-box;
   width: auto;
@@ -22,8 +23,8 @@ export const DivSvg = styled.div`
   padding-top: 2%;
   padding-bottom:0.9%;
   margin-right: 2%;
-`
+`;
 export const DivSvg2 = styled.div`
   margin-right: 3%;
   margin-top: 0%;
-`
+`;

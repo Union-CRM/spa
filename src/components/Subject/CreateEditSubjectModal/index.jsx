@@ -25,20 +25,30 @@ import { useClientContext } from "../../../hook/useClientContent";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useFetchSubject } from "../../../hook/useFetchSubject";
 import { useUserContext } from "../../../hook/useUserContext";
+import { usePlannerContext } from "../../../hook/usePlannerContent"
 
 const Subject = (props) => {
   const { setModal, title, id } = props;
   const { client: clientList } = useClientContext();
+  const subjectPlanner = props.planner === "planner" ? true : false;
+  const { setModalSubject } = usePlannerContext();
 
   // CLOSE E SAVE ////////////
   const closeModal = () => {
+    
     setModal(false);
+    console.log("Olá mundo")
+    setModalSubject(false);
+    
   };
 
   const handleSubmit = () => {
     if (props.title === "Create Subject") {
       createSubject();
+      setModalSubject(false);
+
     }
+
   };
 
   ////////////////////////////////////
@@ -76,7 +86,7 @@ const Subject = (props) => {
     if (ClientId && release && subject && description) {
       insertSubject(newSubject, userTarget.id);
       loadData();
-      setModal(false);
+      setModalSubject(false);
     } else {
       setFlag(true);
     }
@@ -125,7 +135,7 @@ const Subject = (props) => {
   return (
     <>
       <ContainerCentral>
-        <Container>
+        <Container $mode={subjectPlanner}>
           <PositionTitle>
             <H1>{title} </H1>
           </PositionTitle>
