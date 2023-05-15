@@ -153,6 +153,7 @@ const CreateEditBusiness = (props) => {
       segment_id: parseInt(businessSegment.value),
       status: businessStatus,
       tags: tag
+
     }
 
     if(businessName && businessCode && businessSegment.value){
@@ -163,9 +164,11 @@ const CreateEditBusiness = (props) => {
         updateStatusBusiness(idBusiness.id);
       }
 
-    }
-  }
 
+    }  
+
+  }
+  //15-05
   // Button cancel in modalCreateBusiness
   const handleCancel = () => {
     setModalCreateBusiness(false)
