@@ -233,28 +233,6 @@ export const CardPlanner = styled.div`
 
 //* COMPONENT OPEN/CLOSE DETAILS *//
 export const Circle = styled.div`
-  ${(props) => {
-    switch (props.$mode) {
-      case "DONE":
-        return css`
-          background-color: #fff;
-        `;
-      case "CANCELED":
-        return css`
-          background-color: #fff;
-        `;
-      case "SCHEDULED":
-        return css`
-          cursor: none;
-          background-color: transparent;
-        `;
-
-      default:
-        return css`
-          background-color: #6e6b6b;
-        `;
-    }
-  }}
   width:16px;
   height: 16px;
   cursor: pointer;
@@ -266,29 +244,6 @@ export const Circle = styled.div`
 `;
 
 export const IconOpenClose = styled.div`
-  ${(props) => {
-    switch (props.$modes) {
-      case "DONE":
-        return css`
-          cursor: pointer;
-          color: #008585;
-        `;
-      case "SCHEDULED":
-        return css`
-          color: transparent;
-          cursor: default;
-        `;
-      case "CANCELED":
-        return css`
-          cursor: pointer;
-          color: #771300;
-        `;
-      default:
-        return css`
-          background-color: #6e6b6b;
-        `;
-    }
-  }}
   width:100%;
   height: 100%;
   border: none;
@@ -311,26 +266,6 @@ export const IconOpenClose = styled.div`
 /// CONTENTS CARDS ///
 
 export const DivDate = styled.div`
-  ${(props) => {
-    switch (props.$mode) {
-      case "DONE":
-        return css`
-          color: #008585;
-        `;
-      case "SCHEDULED":
-        return css`
-          color: transparent;
-        `;
-      case "CANCELED":
-        return css`
-          color: #771300;
-        `;
-      default:
-        return css`
-          background-color: transparent;
-        `;
-    }
-  }}
   height: 50px;
   font-size: 0.82rem;
   width: 90%;
@@ -339,26 +274,6 @@ export const DivDate = styled.div`
   padding-left: 3%;
   border-right: 2px solid #eff1f6;
   svg {
-    ${(props) => {
-      switch (props.$mode) {
-        case "DONE":
-          return css`
-            color: #008585;
-          `;
-        case "SCHEDULED":
-          return css`
-            color: transparent;
-          `;
-        case "CANCELED":
-          return css`
-            color: #771300;
-          `;
-        default:
-          return css`
-            background-color: transparent;
-          `;
-      }
-    }}
     width:13px;
     height: 13px;
   }
@@ -375,26 +290,6 @@ export const DivDate = styled.div`
 `;
 
 export const DivTime = styled.div`
-  ${(props) => {
-    switch (props.$modes) {
-      case "DONE":
-        return css`
-          color: #008585;
-        `;
-      case "SCHEDULED":
-        return css`
-          color: transparent;
-        `;
-      case "CANCELED":
-        return css`
-          color: #771300;
-        `;
-      default:
-        return css`
-          background-color: transparent;
-        `;
-    }
-  }}
   height: 50px;
   width: 100%;
   padding-top: 0%;

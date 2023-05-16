@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Input,
+  InputDisable,
   ContainerCentral,
   Container,
   PositionTitle,
@@ -86,6 +87,7 @@ const Subject = (props) => {
     if (ClientId && release && subject && description) {
       insertSubject(newSubject, userTarget.id);
       loadData();
+      setModal(false);
       setModalSubject(false);
     } else {
       setFlag(true);
@@ -146,11 +148,13 @@ const Subject = (props) => {
                 Client Name
                 <SingleSelect
                   set={(client) => setSelectedClient(client)}
-                  placeholder={flag && !selectedClient ? "" : ""}
+                  //placeholder={flag && !selectedClient ? "" : ""}
                   sizeSingle={"100%"}
                   sizeMenu={"100%"}
                   options={optionsClient}
                   value={selectedClient}
+                  placeholder={flag && !selectedClient ? "Required field" : ""}
+                  required
                 />
               </Label>
             </DivName>
@@ -158,7 +162,7 @@ const Subject = (props) => {
             <DivBusiness>
               <Label>
                 Business
-                <Input
+                <InputDisable
                   onChange={(event) => setBusiness(event.target.value)}
                   widthInput={"90% !important"}
                   value={business}
@@ -169,7 +173,7 @@ const Subject = (props) => {
 
               <Label>
                 ReleaseTrain
-                <Input
+                <InputDisable
                   onChange={(event) => setRelease(event.target.value)}
                   widthInput={"98% !important"}
                   value={release}
@@ -181,11 +185,12 @@ const Subject = (props) => {
             <DivEmail>
               <Label>
                 Email
-                <Input
+                <InputDisable
                   widthInput={"98% !important"}
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   disabled={selectedClient}
+                  
                 />
               </Label>
             </DivEmail>

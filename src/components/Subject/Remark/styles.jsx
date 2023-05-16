@@ -80,8 +80,8 @@ export const Circle = styled.div`
   position: relative;
   border-radius: 100%;
   bottom: 3px;
-  background-color: #fff;
 `;
+
 
 export const IconOpenClose = styled.button`
   ${(props) => {

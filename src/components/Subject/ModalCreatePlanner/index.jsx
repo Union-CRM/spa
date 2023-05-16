@@ -8,6 +8,7 @@ import {
   Input,
   Form,
   Label,
+  AlertaDate,
   DivHeader,
   DivDate,
   DivStart,
@@ -29,6 +30,7 @@ import { usePlannerContext } from "../../../hook/usePlannerContent";
 import { useUserContext } from "../../../hook/useUserContext";
 import { useFetchPlanner } from "../../../hook/useFetchPlanner";
 import { useClientContext } from "../../../hook/useClientContent";
+import LoginInvalid from '../../../components/Geral/LoginModals/LoginInvalid';
 
 const ModalCreatePlanner = (props) => {
   const { subject, id } = useSubjectContext();
@@ -42,8 +44,11 @@ const ModalCreatePlanner = (props) => {
   const [timeStart, setTimeStart] = useState();
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [timeFinish, setTimeFinish] = useState();
+  const [dateFinish, setDateFinish] = useState();
   const { createPlanner } = useFetchPlanner();
   const [flag, setFlag] = useState(false);
+  const [invalidHour, setInvalidHour] = useState(false);
+  const [invalidDateStart, setInvalidDateStart] = useState(false);
 
   const closeModal = () => {
     setModalDetails(true);
@@ -57,30 +62,60 @@ const ModalCreatePlanner = (props) => {
 
   const { setModalPlanner } = usePlannerContext();
 
+
   const HandleCreatePlanner = (e) => {
-    e.preventDefault();
-    const newPlanner = {
-      name: subjectTarget.subject_title,
-      date: date + " " + timeStart,
-      duration: timeFinish,
-      subject: subjectTarget.id,
-      client: subjectTarget.client_id,
-      release: subjectTarget.release_id,
-      user: userTarget.id,
-      guest: guest.map((g) => ({ client_id: g.value })),
+
+    const horas = new Date();
+    var currentDate = new Date((horas.getMonth() + 1) + "/" + horas.getDate() + "/" + horas.getFullYear())
+    var partesData = date.split("-");
+    var data = new Date(partesData[1] + "/" + partesData[2] + "/" + partesData[0]);
+
+    var aux = "";
+
+    if (horas.getMinutes() < 10) {
+      aux = horas.getHours() + ":0" + horas.getMinutes();
+    }
+    else {
+      aux = horas.getHours() + ":" + horas.getMinutes()
+    }
+
+    if (date && timeFinish && timeStart && guest) {
+      setFlag(false);
+
+      if (data >= currentDate) {
+        setInvalidDateStart(false);
+        if (timeFinish > timeStart && timeStart >= aux) {
+          setInvalidHour(false);
+          const newPlanner = {
+            name: subjectTarget.subject_title,
+            date: date + " " + timeStart,
+            duration: timeFinish,
+            subject: subjectTarget.id,
+            client: subjectTarget.client_id,
+            release: subjectTarget.release_id,
+            user: userTarget.id,
+            guest: guest.map((g) => ({ client_id: g.value })),
+          };
+          createPlanner(newPlanner);
+          setModalDetails(true);
+          setModalPlanner(false);
+        } else {
+          setInvalidHour(true);
+        }
+      }
+     else {
+      setDateFinish("");
+      setInvalidDateStart(true);
     };
-    if (date && timeFinish && timeStart) {
-      createPlanner(newPlanner);
-      setModalDetails(true);
-      setModalPlanner(false);
+
     } else {
       setFlag(true);
     }
-
-    console.log(newPlanner);
+    console.log("FOIII!!!")
   };
 
-  /*useEffect(() => {
+
+  useEffect(() => {
     if (clientList) {
       setClientOption(
         clientList
@@ -88,8 +123,8 @@ const ModalCreatePlanner = (props) => {
           .map((c) => ({ id: c.id, value: c.id, label: c.client }))
       );
     }
-  }, []);*/
-  
+  }, []);
+
 
   return (
     <>
@@ -107,14 +142,13 @@ const ModalCreatePlanner = (props) => {
                     <Input
                       widthInput={"93%"}
                       type="date"
-                      defaultValue={date}
                       name="date"
+                      defaultValue={date}
                       onChange={(e) => setDate(e.target.value)}
                       required={flag && !date ? true : false}
-                      /*placeholder={flag && !name ? "Required field" : ""}
-                    value={name}
-                    required
-                    onChange={(event) => setName(event.target.value)}*/
+                    //placeholder={flag && !name ? "Required field" : ""}
+                    //value={name}
+                    //onChange={(event) => setName(event.target.value)}*/
                     />
                   </Label>
                 </DivDate>
@@ -141,15 +175,28 @@ const ModalCreatePlanner = (props) => {
                       name="time-finish"
                       onChange={(e) => setTimeFinish(e.target.value)}
                       required={flag && !timeFinish ? true : false}
+
                     />
                   </Label>
                 </DivFinish>
               </DivColumnOne>
 
               <DivColumnTwo>
-                <GuestComponent set={(guest) => setGuest(guest)} />
+                <GuestComponent
+                  set={(guest) => setGuest(guest)}
+                  options={clientOption}
+                  label={"Guests"}
+                  tags={guest}
+                  indicator={"guest"}
+                  value={guest.label}
+                
+                />
               </DivColumnTwo>
+
+
             </Form>{" "}
+
+
             <DivButton>
               <ClickButton onClick={(e) => HandleCreatePlanner(e)}>
                 <ButtonDefault
@@ -162,8 +209,21 @@ const ModalCreatePlanner = (props) => {
               <PositionButtonCancel onClick={closeModal}>
                 <ButtonDefault type="userCancel" name={"Cancel"} />
               </PositionButtonCancel>
+
+
+              {invalidHour &&
+                <AlertaDate><span>The start time must be equal to or greater than the current time.</span></AlertaDate>}
+
+              {flag &&
+              <AlertaDate><span>
+              Please make sure all fields are filled in to continue.</span></AlertaDate>}
+
+              {invalidDateStart &&
+              <AlertaDate><span>The end date must be equal to or greater than the current date.</span></AlertaDate>}
             </DivButton>
           </ContainerChildren>
+
+
         </Container>
       </ContainerCentral>
     </>
@@ -171,12 +231,3 @@ const ModalCreatePlanner = (props) => {
 };
 
 export default ModalCreatePlanner;
-
-const options = [
-  { value: 1, label: "Maycon Cabo", color: "#d9d9d9" },
-  { value: 2, label: "Luana Nogueira", color: "#d9d9d9" },
-  { value: 3, label: "Graziele Miranda", color: "#d9d9d9" },
-  { value: 4, label: "João Pedro", color: "#d9d9d9" },
-  { value: 5, label: "Felipe Flaibam", color: "#d9d9d9" },
-  { value: 6, label: "Ariel Souza", color: "#d9d9d9" },
-];
