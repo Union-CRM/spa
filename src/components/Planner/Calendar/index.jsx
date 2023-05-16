@@ -95,6 +95,10 @@ export const BigCalender = (props) => {
     }
   }, [planner]);
 
+  useEffect(() => {
+    setModalPlanner(false);
+  }, []);
+
   const handleOnClickEvent = (d) => {
     setModalPlanner(true);
     setDateTarget(d);
@@ -314,7 +318,11 @@ export const BigCalender = (props) => {
       {modalSubject && (
         <>
           <PositionSubject>
-            <Subject setModal={() => setModalSubject(false)} planner={"planner"} title={"Create Subject"} />
+            <Subject
+              setModal={() => setModalSubject(false)}
+              planner={"planner"}
+              title={"Create Subject"}
+            />
           </PositionSubject>
         </>
       )}

@@ -61,7 +61,7 @@ export const Content = styled.div`
 export const DivClient = styled.div`
   width: 200%;
   height: 90%;
-  
+
   margin: 0;
   grid-column: 1;
   min-width: 400px;
@@ -69,13 +69,14 @@ export const DivClient = styled.div`
     width: 65%;
   }
 
-  ${ContainerHeaderAndCards}{
+  ${ContainerHeaderAndCards} {
     box-shadow: none;
   }
 
   ${ModaClient} {
-    display: none;
-    grid-template-columns: 0%;
+    display: block;
+    grid-column: 2;
+    position: absolute;
   }
 
   ${ContainerGlobal} {
@@ -86,7 +87,9 @@ export const DivClient = styled.div`
     min-width: 200px;
   }
   ${ContainerCentral} {
-    display: none;
+    display: fixed;
+   
+    z-index:20;
   }
 
   ${ContainerClient} {
@@ -106,26 +109,28 @@ export const DivClient = styled.div`
     @media (min-width: 1007px) and (max-width: 1360px) {
       height: 80%;
     }
-    @media (min-width:701px) and (max-width: 1006px) {
+    @media (min-width: 701px) and (max-width: 1006px) {
       height: 54%;
-  }
-  ${BoardStyleClient} {
-    width: 100%;
-    height: 100%;
-    background: #fff;
-  }
+    }
 
-  ${DivButton} {
-    display: none;
-  }
+    ${BoardStyleClient} {
+      width: 100%;
+      height: 100%;
+      background: #fff;
+    }
 
-  ${DivIcons} {
-    display: flex;
-  }
+    ${DivButton} {
+      display: none;
+    }
 
-  ${ContainerCard} {
-    width: auto;
-    height: 204px;
+    ${DivIcons} {
+      display: flex;
+    }
+
+    ${ContainerCard} {
+      width: auto;
+      height: 204px;
+    }
   }
 `;
 

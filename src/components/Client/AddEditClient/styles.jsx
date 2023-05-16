@@ -15,7 +15,6 @@ export const ContainerCentral = styled.div`
   }
 `;
 
-
 // Div Title
 export const PositionTitle = styled.div`
   margin-left: 0px;
@@ -116,7 +115,7 @@ export const Input = styled.input`
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
   padding-left: 2%;
-  border: 2px solid #888c95;
+  border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
   position: relative;

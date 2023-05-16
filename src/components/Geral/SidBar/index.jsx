@@ -50,7 +50,7 @@ function handleLogin(event) {
 
 const SidBar = (props) => {
   const [sidBarState, setSidBarState] = useState(true);
-  const { user } = useUserContext();
+  const { user, setViewProfile } = useUserContext();
   const isAdm = user.level > 1 ? true : false;
   const colorAdm = user.level > 1 ? "#007BFF" : "#FFFFFF";
 
@@ -93,7 +93,7 @@ const SidBar = (props) => {
           </Slink>
           {isAdm && (
             <>
-              <Slink to="/usersAdm">
+              <Slink to="/usersAdm" onClick={() => setViewProfile(false)}>
                 <Li level={user.level}>
                   <Icon $mode={sidBarState}>
                     <IconSystem icon="User" />

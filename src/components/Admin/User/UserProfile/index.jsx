@@ -35,6 +35,15 @@ import Body from "../../../../assets/FontSystem/Body";
 import IconSystem from "../../../../assets/IconSystem";
 import SubjectList from "../../../Subject/SubjectCardListView";
 import { CustomerContextProvider } from "../../../../context/CustomerContext";
+import ModalPlanner from "../../../Planner/AddEditPlanner";
+import ModalDiscardChanges from "../../../Planner/ModalDiscardChanges";
+import ModalSave from "../../../Planner/ModalSuccessfuly";
+import RemarkModal from "../../../Planner/RemarkModal";
+import PopUpCanceled from "../../../Planner/PopUpCanceled";
+import FollowUpModal from "../../../Planner/FollowUpModal";
+import PopUpFinished from "../../../Planner/PopUpFinished";
+import ModalError from "../../../Planner/ModalError";
+//import { Subject as SubjectUser } from "../../../Subject/CreateEditSubjectModal";
 
 import "react-tippy/dist/tippy.css";
 
@@ -42,13 +51,23 @@ const dateOfTheDay = new Date();
 
 const UserProfile = () => {
   const {
-    userTarget,
-    modalPlanner,
-    setModalPlanner,
     modalSubject,
     setModalSubject,
-    setViewProfile,
-  } = useUserContext();
+    modalEdit,
+    modalSave,
+    setModalSave,
+    modalDiscard,
+    modalRemark,
+    modalReschedule,
+    modalFollowUp,
+    modalPopUpFinished,
+    modalPopUpCanceled,
+    modalError,
+    setModalError,
+  } = usePlannerContext();
+
+  const { userTarget, modalPlanner, setModalPlanner, setViewProfile } =
+    useUserContext();
 
   const { subject } = useSubjectContext();
   const { planner } = usePlannerContext();
@@ -184,6 +203,69 @@ const UserProfile = () => {
         />
         <Group />
       </Graph1>
+      {modalEdit && (
+        <>
+          <DivClose onClick={handleCloseModal}></DivClose>
+          <ModalPlanner adminList={true} title={"Edit Planner"} />
+        </>
+      )}
+      {!modalPlanner && modalSave && (
+        <>
+          <DivClose onClick={() => setModalSave(false)}></DivClose>
+          <ModalSave subject={"translate(-50%, -200%)"} />
+        </>
+      )}
+      {modalDiscard && (
+        <>
+          <ModalDiscardChanges />
+        </>
+      )}
+      {modalPopUpCanceled && (
+        <>
+          <PopUpCanceled />
+        </>
+      )}
+      {modalFollowUp && (
+        <>
+          <DivClose />
+          <FollowUpModal adminList={true} />
+        </>
+      )}
+      {modalReschedule && (
+        <>
+          <DivClose onClick={handleCloseModal}></DivClose>
+          <ModalPlanner adminList={true} title={"Reschedule Planner"} />
+        </>
+      )}
+      {modalPopUpFinished && (
+        <>
+          <DivClose />
+          <PopUpFinished />
+        </>
+      )}
+      {/*modalSubject && (
+        <>
+          <PositionSubject>
+            <SubjectUser
+              setModal={() => setModalSubject(false)}
+              planner={"planner"}
+              title={"Create Subject"}
+            />
+          </PositionSubject>
+        </>
+      )*/}
+      {modalRemark && (
+        <>
+          <DivClose onClick={handleCloseModal}></DivClose>
+          <RemarkModal adminList={true} title={"Create Remark"} />
+        </>
+      )}
+      {modalError && (
+        <>
+          <DivClose onClick={() => setModalError(false)}></DivClose>
+          <ModalError />
+        </>
+      )}
     </>
   );
 };

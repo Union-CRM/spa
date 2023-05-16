@@ -51,11 +51,9 @@ const RemarkList = (props) => {
   const { remark } = useRemarkContext([]);
   const [remarkList, setRemarkList] = useState([]);
   const { search } = useSearchContext();
-
   const [modal, setModal] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const [active, setActive] = useState(cardStatus.ACTIVE);
-
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
   };

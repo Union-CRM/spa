@@ -1,4 +1,3 @@
-
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { userGetSubmissiveUsers, userCreate } from "../api/routesAPI";
@@ -40,34 +39,25 @@ export const UserContextProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setUserList(response.data.list);
-      console.log(response)
     } catch (error) {
       console.error(error);
       // to do modal error
     }
-    
   };
 
-
   const loadUsers = async () => {
-   
     try {
       const response = await axios.get(userCreate, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setUsersGlobal(response.data.list);
-      console.log(response)
-      
     } catch (error) {
       console.error(error);
       // to do modal error
     }
-    
   };
 
-
   return (
-
     <UserContext.Provider
       value={{
         home,
@@ -87,11 +77,10 @@ export const UserContextProvider = ({ children }) => {
         modalPassword,
         setModalPassword,
         loadUsers,
-        usersGlobal, 
-        setUsersGlobal
+        usersGlobal,
+        setUsersGlobal,
       }}
     >
-
       {children}
     </UserContext.Provider>
   );

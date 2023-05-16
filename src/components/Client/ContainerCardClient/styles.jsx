@@ -60,13 +60,11 @@ export const HeaderContainerCards = styled.div`
   }
 `;
 
-
 export const DivInfo = styled.div`
-position:relative;
-top:6%;
-left:1%;
+  position: relative;
+  top: 6%;
+  left: 1%;
 `;
-
 
 // Div Title and Button //
 export const Top = styled.div`
@@ -143,7 +141,7 @@ export const DivModal = styled.div`
     switch (props.$mode) {
       case true:
         return css`
-          z-index: 1000;
+          z-index: 10;
           height: 100vh;
           width: 100vw;
           background: rgba(0, 0, 0, 0.8);
