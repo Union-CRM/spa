@@ -96,7 +96,7 @@ export const Input = styled.input`
   height: ${(props) => props.heightInput || "28px"};
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
-  border: 2px solid #888c95;
+  border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
   position: relative;
@@ -110,7 +110,7 @@ export const TextArea = styled.textarea`
   height: ${(props) => props.heightInput || "80px"};
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
-  border: 2px solid #888c95;
+  border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
   resize: none;
@@ -202,5 +202,5 @@ export const DivDate = styled.div`
 `;
 export const DivDateAll = styled.div`
   display: grid;
-  grid-template-columns: 30% 30%;
+  grid-template-columns: 30% 30% 30%;
 `;

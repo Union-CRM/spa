@@ -32,6 +32,10 @@ const UserCard = (props) => {
     setUserTarget(user);
     //props.setId(client.id);
   };
+  const handleEdit = () => {
+    setUserTarget(user);
+    props.openModal();
+  };
 
   const [isActive, setIsActive] = useState(user.status === "ACTIVE");
 
@@ -53,13 +57,13 @@ const UserCard = (props) => {
           checked={isActive}
         >
           <Header>
-            <DivPhoto>
+            <DivPhoto onClick={handleEdit}>
               <DivPhotoI isActive={isActive}>
                 <Body type={"Body2"} name={Split(user.name)} />
               </DivPhotoI>
             </DivPhoto>
 
-            <DivDadosCard>
+            <DivDadosCard onClick={handleEdit}>
               <Body type={"Body2"} name={user.name} />
 
               <Subtitle type={"TextDescription"} name={user.email} />

@@ -52,14 +52,14 @@ export const Container = styled.div`
   grid-column: 2;
   width: 80%;
   min-width: 300px;
-  height: 55vh;
+  height: 81vh;
   background: #fff;
   display: grid;
   border-left: 16.56px solid #e41165;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   z-index: 1000;
-  grid-template-rows: 20% 50% 30%;
+  grid-template-rows: 15% 30% 30% 20%;
   @media (min-width: 100px) and (max-width: 502px) {
     height: 81vh;
     width: 100%;
@@ -91,6 +91,7 @@ export const Input = styled.input`
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
   position: relative;
+  border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
 
   @media (min-width: 1600px) {
     width: 40px;
@@ -138,7 +139,7 @@ export const DivButton = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  grid-row: 3;
+  grid-row: 4;
 `;
 
 export const PositionButtonCancel = styled.div``;
