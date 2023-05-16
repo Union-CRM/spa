@@ -6,7 +6,8 @@ import PageBodyHome from "../../../components/Geral/PageBody/PageBodyHome";
 import PlannerCard from "../../../components/Planner/PlannerCard";
 import { usePlannerContext } from "../../../hook/usePlannerContext";
 import { CustomerContextProvider } from "../../../context/CustomerContext";
-
+import { useUserContext } from "../../../hook/useUserContext";
+import { useSubjectContext } from "../../../hook/useSubjectContent";
 // hook/usePlannerContext
 
 import "react-tippy/dist/tippy.css";
@@ -18,36 +19,56 @@ import "react-tippy/dist/tippy.css";
 
 const dateOfTheDay = new Date();
 
-function PlannerCount() {
-  const { Planner } = usePlannerContext();
-  return Planner;
-}
+const Home = () => {
+  const { planner } = usePlannerContext();
+  const { subject } = useSubjectContext();
 
-class Home extends React.Component {
-  render() {
-    return (
-      <>
-        <PageBodyHome>
-          <CustomerContextProvider>
-            <Content>
-              <DivClient>
-                <ContainerCards />
-              </DivClient>
+  // numberOfPlanner [0]-canceled | [1]- Scheduled | [2] Done
+  const numberOfPlanner = [
+    planner ? planner.filter((p) => p.status === "CANCELED").length : 0,
+    planner ? planner.filter((p) => p.status === "SCHEDULED").length : 0,
+    planner ? planner.filter((p) => p.status === "DONE").length : 0,
+  ];
+  // numberOfSubject [0]-canceled |[2] In progress | [1]- Finished |
+  const numberOfSubject = [
+    subject ? subject.filter((s) => s.status === "CANCELED").length : 0,
+    subject ? subject.filter((s) => s.status === "IN PROGRESS").length : 0,
+    subject ? subject.filter((s) => s.status === "FINISHED").length : 0,
+  ];
 
-              <DivPlanner>
-                <PlannerCard date={dateOfTheDay} />
-              </DivPlanner>
-            </Content>
+  console.log(numberOfPlanner);
+  console.log(numberOfSubject);
 
-            <Graph1>
-              <Grafico value={0} />
-              <Grafico value={1} />
-            </Graph1>
-          </CustomerContextProvider>
-        </PageBodyHome>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <PageBodyHome>
+        <CustomerContextProvider>
+          <Content>
+            <DivClient>
+              <ContainerCards />
+            </DivClient>
+
+            <DivPlanner>
+              <PlannerCard date={dateOfTheDay} />
+            </DivPlanner>
+          </Content>
+
+          <Graph1>
+            <Grafico
+              title={"Subject"}
+              legend={["Canceled", "In progress", "Finished"]}
+              value={numberOfSubject}
+            />
+            <Grafico
+              title={"Planner"}
+              legend={["Canceled", "Scheduled", "Done"]}
+              value={numberOfPlanner}
+            />
+          </Graph1>
+        </CustomerContextProvider>
+      </PageBodyHome>
+    </>
+  );
+};
 
 export default Home;

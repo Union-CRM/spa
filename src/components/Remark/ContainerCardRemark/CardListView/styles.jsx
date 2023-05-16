@@ -39,7 +39,7 @@ export const Card = styled.div`
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
   width: auto;
-  height: 204px;
+  height: fit-content;
   z-index: 0;
   padding-left: 5%;
   padding-right: 5%;
