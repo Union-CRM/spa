@@ -79,7 +79,7 @@ const SubjectsDetails = (props) => {
       <DivDescription>
         Description
         <span onChange={(event) => setDescription(event.target.value)}>
-        {description}
+        {subject.subjectText}
         </span>
       </DivDescription>
     </ContainerDetails>

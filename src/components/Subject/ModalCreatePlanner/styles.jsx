@@ -137,6 +137,22 @@ export const Label = styled.label`
 `;
 
 // Divs
+
+export const AlertaDate = styled.div`
+ background-color: rgba(187, 30, 0, 1);
+ border-radius:5px;
+ padding:2px;
+ height:fit-content;
+ align-items:center;
+ text-align:center;
+ justify-content:center;
+ span {
+  color:#fff;
+  text-align:center;
+  font-size:0.9em;
+ }
+ `;
+
 export const DivColumnOne = styled.div`
   grid-column: 1;
   display: grid;
@@ -165,6 +181,7 @@ export const DivStart = styled.div`
 export const DivFinish = styled.div`
   width: 93%;
   align-self: flex-end;
+  align-items:end;
   flex: 0;
   display: flex;
   height: auto;
@@ -183,10 +200,16 @@ export const DivButton = styled.div`
   grid-row: 4;
 `;
 
-export const PositionButtonCancel = styled.div``;
+export const PositionButtonCancel = styled.div` display:flex;
+justify-content: center;
+position: relative;
+align-items: center;`;
 
 export const ClickButton = styled.div`
-  display: block;
+  display:flex;
+  justify-content: center;
+  position: relative;
+  align-items: center;
 `;
 
 export const InputTime = styled.input`

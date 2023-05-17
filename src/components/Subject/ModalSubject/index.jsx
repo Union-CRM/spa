@@ -111,13 +111,11 @@ const ModalSubject = (props) => {
               {subject.subject_title}
             </TitleSubject>
 
-            {activeTab === 0 &&
-              subject.status !== "FINISHED" &&
-              subject.status !== "CANCELED" && (
+          
                 <IconTag onClick={EditModal}>
                   <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
                 </IconTag>
-              )}
+     
 
             <CreatedBy onChange={(event) => setManager(event.target.value)}>
               Created by on {manager}

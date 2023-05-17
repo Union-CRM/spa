@@ -102,7 +102,7 @@ const Subject = (props) => {
     const newSubject = {
       id: id,
       title: subject,
-      subject_text: description,
+      text: description,
       status_id: status,
     };
 

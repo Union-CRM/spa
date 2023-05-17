@@ -128,10 +128,27 @@ export const Input = styled.input`
   display: block;
   position: relative;
   padding-left: 2%;
+  border: 2px solid ${(props) => props.placeholder === "" ? "#888C95" : "#b03535"
+  };
   @media (min-width: 1355px) and (max-width: 1824px) {
     height: 25px;
   }
 `;
+
+export const InputDisable = styled.input`
+  height: ${(props) => props.heightInput || "28px"};
+  width: ${(props) => props.widthInput || "100%"};
+  border-radius: 5px;
+  border: 2px solid #888c95;
+  background-color:#D6D6D6;
+  display: block;
+  position: relative;
+  padding-left: 2%;
+  @media (min-width: 1355px) and (max-width: 1824px) {
+    height: 25px;
+  }
+`;
+
 
 export const TextArea = styled.textarea`
   height: ${(props) => props.heightInput || "80px"};
@@ -139,6 +156,8 @@ export const TextArea = styled.textarea`
   border-radius: 5px;
   border: 2px solid #888c95;
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
+  border: 2px solid ${(props) => props.placeholder === "" ? "#888C95" : "#b03535"
+};
   display: block;
   resize: none;
   padding-left: 2%;
