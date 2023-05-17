@@ -87,7 +87,6 @@ const ContainerCards = () => {
         setUserList(users);
       }
   }, [search, users]);
-
   return (
     <ContainerGlobal>
       <ContainerHeaderAndCards>

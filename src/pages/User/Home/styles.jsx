@@ -230,3 +230,12 @@ export const HowManyPlanners = styled.div`
   font-weight: 600;
   margin-right: 5%;
 `;
+export const DivClose = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #00000034;
+  z-index: 20;
+`;

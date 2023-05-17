@@ -73,8 +73,13 @@ const ContainerCards = (props) => {
   useEffect(() => {
     if (search) {
       setClientList(
-        client.filter((c) =>
-          c.client.toLowerCase().includes(search.toLowerCase())
+        client.filter(
+          (c) =>
+            c.client.toLowerCase().includes(search.toLowerCase()) ||
+            c.textRole.toLowerCase().includes(search.toLowerCase()) ||
+            c.textCustomer.toLowerCase().includes(search.toLowerCase()) ||
+            c.textBusiness.toLowerCase().includes(search.toLowerCase()) ||
+            c.user_name.toLowerCase().includes(search.toLowerCase())
         )
       );
     } else {

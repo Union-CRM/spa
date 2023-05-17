@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { DivCard as ModaClient } from "../../Planner/PlannerCard/styles";
 import { DivP } from "../../Planner/PlannerCard/styles";
 
@@ -114,4 +114,39 @@ export const DivPlanner = styled.div`
 export const ContainerLowLeft = styled.div`
   height: 80%;
   margin-top: 10%;
+`;
+
+export const DivClose = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #00000034;
+  z-index: 20;
+`;
+
+export const DivModal = styled.div`
+  ${(props) => {
+    switch (props.$mode) {
+      case true:
+        return css`
+          z-index: 1000;
+          height: 100vh;
+          width: 100vw;
+          background: rgba(0, 0, 0, 0.8);
+          position: fixed;
+          top: 0;
+          left: 0;
+        `;
+
+      default:
+        return css``;
+    }
+  }}
+  grid-template-columns:50% 50%;
+  @media (min-width: 50px) and (max-width: 500px) {
+    height: 100vh;
+    width: 100%;
+  }
 `;
