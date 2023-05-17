@@ -15,21 +15,29 @@ import IconSystem from "../../../assets/IconSystem";
 import { usePlannerContext } from "../../../hook/usePlannerContext";
 import { useBusinessContext } from "../../../hook/useBusinessContent";
 import { useReleaseContext } from "../../../hook/useReleaseContent";
+import { useRemarkContext } from "../../../hook/useRemarkContent";
 
 const ModalSave = (props) => {
   const { setModalSave } = usePlannerContext();
-  const { setModalSaveBusiness, sucessBusiness,setSucessBusiness} = useBusinessContext();
-  const { setModalSaveRelease, sucessRelease, setSucessRelease } = useReleaseContext();
+  const { setModalSaveBusiness, sucessBusiness, setSucessBusiness } =
+    useBusinessContext();
+  const { setModalSaveRelease, sucessRelease, setSucessRelease } =
+    useReleaseContext();
+  const { setModalSaveRemark, sucessRemark, setSucessRemark } =
+    useRemarkContext();
 
-  const editSave = sucessBusiness || sucessRelease ? "Edit" : "Created" ;
-  
+  const editSave =
+    sucessBusiness || sucessRelease || sucessRemark ? "Edit" : "Created";
+
   const handleSave = () => {
     setSucessBusiness(false);
     setSucessRelease(false);
     setModalSave(false);
     setModalSaveBusiness(false);
     setModalSaveRelease(false);
-  } 
+    setModalSaveRemark(false);
+    setSucessRemark(false);
+  };
 
   return (
     <ContainerFather onClick={() => handleSave()}>

@@ -3,7 +3,7 @@ import Body from "../../../../assets/FontSystem/Body";
 import Headline from "../../../../assets/FontSystem/Headline";
 import Subtitle from "../../../../assets/FontSystem/Subtitle";
 import IconSystem from "../../../../assets/IconSystem";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePlannerContext } from "../../../../hook/usePlannerContext";
 import {
   ContainerCards,
@@ -41,12 +41,17 @@ function Split(n) {
 
 const Card = (props) => {
   const { setModalPlanner } = usePlannerContext();
-  const time = props.initial.split(" ")[1].split(":");
-  const [timeStart] = useState(`${time[0]}:${time[1]}`);
+  //const [time, setTime] = useState(props.initial.split(" ")[1].split(":"));
+  const [timeStart, setTimeStart] = useState();
   const handleEdit = () => {
     props.OpenModal();
     setModalPlanner(false);
   };
+
+  useEffect(() => {
+    const time = props.initial.split(" ")[1].split(":");
+    setTimeStart(`${time[0]}:${time[1]}`);
+  }, [props.initial]);
 
   return (
     <>

@@ -5,11 +5,12 @@ export const ContainerCards = styled.div`
   background-color: #ffffff;
   height: 20vh;
   width: 98%;
-  border: 1px groove;
+  border: 1px groove none;
   border-radius: 12px;
   display: flex;
   margin-bottom: 1.5%;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+
   filter: drop-shadow;
 `;
 
@@ -108,6 +109,7 @@ export const DivUserInformation = styled.div`
 export const DivNameEmail = styled.div`
   width: fit-content;
   grid-template-rows: 30% 70%;
+  color: black;
 `;
 export const Email = styled.div`
   overflow-x: auto;
