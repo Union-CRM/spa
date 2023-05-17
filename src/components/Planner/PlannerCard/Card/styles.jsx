@@ -6,7 +6,7 @@ export const ContainerCards = styled.div`
   margin-left: 8%;
   margin-right: 8%;
   border-radius: 8px;
-  cursor: pointer;
+  cursor: ${(props) => (props.$mode ? "pointer" : "default")};
   position: relative;
   display: grid;
   height: fit-content;

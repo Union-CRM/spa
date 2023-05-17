@@ -67,7 +67,7 @@ const CreateEditRelease = (props) => {
       setReleaseName(releaseTarget.name)
       setReleaseCode(releaseTarget.code)
       setReleaseStatus(releaseTarget.status)
-      setBusinessRelease({ value: releaseTarget.businessID, label: releaseTarget.businessName })
+      setBusinessRelease({ value: releaseTarget.business_id, label: releaseTarget.business_name })
       setTags(releaseTarget.tags)
 
     }
