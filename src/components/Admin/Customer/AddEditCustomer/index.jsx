@@ -34,8 +34,6 @@ const AddEditCustomer = (props) => {
   const [flag, setFlag] = useState(false);
   const { setModal } = props;
 
-  console.log(newCustomer);
-
   const closeModal = () => {
     setModal(false);
   };

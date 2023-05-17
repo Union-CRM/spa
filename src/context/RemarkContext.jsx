@@ -9,11 +9,12 @@ export const RemarkContextProvider = ({ children }) => {
   const [remarkEdit, setRemarkEdit] = useState(remarkEntity);
   const [modalRemark, setModalRemark] = useState(false);
   const [remarkTarget, setRemarkTarget] = useState();
+  const [modalSaveRemark, setModalSaveRemark] = useState(false);
+  const [sucessRemark, setSucessRemark] = useState(false);
 
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
-
     if (localStorage.getItem("token")) {
       loadRemarkList();
     }
@@ -48,6 +49,10 @@ export const RemarkContextProvider = ({ children }) => {
         activeTab,
         setActiveTab,
         loadRemarkList,
+        modalSaveRemark,
+        setModalSaveRemark,
+        sucessRemark,
+        setSucessRemark,
       }}
     >
       {children}

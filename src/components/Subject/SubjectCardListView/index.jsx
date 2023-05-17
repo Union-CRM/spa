@@ -75,9 +75,10 @@ const SubjectList = (props) => {
       setSubjectList(
         subject.filter(
           (s) =>
-            (s.subject_title.toLowerCase().includes(search.toLowerCase()) ||
-              s.client.toLowerCase().includes(search.toLowerCase())) &&
-            s.user_id === user.id
+            s.subject_title.toLowerCase().includes(search.toLowerCase()) ||
+            s.client.toLowerCase().includes(search.toLowerCase()) ||
+            (s.release.toLowerCase().includes(search.toLowerCase()) &&
+              s.user_id === user.id)
         )
       );
     } else {
