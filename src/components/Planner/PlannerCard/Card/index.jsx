@@ -53,8 +53,10 @@ const Card = (props) => {
 
   return (
     <>
+
       <ContainerCards $mode={whatsStatus} onClick={() => handleEdit()}>
         <ClientContent>
+
           <Setor>
             <Headline type={"Headline5"} name={props.subject} />
           </Setor>

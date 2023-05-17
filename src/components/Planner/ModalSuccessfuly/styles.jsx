@@ -8,7 +8,11 @@ export const ContainerFather = styled.div`
   align-items: center;
   grid-column: 1;
   position: relative;
+  animation: 0.5s some linear forwards;
+  animation-delay: 6s;
 `;
+
+
 
 // Container ModalPopup //
 export const Container = styled.div`

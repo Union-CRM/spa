@@ -20,6 +20,7 @@ import {
 import InputTextArea from "../../Geral/Input/InputText";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
+import { usePlannerContext } from "../../../hook/usePlannerContext";
 import { useFetchRemark } from "../../../hook/useFetchRemark";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useUserContext } from "../../../hook/useUserContext";
@@ -27,6 +28,7 @@ import InputDefault from "../../Geral/Input/InputDefault";
 
 const CreateRemark = (props) => {
   const { id } = props;
+  const { setModalSave } = usePlannerContext();
   const { setModalRemark, loadRemarkList } = useRemarkContext();
   const closeModal = () => {
     setModalDetails(true);
@@ -36,7 +38,6 @@ const CreateRemark = (props) => {
   };
   const { createRemark } = useFetchRemark();
   const { user } = useUserContext();
-  // Subject //
   const { setActiveTab } = useSubjectContext();
   const { subject: subjectList } = useSubjectContext();
   const [subjectTarget, setSubjectTarget] = useState({});

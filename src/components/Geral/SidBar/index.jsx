@@ -128,8 +128,10 @@ const SidBar = (props) => {
           </Slink>
           {isAdm && (
             <>
+
               <Slink onClick={() => handleIconClick('users')} to="/usersAdm">
                 <Li selected={selectedIcon === 'users'} level={user.level}>
+
                   <Icon $mode={sidBarState}>
                     <IconSystem icon="User" />
                     <Span $mode={sidBarState}>User</Span>

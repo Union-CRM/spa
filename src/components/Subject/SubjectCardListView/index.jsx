@@ -311,11 +311,15 @@ const SubjectList = (props) => {
         />
       )}
 
+
+
       {modalSave && (
-        <>
-          <ModalSave subject={"translate(75%, -350%)"} />
-        </>
+      
+
+          <ModalSave subject={"translate(25%, -350%)"} />
+     
       )}
+
 
       {modalDiscard && (
         <>

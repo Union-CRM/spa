@@ -28,7 +28,7 @@ import {
 const EditRemark = (props) => {
   // Subject status
   const { subject: subjectsList } = useSubjectContext();
-  const { remarkEdit } = useRemarkContext();
+  const { remarkEdit, setRemarkEdit } = useRemarkContext();
   const { id } = useSubjectContext();
   const [status, setStatus] = useState();
   const { loadRemarkList } = useRemarkContext();
@@ -47,10 +47,6 @@ const EditRemark = (props) => {
       setStatus(subject.status);
     }
   }, [id]);
-
-  // Tabs
-
-  const [setActiveContent] = useState(0);
 
   // Remark //
 
@@ -73,6 +69,7 @@ const EditRemark = (props) => {
       client_id: remarkEdit.client_id,
       release_id: remarkEdit.release_id,
       user_id: remarkEdit.user_id,
+      user_name: remarkEdit.user_name,
       status_id: 21,
     };
     if (
@@ -81,11 +78,9 @@ const EditRemark = (props) => {
       newRemark.date_return &&
       newRemark.text
     ) {
+      setRemarkEdit(newRemark)
       updateRemark(newRemark, remarkEdit.id).then(loadRemarkList());
       loadRemarkList();
-      setToggleState(3);
-      setActiveTab(3);
-      setActiveContent(3);
     } else {
       setFlag(true);
     }
@@ -94,6 +89,9 @@ const EditRemark = (props) => {
   const handleSubmit = () => {
     if (props.title === "Edit Remark") {
       editRemark();
+      setToggleState(3);
+      setActiveTab(3);
+      console.log("ok")
     }
   };
 
@@ -115,7 +113,8 @@ const EditRemark = (props) => {
                 widthInput={"80%"}
                 type="date"
                 required={flag && !date ? true : false}
-                value={dateReturn}
+
+                value={dateCorrect(dateReturn)}
                 onChange={(event) => setDateReturn(event.target.value)}
               />
             </DivDateReturn>
@@ -129,7 +128,6 @@ const EditRemark = (props) => {
             <DivDadosRemark>
               <NameEmail>
                 {SplitName(remarkEdit.user_name)}
-                <span>{remarkEdit.user_id}</span>
                 <ButtonCreateRemark onClick={handleSubmit}>
                   <ButtonAdd
                     $mode={status}
@@ -194,4 +192,9 @@ function SplitName(n) {
   var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
 
   return user1;
+}
+function dateCorrect (dateReturn, date) {
+  if (dateReturn > date){
+    return 'Insira uma data válida!'
+  }
 }
