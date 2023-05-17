@@ -139,11 +139,11 @@ const ContentRemarks = (props) => {
 
                 <DivDadosRemark>
                   <NameEmail>
-                    {"Remark Title: "}
+                    {"Remark Title "}
                     <span>{r.remark_name}</span>
                   </NameEmail>
                   <Create>
-                    {" Create by: "}
+                    {" Create by "}
                     <span>{SplitName(r.user_name)}</span>
                   </Create>
                 </DivDadosRemark>

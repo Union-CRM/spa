@@ -44,8 +44,10 @@ const Card = (props) => {
   //const [time, setTime] = useState(props.initial.split(" ")[1].split(":"));
   const [timeStart, setTimeStart] = useState();
   const handleEdit = () => {
-    props.OpenModal();
-    setModalPlanner(false);
+    if(props.status === "SCHEDULED"){
+      props.OpenModal();
+      setModalPlanner(false);
+    }
   };
 
   useEffect(() => {
@@ -55,8 +57,10 @@ const Card = (props) => {
 
   return (
     <>
-      <ContainerCards>
-        <ClientContent onClick={() => handleEdit()}>
+
+      <ContainerCards $mode={whatsStatus} onClick={() => handleEdit()}>
+        <ClientContent>
+
           <Setor>
             <Headline type={"Headline5"} name={props.subject} />
           </Setor>
@@ -99,11 +103,11 @@ const Card = (props) => {
           </DivTextCard>
         </ClientContent>
         <UserContent>
-          {props.status === "SCHEDULED" && !props.home && (
-            <DivIcon onClick={() => handleEdit()}>
+          {/*props.status === "SCHEDULED" && !props.home && (
+            <DivIcon >
               <IconSystem icon={"Edit"} width={"11px"} height={"11px"} />
             </DivIcon>
-          )}
+          )*/}
           <DivStatusTime>
             <DivStatus $mode={props.status} />
             {timeStart} - {props.finish}

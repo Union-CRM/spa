@@ -4,7 +4,7 @@ import {
   FaRegClock,
   FaChevronCircleDown,
 } from "react-icons/fa";
-import IconSystem from "../../../assets/IconSystem";
+import { ReactComponent as RowDown } from "../../../assets/svg/RowDown.svg";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { usePlannerContext } from "../../../hook/usePlannerContent";
 import {
@@ -42,6 +42,7 @@ const Planner = (props) => {
   const [userSplit, setUserSplit] = useState();
   const [time, setTime] = useState(["", ""]);
 
+ 
   useEffect(() => {
     if (props.title === "More Details Planner") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
@@ -126,10 +127,20 @@ const Planner = (props) => {
 
           <IconOpenClose $mode={planner.status}>
             <Circle $mode={planner.status}>
-              <FaChevronCircleDown
-                $mode={planner.status}
-                onClick={() => toggleTab(2)}
-              />
+            <RowDown  onClick={() => toggleTab(2)}
+            style={{
+              fill:
+              planner.status === "DONE"
+                  ? "#008585"
+                  : planner.status === "CANCELED"
+                  ? "#771300"
+                  : planner.status === "SCHEDULED"
+                  ? "transparent"
+                  : "",
+            }}/>
+          
+            
+        
             </Circle>
           </IconOpenClose>
         </CardPlanner>

@@ -52,12 +52,15 @@ import FollowUpModal from "../FollowUpModal";
 import PopUpFinished from "../PopUpFinished";
 import Subject from "../../Subject/CreateEditSubjectModal";
 import ModalError from "../ModalError";
+import { useSearchContext } from "../../../hook/useSearchContext";
+import { useSubjectContext } from "../../../hook/useSubjectContent";
 
 export const BigCalender = (props) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [numberOfEvents] = useState(2);
   const [setOpenModal] = useState(false);
   const [dateTarget, setDateTarget] = useState(new Date());
+  const { subject: subjectList } = useSubjectContext();
   const {
     planner,
     modalEdit,
@@ -81,19 +84,40 @@ export const BigCalender = (props) => {
   } = usePlannerContext();
   const [plannerList, setPlannerList] = useState([]);
   const { user, userTarget, setUserTarget } = useUserContext();
+  const { setSearch, search } = useSearchContext();
+  const [searchtState, setSearchtState] = useState(false);
 
   useEffect(() => {
-    if (planner) {
+    setSearch(false);
+  }, []);
+  
+  useEffect(() => {
+    if (search) {
+      setPlannerList(
+        planner.filter(
+          (s) =>
+            (s.name.toLowerCase().includes(search.toLowerCase()) ||
+              s.client.toLowerCase().includes(search.toLowerCase())) &&
+            s.user_id === user.id
+        )
+      );
+    }else {
       if (props.adminList) {
         setPlannerList(planner.filter((p) => p.user_id === userTarget.id));
       } else {
         setPlannerList(planner.filter((p) => p.user_id === user.id));
         setUserTarget(user);
       }
+  }}, [search]);
+
+  useEffect(() => {
+    if (props.adminList) {
+      setPlannerList(planner.filter((s) => s.user_id === userTarget.id));
     } else {
-      setPlannerList([]);
+      setPlannerList(planner.filter((s) => s.user_id === user.id));
+      setUserTarget(user);
     }
-  }, [planner]);
+  }, [planner, userTarget]);
 
   useEffect(() => {
     setModalPlanner(false);
@@ -129,11 +153,13 @@ export const BigCalender = (props) => {
         <DateControls>
           <DivIconSearch>
             <Tippy content="Search">
-              <DivIconS>
+              <DivIconS name="search">
                 <IconSystem icon="Search" width={"20px"} height={"3vh"} />
               </DivIconS>
             </Tippy>
-            <InputSearch placeholder="Search..." />
+            <InputSearch type="search" onFocus={() => setSearchtState("true")}
+            onBlur={() => setSearchtState("false")}
+            onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
           </DivIconSearch>
 
           <DivCurrentDate onClick={() => handleOnClickEvent(new Date())}>

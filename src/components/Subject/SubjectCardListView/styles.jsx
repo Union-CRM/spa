@@ -18,6 +18,7 @@ export const ContainerGlobal = styled.div`
   }
 `;
 
+
 //* Container father and children *//
 export const ContainerHeaderAndCards = styled.div`
   width: 100%;
