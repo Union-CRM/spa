@@ -88,7 +88,7 @@ export const ButtonAdd = styled.button`
 
 export const ContainerCards = styled.div`
   width: 98%;
-  height: 220px;
+  height:210px;
   padding-top: 0%;
   position: relative;
   background-color: ${(props) => (props.$mode ? "transparent" : "transparent")};
@@ -119,8 +119,8 @@ export const ContainerCards = styled.div`
   @media (min-width: 1500px) and (max-width: 2500px) {
     height: 310px;
   }
-  @media (min-height: 150px) and (max-height: 450px) {
-    height: 370px;
+  @media (min-height: 150px) and (max-height: 500px) {
+    height: 300px;
   }
 `;
 

@@ -18,16 +18,14 @@ import { useReleaseContext } from "../../../hook/useReleaseContent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
 
 const ModalSave = (props) => {
+  const { setModalSucess } = useRemarkContext();
   const { setModalSave } = usePlannerContext();
-  const { setModalSaveBusiness, sucessBusiness, setSucessBusiness } =
-    useBusinessContext();
-  const { setModalSaveRelease, sucessRelease, setSucessRelease } =
-    useReleaseContext();
-  const { setModalSaveRemark, sucessRemark, setSucessRemark } =
-    useRemarkContext();
+  const { setModalSaveBusiness, sucessBusiness, setSucessBusiness } =useBusinessContext();
+  const { setModalSaveRelease, sucessRelease, setSucessRelease } =useReleaseContext();
+  const { setModalSaveRemark, sucessRemark, setSucessRemark } = useRemarkContext();
 
-  const editSave =
-    sucessBusiness || sucessRelease || sucessRemark ? "Edit" : "Created";
+  const editSave = sucessBusiness || sucessRelease || sucessRemark ? "Edit" : "Created";
+
 
   const handleSave = () => {
     setSucessBusiness(false);
@@ -35,10 +33,8 @@ const ModalSave = (props) => {
     setModalSave(false);
     setModalSaveBusiness(false);
     setModalSaveRelease(false);
-    setModalSaveRemark(false);
-    setSucessRemark(false);
-  };
-
+    setModalSucess(false);
+  } 
   return (
     <ContainerFather onClick={() => handleSave()}>
       <Container subject={props.subject}>

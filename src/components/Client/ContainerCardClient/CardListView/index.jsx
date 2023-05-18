@@ -5,24 +5,20 @@ import {
   Header,
   DivPhoto,
   DivPhotoI,
+  NameClient,
   DivDadosCard,
   Status,
   DivTagsStatus,
   TagsSpan,
   DivIcons,
-  IconTag,
-  IconEdit,
-  DivToggle,
   InputToggle,
-  LabelToggle,
-  Span,
   DivInfo,
   DivRole,
   DivCustomer,
   DivBusiness,
-  DivRelease,
-  ValueInfo,
+  DivManager,
   TitleInfo,
+  ValueInfo,
   ContainerFather,
   ToggleContainer,
   ToggleButton,
@@ -88,6 +84,24 @@ const ClientCard = (props) => {
           checked={isActive}
         >
           <Header>
+
+          <DivIcons>
+              <ToggleContainer
+                isActive={isActive}
+                $mode={client.status}
+                checked={isActive}
+              >
+                <InputToggle
+                  type="checkbox"
+                  id={client.id}
+                  checked={client.status}
+                  onChange={handleToggle}
+                  onClick={() => handleClick()}
+                />
+                <ToggleButton checked={isActive} />
+              </ToggleContainer>
+            </DivIcons>
+            
             <DivPhoto>
               <DivPhotoI
                isActive={isActive}
@@ -107,7 +121,9 @@ const ClientCard = (props) => {
             </DivPhoto>
 
             <DivDadosCard>
-              <Body type={"Body1"} name={client.client} />
+            <NameClient>
+              
+            <span>{SplitClientName(client.client)}</span>  </NameClient>
 
               <Subtitle type={"TextDescription"} name={client.email} />
 
@@ -136,23 +152,10 @@ const ClientCard = (props) => {
  
             </DivDadosCard>
 
-            <DivIcons>
-              <ToggleContainer
-                isActive={isActive}
-                $mode={client.status}
-                checked={isActive}
-              >
-                <InputToggle
-                  type="checkbox"
-                  id={client.id}
-                  checked={client.status}
-                  onChange={handleToggle}
-                  onClick={() => handleClick()}
-                />
-                <ToggleButton checked={isActive} />
-              </ToggleContainer>
-            </DivIcons>
+     
           </Header>
+
+
           <DivInfo  onClick={handleEdit}>
             <DivRole>
               <TitleInfo>
@@ -175,12 +178,12 @@ const ClientCard = (props) => {
               <ValueInfo>{client.textBusiness} </ValueInfo>
             </DivBusiness>
 
-            <DivRelease>
+            <DivManager>
               <TitleInfo>
                 Manager <span>|</span>{" "}
               </TitleInfo>
               <ValueInfo>{SplitName(client.user_name)}</ValueInfo>
-            </DivRelease>
+            </DivManager>
           </DivInfo>
         </Card>
       </Container>
@@ -191,6 +194,14 @@ const ClientCard = (props) => {
 export default ClientCard;
 
 function SplitName(n) {
+  const user = n ? n : "";
+  var userSplit = user.split(" ");
+  var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
+
+  return user1;
+}
+
+function SplitClientName(n) {
   const user = n ? n : "";
   var userSplit = user.split(" ");
   var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";

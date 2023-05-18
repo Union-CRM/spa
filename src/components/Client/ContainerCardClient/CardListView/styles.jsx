@@ -7,7 +7,7 @@ export const Container = styled.div`
   padding: 0px;
   height: 100%;
   padding-left: 0px;
-  width: 96%;
+  width: 97%;
   z-index: 0 !important;
 `;
 
@@ -25,6 +25,7 @@ export const Card = styled.div`
   cursor: pointer;
   width: auto;
   height: 100%;
+  background-color:#F5F7FA;
   z-index: 0 !important;
   padding-left: 10px;
 `;
@@ -34,7 +35,6 @@ export const ToggleContainer = styled.label`
   display: inline-block;
   height: 17.5px;
   width: 37px;
-  top: 40%;
   border-radius: 30px;
   position: relative;
   cursor: pointer;
@@ -74,7 +74,7 @@ export const Header = styled.div`
   display: grid;
   width: 100%;
   height: 100%;
-  grid-template-rows: 20% auto;
+  grid-template-rows: 27% auto;
   grid-template-columns: 60px auto;
   position: relative;
 `;
@@ -112,6 +112,7 @@ export const DivDadosCard = styled.div`
   text-align: left;
   width: 96%;
   height: fit-content;
+  position:relative;
   display: grid;
   grid-row: 2;
   align-items: center;
@@ -119,13 +120,22 @@ export const DivDadosCard = styled.div`
   padding-left: 3%;
 `;
 
+export const NameClient = styled.div`
+  span {
+  font-size:1.09rem;
+  color:#474747;
+  font-weight:600;
+  }
+`;
+
 // Div Icons //
 export const DivIcons = styled.div`
   display: flex;
   grid-row: 1;
+  position:relative;
   justify-content: end;
+  top:20%;
   padding-right: 5%;
-  grid-gap: 5px;
   height: 100%;
   grid-column: 2;
   align-items: center;
@@ -135,11 +145,11 @@ export const DivIcons = styled.div`
 
 export const DivInfo = styled.div`
   grid-row: 2;
-  margin-top: 3%;
   position: relative;
   display: grid;
   width: 98%;
-  height: auto;
+  padding-top:5%;
+  height:auto;
   z-index: 0;
   grid-template-rows: auto;
 `;
@@ -333,7 +343,7 @@ export const DivBusiness = styled.span`
   }
 `;
 
-export const DivRelease = styled.span`
+export const DivManager = styled.span`
   display: flex;
   height: fit-content;
   width: 90%;
@@ -343,67 +353,23 @@ export const DivRelease = styled.span`
   color: rgba(0, 0, 0, 0.7);
 `;
 
-// * Title and Value Infos* //
 export const TitleInfo = styled.span`
   display: flex;
   font-weight: 900;
   font-style: bold;
-  font-size: 1rem;
+  font-size: 0.88rem;
   span {
+    font-size: 0.86rem;
     color: #007bff;
     font-weight: 700;
-    margin-right: 2px;
-    margin-left: 5px;
+    margin-right: 1.5px;
+    margin-left: 4px;
   }
 `;
 
 export const ValueInfo = styled.span`
   font-weight: 500;
-  font-size: 1rem;
-`;
-
-// VERIFICAR //
-export const Span = styled.span`
-  display: block;
-  width: 12px;
-  height: 12px;
-  background: #ffffff;
-  position: absolute;
-  z-index: 2;
-  right: 50%;
-  top: 0;
-  border: 1px solid grey;
-  border-radius: 50%;
-
-  :after {
-    content: "";
-
-    position: absolute;
-    left: 15%;
-    top: 25%;
-
-    width: 70%;
-    height: 50%;
-
-    background: white;
-    border-radius: inherit;
-  }
-
-  :before {
-    content: "";
-
-    position: absolute;
-    top: 50%;
-    margin-top: -12px;
-    right: -50%;
-
-    text-transform: uppercase;
-    font-weight: bold;
-    font-family: Arial, sans-serif;
-    font-size: 24px;
-
-    color: #fff;
-  }
+  font-size: 0.88rem;
 `;
 
 export const ContainerFather = styled.div`

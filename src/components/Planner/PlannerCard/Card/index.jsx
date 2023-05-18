@@ -43,6 +43,7 @@ const Card = (props) => {
   const { setModalPlanner } = usePlannerContext();
   //const [time, setTime] = useState(props.initial.split(" ")[1].split(":"));
   const [timeStart, setTimeStart] = useState();
+  const whatsStatus = props.status === "SCHEDULED" ? true : false;
   const handleEdit = () => {
     if(props.status === "SCHEDULED"){
       props.OpenModal();

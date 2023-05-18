@@ -21,7 +21,6 @@ const ModalStatusRelease = (props) => {
   // Context and props
   const { modalClose } = props;
   const { updateStatusRelease } = useFetchRelease();
-  
   const { release, idRelease, setModalStatusRelease } = useReleaseContext();
   const releases = release.filter((item) => item.id === idRelease.id)[0];
   const p = releases.status === "ATIVO" ? "Deactivate" : "Active";

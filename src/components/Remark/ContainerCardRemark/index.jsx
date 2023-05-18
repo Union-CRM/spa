@@ -48,7 +48,7 @@ const cardStatus = {
 
 const RemarkList = (props) => {
   const { user, userTarget, setUserTarget } = useUserContext();
-  const { remark, modalSaveRemark } = useRemarkContext();
+  const { remark, modalSucess } = useRemarkContext([]);
   const [remarkList, setRemarkList] = useState([]);
   const { search } = useSearchContext();
   const [modal, setModal] = useState(false);
@@ -209,15 +209,12 @@ const RemarkList = (props) => {
         <CreateEditRemark setModal={setModalEdit} title={"Edit Remark"} />
       )}
 
-      <DivModal $mode={modal} />
+      <DivModal $mode={modal || modalSucess} />
       {modal && (
         <CreateEditRemark setModal={setModal} title={"Create Remark"} />
       )}
-      <DivModal $mode={modalSaveRemark} />
-      {modalSaveRemark && (
-        <>
-          <ModalSave subject={"translate(50%, -250%)"} />
-        </>
+      {modalSucess && (
+        <ModalSave subject={"translate(50%, -300%)"}/>
       )}
     </ContainerGlobal>
   );

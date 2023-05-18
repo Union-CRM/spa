@@ -50,15 +50,28 @@ export const HeaderContainerCards = styled.div`
   background-color: #ffffff;
   border-radius: 8px 8px 0px 0px;
   grid-template-rows: 20% 50% 30%;
-  @media (min-width: 100px) and (max-width: 500px) {
+  @media (min-width: 100px) and (max-width: 600px) {
     display: grid;
     grid-row: 1;
     position: relative;
     grid-column: 1;
     width: 100%;
-    height: 100%;
+    flex-direction:column;
+    height: auto;
   }
 `;
+
+// Tippy //
+
+export const DivInfo = styled.div`
+position:relative;
+top:15%;
+left:1%;
+@media (min-width: 100px) and (max-width: 600px) {
+  display:flex;
+}
+`;
+
 
 // Div Title and Button //
 export const Top = styled.div`
@@ -164,6 +177,9 @@ export const DivTitlePage = styled.div`
   grid-row: 2;
   grid-column: 1;
   width: 100%;
+  @media (min-width: 100px) and (max-width: 600px) {
+    width:auto;
+  }
 `;
 
 // Title Subject List //
@@ -187,8 +203,8 @@ export const HowManyClientList = styled.span`
   font-size: 24px;
   color: #525b75;
   font-weight: 600;
-  @media (min-width: 100px) and (max-width: 500px) {
-    font-size: 1.4rem;
+  @media (min-width: 100px) and (max-width: 600px) {
+    font-size: 1.3rem;  display:block;
   }
 `;
 
@@ -239,6 +255,7 @@ export const HowManyActive = styled.span`
   font-weight: 600;
   @media (min-width: 100px) and (max-width: 500px) {
     display: inline;
+    
   }
 `;
 export const HowManyInactive = styled.span`

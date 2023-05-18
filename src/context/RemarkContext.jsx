@@ -9,6 +9,8 @@ export const RemarkContextProvider = ({ children }) => {
   const [remarkEdit, setRemarkEdit] = useState(remarkEntity);
   const [modalRemark, setModalRemark] = useState(false);
   const [remarkTarget, setRemarkTarget] = useState();
+  const [modalSucess, setModalSucess] = useState(false); 
+//
   const [modalSaveRemark, setModalSaveRemark] = useState(false);
   const [sucessRemark, setSucessRemark] = useState(false);
 
@@ -49,6 +51,9 @@ export const RemarkContextProvider = ({ children }) => {
         activeTab,
         setActiveTab,
         loadRemarkList,
+        modalSucess,
+        setModalSucess,
+    //
         modalSaveRemark,
         setModalSaveRemark,
         sucessRemark,

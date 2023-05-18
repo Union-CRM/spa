@@ -151,6 +151,7 @@ export const AlertaDate = styled.div`
   text-align:center;
   font-size:0.9em;
  }
+
  `;
 
 export const DivColumnOne = styled.div`
