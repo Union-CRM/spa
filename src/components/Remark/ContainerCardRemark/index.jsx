@@ -40,6 +40,7 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { useUserContext } from "../../../hook/useUserContext";
 import { useSearchContext } from "../../../hook/useSearchContext";
+import ModalSave from "../../Planner/ModalSuccessfuly";
 const cardStatus = {
   ACTIVE: "ACTIVE",
   FINISHED: "FINISHED",
@@ -48,7 +49,7 @@ const cardStatus = {
 
 const RemarkList = (props) => {
   const { user, userTarget, setUserTarget } = useUserContext();
-  const { remark } = useRemarkContext([]);
+  const { remark, modalSucess } = useRemarkContext([]);
   const [remarkList, setRemarkList] = useState([]);
   const { search } = useSearchContext();
 
@@ -211,9 +212,12 @@ const RemarkList = (props) => {
         <CreateEditRemark setModal={setModalEdit} title={"Edit Remark"} />
       )}
 
-      <DivModal $mode={modal} />
+      <DivModal $mode={modal || modalSucess} />
       {modal && (
         <CreateEditRemark setModal={setModal} title={"Create Remark"} />
+      )}
+      {modalSucess && (
+        <ModalSave subject={"translate(50%, -300%)"}/>
       )}
     </ContainerGlobal>
   );

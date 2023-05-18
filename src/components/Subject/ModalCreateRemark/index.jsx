@@ -16,6 +16,7 @@ import {
   PositionButtonCancel,
   DivTitle,
   TextArea,
+  AlertaDate,
 } from "./styles";
 import InputTextArea from "../../Geral/Input/InputText";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
@@ -48,12 +49,33 @@ const CreateRemark = (props) => {
   const [text, setText] = useState();
   const [remarkName, setRemarkName] = useState();
 
+  const [invalidDateStart, setInvalidDateStart] = useState(false);
+  const [invalidDateReturn, setInvalidDateReturn] = useState(false);
+
   useEffect(() => {
     setSubjectTarget(subjectList.filter((s) => s.id === id)[0]);
   }, [id]);
 
+
+
   const handleCreateRemark = (e) => {
-    e.preventDefault();
+
+    const horas = new Date();
+    var currentDate = new Date((horas.getMonth() + 1) + "/" + horas.getDate() + "/" + horas.getFullYear())
+    var partesData = date.split("-");
+    var data = new Date(partesData[1] + "/" + partesData[2] + "/" + partesData[0]);
+
+    
+    if (remarkName &&
+      text &&
+      date &&
+      dateReturn) {
+      setFlag(false);
+
+      if (data >= currentDate) {
+        setInvalidDateStart(false);
+        if (dateReturn >= date ) {
+        setInvalidDateReturn(false);
     const newRemark = {
       remark_name: remarkName,
       text: text,
@@ -64,19 +86,23 @@ const CreateRemark = (props) => {
       release_id: subjectTarget.release_id,
       user_id: user.id,
     };
-    if (
-      newRemark.remark_name &&
-      newRemark.text &&
-      newRemark.date &&
-      newRemark.date_return
-    ) {
       createRemark(newRemark).then(loadRemarkList());
       loadRemarkList();
       closeModal();
     } else {
-      setFlag(true);
+      setInvalidDateReturn(true);
     }
-  };
+  }
+ else {
+  setInvalidDateStart(true);
+};
+
+} else {
+  setFlag(true);
+}
+console.log("FOIII!!!")
+};
+
 
   return (
     <ContainerCentral>
@@ -92,6 +118,7 @@ const CreateRemark = (props) => {
               name={date}
               widthInput={"90%"}
               value={date}
+              defaultValue={date}
               required={flag && !date ? true : false}
               onChange={(event) => setDate(event.target.value)}
             />
@@ -132,6 +159,16 @@ const CreateRemark = (props) => {
           </DivText>
         </Form>{" "}
         <DivButton>
+
+        {invalidDateStart &&
+         <AlertaDate><span>The start date must be greater than or equal to today.</span></AlertaDate>}
+
+        {flag &&
+        <AlertaDate><span>
+        Please make sure all fields are filled in to continue.</span></AlertaDate>}
+
+        {invalidDateReturn && <AlertaDate><span>The return date is incorrect, it cannot be less than the start date.</span></AlertaDate>}
+
           <ClickButton>
             <ButtonDefault
               type="userSave"
@@ -144,6 +181,8 @@ const CreateRemark = (props) => {
           <PositionButtonCancel onClick={closeModal}>
             <ButtonDefault type="userCancel" name={"Cancel"} />
           </PositionButtonCancel>
+
+          
         </DivButton>
       </Container>
     </ContainerCentral>

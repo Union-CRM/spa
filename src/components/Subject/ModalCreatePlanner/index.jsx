@@ -57,6 +57,7 @@ const ModalCreatePlanner = (props) => {
 
   const { setModalPlanner } = usePlannerContext();
 
+<<<<<<< Updated upstream
   const HandleCreatePlanner = (e) => {
     e.preventDefault();
     const newPlanner = {
@@ -73,6 +74,61 @@ const ModalCreatePlanner = (props) => {
       createPlanner(newPlanner);
       setModalDetails(true);
       setModalPlanner(false);
+=======
+
+
+  const HandleCreatePlanner = (e) => {
+
+    const horas = new Date();
+    var currentDate = new Date((horas.getMonth() + 1) + "/" + horas.getDate() + "/" + horas.getFullYear())
+    var partesData = date.split("-");
+    var data = new Date(partesData[1] + "/" + partesData[2] + "/" + partesData[0]);
+
+    var aux = "";
+
+    if (horas.getMinutes() < 10) {
+      aux = horas.getHours() + ":0" + horas.getMinutes();
+    }
+    else {
+      aux = horas.getHours() + ":" + horas.getMinutes()
+    }
+
+    if (horas.getHours() < 10) {
+            aux = "0"+aux;
+          }
+
+
+    if (date && timeFinish && timeStart && guest) {
+        setFlag(false)
+
+    
+      if (data >= currentDate) {
+        setInvalidDateStart(false);
+        if (timeFinish > timeStart && timeStart >= aux) {
+          setInvalidHour(false);
+          const newPlanner = {
+            name: subjectTarget.subject_title,
+            date: date + " " + timeStart,
+            duration: timeFinish,
+            subject: subjectTarget.id,
+            client: subjectTarget.client_id,
+            release: subjectTarget.release_id,
+            user: userTarget.id,
+            guest: guest.map((g) => ({ client_id: g.value })),
+          };
+          createPlanner(newPlanner);
+          setModalDetails(true);
+          setModalPlanner(false);
+        } else {
+          setTimeout(true);
+          console.log(setTimeout)
+          //setInvalidHour(true);
+        }
+      }
+     else {
+      setInvalidDateStart(true);
+    }
+>>>>>>> Stashed changes
     } else {
       setFlag(true);
     }
@@ -162,6 +218,21 @@ const ModalCreatePlanner = (props) => {
               <PositionButtonCancel onClick={closeModal}>
                 <ButtonDefault type="userCancel" name={"Cancel"} />
               </PositionButtonCancel>
+<<<<<<< Updated upstream
+=======
+
+
+              {invalidHour &&
+                <AlertaDate><span>The start time must be equal to or greater than the current time.</span></AlertaDate>}
+
+                <div id="danger">
+              {flag &&
+              <AlertaDate><span>
+              Please make sure all fields are filled in to continue.</span></AlertaDate>}</div>
+
+              {invalidDateStart &&
+              <AlertaDate><span>The end date must be equal to or greater than the current date.</span></AlertaDate>}
+>>>>>>> Stashed changes
             </DivButton>
           </ContainerChildren>
         </Container>

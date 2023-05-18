@@ -137,6 +137,26 @@ export const Label = styled.label`
 `;
 
 // Divs
+<<<<<<< Updated upstream
+=======
+
+export const AlertaDate = styled.div`
+ background-color: rgba(187, 30, 0, 1);
+ border-radius:5px;
+ padding:2px;
+ height:fit-content;
+ align-items:center;
+ text-align:center;
+ justify-content:center;
+ span {
+  color:#fff;
+  text-align:center;
+  font-size:0.9em;
+ }
+
+ `;
+
+>>>>>>> Stashed changes
 export const DivColumnOne = styled.div`
   grid-column: 1;
   display: grid;

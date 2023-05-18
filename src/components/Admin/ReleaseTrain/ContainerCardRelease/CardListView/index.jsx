@@ -33,8 +33,9 @@ const ReleaseCard = (props) => {
   // Context and props
   const { openModal, openModalPopUp } = props;
   const { setModalEditRelease, setModalCreateRelease,setIdRelease,
-    setModalStatusRelease} = useReleaseContext();
-  const { release: releaseList, setReleaseTarget} = useReleaseContext();
+  setModalStatusRelease} = useReleaseContext();
+  const { release: releaseList, setReleaseTarget, idRelease} = useReleaseContext();
+  const {updateStatusRelease, updateRelease} = useFetchRelease();
   const release = releaseList.filter((item) => item.id === props.id)[0];
 
   // UseState
@@ -45,11 +46,8 @@ const ReleaseCard = (props) => {
     })
   );
 
-  // Function that is receiving the release id by props to change the status in toggle
-  const handleClick = () => {
-    setModalStatusRelease(true);
-    props.setId(release.id);
-    setIdRelease(release.id);
+const handleClick = () => {
+  updateStatusRelease(release.id);
   };
 
   const [isActive, setIsActive] = useState(release.status === "ATIVO");
@@ -58,7 +56,9 @@ const ReleaseCard = (props) => {
   const handleToggle = () => {
     const newStatus = isActive ? "INATIVO" : "ATIVO";
     setIsActive(!isActive);
+    updateStatusRelease(release.id, { ...release, status: newStatus });
   };
+
 
   // Function to open edit release modal
   function handleModal(id){
@@ -96,7 +96,7 @@ const ReleaseCard = (props) => {
                 )}
               </TagsStatus>
             </HeaderTags>
-            <DivIcons name="Toggle">
+            <DivIcons>
               <ToggleContainer
                 isActive={isActive}
                 $mode={release.status}

@@ -46,7 +46,7 @@ export const CardPlanner = styled.div`
         `;
       case "SCHEDULED":
         return css`
-          border: none;
+          border-bottom:8px solid  #ffd012;
         `;
 
       case "CANCELED":

@@ -46,7 +46,7 @@ const ModalClientEdit = (props) => {
   const [clientId, setClientId] = useState();
 
   const { setModalInfo, setId, modalEditClient, setModalEditClient,
-  toggleState, setToggleState, } = useClientContext();
+  toggleState, setToggleState, idClient} = useClientContext();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [customer, setCustomer] = useState({});
@@ -69,12 +69,13 @@ const ModalClientEdit = (props) => {
     business_name: "",
   });
   const [tags, setTags] = useState([]);
-  const { insertClient, updateClient } = useFetchClient();
+  const { insertClient, updateClient, updateStatusClient } = useFetchClient();
   const [flag, setFlag] = useState(false);
   const { setModal, id, title } = props;
   const {loadUsers} = useUserContext();
   const [releaseOptions, setReleaseOptions] = useState([])
   const { loadCustomerOptions } = useFetchCustomer();
+
   
   useEffect(() =>{
     setCustomerList(loadCustomerOptions())
@@ -105,9 +106,6 @@ const ModalClientEdit = (props) => {
   const handleSubmit = () => {
     if (props.title === "Edit Client") {
       editClient();
-      
-    } else {
-      //createClient();
     }
   };
 
@@ -166,7 +164,7 @@ const ModalClientEdit = (props) => {
         }))
       );
     }
-  }, []);
+  }, [id]);
 
   const editClient = () => {
     const newClient = {
@@ -184,8 +182,12 @@ const ModalClientEdit = (props) => {
       
     };
     
-    
-    if (name && email && role.id && customer.id && users && releaseObj.id) {
+    if (name && email && status && role.id && customer.id && users && releaseObj.id) {
+      if (status === "ATIVO") {
+        updateStatusClient(clientId, newClient);
+      } else if (status === "INATIVO") {
+        updateStatusClient(clientId, newClient);
+      }
       updateClient(clientId, newClient);
       setModalEditClient(false);
       setToggleState(0);
@@ -332,9 +334,10 @@ const ModalClientEdit = (props) => {
                 tags={tags}
                 label={"Tags"}
                 placeholder={flag && !tags ? "Required field" : ""}
-                sizeSingle={"40%"}
                 required
-                sizeMenu={"40%"}
+                sizeMenu={"37%"}
+                width={"90%"}
+                widths={"100%"}
                 options={tagList ? tagList : []}
               />
             </DivTag>
@@ -342,14 +345,15 @@ const ModalClientEdit = (props) => {
             <DivStatus>
               {true && props.title === "Edit Client" && (
                 <SingleSelect
-                  set={(status) => setStatus(status)}
+                options={status_mok}
+                onChange={(event) => setStatus(event.target.value)}
+                set={(status) => setStatus(status)}
+                value={status}
                   label={"Status"}
-                  value={status}
                   placeholder={flag && !status ? "Required field" : ""}
-                  sizeSingle={"40%"}
+                  sizeSingle={"100%"}
+                  sizeMenu={"100%"}
                   required
-                  sizeMenu={"40%"}
-                  options={status_mok}
                 />
               )}
             </DivStatus>
@@ -376,6 +380,6 @@ const ModalClientEdit = (props) => {
 export default ModalClientEdit;
 
 const status_mok = [
-  { id: 1, value: "Active", label: "Active" },
-  { id: 2, value: "Inactive", label: "Inactive" },
+  { id: 1, value: "ATIVO", label: "ATIVO" },
+  { id: 2, value: "INATIVO", label: "INATIVO" },
 ];

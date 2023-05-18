@@ -63,12 +63,10 @@ export const CardRemark = styled.div`
   width:97%;
   z-index: 9999999;
   height: 100%;
-  margin-top: 3%;
   position: relative;
   align-items: center;
   padding-right: 2%;
   border-radius: 6px;
-  background-color: #f5f7fa;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
 `;
 

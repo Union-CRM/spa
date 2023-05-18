@@ -19,6 +19,7 @@ import {
   HowManyActive,
   Inactive,
   HowManyInactive,
+  DivInfo,
 } from "./styles";
 
 import { useState, useEffect } from "react";
@@ -28,6 +29,11 @@ import ModalStatusRelease from "../ModalStatusRelease";
 import ModalSave from "../../../Planner/ModalSuccessfuly";
 import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
 import { useReleaseContext } from "../../../../hook/useReleaseContent";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import { ReactComponent as Info } from "../../../../assets/svg/Info.svg";
+import { useSearchContext } from "../../../../hook/useSearchContext";
+import { useUserContext } from "../../../../hook/useUserContext";
 
 const abaStatus = {
   ACTIVE: "ATIVO",
@@ -38,7 +44,7 @@ const ReleaseTrain = (props) => {
 
   // Context and props
   const { modalCreateRelease, setModalCreateRelease, modalEditRelease, setModalEditRelease,
-    setIdRelease, idRelease, modalSaveRelease, release, modalStatusRelease } = useReleaseContext();
+    setIdRelease, idRelease, modalSaveRelease, release, modalStatusRelease, releaseTarget } = useReleaseContext();
 
   // UseState  
   const [id, setId] = useState(null);
@@ -47,6 +53,8 @@ const ReleaseTrain = (props) => {
   const [releaseList, setReleaseList] = useState();
   const [modalPopUp, setModalPopUp] = useState(false);
   const [active, setActive] = useState(abaStatus.ACTIVE);
+  const { search } = useSearchContext();
+  const { user, userTarget, setUserTarget } = useUserContext();
 
   // Function that is getting the card id to open the modal with the card info
   const EditRelease = (id) => {
@@ -57,8 +65,8 @@ const ReleaseTrain = (props) => {
 
   // Set Release in releaseList
   useEffect(() => {
-    setReleaseList(release);
-  }, [release]);
+    setReleaseList(releaseList);
+  }, [releaseList]);
 
 
   // Managing click according to active or inactive table
@@ -77,6 +85,27 @@ const ReleaseTrain = (props) => {
     setModalEditRelease(false);
   }
 
+  useEffect(() => {
+    setReleaseList(release);
+  }, [release]);
+
+  useEffect(() => {
+    
+    if (release){
+   
+      if (search) {
+        setReleaseList(
+          release?
+          release.filter((c) =>
+            c.name.toLowerCase().includes(search.toLowerCase())
+          ): release
+        );
+      } else {
+        setReleaseList(release);
+      }
+    }
+  }, [search,release]);
+
   return (
     <ContainerGlobal>
       <ContainerHeaderAndCards>
@@ -87,12 +116,22 @@ const ReleaseTrain = (props) => {
               <HowManyClientList>
                 ({releaseList ? releaseList.length : 0})
               </HowManyClientList>{" "}
+              <Tippy content="It is a subdivision of the company, when liked to a category.">
+              <DivInfo>
+                <Info
+                  width="25px"
+                  style={{
+                    fill: "#E41165",
+                  }}
+                />
+              </DivInfo>
+            </Tippy>
             </DivTitlePage>
 
             <DivButton onClick={() => handleModal()}>
               <ButtonAdd
                 mode="#E41165"
-                width="169px"
+                width="200px"
                 height="38px"
                 name="Create Release Train"
                 color="white"
