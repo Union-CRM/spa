@@ -33,13 +33,13 @@ import CreateEditRemark from "../CreateEditRemark";
 //import ModalDiscardChanges from "../ModalDiscardChanges";
 
 import { useRemarkContext } from "../../../hook/useRemarkContent";
-
 import ModalSave from "../../Planner/ModalSuccessfuly";
 import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { useUserContext } from "../../../hook/useUserContext";
 import { useSearchContext } from "../../../hook/useSearchContext";
+import ModalSheet from "../ModalSheet";
 const cardStatus = {
   ACTIVE: "ACTIVE",
   FINISHED: "FINISHED",
@@ -48,7 +48,7 @@ const cardStatus = {
 
 const RemarkList = (props) => {
   const { user, userTarget } = useUserContext();
-  const { remark, modalSucess } = useRemarkContext([]);
+  const { remark, modalSucess, modalSheet, setModalSheet } = useRemarkContext([]);
   const [remarkList, setRemarkList] = useState([]);
   const { search } = useSearchContext();
   const [modal, setModal] = useState(false);
@@ -203,7 +203,13 @@ const RemarkList = (props) => {
       {modal && (
         <CreateEditRemark setModal={setModal} title={"Create Remark"} />
       )}
-      {modalSucess && <ModalSave subject={"translate(50%, -300%)"} />}
+
+      {modalSucess && (
+        <ModalSave subject={"translate(50%, -300%)"}/>
+      )}
+      
+        <ModalSheet />
+     
     </ContainerGlobal>
   );
 };
