@@ -44,6 +44,7 @@ const ModalStatusRelease = (props) => {
 
   return (
     <ContainerFather>
+      {console.log(release)}
       <Overlay>
         <Container>
           <Content>

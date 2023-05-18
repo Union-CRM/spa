@@ -74,59 +74,15 @@ export const CardPlanner = styled.div`
 
 //* COMPONENT OPEN/CLOSE DETAILS *//
 export const Circle = styled.div`
-  ${(props) => {
-    switch (props.$mode) {
-      case "DONE":
-        return css`
-          background-color: #fff;
-        `;
-      case "CANCELED":
-        return css`
-          background-color: #fff;
-        `;
-      case "SCHEDULED":
-        return css`
-          background-color: transparent;
-        `;
-
-      default:
-        return css`
-          background-color: transparent;
-        `;
-    }
-  }}
   width: 16px;
   height: 16px;
   cursor: pointer;
   position: relative;
   border-radius: 100%;
   bottom: 3px;
-  background-color: #fff;
 `;
 
 export const IconOpenClose = styled.div`
-  ${(props) => {
-    switch (props.$mode) {
-      case "DONE":
-        return css`
-          color: #008585;
-        `;
-      case "IN PROGRESS":
-        return css`
-          color: #00953b;
-        `;
-
-      case "CANCELED":
-        return css`
-          color: #771300;
-        `;
-
-      default:
-        return css`
-          background-color: transparent;
-        `;
-    }
-  }}
   width:100%;
   height: 100%;
   border: none;
@@ -137,26 +93,6 @@ export const IconOpenClose = styled.div`
   display: flex;
   transform: rotateX(180deg);
   svg {
-    ${(props) => {
-      switch (props.$modes) {
-        case "DONE":
-          return css`
-            color: #008585;
-          `;
-        case "SCHEDULED":
-          return css`
-            color: transparent;
-          `;
-        case "CANCELED":
-          return css`
-            color: #771300;
-          `;
-        default:
-          return css`
-            background-color: transparent;
-          `;
-      }
-    }}
     cursor: pointer;
     height: 100%;
     width: 100%;
@@ -181,7 +117,7 @@ export const DivDate = styled.div`
         `;
       case "SCHEDULED":
         return css`
-          color: transparent;
+        color: #000;
         `;
       case "CANCELED":
         return css`
@@ -209,7 +145,7 @@ export const DivDate = styled.div`
             `;
           case "SCHEDULED":
             return css`
-              color: transparent;
+            color: #000;
             `;
           case "CANCELED":
             return css`
@@ -245,7 +181,7 @@ export const DivTime = styled.div`
         `;
       case "SCHEDULED":
         return css`
-          color: transparent;
+        color: #000;
         `;
       case "CANCELED":
         return css`
@@ -269,7 +205,7 @@ export const DivTime = styled.div`
           `;
         case "SCHEDULED":
           return css`
-            color: transparent;
+            color: #000;
           `;
         case "CANCELED":
           return css`

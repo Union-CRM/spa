@@ -1,4 +1,4 @@
-import { useState, useEffect, React} from "react";
+import { useState, useEffect, React } from "react";
 import {
   ContainerGlobal,
   ContainerHeaderAndCards,
@@ -27,18 +27,27 @@ import ModalStatusBusiness from "../ModalStatusBusiness";
 import ModalSave from "../../../Planner/ModalSuccessfuly";
 import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
 import { useBusinessContext } from "../../../../hook/useBusinessContent";
-
+import { useSearchContext } from "../../../../hook/useSearchContext";
 const abaStatus = {
   ACTIVE: "ATIVO",
   INACTIVE: "INATIVO",
 };
 
 const ContainerCardsBusiness = (props) => {
-  
   // Context
-  const { business} = useBusinessContext();
-  const { modalCreateBusiness, setModalCreateBusiness, modalEditBusiness, setModalEditBusiness,setIdBusiness,idBusiness,modalSaveBusiness, modalStatus, setModalStatus} = useBusinessContext();
-
+  const { business } = useBusinessContext();
+  const {
+    modalCreateBusiness,
+    setModalCreateBusiness,
+    modalEditBusiness,
+    setModalEditBusiness,
+    setIdBusiness,
+    idBusiness,
+    modalSaveBusiness,
+    modalStatus,
+    setModalStatus,
+  } = useBusinessContext();
+  const { search } = useSearchContext();
   // UseState
   const [id, setId] = useState(null);
   const [modal, setModal] = useState(false);
@@ -55,9 +64,27 @@ const ContainerCardsBusiness = (props) => {
   };
 
   // Set business in businessList
+  /*useEffect(() => {
+    setBusinessList(business);
+  }, [business]);*/
+
   useEffect(() => {
-      setBusinessList(business);   
-  }, [business]);
+    if (business) {
+      if (search) {
+        setBusinessList(
+          business
+            ? business.filter(
+                (c) =>
+                  c.name.toLowerCase().includes(search.toLowerCase()) ||
+                  c.code.toLowerCase().includes(search.toLowerCase())
+              )
+            : business
+        );
+      } else {
+        setBusinessList(business);
+      }
+    }
+  }, [search, business]);
 
   // Select Tab
   const handleClick = (selectedTab) => {
@@ -72,7 +99,7 @@ const ContainerCardsBusiness = (props) => {
   const handleModal = () => {
     setModalCreateBusiness(true);
     setModalEditBusiness(false);
-  }
+  };
 
   return (
     <ContainerGlobal>
@@ -119,7 +146,6 @@ const ContainerCardsBusiness = (props) => {
               onClick={() => handleClick(abaStatus.INACTIVE)}
               style={getTabColor(abaStatus.INACTIVE)}
             >
-              
               <Inactive>
                 Inactive (
                 <HowManyInactive>
@@ -137,7 +163,8 @@ const ContainerCardsBusiness = (props) => {
           <LineDivisor />
           <BoardStyle>
             {businessList &&
-              businessList.filter((item) => item.status === active)
+              businessList
+                .filter((item) => item.status === active)
                 .map((item) => (
                   <ClientCard
                     setId={(i) => setId(i)}
@@ -151,21 +178,22 @@ const ContainerCardsBusiness = (props) => {
         </CardsContainer>
       </ContainerHeaderAndCards>
 
-      <DivModal $mode={modalCreateBusiness || modalEditBusiness || modalSaveBusiness || modalStatus} />            
-      
-      {modalCreateBusiness && (
-        <CreateEditBusiness title={"Create Business"}/>
-      )}
-      {modalEditBusiness && (
-        <CreateEditBusiness title={"Edit Business"}/>
-      )}
-      {modalSaveBusiness && (
-        <ModalSave subject={"translate(60%, -400%)"}/>
-      )}
+      <DivModal
+        $mode={
+          modalCreateBusiness ||
+          modalEditBusiness ||
+          modalSaveBusiness ||
+          modalStatus
+        }
+      />
+
+      {modalCreateBusiness && <CreateEditBusiness title={"Create Business"} />}
+      {modalEditBusiness && <CreateEditBusiness title={"Edit Business"} />}
+      {modalSaveBusiness && <ModalSave subject={"translate(60%, -400%)"} />}
       {modalStatus && (
         <ModalStatusBusiness id={id} modalClose={() => setModalStatus(false)} />
-        )}
+      )}
     </ContainerGlobal>
-  )
+  );
 };
 export default ContainerCardsBusiness;

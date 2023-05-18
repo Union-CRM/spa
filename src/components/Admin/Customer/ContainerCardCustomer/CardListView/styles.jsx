@@ -161,6 +161,7 @@ export const DivContentTags = styled.div`
   top: -20px;
   align-items: center;
   background-color: ${(props) => (props.colorTag ? props.colorTag : "pink")};
+  color: ${(props) => (props.isActive ? "#000" : "#fff")};
   border-radius: 8px;
   margin-right: 10px;
   margin-bottom: 2px;

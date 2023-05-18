@@ -137,8 +137,6 @@ export const Label = styled.label`
 `;
 
 // Divs
-<<<<<<< Updated upstream
-=======
 
 export const AlertaDate = styled.div`
  background-color: rgba(187, 30, 0, 1);
@@ -156,7 +154,6 @@ export const AlertaDate = styled.div`
 
  `;
 
->>>>>>> Stashed changes
 export const DivColumnOne = styled.div`
   grid-column: 1;
   display: grid;
@@ -185,6 +182,7 @@ export const DivStart = styled.div`
 export const DivFinish = styled.div`
   width: 93%;
   align-self: flex-end;
+  align-items:end;
   flex: 0;
   display: flex;
   height: auto;
@@ -203,10 +201,16 @@ export const DivButton = styled.div`
   grid-row: 4;
 `;
 
-export const PositionButtonCancel = styled.div``;
+export const PositionButtonCancel = styled.div` display:flex;
+justify-content: center;
+position: relative;
+align-items: center;`;
 
 export const ClickButton = styled.div`
-  display: block;
+  display:flex;
+  justify-content: center;
+  position: relative;
+  align-items: center;
 `;
 
 export const InputTime = styled.input`

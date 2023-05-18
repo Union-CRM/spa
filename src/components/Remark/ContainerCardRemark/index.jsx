@@ -34,7 +34,7 @@ import CreateEditRemark from "../CreateEditRemark";
 
 import { useRemarkContext } from "../../../hook/useRemarkContent";
 
-//import ModalSave from "../../Planner/ModalSuccessfuly";
+import ModalSave from "../../Planner/ModalSuccessfuly";
 import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
@@ -52,11 +52,9 @@ const RemarkList = (props) => {
   const { remark, modalSucess } = useRemarkContext([]);
   const [remarkList, setRemarkList] = useState([]);
   const { search } = useSearchContext();
-
   const [modal, setModal] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const [active, setActive] = useState(cardStatus.ACTIVE);
-
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
   };

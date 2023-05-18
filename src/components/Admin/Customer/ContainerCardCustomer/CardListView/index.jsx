@@ -110,6 +110,7 @@ const CustomerCard = (props) => {
                 isActive={isActive}
                 $mode={customer.status}
                 checked={isActive}
+                required
               >
                 <InputToggle
                   type="checkbox"
@@ -139,6 +140,7 @@ const CustomerCard = (props) => {
                   if (index < 3) {
                     return (
                       <DivContentTags
+                        isActive={isActive}
                         key={index}
                         colorTag={isActive ? colors[index] : "#7a7a7a"}
                       >
@@ -149,6 +151,7 @@ const CustomerCard = (props) => {
                     return (
                       <Tippy key={index} content={moreTags}>
                         <DivContentTags
+                          isActive={isActive}
                           key={index}
                           colorTag={isActive ? colors[index] : "#7a7a7a"}
                         >

@@ -54,6 +54,7 @@ export const Icon = styled.div`
   align-items: center;
   justify-content: ${(props) => (props.$mode ? "center" : "left")};
 `;
+
 export const User = styled.div`
   width: ${(props) => (props.$mode ? "80px" : "186px")};
   display: flex;
@@ -127,8 +128,8 @@ export const Li = styled.li`
   height: 59px;
   display: flex;
   text-align: center;
-  vertical-align: middle;
-  background-color: #1e2222;
+  vertical-align: middle; 
+  background-color: ${props => (props.selected ? "#E41165" : "#1e2222")};
   @media (max-width: 1367px) {
     height: 45px;
   }
@@ -142,6 +143,7 @@ export const Li = styled.li`
     }};
   }
 `;
+
 export const Slink = styled(Link)`
   padding: 0;
   margin: 0;

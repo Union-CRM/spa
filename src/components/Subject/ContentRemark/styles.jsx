@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 // * CONTAINER REMARK *//
 export const ContainerRemark = styled.div`
   position: relative;
+  background:transparent;
 `;
 
 export const DivNoRemark = styled.span`
@@ -90,7 +91,7 @@ export const ContainerCards = styled.div`
   height:210px;
   padding-top: 0%;
   position: relative;
-  background-color: ${(props) => (props.$mode ? "#fff" : "transparent")};
+  background-color: ${(props) => (props.$mode ? "transparent" : "transparent")};
   padding-left: 1.5%;
   grid-row: ${(props) => (props.$mode ? "2" : "1")};
   overflow-y: scroll;
@@ -238,26 +239,6 @@ export const DivGlobalCard = styled.div`
 `;
 
 export const DivDate = styled.div`
-  ${(props) => {
-    switch (props.$mode) {
-      case "FINISHED":
-        return css`
-          color: #008585;
-        `;
-      case "IN PROGRESS":
-        return css`
-          color: #00953b;
-        `;
-      case "CANCELED":
-        return css`
-          color: #771300;
-        `;
-      default:
-        return css`
-          color: #6e6b6b;
-        `;
-    }
-  }}
   height:50px;
   width: 100%;
   padding-top: 0%;
@@ -303,26 +284,6 @@ export const DivDate = styled.div`
 `;
 
 export const DivDateReturn = styled.div`
-  ${(props) => {
-    switch (props.$mode) {
-      case "FINISHED":
-        return css`
-          color: #008585;
-        `;
-      case "IN PROGRESS":
-        return css`
-          color: #00953b;
-        `;
-      case "CANCELED":
-        return css`
-          color: #771300;
-        `;
-      default:
-        return css`
-          color: #6e6b6b;
-        `;
-    }
-  }}
   height:50px;
   width: 100%;
   padding-top: 0%;
@@ -333,26 +294,6 @@ export const DivDateReturn = styled.div`
     height: 13px;
   }
   span {
-    ${(props) => {
-      switch (props.$mode) {
-        case "FINISHED":
-          return css`
-            color: #008585;
-          `;
-        case "IN PROGRESS":
-          return css`
-            color: #00953b;
-          `;
-        case "CANCELED":
-          return css`
-            color: #771300;
-          `;
-        default:
-          return css`
-            color: #6e6b6b;
-          `;
-      }
-    }}
     font-size:0.82rem;
   }
   p {

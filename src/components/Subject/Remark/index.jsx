@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaRegCalendarAlt, FaChevronCircleDown } from "react-icons/fa";
 import IconSystem from "../../../assets/IconSystem";
+import { ReactComponent as RowDown } from "../../../assets/svg/RowDown.svg";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
 
@@ -26,12 +27,14 @@ import {
 
 const Remark = (props) => {
   const { subject: subjectsList } = useSubjectContext();
-  const { remarkEdit } = useRemarkContext();
+  const { remarkEdit, setRemarkEdit } = useRemarkContext();
   const { id } = useSubjectContext();
   const [status, setStatus] = useState();
-  const { toggleState, setToggleState } = useSubjectContext();
+  const {toggleState, setToggleState } = useSubjectContext();
   const [activeTab, setActiveTab] = useState(0);
   const [activeContent, setActiveContent] = useState(0);
+  const [titleRemark, setTitleRemark] = useState();
+  const [noteRemark, setNoteRemark] = useState();
   const [date, setDate] = useState();
   const [dateReturn, setDateReturn] = useState();
 
@@ -39,13 +42,35 @@ const Remark = (props) => {
     if (props.title === "More Details Remark") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
       setStatus(subject.status);
+      
     }
   }, [id]);
+
+  // REMARK //
+
+  {/*
+  const { remark: remarkList } = useRemarkContext();
+  const remark = remarkList.filter((item) => item.id === props.id)[0];
+
+ useEffect(() => {
+  console.log(remarkList)
+  if (props.title === "More Details Remark") {
+      const remark = remarkList.filter((item) => item.id === props.id)[0];
+      setTitleRemark(remark.remark_name)
+      setNoteRemark(remark.text);
+    }
+  }, [id]);
+  
+*/}
+
+  ////////////
 
   useEffect(() => {
     if (remarkEdit.date) {
       setDate(remarkEdit.date.split("T")[0]);
       setDateReturn(remarkEdit.date_return.split("T")[0]);
+      setTitleRemark(remarkEdit.remark_name)
+      setNoteRemark(remarkEdit.text);
     }
   }, [remarkEdit]);
 
@@ -82,11 +107,11 @@ const Remark = (props) => {
               </NameEmail>
             </DivDadosRemark>
 
-            {status !== "FINISHED" && status !== "CANCELED" && (
+         
               <IconTag onClick={() => toggleTab(5)}>
                 <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
               </IconTag>
-            )}
+   
           </DivGlobalCard>
 
           <ContainerComplete>
@@ -100,9 +125,19 @@ const Remark = (props) => {
             </NoteText>
           </ContainerComplete>
 
-          <IconOpenClose $mode={status}>
+          <IconOpenClose $mode={status} >
             <Circle>
-              <FaChevronCircleDown onClick={() => handleClick()} />
+            <RowDown onClick={() => toggleTab(1)}
+            style={{
+              fill:
+                status === "IN PROGRESS"
+                  ? "#00953B"
+                  : status === "FINISHED"
+                  ? "#008585"
+                  : status === "CANCELED"
+                  ? "#771300"
+                  : "",
+            }}/>
             </Circle>
           </IconOpenClose>
         </CardRemark>
