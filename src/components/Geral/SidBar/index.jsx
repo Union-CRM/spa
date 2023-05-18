@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import IconSystem from "../../../assets/IconSystem";
 import { ReactComponent as Groups } from "../../../assets/svg/Groups.svg";
 import Body from "../../../assets/FontSystem/Body";
@@ -7,6 +7,8 @@ import { ReactComponent as Client } from "../../../assets/svg/Client.svg";
 import { ReactComponent as Subject } from "../../../assets/svg/Subjects.svg";
 import { ReactComponent as Planner } from "../../../assets/svg/Planner.svg";
 import { ReactComponent as Remark } from "../../../assets/svg/Remark.svg";
+import { useCustomerContext } from "../../../hook/useCustomerContext";
+import { useLocation } from 'react-router-dom';
 import {
   Container,
   OpenClose,
@@ -49,14 +51,47 @@ function handleLogin(event) {
 }
 
 const SidBar = (props) => {
+  //const { colorPage } = useCustomerContext();
   const [sidBarState, setSidBarState] = useState(true);
-  const { user } = useUserContext();
+  const { user,colorPageUser } = useUserContext();
   const isAdm = user.level > 1 ? true : false;
   const colorAdm = user.level > 1 ? "#007BFF" : "#FFFFFF";
+  const [selectedIcon, setSelectedIcon] = useState('');
+  const location = useLocation();
+
+  function handleIconClick(iconName) {
+    setSelectedIcon(iconName);
+  }
+
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === '/home') {
+      setSelectedIcon('home');
+    } else if (path === '/usersAdm') {
+      setSelectedIcon('users');
+    } else if (path === '/groups') {
+      setSelectedIcon('groups');
+    } else if (path === '/business') {
+    setSelectedIcon('business');
+    } else if (path === '/releasetrain') {
+    setSelectedIcon('releasetrain');
+    }else if (path === '/customer') {
+      setSelectedIcon('customer');
+    }else if (path === '/client') {
+      setSelectedIcon('client');
+    }else if (path === '/subject') {
+      setSelectedIcon('subject');
+    }else if (path === '/remark') {
+      setSelectedIcon('remark');
+    }else if (path === '/planner') {
+      setSelectedIcon('planner');
+    }
+  }, [location]);
 
   return (
     <>
       <Container $column={props.column} $row={props.row} $mode={sidBarState}>
+        {console.log(colorPageUser)}
         <OpenClose
           $mode={sidBarState}
           onClick={() => setSidBarState(!sidBarState)}
@@ -83,8 +118,8 @@ const SidBar = (props) => {
           <Id $mode={sidBarState}>{user.tcs_id}</Id>
         </User>
         <Ul $mode={sidBarState}>
-          <Slink to="/home">
-            <Li level={user.level}>
+          <Slink onClick={() => handleIconClick('home')} to="/home">
+            <Li selected={selectedIcon === 'home'} level={user.level}>
               <Icon $mode={sidBarState}>
                 <IconSystem icon="Home" />
                 <Span $mode={sidBarState}>Home</Span>
@@ -93,16 +128,18 @@ const SidBar = (props) => {
           </Slink>
           {isAdm && (
             <>
-              <Slink to="/usersAdm">
-                <Li level={user.level}>
+
+              <Slink onClick={() => handleIconClick('users')} to="/usersAdm">
+                <Li selected={selectedIcon === 'users'} level={user.level}>
+
                   <Icon $mode={sidBarState}>
                     <IconSystem icon="User" />
                     <Span $mode={sidBarState}>User</Span>
                   </Icon>
                 </Li>
               </Slink>
-              <Slink to="/groups">
-                <Li level={user.level}>
+              <Slink onClick={() => handleIconClick('groups')} to="/groups">
+                <Li selected={selectedIcon === 'groups'} level={user.level}>
                   <Icon $mode={sidBarState}>
                     <Groups
                       style={{
@@ -115,49 +152,49 @@ const SidBar = (props) => {
                   </Icon>
                 </Li>
               </Slink>
-              <Slink to="/business">
-                <Li level={user.level}>
+              <Slink onClick={() => handleIconClick('business')} to="/business">
+                <Li selected={selectedIcon === 'business'} level={user.level}>
                   <Icon $mode={sidBarState}>
                     <IconSystem icon="Business" />
                     <Span $mode={sidBarState}>Business</Span>
                   </Icon>
                 </Li>
               </Slink>
-              <Slink to="/releasetrain">
-                <Li level={user.level}>
+              <Slink onClick={() => handleIconClick('releasetrain')} to="/releasetrain">
+                <Li selected={selectedIcon === 'releasetrain'} level={user.level}>
                   <Icon $mode={sidBarState}>
                     <IconSystem icon="Release" />
                     <Span $mode={sidBarState}>Release train</Span>
                   </Icon>
                 </Li>
               </Slink>
-              <Slink to="/customer">
-                <Li level={user.level}>
+              <Slink onClick={() => handleIconClick('customer')} to="/customer">
+                <Li selected={selectedIcon === 'customer'} level={user.level}>
                   <Icon $mode={sidBarState}>
                     <IconSystem icon="Costumer" />
-                    <Span $mode={sidBarState}>Custumer</Span>
+                    <Span $mode={sidBarState}>Customer</Span>
                   </Icon>
                 </Li>
               </Slink>
             </>
           )}
-          <Slink to="/client">
-            <Li level={user.level}>
+          <Slink onClick={() => handleIconClick('client')} to="/client">
+            <Li selected={selectedIcon === 'client'} level={user.level}>
               <Icon $mode={sidBarState}>
                 <Client fill={colorAdm} />
                 <Span $mode={sidBarState}>Client</Span>
               </Icon>
             </Li>
           </Slink>
-          <Slink to="/subject">
-            <Li level={user.level}>
+          <Slink onClick={() => handleIconClick('subject')} to="/subject">
+            <Li selected={selectedIcon === 'subject'} level={user.level}>
               <Icon $mode={sidBarState}>
                 <Subject fill={colorAdm} />
                 <Span $mode={sidBarState}>Subjects</Span>
               </Icon>
             </Li>
-            <Slink to="/remark">
-              <Li level={user.level}>
+            <Slink onClick={() => handleIconClick('remark')} to="/remark">
+              <Li selected={selectedIcon === 'remark'} level={user.level}>
                 <Icon $mode={sidBarState}>
                   <Remark fill={colorAdm} />
                   <Span $mode={sidBarState}>Remark</Span>
@@ -165,8 +202,8 @@ const SidBar = (props) => {
               </Li>
             </Slink>
           </Slink>
-          <Slink to="/planner">
-            <Li level={user.level}>
+          <Slink onClick={() => handleIconClick('planner')} to="/planner">
+            <Li selected={selectedIcon === 'planner'} level={user.level}>
               <Icon $mode={sidBarState}>
                 <Planner fill={colorAdm} />
                 <Span $mode={sidBarState}>Planner</Span>

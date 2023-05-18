@@ -16,6 +16,7 @@ import { useUserContext } from "../../../hook/useUserContext";
 import { useFetchPlanner } from "../../../hook/useFetchPlanner";
 import { usePlannerContext } from "../../../hook/usePlannerContext";
 import { useClientContext } from "../../../hook/useClientContent";
+import { TagComponent } from "../../Geral/TagComponent";
 
 const options = [
   { value: 1, label: "In one month" },
@@ -104,17 +105,18 @@ const FollowUpModal = (props) => {
           value={plannerEdit.release_title}
           disabled
         ></InputSubject>
-        <PositionTag>
-          <GuestComponent
+                <PositionTag>
+          <TagComponent
+            indicator={"guest"}
             options={clientOption}
             tags={guests}
             set={(g) => setGuests(g)}
             label={"Guests"}
             sizeHeight={"3.5vh"}
-            width={"9vw"}
+            width={"9.2vw"}
             widths={"15vw"}
-            heights={"12vh"}
-            marginLeft={"40%"}
+            heights={"15vh"}
+            marginLeft={"-5%"}
           />
         </PositionTag>
         <PositionSingle>
