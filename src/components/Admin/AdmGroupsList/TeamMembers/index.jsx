@@ -7,99 +7,117 @@ import {
  DivPhotoI,
  NameUser,
  IDUser,
+ DivView,
+ ViewProfile,
  GlobalCard,
 } from "./styles";
 import Body from "../../../../assets/FontSystem/Body";
 import {useGroupListContext} from "../../../../hook/useGroupListContext";
 import { useUserContext } from "../../../../hook/useUserContext";
+import { ReactComponent as Eye } from "../../../../assets/svg/Eye.svg";
 import { useFetchUsersNotin } from "../../../../hook/useFetchUsersNotin";
 import { Link } from "react-router-dom";
 
 const TeamMembers = (props) => {
   const { setModal, id } = props;
-  const { group: groupList, loadData } = useGroupListContext();
-  const group = groupList.filter((item) => item.id === props.id)[0];
+  const { group: groupList, loadData, setGroupPage } = useGroupListContext();
   const [statusGroup, setStatusGroup ] = useState();
   const [users, setUsers] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const { usersGlobal, loadUsers} = useUserContext();
+  const group = groupList.filter((item) => item.id === props.id)[0];
   
   useEffect(() => {
+    if (groupList) {
+      setGroups(groupList.filter((s) => s.id === props.id)[0]);
+    }
+  }, [groupList]);
+
+  console.log(groups)
+
+  useEffect(() => {
     if (props.title === "Team Members") {
-      const group = groupList.filter((item) => item.id === props.id)[0];
+      const group = groupList.filter((s) => s.id === props.id)[0];
       setStatusGroup(group.status);
     }
   }, [id]);
 
   // Users //
-  {/*
-  const [userOptions, setUserOptions] = useState([]);
-  const{loadUserSub,loadUserNotin} = useFetchUsersNotin() 
-  const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin();
-  const usersList = userSub.concat(usersNotin)
-
-  useEffect(() => {
-    if (usersList) {
-      setUserOptions(
-        usersList
-          .map((c) => ({ id: c.id, value: c.id, label: c.name }))
-      );
-    }
-  }, [usersNotin, userSub]);
-
-  useEffect(()=>{
-    loadUserNotin()
-    loadUserSub()
-  }, [])*/}
-
 
   // USER PROFILE //
   const { userList, setViewProfile, setUserTarget, setHome } = useUserContext();
+
+  console.log(props.id)
   const user = userList.filter((u) => u.id === props.id)[0];
 
-  const handleClickViewProfile = () => {
+  const handleClickViewProfile = (s) => {
+    
+    const userSelected = usersGlobal.filter((u) => u.id === s.user_id)[0];
+    
+    const aux = {
+      id: userSelected.id,
+      name: userSelected.name,
+      email: userSelected.email,
+      tcs_id: userSelected.tcs_id,
+      level: userSelected.level
+    }
+    
+    setUserTarget(aux);
     setViewProfile(true);
-    setUserTarget(user);
     setHome(true);
   };
 
-
   return (
-
     <ContainerDetails>
- {users.map((s) => (
-  <CardMembers>
+ {groups.usuarios && (
+ groups.usuarios.map((s) => (
 
+  <CardMembers $mode={group.status}>
     <GlobalCard>
       <DivDadosCard>
-      <Link
-      to="/usersAdm"
-      onClick={() => handleClickViewProfile()}
-      style={{ textDecoration: "none" }}
-      >
+
       <DivPhoto>
         <DivPhotoI>
-        <Body type={"Body2"} name={Split(user.name)} />
+        <Body type={"Body2"} name={Split(s.user_name)} />
         </DivPhotoI>
-        </DivPhoto>
-
+  
         <NameUser>
           <span>
-          Gilberto Anderson
+          {SplitUser(s.user_name)}
         </span>
-
         <IDUser>
           <span>
-          2534659
+         {s.user_IdTCS}
         </span>
         </IDUser>
-
         </NameUser>
+
+        
+        </DivPhoto>
+    
+
+        <Link
+      to="/usersAdm"
+      onClick={() => handleClickViewProfile(s)}
+      style={{ textDecoration: "none" }}
+      >
+        <DivView>
+        <ViewProfile $mode={group.status}>
+         <span>View Profile</span>
+        <Eye
+        style={{
+        fill:"#FFF",
+        width:"17px"}}
+                      />
+        </ViewProfile>
+        </DivView>
         </Link>
         </DivDadosCard>
 
         </GlobalCard>
         
         </CardMembers >
-        ))}
+        )))}
     </ContainerDetails>
 
   );
@@ -117,4 +135,12 @@ function Split(n) {
     "";
 
   return name2.toUpperCase();
+}
+
+function SplitUser(n) {
+  const user = n ? n : "";
+  var userSplit = user.split(" ");
+  var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
+
+  return user1;
 }

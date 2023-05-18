@@ -49,11 +49,10 @@ export const H1 = styled.h1`
 // Children
 //ok
 export const Container = styled.div`
-  grid-row: 1;
   grid-column: 2;
   width: 80%;
   min-width: 300px;
-  height: 81vh;
+  height: 100%;
   background: #fff;
   display: grid;
   border-left: 16.56px solid #e41165;

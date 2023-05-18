@@ -111,7 +111,7 @@ export const Ul = styled.ul`
   width: ${(props) => (props.$mode ? "80px" : "100%")};
   grid-row: 4/5;
   list-style-type: none;
-  margin-top: 35%;
+  margin-top: 40%;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -129,7 +129,15 @@ export const Li = styled.li`
   display: flex;
   text-align: center;
   vertical-align: middle; 
-  background-color: ${props => (props.selected ? "#E41165" : "#1e2222")};
+  background-color: ${({ selected, level }) => {
+    if (selected && level > 1) {
+      return "#E41165";
+    } else if (selected && level === 1) {
+      return "#007bff";
+    } else {
+      return "#1e2222";
+    }
+  }};
   @media (max-width: 1367px) {
     height: 45px;
   }

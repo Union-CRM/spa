@@ -3,6 +3,7 @@ import {
   ContainerGlobal,
   ContainerHeaderAndCards,
   HeaderContainerCards,
+  DivInfo,
   CardsContainer,
   DivModal,
   LineDivisor,
@@ -28,6 +29,10 @@ import ModalSave from "../../../Planner/ModalSuccessfuly";
 import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
 import { useBusinessContext } from "../../../../hook/useBusinessContent";
 import { useSearchContext } from "../../../../hook/useSearchContext";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import { ReactComponent as Info } from "../../../../assets/svg/Info.svg";
+
 const abaStatus = {
   ACTIVE: "ATIVO",
   INACTIVE: "INATIVO",
@@ -111,6 +116,16 @@ const ContainerCardsBusiness = (props) => {
               <HowManyClientList>
                 ({businessList ? businessList.length : 0})
               </HowManyClientList>{" "}
+              <Tippy content="A business opportunity or potential sale.">
+              <DivInfo>
+                <Info
+                  width="25px"
+                  style={{
+                    fill: "#E41165",
+                  }}
+                />
+              </DivInfo>
+            </Tippy>
             </DivTitlePage>
 
             <DivButton onClick={() => handleModal()}>

@@ -121,7 +121,7 @@ const SidBar = (props) => {
           <Slink onClick={() => handleIconClick('home')} to="/home">
             <Li selected={selectedIcon === 'home'} level={user.level}>
               <Icon $mode={sidBarState}>
-                <IconSystem icon="Home" />
+                <IconSystem icon="Home" width={"23px"} height={"23px"}/>
                 <Span $mode={sidBarState}>Home</Span>
               </Icon>
             </Li>
@@ -133,7 +133,7 @@ const SidBar = (props) => {
                 <Li selected={selectedIcon === 'users'} level={user.level}>
 
                   <Icon $mode={sidBarState}>
-                    <IconSystem icon="User" />
+                    <IconSystem icon="User" width={"24px"} height={"24px"}/>
                     <Span $mode={sidBarState}>User</Span>
                   </Icon>
                 </Li>
@@ -144,8 +144,8 @@ const SidBar = (props) => {
                     <Groups
                       style={{
                         fill: "#FFF",
-                        width: "26",
-                        height: "30",
+                        width: "24",
+                        height: "24",
                       }}
                     />
                     <Span $mode={sidBarState}>Groups</Span>
@@ -155,7 +155,7 @@ const SidBar = (props) => {
               <Slink onClick={() => handleIconClick('business')} to="/business">
                 <Li selected={selectedIcon === 'business'} level={user.level}>
                   <Icon $mode={sidBarState}>
-                    <IconSystem icon="Business" />
+                    <IconSystem icon="Business" width={"24px"} height={"24px"}/>
                     <Span $mode={sidBarState}>Business</Span>
                   </Icon>
                 </Li>
@@ -163,7 +163,7 @@ const SidBar = (props) => {
               <Slink onClick={() => handleIconClick('releasetrain')} to="/releasetrain">
                 <Li selected={selectedIcon === 'releasetrain'} level={user.level}>
                   <Icon $mode={sidBarState}>
-                    <IconSystem icon="Release" />
+                    <IconSystem icon="Release" width={"24px"} height={"24px"}/>
                     <Span $mode={sidBarState}>Release train</Span>
                   </Icon>
                 </Li>
@@ -171,7 +171,7 @@ const SidBar = (props) => {
               <Slink onClick={() => handleIconClick('customer')} to="/customer">
                 <Li selected={selectedIcon === 'customer'} level={user.level}>
                   <Icon $mode={sidBarState}>
-                    <IconSystem icon="Costumer" />
+                    <IconSystem icon="Costumer" width={"24px"} height={"24px"}/>
                     <Span $mode={sidBarState}>Customer</Span>
                   </Icon>
                 </Li>
@@ -181,7 +181,7 @@ const SidBar = (props) => {
           <Slink onClick={() => handleIconClick('client')} to="/client">
             <Li selected={selectedIcon === 'client'} level={user.level}>
               <Icon $mode={sidBarState}>
-                <Client fill={colorAdm} />
+                <Client fill={colorAdm} width={"24px"} height={"24px"}/>
                 <Span $mode={sidBarState}>Client</Span>
               </Icon>
             </Li>
@@ -189,14 +189,14 @@ const SidBar = (props) => {
           <Slink onClick={() => handleIconClick('subject')} to="/subject">
             <Li selected={selectedIcon === 'subject'} level={user.level}>
               <Icon $mode={sidBarState}>
-                <Subject fill={colorAdm} />
+                <Subject fill={colorAdm} width={"24px"} height={"24px"}/>
                 <Span $mode={sidBarState}>Subjects</Span>
               </Icon>
             </Li>
             <Slink onClick={() => handleIconClick('remark')} to="/remark">
               <Li selected={selectedIcon === 'remark'} level={user.level}>
                 <Icon $mode={sidBarState}>
-                  <Remark fill={colorAdm} />
+                  <Remark fill={colorAdm} width={"24px"} height={"24px"}/>
                   <Span $mode={sidBarState}>Remark</Span>
                 </Icon>
               </Li>
@@ -205,7 +205,7 @@ const SidBar = (props) => {
           <Slink onClick={() => handleIconClick('planner')} to="/planner">
             <Li selected={selectedIcon === 'planner'} level={user.level}>
               <Icon $mode={sidBarState}>
-                <Planner fill={colorAdm} />
+                <Planner fill={colorAdm} width={"24px"} height={"24px"}/>
                 <Span $mode={sidBarState}>Planner</Span>
               </Icon>
             </Li>
@@ -213,7 +213,7 @@ const SidBar = (props) => {
         </Ul>
         <Logout $mode={sidBarState} onClick={handleLogin}>
           <Slink to="/">
-            <IconSystem icon="Logout" />
+            <IconSystem icon="Logout" width={"24px"} height={"24px"}/>
             <Span $mode={sidBarState}>Logout</Span>
           </Slink>
         </Logout>

@@ -7,6 +7,7 @@ export const useFetchAdmGroupList = () => {
   const { loadData } = useGroupListContext();
   
   const insertGroup = async (group) => {
+    console.log(group)
     
     axios
       .post(

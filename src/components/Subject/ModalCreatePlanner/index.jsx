@@ -49,6 +49,7 @@ const ModalCreatePlanner = (props) => {
   const [flag, setFlag] = useState(false);
   const [invalidHour, setInvalidHour] = useState(false);
   const [invalidDateStart, setInvalidDateStart] = useState(false);
+  const [invalidDateFinish, setInvalidDateFinish] = useState(false);
 
   const closeModal = () => {
     setModalDetails(true);
@@ -81,15 +82,15 @@ const ModalCreatePlanner = (props) => {
     if (horas.getHours() < 10) {
             aux = "0"+aux;
           }
-
-
+      // verificando
     if (date && timeFinish && timeStart && guest) {
         setFlag(false)
 
-    
-      if (data >= currentDate) {
+      // data posterior
+      if (data > currentDate ) {
         setInvalidDateStart(false);
-        if (timeFinish > timeStart && timeStart >= aux) {
+        console.log("Data posterior")
+        if (timeFinish > timeStart ) {
           setInvalidHour(false);
           const newPlanner = {
             name: subjectTarget.subject_title,
@@ -105,14 +106,41 @@ const ModalCreatePlanner = (props) => {
           setModalDetails(true);
           setModalPlanner(false);
         } else {
-          setTimeout(true);
-          console.log(setTimeout)
-          //setInvalidHour(true);
+          setInvalidDateFinish(true);
         }
+      }// data anterior
+      else if (data < currentDate) {
+        setInvalidDateStart(true);
+        console.log("Data anterior")
       }
-     else {
-      setInvalidDateStart(true);
-    } else {
+     else { //data hoje
+      setInvalidDateStart(false);
+      console.log("Data de hoje")
+
+        if (timeFinish > timeStart ) {
+          if(timeStart > aux ){
+            setInvalidHour(false);
+            const newPlanner = {
+              name: subjectTarget.subject_title,
+              date: date + " " + timeStart,
+              duration: timeFinish,
+              subject: subjectTarget.id,
+              client: subjectTarget.client_id,
+              release: subjectTarget.release_id,
+              user: userTarget.id,
+              guest: guest.map((g) => ({ client_id: g.value })),
+            };
+            createPlanner(newPlanner);
+            setModalDetails(true);
+            setModalPlanner(false);
+          }else{
+            setInvalidHour(true);
+          }
+        }else {
+          setInvalidDateFinish(true);
+        }
+    }
+  } else {
       setFlag(true);
     }
     console.log("FOIII!!!")
@@ -222,6 +250,9 @@ const ModalCreatePlanner = (props) => {
 
               {invalidDateStart &&
               <AlertaDate><span>The end date must be equal to or greater than the current date.</span></AlertaDate>}
+
+               {invalidDateFinish &&
+              <AlertaDate><span>The end time must be greater than the start time.</span></AlertaDate>}
 
             </DivButton>
           </ContainerChildren>

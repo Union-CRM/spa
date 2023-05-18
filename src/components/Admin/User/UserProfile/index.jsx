@@ -72,6 +72,8 @@ const UserProfile = () => {
   const { subject } = useSubjectContext();
   const { planner } = usePlannerContext();
   // numberOfPlanner [0]-canceled | [1]- Scheduled | [2] Done
+
+  console.log(userTarget.id)
   const numberOfPlanner = [
     planner
       ? planner.filter(
@@ -201,7 +203,7 @@ const UserProfile = () => {
           numberOfPlanner={numberOfPlanner}
           value={0}
         />
-        <Group />
+      <Group />
       </Graph1>
       {modalEdit && (
         <>
