@@ -10,7 +10,6 @@ export const RemarkContextProvider = ({ children }) => {
   const [modalRemark, setModalRemark] = useState(false);
   const [remarkTarget, setRemarkTarget] = useState();
   const [modalSucess, setModalSucess] = useState(false); 
-//
   const [modalSaveRemark, setModalSaveRemark] = useState(false);
   const [sucessRemark, setSucessRemark] = useState(false);
 
@@ -53,7 +52,6 @@ export const RemarkContextProvider = ({ children }) => {
         loadRemarkList,
         modalSucess,
         setModalSucess,
-    //
         modalSaveRemark,
         setModalSaveRemark,
         sucessRemark,
