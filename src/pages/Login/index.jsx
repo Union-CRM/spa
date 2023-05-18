@@ -121,25 +121,16 @@ function LoginPage() {
               <Input type="password" placeholder= '●●●●●●●●' value={password} onChange={(e) => setPassword(e.target.value)} />
            </Label>  
 
-           < ForgotPasswordADM onClick={()=>setLoginProblems(true)}>Forgot password?</ForgotPasswordADM>
+           < ForgotPasswordADM>Forgot password?</ForgotPasswordADM>
            
-           {loginProblems && (       
-            <DivModal onClick={handleBackgroundClick} $mode={loginProblems}>    
-            <LoginProblems typeUser={"user"}/>
-            </DivModal>
-           )}
+           
            
 
            <LoginBt>
                     <ButtonDefault name={"Login"} type={"adminSave"} sizeFont={"1.5em"}></ButtonDefault>
             </LoginBt>
         </Form>
-        {/* <DivModal onClick={handleBackgroundClick} $mode={isActive}>
-        {
-          blocked && (
-          <AcessBlocked/>
-       )}  
-      </DivModal> */}
+        
     </Content>
  </Container> 
                       

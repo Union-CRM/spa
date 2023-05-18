@@ -40,7 +40,6 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { useUserContext } from "../../../hook/useUserContext";
 import { useSearchContext } from "../../../hook/useSearchContext";
-import ModalSave from "../../Planner/ModalSuccessfuly";
 const cardStatus = {
   ACTIVE: "ACTIVE",
   FINISHED: "FINISHED",
