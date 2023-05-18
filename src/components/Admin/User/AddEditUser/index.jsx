@@ -22,31 +22,11 @@ import { useFetchUser } from "../../../../hook/useFetchUser";
 
 const AddEditUser = (props) => {
   const { user, setModalPassword, userTarget } = useUserContext();
-  const [newUser, setNewUser] = useState(entityUser);
   const { createUser, updateUserNoPSW } = useFetchUser();
-
-  const levelOptions = levels
-    .map((l) => {
-      if (l < user.level) {
-        return { value: l, label: l };
-      }
-    })
-    .filter((l) => l);
-
+  const [newUser, setNewUser] = useState(entityUser);
   const [flag, setFlag] = useState(false);
   const { setModal } = props;
 
-  const closeModal = () => {
-    setModal(false);
-  };
-
-  const handleSubmit = () => {
-    if (props.title === "Edit User") {
-      handleEditUser();
-    } else {
-      handleCreateUser();
-    }
-  };
   useEffect(() => {
     if (props.title === "Edit User") {
       setNewUser(userTarget);
@@ -95,6 +75,26 @@ const AddEditUser = (props) => {
       ...newUser,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const levelOptions = levels
+    .map((l) => {
+      if (l < user.level) {
+        return { value: l, label: l };
+      }
+    })
+    .filter((l) => l);
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
+  const handleSubmit = () => {
+    if (props.title === "Edit User") {
+      handleEditUser();
+    } else {
+      handleCreateUser();
+    }
   };
 
   return (

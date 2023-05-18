@@ -22,16 +22,6 @@ import { Link } from "react-router-dom";
 import { useGroupListContext } from "../../../../../hook/useGroupListContext";
 import { useSubjectContext } from "../../../../../hook/useSubjectContent";
 import { usePlannerContext } from "../../../../../hook/usePlannerContext";
-function Split(n) {
-  const name = n ? n : "";
-  var nameSplit = name.split(" ");
-  var name2 =
-    nameSplit[0].split("")[0] +
-    " " +
-    nameSplit[nameSplit.length - 1].split("")[0] +
-    "";
-  return name2.toUpperCase();
-}
 
 const Group = (props) => {
   const {
@@ -147,3 +137,14 @@ const Group = (props) => {
   );
 };
 export default Group;
+
+function Split(n) {
+  const name = n ? n : "";
+  var nameSplit = name.split(" ");
+  var name2 =
+    nameSplit[0].split("")[0] +
+    " " +
+    nameSplit[nameSplit.length - 1].split("")[0] +
+    "";
+  return name2.toUpperCase();
+}

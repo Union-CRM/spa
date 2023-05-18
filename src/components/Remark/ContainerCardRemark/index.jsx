@@ -47,27 +47,13 @@ const cardStatus = {
 };
 
 const RemarkList = (props) => {
-  const { user, userTarget, setUserTarget } = useUserContext();
+  const { user, userTarget } = useUserContext();
   const { remark, modalSucess, modalSheet, setModalSheet } = useRemarkContext([]);
   const [remarkList, setRemarkList] = useState([]);
   const { search } = useSearchContext();
   const [modal, setModal] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const [active, setActive] = useState(cardStatus.ACTIVE);
-  const handleClick = (selectedTab) => {
-    setActive(selectedTab);
-  };
-
-  useEffect(() => {
-    if (props.adminList) {
-      setRemarkList(
-        remark ? remark.filter((r) => r.user_id === userTarget.id) : []
-      );
-    } else {
-      setRemarkList(remark ? remark.filter((r) => r.user_id === user.id) : []);
-      setUserTarget(user);
-    }
-  }, [remark, userTarget]);
 
   useEffect(() => {
     if (remark)
@@ -87,7 +73,11 @@ const RemarkList = (props) => {
           setRemarkList(remark.filter((r) => r.user_id === user.id));
         }
       }
-  }, [search]);
+  }, [search, remark, userTarget, props.adminList, user.id]);
+
+  const handleClick = (selectedTab) => {
+    setActive(selectedTab);
+  };
 
   const getTabColor = (status) => {
     return { borderBottom: active === status ? "2px solid #007BFF" : "" };
@@ -213,6 +203,7 @@ const RemarkList = (props) => {
       {modal && (
         <CreateEditRemark setModal={setModal} title={"Create Remark"} />
       )}
+
       {modalSucess && (
         <ModalSave subject={"translate(50%, -300%)"}/>
       )}

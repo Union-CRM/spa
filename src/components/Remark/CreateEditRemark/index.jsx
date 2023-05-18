@@ -29,18 +29,13 @@ import { useFetchRemark } from "../../../hook/useFetchRemark";
 const CreateEditRemark = (props) => {
   const [newRemark, setNewRemark] = useState(remarkEntity);
   const { createRemark, updateRemark } = useFetchRemark();
-  const { remarkTarget, setModalSucess, setModalSaveRemark,setSucessRemark } = useRemarkContext();
+  const { remarkTarget, setModalSucess, setModalSaveRemark, setSucessRemark } =
+    useRemarkContext();
   const [flag, setFlag] = useState(false);
   const { userTarget } = useUserContext();
-  const [selectedSubject, setSelectedSubject] = useState(null);
   const { subject: subjectList } = useSubjectContext();
   const [subjectOption, setSubjectOption] = useState([]);
-  const [status, setStatus] = useState();
   const [prevStatus, setPrevStatus] = useState(false);
-  // CLOSE E SAVE ////////////
-  const closeModal = () => {
-    props.setModal(false);
-  };
 
   useEffect(() => {
     if (props.title === "Edit Remark") {
@@ -56,8 +51,6 @@ const CreateEditRemark = (props) => {
         client_email: subjectObj ? subjectObj.client_email : "",
       });
       setPrevStatus(remarkTarget.status_description);
-      setSelectedSubject(remarkTarget.subject_name);
-      setStatus(remarkTarget.status);
     }
   }, []);
 
@@ -78,6 +71,17 @@ const CreateEditRemark = (props) => {
       );
     }
   }, [subjectList, userTarget]);
+
+  //return true if date 1 is before at date 2
+  const dateIsValid = (date1, date2) => {
+    const d1 = new Date(date1.split("T")[0].split(" ")[0]);
+    const d2 = new Date(date2.split("T")[0].split(" "));
+    return d1 <= d2;
+  };
+
+  const closeModal = () => {
+    props.setModal(false);
+  };
 
   const handleSubmit = () => {
     if (props.title === "Create Remark") {
@@ -105,11 +109,6 @@ const CreateEditRemark = (props) => {
   };
   // status 19: Finished,  20: canceled, 21: Active
   const handleEditRemark = () => {
-    console.log({
-      ...newRemark,
-      date: newRemark.date.split("T")[0] + "T12:00:00.000Z",
-      date_return: newRemark.date_return.split("T")[0] + "T12:00:00.000Z",
-    });
     if (
       newRemark.remark_name &&
       newRemark.subject_id &&
@@ -193,12 +192,6 @@ const CreateEditRemark = (props) => {
         });
       }
     }
-  };
-  //return true if date 1 is before at date 2
-  const dateIsValid = (date1, date2) => {
-    const d1 = new Date(date1.split("T")[0].split(" ")[0]);
-    const d2 = new Date(date2.split("T")[0].split(" "));
-    return d1 <= d2;
   };
 
   return (

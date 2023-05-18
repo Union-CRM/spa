@@ -11,7 +11,6 @@ import {
   ContainerFather,
   ToggleContainer,
   ToggleButton,
-  PositionEdit,
   DivContentTags,
   DivTag,
   DivImg,
@@ -22,7 +21,6 @@ import {
 import Body from "../../../../../assets/FontSystem/Body";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
-import IconSystem from "../../../../../assets/IconSystem";
 import { useFetchCustomer } from "../../../../../hook/useFetchCustomer";
 import { useCustomerContext } from "../../../../../hook/useCustomerContext";
 
@@ -31,6 +29,7 @@ const CustomerCard = (props) => {
   const { customer: customerList, setCustomerTarget } = useCustomerContext();
   const customer = customerList.filter((item) => item.id === props.id)[0];
   const { updateStatusCustumer } = useFetchCustomer();
+  const [isActive, setIsActive] = useState(customer.status === "ATIVO");
   const [tagIcon, setTagIcon] = useState(false);
   const [moreTags] = useState(
     customer.tags
@@ -67,8 +66,6 @@ const CustomerCard = (props) => {
   const handleClick = () => {
     updateStatusCustumer(customer.id);
   };
-
-  const [isActive, setIsActive] = useState(customer.status === "ATIVO");
 
   const handleToggle = () => {
     setIsActive(!isActive);
