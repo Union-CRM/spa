@@ -90,34 +90,32 @@ export const BigCalender = (props) => {
   useEffect(() => {
     setSearch(false);
   }, []);
-  
+
   useEffect(() => {
     if (search) {
       setPlannerList(
-        planner.filter(
-          (s) =>
-            (s.name.toLowerCase().includes(search.toLowerCase()) ||
-              s.client.toLowerCase().includes(search.toLowerCase())) &&
-            s.user_id === user.id
-        )
+        planner
+          ? planner.filter(
+              (s) =>
+                (s.name.toLowerCase().includes(search.toLowerCase()) ||
+                  s.client.toLowerCase().includes(search.toLowerCase())) &&
+                s.user_id === user.id
+            )
+          : []
       );
-    }else {
+    } else {
       if (props.adminList) {
-        setPlannerList(planner.filter((p) => p.user_id === userTarget.id));
+        setPlannerList(
+          planner ? planner.filter((p) => p.user_id === userTarget.id) : []
+        );
       } else {
-        setPlannerList(planner.filter((p) => p.user_id === user.id));
+        setPlannerList(
+          planner ? planner.filter((p) => p.user_id === user.id) : []
+        );
         setUserTarget(user);
       }
-  }}, [search]);
-
-  useEffect(() => {
-    if (props.adminList) {
-      setPlannerList(planner.filter((s) => s.user_id === userTarget.id));
-    } else {
-      setPlannerList(planner.filter((s) => s.user_id === user.id));
-      setUserTarget(user);
     }
-  }, [planner, userTarget]);
+  }, [search, planner, userTarget]);
 
   useEffect(() => {
     setModalPlanner(false);
@@ -157,9 +155,13 @@ export const BigCalender = (props) => {
                 <IconSystem icon="Search" width={"20px"} height={"3vh"} />
               </DivIconS>
             </Tippy>
-            <InputSearch type="search" onFocus={() => setSearchtState("true")}
-            onBlur={() => setSearchtState("false")}
-            onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
+            <InputSearch
+              type="search"
+              onFocus={() => setSearchtState("true")}
+              onBlur={() => setSearchtState("false")}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search..."
+            />
           </DivIconSearch>
 
           <DivCurrentDate onClick={() => handleOnClickEvent(new Date())}>
