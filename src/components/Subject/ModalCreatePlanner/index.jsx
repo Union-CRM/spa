@@ -112,7 +112,7 @@ const ModalCreatePlanner = (props) => {
       }
      else {
       setInvalidDateStart(true);
-    } else {
+    }} else {
       setFlag(true);
     }
     console.log("FOIII!!!")
