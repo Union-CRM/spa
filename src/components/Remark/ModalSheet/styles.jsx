@@ -89,7 +89,6 @@ export const Container = styled.div`
   background: #FFFFFF 80%;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
-  z-index: 1000;
   grid-template-rows: 10% 75% 10%;
   @media (min-width: 100px) and (max-width: 502px) {
     height: 81vh;
@@ -111,7 +110,6 @@ export const ContainerGray = styled.div`
   background: #F5F7FA 80%;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
-  z-index: 1000;
   grid-template-rows: 10% 75% 10%;
   @media (min-width: 100px) and (max-width: 502px) {
     height: 81vh;
@@ -125,7 +123,6 @@ export const ContainerChildren = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  z-index: 1000;
   grid-row: 2;
 `;
 
