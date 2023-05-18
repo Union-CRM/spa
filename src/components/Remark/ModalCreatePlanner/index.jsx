@@ -30,7 +30,7 @@ import { usePlannerContext } from "../../../hook/usePlannerContent";
 import { useUserContext } from "../../../hook/useUserContext";
 import { useFetchPlanner } from "../../../hook/useFetchPlanner";
 import { useClientContext } from "../../../hook/useClientContent";
-import LoginInvalid from '../../../components/Geral/LoginModals/LoginInvalid';
+import LoginInvalid from '../../Geral/LoginModals/LoginInvalid';
 
 const ModalCreatePlanner = (props) => {
   const { subject, id } = useSubjectContext();
@@ -49,7 +49,6 @@ const ModalCreatePlanner = (props) => {
   const [flag, setFlag] = useState(false);
   const [invalidHour, setInvalidHour] = useState(false);
   const [invalidDateStart, setInvalidDateStart] = useState(false);
-  const [invalidDateFinish, setInvalidDateFinish] = useState(false);
 
   const closeModal = () => {
     setModalDetails(true);
@@ -82,15 +81,15 @@ const ModalCreatePlanner = (props) => {
     if (horas.getHours() < 10) {
             aux = "0"+aux;
           }
-      // verificando
+
+
     if (date && timeFinish && timeStart && guest) {
         setFlag(false)
 
-      // data posterior
-      if (data > currentDate ) {
+    
+      if (data >= currentDate) {
         setInvalidDateStart(false);
-        console.log("Data posterior")
-        if (timeFinish > timeStart ) {
+        if (timeFinish > timeStart && timeStart >= aux) {
           setInvalidHour(false);
           const newPlanner = {
             name: subjectTarget.subject_title,
@@ -106,41 +105,11 @@ const ModalCreatePlanner = (props) => {
           setModalDetails(true);
           setModalPlanner(false);
         } else {
-          setInvalidDateFinish(true);
+          setTimeout(true);
+          console.log(setTimeout)
+          //setInvalidHour(true);
         }
-      }// data anterior
-      else if (data < currentDate) {
-        setInvalidDateStart(true);
-        console.log("Data anterior")
       }
-     else { //data hoje
-      setInvalidDateStart(false);
-      console.log("Data de hoje")
-
-        if (timeFinish > timeStart ) {
-          if(timeStart > aux ){
-            setInvalidHour(false);
-            const newPlanner = {
-              name: subjectTarget.subject_title,
-              date: date + " " + timeStart,
-              duration: timeFinish,
-              subject: subjectTarget.id,
-              client: subjectTarget.client_id,
-              release: subjectTarget.release_id,
-              user: userTarget.id,
-              guest: guest.map((g) => ({ client_id: g.value })),
-            };
-            createPlanner(newPlanner);
-            setModalDetails(true);
-            setModalPlanner(false);
-          }else{
-            setInvalidHour(true);
-          }
-        }else {
-          setInvalidDateFinish(true);
-        }
-    }
-  }
      else {
       setInvalidDateStart(true);
     }} else {
@@ -253,9 +222,6 @@ const ModalCreatePlanner = (props) => {
 
               {invalidDateStart &&
               <AlertaDate><span>The end date must be equal to or greater than the current date.</span></AlertaDate>}
-
-               {invalidDateFinish &&
-              <AlertaDate><span>The end time must be greater than the start time.</span></AlertaDate>}
 
             </DivButton>
           </ContainerChildren>

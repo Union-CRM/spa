@@ -10,7 +10,6 @@ import {
   DivPlanner,
   ContainerLowLeft,
   DivClose,
-  DivModal,
 } from "./styles";
 import ContainerCards from "./ContainerCardUser/index";
 import ContainerCardsGroup from "./ContainerCardGroup";
@@ -25,21 +24,12 @@ import PopUpCanceled from "../../Planner/PopUpCanceled";
 import FollowUpModal from "../../Planner/FollowUpModal";
 import PopUpFinished from "../../Planner/PopUpFinished";
 import ModalError from "../../Planner/ModalError";
-//import ModalGroupDetails from "../AdmGroupsList/ModalGroupDetails";
 import { usePlannerContext } from "../../../hook/usePlannerContext";
-//import { useGroupListContext } from "../../../hook/useGroupListContext";
 
 const dateOfTheDay = new Date();
 
 const Home = () => {
-  const handleCloseModal = () => {
-    setModalEdit(false);
-  };
-  //const { modalInfo, id, setModalInfo } = useGroupListContext();
   const {
-    planner,
-    modalSubject,
-    setModalSubject,
     modalEdit,
     setModalEdit,
     modalSave,
@@ -54,6 +44,9 @@ const Home = () => {
     setModalError,
   } = usePlannerContext();
 
+  const handleCloseModal = () => {
+    setModalEdit(false);
+  };
   return (
     <Container>
       <ContainerUp>
@@ -130,25 +123,6 @@ const Home = () => {
           <ModalError />
         </>
       )}
-      {/*
-      {modalEditGroup && (
-        <AddEditGroup
-          id={id}
-          setModal={setModal}
-          title={"Edit Group"}
-        />
-      )}      
-     
-
-      <DivModal $mode={modalInfo} />
-      {modalInfo && (
-        <ModalGroupDetails
-          id={id}
-          //openModal={() => detailsModal()}
-          setModalInfo={setModalInfo}
-          title={"Group Details"}
-        />
-      )} */}
     </Container>
   );
 };

@@ -78,7 +78,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                 width: "100%",
                 position: "relative",
                 gridTemplateColumns: "40% 60%",
-                display: "grid",
+                display: props.display || "grid",
               }),
 
               control: (state) => ({
@@ -103,11 +103,11 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                   display:"block",
                   position: props.positions || "absolute",
                   borderRadius: "5px",
-                  top: props.top || "0px",
+                  top: props.top || "0",
                   border: "2px solid  #888C95",
                   width: props.widths || "90%",
                   height: props.heights || "12.5vh",
-                  marginLeft: props.marginLeft || "2%",
+                  marginLeft: props.marginLeft || "",
                   left: props.Left || "0",
                   paddingTop: "5px",
                   paddingBottom: "5px",

@@ -68,12 +68,25 @@ const UserProfile = () => {
 
   const { userTarget, modalPlanner, setModalPlanner, setViewProfile } =
     useUserContext();
-
   const { subject } = useSubjectContext();
   const { planner } = usePlannerContext();
   // numberOfPlanner [0]-canceled | [1]- Scheduled | [2] Done
 
-  console.log(userTarget.id)
+
+  const handleClickPlanner = () => {
+    setModalPlanner(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalPlanner(false);
+    setModalSubject(false);
+  };
+
+  const handleClickSubject = () => {
+    setModalSubject(true);
+  };
+
+
   const numberOfPlanner = [
     planner
       ? planner.filter(
@@ -110,18 +123,6 @@ const UserProfile = () => {
       : 0,
   ];
 
-  const handleClickPlanner = () => {
-    setModalPlanner(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalPlanner(false);
-    setModalSubject(false);
-  };
-
-  const handleClickSubject = () => {
-    setModalSubject(true);
-  };
   return (
     <>
       <DivPath>
