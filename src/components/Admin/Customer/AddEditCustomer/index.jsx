@@ -15,7 +15,6 @@ import {
   ClickButton,
   PositionButtonCancel,
 } from "./styles";
-
 import SingleSelect from "../../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../../assets/Buttons/ButtonDefault";
 import { TagComponent } from "../../../Geral/TagComponent";
@@ -34,18 +33,6 @@ const AddEditCustomer = (props) => {
   const [flag, setFlag] = useState(false);
   const { setModal } = props;
 
-  const closeModal = () => {
-    setModal(false);
-  };
-
-  const handleSubmit = () => {
-    if (props.title === "Edit Customer") {
-      editCustomer();
-    } else if (props.title === "Create Customer") {
-      handleCreateCustomer();
-    }
-  };
-
   useEffect(() => {
     if (props.title === "Edit Customer") {
       setNewCustomer(customerTarget);
@@ -61,6 +48,18 @@ const AddEditCustomer = (props) => {
       setPrevStatus(customerTarget.status);
     }
   }, []);
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
+  const handleSubmit = () => {
+    if (props.title === "Edit Customer") {
+      editCustomer();
+    } else if (props.title === "Create Customer") {
+      handleCreateCustomer();
+    }
+  };
 
   const handleCreateCustomer = () => {
     if (newCustomer.name) {

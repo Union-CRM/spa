@@ -1,6 +1,4 @@
-import styled, { css } from "styled-components";
-
-export const DivModal = styled.div``;
+import styled from "styled-components";
 
 //Container Father //
 export const Container = styled.div`
@@ -126,14 +124,6 @@ export const TagsSpan = styled.div`
 
 export const ContainerFather = styled.div`
   z-index: 10;
-`;
-
-export const PositionEdit = styled.div`
-  width: 12px;
-  height: 12px;
-  margin-top: 8px;
-  cursor: pointer;
-  display: flex;
 `;
 
 export const DivTag = styled.div`

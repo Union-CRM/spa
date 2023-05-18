@@ -56,18 +56,6 @@ const ContainerCardsBusiness = (props) => {
   const [modalPopUp, setModalPopUp] = useState(false);
   const [active, setActive] = useState(abaStatus.ACTIVE);
 
-  // ModalEditBusiness
-  const EditBusiness = (id) => {
-    setIdBusiness(businessList.filter((b) => b.id === id)[0]);
-    setModal(true);
-    setEdit(true);
-  };
-
-  // Set business in businessList
-  /*useEffect(() => {
-    setBusinessList(business);
-  }, [business]);*/
-
   useEffect(() => {
     if (business) {
       if (search) {
@@ -86,6 +74,12 @@ const ContainerCardsBusiness = (props) => {
     }
   }, [search, business]);
 
+  // ModalEditBusiness
+  const EditBusiness = (id) => {
+    setIdBusiness(businessList.filter((b) => b.id === id)[0]);
+    setModal(true);
+    setEdit(true);
+  };
   // Select Tab
   const handleClick = (selectedTab) => {
     setActive(selectedTab);

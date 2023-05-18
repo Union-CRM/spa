@@ -15,9 +15,7 @@ import { Link } from "react-router-dom";
 
 const UserCard = (props) => {
   const { userList, setViewProfile, setUserTarget, setHome } = useUserContext();
-
   const user = userList.filter((u) => u.id === props.id)[0];
-
   const [isActive] = useState(user.status === "ACTIVE");
 
   const handleClickViewProfile = () => {
