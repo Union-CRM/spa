@@ -20,6 +20,7 @@ export const Card = styled.div`
   border-left: 7px solid ${(props) => (props.isActive ? "green" : "gray")};
   grid-template-rows: 25% 75%;
   display: grid;
+  background-color:#F5F7FA;
   border-radius: 8px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
@@ -27,7 +28,6 @@ export const Card = styled.div`
   width: auto;
   height: 100%;
   z-index: 0 !important;
-  padding-left: 10px;
 `;
 
 export const ToggleContainer = styled.label`
@@ -108,7 +108,7 @@ export const DivDadosCard = styled.div`
   margin-top: 5%;
   width: 100%;
   height: 87px;
-  cursor: pointer;
+ cursor: pointer;
 `;
 
 // Div Icons //
@@ -117,6 +117,7 @@ export const DivIcons = styled.div`
   flex-direction: row;
   grid-gap: 5px;
   width: 15%;
+  padding-right:5%;
 `;
 
 // Div Info client //
@@ -368,6 +369,7 @@ export const DivTeste = styled.span`
   height: fit-content;
   flex-direction: row;
   align-self: center;
+  font-size:0.85rem;
   color: rgba(0, 0, 0, 0.7);
 `;
 
@@ -401,11 +403,10 @@ export const DivTagsSpan = styled.div`
   width: fit-content;
   height:20px;
   width: 50px;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 12px;
   align-items: center;
   justify-content: center;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   margin-left: 2%;
   cursor: pointer;
   text-transform: lowercase;
@@ -423,18 +424,17 @@ export const ImgTag = styled.img`
 `;
 
 export const DivTag = styled.div`
-  width: 100%;
-  height: 80%;
+  width: fit-content;
   display: flex;
-  //align-items: center;
   position: relative;
   flex-wrap: wrap;
   cursor: pointer;
+  padding:1px;
   p {
     text-align: center;
-    font-size: 14px;
-    margin-left: 10px;
     align-items: center;
+    height: fit-content;
+    width: fit-content;
   }
 `;
 
@@ -445,7 +445,6 @@ export const DivContentTags = styled.div`
   display: flex;
   padding: 2px;
   position: relative;
-  top: -20px;
   align-items: center;
   background-color: ${(props) => (props.colorTag ? props.colorTag : "pink")};
   border-radius: 8px;
@@ -454,11 +453,12 @@ export const DivContentTags = styled.div`
   font-size: 12px;
   margin-left: 10px;
   justify-content: center;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const DivCenter = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width:88%;
+  padding-left:5%;
 `

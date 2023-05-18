@@ -34,7 +34,7 @@ import CreateEditRemark from "../CreateEditRemark";
 
 import { useRemarkContext } from "../../../hook/useRemarkContent";
 
-//import ModalSave from "../../Planner/ModalSuccessfuly";
+import ModalSave from "../../Planner/ModalSuccessfuly";
 import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
@@ -48,7 +48,7 @@ const cardStatus = {
 
 const RemarkList = (props) => {
   const { user, userTarget, setUserTarget } = useUserContext();
-  const { remark } = useRemarkContext([]);
+  const { remark, modalSucess } = useRemarkContext([]);
   const [remarkList, setRemarkList] = useState([]);
   const { search } = useSearchContext();
   const [modal, setModal] = useState(false);
@@ -209,9 +209,12 @@ const RemarkList = (props) => {
         <CreateEditRemark setModal={setModalEdit} title={"Edit Remark"} />
       )}
 
-      <DivModal $mode={modal} />
+      <DivModal $mode={modal || modalSucess} />
       {modal && (
         <CreateEditRemark setModal={setModal} title={"Create Remark"} />
+      )}
+      {modalSucess && (
+        <ModalSave subject={"translate(50%, -300%)"}/>
       )}
     </ContainerGlobal>
   );

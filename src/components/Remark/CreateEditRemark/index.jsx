@@ -19,7 +19,6 @@ import {
   DivDateAll,
   DivTitle,
 } from "./styles";
-
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
@@ -29,8 +28,8 @@ import { useFetchRemark } from "../../../hook/useFetchRemark";
 
 const CreateEditRemark = (props) => {
   const [newRemark, setNewRemark] = useState(remarkEntity);
-  const { createRemark, updateRemark, updateStatusRemark } = useFetchRemark();
-  const { remarkTarget } = useRemarkContext();
+  const { createRemark, updateRemark } = useFetchRemark();
+  const { remarkTarget, setModalSucess, setModalSaveRemark,setSucessRemark } = useRemarkContext();
   const [flag, setFlag] = useState(false);
   const { userTarget } = useUserContext();
   const [selectedSubject, setSelectedSubject] = useState(null);
@@ -63,18 +62,27 @@ const CreateEditRemark = (props) => {
   }, []);
 
   useEffect(() => {
-    setSubjectOption(
-      subjectList
-        .filter(
-          (s) => s.status === "IN PROGRESS" && s.user_id === userTarget.id
-        )
-        .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
-    );
+    if (props.title === "Edit Remark") {
+      setSubjectOption(
+        subjectList
+          .filter((s) => s.user_id === userTarget.id)
+          .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
+      );
+    } else {
+      setSubjectOption(
+        subjectList
+          .filter(
+            (s) => s.status === "IN PROGRESS" && s.user_id === userTarget.id
+          )
+          .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
+      );
+    }
   }, [subjectList, userTarget]);
 
   const handleSubmit = () => {
     if (props.title === "Create Remark") {
       handleCreateRemark();
+      setModalSucess(true);
     } else {
       handleEditRemark();
     }
@@ -90,6 +98,7 @@ const CreateEditRemark = (props) => {
     ) {
       createRemark({ ...newRemark, user_id: userTarget.id });
       props.setModal(false);
+      setModalSaveRemark(true);
     } else {
       setFlag(true);
     }
@@ -117,6 +126,8 @@ const CreateEditRemark = (props) => {
         newRemark.id
       );
       props.setModal(false);
+      setModalSaveRemark(true);
+      setSucessRemark(true);
     } else {
       setFlag(true);
     }
