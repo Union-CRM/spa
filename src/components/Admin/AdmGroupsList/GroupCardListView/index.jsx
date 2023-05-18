@@ -58,7 +58,7 @@ const AdmGroupCardListView = (props) => {
   const { setModalInfo, setInfoGroup } = useGroupListContext();
 
   const [isActive, setIsActive] = useState(group.status === "ATIVO");
-  const [previousStatus, setPreviousStatus] = useState(group.status);
+ 
   const handleToggle = () => {
     const newStatus = isActive ? "INATIVO" : "ATIVO";
     setIsActive(!isActive);
@@ -84,6 +84,7 @@ const AdmGroupCardListView = (props) => {
         checked={isActive}>
           <span>{group.textCustomer}</span>
         </Tag>
+
   <DivToggleIcon>
         <ToggleContainer
                 isActive={isActive}

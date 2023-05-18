@@ -62,6 +62,7 @@ export const SingleSelect = (props) => {
               backgroundColor: "transparent",
               display: "flex",
               borderRadius: "5px",
+              fontSize:"0.9rem",
               top: "0px",
               alignItems: "center",
             }),
@@ -76,6 +77,7 @@ export const SingleSelect = (props) => {
             singleValue: (baseStyles, state) => ({
               ...baseStyles,
               color: "#656464",
+              
               width: props.sizeSingle || "512px",
             }),
             menu: (baseStyles, state) => ({

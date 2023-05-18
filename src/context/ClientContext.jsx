@@ -4,6 +4,7 @@ import { clientGetClientsMyGroups } from "../api/routesAPI";
 export const ClientContext = createContext();
 
 export const ClientContextProvider = ({ children }) => {
+  const [idClient, setIdClient] = useState(null);
   const [client, setClient] = useState([{}]);
   const [isActive, setIsActive] = useState(false);
   const [modalAddClient, setModalAddClient] = useState(false);
@@ -61,30 +62,11 @@ export const ClientContextProvider = ({ children }) => {
   };
 
   return (
-    <ClientContext.Provider
-      value={{
-        openModalDetails,
-        client,
-        setClient,
-        loadData,
-        id,
-        setId,
-        toggleState,
-        setToggleState,
-        activeTab,
-        setActiveTab,
-        modal,
-        setModal,
-        isActive,
-        setIsActive,
-        modalEditClient,
-        setModalEditClient,
-        modalInfo,
-        setModalInfo,
-        modalAddClient,
-        setModalAddClient,
-      }}
-    >
+
+    <ClientContext.Provider value={{ openModalDetails, client, setClient, loadData, id,
+      setId, toggleState, setToggleState, activeTab, setActiveTab, modal, setModal, isActive, setIsActive,
+      modalEditClient, setModalEditClient, modalInfo, setModalInfo, idClient, setIdClient,modalAddClient,
+      setModalAddClient, }}>
       {children}
     </ClientContext.Provider>
   );

@@ -62,7 +62,6 @@ const ModalCreatePlanner = (props) => {
 
   const { setModalPlanner } = usePlannerContext();
 
-
   const HandleCreatePlanner = (e) => {
 
     const horas = new Date();
@@ -79,9 +78,15 @@ const ModalCreatePlanner = (props) => {
       aux = horas.getHours() + ":" + horas.getMinutes()
     }
 
-    if (date && timeFinish && timeStart && guest) {
-      setFlag(false);
+    if (horas.getHours() < 10) {
+            aux = "0"+aux;
+          }
 
+
+    if (date && timeFinish && timeStart && guest) {
+        setFlag(false)
+
+    
       if (data >= currentDate) {
         setInvalidDateStart(false);
         if (timeFinish > timeStart && timeStart >= aux) {
@@ -100,14 +105,13 @@ const ModalCreatePlanner = (props) => {
           setModalDetails(true);
           setModalPlanner(false);
         } else {
-          setInvalidHour(true);
+          setTimeout(true);
+          console.log(setTimeout)
+          //setInvalidHour(true);
         }
       }
      else {
-      setDateFinish("");
       setInvalidDateStart(true);
-    };
-
     } else {
       setFlag(true);
     }
@@ -210,16 +214,15 @@ const ModalCreatePlanner = (props) => {
                 <ButtonDefault type="userCancel" name={"Cancel"} />
               </PositionButtonCancel>
 
-
               {invalidHour &&
                 <AlertaDate><span>The start time must be equal to or greater than the current time.</span></AlertaDate>}
-
               {flag &&
               <AlertaDate><span>
               Please make sure all fields are filled in to continue.</span></AlertaDate>}
 
               {invalidDateStart &&
               <AlertaDate><span>The end date must be equal to or greater than the current date.</span></AlertaDate>}
+
             </DivButton>
           </ContainerChildren>
 

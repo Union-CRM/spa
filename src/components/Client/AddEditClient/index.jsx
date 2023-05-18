@@ -236,9 +236,10 @@ const AddEditClient = (props) => {
                 tags={tags}
                 label={"Tags"}
                 placeholder={flag && !tags ? "Required field" : ""}
-                sizeSingle={"40%"}
                 required
-                sizeMenu={"40%"}
+                sizeMenu={"37%"}
+                width={"90%"}
+                widths={"100%"}
                 options={tagList ? tagList : []}
               />
             </DivTag>
