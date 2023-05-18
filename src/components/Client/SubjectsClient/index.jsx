@@ -22,7 +22,6 @@ const SubjectsClient = (props) => {
     loadData, setModalInfo,
   } = useClientContext();
   const { setModalEdit } = useSubjectContext();
-  //const {setEditSubject} = useSubjectContext();
   const [status, setStatus] = useState();
   const { subject: subjectsList,setIdSubject } = useSubjectContext();
   const [subjects, setSubjects] = useState([]);
@@ -50,8 +49,6 @@ const SubjectsClient = (props) => {
   return (
 
     <ContainerDetails>
-
-
   {subjects.map((s) => (
   <CardSubject onClick={() => handleEdit(s.id)}>
 

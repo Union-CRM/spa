@@ -19,6 +19,7 @@ export const Card = styled.div`
   border-left: 7px solid ${(props) => (props.isActive ? "green" : "gray")};
   grid-template-rows: 25% 75%;
   display: grid;
+  background-color:#F5F7FA;
   border-radius: 8px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
@@ -451,7 +452,6 @@ export const DivContentTags = styled.div`
   display: flex;
   padding: 2px;
   position: relative;
-  top: -20px;
   align-items: center;
   color: ${(props) => (props.isActive ? "#000" : "#fff")};
   background-color: ${(props) => (props.colorTag ? props.colorTag : "pink")};
@@ -461,17 +461,12 @@ export const DivContentTags = styled.div`
   font-size: 12px;
   margin-left: 10px;
   justify-content: center;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const DivCenter = styled.div`
-  text-align: center;
-  width: fit-content;
-  height: fit-content;
-  display: block;
-  margin-top: 0;
-  margin-left: auto;
-  margin-right: auto;
-  cursor: pointer;
-  align-items: center;
-`;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width:88%;
+  padding-left:5%;
+`

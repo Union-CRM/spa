@@ -235,7 +235,7 @@ const CreateEditBusiness = (props) => {
               placeholder={""}
               label={"Tag"}
               width={"90%"}
-              widths={"73.9%"}
+              widths={"82%"}
               sizeHeight={"3.5vh"}
               heights={"12vh"}
               sizeMenuList={"10vw"}

@@ -19,6 +19,7 @@ export const UserContextProvider = ({ children }) => {
     if (localStorage.getItem("token")) {
       loadUserMe();
       loadUsers();
+      
     }
   }, []);
 
@@ -46,15 +47,18 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const loadUsers = async () => {
+    console.log("teste");
     try {
       const response = await axios.get(userCreate, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setUsersGlobal(response.data.list);
+      console.log(response)
     } catch (error) {
       console.error(error);
       // to do modal error
     }
+    
   };
 
   return (
