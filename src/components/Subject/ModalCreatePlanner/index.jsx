@@ -136,14 +136,11 @@ const ModalCreatePlanner = (props) => {
           }else{
             setInvalidHour(true);
           }
-        }else {
+        } else {
           setInvalidDateFinish(true);
         }
     }
-  }
-     else {
-      setInvalidDateStart(true);
-    }} else {
+  } else {
       setFlag(true);
     }
     console.log("FOIII!!!")
