@@ -76,13 +76,13 @@ const ContainerRemarkReport = () => {
                 //verificação data final
                 if(endDate >= startDate){ 
                     setFlagEndDate(false);
-                    return remark.filter((r)=> (r.date >= startDate) && (r.date <= endDate) && (r.user_id === userTarget.id))           
+                    return remark.filter((r)=> (r.date.split("T")[0] >= startDate) && (r.date.split("T")[0]<= endDate) && (r.user_id === userTarget.id))           
                 }else{
                     setFlagEndDate(true);
                 }                   
             }else if(startDate){ // somente da inicial
                 setFlagEndDate(false);
-                return(remark.filter((r)=> r.date >= startDate && r.user_id === userTarget.id)) 
+                return(remark.filter((r)=> r.date.split("T")[0] >= startDate && r.user_id === userTarget.id)) 
             }else if(!startDate && endDate){ // somente data final
                 setFlagStartDate(true)
             }
@@ -94,7 +94,7 @@ const ContainerRemarkReport = () => {
         else if(startDate && endDate){
             //verificação data final
             if(endDate > startDate){
-                return(remark.filter((r)=> r.date >= startDate && r.date <= endDate )) 
+                return(remark.filter((r)=> r.date.split("T")[0] >= startDate && r.date.split("T")[0] <= endDate )) 
                 setFlagEndDate(false);
             }else{
                 setFlagEndDate(true);
