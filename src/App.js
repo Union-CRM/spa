@@ -29,6 +29,8 @@ import AdmUser from "./pages/Admin/User/index";
 import Customer from "./pages/Adm/Customer/index";
 import ReleaseTrainPage from "./pages/Adm/ReleaseTrain";
 import GroupsList from "./pages/Admin/GroupsList/index";
+import RemarkReport from "./pages/Adm/RemarkReport/index"
+
 
 function App() {
   const { user } = useUserContext();
@@ -86,6 +88,16 @@ function App() {
                               element={
                                 localStorage.getItem("token") ? (
                                   <Customer />
+                                ) : (
+                                  <LoginPage />
+                                )
+                              }
+                            />
+                             <Route
+                              path="/remarkreport"
+                              element={
+                                localStorage.getItem("token") ? (
+                                  <RemarkReport />
                                 ) : (
                                   <LoginPage />
                                 )
