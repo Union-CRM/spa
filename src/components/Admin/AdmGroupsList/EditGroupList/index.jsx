@@ -27,7 +27,7 @@ import { useUserContext } from "../../../../hook/useUserContext";
 import { attachUser, detachUser } from "../../../../api/routesAPI";
 
 
-const AddEditGroup = (props) => {
+const EditGroupList = (props) => {
   const [flag, setFlag] = useState(false);
   const [groupName, setGroupName] = useState("");
   const [users, setUserGroup] = useState([]);
@@ -37,27 +37,23 @@ const AddEditGroup = (props) => {
   const [customerList,setCustomerList] = useState([])
   const {insertGroup, updateGroup, attachUser, detachUser} = useFetchAdmGroupList();
   const { group: groupList} = useGroupListContext();
-  const {  setInfoGroup, idEdit } = useGroupListContext();
+  const {  setInfoGroup, idEdit, setModalEditGroup, setModalInfo } = useGroupListContext();
+  const { toggleState, setToggleState, loadData} = useGroupListContext();
   const [userOptions, setUserOptions] = useState([]);
   const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin();
-  const { setModal, id } = props;
+
+  const {  id, setModal } = props;
   const {user} = useUserContext();
   //const [userGroup, setUserGroup] = useState([]);
   
-  
   const{loadUserSub,loadUserNotin} = useFetchUsersNotin()
   useEffect(()=>{
-   
     loadUserNotin()
     loadUserSub()
   }, [])
  
   const usersList = userSub.concat(usersNotin)
-<<<<<<< Updated upstream
-
-=======
   
->>>>>>> Stashed changes
   useEffect(() => {
     if (usersList) {
       setUserOptions(
@@ -67,72 +63,15 @@ const AddEditGroup = (props) => {
     }
   }, [usersNotin, userSub]);
 
-<<<<<<< Updated upstream
-   
-  
-  
-  
 
-=======
->>>>>>> Stashed changes
-  const handleSubmit = () => {
-    if (props.title === "Create Group") {
-      createGroup();
-      setModal(false);
-    }
-  };
-
-
-    const closeModal = () => {
-        setModal(false);
-        setInfoGroup(false);
-
-      };
-      
-    
     useEffect(() =>{
       setCustomerList(loadCustomerOptions())
     }, [])
 
-
-  
-    
-
-    const group = groupList.filter((item) => item.id === props.id)[0];
-<<<<<<< Updated upstream
-    
-   
-  
-=======
-
-
->>>>>>> Stashed changes
     const handleSelectCustomer = (cs) => {
       console.log(cs)
       setCustomer(customerList.filter((c) => c.id === cs)[0]);
     };
-    
-
-<<<<<<< Updated upstream
-  
-    const createGroup = () => {
-      console.log(users);
-=======
-    const createGroup = () => {
-      console.log(users)
->>>>>>> Stashed changes
-      const newGroup = {
-        group_name: groupName,
-        customer_id: customer.id,
-        users:{users_id:[...(users.map((g) => ({ id: g.value }))), {id:user.id}]},    
-        };
-        if (groupName && customer.id && users) {
-          insertGroup(newGroup);
-          setModal(false);
-        } else {
-          setFlag(true);
-        }
-      };
 
     // Edit GROUP //
  
@@ -140,38 +79,20 @@ const AddEditGroup = (props) => {
         const newGroup = {
           group_name: groupName,
           customer: customer.id,
-<<<<<<< Updated upstream
-          user:[...(users.map((g) => ({ id: g.value }))), {id:user.id}],
-          
-        };
-        console.log(newGroup)
-        if (groupName) {
-          updateGroup(newGroup, props.id) 
-          attachUser(newGroup)
-=======
           user:users.map((g) => ({ id: g.value })), 
         };
         console.log(newGroup)
         if (groupName && customer && users) {
           updateGroup(newGroup, idEdit) 
->>>>>>> Stashed changes
-          setModal(false);
-        } else {
+          setModalEditGroup(false);
+        }else {
           setFlag(true);
-          }
-        };
+        }
+    };
 
       useEffect(() => {
       console.log(idEdit)
       if (props.title === "Edit Group") {
-<<<<<<< Updated upstream
-        const group = groupList.filter((item) => item.id === idEdit)[0];
-        setGroupName(group.group_name)
-        setCustomer({ id: group.customer_id, label: group.textCustomer })
-        setUsers({id: group.user_id, label: group.user_name})
-        
-        
-=======
          //const group = groupList.filter((item) => item.id === props.id)[0];
         const group = groupList.filter((item) => item.id === idEdit)[0]
         setGroupName(group.group_name)
@@ -183,18 +104,30 @@ const AddEditGroup = (props) => {
             color: colors[Math.floor(Math.random() * (colors.length - 1))],
           })) 
         )     
->>>>>>> Stashed changes
       }
-    }, [usersNotin, userSub]);
+    }, [id]);
   
-  
+    const handleSubmit = () => {
+        if (props.title === "Edit Group") {
+            editGroup();
+            setModalEditGroup(false);
+       } 
+      };
+    
+        const closeModal = () => {
+            setModalEditGroup(false);
+            setModalInfo(true);
+            setToggleState(0);
+          };
+    
+          
   return (
     <>
     {console.log(userOptions)}
       <ContainerCentral>
         <Container>
           <PositionTitle>
-            <H1>{props.title} </H1>
+            <H1>{props.title}</H1>
           </PositionTitle>
           <Form>
             <DivName>
@@ -263,7 +196,7 @@ const AddEditGroup = (props) => {
   );
 };
 
-export default AddEditGroup;
+export default EditGroupList;
 
 const status_mok = [
   { id: 1, value: "Active", label: "Active" },

@@ -216,6 +216,12 @@ const RemarkList = (props) => {
       {modalSucess && (
         <ModalSave subject={"translate(50%, -300%)"}/>
       )}
+<<<<<<< Updated upstream
+=======
+      
+    
+     
+>>>>>>> Stashed changes
     </ContainerGlobal>
   );
 };

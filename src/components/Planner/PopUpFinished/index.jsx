@@ -31,7 +31,7 @@ const PopUpFinished = () => {
             <Title>
               <p>Planner Finished</p>
             </Title>
-            <Button onClick={() => handleReschedule()}>Resschedule Planner</Button>
+            <Button onClick={() => handleReschedule()}>Reschedule Planner</Button>
             <Button onClick={() => handleSubject()}>Create New Subject</Button>
             <Button onClick={() => setModalPopUpFinished(false)}>Finished</Button>
           </Content>

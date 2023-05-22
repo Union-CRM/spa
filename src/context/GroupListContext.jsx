@@ -15,11 +15,12 @@ export const GroupListContextProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [toggleState, setToggleState] = useState(0);
   const [activeTab, setActiveTab] = useState(null);
-  const [modal, setModal] = useState();
+  const [modal, setModal] = useState(false);
   const [id, setId] = useState(null);
   const [idEdit,setIdEdit] = useState();
   const [modalEditGroup, setModalEditGroup] = useState(false);
   const [modalInfo, setModalInfo] = useState(false);
+
 
   useEffect(() => {
     if (user.level > 1) {
@@ -61,7 +62,11 @@ export const GroupListContextProvider = ({ children }) => {
   return (
     <GroupListContext.Provider value={{ group, setGroup, loadData, team, setTeamList, infoGroup, setInfoGroup, users, idGroups,
       setIdGroups, modalEditGroup, setModalEditGroup, modalInfo, setModalInfo, id, setId, modal, setModal, activeTab, setActiveTab,
+<<<<<<< Updated upstream
       toggleState, setToggleState,idEdit,setIdEdit
+=======
+      toggleState, setToggleState,idEdit,setIdEdit, groupPage, setGroupPage, 
+>>>>>>> Stashed changes
      }}>
     {children}
     </GroupListContext.Provider>

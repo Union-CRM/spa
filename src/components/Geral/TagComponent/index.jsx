@@ -106,7 +106,11 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                   top: props.top || "0px",
                   border: "2px solid  #888C95",
                   width: props.widths || "90%",
+<<<<<<< Updated upstream
                   height: props.heights || "12.5vh",
+=======
+                  height: props.heights || "10.5vh",
+>>>>>>> Stashed changes
                   marginLeft: props.marginLeft || "2%",
                   left: props.Left || "0",
                   paddingTop: "5px",

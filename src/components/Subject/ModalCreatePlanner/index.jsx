@@ -216,6 +216,7 @@ const ModalCreatePlanner = (props) => {
 
               {invalidHour &&
                 <AlertaDate><span>The start time must be equal to or greater than the current time.</span></AlertaDate>}
+
               {flag &&
               <AlertaDate><span>
               Please make sure all fields are filled in to continue.</span></AlertaDate>}
