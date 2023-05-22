@@ -9,6 +9,7 @@ import {
   ContainerHeaderAndCards,
   DivButton,
   DivClose,
+  DivInfo,
   DivModal,
   DivSpans,
   DivTitlePage,
@@ -20,7 +21,6 @@ import {
   Inactive,
   LineDivisor,
   Top,
-  DivInfo,
 } from "./styles";
 import UserCard from "./CardListView/index";
 import AddEditClient from "../AddEditUser";
@@ -40,9 +40,9 @@ const abaStatus = {
 
 const ContainerCards = () => {
   const { loadUserList, userList: users, modalPassword } = useUserContext();
-  const [userList, setUserList] = useState([]);
   const { search } = useSearchContext();
-  // States modal//
+
+  const [userList, setUserList] = useState([]);
   const [modal, setModal] = useState(false);
   const [modalPopUp, setModalPopUp] = useState(false);
   const [id, setId] = useState(null);
@@ -52,6 +52,23 @@ const ContainerCards = () => {
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
   };
+
+  useEffect(() => {
+    loadUserList();
+  }, []);
+
+  useEffect(() => {
+    if (users)
+      if (search) {
+        setUserList(
+          users.filter((u) =>
+            u.name.toLowerCase().includes(search.toLowerCase())
+          )
+        );
+      } else {
+        setUserList(users);
+      }
+  }, [search, users]);
 
   const getTabColor = (status) => {
     return { borderBottom: active === status ? "2px solid #E41165" : "" };
@@ -67,26 +84,6 @@ const ContainerCards = () => {
     setEdit(true);
   };
 
-  useEffect(() => {
-    loadUserList();
-  }, []);
-
-  useEffect(() => {
-    setUserList(users);
-  }, [users]);
-
-  useEffect(() => {
-    if (users)
-      if (search) {
-        setUserList(
-          users.filter((u) =>
-            u.name.toLowerCase().includes(search.toLowerCase())
-          )
-        );
-      } else {
-        setUserList(users);
-      }
-  }, [search, users]);
   return (
     <ContainerGlobal>
       <ContainerHeaderAndCards>
@@ -94,7 +91,9 @@ const ContainerCards = () => {
           <Top>
             <DivTitlePage>
               <H1>User List </H1>
-              <HowManyClientList>({userList.length})</HowManyClientList>{" "}
+              <HowManyClientList>
+                ({userList ? userList.length : 0})
+              </HowManyClientList>{" "}
               <Tippy content="List of all system users">
                 <DivInfo>
                   <Info
@@ -127,7 +126,9 @@ const ContainerCards = () => {
               <Active>
                 Active (
                 <HowManyActive>
-                  {userList.filter((item) => item.status === "ACTIVE").length}
+                  {userList
+                    ? userList.filter((item) => item.status === "ACTIVE").length
+                    : 0}
                 </HowManyActive>
                 )
               </Active>
@@ -140,7 +141,10 @@ const ContainerCards = () => {
               <Inactive>
                 Inactive (
                 <HowManyInactive>
-                  {userList.filter((item) => item.status === "INACTIVE").length}
+                  {userList
+                    ? userList.filter((item) => item.status === "INACTIVE")
+                        .length
+                    : 0}
                 </HowManyInactive>
                 )
               </Inactive>

@@ -1,19 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import ContainerCards from "../../../components/Client/ContainerCardClient";
-import {
-  Content,
-  DivClient,
-  DivPlanner,
-  Graph1,
-  DivInfo,
-  DivClose,
-} from "./styles";
+import { Content, DivClient, DivPlanner, Graph1, DivClose } from "./styles";
 import Grafico from "../../../components/Grafico";
 import PageBodyHome from "../../../components/Geral/PageBody/PageBodyHome";
 import PlannerCard from "../../../components/Planner/PlannerCard";
 import { usePlannerContext } from "../../../hook/usePlannerContext";
 import { CustomerContextProvider } from "../../../context/CustomerContext";
-import { useUserContext } from "../../../hook/useUserContext";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import ModalPlanner from "../../../components/Planner/AddEditPlanner";
 import ModalDiscardChanges from "../../../components/Planner/ModalDiscardChanges";
@@ -23,23 +15,17 @@ import PopUpCanceled from "../../../components/Planner/PopUpCanceled";
 import FollowUpModal from "../../../components/Planner/FollowUpModal";
 import PopUpFinished from "../../../components/Planner/PopUpFinished";
 import ModalError from "../../../components/Planner/ModalError";
-
-// hook/usePlannerContext
-
 import "react-tippy/dist/tippy.css";
 
 /*const funcClientInfo =()=>{
   const [clientInfo,setClientInfo] = useState("Client Information"); 
   return {clientInfo,setClientInfo};
 }*/
-
 const dateOfTheDay = new Date();
 
 const Home = () => {
   const {
     planner,
-    modalSubject,
-    setModalSubject,
     modalEdit,
     setModalEdit,
     modalSave,

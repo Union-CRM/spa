@@ -102,9 +102,9 @@ const AdmGroupCardListView = (props) => {
   </ToggleContainer>    
 
 
-        <IconButton onClick={handleEdit}>
+        {/* <IconButton onClick={handleEdit}>
             <IconSystem  icon={"Edit"} height={"13px"} />
-        </IconButton>
+        </IconButton> */}
         </DivToggleIcon> 
       </TopContainer>
 
