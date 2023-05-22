@@ -79,7 +79,8 @@ const ContainerCards = (props) => {
             c.textRole.toLowerCase().includes(search.toLowerCase()) ||
             c.textCustomer.toLowerCase().includes(search.toLowerCase()) ||
             c.textBusiness.toLowerCase().includes(search.toLowerCase()) ||
-            c.user_name.toLowerCase().includes(search.toLowerCase())
+            c.user_name.toLowerCase().includes(search.toLowerCase()) ||
+            SplitName(c.user_name.toLowerCase()).includes(search.toLowerCase())
         )
       );
     } else {
@@ -240,3 +241,11 @@ const ContainerCards = (props) => {
   );
 };
 export default ContainerCards;
+
+function SplitName(n) {
+  const user = n ? n : "";
+  var userSplit = user.split(" ");
+  var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
+
+  return user1;
+}
