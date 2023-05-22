@@ -41,6 +41,7 @@ export const UserContextProvider = ({ children }) => {
       setUserList(response.data.list);
     } catch (error) {
       console.error(error);
+      setUserList([])
       // to do modal error
     }
   };
@@ -55,6 +56,7 @@ export const UserContextProvider = ({ children }) => {
       console.error(error);
       // to do modal error
     }
+    
   };
 
   return (

@@ -68,10 +68,25 @@ const UserProfile = () => {
 
   const { userTarget, modalPlanner, setModalPlanner, setViewProfile } =
     useUserContext();
-
   const { subject } = useSubjectContext();
   const { planner } = usePlannerContext();
   // numberOfPlanner [0]-canceled | [1]- Scheduled | [2] Done
+
+
+  const handleClickPlanner = () => {
+    setModalPlanner(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalPlanner(false);
+    setModalSubject(false);
+  };
+
+  const handleClickSubject = () => {
+    setModalSubject(true);
+  };
+
+
   const numberOfPlanner = [
     planner
       ? planner.filter(
@@ -108,18 +123,6 @@ const UserProfile = () => {
       : 0,
   ];
 
-  const handleClickPlanner = () => {
-    setModalPlanner(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalPlanner(false);
-    setModalSubject(false);
-  };
-
-  const handleClickSubject = () => {
-    setModalSubject(true);
-  };
   return (
     <>
       <DivPath>
@@ -201,7 +204,7 @@ const UserProfile = () => {
           numberOfPlanner={numberOfPlanner}
           value={0}
         />
-        <Group />
+      <Group />
       </Graph1>
       {modalEdit && (
         <>

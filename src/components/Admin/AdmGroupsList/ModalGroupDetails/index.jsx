@@ -29,7 +29,7 @@ import TeamMembers from "../TeamMembers"
 
 const ModalGroupDetails = (props) => {
   const { setModal, id } = props;
-  const { setModalInfo, setId,  modalEditGroup, setModalEditGroup, loadData } = useGroupListContext();
+  const { setModalInfo, setId, setModalEditGroup, setInfoGroup } = useGroupListContext();
   
   // UseEffect Clients //
   const { group: groupList } = useGroupListContext();
@@ -69,6 +69,7 @@ console.log(EditModal)
   // Close page //
   const closeModal = () => {
     setModalInfo(false);
+    setInfoGroup(true);
   };
 
   return (
@@ -82,7 +83,7 @@ console.log(EditModal)
           <DivStatus>
             <Status $mode={group.status}>
             <span onChange={(event) => setStatusGroup(event.target.value)}>
-                {group.status}
+            {group.status}
               </span>
             </Status>
           </DivStatus>

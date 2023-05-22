@@ -3,6 +3,7 @@ import {
   ContainerGlobal,
   ContainerHeaderAndCards,
   HeaderContainerCards,
+  DivInfo,
   CardsContainer,
   DivModal,
   LineDivisor,
@@ -28,6 +29,10 @@ import ModalSave from "../../../Planner/ModalSuccessfuly";
 import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
 import { useBusinessContext } from "../../../../hook/useBusinessContent";
 import { useSearchContext } from "../../../../hook/useSearchContext";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import { ReactComponent as Info } from "../../../../assets/svg/Info.svg";
+
 const abaStatus = {
   ACTIVE: "ATIVO",
   INACTIVE: "INATIVO",
@@ -56,18 +61,6 @@ const ContainerCardsBusiness = (props) => {
   const [modalPopUp, setModalPopUp] = useState(false);
   const [active, setActive] = useState(abaStatus.ACTIVE);
 
-  // ModalEditBusiness
-  const EditBusiness = (id) => {
-    setIdBusiness(businessList.filter((b) => b.id === id)[0]);
-    setModal(true);
-    setEdit(true);
-  };
-
-  // Set business in businessList
-  /*useEffect(() => {
-    setBusinessList(business);
-  }, [business]);*/
-
   useEffect(() => {
     if (business) {
       if (search) {
@@ -86,6 +79,12 @@ const ContainerCardsBusiness = (props) => {
     }
   }, [search, business]);
 
+  // ModalEditBusiness
+  const EditBusiness = (id) => {
+    setIdBusiness(businessList.filter((b) => b.id === id)[0]);
+    setModal(true);
+    setEdit(true);
+  };
   // Select Tab
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
@@ -111,6 +110,16 @@ const ContainerCardsBusiness = (props) => {
               <HowManyClientList>
                 ({businessList ? businessList.length : 0})
               </HowManyClientList>{" "}
+              <Tippy content="A business opportunity or potential sale.">
+              <DivInfo>
+                <Info
+                  width="25px"
+                  style={{
+                    fill: "#E41165",
+                  }}
+                />
+              </DivInfo>
+            </Tippy>
             </DivTitlePage>
 
             <DivButton onClick={() => handleModal()}>

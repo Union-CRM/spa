@@ -60,6 +60,17 @@ export const HeaderContainerCards = styled.div`
   }
 `;
 
+// Tippy //
+
+export const DivInfo = styled.div`
+position:relative;
+top:5%;
+left:1%;
+@media (min-width: 100px) and (max-width: 600px) {
+  display:flex;
+}
+`;
+
 // Div Title and Button //
 export const Top = styled.div`
   display: grid;

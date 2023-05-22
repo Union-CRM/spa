@@ -31,13 +31,6 @@ export const Content = styled.div`
   }
 `;
 
-export const DivInfo = styled.div`
-  position: relative;
-  top: 6%;
-  right: 12%;
-  z-index: 10;
-`;
-
 /////////////////////**///////////////////////////////
 
 //* CLIENT *//
@@ -209,27 +202,6 @@ export const Graph1 = styled.div`
   }
 `;
 
-// PENSAR //
-export const H1Planners = styled.div`
-  width: fit-content;
-  display: flex;
-  flex-direction: row;
-  font-family: "Houschka Rounded Alt";
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 28px;
-  grid-row: 2;
-  height: fit-content;
-  border-bottom: 2px solid #007bff;
-`;
-
-export const HowManyPlanners = styled.div`
-  font-size: 24px;
-  color: #525b75;
-  font-weight: 600;
-  margin-right: 5%;
-`;
 export const DivClose = styled.div`
   position: fixed;
   width: 100%;

@@ -5,7 +5,6 @@ export const ContainerCentral = styled.div`
   justify-content: end;
   display: flex;
   grid-row: 1;
-  grid-column: 2;
   @media (min-width: 100px) and (max-width: 590px) {
     grid-column: 1;
     grid-row: 1;
@@ -50,9 +49,8 @@ export const H1 = styled.h1`
 // Children
 
 export const Container = styled.div`
-  grid-row: 1;
   grid-column: 2;
-  width: 75%;
+  width: 80%;
   min-width: 350px;
   height: 100%;
   background: #fff;

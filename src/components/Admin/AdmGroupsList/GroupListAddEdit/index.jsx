@@ -46,13 +46,13 @@ const AddEditGroup = (props) => {
   
   const{loadUserSub,loadUserNotin} = useFetchUsersNotin()
   useEffect(()=>{
-   
     loadUserNotin()
     loadUserSub()
   }, [])
  
   const usersList = userSub.concat(usersNotin)
-
+  console.log(usersList)
+  
   useEffect(() => {
     if (usersList) {
       setUserOptions(
@@ -62,9 +62,6 @@ const AddEditGroup = (props) => {
     }
   }, [usersNotin, userSub]);
 
-   
-  
-  
   
 
   const handleSubmit = () => {
@@ -85,22 +82,17 @@ const AddEditGroup = (props) => {
       setCustomerList(loadCustomerOptions())
     }, [])
 
-
-  
-    
-
     const group = groupList.filter((item) => item.id === props.id)[0];
     
-   
   
     const handleSelectCustomer = (cs) => {
       setCustomer(customerList.filter((c) => cs.id === customer_id)[0]);
     };
-    
 
-  
+
     const createGroup = () => {
-      console.log(users);
+      console.log(userOptions);
+
       const newGroup = {
         group_name: groupName,
         customer_id: customer.id,
@@ -118,34 +110,37 @@ const AddEditGroup = (props) => {
  
      
    const editGroup = () => {
+        
         const newGroup = {
           group_name: groupName,
           customer: customer.id,
-          user:[...(users.map((g) => ({ id: g.value }))), {id:user.id}],
+          users:{users_id:[...(users.map((g) => ({ id: g.value }))), {id:user.id}]},
+          
           
         };
         console.log(newGroup)
-        if (groupName) {
-          updateGroup(newGroup, props.id) 
+        console.log(props.id) //ERRO NO ID
+        if (groupName && customer.id && users) {
+          updateGroup(newGroup, id) 
           attachUser(newGroup)
           setModal(false);
-        } else {
+        }else {
           setFlag(true);
-          }
-        };
+        }
+    };
 
     useEffect(() => {
       
       console.log(idEdit)
       if (props.title === "Edit Group") {
-        const group = groupList.filter((item) => item.id === idEdit)[0];
+        console.log(props.id)
+        console.log(groupList)
+        //const group = groupList.filter((item) => item.id === props.id)[0];
+        const group = groupList.filter((item) => item.id === idEdit)[0]
         setGroupName(group.group_name)
         setCustomer({ id: group.customer_id, label: group.textCustomer })
-        setUsers({id: group.user_id, label: group.user_name})
-        
-        
       }
-    }, [usersNotin, userSub]);
+    }, [id]);
   
   
   return (
