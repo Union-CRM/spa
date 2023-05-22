@@ -9,7 +9,7 @@ export const ContainerFather = styled.div`
     grid-column: 1;
     display: grid;
     position: relative;
-    top: 0px;s
+    top: 0px;
     left: 0;
     justify-content: start;
   }
@@ -188,7 +188,7 @@ export const DivTitle = styled.div`
   text-align: left;
   align-items: center;
   grid-template-columns: 15% 85%;
-  padding-bottom:0.5%;
+  padding-bottom: 0.5%;
 `;
 
 export const DivNameManager = styled.div`
@@ -197,12 +197,11 @@ export const DivNameManager = styled.div`
   padding-top: 1%;
   text-align: left;
   align-items: center;
-  grid-column:2;
+  grid-column: 2;
   @media (min-width: 1900px) and (max-width: 2500px) {
-    padding-left:5%;
+    padding-left: 5%;
   }
 `;
-
 
 export const ClientName = styled.h1`
   width: 100%;
@@ -232,14 +231,14 @@ export const CreatedBy = styled.h2`
 export const DivPhoto = styled.div`
   width: 100%;
   height: 100%;
-  display:flex;
+  display: flex;
 `;
 
 export const DivPhotoI = styled.div`
   background-color: #d9d9d9;
   border: 5px solid #007bff;
   width: 58px;
-  height:59px;
+  height: 59px;
   border-radius: 100%;
   display: flex;
   position: relative;
@@ -251,10 +250,9 @@ export const DivPhotoI = styled.div`
   }
   @media (min-width: 1920px) and (max-width: 2500px) {
     width: 50px;
-    height:50px;
+    height: 50px;
   }
 `;
-
 
 export const IconTag = styled.span`
   height: 100%;

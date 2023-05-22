@@ -71,6 +71,9 @@ export const clientUpdateStatus = `http://crm-lb-353213555.us-east-1.elb.amazona
 export const clientUpdate =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8083/union/v1/clients/update/";
 
+export const clientGetAll =
+  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8083/union/v1/clients/";
+
 //customer
 export const customersGet =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8084/union/v1/customers";
