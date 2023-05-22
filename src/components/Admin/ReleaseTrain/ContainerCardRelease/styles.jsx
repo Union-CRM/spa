@@ -65,7 +65,7 @@ export const HeaderContainerCards = styled.div`
 
 export const DivInfo = styled.div`
 position:relative;
-top:15%;
+top:5%;
 left:1%;
 @media (min-width: 100px) and (max-width: 600px) {
   display:flex;

@@ -151,6 +151,7 @@ function LoginPage() {
               <DivPassWIcon>
                 <IconSystem icon="Lock" width={"20px"} height={"20px"} />
               </DivPassWIcon>
+
               <Input
                 type="password"
                 placeholder="●●●●●●●●"

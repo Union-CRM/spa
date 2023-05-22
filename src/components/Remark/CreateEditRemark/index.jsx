@@ -29,8 +29,8 @@ import { useFetchRemark } from "../../../hook/useFetchRemark";
 const CreateEditRemark = (props) => {
   const [newRemark, setNewRemark] = useState(remarkEntity);
   const { createRemark, updateRemark } = useFetchRemark();
-  const { remarkTarget, setModalSucess, setModalSaveRemark, setSucessRemark } =
-    useRemarkContext();
+  const { remarkTarget, setModalSucess, setModalSaveRemark, setSucessRemark } = useRemarkContext();
+  
   const [flag, setFlag] = useState(false);
   const { userTarget } = useUserContext();
   const { subject: subjectList } = useSubjectContext();

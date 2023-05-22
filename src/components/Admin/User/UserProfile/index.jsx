@@ -72,6 +72,7 @@ const UserProfile = () => {
   const { planner } = usePlannerContext();
   // numberOfPlanner [0]-canceled | [1]- Scheduled | [2] Done
 
+
   const handleClickPlanner = () => {
     setModalPlanner(true);
   };
@@ -84,6 +85,7 @@ const UserProfile = () => {
   const handleClickSubject = () => {
     setModalSubject(true);
   };
+
 
   const numberOfPlanner = [
     planner
@@ -202,7 +204,7 @@ const UserProfile = () => {
           numberOfPlanner={numberOfPlanner}
           value={0}
         />
-        <Group />
+      <Group />
       </Graph1>
       {modalEdit && (
         <>
