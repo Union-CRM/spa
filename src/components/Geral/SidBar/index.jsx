@@ -88,8 +88,8 @@ const SidBar = (props) => {
       setSelectedIcon('remark');
     }else if (path === '/planner') {
       setSelectedIcon('planner');
-    }else if (path === '/remarkReport') {
-    setSelectedIcon('planilha');
+    }else if (path === '/remarkreport') {
+    setSelectedIcon('remarkreport');
     }
   }, [location]);
 
@@ -179,8 +179,8 @@ const SidBar = (props) => {
                   </Icon>
                 </Li>
               </Slink>
-              <Slink onClick={() => handleIconClick('planilha')} to="/remarkreport">
-                <Li selected={selectedIcon === 'planilha'} level={user.level}>
+              <Slink onClick={() => handleIconClick('remarkreport')} to="/remarkreport">
+                <Li selected={selectedIcon === 'remarkreport'} level={user.level}>
                   <Icon $mode={sidBarState}>
                     <Report fill={"#FFFFFF"} width={"22px"} height={"20px"}/>
                     <Span $mode={sidBarState}>Report</Span>

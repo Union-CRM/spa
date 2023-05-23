@@ -28,7 +28,13 @@ import { useUserContext } from "../../../../hook/useUserContext";
 // Group List //
 import { useGroupListContext } from "../../../../hook/useGroupListContext";
 import { useFetchAdmGroupList } from "../../../../hook/useFetchAdmGroupList";
+
 const AdmGroupCardListView = (props) => {
+
+  //const {countGroups} = useFetchAdmGroupList();
+  const { usersGroup,countGroups } = useGroupListContext();
+
+ 
 
   const handleEdit = () => {
     openModal();
@@ -40,6 +46,7 @@ const AdmGroupCardListView = (props) => {
   };
 
   const handleInfo = () => {
+
     setModalInfo(true);
     setInfoGroup(false);
     setToggleState(0);
@@ -53,6 +60,7 @@ const AdmGroupCardListView = (props) => {
   const [userOption, setUserOption] = useState([{}]);
   const { group: groupList, updateGroup } = useGroupListContext();
   const group = groupList.filter((item) => item.id === props.id)[0];
+  
 
   const { toggleState, setToggleState } = useGroupListContext();
   const { activeTab, setActiveTab } = useGroupListContext();
@@ -65,14 +73,20 @@ const AdmGroupCardListView = (props) => {
     setIsActive(!isActive);
     updateGroup(group.id, { ...group, status: newStatus });
   };
+  
+  const [count,setCount] = useState();
 
+  useEffect( () =>{
+    if(countGroups){
+      setCount(countGroups.filter((item) => item.group_id === group.id)[0])
+    }
+  },[countGroups])
 
-
+  // verificar posteriormente
   return (
 
     <ContainerFather>
       <Container>
-
         <CardGroup
           isActive={isActive}
           active={isActive}
@@ -103,14 +117,8 @@ const AdmGroupCardListView = (props) => {
               </ToggleContainer>
 
 
-              <IconButton onClick={handleEdit}>
-                <IconSystem icon={"Edit"} height={"13px"} />
-              </IconButton>
             </DivToggleIcon>
           </TopContainer>
-
-
-
           <Content onClick={() => handleInfo()}>
             <DivIconItau>
               <PeopleTeams
@@ -122,7 +130,7 @@ const AdmGroupCardListView = (props) => {
             <TeamsContainer>
               <FontSubtitle type={"TextDescription"} name={"Team members"} />
 
-              {group.usersCount} members
+              {count ? count.qnt : 0} members
 
             </TeamsContainer>
           </Content>

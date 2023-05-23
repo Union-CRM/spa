@@ -321,6 +321,7 @@ const ModalClientEdit = (props) => {
                 sizeMenu={"37%"}
                 width={"90%"}
                 widths={"100%"}
+                marginLeft={"1%"}
                 options={tagList ? tagList : []}
               />
             </DivTag>

@@ -22,7 +22,6 @@ class PlannerPage extends React.Component {
         <DivHeader>
           {/*A Rota e o Nome da Pagina de Planner*/}
           <DivRouteTitle>
-            <Path>Home - Planner</Path>
             <DivTitle>
               <Title>Planner</Title>
               {/*Tippy Usada para aparecer uma caixa de text quando passa o mouse em cima */}

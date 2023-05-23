@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   grid-column: 2;
   width: 80%;
-  min-width: 300px;
+  min-width: 360px;
   height: 100%;
   background: #fff;
   display: grid;

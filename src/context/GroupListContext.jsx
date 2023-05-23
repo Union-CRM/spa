@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useUserContext } from "../hook/useUserContext";
 
-import { groupGetUser } from "../api/routesAPI";
+import { groupGetUser , countUserGroup, getUsersGroup} from "../api/routesAPI";
 
 export const GroupListContext = createContext();
 
@@ -21,10 +21,14 @@ export const GroupListContextProvider = ({ children }) => {
   const [modalEditGroup, setModalEditGroup] = useState(false);
   const [modalInfo, setModalInfo] = useState(false);
   const [groupPage, setGroupPage] = useState(false);
+  const [usersGroup, setUsersGroup] = useState([{}]);
+  const [countGroups, setCountGroups] = useState([{}]);
+  const [teamMembers, setTeamMembers] = useState([{}]);
 
   useEffect(() => {
     if (user.level > 1) {
       loadData();
+      loadContGroup();
     }
   }, [user]);
 
@@ -46,11 +50,6 @@ export const GroupListContextProvider = ({ children }) => {
           group_name: item.group_name,
           customer_id: item.customers.customer_id,
           textCustomer: item.customers.customer_name,
-          tcsId: item.users.user_IdTCS,
-          usersId: item.users.map((user) => user.user_id),
-          usersNames: item.users.map((user) => user.user_name),
-          usersCount: item.users.map((user) => user.user_id).length,
-          usuarios: item.users,
           responsible_id: item.responsible_id,
           responsible_name: item.responsible_name,
         }))
@@ -60,10 +59,43 @@ export const GroupListContextProvider = ({ children }) => {
     }
 
   };
+
+  const loadContGroup = async () => {
+    let groups;
+
+    try {
+      const response = await axios.get(`${countUserGroup}${user.id}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+      groups = response;
+      
+    } catch (error) {
+      console.error(error);
+    }
+    setCountGroups(groups.data.count_users_list)
+  };
+
+  const getTeamMembers = async (group_id) => {
+    try {
+      const response = await axios.get(`${getUsersGroup}${group_id}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        },
+      )
+      setTeamMembers(response.data.user_list);
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <GroupListContext.Provider value={{ group, setGroup, loadData, team, setTeamList, infoGroup, setInfoGroup, users, idGroups,
       setIdGroups, modalEditGroup, setModalEditGroup, modalInfo, setModalInfo, id, setId, modal, setModal, activeTab, setActiveTab,
-      toggleState, setToggleState,idEdit,setIdEdit, groupPage, setGroupPage
+      toggleState, setToggleState,idEdit,setIdEdit, groupPage, setGroupPage, usersGroup, setUsersGroup ,countGroups, setCountGroups,loadContGroup,
+      teamMembers, setTeamMembers,getTeamMembers,
      }}>
     {children}
     </GroupListContext.Provider>

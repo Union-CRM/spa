@@ -18,7 +18,7 @@ export const Header = styled.div`
 export const InputDate = styled.input`
   width: auto;
   max-width: 100%;
-  height:3.5vh;
+  height:100%;
   color: #a0a0a0;
   border-radius: 8px ;
   border: 2px solid ${(props)=> props.required ? "#b03535" : "#888C95"};
@@ -35,6 +35,7 @@ export const Label = styled.div`
 
 export const DivDate = styled.div`
     margin-left: 5%;
+    height:29px;
 `
 
 export const DivSelect = styled.div`
@@ -47,6 +48,8 @@ export const ContainerPlanilha = styled.div `
     height: 60vh;
     border: 2px solid #A9A9A9;
     border-radius: 8px;
+    margin-top:1%;
+    position:relative;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 `;
 
@@ -76,8 +79,8 @@ export const DivButtons = styled.div`
 `;
 
 export const ButtonPesquisar = styled.button`
-    width: 40%;
-    height: 2.5vh;
+    width: 75%;
+    height: 3vh;
     background-color: #E41165;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     border: none;
@@ -86,7 +89,7 @@ export const ButtonPesquisar = styled.button`
     margin-right: 5%;
     cursor: pointer;
     :hover{ 
-        opacity: 0.8;
+        opacity: 0.7;
     }
     align-self: center;
     margin-top: 6%;
@@ -94,8 +97,8 @@ export const ButtonPesquisar = styled.button`
 `;
 
 export const ButtonExportar = styled.button`
-    width: 40%;
-    height: 2.5vh;
+    width: 75%;
+    height: 3vh;
     background-color:  #007BFF;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     border: none;
@@ -103,7 +106,7 @@ export const ButtonExportar = styled.button`
     border-radius: 16px;
     cursor: pointer;
     :hover { 
-        opacity: 0.8;
+        opacity: 0.7;
     }
     align-self: center;
     margin-top: 6%;
@@ -112,17 +115,18 @@ export const ButtonExportar = styled.button`
 
 export const ContainerRemarks = styled.div`
     width: 99.7%;
-    height: 53vh;
+    height: 54vh;
     overflow-y: scroll;
 `
 
 
 export const Total = styled.div`
     display: flex;
-    width: 20%;
-    height: 6vh;
+    width: fit-content;
+    height:1%;
     margin-top: 2%;
-    font-size: 24px;
+    font-size: 1.5rem;
+    font-weight:600;
 
 `
 
