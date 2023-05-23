@@ -30,19 +30,18 @@ import { attachUser, detachUser } from "../../../../api/routesAPI";
 const AddEditGroup = (props) => {
   const [flag, setFlag] = useState(false);
   const [groupName, setGroupName] = useState("");
-  const [users, setUserGroup] = useState([]);
+  const [users, setUsers] = useState([]);
   const [customer, setCustomer] = useState({});
   const [customer_id, setCustomerId] = useState();
   const { loadCustomerOptions } = useFetchCustomer();
   const [customerList,setCustomerList] = useState([])
   const {insertGroup, updateGroup, attachUser, detachUser} = useFetchAdmGroupList();
   const { group: groupList} = useGroupListContext();
-  const {  setInfoGroup, idEdit } = useGroupListContext();
+  const {  infoGroup, setInfoGroup, idEdit } = useGroupListContext();
   const [userOptions, setUserOptions] = useState([]);
   const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin();
   const { setModal, id } = props;
   const {user} = useUserContext();
-  //const [userGroup, setUserGroup] = useState([]);
   
   
   const{loadUserSub,loadUserNotin} = useFetchUsersNotin()
@@ -52,6 +51,8 @@ const AddEditGroup = (props) => {
   }, [])
  
   const usersList = userSub.concat(usersNotin)
+  console.log(usersList)
+  
   useEffect(() => {
     if (usersList) {
       setUserOptions(
@@ -60,34 +61,38 @@ const AddEditGroup = (props) => {
       );
     }
   }, [usersNotin, userSub]);
+
+  
+
   const handleSubmit = () => {
     if (props.title === "Create Group") {
       createGroup();
-      setModal(false);
+    } else {
+      editGroup();
     }
   };
 
 
     const closeModal = () => {
         setModal(false);
-        setInfoGroup(false);
-
+        setInfoGroup(true);
       };
-      
     
     useEffect(() =>{
       setCustomerList(loadCustomerOptions())
     }, [])
 
     const group = groupList.filter((item) => item.id === props.id)[0];
-
+    
+  
     const handleSelectCustomer = (cs) => {
-      console.log(cs)
-      setCustomer(customerList.filter((c) => c.id === cs)[0]);
+      setCustomer(customerList.filter((c) => cs.id === customer_id)[0]);
     };
 
 
     const createGroup = () => {
+      console.log(userOptions);
+
       const newGroup = {
         group_name: groupName,
         customer_id: customer.id,
@@ -103,46 +108,43 @@ const AddEditGroup = (props) => {
 
     // Edit GROUP //
  
+     
    const editGroup = () => {
         
         const newGroup = {
           group_name: groupName,
           customer: customer.id,
-
-          user:users.map((g) => ({ id: g.value })), 
+          users:{users_id:[...(users.map((g) => ({ id: g.value }))), {id:user.id}]},
+          
+          
         };
         console.log(newGroup)
-        if (groupName && customer && users) {
-          updateGroup(newGroup, idEdit) 
-
+        console.log(props.id) //ERRO NO ID
+        if (groupName && customer.id && users) {
+          updateGroup(newGroup, id) 
+          attachUser(newGroup)
           setModal(false);
         }else {
           setFlag(true);
         }
     };
 
-      useEffect(() => {
+    useEffect(() => {
+      
       console.log(idEdit)
       if (props.title === "Edit Group") {
-         //const group = groupList.filter((item) => item.id === props.id)[0];
+        console.log(props.id)
+        console.log(groupList)
+        //const group = groupList.filter((item) => item.id === props.id)[0];
         const group = groupList.filter((item) => item.id === idEdit)[0]
         setGroupName(group.group_name)
         setCustomer({ id: group.customer_id, label: group.textCustomer })
-        setUserGroup(
-          group.usuarios.map((item) => ({
-            value: item.user_id,
-            label: item.user_name,
-            color: colors[Math.floor(Math.random() * (colors.length - 1))],
-          })) 
-        )     
-
       }
     }, [id]);
   
   
   return (
     <>
-    {console.log(userOptions)}
       <ContainerCentral>
         <Container>
           <PositionTitle>
@@ -161,39 +163,35 @@ const AddEditGroup = (props) => {
                 />
               </Label>
             </DivName>
-            <DivCustomer>
-              <SingleSelect
-                key="2"
-                set={(cs) => handleSelectCustomer(cs)}
-                label={"Customer"}
-                value={customer.label}
-                placeholder={flag && !customer.label ? "Required field" : ""}
-                sizeSingle={"100%"}
-                required
-                sizeMenu={"100%"}
-                options={customerList}
-              />
+
+      
+              <DivCustomer>
+
+                <SingleSelect
+                 key="2"
+                 set={(cs) => handleSelectCustomer(cs)}
+                 label={"Customer"}
+                 value={customer.label}
+                 placeholder={flag && !customer.label ? "Required field" : ""}
+                 sizeSingle={"100%"}
+                 required
+                 sizeMenu={"100%"}
+                 options={customerList}
+                />
+  
               </DivCustomer>
+
+
             <DivUser>
-              <UsersComponents
-                set={(users) => setUserGroup(users)} /////
-                options={userOptions}
-                tags={users}
-                label={"Users"}
-                indicator={"guest"}
-                value={users.label}
-              />
-
-              {/*<UsersComponents
-                set={(users) => setUsers(users)}
-                options={userOptions}
-                label={"Users"}
-                tags={users}
-                indicator={"guest"}
-                value={users.label}
-  />*/}
-
-            </DivUser>
+            <UsersComponents
+            set={(users) => setUsers(users)}
+            options={userOptions}
+            label={"Users"}
+            tags={users}
+            indicator={"guest"}
+            value={users.label}
+             />
+              </DivUser>
           </Form>{" "}
           <DivButton>
           <ClickButton onClick={handleSubmit}>
@@ -222,23 +220,3 @@ const status_mok = [
   { id: 2, value: "Inactive", label: "Inactive" },
 ];
  
-const colors = [
-  "#836FFF",
-  "#00BFFF",
-  "#7FFFD4",
-  "#00FA9A",
-  "#00FF00",
-  "#ADFF2F",
-  "#BDB76B",
-  "#FFDEAD",
-  "#DEB887",
-  "#9370DB",
-  "#EE82EE",
-  "#FFB6C1",
-  "#F08080",
-  "#FA8072",
-  "#FFA07A",
-  "#FFFF00",
-  "#7B68EE",
-  "#BC8F8F",
-];

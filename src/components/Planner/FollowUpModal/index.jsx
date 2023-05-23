@@ -114,9 +114,7 @@ const FollowUpModal = (props) => {
             label={"Guests"}
             sizeHeight={"3.5vh"}
             width={"9.2vw"}
-
-            widths={"98%"}
-            sizeMenu={"32%"}
+            widths={"15vw"}
             heights={"15vh"}
             marginLeft={"-5%"}
           />
@@ -127,8 +125,7 @@ const FollowUpModal = (props) => {
             label={"Return"}
             options={options}
             sizeHeight={"3.5vh"}
-            sizeSingle={"31.8%"}
-            sizeMenu={"32%"}
+            sizeSingle={"9vw"}
             set={(d) => handleSelectReturn(d)}
             required
           />

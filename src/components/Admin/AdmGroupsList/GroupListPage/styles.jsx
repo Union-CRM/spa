@@ -244,7 +244,7 @@ export const DivButton = styled.div`
   align-items: center;
   text-align: center;
   @media (min-width: 100px) and (max-width: 919px) {
-    padding-left:5%;
+    padding-left:15%;
   }
 
 `;

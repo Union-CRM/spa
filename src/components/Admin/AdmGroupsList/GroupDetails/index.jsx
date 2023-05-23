@@ -11,7 +11,7 @@ import {
   TagsClient,
   DivColors,
 } from "./styles";
-import { useGroupListContext } from "../../../../hook/useGroupListContext";
+import {useGroupListContext} from "../../../../hook/useGroupListContext";
 import { useFetchCustomer } from "../../../../hook/useFetchCustomer";
 import { useSubjectContext } from "../../../../hook/useSubjectContent";
 import { usePlannerContext } from "../../../../hook/usePlannerContext";
@@ -24,7 +24,7 @@ const GroupDetails = (props) => {
 
   const { setId } = useGroupListContext();
   const [customer, setCustomer] = useState();
-  const [statusGroup, setStatusGroup] = useState();
+  const [statusGroup, setStatusGroup ] = useState();
 
   const { subject } = useSubjectContext();
   const { planner } = usePlannerContext();
@@ -35,38 +35,38 @@ const GroupDetails = (props) => {
     ? subject.filter((s) => group.usersId.includes(s.user_id))
     : [];
 
-  useEffect(() => {
-    if (props.title === "Group Content") {
-      const group = groupList.filter((item) => item.id === props.id)[0];
-      setStatusGroup(group.status);
-    }
-  }, [id]);
+    useEffect(() => {
+      if (props.title === "Group Content") {
+        const group = groupList.filter((item) => item.id === props.id)[0];
+        setStatusGroup(group.status);
+      }
+    }, [id]);
 
   return (
     <ContainerDetails>
-
-      <DivCustomer>
+      
+        <DivCustomer>
         Customer
-        <span onChange={(event) => setCustomer(event.target.value)}>
-          {group.textCustomer}
-        </span>
-      </DivCustomer>
+          <span onChange={(event) => setCustomer(event.target.value)}>
+         {group.textCustomer}
+          </span>
+        </DivCustomer>
 
-      <DivBetween>
+        <DivBetween>
         <DivPlanner>
-          Planners in that group
-          <PlannerCircle $mode={group.status}>
-            {plannerGroup.length}
-          </PlannerCircle>
+        Planners in that group
+        <PlannerCircle  $mode={group.status}>
+        {plannerGroup.length}
+        </PlannerCircle>
         </DivPlanner>
 
         <DivSubjects>
-          Subjects in that group
-          <PlannerCircle $mode={group.status}>
-            {subjectGroup.length}
-          </PlannerCircle>
-        </DivSubjects>
-      </DivBetween>
+        Subjects in that group
+        <PlannerCircle  $mode={group.status}>
+        {subjectGroup.length}
+        </PlannerCircle>
+            </DivSubjects>
+        </DivBetween>
 
     </ContainerDetails>
   );

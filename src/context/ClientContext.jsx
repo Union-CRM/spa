@@ -15,10 +15,6 @@ export const ClientContextProvider = ({ children }) => {
   const [id, setId] = useState(null);
   const [modalEditClient, setModalEditClient] = useState(false);
   const [modalInfo, setModalInfo] = useState(false);
-
- 
-  
-  
   useEffect(() => {
     if (localStorage.getItem("token")) {
       loadData();
@@ -59,7 +55,6 @@ export const ClientContextProvider = ({ children }) => {
     /* console.log(clients.data.list)*/
   };
 
-
   /*  
   const loadData = async () => {
     var clients;
@@ -93,13 +88,11 @@ export const ClientContextProvider = ({ children }) => {
       }))
     );*/
 
-
   const openModalDetails = (id) => {
     setSelectedClient(id);
   };
 
   return (
-
     <ClientContext.Provider
       value={{
         openModalDetails,
@@ -126,7 +119,6 @@ export const ClientContextProvider = ({ children }) => {
         setModalAddClient,
       }}
     >
-
       {children}
     </ClientContext.Provider>
   );

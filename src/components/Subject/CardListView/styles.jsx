@@ -152,6 +152,7 @@ export const DivSubjectAndCreatedBy = styled.span`
   margin-top: 2%;
   p {
     font-weight: 900;
+    font-size:1rem;
   }
   @media (min-width: 1355px) and (max-width: 1824px) {
     font-size: 0.8rem;

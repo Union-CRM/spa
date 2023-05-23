@@ -106,9 +106,8 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                   top: props.top || "0",
                   border: "2px solid  #888C95",
                   width: props.widths || "90%",
-                  height: props.heights || "10.5vh",
-                  marginLeft: props.marginLeft || "2%",
-
+                  height: props.heights || "12.5vh",
+                  marginLeft: props.marginLeft || "",
                   left: props.Left || "0",
                   paddingTop: "5px",
                   paddingBottom: "5px",

@@ -25,7 +25,6 @@ export const InputDate = styled.input`
   
   @media (max-width: 1200px) {
     width: 85%;
-
   }
     
 `;
@@ -64,7 +63,7 @@ export const Title = styled.div`
     height: 100%;
     border: 1px solid #A9A9A9;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
 `;
 
@@ -125,4 +124,10 @@ export const Total = styled.div`
     margin-top: 2%;
     font-size: 24px;
 
+`
+
+export const DivCenter = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 `
