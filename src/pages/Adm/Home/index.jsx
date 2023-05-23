@@ -8,6 +8,8 @@ const HomeAdm = () => {
       <PageBody showNav={true}>
         <Home></Home>
       </PageBody>
+
+      
     </>
   );
 };
