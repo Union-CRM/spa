@@ -8,7 +8,10 @@ class RemarkPage extends React.Component {
     return (
       <>
         <PageBody>
+          <RemarkContextProvider>
             <RemarkList />
+          </RemarkContextProvider>
+
         </PageBody>
       </>
     );

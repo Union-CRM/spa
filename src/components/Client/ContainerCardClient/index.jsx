@@ -81,6 +81,7 @@ const ContainerCards = (props) => {
             c.textBusiness.toLowerCase().includes(search.toLowerCase()) ||
             c.user_name.toLowerCase().includes(search.toLowerCase()) ||
             SplitName(c.user_name.toLowerCase()).includes(search.toLowerCase())
+
         )
       );
     } else {

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ContainerOptions as ContainerUsers } from "../../../Admin/AdmGroupsList/UsersComponents/styles";
 
 // Div Father
 export const ContainerCentral = styled.div`
@@ -45,6 +46,31 @@ export const H1 = styled.h1`
   }
 `;
 
+/// Button Close
+
+export const DivClose = styled.div`
+  align-items: center;
+  display: grid;
+  width: 50%;
+  @media (min-width: 50px) and (max-width: 500px) {
+  }
+`;
+
+export const Close = styled.button`
+  background-color: #2b2b2b;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  display: grid;
+  width: 100%;
+  height: 20px;
+  :hover {
+    opacity: 0.8;
+  }
+`;
+
 // Children
 
 export const Container = styled.div`
@@ -54,11 +80,11 @@ export const Container = styled.div`
   height: 100%;
   background: #fff;
   display: grid;
-  border-left: 16.56px solid #e41165;
+  border-left: 16.56px solid  #e41165;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   z-index: 1000;
-  grid-template-rows: 15% 30% 30% 20%;
+  grid-template-rows: 10% 75% 15%;
   @media (min-width: 100px) and (max-width: 502px) {
     height: 81vh;
     width: 100%;
@@ -76,7 +102,7 @@ export const Form = styled.div`
   width: 93%;
   padding-left: 7%;
   grid-row: 2;
-  grid-template-rows: 33.3% 33.3% 33.3%;
+  grid-template-rows: 14.2% 14.2% 35%;
   @media (min-width: 1600px) {
   }
 `;
@@ -90,7 +116,6 @@ export const Input = styled.input`
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
   position: relative;
-  border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
 
   @media (min-width: 1600px) {
     width: 40px;
@@ -114,21 +139,20 @@ export const DivName = styled.div`
   display: grid;
 `;
 
-export const DivStatus = styled.div`
-  width: 72%;
-  height: 100%;
-  grid-template-columns: 50% 50%;
-  display: grid;
-  grid-row: 3;
+export const DivCustomer = styled.div`
+width: 90%;
+height: 100%;
+grid-row: 2;
 `;
 
-export const DivTag = styled.div`
-  grid-row: 2;
-  width: 90%;
-
-  height: auto;
-  display: grid;
+export const DivUser = styled.div`
+grid-row:3;
+width: 91%;
+height: 100%;
 `;
+
+
+
 
 // Button Save and Cancel
 
@@ -138,8 +162,8 @@ export const DivButton = styled.div`
   position: relative;
   align-items: center;
   width: 100%;
-  height: 100%;
-  grid-row: 4;
+  height:90%;
+  grid-row: 3;
 `;
 
 export const PositionButtonCancel = styled.div``;
