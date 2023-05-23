@@ -130,8 +130,8 @@ export const TeamsContainer = styled.div`
   align-items: center;
   width:92%;
   height:30px;
-  padding-right:2%;
-  padding-left:4%;
+  padding-right:4%;
+  padding-left:3%;
   margin-top: 6px;
   background-color: #d9d9d9;
   font-size: 12px;
@@ -158,4 +158,12 @@ export const Avatar = styled.img`
   top: -3px;
   left: ${(props) => `calc(10px * ${props.position})`};
   background-color: #fff;
+`;
+
+// Name Group //
+export const NameGroup = styled.div`
+  position: relative;
+  width: 100%;
+  height:100%;
+  font-size:1.1rem;
 `;

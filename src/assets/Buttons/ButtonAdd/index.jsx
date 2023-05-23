@@ -1,6 +1,8 @@
 import React from "react";
 import IconSystem from "../../IconSystem";
 import { Button, IconAdd, Span } from "./styles";
+import { ReactComponent as Add2 } from "../../svg/Add2.svg";
+
 
 class ButtonAdd extends React.Component {
   render() {
@@ -18,7 +20,12 @@ class ButtonAdd extends React.Component {
           sizeFont={this.props.sizeFont}
         >
           <IconAdd>
-            <IconSystem icon={"Add2"} />
+         
+            <Add2
+            style={{
+            fill:"#FFF"
+            }}
+           />
           </IconAdd>
           <Span
             color={this.props.color}

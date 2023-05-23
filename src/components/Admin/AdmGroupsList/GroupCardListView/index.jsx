@@ -5,6 +5,7 @@ import {
   CardGroup,
   IconButton,
   Tag,
+  NameGroup,
   TeamsContainer,
   Avatar,
   AvatarContainer,
@@ -25,7 +26,7 @@ import { useFetchCustomer } from "../../../../hook/useFetchCustomer";
 import { useUserContext } from "../../../../hook/useUserContext";
 
 // Group List //
-import {useGroupListContext} from "../../../../hook/useGroupListContext";
+import { useGroupListContext } from "../../../../hook/useGroupListContext";
 import { useFetchAdmGroupList } from "../../../../hook/useFetchAdmGroupList";
 const AdmGroupCardListView = (props) => {
 
@@ -50,7 +51,7 @@ const AdmGroupCardListView = (props) => {
   const { openModal, openModalPopUp } = props;
   const { updateStatus } = useFetchAdmGroupList();
   const [userOption, setUserOption] = useState([{}]);
-  const { group: groupList, updateGroup} = useGroupListContext();
+  const { group: groupList, updateGroup } = useGroupListContext();
   const group = groupList.filter((item) => item.id === props.id)[0];
 
   const { toggleState, setToggleState } = useGroupListContext();
@@ -58,7 +59,7 @@ const AdmGroupCardListView = (props) => {
   const { setModalInfo, setInfoGroup } = useGroupListContext();
 
   const [isActive, setIsActive] = useState(group.status === "ATIVO");
- 
+
   const handleToggle = () => {
     const newStatus = isActive ? "INATIVO" : "ATIVO";
     setIsActive(!isActive);
@@ -70,23 +71,23 @@ const AdmGroupCardListView = (props) => {
   return (
 
     <ContainerFather>
-    <Container>
-    
-    <CardGroup
+      <Container>
+
+        <CardGroup
           isActive={isActive}
           active={isActive}
           $mode={group.status}
           checked={isActive}>
-      <TopContainer>
-        <Tag
-        isActive={isActive}
-        $mode={group.status}
-        checked={isActive}>
-          <span>{group.textCustomer}</span>
-        </Tag>
+          <TopContainer>
+            <Tag
+              isActive={isActive}
+              $mode={group.status}
+              checked={isActive}>
+              <span>{group.textCustomer}</span>
+            </Tag>
 
-  <DivToggleIcon>
-        <ToggleContainer
+            <DivToggleIcon>
+              <ToggleContainer
                 isActive={isActive}
                 $mode={group.status}
                 checked={isActive}
@@ -99,34 +100,35 @@ const AdmGroupCardListView = (props) => {
                   onClick={() => handleClick()}
                 />
                 <ToggleButton checked={isActive} />
-  </ToggleContainer>    
+              </ToggleContainer>
 
 
-        {/* <IconButton onClick={handleEdit}>
-            <IconSystem  icon={"Edit"} height={"13px"} />
-        </IconButton> */}
-        </DivToggleIcon> 
-      </TopContainer>
+              <IconButton onClick={handleEdit}>
+                <IconSystem icon={"Edit"} height={"13px"} />
+              </IconButton>
+            </DivToggleIcon>
+          </TopContainer>
 
-   
 
-      <Content onClick={() => handleInfo()}>
-        <DivIconItau>
-        <PeopleTeams 
-        style={{
-        fill: "#E7E7E7"}}  />
-       </DivIconItau>
-        <Body type={"Body1"} name={group.group_name} />
-        <TeamsContainer>
-          <FontSubtitle type={"TextDescription"} name={"Team members"} />
 
-     {group.usersCount} members
+          <Content onClick={() => handleInfo()}>
+            <DivIconItau>
+              <PeopleTeams
+                style={{
+                  fill: "#E7E7E7"
+                }} />
+            </DivIconItau>
+           <NameGroup>{group.group_name}</NameGroup>
+            <TeamsContainer>
+              <FontSubtitle type={"TextDescription"} name={"Team members"} />
 
-        </TeamsContainer>
-      </Content>
-      
-      </CardGroup>
-    </Container>
+              {group.usersCount} members
+
+            </TeamsContainer>
+          </Content>
+
+        </CardGroup>
+      </Container>
     </ContainerFather>
   );
 };

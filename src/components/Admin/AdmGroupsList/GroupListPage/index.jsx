@@ -36,6 +36,7 @@ import AddEditGroup from "../../AdmGroupsList/GroupListAddEdit";
 import AdmGroupCardListView from "../GroupCardListView/index";
 import InfoGroup from "../../AdmGroupsList/ModalInfoGroup";
 import ModalGroupDetails from "../ModalGroupDetails";
+import EditGroupList from "../EditGroupList"
 
 const abaStatus = {
   ATIVO: "ATIVO",
@@ -47,9 +48,9 @@ const GroupListView = () => {
 
   const [groupList, setGroupList] = useState();
   const [modalPopUp, setModalPopUp] = useState(false);
-  const [modal, setModal] = useState(false);
+  //const [modal, setModal] = useState(false);
   const [isEdit, setEdit] = useState(false);
-  const { group, infoGroup, setInfoGroup, setIdEdit } = useGroupListContext();
+  const { group, infoGroup, setInfoGroup, setIdEdit, modal, setModal } = useGroupListContext();
 
   //const [infoGroup, setInfoGroup] = useState(true);
 
@@ -73,12 +74,12 @@ const GroupListView = () => {
     setInfoGroup(false);
   };
 
-  const EditGroup = (item) => {
+  {/*const EditGroup = (item) => {
     setIdEdit(item.id);
     setModal(true);
     setEdit(true);
     setInfoGroup(false);
-  };
+  };*/}
 
   const modalClose = () => {
     setModalPopUp(true);
@@ -90,10 +91,6 @@ const GroupListView = () => {
 
   return (
     <ContainerGlobal>
-      <Routes>
-        Home {">"} <span> Group List</span>
-      </Routes>
-
       <ContainerHeaderAndCards>
         <HeaderContainerCards>
           <Top>
@@ -170,32 +167,47 @@ const GroupListView = () => {
                     //openModal={() => detailsModal()}
                     key={item.id}
                     id={item.id}
-                    openModal={() => EditGroup(item)}
+                   // openModal={() => EditGroup(item)}
                   />
                 ))}
           </BoardStyle>
         </CardsContainer>
       </ContainerHeaderAndCards>
 
-      <DivModal $mode={modal} />
+      <DivModal $mode={modalEditGroup}/>
 
+     {modalEditGroup && (
+     <EditGroupList
+     id={id}
+     setModalEditGroup={setModalEditGroup}
+     title={"Edit Group"}
+     />
+    )}
+
+<DivModal $mode={modal}/>
       {modal && (
         <AddEditGroup
           id={id}
+          setId={(i) => setId(i)}
           setModal={setModal}
-          title={isEdit ? "Edit Group" : "Create Group"}
+          title={"Create Group"}
         />
       )}
+
+      
 
       <DivModal $mode={modalInfo} />
       {modalInfo && (
         <ModalGroupDetails
           id={id}
+          setId={(i) => setId(i)}
           openModal={() => detailsModal()}
           setModalInfo={setModalInfo}
           title={"Group Details"}
+          //openModal={() => EditGroup(item)}
         />
       )}
+
 
       {infoGroup && (
         <InfoGroup id={id} setInfoGroup={setInfoGroup} title={"Info Group"} />

@@ -60,10 +60,10 @@ ${(props) => {
   height: auto;
   z-index: 9999999;
   margin-top: 3%;
-  padding-bottom: 1%;
+  padding-bottom: 3%;
   position: relative;
   align-items: center;
-  padding-right: 2%;
+  padding-right: 3%;
   background: #F5F7FA;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   border-radius: 8px;

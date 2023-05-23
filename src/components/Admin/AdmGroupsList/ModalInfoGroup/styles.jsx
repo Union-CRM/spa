@@ -86,11 +86,10 @@ export const DivClose = styled.div`
 export const Container = styled.div`
   grid-column: 2;
   width: 80%;
-  min-width: 300px;
+  min-width: 385px;
   height: 100%;
   background: #fff;
   display: grid;
-  background: #fff;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   z-index: 1000;
