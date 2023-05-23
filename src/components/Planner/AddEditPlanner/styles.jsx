@@ -60,7 +60,7 @@ export const InputPlanner = styled.input`
     border-radius: 6px;
 `
 export const InputStatus = styled.input`
-    width: 10.4vw;
+    width: 97%;
     height: 3.5vh;
     border-radius: 6px;
 `
@@ -97,10 +97,12 @@ export const PositionTags = styled.div`
     margin-left: 5.5%;
     margin-top: 3%;
     margin-bottom: 2%;
+    width:86%;
 `
 
 export const PositionStatus = styled.div`
     margin-left: 5%;
+    width:32.5%;
 `
 export const DivDate = styled.div`
    display: flex;

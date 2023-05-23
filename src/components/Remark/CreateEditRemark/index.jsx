@@ -86,7 +86,6 @@ const CreateEditRemark = (props) => {
   const handleSubmit = () => {
     if (props.title === "Create Remark") {
       handleCreateRemark();
-      setModalSucess(true);
     } else {
       handleEditRemark();
     }
@@ -102,7 +101,6 @@ const CreateEditRemark = (props) => {
     ) {
       createRemark({ ...newRemark, user_id: userTarget.id });
       props.setModal(false);
-      setModalSaveRemark(true);
     } else {
       setFlag(true);
     }
@@ -125,8 +123,6 @@ const CreateEditRemark = (props) => {
         newRemark.id
       );
       props.setModal(false);
-      setModalSaveRemark(true);
-      setSucessRemark(true);
     } else {
       setFlag(true);
     }
@@ -298,7 +294,7 @@ const CreateEditRemark = (props) => {
                 />
               </DivDate>
               <DivDate>
-                {prevStatus === "ACTIVE" && (
+                {prevStatus === "ACTIVE" && "FINISHED"  && "CANCELED" && (
                   <SingleSelect
                     placeholder={""}
                     set={(s) => handleSelectStatus(s)}

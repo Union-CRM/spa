@@ -51,6 +51,7 @@ export const PositionSingle = styled.div`
 export const PositionTag = styled.div`
     margin-left: 4%;
     margin-top: 2%;
+    width:92%;
 `
 
 export const PositionButtons = styled.div`

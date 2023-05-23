@@ -372,7 +372,7 @@ const ModalPlanner = (props) => {
             label={"Guests"}
             tags={guest}
             width={"90%"}
-            widths={"13vw"}
+            widths={"100%"}
             set={(g) => setGuest(g)}
             sizeHeight={"3.5vh"}
             heights={"12vh"}
@@ -389,9 +389,9 @@ const ModalPlanner = (props) => {
               options={StatusOption}
               value={status}
               label={"Status"}
-              sizeSingle={"37%"}
+              sizeSingle={"97%"}
               sizeMenuList={"100%"}
-              sizeMenu={"33%"}
+              sizeMenu={"100%"}
               isDisabled={false}
               sizeHeight={"3.5vh"}
             />

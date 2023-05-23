@@ -79,9 +79,9 @@ const AddEditUser = (props) => {
 
   const levelOptions = levels
     .map((l) => {
-      if (l < user.level) {
+      //if (l < user.level) {
         return { value: l, label: l };
-      }
+      //}
     })
     .filter((l) => l);
 
@@ -99,6 +99,7 @@ const AddEditUser = (props) => {
 
   return (
     <>
+    {console.log(levels)}
       <ContainerCentral>
         <Container>
           <PositionTitle>

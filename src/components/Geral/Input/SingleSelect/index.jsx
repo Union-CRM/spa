@@ -46,8 +46,10 @@ export const SingleSelect = (props) => {
             placeholder: (styles, state) => ({
               ...styles,
               color: "#656464",
+             
               "::placeholder-shown": {
                 borderColor: "red",
+      
               },
             }),
 
@@ -59,10 +61,10 @@ export const SingleSelect = (props) => {
               height: "28px !important",
               position: "relative !important",
               cursor: "pointer",
-              backgroundColor: "transparent",
+              backgroundColor:  props.backgroundColor || "transparent",
               display: "flex",
               borderRadius: "5px",
-              fontSize:"0.9rem",
+              fontSize:"0.82rem",
               top: "0px",
               alignItems: "center",
             }),
@@ -89,7 +91,7 @@ export const SingleSelect = (props) => {
               maxWidth: props.sizeMenuList || "auto",
               overflowY: "scroll",
               "&::-webkit-scrollbar": {
-                backgroundColor: "#DFDFDF",
+                backgroundColor: "#FFF",
               },
               "&::-webkit-scrollbar-thumb ": {
                 backgroundColor: "#DFDFDF",

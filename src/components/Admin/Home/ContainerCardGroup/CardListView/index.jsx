@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import Body from "../../../../../assets/FontSystem/Body";
 import Subtitle from "../../../../../assets/FontSystem/Subtitle";
 import {
@@ -22,8 +22,10 @@ import { Link } from "react-router-dom";
 import { useGroupListContext } from "../../../../../hook/useGroupListContext";
 import { useSubjectContext } from "../../../../../hook/useSubjectContent";
 import { usePlannerContext } from "../../../../../hook/usePlannerContext";
+import { useFetchAdmGroupList } from "../../../../../hook/useFetchAdmGroupList";
 
 const Group = (props) => {
+ 
   const {
     group: groupList,
     setModalInfo,
@@ -31,9 +33,10 @@ const Group = (props) => {
     setInfoGroup,
     setToggleState,
     setActiveTab,
+    countGroups
   } = useGroupListContext();
   const group = groupList.filter((g) => g.id === props.id)[0];
-  const { subject } = useSubjectContext();
+  /*const { subject } = useSubjectContext();
 
   const { planner } = usePlannerContext();
   const plannerGroup = planner
@@ -41,7 +44,7 @@ const Group = (props) => {
     : [];
   const subjectGroup = subject
     ? subject.filter((s) => group.usersId.includes(s.user_id))
-    : [];
+    : [];*/
 
   const handleClickViewGroup = () => {
     setInfoGroup(false);
@@ -50,6 +53,11 @@ const Group = (props) => {
     setModalInfo(true);
     setId(group.id);
   };
+  const [count,setCount] = useState();
+
+  useEffect( () =>{
+    setCount(countGroups.filter((item) => item.group_id === group.id)[0])
+  },[countGroups])
 
   return (
     <>
@@ -69,17 +77,17 @@ const Group = (props) => {
             <DivInfo>
               <Body
                 type={"Body3"}
-                name={group.textCustomer}
+                name={`${group.textCustomer}  |`}
                 colorFont={"rgba(0, 0, 0, 1)"}
               />
               <Body
                 type={"Body3"}
-                name={`${group.usersCount}  Users`}
+                name={`|   ${count ? count.qnt : 0} Users`}
                 colorFont={"rgba(0, 0, 0, 1)"}
               />
             </DivInfo>
             <DivTextCard>
-              <TextSubject>
+              {/*<TextSubject>
                 <Subtitle
                   type={"TextDescription"}
                   name={"Subjects"}
@@ -92,8 +100,8 @@ const Group = (props) => {
                     colorFont={"rgba(0, 0, 0, 0.6);"}
                   />
                 </DivDonut>
-              </TextSubject>
-              <TextSubject>
+              </TextSubject>*/}
+              {/*<TextSubject>
                 <Subtitle
                   type={"TextDescription"}
                   name={"Planners "}
@@ -106,7 +114,7 @@ const Group = (props) => {
                     colorFont={"rgba(0, 0, 0, 0.6);"}
                   />
                 </DivDonut>
-              </TextSubject>
+              </TextSubject>*/}
             </DivTextCard>
           </ClientContent>
           <UserContent>

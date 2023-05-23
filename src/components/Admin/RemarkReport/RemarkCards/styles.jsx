@@ -16,11 +16,13 @@ export const Container = styled.div`
     }
     :hover {
         background-color: #A9A9A9;
+        border: #
     }
 `;
 
 export const DivInfo = styled.div`
     border: 1px solid #A9A9A9;
+    :hover
     width: 100%;
     display: flex;
     flex-direction: column;

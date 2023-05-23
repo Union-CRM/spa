@@ -128,7 +128,7 @@ export const BoardStyle = styled.div`
   z-index: 0 !important;
   width: 99%;
   top: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
   grid-gap: 20px;
   grid-row: 1;
   display: grid;

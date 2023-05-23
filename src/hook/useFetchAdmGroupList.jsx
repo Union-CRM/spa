@@ -2,13 +2,13 @@ import axios from "axios";
 import { useGroupListContext } from "./useGroupListContext";
 
 import { useUserContext } from "./useUserContext";
-import { groupCreate, groupUpdate, attachUser,  } from "../api/routesAPI";
+import { groupCreate, groupUpdate, attachUser, getUsersGroup, countUserGroup, groupUpdateStatus  } from "../api/routesAPI";
+
 export const useFetchAdmGroupList = () => {
-  const { loadData } = useGroupListContext();
+
+  const { loadData, setUsersGroup , setCountGroups,loadContGroup } = useGroupListContext();
   
-  const insertGroup = async (group) => {
-    console.log(group)
-    
+  const insertGroup = async (group) => {    
     axios
       .post(
         groupCreate,
@@ -21,15 +21,13 @@ export const useFetchAdmGroupList = () => {
       )
       .then(function (response) {
         loadData();
-        console.log("over here ")
-        //console.log(response);
+        loadContGroup();
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   };
   const updateGroup = async (group, group_id) => {
-    console.log(group +"segundou" + group_id)
     axios
       .put(
         `${groupUpdate}${group_id}`,
@@ -41,17 +39,17 @@ export const useFetchAdmGroupList = () => {
       )
       .then(function (response) {
         loadData();
-        //console.log(response);
+        loadContGroup();
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   };
 
   const updateStatus = async (group_id) => {
     axios
       .put(
-        `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/update/status/${group_id}`,
+        `${groupUpdateStatus}${group_id}`,
         {      
         },
         {
@@ -60,10 +58,9 @@ export const useFetchAdmGroupList = () => {
       )
       .then(function (response) {
         loadData();
-        //console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -78,10 +75,9 @@ export const useFetchAdmGroupList = () => {
       )
       .then(function (response) {
         loadData();
-        //console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -97,20 +93,36 @@ export const useFetchAdmGroupList = () => {
       )
       .then(function (response) {
         loadData();
-        //console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   };
 
-  
+  const groups = async (group_id) => {
+    let groups;
+    try {
+      const response = await axios.get(`${getUsersGroup}${group_id}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      },
+      ),
+      groups = response;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+   
   return {
     insertGroup,
     updateGroup,
     updateStatus,
     detachUser,
-    attachUser
+    attachUser,
+    getUsersGroup,
+    setCountGroups,
+    //countGroup,
+    groups
 
   };
 };

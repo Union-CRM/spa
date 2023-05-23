@@ -55,9 +55,17 @@ export const groupCreate = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:
 
 export const groupUpdate = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/update/`;
 
+export const groupUpdateStatus = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/update/status/`;
+
 export const attachUser = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/update/attach/`;
 
 export const detachUser = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/update/detach/`;
+
+export const groupGetUser = "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/user/"; //adicionar id usuario
+
+export const countUserGroup = "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/count/user/";//adicionar id usuario  
+
+export const getUsersGroup = "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/usersGroup/"; //id do grupo
 
 //client
 export const clientGetClientsMyGroups =
@@ -87,8 +95,7 @@ export const customerUpdate =
 export const customerUpdateStatus =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8084/union/v1/customers/update/status/";
 
-export const groupGetUser =
-  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/user/"; //adicionar id usuario
+
 
 //FetchRealise
 export const realiseGetRealiseTrains =
