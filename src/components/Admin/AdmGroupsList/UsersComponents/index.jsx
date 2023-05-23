@@ -9,7 +9,11 @@ import {ReactComponent as Drop} from "../../../../assets/svg/Drop.svg"
 export const UsersComponents = (props, placeholder, idTagOption) => {
   const animatedComponents = makeAnimated();
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const colors = ["#FFC0CB", "#DDA0DD", "#F5DEB3", "#98FB98", "#87CEEB"];
 
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
 
 const DropdownIndicator = () => {
     if (props.indicator){
@@ -32,7 +36,7 @@ const DropdownIndicator = () => {
   const options = props.options.map((item) => ({
     value: item.value,
     label: item.label,
-   
+    color: colors[Math.floor(Math.random() * (colors.length - 1))],
   }));
 
   return (
@@ -77,9 +81,7 @@ const DropdownIndicator = () => {
               }),
 
               control: (state) => ({
-                border: `2px solid ${
-                  props.placeholder === "" ? "#888C95" : "#b03535"
-                }`,
+                border: "2px solid #888C95",
                 height: "100% !important",
                 top: props.top || "0px",
                 width: props.width || "99%",
@@ -93,7 +95,7 @@ const DropdownIndicator = () => {
                 return {
                   ...styles,
                   gridRow:"2",
-                  display: "grid",
+                  display: "flex",
                   position: props.positions || "absolute",
                   borderRadius: "5px",
                   top: props.top || "9px",
@@ -167,10 +169,13 @@ const DropdownIndicator = () => {
               multiValue: (styles, { data }) => {
                 return {
                   ...styles,
-                  width:"fit-content",
-                  backgroundColor: "#F5F5F5",
+                  backgroundColor: data.color,
+                  height:"fit-content",
                   borderRadius: "7px",
                   color: "red",
+                  width:"fit-content",
+                  flexWrap: "wrap",
+                  fontSize:"1rem",
                 };
               },
               multiValueLabel: (styles, { data }) => {

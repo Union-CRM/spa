@@ -10,6 +10,7 @@ import { ReactComponent as Remark } from "../../../assets/svg/Remark.svg";
 import { useCustomerContext } from "../../../hook/useCustomerContext";
 import { useLocation } from 'react-router-dom';
 import { ReactComponent as Report } from "../../../assets/svg/ReportRemark.svg";
+
 import {
   Container,
   OpenClose,
@@ -86,14 +87,17 @@ const SidBar = (props) => {
       setSelectedIcon('remark');
     }else if (path === '/planner') {
       setSelectedIcon('planner');
+
     }else if (path === '/remarkReport') {
     setSelectedIcon('planilha');
+
     }
   }, [location]);
 
   return (
     <>
       <Container $column={props.column} $row={props.row} $mode={sidBarState}>
+        {console.log(colorPageUser)}
         <OpenClose
           $mode={sidBarState}
           onClick={() => setSidBarState(!sidBarState)}
@@ -172,6 +176,7 @@ const SidBar = (props) => {
               </Slink>
               <Slink onClick={() => handleIconClick('customer')} to="/customer">
                 <Li selected={selectedIcon === 'customer'} level={user.level}>
+
                   <Icon $mode={sidBarState}>
                     <IconSystem icon="Costumer" width={"24px"} height={"24px"}/>
                     <Span $mode={sidBarState}>Customer</Span>
@@ -183,6 +188,7 @@ const SidBar = (props) => {
                   <Icon $mode={sidBarState}>
                     <Report fill={"#FFFFFF"} width={"24px"} height={"24px"}/>
                     <Span $mode={sidBarState}>Report</Span>
+
                   </Icon>
                 </Li>
               </Slink>

@@ -371,13 +371,12 @@ const ModalPlanner = (props) => {
             placeholder={""}
             label={"Guests"}
             tags={guest}
-            width={"90%"}
-            widths={"13vw"}
+            width={"88%"}
+            widths={"100%"}
             set={(g) => setGuest(g)}
             sizeHeight={"3.5vh"}
-            heights={"12vh"}
-            sizeMenuList={"10vw"}
-            sizeMenu={"35%"}
+            heights={"13vh"}
+            sizeMenu={"36%"}
             indicator={"guest"}
           />
         </PositionTags>
