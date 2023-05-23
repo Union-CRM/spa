@@ -39,7 +39,7 @@ const PopUpCanceled= () => {
             <Title>
               <p>Planner Canceled</p>
             </Title>
-            <Button onClick={() => handleReschedule()}>Resschedule Planner</Button>
+            <Button onClick={() => handleReschedule()}>Reschedule Planner</Button>
             <Button onClick={() => handleSubject()}>Create New Subject</Button>
             <Button onClick={() => handleFollowUp()}>Schedule Follow Up</Button>
           </Content>

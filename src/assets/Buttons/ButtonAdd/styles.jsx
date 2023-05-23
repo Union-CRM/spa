@@ -7,6 +7,9 @@ export const Button = styled.button`
   height: ${(props) => props.$height || "50px"};
   padding: ${(props) => props.$padding || "15px"};
   display: flex;
+  @media(max-width: 1120px){ 
+    width: 150px;
+  }
   align-items: center;
   text-align: center;
   border-radius: 0.5em;
