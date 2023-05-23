@@ -68,7 +68,6 @@ const ModalGroupDetails = (props) => {
     setModalEditGroup(true);
     setModalInfo(false);
     props.setIdEdit(group.id);
-
   };
 
 

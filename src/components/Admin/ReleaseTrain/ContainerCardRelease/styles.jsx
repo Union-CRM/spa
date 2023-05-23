@@ -8,9 +8,12 @@ export const ContainerGlobal = styled.div`
   min-width: 400px;
   position: relative;
   grid-template-columns: 50% 50%;
+  @media(max-width: 1050px){
+    grid-template-columns: ${(props) => (props.$mode ? "50% 50%" : "100%")};
+  }
   grid-template-rows: 100%;
   @media (width: 500px) {
-    width: 790px;
+    width: 100%;
   }
   @media (min-width: 1824px) and (max-width: 2000px) {
     width: 100%;
@@ -21,17 +24,16 @@ export const ContainerGlobal = styled.div`
 //* Container father and children *//
 export const ContainerHeaderAndCards = styled.div`
   width: 100%;
-  min-width: 340px;
   height: 100%;
   grid-column: 1;
   grid-row: 1;
   position: relative;
   display: grid;
   border-radius: 8px;
-  grid-template-rows: 15% 85%;
+  grid-template-rows: 20% 80%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   @media (min-width: 50px) and (max-width: 1360px) {
-    height: 80vh;
+    height: 95%;
     width: 100%;
   }
   @media (min-width: 1355px) and (max-width: 1824px) {
@@ -54,7 +56,6 @@ export const HeaderContainerCards = styled.div`
     display: grid;
     grid-row: 1;
     position: relative;
-    grid-column: 1;
     width: 100%;
     flex-direction:column;
     height: auto;
@@ -187,6 +188,9 @@ export const H1 = styled.h1`
   width: fit-content;
   font-family: "Houschka Rounded Alt";
   font-size: 24px;
+  @media(max-width: 1120px) {
+    font-size: 18px;
+  }
   font-style: normal;
   font-weight: 600;
   line-height: 28px;
@@ -201,6 +205,9 @@ export const H1 = styled.h1`
 // Number of cards Clients //
 export const HowManyClientList = styled.span`
   font-size: 24px;
+  @media(max-width: 1120px) {
+    font-size: 18px;
+  }
   color: #525b75;
   font-weight: 600;
   @media (min-width: 100px) and (max-width: 600px) {
@@ -217,6 +224,9 @@ export const DivButton = styled.div`
   justify-content: end;
   align-items: center;
   text-align: center;
+  @media(max-width: 670px) {
+    margin-left: -30px;
+  }
 `;
 
 /// Div Buttons Status ///

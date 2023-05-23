@@ -13,7 +13,6 @@ export const userUpdateStatus =
 
 export const userCreate =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users";
-
 //Subject
 export const subjectGetSubmissivesSubjects =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/submissives";
@@ -29,7 +28,6 @@ export const subjectUpdateStatusFinished =
 
 export const subjectUpdateStatusCanceled =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/update/canceled/";
-  
 //Remark
 export const remarkGetSubmissivesRemarks =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8088/union/v1/remarks/submissives";

@@ -59,10 +59,9 @@ export const Container = styled.div`
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   z-index: 1000;
-  grid-template-rows: 10% 70% 20%;
-  
+  grid-template-rows: 10% 75% 15%;
   @media (width: 500px) {
-    height: 82vh;
+    height: 81vh;
     width: 375px;
     flex-direction: flex-start;
     position: relative;
@@ -83,7 +82,7 @@ export const Form = styled.div`
   grid-row: 2;
   grid-template-rows: 14.2% 14.2% 14.2% 14.2% 14.2% 29%;
   @media (min-width: 1355px) and (max-width: 1824px) {
-    width: 93%;
+    width: 95%;
     height: 100%;
   }
   @media (min-width: 1824px) and (max-width: 2000px) {
@@ -106,7 +105,7 @@ export const Input = styled.input`
 `;
 
 export const TextArea = styled.textarea`
-  height: ${(props) => props.heightInput || "60px"};
+  height: ${(props) => props.heightInput || "80px"};
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
   border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
@@ -116,7 +115,7 @@ export const TextArea = styled.textarea`
   padding-left: 2%;
   position: relative;
   @media (min-width: 1355px) and (max-width: 1824px) {
-    height: 60px;
+    height: 70px;
   }
   @media (min-width: 1824px) and (max-width: 2000px) {
     height: 100px;
@@ -178,10 +177,8 @@ export const DivButton = styled.div`
   width: 100%;
   height: 100%;
   grid-row: 3;
-  @media (650px) {
-    
-  }
   @media (min-width: 1355px) and (max-width: 1824px) {
+    bottom: 10%;
     position: relative;
     height: 100%;
   }
@@ -190,16 +187,10 @@ export const DivButton = styled.div`
   }
 `;
 
-export const PositionButtonCancel = styled.div` display:flex;
-justify-content: center;
-position: relative;
-align-items: center;`;
+export const PositionButtonCancel = styled.div``;
 
 export const ClickButton = styled.div`
-  display:flex;
-  justify-content: center;
-  position: relative;
-  align-items: center;
+  display: block;
 `;
 
 export const DivDate = styled.div`
@@ -211,19 +202,3 @@ export const DivDateAll = styled.div`
   display: grid;
   grid-template-columns: 30% 30% 30%;
 `;
-
-export const AlertaDate = styled.div`
- background-color: rgba(187, 30, 0, 1);
- border-radius:5px;
- padding:2px;
- height:fit-content;
- align-items:center;
- text-align:center;
- justify-content:center;
- span {
-  color:#fff;
-  text-align:center;
-  font-size:0.9em;
- }
-
- `;

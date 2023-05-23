@@ -55,6 +55,7 @@ const ReleaseTrain = (props) => {
   const [active, setActive] = useState(abaStatus.ACTIVE);
   const { search } = useSearchContext();
   const { user, userTarget, setUserTarget } = useUserContext();
+  const layout = modalCreateRelease ? true : false;
 
   // Function that is getting the card id to open the modal with the card info
   const EditRelease = (id) => {
@@ -107,7 +108,7 @@ const ReleaseTrain = (props) => {
   }, [search,release]);
 
   return (
-    <ContainerGlobal>
+    <ContainerGlobal $mode={layout}>
       <ContainerHeaderAndCards>
         <HeaderContainerCards>
           <Top>
@@ -127,7 +128,6 @@ const ReleaseTrain = (props) => {
               </DivInfo>
             </Tippy>
             </DivTitlePage>
-
             <DivButton onClick={() => handleModal()}>
               <ButtonAdd
                 mode="#E41165"

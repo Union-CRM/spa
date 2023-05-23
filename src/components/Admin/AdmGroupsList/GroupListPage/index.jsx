@@ -38,7 +38,6 @@ import InfoGroup from "../../AdmGroupsList/ModalInfoGroup";
 import ModalGroupDetails from "../ModalGroupDetails";
 import EditGroupList from "../EditGroupList"
 
-
 const abaStatus = {
   ATIVO: "ATIVO",
   INATIVO: "INATIVO",
@@ -75,13 +74,12 @@ const GroupListView = () => {
     setInfoGroup(false);
   };
 
-
-  const EditGroup = (item) => {
+  {/*const EditGroup = (item) => {
     setIdEdit(item.id);
     setModal(true);
     setEdit(true);
     setInfoGroup(false);
-  };
+  };*/}
 
   const modalClose = () => {
     setModalPopUp(true);
@@ -196,6 +194,7 @@ const GroupListView = () => {
         />
       )}
 
+      
 
       <DivModal $mode={modalInfo} />
       {modalInfo && (
@@ -208,6 +207,7 @@ const GroupListView = () => {
           //openModal={() => EditGroup(item)}
         />
       )}
+
 
       {infoGroup && (
         <InfoGroup id={id} setInfoGroup={setInfoGroup} title={"Info Group"} />

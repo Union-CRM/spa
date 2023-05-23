@@ -18,7 +18,6 @@ import {
   DivDate,
   DivDateAll,
   DivTitle,
-  AlertaDate,
 } from "./styles";
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
@@ -26,11 +25,6 @@ import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
 import { useUserContext } from "../../../hook/useUserContext";
 import { useFetchRemark } from "../../../hook/useFetchRemark";
-
-// Alerts //
-/*const [invalidHour, setInvalidHour] = useState(false);
-const [invalidDateStart, setInvalidDateStart] = useState(false);
-const [invalidDateFinish, setInvalidDateFinish] = useState(false);*/
 
 const CreateEditRemark = (props) => {
   const [newRemark, setNewRemark] = useState(remarkEntity);
@@ -304,9 +298,7 @@ const CreateEditRemark = (props) => {
                 />
               </DivDate>
               <DivDate>
-
                 {prevStatus === "ACTIVE" && (
-
                   <SingleSelect
                     placeholder={""}
                     set={(s) => handleSelectStatus(s)}
@@ -319,7 +311,6 @@ const CreateEditRemark = (props) => {
                     isDisabled={false}
                     sizeHeight={"3.5vh"}
                   />
-
                 )}
               </DivDate>
             </DivDateAll>
@@ -341,11 +332,6 @@ const CreateEditRemark = (props) => {
           </Form>
 
           <DivButton>
-
-          {flag &&
-              <AlertaDate><span>
-              Please make sure all fields are filled in to continue.</span></AlertaDate>}
-
             <ClickButton onClick={handleSubmit}>
               <ButtonDefault
                 type={"userSave"}
@@ -363,9 +349,6 @@ const CreateEditRemark = (props) => {
                 sizeFont={"1rem"}
               />
             </PositionButtonCancel>
-
-           
-
           </DivButton>
         </Container>
       </ContainerCentral>

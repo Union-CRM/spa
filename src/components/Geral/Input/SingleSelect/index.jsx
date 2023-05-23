@@ -89,7 +89,7 @@ export const SingleSelect = (props) => {
               maxWidth: props.sizeMenuList || "auto",
               overflowY: "scroll",
               "&::-webkit-scrollbar": {
-                backgroundColor: "#FFF",
+                backgroundColor: "#DFDFDF",
               },
               "&::-webkit-scrollbar-thumb ": {
                 backgroundColor: "#DFDFDF",
