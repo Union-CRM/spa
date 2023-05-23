@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const ContainerCards = styled.div`
-  
+
   margin-top: 15px;
   margin-left: 8%;
   margin-right: 8%;
@@ -146,6 +146,11 @@ export const DivPhoto = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+`;
+
+export const PhotoName = styled.div`
+  font-size:0.8rem;
+  font-weight:800;
 `;
 
 export const ReleaseTrain = styled.div`

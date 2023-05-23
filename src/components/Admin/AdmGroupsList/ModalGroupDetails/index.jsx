@@ -65,9 +65,9 @@ const ModalGroupDetails = (props) => {
   };
 
   const handleEdit = () => {
+    setIdEdit(id)
     setModalEditGroup(true);
     setModalInfo(false);
-    props.setIdEdit(group.id);
   };
 
 
@@ -94,8 +94,7 @@ const ModalGroupDetails = (props) => {
             {group.group_name}
             </GroupName>
 
-            {activeTab === 0 &&
-          (
+            {activeTab === 0 && (
            <IconTag onClick={handleEdit} >
           <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
           </IconTag>

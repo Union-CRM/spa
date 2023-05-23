@@ -35,9 +35,9 @@ const EditGroupList = (props) => {
   const [customer_id, setCustomerId] = useState();
   const { loadCustomerOptions } = useFetchCustomer();
   const [customerList,setCustomerList] = useState([])
-  const {insertGroup, updateGroup, attachUser, detachUser} = useFetchAdmGroupList();
+  const {insertGroup, updateGroup, attachUser, detachUser,} = useFetchAdmGroupList();
   const { group: groupList} = useGroupListContext();
-  const {  setInfoGroup, idEdit, setModalEditGroup, setModalInfo } = useGroupListContext();
+  const {  setInfoGroup, idEdit, setModalEditGroup, setModalInfo, teamMembers } = useGroupListContext();
   const { toggleState, setToggleState, loadData} = useGroupListContext();
   const [userOptions, setUserOptions] = useState([]);
   const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin();
@@ -48,11 +48,11 @@ const EditGroupList = (props) => {
   
   const{loadUserSub,loadUserNotin} = useFetchUsersNotin()
   useEffect(()=>{
-    loadUserNotin()
+    //loadUserNotin()
     loadUserSub()
   }, [])
  
-  const usersList = userSub.concat(usersNotin)
+  const usersList = userSub//.concat(usersNotin)
   
   useEffect(() => {
     if (usersList) {
@@ -69,7 +69,6 @@ const EditGroupList = (props) => {
     }, [])
 
     const handleSelectCustomer = (cs) => {
-      console.log(cs)
       setCustomer(customerList.filter((c) => c.id === cs)[0]);
     };
 
@@ -81,9 +80,10 @@ const EditGroupList = (props) => {
           customer: customer.id,
           user:users.map((g) => ({ id: g.value })), 
         };
-        console.log(newGroup)
         if (groupName && customer && users) {
           updateGroup(newGroup, idEdit) 
+          setToggleState(0);
+          setModalInfo(true);
           setModalEditGroup(false);
         }else {
           setFlag(true);
@@ -91,14 +91,13 @@ const EditGroupList = (props) => {
     };
 
       useEffect(() => {
-      console.log(idEdit)
       if (props.title === "Edit Group") {
          //const group = groupList.filter((item) => item.id === props.id)[0];
         const group = groupList.filter((item) => item.id === idEdit)[0]
         setGroupName(group.group_name)
         setCustomer({ id: group.customer_id, label: group.textCustomer })
         setUserGroup(
-          group.usuarios.map((item) => ({
+          teamMembers.map((item) => ({
             value: item.user_id,
             label: item.user_name,
             color: colors[Math.floor(Math.random() * (colors.length - 1))],
@@ -110,7 +109,6 @@ const EditGroupList = (props) => {
     const handleSubmit = () => {
         if (props.title === "Edit Group") {
             editGroup();
-            setModalEditGroup(false);
        } 
       };
     
@@ -123,7 +121,6 @@ const EditGroupList = (props) => {
           
   return (
     <>
-    {console.log(userOptions)}
       <ContainerCentral>
         <Container>
           <PositionTitle>

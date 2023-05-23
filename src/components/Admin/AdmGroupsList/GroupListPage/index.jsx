@@ -209,9 +209,9 @@ const GroupListView = () => {
       )}
 
 
-      {infoGroup && (
+      {/*infoGroup && (
         <InfoGroup id={id} setInfoGroup={setInfoGroup} title={"Info Group"} />
-      )}
+      )*/}
     </ContainerGlobal>
   );
 };

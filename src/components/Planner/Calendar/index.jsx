@@ -152,7 +152,7 @@ export const BigCalender = (props) => {
           <DivIconSearch>
             <Tippy content="Search">
               <DivIconS name="search">
-                <IconSystem icon="Search" width={"20px"} height={"3vh"} />
+                <IconSystem icon="Search" fill={"color: #007bff"} width={"20px"} height={"17px"} />
               </DivIconS>
             </Tippy>
             <InputSearch
@@ -192,7 +192,7 @@ export const BigCalender = (props) => {
           <DivCreatePlanner onClick={() => setModalCreate(true)}>
             <ButtonAdd
               height={"4.8vh"}
-              width={"9.5vw"}
+              width={"45%"}
               mode={"#007BFF"}
               color={"#FFFFFF"}
               name={"Create Planner"}

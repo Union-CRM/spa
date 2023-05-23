@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 
 const TeamMembers = (props) => {
   const { setModal, id } = props;
-  const { group: groupList, loadData, setGroupPage } = useGroupListContext();
+  const { group: groupList, loadData, setGroupPage, teamMembers } = useGroupListContext();
   const [statusGroup, setStatusGroup ] = useState();
   const [users, setUsers] = useState([]);
   const [groups, setGroups] = useState([]);
@@ -32,8 +32,6 @@ const TeamMembers = (props) => {
       setGroups(groupList.filter((s) => s.id === props.id)[0]);
     }
   }, [groupList]);
-
-  console.log(groups)
 
   useEffect(() => {
     if (props.title === "Team Members") {
@@ -47,7 +45,6 @@ const TeamMembers = (props) => {
   // USER PROFILE //
   const { userList, setViewProfile, setUserTarget, setHome } = useUserContext();
 
-  console.log(props.id)
   const user = userList.filter((u) => u.id === props.id)[0];
 
   const handleClickViewProfile = (s) => {
@@ -69,8 +66,8 @@ const TeamMembers = (props) => {
 
   return (
     <ContainerDetails>
- {groups.usuarios && (
- groups.usuarios.map((s) => (
+ {teamMembers && (
+ teamMembers.map((s) => (
 
   <CardMembers $mode={group.status}>
     <GlobalCard>

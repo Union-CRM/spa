@@ -45,7 +45,7 @@ const ContainerRemarkReport = () => {
     const selectUser = (id)=>{
         setUserTarget(userOptions.filter((u)=> u.value===id )[0])
     }    
-    //console.log(remark)
+  
     const handleCreateReport =()=>{
         setRemarkList(filter())
     }
@@ -77,7 +77,7 @@ const ContainerRemarkReport = () => {
                 //verificação data final
                 if(endDate >= startDate){ 
                     setFlagEndDate(false);
-                    console.log(remark.filter((r)=> r.date.split("T")[0] >= startDate && r.date.split("T")[0] <= endDate && r.user_id === userTarget.id))
+
                     //return remark.filter((r)=> (r.date.split("T")[0] >= startDate) && (r.date.split("T")[0]<= endDate) && (r.user_id === userTarget.id))    
                     return remark.filter((r)=> r.date.split("T")[0] >= startDate && r.date.split("T")[0] <= endDate && r.user_id === userTarget.id)         
                 }else{
@@ -117,6 +117,7 @@ const ContainerRemarkReport = () => {
                 placeholder={ "" }
                 label={"User"} 
                 sizeSingle={"100%"} 
+                backgroundColor={"#FFF"}
                 options={userOptions}
                 value={userTarget.label}
               />}             

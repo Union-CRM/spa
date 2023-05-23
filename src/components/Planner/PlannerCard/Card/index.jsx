@@ -12,6 +12,7 @@ import {
   ReleaseTrain,
   Status,
   DivPhoto,
+  PhotoName,
   DivUserInformation,
   PositionStatus,
   DivTextCard,
@@ -115,7 +116,7 @@ const Card = (props) => {
           </DivStatusTime>
           <DivUserInformation>
             <DivPhoto>
-              <Body type={"Body1"} name={Split(props.userName)} />
+              <PhotoName> {Split(props.userName)} </PhotoName>
             </DivPhoto>
             <DivNameEmail>
               <NameUser>{props.userName}</NameUser>
