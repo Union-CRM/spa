@@ -13,6 +13,7 @@ import { Container,
   ButtonExportar,
   ContainerRemarks,
   Total,
+  DivCenter,
   } from "./styles";
 import { useUserContext } from '../../../hook/useUserContext';
 import { useRemarkContext } from '../../../hook/useRemarkContent';
@@ -76,7 +77,9 @@ const ContainerRemarkReport = () => {
                 //verificação data final
                 if(endDate >= startDate){ 
                     setFlagEndDate(false);
-                    return remark.filter((r)=> (r.date.split("T")[0] >= startDate) && (r.date.split("T")[0]<= endDate) && (r.user_id === userTarget.id))           
+                    console.log(remark.filter((r)=> r.date.split("T")[0] >= startDate && r.date.split("T")[0] <= endDate && r.user_id === userTarget.id))
+                    //return remark.filter((r)=> (r.date.split("T")[0] >= startDate) && (r.date.split("T")[0]<= endDate) && (r.user_id === userTarget.id))    
+                    return remark.filter((r)=> r.date.split("T")[0] >= startDate && r.date.split("T")[0] <= endDate && r.user_id === userTarget.id)         
                 }else{
                     setFlagEndDate(true);
                 }                   
@@ -145,22 +148,34 @@ const ContainerRemarkReport = () => {
           <ContainerPlanilha>
             <HeaderPlanilha>
                 <Title>
+                  <DivCenter>
                   User
+                  </DivCenter>
                 </Title>
                 <Title>
+                <DivCenter>
                   Client
+                  </DivCenter>
                 </Title>
                 <Title>
+                <DivCenter>
                   Subject
+                  </DivCenter>
                 </Title>
                 <Title>
+                <DivCenter>
                   Remark
+                  </DivCenter>
                 </Title>
                 <Title>
+                <DivCenter>
                   Initial Date
+                  </DivCenter>
                 </Title>
                 <Title>
-                  Final Date
+                <DivCenter>
+                  Return date
+                  </DivCenter>
                 </Title>
             </HeaderPlanilha>
             <ContainerRemarks>

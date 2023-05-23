@@ -125,7 +125,6 @@ export const DivStatus = styled.div`
 export const DivTag = styled.div`
   grid-row: 2;
   width: 90%;
-
   height: auto;
   display: grid;
 `;

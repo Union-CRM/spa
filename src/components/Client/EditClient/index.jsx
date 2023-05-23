@@ -44,9 +44,15 @@ const ModalClientEdit = (props) => {
   const { user } = useUserContext();
   const [clientId, setClientId] = useState();
 
-
-  const { setModalInfo, setId, modalEditClient, setModalEditClient,
-  toggleState, setToggleState, idClient} = useClientContext();
+  const {
+    setModalInfo,
+    setId,
+    modalEditClient,
+    setModalEditClient,
+    toggleState,
+    setToggleState,
+    idClient,
+  } = useClientContext();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [customer, setCustomer] = useState({});
@@ -74,6 +80,7 @@ const ModalClientEdit = (props) => {
   const { loadUsers } = useUserContext();
   const [releaseOptions, setReleaseOptions] = useState([]);
   const { loadCustomerOptions } = useFetchCustomer();
+
   useEffect(() => {
     setCustomerList(loadCustomerOptions());
   }, []);
@@ -154,9 +161,15 @@ const ModalClientEdit = (props) => {
       user_id: users.id,
     };
 
-    
-    if (name && email && status && role.id && customer.id && users && releaseObj.id) {
-
+    if (
+      name &&
+      email &&
+      status &&
+      role.id &&
+      customer.id &&
+      users &&
+      releaseObj.id
+    ) {
       if (status === "ATIVO") {
         updateStatusClient(clientId, newClient);
       } else if (status === "INATIVO") {
@@ -315,11 +328,10 @@ const ModalClientEdit = (props) => {
             <DivStatus>
               {true && props.title === "Edit Client" && (
                 <SingleSelect
-
-                options={status_mok}
-                onChange={(event) => setStatus(event.target.value)}
-                set={(status) => setStatus(status)}
-                value={status}
+                  options={status_mok}
+                  onChange={(event) => setStatus(event.target.value)}
+                  set={(status) => setStatus(status)}
+                  value={status}
                   label={"Status"}
                   placeholder={flag && !status ? "Required field" : ""}
                   sizeSingle={"100%"}
@@ -353,7 +365,6 @@ export default ModalClientEdit;
 const status_mok = [
   { id: 1, value: "ATIVO", label: "ATIVO" },
   { id: 2, value: "INATIVO", label: "INATIVO" },
-
 ];
 
 const colors = [
@@ -375,5 +386,4 @@ const colors = [
   "#FFFF00",
   "#7B68EE",
   "#BC8F8F",
-
 ];

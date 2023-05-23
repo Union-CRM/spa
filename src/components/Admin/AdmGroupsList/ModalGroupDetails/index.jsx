@@ -28,8 +28,8 @@ import TeamMembers from "../TeamMembers"
 
 
 const ModalGroupDetails = (props) => {
-  const { id } = props;
-  const { setModalInfo, setId, setModalEditGroup, setIdEdit, setInfoGroup } = useGroupListContext();
+  const { setModal, id } = props;
+  const { setModalInfo, setId, setModalEditGroup, setInfoGroup } = useGroupListContext();
   
   // UseEffect Clients //
   const { group: groupList } = useGroupListContext();
@@ -58,19 +58,19 @@ const ModalGroupDetails = (props) => {
     setActiveContent(index);
   };
 
+    // Edit //
+    const EditModal = () => {
+      setModalInfo(false);
+      setModalEditGroup(true);
+    };
+
+console.log(EditModal)
+
   // Close page //
   const closeModal = () => {
     setModalInfo(false);
     setInfoGroup(true);
   };
-
-  const handleEdit = () => {
-    setModalEditGroup(true);
-    setModalInfo(false);
-    props.setIdEdit(group.id);
-
-  };
-
 
   return (
     <ContainerFather>
@@ -97,7 +97,7 @@ const ModalGroupDetails = (props) => {
 
             {activeTab === 0 &&
           (
-           <IconTag onClick={handleEdit} >
+           <IconTag onClick={EditModal}>
           <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
           </IconTag>
             )}

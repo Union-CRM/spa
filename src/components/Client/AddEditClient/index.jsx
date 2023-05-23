@@ -150,7 +150,46 @@ const AddEditClient = (props) => {
             <H1>{props.title} </H1>
           </PositionTitle>
           <Form>
-          <DivCustomer>
+            <DivName>
+              <Label>
+                Client Name
+                <Input
+                  widthInput={"98% !important"}
+                  placeholder={flag && !name ? "Required field" : ""}
+                  value={name}
+                  required={flag && !name ? true : false}
+                  onChange={(event) => setName(event.target.value)}
+                />
+              </Label>
+            </DivName>
+
+            <DivEmail>
+              <Label>
+                Email
+                <Input
+                  widthInput={"93% !important"}
+                  name={email}
+                  value={email}
+                  placeholder={flag && !email ? "Required field" : ""}
+                  required={flag && !email ? true : false}
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              </Label>
+
+              <SingleSelect
+                key="1"
+                set={(role) => handleSelectRole(role)}
+                placeholder={flag && !role.id ? "Required field" : ""}
+                name={role}
+                value={role.label}
+                label={"Role"}
+                sizeSingle={"100%"}
+                sizeMenu={"100%"}
+                options={roleList ? roleList : []}
+              />
+            </DivEmail>
+
+            <DivCustomer>
               <SingleSelect
                 key="2"
                 set={(customer_id) => handleSelectCustomer(customer_id)}
@@ -191,47 +230,6 @@ const AddEditClient = (props) => {
               </Label>
             </DivBusiness>
 
-
-            <DivName>
-              <Label>
-                Client Name
-                <Input
-                  widthInput={"98% !important"}
-                  placeholder={flag && !name ? "Required field" : ""}
-                  value={name}
-                  required={flag && !name ? true : false}
-                  onChange={(event) => setName(event.target.value)}
-                />
-              </Label>
-            </DivName>
-
-            <DivEmail>
-              <Label>
-                Email
-                <Input
-                  widthInput={"93% !important"}
-                  name={email}
-                  value={email}
-                  placeholder={flag && !email ? "Required field" : ""}
-                  required={flag && !email ? true : false}
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              </Label>
-
-              <SingleSelect
-                key="1"
-                set={(role) => handleSelectRole(role)}
-                placeholder={flag && !role.id ? "Required field" : ""}
-                name={role}
-                value={role.label}
-                label={"Role"}
-                sizeSingle={"100%"}
-                sizeMenu={"100%"}
-                options={roleList ? roleList : []}
-              />
-            </DivEmail>
-
-           
             <DivTag>
               <TagComponent
                 set={(tags) => setTags(tags)}
