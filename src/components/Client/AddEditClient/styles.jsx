@@ -15,7 +15,6 @@ export const ContainerCentral = styled.div`
   }
 `;
 
-
 // Div Title
 export const PositionTitle = styled.div`
   margin-left: 0px;
@@ -116,7 +115,7 @@ export const Input = styled.input`
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
   padding-left: 2%;
-  border: 2px solid #888c95;
+  border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
   position: relative;
@@ -136,8 +135,30 @@ export const Label = styled.label`
 
 // Divs
 
-export const DivName = styled.div`
+export const DivCustomer = styled.div`
   grid-row: 1;
+  width: 90%;
+  height: auto;
+  display: grid;
+`;
+
+export const DivBusiness = styled.div`
+  grid-row: 2;
+  width: 90%;
+  height: auto;
+  display: grid;
+`;
+
+export const DivRelease = styled.div`
+  grid-row: 3;
+  width: 90%;
+  height: auto;
+  display: grid;
+`;
+
+
+export const DivName = styled.div`
+  grid-row: 4;
   width: 90%;
   height: 100%;
   display: grid;
@@ -148,29 +169,9 @@ export const DivEmail = styled.div`
   height: 100%;
   grid-template-columns: 50% 50%;
   display: grid;
-  grid-row: 2;
-`;
-
-export const DivCustomer = styled.div`
-  grid-row: 3;
-  width: 90%;
-  height: auto;
-  display: grid;
-`;
-
-export const DivBusiness = styled.div`
   grid-row: 5;
-  width: 90%;
-  height: auto;
-  display: grid;
 `;
 
-export const DivRelease = styled.div`
-  grid-row: 4;
-  width: 90%;
-  height: auto;
-  display: grid;
-`;
 
 export const DivTag = styled.div`
   grid-row: 6;
@@ -195,6 +196,7 @@ export const DivButton = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  bottom:6%;
   grid-row: 3;
 `;
 

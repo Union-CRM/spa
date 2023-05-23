@@ -15,7 +15,6 @@ import {
   ClickButton,
   PositionButtonCancel,
 } from "./styles";
-
 import SingleSelect from "../../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../../assets/Buttons/ButtonDefault";
 import { TagComponent } from "../../../Geral/TagComponent";
@@ -25,25 +24,14 @@ import { useFetchCustomer } from "../../../../hook/useFetchCustomer";
 
 const AddEditCustomer = (props) => {
   const [newCustomer, setNewCustomer] = useState(entityCustomer);
-  const [status, setStatus] = useState({ value: "ATIVO" });
+  const [prevStatus, setPrevStatus] = useState();
   const { tagList } = useFetchTag("Tag");
-  const { createCustomer, updateCustomer } = useFetchCustomer();
+  const { createCustomer, updateCustomer, updateStatusCustumer } =
+    useFetchCustomer();
   const { customerTarget } = useCustomerContext();
   const [tags, setTags] = useState([]);
   const [flag, setFlag] = useState(false);
   const { setModal } = props;
-
-  const closeModal = () => {
-    setModal(false);
-  };
-
-  const handleSubmit = () => {
-    if (props.title === "Edit Customer") {
-      editCustomer();
-    } else if (props.title === "Create Customer") {
-      handleCreateCustomer();
-    }
-  };
 
   useEffect(() => {
     if (props.title === "Edit Customer") {
@@ -57,12 +45,24 @@ const AddEditCustomer = (props) => {
             }))
           : []
       );
+      setPrevStatus(customerTarget.status);
     }
   }, []);
 
+  const closeModal = () => {
+    setModal(false);
+  };
+
+  const handleSubmit = () => {
+    if (props.title === "Edit Customer") {
+      editCustomer();
+    } else if (props.title === "Create Customer") {
+      handleCreateCustomer();
+    }
+  };
+
   const handleCreateCustomer = () => {
     if (newCustomer.name) {
-      //to do create customer
       createCustomer({
         name: newCustomer.name,
         tags: tags ? tags.map((t) => ({ tag_id: t.value })) : [],
@@ -75,9 +75,12 @@ const AddEditCustomer = (props) => {
 
   const editCustomer = () => {
     if (newCustomer.name) {
+      if (newCustomer.status !== prevStatus) {
+        updateStatusCustumer(newCustomer.id);
+      }
       updateCustomer(customerTarget.id, {
         ...newCustomer,
-        tags: tags ? tags.map((t) => ({ tags_id: t.value })) : [],
+        tags: tags ? tags.map((t) => ({ tag_id: t.value })) : [],
       });
       setModal(false);
     } else {
@@ -89,6 +92,13 @@ const AddEditCustomer = (props) => {
     setNewCustomer({
       ...newCustomer,
       [e.name]: e.value,
+    });
+  };
+
+  const handleSelectStatus = (s) => {
+    setNewCustomer({
+      ...newCustomer,
+      status: s,
     });
   };
 
@@ -110,7 +120,7 @@ const AddEditCustomer = (props) => {
                   }
                   value={newCustomer.name}
                   name="name"
-                  required
+                  required={flag && !newCustomer.name ? true : false}
                   onChange={(event) => handleChange(event.target)}
                 />
               </Label>
@@ -130,14 +140,18 @@ const AddEditCustomer = (props) => {
             <DivStatus>
               {props.title === "Edit Customer" && (
                 <SingleSelect
-                  set={(status) => setStatus(status)}
+                  set={(status) => handleSelectStatus(status)}
                   label={"Status"}
-                  value={newCustomer.status}
+                  value={
+                    newCustomer &&
+                    status_mok.filter((s) => s.value === newCustomer.status)[0]
+                      .label
+                  }
+                  sizeSingle={"100%"}
+                  required={flag && !newCustomer.status ? true : false}
                   placeholder={
                     flag && !newCustomer.status ? "Required field" : ""
                   }
-                  sizeSingle={"100%"}
-                  required
                   sizeMenu={"100%"}
                   options={status_mok}
                 />
@@ -177,8 +191,8 @@ const AddEditCustomer = (props) => {
 export default AddEditCustomer;
 
 const status_mok = [
-  { id: 1, value: "Active", label: "Active" },
-  { id: 2, value: "Inactive", label: "Inactive" },
+  { id: 1, value: "ATIVO", label: "Active" },
+  { id: 2, value: "INATIVO", label: "Inactive" },
 ];
 
 const colors = [
@@ -206,4 +220,5 @@ const entityCustomer = {
   id: "",
   name: "",
   tags: [],
+  status: "ATIVO",
 };

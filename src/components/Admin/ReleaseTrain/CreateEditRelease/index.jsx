@@ -67,7 +67,7 @@ const CreateEditRelease = (props) => {
       setReleaseName(releaseTarget.name)
       setReleaseCode(releaseTarget.code)
       setReleaseStatus(releaseTarget.status)
-      setBusinessRelease({ value: releaseTarget.businessID, label: releaseTarget.businessName })
+      setBusinessRelease({ value: releaseTarget.business_id, label: releaseTarget.business_name })
       setTags(releaseTarget.tags)
 
     }
@@ -233,7 +233,7 @@ const CreateEditRelease = (props) => {
                   options={status}
                   value={releaseStatus ? releaseStatus : ("")}
                   sizeSingle={"87%"}
-                  sizeMenu={"100%"}
+                  sizeMenu={"87%"}
                   isDisabled={false}
                   required
                 />
@@ -249,29 +249,19 @@ const CreateEditRelease = (props) => {
           </DivCodeStatus>
           <DivSegment>
             <Label>Business</Label>
-            {!modalEditRelease && (
-              <SingleSelect
-                set={(s) => handleSelectBusiness(s)}
-                placeholder={flagBusiness && !businessRelease ? "Required field" : ""}
-                options={businessList ? businessList : []}
-                sizeSingle={"86.5%"}
-                sizeMenu={"100%"}
-                isDisabled={false}
-                required
-              />
-            )}
-            {modalEditRelease && (
+      
               <SingleSelect
                 set={(s) => handleSelectBusiness(s)}
                 placeholder={flagBusiness && !businessRelease ? "Required field" : ""}
                 options={businessList ? businessList : []}
                 value={businessRelease.label}
                 sizeSingle={"86.5%"}
-                sizeMenu={"100%"}
+                sizeMenu={"86.5%"}
                 isDisabled={false}
                 required
               />
-            )}
+       
+
           </DivSegment>
           <TagComponent
             options={tagList ? tagList : []}
@@ -279,7 +269,7 @@ const CreateEditRelease = (props) => {
             placeholder={""}
             label={"Tag"}
             width={"90%"}
-            widths={"73.9%"}
+            widths={"85%"}
             sizeHeight={"3.5vh"}
             heights={"12vh"}
             sizeMenuList={"10vw"}

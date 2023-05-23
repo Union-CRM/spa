@@ -19,9 +19,7 @@ import {
   ReleaseTrain,
   Status,
 } from "./styles";
-
 import { useRemarkContext } from "../../../../hook/useRemarkContent";
-import { useSearchContext } from "../../../../hook/useSearchContext";
 import IconSystem from "../../../../assets/IconSystem";
 
 const RemarkCard = (props) => {
@@ -56,7 +54,7 @@ const RemarkCard = (props) => {
           <CardDate>
             <Date1>
               <IconSystem icon={"FlechaVerde"} height={"15px"} width={"15px"} />
-              <p>10 Feb 2023</p>
+              <p>{remark.date.split("T")[0]}</p>
             </Date1>
 
             <Date2>
@@ -65,7 +63,7 @@ const RemarkCard = (props) => {
                 height={"15px"}
                 width={"15px"}
               />
-              <p>07 Mar 2023</p>
+              <p>{remark.date_return.split("T")[0]}</p>
             </Date2>
           </CardDate>
         </Header>

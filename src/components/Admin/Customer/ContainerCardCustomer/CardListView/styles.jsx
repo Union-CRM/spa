@@ -1,6 +1,4 @@
-import styled, { css } from "styled-components";
-
-export const DivModal = styled.div``;
+import styled from "styled-components";
 
 //Container Father //
 export const Container = styled.div`
@@ -128,14 +126,6 @@ export const ContainerFather = styled.div`
   z-index: 10;
 `;
 
-export const PositionEdit = styled.div`
-  width: 12px;
-  height: 12px;
-  margin-top: 8px;
-  cursor: pointer;
-  display: flex;
-`;
-
 export const DivTag = styled.div`
   width: 100%;
   height: 80%;
@@ -161,6 +151,7 @@ export const DivContentTags = styled.div`
   top: -20px;
   align-items: center;
   background-color: ${(props) => (props.colorTag ? props.colorTag : "pink")};
+  color: ${(props) => (props.isActive ? "#000" : "#fff")};
   border-radius: 8px;
   margin-right: 10px;
   margin-bottom: 2px;

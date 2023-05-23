@@ -131,6 +131,21 @@ export const Label = styled.label`
 
 // Divs
 
+export const AlertaDate = styled.div`
+ background-color: rgba(187, 30, 0, 1);
+ border-radius:5px;
+ padding:2px;
+ height:fit-content;
+ align-items:center;
+ text-align:center;
+ justify-content:center;
+ span {
+  color:#fff;
+  text-align:center;
+  font-size:0.9em;
+ }
+ `;
+
 export const DivDate = styled.div`
   grid-row: 1;
   width: 100%;
@@ -158,13 +173,23 @@ export const DivButton = styled.div`
   width: 100%;
   height: 80%;
   grid-row: 3;
+  
 `;
 
-export const PositionButtonCancel = styled.div``;
+export const PositionButtonCancel = styled.div`
+justify-content: center;
+position: relative;
+align-items: center;
+display:flex;
+`;
 
 export const ClickButton = styled.div`
-  display: block;
+justify-content: center;
+position: relative;
+align-items: center;
+display:flex;
 `;
+
 export const DivTitle = styled.div`
   width: 312%;
   height: 100%;

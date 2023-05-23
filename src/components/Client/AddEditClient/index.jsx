@@ -29,58 +29,59 @@ import { useFetchCustomer } from "../../../hook/useFetchCustomer";
 import { useFetchClient } from "../../../hook/useFetchClient";
 import { useFetchRole } from "../../../hook/useFetchRole";
 import { useFetchTag } from "../../../hook/useFetchTag";
-import {useCustomerContext} from "../../../hook/useCustomerContext";
+import { useCustomerContext } from "../../../hook/useCustomerContext";
 import { useReleaseContext } from "../../../hook/useReleaseContent";
 
 const AddEditClient = (props) => {
-  const { client: clientList, setClient: setClientList, updateStatusClient } = useClientContext();
+  const {
+    client: clientList,
+    setClient: setClientList,
+    updateStatusClient,
+  } = useClientContext();
 
-  const [clientId,setClientId]=useState()
+  const [clientId, setClientId] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [customer, setCustomer] = useState({});
-  const {user} = useUserContext();
+  const { userTarget } = useUserContext();
   const [business, setBusiness] = useState("");
   const [role, setRole] = useState({});
   const [status, setStatus] = useState("");
   const { release: releaseList } = useReleaseContext("release");
-  const { loadCustomerList} = useCustomerContext();
+  const { loadCustomerList } = useCustomerContext();
 
   const { loadCustomerOptions } = useFetchCustomer();
-  const [customerList,setCustomerList] = useState([])
+  const [customerList, setCustomerList] = useState([]);
   const { roleList } = useFetchRole("Role");
   const { tagList } = useFetchTag("Tag");
   const [releaseObj, setReleaseObj] = useState({
     release_name: "",
     business_name: "",
   });
-  const [releaseOptions, setReleaseOptions] = useState([])
+  const [releaseOptions, setReleaseOptions] = useState([]);
 
-  
   const [tags, setTags] = useState([]);
-  const {insertClient,updateClient}= useFetchClient();
+  const { insertClient, updateClient } = useFetchClient();
   const [flag, setFlag] = useState(false);
   const { setModal, id } = props;
 
-  useEffect(() =>{
-    loadCustomerList()
-    setCustomerList(loadCustomerOptions())
-  }, [])
+  useEffect(() => {
+    loadCustomerList();
+    setCustomerList(loadCustomerOptions());
+  }, []);
 
-  useEffect(() =>{
-
-    if(releaseList){
-    setReleaseOptions(
-      releaseList.map((item) => ({
-        id: item.id,
-        value: item.id,
-        label: item.name,
-        //status: item.status,
-      })))
-      }
-     
-  },[releaseList])
-
+  useEffect(() => {
+    if (releaseList) {
+      setReleaseOptions(
+        releaseList.map((item) => ({
+          id: item.id,
+          value: item.id,
+          label: item.name,
+          //status: item.status,
+        }))
+      );
+    }
+  }, [releaseList]);
 
   const closeModal = () => {
     setModal(false);
@@ -90,7 +91,6 @@ const AddEditClient = (props) => {
     if (props.title === "Create Client") {
       createClient();
     } else {
-      
     }
   };
 
@@ -104,7 +104,6 @@ const AddEditClient = (props) => {
     return lastId + 1;
   }
 
-
   const createClient = () => {
     const newClient = {
       client_email: email,
@@ -114,23 +113,21 @@ const AddEditClient = (props) => {
       customer_id: customer.id,
       business_id: parseInt(releaseObj.business_id),
       release_id: releaseObj.id,
-      user_id: user.id,
-      tags:tags.map((tag) => ({ tag_id: tag.value})),
+      user_id: userTarget.id,
+      tags: tags.map((tag) => ({ tag_id: tag.value })),
     };
-    console.log(newClient)
-    if (name && email && role.id && customer.id && releaseObj.id ) {
+    console.log(newClient);
+    if (name && email && role.id && customer.id && releaseObj.id) {
       insertClient(newClient);
       setModal(false);
 
       /*if(createClient.status != client.status){
         updateStatusClient(client.id);
       }*/
-
     } else {
       setFlag(true);
     }
   };
-
 
   const handleSelectRelease = (release_id) => {
     console.log(release_id);
@@ -153,6 +150,49 @@ const AddEditClient = (props) => {
             <H1>{props.title} </H1>
           </PositionTitle>
           <Form>
+
+          <DivCustomer>
+              <SingleSelect
+                key="2"
+                set={(customer_id) => handleSelectCustomer(customer_id)}
+                label={"Customer"}
+                value={customer.label}
+                placeholder={flag && !customer.id ? "Required field" : ""}
+                sizeSingle={"100%"}
+                sizeMenu={"100%"}
+                options={customerList ? customerList : []}
+              />
+            </DivCustomer>
+
+            <DivRelease>
+              <SingleSelect
+                key="3"
+                set={(release_id) => handleSelectRelease(release_id)}
+                label={"Release Train"}
+                value={releaseObj.name}
+                placeholder={flag && !releaseObj.id ? "Required field" : ""}
+                sizeSingle={"100%"}
+                sizeMenu={"100%"}
+                options={releaseOptions}
+              />
+            </DivRelease>
+            <DivBusiness>
+              <Label>
+                Business
+                <Input
+                  disabled
+                  widthInput={"98% !important"}
+                  value={releaseObj.business_name}
+                  placeholder={
+                    flag && !releaseObj._name ? "Required field" : ""
+                  }
+                  required={flag && !releaseObj.business_name ? true : false}
+                  name={business}
+                />
+              </Label>
+            </DivBusiness>
+
+
             <DivName>
               <Label>
                 Client Name
@@ -160,7 +200,7 @@ const AddEditClient = (props) => {
                   widthInput={"98% !important"}
                   placeholder={flag && !name ? "Required field" : ""}
                   value={name}
-                  required
+                  required={flag && !name ? true : false}
                   onChange={(event) => setName(event.target.value)}
                 />
               </Label>
@@ -174,7 +214,7 @@ const AddEditClient = (props) => {
                   name={email}
                   value={email}
                   placeholder={flag && !email ? "Required field" : ""}
-                  required
+                  required={flag && !email ? true : false}
                   onChange={(event) => setEmail(event.target.value)}
                 />
               </Label>
@@ -185,7 +225,6 @@ const AddEditClient = (props) => {
                 placeholder={flag && !role.id ? "Required field" : ""}
                 name={role}
                 value={role.label}
-                required
                 label={"Role"}
                 sizeSingle={"100%"}
                 sizeMenu={"100%"}
@@ -193,58 +232,17 @@ const AddEditClient = (props) => {
               />
             </DivEmail>
 
-            <DivCustomer>
-              <SingleSelect
-                key="2"
-                set={(customer_id) => handleSelectCustomer(customer_id)}
-                label={"Customer"}
-                value={customer.label}
-                placeholder={flag && !customer.id ? "Required field" : ""}
-                sizeSingle={"100%"}
-                required
-                sizeMenu={"100%"}
-                options={customerList ? customerList : []}
-              />
-            </DivCustomer>
-
-            <DivRelease>
-              <SingleSelect
-                key="3"
-                set={(release_id) => handleSelectRelease(release_id)}
-                label={"Release Train"}
-                value={releaseObj.name}               
-                placeholder={flag && !releaseObj.id ? "Required field" : ""}
-                sizeSingle={"100%"}
-                required
-                sizeMenu={"100%"}
-                options={releaseOptions}
-              />
-            </DivRelease>
-            <DivBusiness>
-              <Label>
-                Business
-                <Input
-                  disabled
-                  widthInput={"98% !important"}
-                  value={releaseObj.business_name}
-                  placeholder={
-                    flag && !releaseObj.business ? "Required field" : ""
-                  }
-                  required
-                  name={business}
-                />
-              </Label>
-            </DivBusiness>
-
+           
             <DivTag>
               <TagComponent
                 set={(tags) => setTags(tags)}
                 tags={tags}
                 label={"Tags"}
                 placeholder={flag && !tags ? "Required field" : ""}
-                sizeSingle={"40%"}
                 required
-                sizeMenu={"40%"}
+                sizeMenu={"37%"}
+                width={"90%"}
+                widths={"100%"}
                 options={tagList ? tagList : []}
               />
             </DivTag>

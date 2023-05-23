@@ -14,7 +14,6 @@ export const useFetchUsersNotin = () => {
     loadUserNotin();
     loadUserSub();
 
-    
   }, []);
 
   const loadUserNotin = async () => {
@@ -26,8 +25,9 @@ export const useFetchUsersNotin = () => {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
+
       user = response;
-     
+ 
     } catch (error) {
       console.error(error);
     }
@@ -43,7 +43,7 @@ export const useFetchUsersNotin = () => {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
-      
+            
       setUserListSub(response.data.list);
       
     } catch (error) {

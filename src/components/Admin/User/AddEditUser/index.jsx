@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import {
   ClickButton,
   ContainerCentral,
@@ -22,27 +21,25 @@ import { useUserContext } from "../../../../hook/useUserContext";
 import { useFetchUser } from "../../../../hook/useFetchUser";
 
 const AddEditUser = (props) => {
-  const { user, setModalPassword } = useUserContext();
+  const { user, setModalPassword, userTarget } = useUserContext();
+  const { createUser, updateUserNoPSW } = useFetchUser();
   const [newUser, setNewUser] = useState(entityUser);
-  const { createUser } = useFetchUser();
-
-  const levelOptions = levels
-    .map((l) => {
-      if (l < user.level) {
-        return { value: l, label: l };
-      }
-    })
-    .filter((l) => l);
-
   const [flag, setFlag] = useState(false);
   const { setModal } = props;
 
-  const closeModal = () => {
-    setModal(false);
-  };
+  useEffect(() => {
+    if (props.title === "Edit User") {
+      setNewUser(userTarget);
+    }
+  }, []);
 
-  const handleSubmit = () => {
-    handleCreateUser();
+  const handleEditUser = () => {
+    if (true) {
+      updateUserNoPSW(userTarget.id, newUser);
+      setModal(false);
+    } else {
+      setFlag(true);
+    }
   };
 
   const handleCreateUser = () => {
@@ -50,7 +47,6 @@ const AddEditUser = (props) => {
       ...newUser,
       tcs_id: parseInt(newUser.tcs_id),
     };
-    console.log(u);
     if (newUser.name && newUser.email && newUser.tcs_id && newUser.level) {
       createUser(u)
         .then(function (variavel) {
@@ -80,6 +76,26 @@ const AddEditUser = (props) => {
     });
   };
 
+  const levelOptions = levels
+    .map((l) => {
+      if (l < user.level) {
+        return { value: l, label: l };
+      }
+    })
+    .filter((l) => l);
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
+  const handleSubmit = () => {
+    if (props.title === "Edit User") {
+      handleEditUser();
+    } else {
+      handleCreateUser();
+    }
+  };
+
   return (
     <>
       <ContainerCentral>
@@ -96,7 +112,7 @@ const AddEditUser = (props) => {
                   widthInput={"98% !important"}
                   placeholder={flag && !newUser.name ? "Required field" : ""}
                   value={newUser.name}
-                  required
+                  required={flag && !newUser.name ? true : false}
                   onChange={(event) => handleChange(event)}
                 />
               </Label>
@@ -122,7 +138,7 @@ const AddEditUser = (props) => {
                   name="tcs_id"
                   value={newUser.tcs_id}
                   placeholder={flag && !newUser.tcs_id ? "Required field" : ""}
-                  required
+                  required={flag && !newUser.tcs_id ? true : false}
                   onChange={(event) => handleChange(event)}
                 />
               </Label>
@@ -136,7 +152,7 @@ const AddEditUser = (props) => {
                   name="email"
                   value={newUser.email}
                   placeholder={flag && !newUser.email ? "Required field" : ""}
-                  required
+                  required={flag && !newUser.email ? true : false}
                   onChange={(event) => handleChange(event)}
                 />
               </Label>

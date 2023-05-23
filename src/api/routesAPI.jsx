@@ -2,6 +2,9 @@
 export const userGetSubmissiveUsers =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/submissives";
 
+export const userUpdateNoPSW =
+  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/update/";
+
 export const userGetUsersMe =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/me";
 
@@ -10,6 +13,7 @@ export const userUpdateStatus =
 
 export const userCreate =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users";
+
 //Subject
 export const subjectGetSubmissivesSubjects =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/submissives";
@@ -25,6 +29,7 @@ export const subjectUpdateStatusFinished =
 
 export const subjectUpdateStatusCanceled =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/update/canceled/";
+  
 //Remark
 export const remarkGetSubmissivesRemarks =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8088/union/v1/remarks/submissives";
@@ -34,6 +39,10 @@ export const remarkCreate =
 
 export const remarkUpdate =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8088/union/v1/remarks/update/";
+
+export const remarkUpdateStatus =
+  "crm-lb-353213555.us-east-1.elb.amazonaws.com:8088/union/v1/remarks/update/status/";
+
 //Planner
 export const plannerGetSubmissivesPlanners =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8086/union/v1/planners/submissives";
@@ -46,13 +55,11 @@ export const plannerUpdate =
 
 export const groupCreate = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups`;
 
-
 export const groupUpdate = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/update/`;
 
 export const attachUser = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/update/attach/`;
 
 export const detachUser = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/update/detach/`;
-
 
 //client
 export const clientGetClientsMyGroups =

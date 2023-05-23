@@ -28,10 +28,7 @@ export const ContainerDetails = styled.div`
     background-color: #dfdfdf;
   }
   @media (min-width: 1500px) and (max-width: 2500px) {
-    height: 380px;
-  }
-  @media (min-width: 1500px) and (max-width: 2500px) {
-    height: 310px;
+    height: 520px;
   }
   @media (min-height: 150px) and (max-height: 450px) {
     height: 370px;
@@ -43,21 +40,36 @@ export const ContainerDetails = styled.div`
 //* CARDS *//
 
 export const CardMembers = styled.div`
+${(props) => {
+  switch (props.$mode) {
+    case "ATIVO":
+      return css`
+        border-left: 5px solid #E41165;
+      `;
+    case "INATIVO":
+      return css`
+        border-left:5px solid #7a7a7a;
+      `;
+    default:
+      return css`
+        background-color: #6e6b6b;
+      `;
+  }
+}}
   width:94%;
-  height: 56px;
+  height: auto;
   z-index: 9999999;
   margin-top: 3%;
-  padding-bottom: 1%;
+  padding-bottom: 3%;
   position: relative;
   align-items: center;
-  padding-right: 2%;
+  padding-right: 3%;
   background: #F5F7FA;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   position: relative;
   justify-content: end;
-  cursor: pointer;
-  border-left: 6px solid #E41165;
+  cursor: default;
 `;
 
 
@@ -72,14 +84,15 @@ export const GlobalCard = styled.div`
 export const DivDadosCard = styled.span`
 display:flex;
 width:100%;
+position:relative;
 `;
 
 // PHOTO USER //
 
 export const DivPhoto = styled.div`
-  display: flex;
-  width: auto;
-  height: auto;
+  width:100%;
+  height:fit-content;
+  display:flex;
 `;
 
 export const DivPhotoI = styled.div`
@@ -97,17 +110,18 @@ export const DivPhotoI = styled.div`
 // NAME USER //
 
 export const NameUser = styled.div`
-padding-top:0.5%;
-padding-left:2%;
-width:100%;
+padding-top:0.2%;
+padding-left:5%;
 position:relative;
 span {
 display:flex;
 justify-content:flex-start;
 font-size:0.9rem;
+color:#000;
 width:100%;
 font-weight:800;
 opacity:0.80;}
+
 `;
 
 
@@ -124,6 +138,44 @@ width:100%;
 font-weight:500;
 opacity:0.80;}
 `;
+
+export const DivView = styled.div`
+display:flex;
+width:100%;
+position:relative;
+justify-content:flex-end;
+align-items:center;
+`;
+
+export const ViewProfile = styled.div`
+${(props) => {
+  switch (props.$mode) {
+    case "ATIVO":
+      return css`
+      background-color: #E41165;
+      `;
+    case "INATIVO":
+      return css`
+      background-color: #7a7a7a;
+      `;
+    default:
+      return css`
+        background-color: #6e6b6b;
+      `;
+  }
+}}
+border-radius:6px;
+align-items:center;
+color:#fff;
+width:120px;
+display:flex;
+cursor: pointer;
+justify-content:center;
+span {
+  margin-right:5px;
+}
+`;
+
 
 
 /// Status Subject ////

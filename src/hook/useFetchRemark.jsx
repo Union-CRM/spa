@@ -2,9 +2,12 @@ import axios from "axios";
 import { useState } from "react";
 import { usePlannerContext } from "./usePlannerContext";
 import { useRemarkContext } from "./useRemarkContent";
-import { remarkCreate, remarkUpdate } from "../api/routesAPI";
+import {
+  remarkCreate,
+  remarkUpdate,
+  remarkUpdateStatus,
+} from "../api/routesAPI";
 export const useFetchRemark = () => {
-  const [remarkId, setRemarkId] = useState();
   const {
     setModalError,
     setModalRemark,
@@ -45,8 +48,23 @@ export const useFetchRemark = () => {
       });
   };
 
+  const updateStatusRemark = async (remark_id, newStatus) => {
+    axios
+      .put(`${remarkUpdateStatus}${remark_id}`, newStatus, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then(function (response) {
+        loadRemarkList();
+      })
+      .catch(function (error) {
+        setModalError(true);
+        console.error(error);
+      });
+  };
+
   return {
     createRemark,
     updateRemark,
+    updateStatusRemark,
   };
 };

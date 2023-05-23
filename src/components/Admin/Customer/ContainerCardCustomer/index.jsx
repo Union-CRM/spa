@@ -26,54 +26,39 @@ import CustomerCard from "./CardListView/index";
 import AddEditCustomer from "../AddEditCustomer";
 import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
 import { useState, useEffect } from "react";
-import { useUserContext } from "../../../../hook/useUserContext";
 import { useSearchContext } from "../../../../hook/useSearchContext";
-
 import { useCustomerContext } from "../../../../hook/useCustomerContext";
 import ModalError from "../ModalError";
 import ModalSuccessfuly from "../ModalSuccessfuly";
 import { ReactComponent as Info } from "../../../../assets/svg/Info.svg";
-
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
-
-const abaStatus = {
-  ACTIVE: "ATIVO",
-  INACTIVE: "INATIVO",
-};
 
 const ContainerCards = (props) => {
   // States modal//
   const [modal, setModal] = useState(false);
-
   const [id, setId] = useState(null);
   const { customer, popUpSuccess, popUpError } = useCustomerContext();
   const [isEdit, setEdit] = useState(false);
   const { search } = useSearchContext();
   const [customerList, setCustomerList] = useState([]);
-
   const [active, setActive] = useState(abaStatus.ACTIVE);
 
   useEffect(() => {
-    setCustomerList(customer);
-  }, [customer]);
-
-  useEffect(() => {
-    
-    if (customer){
-   
+    if (customer) {
       if (search) {
         setCustomerList(
-          customer?
-          customer.filter((c) =>
-            c.name.toLowerCase().includes(search.toLowerCase())
-          ): customer
+          customer
+            ? customer.filter((c) =>
+                c.name.toLowerCase().includes(search.toLowerCase())
+              )
+            : customer
         );
       } else {
         setCustomerList(customer);
       }
     }
-  }, [search,customer]);
+  }, [search, customer]);
 
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
@@ -206,3 +191,8 @@ const ContainerCards = (props) => {
   );
 };
 export default ContainerCards;
+
+const abaStatus = {
+  ACTIVE: "ATIVO",
+  INACTIVE: "INATIVO",
+};

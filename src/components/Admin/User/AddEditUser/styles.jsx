@@ -49,11 +49,10 @@ export const H1 = styled.h1`
 // Children
 //ok
 export const Container = styled.div`
-  grid-row: 1;
   grid-column: 2;
   width: 80%;
   min-width: 300px;
-  height: 81vh;
+  height: 100%;
   background: #fff;
   display: grid;
   border-left: 16.56px solid #e41165;
@@ -88,7 +87,7 @@ export const Input = styled.input`
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
   padding-left: 2%;
-  border: 2px solid #888c95;
+  border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
   position: relative;

@@ -18,8 +18,8 @@ import {
   DivDate,
   DivDateAll,
   DivTitle,
+  AlertaDate,
 } from "./styles";
-
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
@@ -27,20 +27,21 @@ import { useRemarkContext } from "../../../hook/useRemarkContent";
 import { useUserContext } from "../../../hook/useUserContext";
 import { useFetchRemark } from "../../../hook/useFetchRemark";
 
+// Alerts //
+/*const [invalidHour, setInvalidHour] = useState(false);
+const [invalidDateStart, setInvalidDateStart] = useState(false);
+const [invalidDateFinish, setInvalidDateFinish] = useState(false);*/
+
 const CreateEditRemark = (props) => {
   const [newRemark, setNewRemark] = useState(remarkEntity);
   const { createRemark, updateRemark } = useFetchRemark();
-  const { remarkTarget } = useRemarkContext();
+  const { remarkTarget, setModalSucess, setModalSaveRemark, setSucessRemark } = useRemarkContext();
+  
   const [flag, setFlag] = useState(false);
   const { userTarget } = useUserContext();
-  const [selectedSubject, setSelectedSubject] = useState(null);
   const { subject: subjectList } = useSubjectContext();
   const [subjectOption, setSubjectOption] = useState([]);
-
-  // CLOSE E SAVE ////////////
-  const closeModal = () => {
-    props.setModal(false);
-  };
+  const [prevStatus, setPrevStatus] = useState(false);
 
   useEffect(() => {
     if (props.title === "Edit Remark") {
@@ -50,21 +51,43 @@ const CreateEditRemark = (props) => {
       setNewRemark({
         ...newRemark,
         ...remarkTarget,
+        status_id: StatusOption.filter(
+          (s) => s.label === remarkTarget.status_description
+        )[0].value,
         client_email: subjectObj ? subjectObj.client_email : "",
       });
-      setSelectedSubject(remarkTarget.subject_name);
+      setPrevStatus(remarkTarget.status_description);
     }
   }, []);
 
   useEffect(() => {
-    setSubjectOption(
-      subjectList
-        .filter(
-          (s) => s.status === "IN PROGRESS" && s.user_id === userTarget.id
-        )
-        .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
-    );
+    if (props.title === "Edit Remark") {
+      setSubjectOption(
+        subjectList
+          .filter((s) => s.user_id === userTarget.id)
+          .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
+      );
+    } else {
+      setSubjectOption(
+        subjectList
+          .filter(
+            (s) => s.status === "IN PROGRESS" && s.user_id === userTarget.id
+          )
+          .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
+      );
+    }
   }, [subjectList, userTarget]);
+
+  //return true if date 1 is before at date 2
+  const dateIsValid = (date1, date2) => {
+    const d1 = new Date(date1.split("T")[0].split(" ")[0]);
+    const d2 = new Date(date2.split("T")[0].split(" "));
+    return d1 <= d2;
+  };
+
+  const closeModal = () => {
+    props.setModal(false);
+  };
 
   const handleSubmit = () => {
     if (props.title === "Create Remark") {
@@ -84,18 +107,13 @@ const CreateEditRemark = (props) => {
     ) {
       createRemark({ ...newRemark, user_id: userTarget.id });
       props.setModal(false);
+      setModalSaveRemark(true);
     } else {
       setFlag(true);
     }
   };
   // status 19: Finished,  20: canceled, 21: Active
   const handleEditRemark = () => {
-    console.log({
-      ...newRemark,
-      status_id: 21,
-      date: newRemark.date.split("T")[0] + "T12:00:00.000Z",
-      date_return: newRemark.date_return.split("T")[0] + "T12:00:00.000Z",
-    });
     if (
       newRemark.remark_name &&
       newRemark.subject_id &&
@@ -106,13 +124,14 @@ const CreateEditRemark = (props) => {
       updateRemark(
         {
           ...newRemark,
-          status_id: 21,
           date: newRemark.date.split("T")[0] + "T12:00:00.000Z",
           date_return: newRemark.date_return.split("T")[0] + "T12:00:00.000Z",
         },
         newRemark.id
       );
       props.setModal(false);
+      setModalSaveRemark(true);
+      setSucessRemark(true);
     } else {
       setFlag(true);
     }
@@ -133,6 +152,15 @@ const CreateEditRemark = (props) => {
     });
   };
 
+  const handleSelectStatus = (status) => {
+    setNewRemark({
+      ...newRemark,
+      status_id: status,
+      status_description: StatusOption.filter((s) => s.value === status)[0]
+        .label,
+    });
+  };
+
   const handleChange = (event) => {
     setNewRemark({
       ...newRemark,
@@ -140,11 +168,35 @@ const CreateEditRemark = (props) => {
     });
   };
 
-  const handleChengeDate = (event) => {
-    setNewRemark({
-      ...newRemark,
-      [event.target.name]: event.target.value,
-    });
+  const handleChangeDate = (event) => {
+    if (event.target.name === "date") {
+      if (newRemark.date_return) {
+        if (dateIsValid(event.target.value, newRemark.date_return)) {
+          setNewRemark({
+            ...newRemark,
+            [event.target.name]: event.target.value,
+          });
+        } else {
+          setNewRemark({
+            ...newRemark,
+            [event.target.name]: event.target.value,
+            date_return: "",
+          });
+        }
+      } else {
+        setNewRemark({
+          ...newRemark,
+          [event.target.name]: event.target.value,
+        });
+      }
+    } else if (event.target.name === "date_return") {
+      if (dateIsValid(newRemark.date, event.target.value)) {
+        setNewRemark({
+          ...newRemark,
+          [event.target.name]: event.target.value,
+        });
+      }
+    }
   };
 
   return (
@@ -165,6 +217,7 @@ const CreateEditRemark = (props) => {
                     flag && !newRemark.remark_name ? "Required field" : ""
                   }
                   value={newRemark.remark_name}
+                  required={flag && !newRemark.remark_name ? true : false}
                   onChange={(event) => handleChange(event)}
                 />
               </Label>
@@ -173,12 +226,16 @@ const CreateEditRemark = (props) => {
               <Label>
                 Subject
                 <SingleSelect
-                  set={(client) => handleSelectSubject(client)}
-                  placeholder={flag && !selectedSubject ? "" : ""}
+                  set={(s) => handleSelectSubject(s)}
+                  placeholder={
+                    flag && !newRemark.subject_name ? "Required field" : ""
+                  }
+                  //placeholder={flag && !role.id ? "Required field" : ""}
+                  required
                   sizeSingle={"100%"}
                   sizeMenu={"100%"}
                   options={subjectOption}
-                  value={selectedSubject}
+                  value={newRemark.subject_name}
                 />
               </Label>
             </DivName>
@@ -231,7 +288,7 @@ const CreateEditRemark = (props) => {
                   name={"date"}
                   required={flag && !newRemark.date ? true : false}
                   value={newRemark.date.split("T")[0]}
-                  onChange={(event) => handleChengeDate(event)}
+                  onChange={(event) => handleChangeDate(event)}
                 />
               </DivDate>
               <DivDate>
@@ -242,8 +299,24 @@ const CreateEditRemark = (props) => {
                   value={newRemark.date_return.split("T")[0]}
                   required={flag && !newRemark.date_return ? true : false}
                   name={"date_return"}
-                  onChange={(event) => handleChengeDate(event)}
+                  onChange={(event) => handleChangeDate(event)}
                 />
+              </DivDate>
+              <DivDate>
+               
+                  <SingleSelect
+                    placeholder={""}
+                    set={(s) => handleSelectStatus(s)}
+                    options={StatusOption}
+                    value={newRemark.status_description}
+                    sizeSingle={"100%"}
+                    sizeMenuList={"100%"}
+                    label={"Status"}
+                    sizeMenu={"100%"}
+                    isDisabled={false}
+                    sizeHeight={"3.5vh"}
+                  />
+             
               </DivDate>
             </DivDateAll>
 
@@ -256,7 +329,7 @@ const CreateEditRemark = (props) => {
                   name={"text"}
                   value={newRemark.text}
                   onChange={(event) => handleChange(event)}
-                  required
+                  required={flag && !newRemark.text ? true : false}
                   rows="4"
                 />
               </Label>
@@ -264,6 +337,11 @@ const CreateEditRemark = (props) => {
           </Form>
 
           <DivButton>
+
+          {flag &&
+              <AlertaDate><span>
+              Please make sure all fields are filled in to continue.</span></AlertaDate>}
+
             <ClickButton onClick={handleSubmit}>
               <ButtonDefault
                 type={"userSave"}
@@ -281,12 +359,21 @@ const CreateEditRemark = (props) => {
                 sizeFont={"1rem"}
               />
             </PositionButtonCancel>
+
+           
+
           </DivButton>
         </Container>
       </ContainerCentral>
     </>
   );
 };
+
+const StatusOption = [
+  { id: 21, value: 21, label: "ACTIVE" },
+  { id: 19, value: 19, label: "FINISHED" },
+  { id: 20, value: 20, label: "CANCELED" },
+];
 
 export default CreateEditRemark;
 const remarkEntity = {

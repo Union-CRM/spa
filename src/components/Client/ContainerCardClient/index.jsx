@@ -40,8 +40,7 @@ import Subject from "../../../components/Subject/EditSubject";
 //import { useSubjectContext } from "../../../hook/useSubjectContent";
 
 import { useSubjectContext } from "../../../hook/useSubjectContent";
-  //const { setEditSubject } = SubjectContext();
-
+//const { setEditSubject } = SubjectContext();
 
 const abaStatus = {
   ACTIVE: "Active",
@@ -50,24 +49,23 @@ const abaStatus = {
 
 const ContainerCards = (props) => {
   // States modal//
-const { search } = useSearchContext();
-  const [modal, setModal] = useState(false);
+  const { search } = useSearchContext();
   const [modalPopUp, setModalPopUp] = useState(false);
   const [isEdit, setEdit] = useState(false);
   const [clientList, setClientList] = useState();
   const [active, setActive] = useState(abaStatus.ACTIVE);
-  const { user, userTarget } = useUserContext();
+  const { user, userTarget, setUserTarget } = useUserContext();
   const { modalEdit, idSubject } = useSubjectContext();
   const { client } = useClientContext();
-  const { id, setId } = useClientContext();
-  const {modalInfo, setModalInfo} = useClientContext();
-  const {modalEditClient, setModalEditClient } = useClientContext();
-
+  const { id, setId, modalAddClient, setModalAddClient } = useClientContext();
+  const { modalInfo, setModalInfo } = useClientContext();
+  const { modalEditClient, setModalEditClient } = useClientContext();
 
   useEffect(() => {
     if (props.adminList) {
       setClientList(client.filter((c) => c.user_id === userTarget.id));
     } else {
+      setUserTarget(user);
       setClientList(client);
     }
   }, [client]);
@@ -75,8 +73,13 @@ const { search } = useSearchContext();
   useEffect(() => {
     if (search) {
       setClientList(
-        client.filter((c) =>
-          c.client.toLowerCase().includes(search.toLowerCase())
+        client.filter(
+          (c) =>
+            c.client.toLowerCase().includes(search.toLowerCase()) ||
+            c.textRole.toLowerCase().includes(search.toLowerCase()) ||
+            c.textCustomer.toLowerCase().includes(search.toLowerCase()) ||
+            c.textBusiness.toLowerCase().includes(search.toLowerCase()) ||
+            c.user_name.toLowerCase().includes(search.toLowerCase())
         )
       );
     } else {
@@ -88,7 +91,6 @@ const { search } = useSearchContext();
     }
   }, [search]);
 
-
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
   };
@@ -98,7 +100,7 @@ const { search } = useSearchContext();
   };
 
   const createClient = () => {
-    setModal(true);
+    setModalAddClient(true);
     setEdit(false);
   };
 
@@ -120,20 +122,16 @@ const { search } = useSearchContext();
               <HowManyClientList>
                 ({clientList ? clientList.length : 0})
               </HowManyClientList>{" "}
-
               <Tippy content="List of all clients.">
-              <DivInfo>
-              
+                <DivInfo>
                   <Info
-                  width="25px"
-                  style={{
-                    fill: "#007BFF",
-                  }}
-                />
-                     </DivInfo>
+                    width="25px"
+                    style={{
+                      fill: "#007BFF",
+                    }}
+                  />
+                </DivInfo>
               </Tippy>
-         
-
             </DivTitlePage>
 
             <DivButton onClick={() => createClient()}>
@@ -187,8 +185,8 @@ const { search } = useSearchContext();
           <LineDivisor />
 
           <BoardStyle>
-            {clientList  &&
-              clientList 
+            {clientList &&
+              clientList
                 .filter((item) => item.status === active)
                 .map((item) => (
                   <ClientCard
@@ -204,18 +202,20 @@ const { search } = useSearchContext();
         </CardsContainer>
       </ContainerHeaderAndCards>
 
-      <DivModal $mode={modal} />
-{modal && (
-    <AddEditClient
-      id={id}
-      setModal={setModal}
-      title={"Create Client"}
-    />
-)}
+      <DivModal $mode={modalAddClient} />
+      {modalAddClient && (
+        <AddEditClient
+          id={id}
+          setModal={setModalAddClient}
+          title={"Create Client"}
+        />
+      )}
 
-      <DivModal $mode={modalInfo || modalEdit || modalEditClient || modalPopUp} />
+      <DivModal
+        $mode={modalInfo || modalEdit || modalEditClient || modalPopUp}
+      />
 
-       {modalInfo && (
+      {modalInfo && (
         <ModalClientDetails
           id={id}
           openModal={() => detailsModal()}
@@ -224,21 +224,19 @@ const { search } = useSearchContext();
         />
       )}
 
-    {modalEditClient && (
+      {modalEditClient && (
         <ModalClientEdit
           id={id}
           setModalEditClient={setModalEditClient}
           title={"Edit Client"}
         />
-    )}
+      )}
 
       {modalPopUp && (
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
       )}
-      {modalEdit && (
-        <Subject id={idSubject} title={"Edit Subject"}/>
-      )}
-   </ContainerGlobal>  
- )   
-}
+      {modalEdit && <Subject id={idSubject} title={"Edit Subject"} />}
+    </ContainerGlobal>
+  );
+};
 export default ContainerCards;

@@ -15,18 +15,17 @@ export const Container = styled.div`
 export const Card = styled.div`
   border-left: ${(props) =>
     props.isActive ? "7px solid #00953b" : "7px solid #7a7a7a"};
-  border-left: 7px solid ${(props) =>
-  (props.checked ? "Active" : "Inactive")};
+  border-left: 7px solid ${(props) => (props.checked ? "Active" : "Inactive")};
   border-left: 7px solid ${(props) => (props.isActive ? "green" : "gray")};
   grid-template-rows: 25% 75%;
   display: grid;
+  background-color:#F5F7FA;
   border-radius: 8px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
   width: auto;
   height: 100%;
   z-index: 0 !important;
-  padding-left: 10px;
 `;
 
 export const ToggleContainer = styled.label`
@@ -75,6 +74,7 @@ export const Header = styled.div`
   height: 100%;
   display: flex;
   cursor: default;
+  position: relative;
 `;
 
 // Photo Client //
@@ -114,9 +114,10 @@ export const DivDadosCard = styled.div`
 // Div Icons //
 export const DivIcons = styled.div`
   display: flex;
-  flex-direction: row;
-  grid-gap: 5px;
-  width: 15%;
+  justify-content: end;
+  padding-right: 5%;
+  height: 100%;
+  width: 100%;
 `;
 
 // Div Info client //
@@ -134,7 +135,7 @@ export const DivInfo = styled.div`
 
 // Styles Status and tags //
 export const DivTagsStatus = styled.div`
-  margin:2% 0px 2% 0px;
+  margin: 2% 0px 2% 0px;
   display: flex;
   justify-content: center;
 `;
@@ -156,9 +157,9 @@ export const Status = styled.div`
 export const TagsSpan = styled.div`
   display: flex;
   color: #ffffff;
-  background-color: #007bff !important;
+  background-color: ${(props) => (props.isActive ? "#007bff" : "#7a7a7a")};
   width: fit-content;
-  height:15px;
+  height: 15px;
   border-radius: 8px;
   font-size: 14px;
   align-items: center;
@@ -364,10 +365,15 @@ export const ContainerFather = styled.div`
 `;
 
 export const DivTeste = styled.span`
-  display: flex;
+  text-align: center;
+  width: fit-content;
   height: fit-content;
-  flex-direction: row;
-  align-self: center;
+  display: block;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  align-items: center;
   color: rgba(0, 0, 0, 0.7);
 `;
 
@@ -375,7 +381,7 @@ export const NameBusiness = styled.div`
   font-style: bold;
   font-weight: 600;
   align-self: center;
-`
+`;
 
 export const HeaderTags = styled.div`
   grid-row: 1;
@@ -386,7 +392,7 @@ export const HeaderTags = styled.div`
 `;
 
 export const TagsStatus = styled.div`
-  margin-top:3.5%;
+  margin-top: 3.5%;
   display: grid;
   margin-left: 10px;
   justify-content: left;
@@ -397,9 +403,10 @@ export const TagsStatus = styled.div`
 export const DivTagsSpan = styled.div`
   display: flex;
   color: #ffffff;
-  background-color: ${(props) => (props.isActive ? "#007bff" : "#007bff")};
+  background-color: ${(props) => (props.isActive ? "#007bff" : "#7a7a7a")};
+
   width: fit-content;
-  height:20px;
+  height: 20px;
   width: 50px;
   border-radius: 4px;
   font-size: 12px;
@@ -445,8 +452,8 @@ export const DivContentTags = styled.div`
   display: flex;
   padding: 2px;
   position: relative;
-  top: -20px;
   align-items: center;
+  color: ${(props) => (props.isActive ? "#000" : "#fff")};
   background-color: ${(props) => (props.colorTag ? props.colorTag : "pink")};
   border-radius: 8px;
   margin-right: 10px;
@@ -454,11 +461,12 @@ export const DivContentTags = styled.div`
   font-size: 12px;
   margin-left: 10px;
   justify-content: center;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const DivCenter = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width:88%;
+  padding-left:5%;
 `

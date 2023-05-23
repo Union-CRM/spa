@@ -286,6 +286,6 @@ export const DivClose = styled.div`
 
 export const DivInfo = styled.div`
   position: relative;
-  top: 15%;
+  top: 5%;
   left: 1%;
 `;

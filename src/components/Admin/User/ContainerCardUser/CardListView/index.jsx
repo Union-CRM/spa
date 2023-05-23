@@ -26,14 +26,16 @@ const UserCard = (props) => {
   const { userList, setViewProfile, setUserTarget } = useUserContext();
   const { updateStatusUser } = useFetchUser();
   const user = userList.filter((u) => u.id === props.id)[0];
+  const [isActive, setIsActive] = useState(user.status === "ACTIVE");
 
   const handleClickViewProfile = () => {
     setViewProfile(true);
     setUserTarget(user);
-    //props.setId(client.id);
   };
-
-  const [isActive, setIsActive] = useState(user.status === "ACTIVE");
+  const handleEdit = () => {
+    setUserTarget(user);
+    props.openModal();
+  };
 
   const handleToggle = () => {
     setIsActive(!isActive);
@@ -53,13 +55,13 @@ const UserCard = (props) => {
           checked={isActive}
         >
           <Header>
-            <DivPhoto>
+            <DivPhoto onClick={handleEdit}>
               <DivPhotoI isActive={isActive}>
                 <Body type={"Body2"} name={Split(user.name)} />
               </DivPhotoI>
             </DivPhoto>
 
-            <DivDadosCard>
+            <DivDadosCard onClick={handleEdit}>
               <Body type={"Body2"} name={user.name} />
 
               <Subtitle type={"TextDescription"} name={user.email} />

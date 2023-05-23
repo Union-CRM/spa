@@ -15,23 +15,14 @@ import ClientCard from "./CardListView/index";
 import { useState, useEffect } from "react";
 import { useUserContext } from "../../../../hook/useUserContext";
 
-const abaStatus = {
-  ACTIVE: "ACTIVE",
-  INACTIVE: "INACTIVE",
-};
-
 const ContainerCards = () => {
   const { loadUserList, userList } = useUserContext();
+  const [active] = useState(abaStatus.ACTIVE);
 
-  //console.log(userList);
   useEffect(() => {
     loadUserList();
   }, []);
-
   // States modal//
-
-  const [active] = useState(abaStatus.ACTIVE);
-
   return (
     <>
       <ContainerHeaderAndCards>
@@ -40,7 +31,11 @@ const ContainerCards = () => {
             <DivTitlePage>
               <H1>Users </H1>
               <HowManyClientList>
-                ({userList.filter((item) => item.status === active).length})
+                (
+                {userList
+                  ? userList.filter((item) => item.status === active).length
+                  : 0}
+                )
               </HowManyClientList>{" "}
             </DivTitlePage>
 
@@ -63,3 +58,8 @@ const ContainerCards = () => {
   );
 };
 export default ContainerCards;
+
+const abaStatus = {
+  ACTIVE: "ACTIVE",
+  INACTIVE: "INACTIVE",
+};

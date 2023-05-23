@@ -61,7 +61,7 @@ export const Content = styled.div`
 export const DivClient = styled.div`
   width: 200%;
   height: 90%;
-  
+
   margin: 0;
   grid-column: 1;
   min-width: 400px;
@@ -69,13 +69,14 @@ export const DivClient = styled.div`
     width: 65%;
   }
 
-  ${ContainerHeaderAndCards}{
+  ${ContainerHeaderAndCards} {
     box-shadow: none;
   }
 
   ${ModaClient} {
-    display: none;
-    grid-template-columns: 0%;
+    display: block;
+    grid-column: 2;
+    position: absolute;
   }
 
   ${ContainerGlobal} {
@@ -86,7 +87,9 @@ export const DivClient = styled.div`
     min-width: 200px;
   }
   ${ContainerCentral} {
-    display: none;
+    display: fixed;
+
+    z-index: 20;
   }
 
   ${ContainerClient} {
@@ -106,26 +109,28 @@ export const DivClient = styled.div`
     @media (min-width: 1007px) and (max-width: 1360px) {
       height: 80%;
     }
-    @media (min-width:701px) and (max-width: 1006px) {
+    @media (min-width: 701px) and (max-width: 1006px) {
       height: 54%;
-  }
-  ${BoardStyleClient} {
-    width: 100%;
-    height: 100%;
-    background: #fff;
-  }
+    }
 
-  ${DivButton} {
-    display: none;
-  }
+    ${BoardStyleClient} {
+      width: 100%;
+      height: 100%;
+      background: #fff;
+    }
 
-  ${DivIcons} {
-    display: flex;
-  }
+    ${DivButton} {
+      display: none;
+    }
 
-  ${ContainerCard} {
-    width: auto;
-    height: 204px;
+    ${DivIcons} {
+      display: flex;
+    }
+
+    ${ContainerCard} {
+      width: auto;
+      height: 204px;
+    }
   }
 `;
 
@@ -183,28 +188,6 @@ export const Graph1 = styled.div`
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   margin-bottom: 0;
-`;
-
-// PENSAR //
-export const H1Planners = styled.div`
-  width: fit-content;
-  display: flex;
-  flex-direction: row;
-  font-family: "Houschka Rounded Alt";
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 28px;
-  grid-row: 2;
-  height: fit-content;
-  border-bottom: 2px solid #007bff;
-`;
-
-export const HowManyPlanners = styled.div`
-  font-size: 24px;
-  color: #525b75;
-  font-weight: 600;
-  margin-right: 5%;
 `;
 
 export const DivPhoto = styled.div`

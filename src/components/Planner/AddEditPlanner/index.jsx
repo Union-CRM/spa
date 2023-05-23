@@ -59,6 +59,12 @@ const ModalPlanner = (props) => {
   const { createPlanner, updatePlanner } = useFetchPlanner();
   const { user, userTarget } = useUserContext();
   const [flag, setFlag] = useState(false);
+
+  const [flagSubject, setFlagSubject] = useState(false);
+  const [flagDate, setFlagDate] = useState(false);
+  const [flagStart, setFlagStart] = useState(false);
+  const [flagFinish, setFlagFinish] = useState(false);
+
   const clientOption = clientList
     .filter((c) => c.status === "Active" && c.user_id === userTarget.id)
     .map((c) => ({ id: c.id, value: c.id, label: c.client }));
@@ -122,21 +128,105 @@ const ModalPlanner = (props) => {
   };
 
   const HandleCreatePlanner = () => {
-    const newPlanner = {
-      name: subjectObj.subject_title,
-      date: date + " " + timeStart,
-      duration: timeFinish,
-      subject: subjectObj.id,
-      client: subjectObj.client_id,
-      release: subjectObj.release_id,
-      user: userTarget.id,
-      guest: guest.map((g) => ({ client_id: g.value })),
-    };
-    if (subjectObj.id && date && timeFinish && timeStart) {
-      createPlanner(newPlanner);
-    } else {
-      setFlag(true);
+
+    var aux = "";
+    var todayDate = new Date();
+    
+    const partesData = date.split("/");
+
+    //Data enviada do formulário
+    var data = new Date(partesData[1]+ "/"+partesData[2]+"/"+partesData[0]);
+
+    //Data de hoje
+    var tDate = new Date((todayDate.getMonth()+1)+"/"+todayDate.getDate()+"/"+todayDate.getFullYear())
+    
+    if (todayDate.getMinutes() < 10) {
+      aux = todayDate.getHours() + ":0" + todayDate.getMinutes();
     }
+    else {
+      aux = todayDate.getHours() + ":" + todayDate.getMinutes()
+    }
+
+    if (todayDate.getHours() < 10) {
+      aux = "0"+aux;
+    }
+
+    if(!subjectObj.id){
+      setFlagSubject(true);
+    }
+    if(!date){
+      setFlagDate(true);
+    }
+    if(!timeStart){
+      setFlagStart(true);
+    }
+    if(!timeFinish){
+      setFlagFinish(true);
+    }
+
+    if (timeStart && timeFinish && date) {
+
+      if(data > tDate){
+        setFlagDate(false)
+        setFlagStart(false)
+        if (timeFinish > timeStart) {
+          setFlagFinish(false)
+
+          const newPlanner = {
+            name: subjectObj.subject_title,
+            date: date + " " + timeStart,
+            duration: timeFinish,
+            subject: subjectObj.id,
+            client: subjectObj.client_id,
+            release: subjectObj.release_id,
+            user: userTarget.id,
+            guest: guest.map((g) => ({ client_id: g.value })),
+          };
+          if (subjectObj.id && date && timeFinish && timeStart) {
+            createPlanner(newPlanner);
+          }
+        }else {
+          setFlagFinish(true)
+        }
+      }
+      else if(data < tDate) {
+        setFlagDate(true)
+      }else{
+        setFlagDate(false)
+        
+        if (timeStart >= aux) {
+          setFlagStart(false)
+
+          if (timeFinish > timeStart) {
+            setFlagFinish(false)
+
+            const newPlanner = {
+              name: subjectObj.subject_title,
+              date: date + " " + timeStart,
+              duration: timeFinish,
+              subject: subjectObj.id,
+              client: subjectObj.client_id,
+              release: subjectObj.release_id,
+              user: userTarget.id,
+              guest: guest.map((g) => ({ client_id: g.value })),
+            };
+            if (subjectObj.id && date && timeFinish && timeStart) {
+              createPlanner(newPlanner);
+            }
+          }else {
+            setFlagFinish(true)
+          }
+
+        }else{
+          setFlagStart(true)
+        }
+      }
+
+
+    }
+     
+        
+       
   };
 
   const handleCancel = (e) => {
@@ -177,8 +267,20 @@ const ModalPlanner = (props) => {
       <Form>
         <PositionInputs>
           {!modalEdit && !modalReschedule && (
+            /*<SingleSelect
+              //placeholder={flagSubject && !subjectObj.id ? "Required field" : ""}
+              required={(flagSubject) || (flagSubject && !subjectObj.id) ? true : false} //testar melhor
+              set={(s) => handleSelectSubject(s)}
+              options={subjectOption}
+              name={"subject"}
+              label={"Subject"}
+              sizeHeight={"3.5vh"}
+              sizeSingle={"26vw"}
+              onChange={(s) => handleSelectSubject(s)}
+            />*/
+            
             <SingleSelect
-              placeholder={flag && !subjectObj.id ? "Required field" : ""}
+              placeholder={flagSubject && !subjectObj.id ? "Required field" : ""}
               set={(s) => handleSelectSubject(s)}
               options={subjectOption}
               name={"subject"}
@@ -237,7 +339,8 @@ const ModalPlanner = (props) => {
               type="Date"
               name="date"
               onChange={(e) => setDate(e.target.value)}
-              required={flag && !date ? true : false}
+              //required={flagDate && !date ? true : false}
+              required={(flagDate) || (flagDate && !date) ? true : false} 
             ></InputDate>
           </DivDate>
           <DivStart>
@@ -247,7 +350,8 @@ const ModalPlanner = (props) => {
               type="time"
               name="time"
               onChange={(e) => setTimeStart(e.target.value)}
-              required={flag && !timeStart ? true : false}
+              //required={flagStart && !timeStart ? true : false}
+              required={(flagStart) || (flagStart && !timeStart) ? true : false} //testar melhor
             ></InputDate>
           </DivStart>
           <DivFinish>
@@ -257,7 +361,7 @@ const ModalPlanner = (props) => {
               type="time"
               name="time-finish"
               onChange={(e) => setTimeFinish(e.target.value)}
-              required={flag && !timeFinish ? true : false}
+              required={(flagFinish) || (flagFinish && !timeFinish) ? true : false} //testar melhor
             ></InputDate>
           </DivFinish>
         </DivClocks>
@@ -267,13 +371,12 @@ const ModalPlanner = (props) => {
             placeholder={""}
             label={"Guests"}
             tags={guest}
-            width={"90%"}
-            widths={"13vw"}
+            width={"88%"}
+            widths={"100%"}
             set={(g) => setGuest(g)}
             sizeHeight={"3.5vh"}
-            heights={"12vh"}
-            sizeMenuList={"10vw"}
-            sizeMenu={"35%"}
+            heights={"13vh"}
+            sizeMenu={"36%"}
             indicator={"guest"}
           />
         </PositionTags>
