@@ -11,6 +11,7 @@ class RemarkPage extends React.Component {
           <RemarkContextProvider>
             <RemarkList />
           </RemarkContextProvider>
+
         </PageBody>
       </>
     );

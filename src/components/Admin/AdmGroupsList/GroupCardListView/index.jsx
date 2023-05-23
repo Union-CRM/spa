@@ -59,7 +59,6 @@ const AdmGroupCardListView = (props) => {
   const { setModalInfo, setInfoGroup } = useGroupListContext();
 
   const [isActive, setIsActive] = useState(group.status === "ATIVO");
-
   const handleToggle = () => {
     const newStatus = isActive ? "INATIVO" : "ATIVO";
     setIsActive(!isActive);
@@ -78,6 +77,7 @@ const AdmGroupCardListView = (props) => {
           active={isActive}
           $mode={group.status}
           checked={isActive}>
+
           <TopContainer>
             <Tag
               isActive={isActive}
@@ -100,17 +100,13 @@ const AdmGroupCardListView = (props) => {
                   onClick={() => handleClick()}
                 />
                 <ToggleButton checked={isActive} />
+
               </ToggleContainer>
-
-
               <IconButton onClick={handleEdit}>
                 <IconSystem icon={"Edit"} height={"13px"} />
               </IconButton>
             </DivToggleIcon>
           </TopContainer>
-
-
-
           <Content onClick={() => handleInfo()}>
             <DivIconItau>
               <PeopleTeams

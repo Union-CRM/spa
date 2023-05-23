@@ -65,6 +65,7 @@ export const GroupListContextProvider = ({ children }) => {
     <GroupListContext.Provider value={{ group, setGroup, loadData, team, setTeamList, infoGroup, setInfoGroup, users, idGroups,
       setIdGroups, modalEditGroup, setModalEditGroup, modalInfo, setModalInfo, id, setId, modal, setModal, activeTab, setActiveTab,
       toggleState, setToggleState,idEdit,setIdEdit, groupPage, setGroupPage, 
+
      }}>
     {children}
     </GroupListContext.Provider>

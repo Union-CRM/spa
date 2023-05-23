@@ -150,7 +150,6 @@ const AddEditClient = (props) => {
             <H1>{props.title} </H1>
           </PositionTitle>
           <Form>
-
           <DivCustomer>
               <SingleSelect
                 key="2"

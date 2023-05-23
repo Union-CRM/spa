@@ -52,7 +52,6 @@ const AddEditGroup = (props) => {
   }, [])
  
   const usersList = userSub.concat(usersNotin)
-  
   useEffect(() => {
     if (usersList) {
       setUserOptions(
@@ -61,7 +60,6 @@ const AddEditGroup = (props) => {
       );
     }
   }, [usersNotin, userSub]);
-
   const handleSubmit = () => {
     if (props.title === "Create Group") {
       createGroup();
@@ -83,14 +81,13 @@ const AddEditGroup = (props) => {
 
     const group = groupList.filter((item) => item.id === props.id)[0];
 
-
     const handleSelectCustomer = (cs) => {
       console.log(cs)
       setCustomer(customerList.filter((c) => c.id === cs)[0]);
     };
 
+
     const createGroup = () => {
-      console.log(users)
       const newGroup = {
         group_name: groupName,
         customer_id: customer.id,
@@ -107,14 +104,17 @@ const AddEditGroup = (props) => {
     // Edit GROUP //
  
    const editGroup = () => {
+        
         const newGroup = {
           group_name: groupName,
           customer: customer.id,
+
           user:users.map((g) => ({ id: g.value })), 
         };
         console.log(newGroup)
         if (groupName && customer && users) {
           updateGroup(newGroup, idEdit) 
+
           setModal(false);
         }else {
           setFlag(true);
@@ -135,6 +135,7 @@ const AddEditGroup = (props) => {
             color: colors[Math.floor(Math.random() * (colors.length - 1))],
           })) 
         )     
+
       }
     }, [id]);
   

@@ -47,6 +47,7 @@ const AddEditUser = (props) => {
       ...newUser,
       tcs_id: parseInt(newUser.tcs_id),
     };
+
     if (newUser.name && newUser.email && newUser.tcs_id && newUser.level) {
       createUser(u)
         .then(function (variavel) {

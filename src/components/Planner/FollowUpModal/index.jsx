@@ -114,6 +114,7 @@ const FollowUpModal = (props) => {
             label={"Guests"}
             sizeHeight={"3.5vh"}
             width={"9.2vw"}
+
             widths={"98%"}
             sizeMenu={"32%"}
             heights={"15vh"}

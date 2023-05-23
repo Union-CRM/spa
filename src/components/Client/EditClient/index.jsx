@@ -30,12 +30,11 @@ import { useFetchCustomer } from "../../../hook/useFetchCustomer";
 import { useFetchClient } from "../../../hook/useFetchClient";
 import { useFetchRole } from "../../../hook/useFetchRole";
 import { useFetchTag } from "../../../hook/useFetchTag";
-import {useFetchUser} from "../../../hook/useFetchUser";
+import { useFetchUser } from "../../../hook/useFetchUser";
 import { useFetchUsersNotin } from "../../../hook/useFetchUsersNotin";
 import { useReleaseContext } from "../../../hook/useReleaseContent";
 
 const ModalClientEdit = (props) => {
-
   const {
     client: clientList,
     setClient: setClientList,
@@ -44,6 +43,7 @@ const ModalClientEdit = (props) => {
 
   const { user } = useUserContext();
   const [clientId, setClientId] = useState();
+
 
   const { setModalInfo, setId, modalEditClient, setModalEditClient,
   toggleState, setToggleState, idClient} = useClientContext();
@@ -54,16 +54,15 @@ const ModalClientEdit = (props) => {
   const [role, setRole] = useState({});
   const [status, setStatus] = useState({ value: "Active" });
   const [users, setUsers] = useState([]);
-  
-  
+
   //const {userList} = useFetchUser("Users");
 
   const { release: releaseList } = useReleaseContext("release");
-  
-  const [customerList,setCustomerList] = useState([])
+
+  const [customerList, setCustomerList] = useState([]);
   const { roleList } = useFetchRole("Role");
   const { tagList } = useFetchTag("Tag");
-  const {usersGlobal} = useUserContext();
+  const { usersGlobal } = useUserContext();
   const [releaseObj, setReleaseObj] = useState({
     release_name: "",
     business_name: "",
@@ -72,30 +71,24 @@ const ModalClientEdit = (props) => {
   const { insertClient, updateClient, updateStatusClient } = useFetchClient();
   const [flag, setFlag] = useState(false);
   const { setModal, id, title } = props;
-  const {loadUsers} = useUserContext();
-  const [releaseOptions, setReleaseOptions] = useState([])
+  const { loadUsers } = useUserContext();
+  const [releaseOptions, setReleaseOptions] = useState([]);
   const { loadCustomerOptions } = useFetchCustomer();
+  useEffect(() => {
+    setCustomerList(loadCustomerOptions());
+  }, []);
 
-  
-  useEffect(() =>{
-    setCustomerList(loadCustomerOptions())
-  }, [])
-
-
-  useEffect(() =>{
-
-    if(releaseList){
-    setReleaseOptions(
-      releaseList.map((item) => ({
-        id: item.id,
-        value: item.id,
-        label: item.name,
-      })))
-      }
-     
-  },[releaseList])
-
-  
+  useEffect(() => {
+    if (releaseList) {
+      setReleaseOptions(
+        releaseList.map((item) => ({
+          id: item.id,
+          value: item.id,
+          label: item.name,
+        }))
+      );
+    }
+  }, [releaseList]);
 
   const closeModal = () => {
     setModalEditClient(false);
@@ -121,26 +114,6 @@ const ModalClientEdit = (props) => {
 
   useEffect(() => {
     if (props.title === "Edit Client") {
-      const colors = [
-        "#836FFF",
-        "#00BFFF",
-        "#7FFFD4",
-        "#00FA9A",
-        "#00FF00",
-        "#ADFF2F",
-        "#BDB76B",
-        "#FFDEAD",
-        "#DEB887",
-        "#9370DB",
-        "#EE82EE",
-        "#FFB6C1",
-        "#F08080",
-        "#FA8072",
-        "#FFA07A",
-        "#FFFF00",
-        "#7B68EE",
-        "#BC8F8F",
-      ];
       const client = clientList.filter((item) => item.id === props.id)[0];
       setClientId(client.id);
       setName(client.client);
@@ -155,7 +128,7 @@ const ModalClientEdit = (props) => {
       setBusiness(client.textBusiness);
       setCustomer({ id: client.customer_id, label: client.textCustomer });
       setRole({ id: client.role_id, label: client.textRole });
-      setUsers({id: client.user_id, label: client.user_name})
+      setUsers({ id: client.user_id, label: client.user_name });
       setTags(
         client.tags.map((item) => ({
           value: item.value,
@@ -179,10 +152,11 @@ const ModalClientEdit = (props) => {
       textRelease: releaseObj.name,
       tags: tags,
       user_id: users.id,
-      
     };
+
     
     if (name && email && status && role.id && customer.id && users && releaseObj.id) {
+
       if (status === "ATIVO") {
         updateStatusClient(clientId, newClient);
       } else if (status === "INATIVO") {
@@ -200,7 +174,6 @@ const ModalClientEdit = (props) => {
   const handleSelectRelease = (release_id) => {
     setReleaseObj(releaseList.filter((item) => item.id === release_id)[0]);
   };
- 
 
   const handleSelectCustomer = (customer_id) => {
     setCustomer(customerList.filter((c) => c.id === customer_id)[0]);
@@ -214,7 +187,7 @@ const ModalClientEdit = (props) => {
     setUsers(optionsUser.filter((item) => item.id === user_id)[0]);
   };
 
-   const optionsUser = usersGlobal.map((u) => {
+  const optionsUser = usersGlobal.map((u) => {
     return {
       id: u.id,
       value: u.id,
@@ -222,8 +195,6 @@ const ModalClientEdit = (props) => {
     };
   });
 
-
-  
   return (
     <>
       <ContainerCentral>
@@ -294,8 +265,7 @@ const ModalClientEdit = (props) => {
                 sizeSingle={"100%"}
                 sizeMenu={"100%"}
                 options={optionsUser}
-                />
-
+              />
             </DivCustomer>
 
             <DivRelease>
@@ -303,7 +273,7 @@ const ModalClientEdit = (props) => {
                 key="3"
                 set={(release_id) => handleSelectRelease(release_id)}
                 label={"Release Train"}
-                value={releaseObj.name}  
+                value={releaseObj.name}
                 placeholder={flag && !releaseObj.id ? "Required field" : ""}
                 sizeSingle={"100%"}
                 required
@@ -345,6 +315,7 @@ const ModalClientEdit = (props) => {
             <DivStatus>
               {true && props.title === "Edit Client" && (
                 <SingleSelect
+
                 options={status_mok}
                 onChange={(event) => setStatus(event.target.value)}
                 set={(status) => setStatus(status)}
@@ -382,4 +353,27 @@ export default ModalClientEdit;
 const status_mok = [
   { id: 1, value: "ATIVO", label: "ATIVO" },
   { id: 2, value: "INATIVO", label: "INATIVO" },
+
+];
+
+const colors = [
+  "#836FFF",
+  "#00BFFF",
+  "#7FFFD4",
+  "#00FA9A",
+  "#00FF00",
+  "#ADFF2F",
+  "#BDB76B",
+  "#FFDEAD",
+  "#DEB887",
+  "#9370DB",
+  "#EE82EE",
+  "#FFB6C1",
+  "#F08080",
+  "#FA8072",
+  "#FFA07A",
+  "#FFFF00",
+  "#7B68EE",
+  "#BC8F8F",
+
 ];

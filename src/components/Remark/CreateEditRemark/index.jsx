@@ -92,6 +92,7 @@ const CreateEditRemark = (props) => {
   const handleSubmit = () => {
     if (props.title === "Create Remark") {
       handleCreateRemark();
+      setModalSucess(true);
     } else {
       handleEditRemark();
     }
@@ -303,7 +304,9 @@ const CreateEditRemark = (props) => {
                 />
               </DivDate>
               <DivDate>
-               
+
+                {prevStatus === "ACTIVE" && (
+
                   <SingleSelect
                     placeholder={""}
                     set={(s) => handleSelectStatus(s)}
@@ -316,7 +319,8 @@ const CreateEditRemark = (props) => {
                     isDisabled={false}
                     sizeHeight={"3.5vh"}
                   />
-             
+
+                )}
               </DivDate>
             </DivDateAll>
 
