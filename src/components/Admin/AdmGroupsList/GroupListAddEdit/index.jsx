@@ -41,9 +41,8 @@ const AddEditGroup = (props) => {
   const [userOptions, setUserOptions] = useState([]);
   const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin();
   const { setModal, id } = props;
-  const {user} = useUserContext();
+  const {user, usersGlobal: usersList} = useUserContext();
   //const [userGroup, setUserGroup] = useState([]);
-  
   
   const{loadUserSub,loadUserNotin} = useFetchUsersNotin()
   useEffect(()=>{
@@ -51,13 +50,14 @@ const AddEditGroup = (props) => {
     loadUserSub()
   }, [])
  
-  const usersList = userSub.concat(usersNotin)
+  //const usersList = userSub.concat(usersNotin)
   
   useEffect(() => {
     if (usersList) {
       setUserOptions(
         usersList
           .map((c) => ({ id: c.id, value: c.id, label: c.name }))
+          .sort((a, b) => (a.label || '').localeCompare(b.label || ''))
       );
     }
   }, [usersNotin, userSub]);

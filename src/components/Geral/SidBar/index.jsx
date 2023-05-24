@@ -56,7 +56,7 @@ function handleLogin(event) {
 const SidBar = (props) => {
   //const { colorPage } = useCustomerContext();
   const [sidBarState, setSidBarState] = useState(true);
-  const { user,colorPageUser } = useUserContext();
+  const { user,colorPageUser,setViewProfile } = useUserContext();
   const isAdm = user.level > 1 ? true : false;
   const colorAdm = user.level > 1 ? "#007BFF" : "#FFFFFF";
   const [selectedIcon, setSelectedIcon] = useState('');
@@ -64,6 +64,11 @@ const SidBar = (props) => {
 
   function handleIconClick(iconName) {
     setSelectedIcon(iconName);
+  }
+  
+  const handleIconClickUser = (iconName)=>{
+    setSelectedIcon(iconName);
+    setViewProfile(false);
   }
 
   useEffect(() => {
@@ -132,7 +137,7 @@ const SidBar = (props) => {
           </Slink>
           {isAdm && (
             <>
-              <Slink onClick={() => handleIconClick('users')} to="/usersAdm">
+              <Slink onClick={() => handleIconClickUser('users')} to="/usersAdm">
                 <Li selected={selectedIcon === 'users'} level={user.level}>
 
                   <Icon $mode={sidBarState}>

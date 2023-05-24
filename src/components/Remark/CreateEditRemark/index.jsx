@@ -294,7 +294,7 @@ const CreateEditRemark = (props) => {
                 />
               </DivDate>
               <DivDate>
-                {prevStatus === "ACTIVE" && "FINISHED"  && "CANCELED" && (
+               
                   <SingleSelect
                     placeholder={""}
                     set={(s) => handleSelectStatus(s)}
@@ -307,7 +307,7 @@ const CreateEditRemark = (props) => {
                     isDisabled={false}
                     sizeHeight={"3.5vh"}
                   />
-                )}
+             
               </DivDate>
             </DivDateAll>
 

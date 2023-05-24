@@ -23,7 +23,7 @@ import { useFetchUser } from "../../../../../hook/useFetchUser";
 import ButtonDefault from "../../../../../assets/Buttons/ButtonDefault";
 
 const UserCard = (props) => {
-  const { userList, setViewProfile, setUserTarget } = useUserContext();
+  const { usersGlobal: userList, setViewProfile, setUserTarget } = useUserContext();
   const { updateStatusUser } = useFetchUser();
   const user = userList.filter((u) => u.id === props.id)[0];
   const [isActive, setIsActive] = useState(user.status === "ACTIVE");

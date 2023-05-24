@@ -8,7 +8,7 @@ export const Container = styled.div`
     @margin(max-width: 1367px){
         margin-left: 2px;
     }
-    grid-template-columns: 17.29% 17.3% 17.2% 17.2% 17.26% 15.7%;
+    grid-template-columns: 17.4% 17.25% 17.2% 17.25% 17.25% 15.7%;
     grid-column: 6;
     width: 98%;
     @media(max-width: 1400px){

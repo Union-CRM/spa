@@ -165,6 +165,9 @@ export const Li = styled.li`
       }
     }};
   }
+  @media (min-width: 1500px) and (max-width: 2000px) {
+    height: 50px;
+  }
 `;
 
 export const Slink = styled(Link)`

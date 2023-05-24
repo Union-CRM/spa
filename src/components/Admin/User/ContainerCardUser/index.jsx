@@ -39,9 +39,8 @@ const abaStatus = {
 };
 
 const ContainerCards = () => {
-  const { loadUserList, userList: users, modalPassword } = useUserContext();
+  const { loadUserList, usersGlobal: users, modalPassword } = useUserContext();
   const { search } = useSearchContext();
-
   const [userList, setUserList] = useState([]);
   const [modal, setModal] = useState(false);
   const [modalPopUp, setModalPopUp] = useState(false);
