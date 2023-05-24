@@ -189,6 +189,7 @@ const ContainerCards = (props) => {
             {clientList &&
               clientList
                 .filter((item) => item.status === active)
+                .sort((a, b) => (a.client || '').localeCompare(b.client || ''))
                 .map((item) => (
                   <ClientCard
                     setId={(i) => setId(i)}

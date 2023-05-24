@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { userGetSubmissiveUsers, userCreate } from "../api/routesAPI";
+import { userGetSubmissiveUsers, userCreate,userGetAll } from "../api/routesAPI";
 import { userGetUsersMe } from "../api/routesAPI";
 export const UserContext = createContext();
 
@@ -48,7 +48,7 @@ export const UserContextProvider = ({ children }) => {
 
   const loadUsers = async () => {
     try {
-      const response = await axios.get(userCreate, {
+      const response = await axios.get(userGetAll, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setUsersGlobal(response.data.list);

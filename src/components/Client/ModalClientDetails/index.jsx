@@ -35,26 +35,34 @@ const ModalClientDetails = (props) => {
   const { setModal, id } = props;
   const { setModalInfo, setId, modalEditClient, setModalEditClient, loadData } =
     useClientContext();
-  const { user } = useUserContext();
+  const { user,userList, loadUserList } = useUserContext();
   // UseEffect Clients //
   const { client: clientList } = useClientContext();
   const client = clientList.filter((item) => item.id === props.id)[0];
   const [statusClient, setStatus] = useState();
   const [clientName, setClientName] = useState();
   const [manager, setManager] = useState();
-
+  const [editable,setEditable] =useState(false);
+  const [activeContent, setActiveContent] = useState(0);
+  const { toggleState, setToggleState } = useClientContext();
+  const { activeTab, setActiveTab } = useClientContext();
+  //console.log(userList)
+  
   useEffect(() => {
+    const client = clientList.filter((item) => item.id === props.id)[0];  
     if (props.title === "Client Details") {
-      const client = clientList.filter((item) => item.id === props.id)[0];
       setStatus(client.status);
       setClientName(client.client_name);
       setManager(client.user_name);
     }
-  }, [id]);
+    if(userList){
+      const usersID = (userList.map((u)=> u.id))
+      setEditable( usersID.includes(client.user_id) || client.user_id===user.id)
+    }else{
+      loadUserList();
+    }    
+  }, [id,userList]);
 
-  const [activeContent, setActiveContent] = useState(0);
-  const { toggleState, setToggleState } = useClientContext();
-  const { activeTab, setActiveTab } = useClientContext();
   const toggleTab = (index) => {
     setToggleState(index);
     setActiveTab(index);
@@ -109,7 +117,7 @@ const ModalClientDetails = (props) => {
               >
                 {client.client}
               </ClientName>
-              {activeTab === 0 && client.user_id === user.id && (
+              {activeTab === 0 && editable && (
                 <IconTag onClick={EditModal}>
                   <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
                 </IconTag>

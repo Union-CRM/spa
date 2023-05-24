@@ -43,7 +43,7 @@ const EditGroupList = (props) => {
   const{userNotin: usersNotin, userListSub: userSub} = useFetchUsersNotin();
 
   const {  id, setModal } = props;
-  const {user} = useUserContext();
+  const {user,usersGlobal: usersList} = useUserContext();
   //const [userGroup, setUserGroup] = useState([]);
   
   const{loadUserSub,loadUserNotin} = useFetchUsersNotin()
@@ -52,7 +52,7 @@ const EditGroupList = (props) => {
     loadUserSub()
   }, [])
  
-  const usersList = userSub//.concat(usersNotin)
+  //const usersList = userSub//.concat(usersNotin)
   
   useEffect(() => {
     if (usersList) {

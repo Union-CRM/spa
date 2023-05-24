@@ -30,15 +30,17 @@ export const ContainerHeaderAndCards = styled.div`
   position: relative;
   display: grid;
   border-radius: 8px;
+  background:white;
   grid-template-rows: 20% 80%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   @media (min-width: 50px) and (max-width: 1360px) {
     height: 95%;
     width: 100%;
   }
-  @media (min-width: 1355px) and (max-width: 1824px) {
+  @media (min-width: 1355px) and (max-width: 1600px) {
     width: 100%;
   }
+
 `;
 
 //* Header Container *//
@@ -48,10 +50,11 @@ export const HeaderContainerCards = styled.div`
   grid-row: 1;
   width: auto;
   height: 100%;
+  position:relative;
   display: grid;
-  background-color: #ffffff;
+  background-color:transparent;
   border-radius: 8px 8px 0px 0px;
-  grid-template-rows: 20% 50% 30%;
+  grid-template-rows: 20% 45% 15%;
   @media (min-width: 100px) and (max-width: 600px) {
     display: grid;
     grid-row: 1;
@@ -87,6 +90,7 @@ export const LineDivisor = styled.div`
   width: 92%;
   height: 2px;
   margin-left: 5%;
+  z-index:1000;
   background-color: #e3e6ed;
   position: absolute;
 `;
