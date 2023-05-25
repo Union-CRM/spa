@@ -16,7 +16,7 @@ import { useState, useEffect } from "react";
 import { useUserContext } from "../../../../hook/useUserContext";
 
 const ContainerCards = () => {
-  const { loadUserList, usersGlobal: userList } = useUserContext();
+  const { loadUserList, userList } = useUserContext();
   const [active] = useState(abaStatus.ACTIVE);
 
   useEffect(() => {

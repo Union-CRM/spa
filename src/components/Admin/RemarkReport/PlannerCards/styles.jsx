@@ -6,10 +6,10 @@ export const Container = styled.div`
   cursor: context-menu;
   justify-content: start;
   background: ${(props) => props.color};
-  grid-template-columns: repeat(auto-fit, minmax(16.66%, 6fr));
+  grid-template-columns: repeat(auto-fit, minmax(16.6666%, 6fr));
   width: 100%;
   :hover {
-    background-color: #dddbdd;
+    background-color: #a9a9a9;
     cursor: context-menu;
     //border: #
   }
@@ -26,5 +26,7 @@ export const DivInfo = styled.div`
 export const DivCenter = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center !important;
+  width: 100%;
   justify-content: center;
 `;

@@ -39,7 +39,7 @@ const abaStatus = {
 };
 
 const ContainerCards = () => {
-  const { loadUserList, usersGlobal: users, modalPassword } = useUserContext();
+  const { loadUserList, userList: users, modalPassword } = useUserContext();
   const { search } = useSearchContext();
   const [userList, setUserList] = useState([]);
   const [modal, setModal] = useState(false);
@@ -158,6 +158,7 @@ const ContainerCards = () => {
             {userList &&
               userList
                 .filter((u) => u.status === active)
+                .sort((a, b) => (a.name || "").localeCompare(b.name || ""))
                 .map((u) => (
                   <UserCard
                     setId={(i) => setId(i)}

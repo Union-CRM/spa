@@ -25,9 +25,13 @@ import {
   ButtonEnterUser,
   ForgotPasswordADM,
   DivModal,
+  DivClose,
+  DivDados,
 } from "./styles";
 import Headline from "../../assets/FontSystem/Headline";
 import axios from "axios";
+import FirstLogin from "../../components/Geral/LoginModals/FirstLogin";
+import { useUserContext } from "../../hook/useUserContext";
 
 function LoginPage() {
   const [email, setEmail] = useState(""); // Criar estado para email com o hook useState
@@ -36,7 +40,11 @@ function LoginPage() {
   const [loginQtd, setLoginQtd] = useState(1);
   const [loginProblems, setLoginProblems] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [blocked, setBlocked] = useState(false);
+  //const [blocked, setBlocked] = useState(false);
+  const [changeModal, setChangeModal] = useState(false);
+  const { blocked, setBlocked, modalPassword, setModalPassword } =
+    useUserContext();
+  const [forgotPass, setForgotPass] = useState(false);
 
   localStorage.setItem("token", "");
 
@@ -44,7 +52,8 @@ function LoginPage() {
     // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
 
     event.preventDefault(); // Impedir comportamento padrão de submissão do formulário
-
+    //if (isActive) {
+    //} else
     if (email !== "" && password !== "" && loginQtd <= 3) {
       // Verificar email , senha preenchida e quantidade de tentativas.
       console.log("teste");
@@ -59,6 +68,7 @@ function LoginPage() {
         )
         .catch(function (error) {
           console.log("Login ou senha incorreta");
+          console.log(error);
           setInvalid(true);
 
           if (loginQtd === 3) {
@@ -66,7 +76,8 @@ function LoginPage() {
             setIsActive(true);
             setBlocked(true);
             setInvalid(false);
-            setLoginQtd(0);
+            setLoginQtd(1);
+            setChangeModal(true);
             console.log(loginQtd);
           } else {
             setLoginQtd(loginQtd + 1);
@@ -97,6 +108,38 @@ function LoginPage() {
       CloseModal();
     }
   };
+
+  function forgot() {
+    setChangeModal(true);
+    setIsActive(true);
+
+    // document.addEventListener(
+    //   "keypress",
+    //   function (e) {
+    //     console.log(e.which);
+    //     if (e.which == 1) {
+    //       console.log("ou");
+    //       setChangeModal(true);
+    //       setIsActive(true);
+    //     }
+    //   },
+    //   false
+    // );
+
+    /*document.addEventListener(
+      "click",
+      function (e) {
+        console.log(e.which);
+        if (e.which == 1) {
+          console.log("ou");
+          setChangeModal(true);
+          setIsActive(true);
+        }
+      },
+      false
+    );*/
+  }
+
   return (
     <>
       <Container>
@@ -130,10 +173,9 @@ function LoginPage() {
           <LogoDiv>
             <IconSystem icon="LogoUnion" />
           </LogoDiv>
-          {invalid && <LoginInvalid />}
-          <Form onSubmit={handleLogin}>
-            {" "}
-            {/* Adicionar evento de submissão de formulário */}
+          {invalid && <LoginInvalid />}{" "}
+          {/* Adicionar evento de submissão de formulário */}
+          <DivDados>
             <Label>
               <Span>Email</Span>
               <Input
@@ -159,15 +201,42 @@ function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Label>
-            <ForgotPasswordADM>Forgot password?</ForgotPasswordADM>
-            <LoginBt>
-              <ButtonDefault
-                name={"Login"}
-                type={"adminSave"}
-                sizeFont={"1.5em"}
-              ></ButtonDefault>
-            </LoginBt>
-          </Form>
+
+            <ForgotPasswordADM onClick={() => forgot()}>
+              Forgot password?
+            </ForgotPasswordADM>
+            <Form onSubmit={handleLogin}>
+              <LoginBt>
+                <ButtonDefault
+                  name={"Login"}
+                  type={"adminSave"}
+                  sizeFont={"1.5em"}
+                  id="botaoLogin"
+                ></ButtonDefault>
+              </LoginBt>
+            </Form>
+          </DivDados>
+          <DivModal onClick={handleBackgroundClick} $mode={isActive}>
+            {changeModal &&
+              (blocked ? (
+                <AcessBlocked
+                  closeModal={() => setBlocked(false)}
+                  active={() => setIsActive(false)}
+                />
+              ) : (
+                [
+                  <LoginProblems
+                    typeUser={"user"}
+                    closeModal={() => setBlocked(false)}
+                    active={() => setIsActive(false)}
+                    change={() => setChangeModal(false)}
+                  />,
+                ]
+              ))}
+          </DivModal>
+          {/*<DivClose />*/}
+          {/*renderização condicional para veriricar se é primeiro login fazer aqui*/}
+          {/*<FirstLogin />*/}
         </Content>
       </Container>
     </>

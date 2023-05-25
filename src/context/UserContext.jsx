@@ -1,6 +1,10 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { userGetSubmissiveUsers, userCreate,userGetAll } from "../api/routesAPI";
+import {
+  userGetSubmissiveUsers,
+  userCreate,
+  userGetAll,
+} from "../api/routesAPI";
 import { userGetUsersMe } from "../api/routesAPI";
 export const UserContext = createContext();
 
@@ -14,6 +18,7 @@ export const UserContextProvider = ({ children }) => {
   const [modalPlanner, setModalPlanner] = useState(false);
   const [modalSubject, setModalSubject] = useState(false);
   const [modalPassword, setModalPassword] = useState(false);
+  const [blocked, setBlocked] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -41,7 +46,7 @@ export const UserContextProvider = ({ children }) => {
       setUserList(response.data.list);
     } catch (error) {
       console.error(error);
-      setUserList([])
+      setUserList([]);
       // to do modal error
     }
   };
@@ -56,7 +61,6 @@ export const UserContextProvider = ({ children }) => {
       console.error(error);
       // to do modal error
     }
-    
   };
 
   return (
@@ -81,6 +85,8 @@ export const UserContextProvider = ({ children }) => {
         loadUsers,
         usersGlobal,
         setUsersGlobal,
+        blocked,
+        setBlocked,
       }}
     >
       {children}
