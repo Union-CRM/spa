@@ -2,7 +2,7 @@ import React from "react";
 import Body from "../../../assets/FontSystem/Body";
 import Subtitle from "../../../assets/FontSystem/Subtitle";
 import { useState } from "react";
-
+import {useGroupListContext} from "../../../hook/useGroupListContext";
 import {
   ContainerCards,
   DivInfo,
@@ -34,6 +34,16 @@ function Split(n) {
 }
 
 const Group = (props) => {
+  const {
+    group: groupList,
+    setModalInfo,
+    setId,
+    setInfoGroup,
+    setToggleState,
+    setActiveTab,
+    countGroups
+  } = useGroupListContext();
+  const group = groupList.filter((g) => g.id === props.id)[0];
   return (
     <>
       <ContainerCards>

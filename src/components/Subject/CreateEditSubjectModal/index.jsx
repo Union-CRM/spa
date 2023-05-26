@@ -38,7 +38,6 @@ const Subject = (props) => {
   const closeModal = () => {
     
     setModal(false);
-    console.log("Olá mundo")
     setModalSubject(false);
     
   };

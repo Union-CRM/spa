@@ -122,7 +122,6 @@ const AddEditGroup = (props) => {
     };
 
       useEffect(() => {
-      console.log(idEdit)
       if (props.title === "Edit Group") {
          //const group = groupList.filter((item) => item.id === props.id)[0];
         const group = groupList.filter((item) => item.id === idEdit)[0]
@@ -141,7 +140,6 @@ const AddEditGroup = (props) => {
   
   return (
     <>
-    {console.log(userOptions)}
       <ContainerCentral>
         <Container>
           <PositionTitle>

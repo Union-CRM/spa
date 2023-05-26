@@ -43,6 +43,7 @@ import PopUpCanceled from "../../../Planner/PopUpCanceled";
 import FollowUpModal from "../../../Planner/FollowUpModal";
 import PopUpFinished from "../../../Planner/PopUpFinished";
 import ModalError from "../../../Planner/ModalError";
+
 //import { Subject as SubjectUser } from "../../../Subject/CreateEditSubjectModal";
 
 import "react-tippy/dist/tippy.css";
@@ -204,8 +205,9 @@ const UserProfile = () => {
           numberOfPlanner={numberOfPlanner}
           value={0}
         />
-      <Group />
+       <Group />
       </Graph1>
+     
       {modalEdit && (
         <>
           <DivClose onClick={handleCloseModal}></DivClose>

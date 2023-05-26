@@ -27,6 +27,7 @@ export const useFetchAdmGroupList = () => {
         console.error(error);
       });
   };
+  
   const updateGroup = async (group, group_id) => {
     axios
       .put(

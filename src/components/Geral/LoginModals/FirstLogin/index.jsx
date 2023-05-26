@@ -36,8 +36,8 @@ const FirstLogin = () => {
   useEffect(() => {
     if (verificarSenha) {
       if (senha === confirmarSenha) {
-        if (senha.length < 6 || confirmarSenha.length < 6) {
-          setMessage("password is weak needs at least 6 characters");
+        if (senha.length < 8 || confirmarSenha.length < 8) {
+          setMessage("password is weak needs at least 8 characters");
           setDiv(true);
         } else {
           setMessage("The Passwords match");

@@ -47,7 +47,6 @@ export const InputDate = styled.input`
   color: #a0a0a0;
   border-radius: 8px;
   border: 2px solid ${(props) => (props.required ? "#b03535" : "#888C95")};
-
   @media (max-width: 1200px) {
     width: 85%;
   }
@@ -101,14 +100,17 @@ export const HeaderPlanilha = styled.div`
   align-items: center;
   background-color: #e41165;
   box-sizing: border-box;
+ 
+  z-index: 0;
 `;
 
 export const DivCenter = styled.div`
   display: flex;
-  width: 100%;
   position: relative;
+  width: 100%;
   flex-direction: row;
   justify-content: center;
+  cursor: pointer;
 `;
 
 export const Title = styled.div`
@@ -183,10 +185,12 @@ export const Total = styled.div`
   width: fit-content;
   height: 1%;
   margin-top: 1%;
-
   font-size: 24px;
   color: #525b75;
   font-weight: 600;
+  span {
+    margin-right:2%;
+  }
 `;
 
 export const DivNumber = styled.div`

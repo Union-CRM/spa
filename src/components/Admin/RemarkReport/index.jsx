@@ -70,12 +70,7 @@ const ContainerRemarkReport = () => {
     setOption(Options.filter((o) => o.value === value)[0]);
   };
 
-  const handleCreateReport = () => {
-    setView(option.label);
-    setRemarkList(Filter(remark));
-    setPlannerList(Filter(planner));
-    //console.log(Filter(planner));
-  };
+
 
   const handleDownload = () => {
     setView(option.label);
@@ -215,6 +210,22 @@ const ContainerRemarkReport = () => {
     }
   };
 
+  const [orderRemark,setOrderRemark]=useState("user_name")
+  const [orderPlanner, setOrderPlanner] = useState("")
+  const handleSelectOrder=(i)=>{
+    setOrderRemark(remarkOrder[i])
+    setOrderPlanner(plannerOrder[i])
+  }
+  
+  const handleCreateReport = () => {
+    setView(option.label);
+    setRemarkList(Filter(remark));
+    setPlannerList(Filter(planner));
+    setOrderRemark("user_name")
+    setOrderPlanner("user")
+    //console.log(Filter(planner));
+  };
+
   return (
     <Container>
       <TitlePage>
@@ -278,7 +289,7 @@ const ContainerRemarkReport = () => {
         </DivButtons>
       </Header>
       <Total>
-        Total
+        <span>Total</span>
         {view}:{" "}
         <DivNumber>
           ({view === "Remark" ? remarkList.length : plannerList.length})
@@ -287,14 +298,14 @@ const ContainerRemarkReport = () => {
       <ContainerPlanilha>
         <HeaderPlanilha>
           {view === "Remark" &&
-            remarkTitles.map((r) => (
-              <Title>
-                <DivCenter>{r}</DivCenter>
+            remarkTitles.map((r,index) => (
+              <Title key={index}>
+                <DivCenter onClick={()=>handleSelectOrder(index)}>{r}</DivCenter>
               </Title>
             ))}
           {view === "Planner" &&
-            plannerTitles.map((p) => (
-              <Title>
+            plannerTitles.map((p,index) => (
+              <Title key={index} onClick={()=>handleSelectOrder(index)}>
                 <DivCenter>{p}</DivCenter>
               </Title>
             ))}
@@ -303,12 +314,12 @@ const ContainerRemarkReport = () => {
         <ContainerRemarks>
           {remarkList &&
             view === "Remark" &&
-            remarkList.map((r, index) => (
+            remarkList.sort((a, b) => (a[orderRemark] || "").localeCompare(b[orderRemark] || "")).map((r, index) => (
               <RemarkCard key={index} index={index} remark={r} />
             ))}
           {plannerList &&
             view === "Planner" &&
-            plannerList.map((p, index) => (
+            plannerList.sort((a, b) => (a[orderPlanner] || "").localeCompare(b[orderPlanner] || "")).map((p, index) => (
               <PlannerCards key={index} index={index} planner={p} />
             ))}
         </ContainerRemarks>
@@ -341,3 +352,26 @@ const plannerTitles = [
   "Created By",
   "Status",
 ];
+
+
+const remarkOrder =[
+  "user_name",
+  "client_name",
+  "subject_name",
+  "remark_name",
+  "date",
+  "date_return",
+]
+
+const plannerOrder =[
+  "user",
+  "client",
+  "subject",
+  "date",
+  "createdBy_name",
+  "status",
+]
+
+
+
+

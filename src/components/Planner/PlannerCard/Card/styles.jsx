@@ -205,7 +205,7 @@ export const ClientContent = styled.div`
   position: relative;
   height:  fit-content;
   width: auto;
-  max-width: 100%;
+  width: 80%;
   align-items: right;
   
   `
