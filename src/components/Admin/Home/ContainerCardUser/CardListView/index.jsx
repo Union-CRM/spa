@@ -14,7 +14,7 @@ import { useUserContext } from "../../../../../hook/useUserContext";
 import { Link } from "react-router-dom";
 
 const UserCard = (props) => {
-  const { usersGlobal: userList, setViewProfile, setUserTarget, setHome } = useUserContext();
+  const { userList, setViewProfile, setUserTarget, setHome } = useUserContext();
   const user = userList.filter((u) => u.id === props.id)[0];
   const [isActive] = useState(user.status === "ACTIVE");
 

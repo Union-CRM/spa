@@ -47,7 +47,7 @@ export const HeaderContainerCards = styled.div`
   width: auto;
   height: 100%;
   display: grid;
-  background-color: #ffffff;
+  background: #fff;
   border-radius: 8px 8px 0px 0px;
   grid-template-rows: 20% 50% 30%;
   @media (min-width: 100px) and (max-width: 500px) {

@@ -4,6 +4,7 @@ import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import LoginProblems from "../../../components/Geral/LoginModals/LoginProblems";
 import LoginInvalid from "../../../components/Geral/LoginModals/LoginInvalid";
 import AcessBlocked from "../../../components/Geral/LoginModals/AcessBlocked";
+import FirstLogin from "../../Geral/LoginModals/FirstLogin";
 import {
   Container,
   DivTcs,
@@ -25,6 +26,7 @@ import {
   ButtonEnterUser,
   ForgotPasswordADM,
   DivModal,
+  DivClose,
 } from "./styles";
 import Headline from "../../../assets/FontSystem/Headline";
 import axios from "axios";
@@ -62,7 +64,6 @@ function LoginPageAdmin() {
 
     if (loginQtd >= 3) {
       console.log("bloqueado");
-
       setChangeModal(true);
       setIsActive(true);
       setBlocked(true);
@@ -95,9 +96,13 @@ function LoginPageAdmin() {
                 console.error('Error', error.message);
                 }*/
         });
-
-      localStorage.setItem("token", data.token);
-      window.location.href = "/home";
+      const teste = true;
+      if (teste) {
+        console.log("Entrou");
+      } else {
+        localStorage.setItem("token", data.token);
+        window.location.href = "/home";
+      }
     } else {
       console.log("Login ou senha incorreta ( Vazio )");
       event.preventDefault();
@@ -182,9 +187,6 @@ function LoginPageAdmin() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Label>
-            <ForgotPasswordADM onClick={() => setIsActive(true)}>
-              Forgot password?
-            </ForgotPasswordADM>
             <LoginBt>
               <ButtonDefault
                 name={"Login"}
@@ -198,6 +200,10 @@ function LoginPageAdmin() {
               </ButtonEnterUser>
             </EnterUser>
           </Form>
+          <ForgotPasswordADM onClick={() => setIsActive(true)}>
+            Forgot password?
+          </ForgotPasswordADM>
+
           <DivModal onClick={handleBackgroundClick} $mode={isActive}>
             {changeModal ? (
               blocked && <AcessBlocked />
@@ -205,6 +211,9 @@ function LoginPageAdmin() {
               <LoginProblems typeUser={"user"} />
             )}
           </DivModal>
+          {/*<DivClose />*/}
+          {/*renderização condicional para veriricar se é primeiro login fazer aqui*/}
+          {/*<FirstLogin />*/}
         </Content>
       </Container>
     </>
