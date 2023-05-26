@@ -1,18 +1,32 @@
 import React from "react";
-import { Container, Logo, GoSearch, DivSear, DivIcon } from "./styles";
+import { Container, Logo, GoSearch, DivSear, DivIcon,DivNotification, NotificationBadge, DivInfoNotication} from "./styles";
 import { useState, useEffect } from "react";
 import { useSearchContext } from "../../../hook/useSearchContext";
 import IconSystem from "../../../assets/IconSystem";
+import { ReactComponent as NotificationRemarks } from "../../../assets/svg/NotificationRemarks.svg";
+import RemarkNotification from "./NotificationModal";
+import { useRemarkContext } from "../../../hook/useRemarkContent";
+
+import { FaRegCalendarAlt, FaChevronCircleDown } from "react-icons/fa";
 
 const NavBar = () => {
-  const { setSearch } = useSearchContext();
-  const [searchtState, setSearchtState] = useState(false);
+  const { setSearch, setSearchtState, setNotification, notification} = useSearchContext();
+  const [searchtState ] = useState(false);
+
+
+  const handleNotification = () => {
+    setNotification(!notification)
+  };
+
   useEffect(() => {
     setSearch(false);
   }, []);
+
   return (
+
     <>
       <Container>
+     
         <Logo>
           <IconSystem icon={"TataLogo"} />
         </Logo>
@@ -28,9 +42,32 @@ const NavBar = () => {
             onBlur={() => setSearchtState("false")}
             onChange={(e) => setSearch(e.target.value)}
           ></GoSearch>
+
+  
         </DivSear>
-      </Container>
+
+  
+        <DivNotification>
+        <NotificationRemarks
+            onClick={() => handleNotification()}
+            style={{
+             fill:"white",
+             cursor:"pointer",
+            }}/>
+
+
+            </DivNotification>
+     
+      <DivInfoNotication>
+      {notification && (
+               <RemarkNotification
+                  setNotification={setNotification}
+                  />
+               )}
+        </DivInfoNotication>
+                </Container>
     </>
+
   );
 };
 

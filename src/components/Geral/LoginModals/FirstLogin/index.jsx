@@ -11,6 +11,8 @@ import {
 } from "./styles";
 import IconSystem from "../../../../assets/IconSystem";
 import Headline from "../../../../assets/FontSystem/Headline";
+import { useFetchUser } from "../../../../hook/useFetchUser";
+import { useUserContext } from "../../../../hook/useUserContext";
 
 const FirstLogin = () => {
   const [senha, setSenha] = useState("");
@@ -18,6 +20,8 @@ const FirstLogin = () => {
   const [message, setMessage] = useState("");
   const [div, setDiv] = useState(false);
   const [verificarSenha, setVerificarSenha] = useState(false);
+  const {updateUserNoPSW} = useFetchUser();
+  const {user, loadUserMe, token, setFirst} = useUserContext();
 
   const handleChangeSenha = (event) => {
     const { value } = event.target;
@@ -33,6 +37,20 @@ const FirstLogin = () => {
     setVerificarSenha(true);
   };
 
+  function updatePass(){
+    const upUser = {
+      name: user.name,
+      email: user.email,
+      tcs_id: user.id,
+      level: user.level,
+      firstAccess: false,
+      password: senha
+    }
+    updateUserNoPSW(user.id,upUser);
+    setFirst(false);
+    window.location.href = "/";
+  }
+
   useEffect(() => {
     if (verificarSenha) {
       if (senha === confirmarSenha) {
@@ -41,6 +59,7 @@ const FirstLogin = () => {
           setDiv(true);
         } else {
           setMessage("The Passwords match");
+          updatePass()
           setDiv(false);
         }
       } else {

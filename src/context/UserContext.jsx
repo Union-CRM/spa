@@ -19,6 +19,8 @@ export const UserContextProvider = ({ children }) => {
   const [modalSubject, setModalSubject] = useState(false);
   const [modalPassword, setModalPassword] = useState(false);
   const [blocked, setBlocked] = useState(false);
+  const [token, setToken] = useState();
+  const [first, setFirst] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -87,6 +89,10 @@ export const UserContextProvider = ({ children }) => {
         setUsersGlobal,
         blocked,
         setBlocked,
+        token,
+        setToken,
+        first,
+        setFirst
       }}
     >
       {children}

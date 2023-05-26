@@ -62,6 +62,7 @@ const ContainerRemarkReport = () => {
       ]);
     }
   }, [userList]);
+
   const selectUser = (id) => {
     setUserTarget(userOptions.filter((u) => u.value === id)[0]);
   };

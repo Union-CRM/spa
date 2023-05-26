@@ -4,6 +4,7 @@ import ButtonDefault from "../../assets/Buttons/ButtonDefault";
 import LoginProblems from "../../components/Geral/LoginModals/LoginProblems";
 import LoginInvalid from "../../components/Geral/LoginModals/LoginInvalid";
 import AcessBlocked from "../../components/Geral/LoginModals/AcessBlocked";
+import FirstLogin from "../../components/Geral/LoginModals/FirstLogin";
 import {
   Container,
   DivTcs,
@@ -29,6 +30,7 @@ import {
 } from "./styles";
 import Headline from "../../assets/FontSystem/Headline";
 import axios from "axios";
+import { useUserContext } from "../../hook/useUserContext";
 
 function LoginPage() {
   const [email, setEmail] = useState(""); // Criar estado para email com o hook useState
@@ -40,12 +42,13 @@ function LoginPage() {
   const [blocked, setBlocked] = useState(false);
   const [forgotPass, setForgotPass] = useState(false);
   const [changeModal, setChangeModal] = useState(false);
+  const {user,loadUserMe, setToken, first, setFirst} = useUserContext();
 
   localStorage.setItem("token", "");
 
   async function handleLogin(event) {
     // Renomear função de teste para handleLogin e adicionar evento de submissão de formulário
-
+    
     event.preventDefault(); // Impedir comportamento padrão de submissão do formulário
 
     if (email !== "" && password !== "" && loginQtd <= 3) {
@@ -75,22 +78,25 @@ function LoginPage() {
             console.log(loginQtd);
           }
         });
-
-      /*if(data.firstlogin){
-        abrir modal 
-        atualizar firstlogin no banco
+      if(data.firstAcess){
+        localStorage.setItem("token", data.token);
+        setFirst(true)
+        setToken(localStorage.getItem("token"))
+        loadUserMe()
       }else{
         localStorage.setItem("token", data.token);
         window.location.href = "/home";
-      }*/
-      localStorage.setItem("token", data.token);
-      window.location.href = "/home";
+      }
+      
+      //console.log(data.token)
+      //localStorage.setItem("token", data.token);
+      //window.location.href = "/home";
     } else if (!loginProblems) {
       console.log("Login ou senha incorreta ( Vazio )");
       event.preventDefault();
       setInvalid(true);
     }
-
+    
     /*localStorage.setItem('token', "data.token");
       window.location.href = '/home';*/
   }
@@ -202,6 +208,10 @@ function LoginPage() {
               ))}
           </DivModal>
           {/*<DivClose />*/}
+          { first ?
+            <FirstLogin />
+            : []
+            }
           {/*renderização condicional para veriricar se é primeiro login fazer aqui*/}
         </Content>
       </Container>

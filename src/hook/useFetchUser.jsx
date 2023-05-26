@@ -7,7 +7,7 @@ import {
 } from "../api/routesAPI";
 
 export const useFetchUser = () => {
-  const { loadUserList } = useUserContext();
+  const { loadUserList, token } = useUserContext();
   const createUser = async (user) => {
     //console.log(user);
     try {
@@ -42,7 +42,7 @@ export const useFetchUser = () => {
   const updateUserNoPSW = async (user_id, user) => {
     axios
       .put(`${userUpdateNoPSW}${user_id}`, user, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then(function (response) {
         //setPopUpSuccess(true);
@@ -50,7 +50,7 @@ export const useFetchUser = () => {
       })
       .catch(function (error) {
         //setPopUpError(true);
-        console.error(error.message);
+        console.error(error.response);
       });
   };
   //localhost:8081/union/v1/users/update/status/27
