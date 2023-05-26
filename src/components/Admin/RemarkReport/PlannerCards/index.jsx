@@ -4,7 +4,6 @@ import { Container, DivInfo, DivCenter } from "./styles";
 const PlannerCards = (props) => {
   const isEven = props.index % 2 === 0;
   const cardColor = isEven ? "#fffff" : "pink";
-  console.log(isEven);
   return (
     <Container color={cardColor}>
       <DivInfo>

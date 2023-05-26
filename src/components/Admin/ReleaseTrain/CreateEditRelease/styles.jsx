@@ -14,6 +14,7 @@ export const Container = styled.div`
   grid-template-rows: 10% 75% 15%;
   @media (min-width: 100px) and (max-width: 502px) {
     height: 81vh;
+    grid-column: 1;
     width: 100%;
     flex-direction: flex-start;
     position: relative;

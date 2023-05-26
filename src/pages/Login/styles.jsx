@@ -29,19 +29,13 @@ export const Content = styled.div`
 export const LogoDiv = styled.div``;
 
 export const Form = styled.form`
-  width: 100%;
+  width: 60%;
   margin-top: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
-export const DivDados = styled.form`
-  width: 60%;
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
+
 
 export const DivTcs = styled.div`
   display: flex;
@@ -119,6 +113,7 @@ export const LoginBt = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top:25px;
 `;
 
 export const DivPassWIcon = styled.div`
@@ -160,7 +155,7 @@ export const ButtonEnterUser = styled.button`
   cursor: pointer;
 `;
 
-export const ForgotPasswordADM = styled.button`
+export const ForgotPasswordADM = styled.div`
   color: rgba(0, 0, 0, 1);
   font-family: "Houschka Rounded Alt";
   font-size: 12px;

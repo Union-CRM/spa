@@ -99,7 +99,6 @@ const AddEditUser = (props) => {
 
   return (
     <>
-    {console.log(levels)}
       <ContainerCentral>
         <Container>
           <PositionTitle>

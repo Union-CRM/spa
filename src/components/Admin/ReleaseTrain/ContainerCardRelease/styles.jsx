@@ -31,7 +31,7 @@ export const ContainerHeaderAndCards = styled.div`
   display: grid;
   border-radius: 8px;
   background:white;
-  grid-template-rows: 20% 80%;
+  grid-template-rows: 16% 80%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   @media (min-width: 50px) and (max-width: 1360px) {
     height: 95%;
@@ -87,9 +87,9 @@ export const Top = styled.div`
 
 //** Line **//
 export const LineDivisor = styled.div`
-  width: 92%;
+  width: 94%;
   height: 2px;
-  margin-left: 5%;
+  margin-left:2.5%;
   z-index:1000;
   background-color: #e3e6ed;
   position: absolute;
@@ -210,7 +210,8 @@ export const H1 = styled.h1`
 export const HowManyClientList = styled.span`
   font-size: 24px;
   @media(max-width: 1120px) {
-    font-size: 18px;
+    font-size:1.2rem;
+    padding-top:1%;
   }
   color: #525b75;
   font-weight: 600;

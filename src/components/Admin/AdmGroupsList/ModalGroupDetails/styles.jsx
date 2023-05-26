@@ -183,7 +183,7 @@ text-align: left;
 align-items: center;
 grid-template-columns: 90% 10%;
   @media (min-width: 1900px) and (max-width: 2500px) {
-    padding-left:5%;
+    padding-left:0%;
   }
 `;
 

@@ -132,8 +132,11 @@ const AddEditCustomer = (props) => {
                 label={"Tags"}
                 placeholder={flag && !tags ? "Required field" : ""}
                 sizeSingle={"40%"}
+                widths={"100%"}
+                width={"90%"}
+                marginLeft={"1%"}
                 required
-                sizeMenu={"40%"}
+                sizeMenu={"37%"}
                 options={tagList ? tagList : []}
               />
             </DivTag>
@@ -147,12 +150,12 @@ const AddEditCustomer = (props) => {
                     status_mok.filter((s) => s.value === newCustomer.status)[0]
                       .label
                   }
-                  sizeSingle={"100%"}
+                  sizeSingle={"90%"}
                   required={flag && !newCustomer.status ? true : false}
                   placeholder={
                     flag && !newCustomer.status ? "Required field" : ""
                   }
-                  sizeMenu={"100%"}
+                  sizeMenu={"37%"}
                   options={status_mok}
                 />
               )}
@@ -160,7 +163,7 @@ const AddEditCustomer = (props) => {
                 <Label>
                   Status
                   <Input
-                    widthInput={"98% !important"}
+                    widthInput={"88% !important"}
                     placeholder={""}
                     value={"Active"}
                     disabled

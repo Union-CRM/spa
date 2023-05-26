@@ -45,7 +45,6 @@ const ClientDetails = (props) => {
     
     if (props.title === "Details Clients") {
       const client = clientList.filter((item) => item.id === props.id)[0];
-      console.log(client)
       setEmail(client.client_email);
       setReleaseObj({
         id: client.release_id,
