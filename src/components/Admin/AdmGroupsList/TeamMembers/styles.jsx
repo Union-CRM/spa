@@ -28,7 +28,7 @@ export const ContainerDetails = styled.div`
     background-color: #dfdfdf;
   }
   @media (min-width: 1500px) and (max-width: 2500px) {
-    height: 520px;
+    height: 500px;
   }
   @media (min-height: 150px) and (max-height: 450px) {
     height: 370px;

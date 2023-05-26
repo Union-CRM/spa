@@ -12,8 +12,8 @@ export const RemarkContextProvider = ({ children }) => {
   const [modalSucess, setModalSucess] = useState(false); 
   const [modalSaveRemark, setModalSaveRemark] = useState(false);
   const [sucessRemark, setSucessRemark] = useState(false);
-
   const [activeTab, setActiveTab] = useState(0);
+  const [notification, setNotification] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -56,6 +56,7 @@ export const RemarkContextProvider = ({ children }) => {
         setModalSaveRemark,
         sucessRemark,
         setSucessRemark,
+        notification, setNotification
       }}
     >
       {children}

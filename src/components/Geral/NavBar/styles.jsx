@@ -10,7 +10,7 @@ export const Container = styled.div`
   margin-top: 1%;
   height: 60px;
   display: grid;
-  grid-template-columns: 10% 75%;
+  grid-template-columns: 10% 75% 15%;
   border-radius: 8px;
   background: #313132;
   border-bottom: 1px solid #313132;
@@ -22,6 +22,37 @@ export const Container = styled.div`
     display: grid;
   }
 `;
+export const DivInfoNotication = styled.div`
+display: grid;
+grid-column:3;
+width:100%;
+top:-6%;
+z-index:2;
+float: right;
+position:relative;
+justify-content:flex-end;
+`;
+
+export const DivNotification = styled.div`
+  width:100%;
+  height:100%;
+  grid-column:3;
+  position:relative;
+  align-items:center;
+  justify-content:flex-end;
+  display:grid;
+  right:10%;
+  height: 60%;
+  margin: 0 auto;
+  margin-top: 5%;
+  @media(max-width: 501px) {
+    margin-top: 100%;
+  }
+  @media(max-width: 1367px){ 
+    margin-top: 8%;
+  }
+`;
+
 
 export const Logo = styled.div`
   grid-column: 1;
@@ -97,6 +128,7 @@ export const DivIcon = styled.button`
   border-bottom-left-radius: 8px;
 `;
 
+
 export const CloseSear = styled.div`
   ${(props) => {
     switch (props.$mode) {
@@ -114,4 +146,18 @@ export const CloseSear = styled.div`
   width: 80vw;
   height: 90vh;
   background-color: aliceblue;
+`;
+export const NotificationBadge = styled.span`
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
 `;

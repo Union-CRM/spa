@@ -57,11 +57,13 @@ export const SubjectContextProvider = ({ children }) => {
   const [isEdit, setEdit] = useState(false);
   const [idSubject,setIdSubject]= useState();
 
+
   const [toggleState, setToggleState] = useState(1);
 
   const [id, setId] = useState(null);
 
   const [modalPlanner, setModalPlanner] = useState(false);
+ 
 
   const openModalDetails = (id) => {
     setSelectedSubject(id);
@@ -96,7 +98,8 @@ export const SubjectContextProvider = ({ children }) => {
         editSubject,
         setEditSubject,
         idSubject,
-        setIdSubject
+        setIdSubject,
+      
       }}
     >
       {children}
