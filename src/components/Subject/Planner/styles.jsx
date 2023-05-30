@@ -66,6 +66,7 @@ export const CardPlanner = styled.div`
   margin-top: 3%;
   position: relative;
   align-items: center;
+  cursor:pointer;
   padding-right: 2%;
   border-radius: 6px;
   background-color: #f5f7fa;

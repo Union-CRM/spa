@@ -109,3 +109,7 @@ export const roleCreate =
 
 export const getTags =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8090/union/v1/tags";
+
+//Forgot Password  
+export const forgotPass =
+  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users";  

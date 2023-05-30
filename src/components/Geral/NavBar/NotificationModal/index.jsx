@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from 'react'
-import {Container, Title,DivInfo, Label, DivTitle, DateRemark, DivDados, DivNumber} from './styles'
+import {Container, Title,DivInfo, RermarkTitle, DivTitle, DateRemark, DivDados, DivNumber, DivIconRemark, ContentRemark, DivSubject, DivClient, NoRemark, Line} from './styles'
 import { useRemarkContext } from '../../../../hook/useRemarkContent';
 import { useSearchContext } from "../../../../hook/useSearchContext";
 import { useUserContext } from '../../../../hook/useUserContext';
+import { ReactComponent as Subject } from "../../../../assets/svg/Subjects.svg";
 
 const RemarkNotification = () => {
     const {notification, setNotification}  = useSearchContext();
@@ -53,18 +54,31 @@ return (
       
         </DivTitle>
 
+        {remarkList && remarkList.length === 0 ? (
+           <NoRemark><span>No remarks for today.</span></NoRemark> 
+  
+        ) : (
+
         <DivInfo>
         {remarkList.map((item) => (
-                   <DivDados >
-                    <Label>Title: <span>{item.remark_name}</span>
-                    </Label>
-                    <Label>Subject: <span>{item.subject_name}</span></Label>
-                    <Label>Client: <span>{item.client_name}</span></Label>
-                   
+                    <DivDados >
+                     <Line>
+                    <DivIconRemark>
+                    <Subject fill={"#fff"} width={"12px"} height={"12px"} />
+                    <RermarkTitle> 
+                    <span>{item.remark_name}</span>
+                    </RermarkTitle></DivIconRemark>
+                    <ContentRemark>
+                    <DivSubject>Subject: <span>{item.subject_name}</span></DivSubject> 
+                     <DivClient>Client: <span>{item.client_name}</span></DivClient>
+                    </ContentRemark>
+                    </Line>
                   </DivDados>
                   ))}    
           </DivInfo>
+          )}
     </Container>
+    
   )
 }
 const month=["Jan","Fev","Mar","Abr","May", "Jun", "Jul", "Aug", "Sep", "Out", "Nov","Dez"]
