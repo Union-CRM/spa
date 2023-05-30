@@ -38,10 +38,11 @@ const FirstLogin = () => {
   };
 
   function updatePass(){
+    console.log(user)
     const upUser = {
       name: user.name,
       email: user.email,
-      tcs_id: user.id,
+      tcs_id: user.tcs_id,
       level: user.level,
       firstAccess: false,
       password: senha

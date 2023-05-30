@@ -26,6 +26,8 @@ import {
   PositionSubject,
   DivMonth,
   DivNumberPlanner,
+  Day,
+  DivDayHeader,
 } from "./styles";
 import { DAYS, month } from "./utils/conts";
 import {
@@ -86,6 +88,8 @@ export const BigCalender = (props) => {
   const { user, userTarget, setUserTarget } = useUserContext();
   const { setSearch, search } = useSearchContext();
   const [searchtState, setSearchtState] = useState(false);
+  const [hoverAtivo, setHoverAtivo] = useState(false);
+  const [divAtiva, setDivAtiva] = useState(null)
 
   useEffect(() => {
     setSearch(false);
@@ -106,11 +110,13 @@ export const BigCalender = (props) => {
     } else {
       if (props.adminList) {
         setPlannerList(
-          planner ? planner.filter((p) => p.user_id === userTarget.id) : []
+          planner ? planner.filter((p) => p.user_id === userTarget.id)
+          .sort((a, b) => (b.status || "").localeCompare(a.status || "") || (a.date || "").localeCompare(b.date || "")) : []
         );
       } else {
         setPlannerList(
-          planner ? planner.filter((p) => p.user_id === user.id) : []
+          planner ? planner.filter((p) => p.user_id === user.id)
+          .sort((a, b) => (b.status || "").localeCompare(a.status || "") || (a.date || "").localeCompare(b.date || ""))  : []
         );
         setUserTarget(user);
       }
@@ -144,6 +150,23 @@ export const BigCalender = (props) => {
   const d = new Date();
   let dayweek = weekday[d.getDay()];
   let Month = month[d.getMonth()];
+
+  //funcão hover trazer para trazer infos do release, subject e business
+  /*const handleHover = () => {
+    setHoverAtivo(!hoverAtivo)
+  };*/
+
+  //função para nao ativar o hover em todas as divs
+  const handleMouseEnter = (id) => {
+    setDivAtiva(id);
+    setHoverAtivo(id);
+  };
+
+  //função para desativar o hover quando o mouse nao tiver na div
+  const handleMouseLeave = () => { 
+    setDivAtiva(null);
+    setHoverAtivo(false);
+  };
 
   return (
     <Container>
@@ -233,14 +256,21 @@ export const BigCalender = (props) => {
                     month === currentDate.getMonth() ? "#E3E6ED" : "#e3e6ed7a"
                   }
                 >
-                  <span
+                  <DivDayHeader>
+                  <Day
                     key={d}
                     className={`nonDRAG ${
                       datesAreOnSameDay(new Date(), date) ? "active" : ""
                     }`}
                   >
                     {day}
-                  </span>
+                    </Day>
+                    {numberOfPlanner > 2 && (
+                    <DivNumberPlanner>
+                      <p>+{numberOfPlanner - 2}</p>
+                    </DivNumberPlanner>
+                  )}
+                  </DivDayHeader>
                   {plannerList
                     .filter((planner) =>
                       datesAreOnSameDay(new Date(planner.date), date)
@@ -249,6 +279,9 @@ export const BigCalender = (props) => {
                       (ev, index) =>
                         index < numberOfEvents && (
                           <StyledEvent
+                            onMouseEnter={() => handleMouseEnter(ev.id)}
+                            onMouseLeave={handleMouseLeave}
+                            ativa={divAtiva === ev.id}
                             onClick={() => handleOnClickEvent(date)}
                             className="StyledEvent"
                             id={`${ev.id} ${ev.subject}`}
@@ -263,15 +296,18 @@ export const BigCalender = (props) => {
                                   : "#FFDE59"
                               }
                             ></Dot>
-                            <p>{ev.subject}</p>
+                            {/*client */}
+                            {hoverAtivo!==ev.id && (
+                              <p>{ev.client}</p>
+                              )}
+                              {/*Release e business */}
+                            {hoverAtivo ===ev.id && (
+                              <p>{ev.release}, {ev.business}</p>
+                            )}
                           </StyledEvent>
                         )
                     )}
-                  {numberOfPlanner > 2 && (
-                    <DivNumberPlanner>
-                      <p>+{numberOfPlanner - 2}</p>
-                    </DivNumberPlanner>
-                  )}
+
                 </DivDays>
               );
             })}

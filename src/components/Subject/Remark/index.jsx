@@ -87,7 +87,7 @@ const Remark = (props) => {
   return (
     <ContainerRemark>
       <ContainerCards>
-        <CardRemark $mode={status}>
+        <CardRemark $mode={status} onClick={() => toggleTab(1)}>
           <DivGlobalCard>
             <DivDate $mode={status}>
               <FaRegCalendarAlt $mode={status} />
@@ -125,9 +125,9 @@ const Remark = (props) => {
             </NoteText>
           </ContainerComplete>
 
-          <IconOpenClose $mode={status} >
+          <IconOpenClose $mode={status}  >
             <Circle>
-            <RowDown onClick={() => toggleTab(1)}
+            <RowDown
             style={{
               fill:
                 status === "IN PROGRESS"

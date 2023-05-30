@@ -112,6 +112,7 @@ const FollowUpModal = (props) => {
             tags={guests}
             set={(g) => setGuests(g)}
             label={"Guests"}
+            placeholder={""}
             sizeHeight={"3.5vh"}
             width={"82%"}
             widths={"100%"}

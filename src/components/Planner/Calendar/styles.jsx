@@ -359,9 +359,21 @@ export const DivMonth = styled.div`
   height: 60vh;
 `;
 
-export const DivNumberPlanner = styled.div`
-  align-self: flex-end;
-  display: flex;
-  background-color: #e3e6ed;
+export const DivNumberPlanner = styled.span`
   border: transparent;
+  margin-right: 5%;
 `;
+
+export const Day = styled.span`
+  border: transparent;
+  display: inline-block;
+`
+
+export const DivDayHeader = styled.span`
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
+  @media(max-height: 666px){
+    line-height: 12px;
+  }
+`

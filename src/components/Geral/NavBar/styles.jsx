@@ -27,7 +27,8 @@ display: grid;
 grid-column:3;
 width:100%;
 top:-6%;
-z-index:2;
+right:1%;
+z-index:1000 !important;
 float: right;
 position:relative;
 justify-content:flex-end;
@@ -150,7 +151,7 @@ export const CloseSear = styled.div`
 export const NotificationBadge = styled.span`
   position: absolute;
   top: 0;
-  right: 0;
+  right:0;
   background-color: red;
   color: white;
   border-radius: 50%;

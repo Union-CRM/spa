@@ -66,7 +66,7 @@ const ContentsPlanner = (props) => {
   );
 
   useEffect(() => {
-    setPlannerSubject(planner.filter((p) => p.subject_id === props.id));
+    setPlannerSubject(planner.filter((p) => p.subject_id === props.id).sort((a, b) => (b.status || "").localeCompare(a.status || "")) );
   }, [planner]);
   /*
   const statusPlanner = {

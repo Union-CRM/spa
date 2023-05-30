@@ -12,6 +12,7 @@ export const ContainerCards = styled.div`
   height: 100%;
   padding-top: 0%;
   position: relative;
+  cursor:pointer;
   background-color: ${(props) => (props.$mode ? "#fff" : "transparent")};
   padding-left: 1.5%;
   grid-row: ${(props) => (props.$mode ? "2" : "1")};
@@ -66,6 +67,7 @@ export const CardRemark = styled.div`
   position: relative;
   align-items: center;
   padding-right: 2%;
+  background-color: #f5f7fa;
   border-radius: 6px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
 `;

@@ -82,7 +82,7 @@ const Planner = (props) => {
   return (
     <ContainerPlanner>
       <ContainerCards>
-        <CardPlanner $mode={planner.status}>
+        <CardPlanner $mode={planner.status}  onClick={() => toggleTab(2)}>
           <DivGlobalCard>
             <DivDate $mode={planner.status}>
               <FaRegCalendarAlt $mode={planner.status} />
@@ -127,7 +127,7 @@ const Planner = (props) => {
 
           <IconOpenClose $mode={planner.status}>
             <Circle $mode={planner.status}>
-            <RowDown  onClick={() => toggleTab(2)}
+            <RowDown 
             style={{
               fill:
               planner.status === "DONE"

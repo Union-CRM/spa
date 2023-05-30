@@ -116,7 +116,7 @@ const ContentRemarks = (props) => {
       ) : (
         <ContainerCards>
           {remark.map((r) => (
-            <CardRemark $mode={status}>
+            <CardRemark $mode={status}  onClick={() => handleClick(r.id)}>
               <DivGlobalCard>
                 <DivDate $mode={status}>
                   <Calendar
@@ -152,7 +152,6 @@ const ContentRemarks = (props) => {
               <IconOpenClose $mode={status}>
                 <Circle>
                   <RowDown
-                    onClick={() => handleClick(r.id)}
                     style={{
                       fill:
                         status === "IN PROGRESS"

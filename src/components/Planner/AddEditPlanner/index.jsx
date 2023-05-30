@@ -300,15 +300,17 @@ const ModalPlanner = (props) => {
                 value={subjectObj ? subjectObj.subject_title : ""}
                 disabled
               />
-            </>
-          )}
-          <PositionLabel>Client Name</PositionLabel>
+<PositionLabel>Client Name</PositionLabel>
           <InputPlanner
             type="text"
             placeholder="Client Name"
             value={subjectObj ? subjectObj.client : ""}
             disabled
           />
+
+            </>
+          )}
+
           <PositionLabel>Email</PositionLabel>
           <InputPlanner
             type="text"
