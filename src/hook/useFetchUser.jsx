@@ -57,23 +57,18 @@ export const useFetchUser = () => {
 
   const forgotPassword = async (email) => {
     
-    /*
     axios
-      .post(`${forgotPass}`,email, {
+      .put(`${forgotPass}`,email, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(function (response) {
         console.log("Email enviado com sucesso!");
       })
       .catch(function (error) {
-        //setPopUpError(true);
         console.error(error.response);
-      });*/
+      });
   };
 
-
-
-  //localhost:8081/union/v1/users/update/status/27
   return {
     createUser,
     updateStatusUser,

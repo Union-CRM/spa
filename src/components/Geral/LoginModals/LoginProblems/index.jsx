@@ -18,7 +18,8 @@ const LoginProblems = (props) => {
 
     if (regex.test(emailRecovery)) {
       setIsValid(true)
-      forgotPassword(emailRecovery)
+      var newEmail = {email: emailRecovery}
+      forgotPassword(newEmail)
       props.closeModal();
       props.active();
       props.change();
@@ -35,13 +36,12 @@ const LoginProblems = (props) => {
           height={"100px"}
         ></IconSystem>
       </DivIcon>
-
       <P>
         Enter your email address and we'll send you a link to acess your account
         again.
       </P>
       {!isValid && recoveryF ? (
-        <p style={{ padding: '1.5%',
+        <p style={{ padding: '0.5%',
         backgroundColor: 'rgba(187, 30, 0, 1)',
         color: '#FFF',
         fontSize: '20px',
