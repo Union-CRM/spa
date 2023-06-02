@@ -14,7 +14,6 @@ export const Container = styled.div`
   text-align: center;
   align-items: center;
   justify-items: center;
-  gap: 10%;
 
   @media screen and (max-width: 843px) {
     max-width: 65vw;
@@ -26,7 +25,6 @@ export const Container = styled.div`
   }
   @media screen and (max-width: 1483px) {
     height: 90vh;
-    gap: 8%;
   }
 `;
 export const InputEmail = styled.input`

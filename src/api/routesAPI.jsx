@@ -112,4 +112,4 @@ export const getTags =
 
 //Forgot Password  
 export const forgotPass =
-  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users";  
+  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/forgotpwd";  
