@@ -4,10 +4,8 @@ export const Container = styled.div`
   height: fit-content;
   display: grid;
   cursor: context-menu;
-  justify-self: start;
-  align-self: start;
   background: ${(props) => props.color};
-  grid-template-columns: repeat(auto-fit, minmax(16.6666%, 6fr));
+  grid-template-columns: repeat(auto-fit, minmax(14.28%, 7fr));
   width: 100%;
   :hover {
     background-color: #EAEAEA;
@@ -29,7 +27,6 @@ export const DivInfo = styled.div`
 export const DivCenter = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center !important;
-  width: 100%;
   justify-content: center;
+  align-items:center;
 `;
