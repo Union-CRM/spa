@@ -84,7 +84,8 @@ export const ContainerPlanilha = styled.div`
   overflow-y: scroll;
   position: relative;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-  justify-content: flex-start;
+  justify-content: start;
+  align-content: start;
   display: grid;
   grid-template-columns: 100%;
   grid-column: 1;
@@ -135,13 +136,13 @@ export const DivButtons = styled.div`
 `;
 
 export const ButtonPesquisar = styled.button`
-  width: 75%;
-  height: 3vh;
+  width: 80%;
+  height: 5vh;
   background-color: #e41165;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
   border: none;
   color: #ffffff;
-  border-radius: 16px;
+  border-radius: 20px;
   margin-right: 5%;
   cursor: pointer;
   :hover {
@@ -153,13 +154,13 @@ export const ButtonPesquisar = styled.button`
 `;
 
 export const ButtonExportar = styled.button`
-  width: 75%;
-  height: 3vh;
+  width: 80%;
+  height: 5vh;
   background-color: #007bff;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
   border: none;
   color: #ffffff;
-  border-radius: 16px;
+  border-radius: 20px;
   cursor: pointer;
   :hover {
     opacity: 0.7;
@@ -171,8 +172,9 @@ export const ButtonExportar = styled.button`
 
 export const ContainerRemarks = styled.div`
   width: 100%;
-  position: relative;
-  display: grid;
+  //position: relative;
+  flex-direction: column;
+  display: flex;
   grid-row: 2;
   //background-color: #fff;
   //div:nth-child(even) {
