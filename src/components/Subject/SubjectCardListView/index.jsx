@@ -23,6 +23,7 @@ import {
   HowManyFinished,
   Canceled,
   HowManyCancel,
+  ContainerLimit,
 } from "./styles";
 import SubjectCard from "../CardListView/index";
 import { useState, useEffect } from "react";
@@ -56,6 +57,7 @@ const SubjectList = (props) => {
   const { user, userTarget, setUserTarget } = useUserContext();
   const [subjectList, setSubjectList] = useState([]);
   const { search } = useSearchContext();
+  const [limit, setLimit] = useState(50);
   /*
   const SubjectsCancel = "";
   const SubjectsProgress ="";
@@ -244,17 +246,22 @@ const SubjectList = (props) => {
             {subjectList &&
               subjectList
                 .filter((item) => item.status === active)
-                .map((item) => (
-                  <SubjectCard
+                .map((item, index) => {
+                  if(index<limit){
+                    return <SubjectCard
                     key={item.id}
                     id={item.id}
                     /*setIdPlanner={(i) => setIdPlanner(i)}*/
                     setIdRemark={(i) => setIdRemark(i)}
                     setId={(i) => setId(i)}
                     openModal={() => detailsModal()}
-                  />
-                ))}
+                  />}
+                  })} 
           </BoardStyle>
+          {limit < subjectList.length &&  
+          <ContainerLimit>
+            <p onClick={()=> setLimit(limit+50)}>Show more</p>  
+          </ContainerLimit>}  
         </ContainerCards>
       </ContainerHeaderAndCards>
 

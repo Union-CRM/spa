@@ -127,6 +127,7 @@ export const BoardStyle = styled.div`
   grid-row: 1;
   display: grid;
   height: fit-content;
+
 `;
 
 //* Modal Edit and Add Client *//
@@ -288,4 +289,17 @@ export const DivInfo = styled.div`
   position: relative;
   top: 6%;
   left: 1%;
+`;
+export const ContainerLimit = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e41165;
+  font-weight: 800;
+  text-decoration: underline;
+  padding-bottom: 2%;
+  cursor: pointer;
+  width:100%;
+bottom: 0;
+margin-top: 35px;
 `;

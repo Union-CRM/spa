@@ -23,6 +23,7 @@ import {
   HowManyFinished,
   Canceled,
   HowManyCancel,
+  ContainerLimit,
 } from "./styles";
 import RemarkCard from "./CardListView/index";
 import { useState, useEffect } from "react";
@@ -54,6 +55,8 @@ const RemarkList = (props) => {
   const [modal, setModal] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const [active, setActive] = useState(cardStatus.ACTIVE);
+  //Limit 
+  const [limit,setLimit]=useState(50);
 
   useEffect(() => {
     if (remark)
@@ -183,14 +186,19 @@ const RemarkList = (props) => {
             {remarkList &&
               remarkList
                 .filter((item) => item.status_description === active)
-                .map((item) => (
-                  <RemarkCard
+                .map((item,index) => {
+                  if(index<limit){
+                  return<RemarkCard
                     openModal={setModalEdit}
                     key={item.id}
                     id={item.id}
                   />
-                ))}
+                }})}
           </BoardStyle>
+          {limit < remarkList.length &&  
+          <ContainerLimit>
+            <p onClick={()=> setLimit(limit+50)}>Show more</p>  
+          </ContainerLimit>}  
         </ContainerCards>
       </ContainerHeaderAndCards>
 

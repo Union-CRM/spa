@@ -21,6 +21,7 @@ import {
   Inactive,
   LineDivisor,
   Top,
+  ContainerLimit,
 } from "./styles";
 import UserCard from "./CardListView/index";
 import AddEditClient from "../AddEditUser";
@@ -47,6 +48,9 @@ const ContainerCards = () => {
   const [id, setId] = useState(null);
   const [isEdit, setEdit] = useState(false);
   const [active, setActive] = useState(abaStatus.ACTIVE);
+
+  //Limit 
+  const [limit,setLimit]=useState(10);
 
   const handleClick = (selectedTab) => {
     setActive(selectedTab);
@@ -159,16 +163,23 @@ const ContainerCards = () => {
               userList
                 .filter((u) => u.status === active)
                 .sort((a, b) => (a.name || "").localeCompare(b.name || ""))
-                .map((u) => (
-                  <UserCard
-                    setId={(i) => setId(i)}
-                    openModalPopUp={() => setModalPopUp(true)}
-                    key={u.id}
-                    id={u.id}
-                    openModal={() => EditClient()}
+                .map((u,index) => {
+                  if(index<limit){
+                    return  <UserCard
+                        setId={(i) => setId(i)}
+                        openModalPopUp={() => setModalPopUp(true)}
+                        key={u.id}
+                        id={u.id}
+                        openModal={() => EditClient()}
                   />
-                ))}
+                }
+                  
+              })}
+                  
           </BoardStyle>
+          {limit < userList.length &&  <ContainerLimit>
+                        <p onClick={()=> setLimit(limit+50)}>Show more</p>  
+                   </ContainerLimit>  }  
         </CardsContainer>
       </ContainerHeaderAndCards>
 

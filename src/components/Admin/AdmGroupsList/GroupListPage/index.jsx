@@ -21,6 +21,7 @@ import {
   HowManyInactive,
   DivInfo,
   Routes,
+  ContainerLimit,
 } from "./styles";
 import ButtonAdd from "../../../../assets/Buttons/ButtonAdd";
 import { useState, useEffect } from "react";
@@ -51,6 +52,7 @@ const GroupListView = () => {
   //const [modal, setModal] = useState(false);
   const [isEdit, setEdit] = useState(false);
   const { group, infoGroup, setInfoGroup, setIdEdit, modal, setModal } = useGroupListContext();
+  const [limit,setLimit]  = useState(10);
 
   //const [infoGroup, setInfoGroup] = useState(true);
 
@@ -161,16 +163,23 @@ const GroupListView = () => {
             {group &&
               group
                 .filter((item) => item.status === active)
-                .map((item) => (
-                  <AdmGroupCardListView
+                .map((item,index) => {
+                  if(index<limit){
+                    return <AdmGroupCardListView
                     setId={(i) => setId(i)}
                     //openModal={() => detailsModal()}
                     key={item.id}
                     id={item.id}
                    // openModal={() => EditGroup(item)}
                   />
-                ))}
-          </BoardStyle>
+                }})} 
+                </BoardStyle>
+                      {limit < group.length &&  
+                  <ContainerLimit>
+                    <p onClick={()=> setLimit(limit+50)}>Show more</p>  
+                  </ContainerLimit>
+                }
+         
         </CardsContainer>
       </ContainerHeaderAndCards>
 

@@ -20,6 +20,7 @@ import {
   HowManyActive,
   Inactive,
   HowManyInactive,
+  ContainerLimit,
 } from "./styles";
 
 import ClientCard from "./CardListView/index";
@@ -57,9 +58,10 @@ const ContainerCardsBusiness = (props) => {
   const [id, setId] = useState(null);
   const [modal, setModal] = useState(false);
   const [isEdit, setEdit] = useState(false);
-  const [businessList, setBusinessList] = useState();
+  const [businessList, setBusinessList] = useState([]);
   const [modalPopUp, setModalPopUp] = useState(false);
   const [active, setActive] = useState(abaStatus.ACTIVE);
+  const [limit,setLimit]  = useState(50);
 
   useEffect(() => {
     if (business) {
@@ -174,16 +176,23 @@ const ContainerCardsBusiness = (props) => {
             {businessList &&
               businessList
                 .filter((item) => item.status === active)
-                .map((item) => (
-                  <ClientCard
+                .map((item,index) => {
+                  if(index<limit){
+                    return <ClientCard
                     setId={(i) => setId(i)}
                     openModalPopUp={() => setModalPopUp(true)}
                     key={item.id}
                     id={item.id}
                     openModal={() => EditBusiness(item.id)}
                   />
-                ))}
+                }})}
+                
           </BoardStyle>
+                {limit < businessList.length &&  
+                  <ContainerLimit>
+                    <p onClick={()=> setLimit(limit+50)}>Show more</p>  
+                  </ContainerLimit>
+                }
         </CardsContainer>
       </ContainerHeaderAndCards>
 

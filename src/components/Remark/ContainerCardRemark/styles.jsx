@@ -300,3 +300,19 @@ export const ButtonCancel = styled.button`
     border-bottom: 2px solid #007bff;
   }
 `;
+
+
+
+export const ContainerLimit = styled.div`
+color:#007bff;
+align-items:center;
+text-align:center;
+justify-content: center;
+font-weight: 800;
+text-decoration: underline;
+padding-bottom: 2%;
+cursor: pointer;
+width:100%;
+bottom: 0;
+margin-top: 35px;
+`;

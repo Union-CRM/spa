@@ -2,6 +2,7 @@ import React from "react";
 import {
   ContainerGlobal,
   ContainerHeaderAndCards,
+  ContainerLimit,
   HeaderContainerCards,
   CardsContainer,
   LineDivisor,
@@ -50,12 +51,13 @@ const ReleaseTrain = (props) => {
   const [id, setId] = useState(null);
   const [modal, setModal] = useState(false);
   const [isEdit, setEdit] = useState(false);
-  const [releaseList, setReleaseList] = useState();
+  const [releaseList, setReleaseList] = useState([]);
   const [modalPopUp, setModalPopUp] = useState(false);
   const [active, setActive] = useState(abaStatus.ACTIVE);
   const { search } = useSearchContext();
   const { user, userTarget, setUserTarget } = useUserContext();
   const layout = modalCreateRelease ? true : false;
+  const [limit,setLimit]  = useState(50);
 
   // Function that is getting the card id to open the modal with the card info
   const EditRelease = (id) => {
@@ -178,17 +180,25 @@ const ReleaseTrain = (props) => {
           <BoardStyle>
             {releaseList &&
               releaseList.filter((item) => item.status === active)
-                .map((item) => (
-                  <ClientCard
+                .map((item,index) => {
+                  if(index<limit)
+                   return <ClientCard
                     setId={(i) => setId(i)}
                     openModalPopUp={() => setModalPopUp(true)}
                     key={item.id}
                     id={item.id}
                     openModal={() => EditRelease(item.id)}
                   />
-                ))}
-          </BoardStyle>
+            })}</BoardStyle>
+            {limit < releaseList.length &&  
+            <ContainerLimit>
+              <p onClick={()=> setLimit(limit+50)}>Show more</p>  
+            </ContainerLimit>} 
+          
+
+
         </CardsContainer>
+        
       </ContainerHeaderAndCards>
       <DivModal $mode={modalCreateRelease || modalEditRelease || modalSaveRelease || modalStatusRelease} />
       {modalCreateRelease && (
