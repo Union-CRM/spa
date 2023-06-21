@@ -21,6 +21,7 @@ import {
   HowManyInactive,
   DivClose,
   DivInfo,
+  ContainerLimit,
 } from "./styles";
 import CustomerCard from "./CardListView/index";
 import AddEditCustomer from "../AddEditCustomer";
@@ -43,6 +44,14 @@ const ContainerCards = (props) => {
   const { search } = useSearchContext();
   const [customerList, setCustomerList] = useState([]);
   const [active, setActive] = useState(abaStatus.ACTIVE);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerPage] = useState(10);
+  const [limit,setLimit]=useState(10);
+    //Limit 
+    const startIndex = (currentPage * cardsPerPage);
+    const endIndex = (startIndex + cardsPerPage);
+
+
 
   useEffect(() => {
     if (customer) {
@@ -166,15 +175,19 @@ const ContainerCards = (props) => {
             {customerList &&
               customerList
                 .filter((item) => item.status === active)
-                .map((item) => (
-                  <CustomerCard
+                .map((item, index) => {
+                  if(index<limit){
+                    return <CustomerCard
                     setId={(i) => setId(i)}
                     key={item.id}
                     id={item.id}
                     openModal={() => EditClient()}
-                  />
-                ))}
-          </BoardStyle>
+                  /> }
+              })} </BoardStyle>
+                {limit < customerList.length &&  <ContainerLimit>
+                  <p onClick={()=> setLimit(limit+50)}>Show more</p>  
+             </ContainerLimit>  }  
+         
         </CardsContainer>
       </ContainerHeaderAndCards>
 

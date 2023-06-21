@@ -20,6 +20,7 @@ import {
   HowManyActive,
   Inactive,
   HowManyInactive,
+  ContainerLimit,
 } from "./styles";
 import ClientCard from "./CardListView/index";
 import AddEditClient from "../AddEditClient";
@@ -52,7 +53,7 @@ const ContainerCards = (props) => {
   const { search } = useSearchContext();
   const [modalPopUp, setModalPopUp] = useState(false);
   const [isEdit, setEdit] = useState(false);
-  const [clientList, setClientList] = useState();
+  const [clientList, setClientList] = useState([]);
   const [active, setActive] = useState(abaStatus.ACTIVE);
   const { user, userTarget, setUserTarget } = useUserContext();
   const { modalEdit, idSubject } = useSubjectContext();
@@ -60,6 +61,11 @@ const ContainerCards = (props) => {
   const { id, setId, modalAddClient, setModalAddClient } = useClientContext();
   const { modalInfo, setModalInfo } = useClientContext();
   const { modalEditClient, setModalEditClient } = useClientContext();
+  const [limit,setLimit]=useState(50);
+  //const pages = Math.ceil(clientList.length/cardsPerPage);
+
+  //const currentsItens = clientList.slice(startIndex,endIndex);
+
 
   useEffect(() => {
     if (props.adminList) {
@@ -190,18 +196,35 @@ const ContainerCards = (props) => {
               clientList
                 .filter((item) => item.status === active)
                 .sort((a, b) => (a.client || '').localeCompare(b.client || ''))
-                .map((item) => (
-                  <ClientCard
-                    setId={(i) => setId(i)}
-                    openModalPopUp={() => setModalPopUp(true)}
-                    openModal={() => detailsModal()}
-                    key={item.id}
-                    id={item.id}
+                .map((item,index) => {
+                  if(index<limit){
+                    return <ClientCard
+                      setId={(i) => setId(i)}
+                      openModalPopUp={() => setModalPopUp(true)}
+                      openModal={() => detailsModal()}
+                      key={item.id}
+                      id={item.id}
                     //modalPopUp={() => PopUp()}
-                  />
-                ))}
+                    />
+                  }
+                  
+})} 
+
+      
+
           </BoardStyle>
+          {limit < clientList.length &&  
+          <ContainerLimit>
+            <p onClick={()=> setLimit(limit+50)}>Show more</p>  
+          </ContainerLimit>}  
         </CardsContainer>
+      
+        {/* Metodo Array para definir qtd de paginas */ }
+        {/* <DivPages>
+          {Array.from(Array(pages), (item, index) => {
+            return<ButtonPage>{index}</ButtonPage>
+          })}
+        </DivPages> */}
       </ContainerHeaderAndCards>
 
       <DivModal $mode={modalAddClient} />

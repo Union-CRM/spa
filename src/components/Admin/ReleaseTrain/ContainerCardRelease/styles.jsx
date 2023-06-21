@@ -304,3 +304,17 @@ export const ButtonInactive = styled.button`
     border-bottom: 2px solid #E41165;
   }
 `;
+
+export const ContainerLimit = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e41165;
+  font-weight: 800;
+  text-decoration: underline;
+  padding-bottom: 1%;
+  cursor: pointer;
+  width:100%;
+bottom: 0;
+margin-top: 30px;
+`;
