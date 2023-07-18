@@ -156,6 +156,7 @@ const ModalClientDetails = (props) => {
 
             <Content active={toggleState === 1}>
               <SubjectClient
+                clientStatus={client.status}
                 setId={(i) => setId(i)}
                 id={id}
                 title={"Subject Clients"}

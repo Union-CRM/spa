@@ -9,6 +9,8 @@ import {
  DivStatusSubject,
  DivGlobalCard,
  CreatedAt,
+ ButtonCreateSubject,
+ ButtonAdd,
 } from "./styles";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useClientContext } from "../../../hook/useClientContent";
@@ -17,38 +19,72 @@ const SubjectsClient = (props) => {
   const { setModal, id } = props;
 
   const {
-    client: clientList,
-    setClient: setClientList,
     loadData, setModalInfo,
+    setModalCreateSubject
   } = useClientContext();
-  const { setModalEdit } = useSubjectContext();
   const [status, setStatus] = useState();
   const { subject: subjectsList,setIdSubject } = useSubjectContext();
   const [subjects, setSubjects] = useState([]);
+  const { setModalSubject } = useSubjectContext();
 
   useEffect(() => {
-    if (subjectsList) {
-      setSubjects(subjectsList.filter((s) => s.client_id === props.id));
+    try{
+      if (subjectsList) {
+        setSubjects(subjectsList.filter((s) => s.client_id === props.id));
+      }
+    }catch (error){     
+      console.error(error.message);
     }
+   
   }, [subjectsList]);
-
-
+  
+  
   useEffect(() => {
-    if (props.title === "Subject Clients") {
-      const subject = subjectsList.filter((s) => s.client_id === props.id);
-      setStatus(subject.status);
+    try {
+      if (props.title === "Subject Clients") {
+        const subject = subjectsList.filter((s) => s.client_id === props.id);
+        setStatus(subject.status);
+      }
+    } catch (error) {
+    console.error(error)
     }
+    
   }, [id]);
 
   const handleEdit = (id) => {
     setIdSubject(id);
-    setModalEdit(true);
     setModalInfo(false);
   }
+
+  const SubjectModal = () => {
+    setModalCreateSubject(true);
+    setModalInfo(false);    
+  };
+  console.log(props.clientStatus);
 
   return (
 
     <ContainerDetails>
+
+<ButtonCreateSubject>
+
+        {status !== "INACTIVE" && (
+          <ButtonAdd
+            onClick={() => SubjectModal()}
+            $mode={props.clientStatus}
+            width="130px"
+            padding="0"
+            sizeFont="0.9rem"
+            boxShadow="none"
+            margin="none"
+            title="Create Subject"
+          >
+            {" "}
+            <span>Create Subject</span>
+          </ButtonAdd>
+        )}
+      </ButtonCreateSubject>
+
   {subjects.map((s) => (
   <CardSubject onClick={() => handleEdit(s.id)}>
 

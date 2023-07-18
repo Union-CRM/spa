@@ -150,3 +150,70 @@ span {
   margin-right:1%;
 }
 `;
+
+export const ButtonCreateSubject= styled.div`
+  display: flex;
+  width: 99%;
+  padding-top: 2%;
+  padding-right: 1.5%;
+  position: relative;
+  justify-content: end;
+`;
+
+export const ButtonAdd = styled.button`
+  ${(props) => {
+    switch (props.$mode) {
+      case "FINISHED":
+        return css`
+          border: 1px solid #008585;
+        `;
+      case "IN PROGRESS":
+        return css`
+          border: 1px solid #00953b;
+        `;
+      case "CANCELED":
+        return css`
+          border: 1px solid #771300;
+        `;
+      default:
+        return css`
+          background-color: #6e6b6b;
+        `;
+    }
+  }}
+  background-color:transparent;
+  width: ${(props) => props.$width || "fit - content"};
+  height: ${(props) => props.$height || "fit-content"};
+  padding: ${(props) => props.$padding || "7px"};
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-radius: 0.5em;
+  cursor: pointer;
+  span {
+    ${(props) => {
+      switch (props.$mode) {
+        case "FINISHED":
+          return css`
+            color: #008585;
+          `;
+        case "IN PROGRESS":
+          return css`
+            color: #00953b;
+          `;
+        case "CANCELED":
+          return css`
+            color: #771300;
+          `;
+        default:
+          return css`
+            background-color: #6e6b6b;
+          `;
+      }
+    }}
+    font-size:0.9rem;
+  }
+  :hover {
+    opacity: 0.8;
+  }
+`;
