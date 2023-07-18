@@ -37,7 +37,7 @@ import { useSearchContext } from "../../../hook/useSearchContext";
 import ModalClientDetails from "../ModalClientDetails";
 import ModalClientEdit from "../EditClient";
 //import Subject from "../../Subject/EditSubject/index";
-import Subject from "../../../components/Subject/EditSubject";
+import Subject from "../ModalCreateSubject";
 //import { useSubjectContext } from "../../../hook/useSubjectContent";
 
 import { useSubjectContext } from "../../../hook/useSubjectContent";
@@ -61,7 +61,10 @@ const ContainerCards = (props) => {
   const { id, setId, modalAddClient, setModalAddClient } = useClientContext();
   const { modalInfo, setModalInfo } = useClientContext();
   const { modalEditClient, setModalEditClient } = useClientContext();
+  const { modalCreateSubject, setModalCreateSubject } = useClientContext();
+  
   const [limit,setLimit]=useState(50);
+
   //const pages = Math.ceil(clientList.length/cardsPerPage);
 
   //const currentsItens = clientList.slice(startIndex,endIndex);
@@ -75,6 +78,8 @@ const ContainerCards = (props) => {
       setClientList(client);
     }
   }, [client]);
+
+  //console.log(clientList)
 
   useEffect(() => {
     if (search) {
@@ -210,8 +215,6 @@ const ContainerCards = (props) => {
                   
 })} 
 
-      
-
           </BoardStyle>
           {limit < clientList.length &&  
           <ContainerLimit>
@@ -255,6 +258,13 @@ const ContainerCards = (props) => {
           setModalEditClient={setModalEditClient}
           title={"Edit Client"}
         />
+      )}
+
+      {modalCreateSubject && (
+        <Subject
+        id={idSubject} 
+        title={"Create Subject"} />
+        
       )}
 
       {modalPopUp && (

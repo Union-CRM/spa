@@ -29,30 +29,19 @@ import { useFetchSubjectStatus } from "../../../hook/useFetchSubjectStatus";
 
 
 const Subject = (props) => {
+
   const { setModal, title, id } = props;
-  const { client: clientList } = useClientContext();
+  const { client: clientList, setModalInfo,setModalCreateSubject,setToggleState } = useClientContext();
   const { updateSubject } = useFetchSubject();
   const { subjectFinished, subjectCanceld } = useFetchSubjectStatus();
   // CLOSE E SAVE ////////////
-
-  const { setModalDetails, setModalEdit, setEditModal, idSubject } = useSubjectContext();
-  const { toggleState, setToggleState, loadData} = useSubjectContext();
-
-
+  
   const closeModal = () => {
-    setModalDetails(true);
-    setModalEdit(false);
-    setToggleState(0);
+    setModalInfo(true);
+    setModalCreateSubject(false);
+    setToggleState(1);
   };
-
-  const handleSubmit = () => {
-    if (props.title === "Edit Subject") {
-      editSubject();
-    }
-  };
-
   ////////////////////////////////////
-
   /////////// CREATE SUBJECT ////////////////
 
   const { subject: subjectsList, setSubject: setSubjectList } =
@@ -68,61 +57,33 @@ const Subject = (props) => {
   const [client, setClient] = useState();
   const [release, setRelease] = useState();
 
-  function getId() {
-    let lastId = 1;
-
-    subjectsList.map((s) => {
-      lastId = s.id > lastId ? s.id : lastId;
-    });
-
-    return lastId + 1;
-  }
-
-  ////////// EDIT SUBJECT ////////////
-
-  useEffect(() => {
-    if (props.title === "Edit Subject") {
-    
-      /*if(idSubject){
-        const subject = subjectsList.filter((item) => item.id === idSubject);
-        console.log(subject)
-      }else{*/
-        const subject = subjectsList.filter((item) => item.id === props.id)[0];
-          
-      setStatus(subject.status);
-      setSubject(subject.subject_title);
-      setSelectedClient(subject.client);
-      setDescription(subject.subjectText);
-    }
-  }, [id]);
-
   const [selectedClient, setSelectedClient] = useState(null);
-
-  const editSubject = () => {
-    const newSubject = {
-      id: id,
-      title: subject,
-      text: description,
-      status_id: status,
-    };
-
-    console.log(newSubject);
-    if (subject && description && status) {
-      if (status === "FINISHED") {
-        subjectFinished(id, newSubject);
-      } else if (status === "CANCELED") {
-        subjectCanceld(id, newSubject);
+    /*
+  if (subject && description && status) {
+        if (status === "FINISHED") {
+          subjectFinished(id, newSubject);
+        } else if (status === "CANCELED") {
+          subjectCanceld(id, newSubject);
+        }
+        updateSubject(id, newSubject);
+        setModalEdit(false);
+        setModalDetails(true);
+        setToggleState(0);
+      } else {
+        setFlag(true);
       }
-      updateSubject(id, newSubject);
-      setModalEdit(false);
-      setModalDetails(true);
-      setToggleState(0);
-    } else {
-      setFlag(true);
+    */
+
+  // PUXANDO OS CLIENTS DO CLIENT LIST //
+
+  
+  const handleSubmit = () => {
+    if (props.title === "Create Subject") {
+      createSubject();
+      setModalSubject(false);
     }
   };
 
-  // PUXANDO OS CLIENTS DO CLIENT LIST //
 
   useEffect(() => {
     if (selectedClient) {
@@ -152,9 +113,25 @@ const Subject = (props) => {
   const handleClientChange = (selectedClient) => {
     setSelectedClient(selectedClient.value);
   };
-  ////////////////////////////////////
 
-  const [userChoice, setUserChoice] = useState("");
+  const createSubject = () => {
+    const newSubject = {
+      client: ClientId,
+      release_id: ReleaseId,
+      subject_title: subject,
+      subject_text: description,
+    };
+
+    if (ClientId && release && subject && description) {
+      insertSubject(newSubject, userTarget.id);
+      loadData();
+      setModal(false);
+      setModalSubject(false);
+    } else {
+      setFlag(true);
+    }
+  };
+
 
   return (
     <>
@@ -169,9 +146,8 @@ const Subject = (props) => {
               <Label>
                 Client Name
                 <Input
-                  onChange={(event) => setSelectedClient(event.target.value)}
+                 
                   widthInput={"98% !important"}
-                  backgroundInput={"#D9D9D9"}
                   options={optionsClient}
                   value={selectedClient}
                   placeholder={flag && !selectedClient ? "" : ""}
@@ -183,9 +159,9 @@ const Subject = (props) => {
               <Label>
                 Business
                 <Input
-                  onChange={(event) => setBusiness(event.target.value)}
+                  
                   widthInput={"90% !important"}
-                  backgroundInput={"#D9D9D9"}
+                  backgroundInput={"#bd2a2a"}
                   value={business}
                   name={business}
                 />
@@ -194,9 +170,9 @@ const Subject = (props) => {
               <Label>
                 ReleaseTrain
                 <Input
-                  onChange={(event) => setRelease(event.target.value)}
+                
                   widthInput={"98% !important"}
-                  backgroundInput={"#D9D9D9"}
+                  
                   value={release}
                 />
               </Label>
@@ -267,7 +243,7 @@ const Subject = (props) => {
                 type={"userSave"}
                 weightFont={"500"}
                 sizeFont={"1rem"}
-                name={"Save"}
+                name={"Save"}s
               />
             </ClickButton>
 
@@ -284,9 +260,11 @@ const Subject = (props) => {
       </ContainerCentral>
     </>
   );
-};
+  };
+    
 
-export default Subject;
+
+  export default Subject;
 
 const status_mok = [
   { id: 1, value: "IN PROGRESS", label: "IN PROGRESS" },
