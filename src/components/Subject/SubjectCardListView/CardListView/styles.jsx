@@ -15,20 +15,23 @@ export const Card = styled.div`
         return css`
           border-left: 7px solid #771300;
         `;
+
       default:
         return css`
           border-left: 7px solid #6e6b6b;
         `;
     }
   }}
-  width: 265px;
-  height: 207px;
+  display: grid;
   border-radius: 8px;
-  margin-top: 30px;
-  margin-left: 40px;
-  display: block;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  position: relative;
+  cursor: pointer;
+  width: auto;
+  height: 100%;
   background-color: #f5f7fa;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+  z-index: 0 !important;
+  padding-left: 10px;
 `;
 export const Status = styled.div`
   ${(props) => {
@@ -44,6 +47,10 @@ export const Status = styled.div`
       case "Canceled":
         return css`
           background-color: #771300;
+        `;
+      case "Excellent":
+        return css`
+          background-color: #003b18;
         `;
       default:
         return css`
@@ -129,4 +136,10 @@ export const PositionEdit = styled.div`
   display: flex;
 `;
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  padding: 0px;
+  height: 100%;
+  padding-left: 0px;
+  width: 97%;
+  z-index: 0 !important;
+`;

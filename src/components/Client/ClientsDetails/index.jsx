@@ -13,48 +13,21 @@ import {
   DivColors,
 } from "./styles";
 import { useClientContext } from "../../../hook/useClientContent";
-import { useFetchRelease } from "../../../hook/useFetchRelease";
-import { useFetchCustomer } from "../../../hook/useFetchCustomer";
-import { useFetchRole } from "../../../hook/useFetchRole";
-import { useFetchTag } from "../../../hook/useFetchTag";
+//import { useFetchRelease } from "../../../hook/useFetchRelease";
+//import { useFetchCustomer } from "../../../hook/useFetchCustomer";
+//import { useFetchRole } from "../../../hook/useFetchRole";
+//import { useFetchTag } from "../../../hook/useFetchTag";
 
 const ClientDetails = (props) => {
-  const { setModal, id } = props;
+  const { id } = props;
 
-  const { releaseList } = useFetchRelease("release");
-  const { customerList } = useFetchCustomer("Customer");
-  const { roleList } = useFetchRole("Role");
-  const { tagList } = useFetchTag("Tag");
-  const [releaseObj, setReleaseObj] = useState({
-    release_name: "",
-    business_name: "",
-  });
-
-  const { client: clientList, loadData } = useClientContext();
+  const { client: clientList } = useClientContext();
   const client = clientList.filter((item) => item.id === props.id)[0];
 
-  const { setId } = useClientContext();
-  const [email, setEmail] = useState();
-  const [release, setRelease] = useState();
-  const [rose, setRole] = useState();
-  const [business, setBusiness] = useState();
-  const [customer, setCustomer] = useState();
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    
     if (props.title === "Details Clients") {
-      const client = clientList.filter((item) => item.id === props.id)[0];
-      setEmail(client.client_email);
-      setReleaseObj({
-        id: client.release_id,
-        label: client.textRelease,
-        business_id: client.business_id,
-        business_name: client.textBusiness,
-      });
-      setBusiness(client.textBusiness);
-      setCustomer({ id: client.customer_id, label: client.textCustomer });
-      setRole({ id: client.role_id, label: client.textRole });
       setTags(
         client.tags.map((item) => ({
           value: item.value,
@@ -70,62 +43,46 @@ const ClientDetails = (props) => {
       <DivBetween>
         <DivEmail>
           Email
-          <span onChange={(event) => setEmail(event.target.value)}>
-            {client.email}
-          </span>
+          <span>{client.email}</span>
         </DivEmail>
 
         <DivRole>
           Role
-          <span onChange={(event) => setRole(event.target.value)}>
-            {client.textRole}
-          </span>
+          <span>{client.textRole}</span>
         </DivRole>
       </DivBetween>
 
       <DivBetween>
         <DivCustomer>
           Customer
-          <span onChange={(event) => setCustomer(event.target.value)}>
-            {client.textCustomer}
-          </span>
+          <span>{client.textCustomer}</span>
         </DivCustomer>
 
         <DivRelease>
           Release Train
-          <span onChange={(event) => setRelease(event.target.value)}>
-            {client.textRelease}
-          </span>
+          <span>{client.textRelease}</span>
         </DivRelease>
       </DivBetween>
 
       <DivBusiness>
         Business
-        <span onChange={(event) => setBusiness(event.target.value)}>
-            {client.textBusiness}
-          </span>
+        <span>{client.textBusiness}</span>
       </DivBusiness>
 
       <DivTags>
-       Tags
-
-       {tags && tags.length === 0 ? (
-     
-     <NoTags>
-     It has no tags.</NoTags>
-
- ) : (
-  
-        <TagsClient>
-       {tags ? tags.map ((t) => 
-          <DivColors colors={t.color}>
-            {t.label}
-          </DivColors>
-         ) : "" }
-         </TagsClient>
-          )}
+        Tags
+        {tags && tags.length === 0 ? (
+          <NoTags>It has no tags.</NoTags>
+        ) : (
+          <TagsClient>
+            {tags
+              ? tags.map((t) => (
+                  <DivColors colors={t.color}>{t.label}</DivColors>
+                ))
+              : ""}
+          </TagsClient>
+        )}
       </DivTags>
-
     </ContainerDetails>
   );
 };

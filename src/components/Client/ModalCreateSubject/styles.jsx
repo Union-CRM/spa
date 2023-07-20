@@ -120,7 +120,7 @@ export const Input = styled.input`
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
   border: 2px solid #888c95;
-  background-color: #ffff;
+  background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
   display: block;
   position: relative;
   padding-left: 2%;

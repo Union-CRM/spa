@@ -57,7 +57,7 @@ const ModalPlanner = (props) => {
     modalReschedule,
   } = usePlannerContext();
   const { createPlanner, updatePlanner } = useFetchPlanner();
-  const { user, userTarget } = useUserContext();
+  const { user, userTarget, userList, usersGlobal } = useUserContext();
   const [flag, setFlag] = useState(false);
 
   const [flagSubject, setFlagSubject] = useState(false);
@@ -65,14 +65,24 @@ const ModalPlanner = (props) => {
   const [flagStart, setFlagStart] = useState(false);
   const [flagFinish, setFlagFinish] = useState(false);
 
+  const userOption = usersGlobal
+    .filter((u) => u.status === "ACTIVE")
+    .map((u) => ({ id: u.id, value: u.id, label: u.name }));
+  //console.log(userOption);
   const clientOption = clientList
     .filter((c) => c.status === "Active" && c.user_id === userTarget.id)
     .map((c) => ({ id: c.id, value: c.id, label: c.client }));
+
+  const guestOptions = clientOption.concat(userOption);
+
   useEffect(() => {
     setSubjectOption(
       subjectList
         .filter(
-          (s) => s.status === "IN PROGRESS" && s.user_id === userTarget.id
+          (s) =>
+            s.status !== "FINISHED" &&
+            s.status !== "CANCELED" &&
+            s.user_id === userTarget.id
         )
         .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
     );
@@ -128,49 +138,55 @@ const ModalPlanner = (props) => {
   };
 
   const HandleCreatePlanner = () => {
-
     var aux = "";
     var todayDate = new Date();
-    
+
     const partesData = date.split("/");
 
     //Data enviada do formulário
-    var data = new Date(partesData[1]+ "/"+partesData[2]+"/"+partesData[0]);
+    var data = new Date(
+      partesData[1] + "/" + partesData[2] + "/" + partesData[0]
+    );
 
     //Data de hoje
-    var tDate = new Date((todayDate.getMonth()+1)+"/"+todayDate.getDate()+"/"+todayDate.getFullYear())
-    
+    var tDate = new Date(
+      todayDate.getMonth() +
+        1 +
+        "/" +
+        todayDate.getDate() +
+        "/" +
+        todayDate.getFullYear()
+    );
+
     if (todayDate.getMinutes() < 10) {
       aux = todayDate.getHours() + ":0" + todayDate.getMinutes();
-    }
-    else {
-      aux = todayDate.getHours() + ":" + todayDate.getMinutes()
+    } else {
+      aux = todayDate.getHours() + ":" + todayDate.getMinutes();
     }
 
     if (todayDate.getHours() < 10) {
-      aux = "0"+aux;
+      aux = "0" + aux;
     }
 
-    if(!subjectObj.id){
+    if (!subjectObj.id) {
       setFlagSubject(true);
     }
-    if(!date){
+    if (!date) {
       setFlagDate(true);
     }
-    if(!timeStart){
+    if (!timeStart) {
       setFlagStart(true);
     }
-    if(!timeFinish){
+    if (!timeFinish) {
       setFlagFinish(true);
     }
 
     if (timeStart && timeFinish && date) {
-
-      if(data > tDate){
-        setFlagDate(false)
-        setFlagStart(false)
+      if (data > tDate) {
+        setFlagDate(false);
+        setFlagStart(false);
         if (timeFinish > timeStart) {
-          setFlagFinish(false)
+          setFlagFinish(false);
 
           const newPlanner = {
             name: subjectObj.subject_title,
@@ -185,20 +201,19 @@ const ModalPlanner = (props) => {
           if (subjectObj.id && date && timeFinish && timeStart) {
             createPlanner(newPlanner);
           }
-        }else {
-          setFlagFinish(true)
+        } else {
+          setFlagFinish(true);
         }
-      }
-      else if(data < tDate) {
-        setFlagDate(true)
-      }else{
-        setFlagDate(false)
-        
+      } else if (data < tDate) {
+        setFlagDate(true);
+      } else {
+        setFlagDate(false);
+
         if (timeStart >= aux) {
-          setFlagStart(false)
+          setFlagStart(false);
 
           if (timeFinish > timeStart) {
-            setFlagFinish(false)
+            setFlagFinish(false);
 
             const newPlanner = {
               name: subjectObj.subject_title,
@@ -213,20 +228,14 @@ const ModalPlanner = (props) => {
             if (subjectObj.id && date && timeFinish && timeStart) {
               createPlanner(newPlanner);
             }
-          }else {
-            setFlagFinish(true)
+          } else {
+            setFlagFinish(true);
           }
-
-        }else{
-          setFlagStart(true)
+        } else {
+          setFlagStart(true);
         }
       }
-
-
     }
-     
-        
-       
   };
 
   const handleCancel = (e) => {
@@ -261,6 +270,7 @@ const ModalPlanner = (props) => {
       setModalEdit(false);
     }
   };
+
   return (
     <Container>
       <PositionTitle>{props.title}</PositionTitle>
@@ -278,9 +288,11 @@ const ModalPlanner = (props) => {
               sizeSingle={"26vw"}
               onChange={(s) => handleSelectSubject(s)}
             />*/
-            
+
             <SingleSelect
-              placeholder={flagSubject && !subjectObj.id ? "Required field" : ""}
+              placeholder={
+                flagSubject && !subjectObj.id ? "Required field" : ""
+              }
               set={(s) => handleSelectSubject(s)}
               options={subjectOption}
               name={"subject"}
@@ -300,14 +312,13 @@ const ModalPlanner = (props) => {
                 value={subjectObj ? subjectObj.subject_title : ""}
                 disabled
               />
-<PositionLabel>Client Name</PositionLabel>
-          <InputPlanner
-            type="text"
-            placeholder="Client Name"
-            value={subjectObj ? subjectObj.client : ""}
-            disabled
-          />
-
+              <PositionLabel>Client Name</PositionLabel>
+              <InputPlanner
+                type="text"
+                placeholder="Client Name"
+                value={subjectObj ? subjectObj.client : ""}
+                disabled
+              />
             </>
           )}
 
@@ -342,7 +353,7 @@ const ModalPlanner = (props) => {
               name="date"
               onChange={(e) => setDate(e.target.value)}
               //required={flagDate && !date ? true : false}
-              required={(flagDate) || (flagDate && !date) ? true : false} 
+              required={flagDate || (flagDate && !date) ? true : false}
             ></InputDate>
           </DivDate>
           <DivStart>
@@ -353,7 +364,7 @@ const ModalPlanner = (props) => {
               name="time"
               onChange={(e) => setTimeStart(e.target.value)}
               //required={flagStart && !timeStart ? true : false}
-              required={(flagStart) || (flagStart && !timeStart) ? true : false} //testar melhor
+              required={flagStart || (flagStart && !timeStart) ? true : false} //testar melhor
             ></InputDate>
           </DivStart>
           <DivFinish>
@@ -363,13 +374,15 @@ const ModalPlanner = (props) => {
               type="time"
               name="time-finish"
               onChange={(e) => setTimeFinish(e.target.value)}
-              required={(flagFinish) || (flagFinish && !timeFinish) ? true : false} //testar melhor
+              required={
+                flagFinish || (flagFinish && !timeFinish) ? true : false
+              } //testar melhor
             ></InputDate>
           </DivFinish>
         </DivClocks>
         <PositionTags>
           <TagComponent
-            options={clientOption}
+            options={guestOptions}
             placeholder={""}
             label={"Guests"}
             tags={guest}

@@ -33,18 +33,18 @@ import { useCustomerContext } from "../../../hook/useCustomerContext";
 import { useReleaseContext } from "../../../hook/useReleaseContent";
 
 const AddEditClient = (props) => {
-  const {
+  /*const {
     client: clientList,
     setClient: setClientList,
     updateStatusClient,
   } = useClientContext();
-
-  const [clientId, setClientId] = useState();
+*/
+  // const [clientId, setClientId] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [customer, setCustomer] = useState({});
   const { userTarget } = useUserContext();
-  const [business, setBusiness] = useState("");
+  const [business] = useState("");
   const [role, setRole] = useState({});
   const [status, setStatus] = useState("");
   const { release: releaseList } = useReleaseContext("release");
@@ -61,9 +61,9 @@ const AddEditClient = (props) => {
   const [releaseOptions, setReleaseOptions] = useState([]);
 
   const [tags, setTags] = useState([]);
-  const { insertClient, updateClient } = useFetchClient();
+  const { insertClient } = useFetchClient();
   const [flag, setFlag] = useState(false);
-  const { setModal, id } = props;
+  const { setModal } = props;
 
   useEffect(() => {
     loadCustomerList();
@@ -94,16 +94,6 @@ const AddEditClient = (props) => {
     }
   };
 
-  function getId() {
-    let lastId = 1;
-
-    clientList.map((c) => {
-      lastId = c.id > lastId ? c.id : lastId;
-    });
-
-    return lastId + 1;
-  }
-
   const createClient = () => {
     const newClient = {
       client_email: email,
@@ -120,10 +110,6 @@ const AddEditClient = (props) => {
     if (name && email && role.id && customer.id && releaseObj.id) {
       insertClient(newClient);
       setModal(false);
-
-      /*if(createClient.status != client.status){
-        updateStatusClient(client.id);
-      }*/
     } else {
       setFlag(true);
     }
@@ -150,8 +136,7 @@ const AddEditClient = (props) => {
             <H1>{props.title} </H1>
           </PositionTitle>
           <Form>
-
-          <DivCustomer>
+            <DivCustomer>
               <SingleSelect
                 key="2"
                 set={(customer_id) => handleSelectCustomer(customer_id)}
@@ -192,7 +177,6 @@ const AddEditClient = (props) => {
               </Label>
             </DivBusiness>
 
-
             <DivName>
               <Label>
                 Client Name
@@ -232,7 +216,6 @@ const AddEditClient = (props) => {
               />
             </DivEmail>
 
-          
             <DivTag>
               <TagComponent
                 set={(tags) => setTags(tags)}
@@ -287,25 +270,4 @@ export default AddEditClient;
 const status_mok = [
   { id: 1, value: "ATIVO", label: "ATIVO" },
   { id: 2, value: "INATIVO", label: "INATIVO" },
-];
-
-const colors = [
-  "#836FFF",
-  "#00BFFF",
-  "#7FFFD4",
-  "#00FA9A",
-  "#00FF00",
-  "#ADFF2F",
-  "#BDB76B",
-  "#FFDEAD",
-  "#DEB887",
-  "#9370DB",
-  "#EE82EE",
-  "#FFB6C1",
-  "#F08080",
-  "#FA8072",
-  "#FFA07A",
-  "#FFFF00",
-  "#7B68EE",
-  "#BC8F8F",
 ];

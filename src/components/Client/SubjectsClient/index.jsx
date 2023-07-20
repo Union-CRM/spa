@@ -1,44 +1,41 @@
 import React, { useState, useEffect } from "react";
 import {
   ContainerDetails,
- CardSubject,
- DivSubject,
- StatusSubject,
- DivTitleSubject,
- TitleSubject,
- DivStatusSubject,
- DivGlobalCard,
- CreatedAt,
- ButtonCreateSubject,
- ButtonAdd,
+  CardSubject,
+  DivSubject,
+  StatusSubject,
+  DivTitleSubject,
+  TitleSubject,
+  DivStatusSubject,
+  DivGlobalCard,
+  CreatedAt,
+  ButtonCreateSubject,
+  ButtonAdd,
 } from "./styles";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useClientContext } from "../../../hook/useClientContent";
+import { useUserContext } from "../../../hook/useUserContext";
 
 const SubjectsClient = (props) => {
   const { setModal, id } = props;
-
-  const {
-    loadData, setModalInfo,
-    setModalCreateSubject
-  } = useClientContext();
+  const { userTarget } = useUserContext();
+  const { loadData, setModalInfo, setModalCreateSubject, clientTarget } =
+    useClientContext();
   const [status, setStatus] = useState();
-  const { subject: subjectsList,setIdSubject } = useSubjectContext();
+  const { subject: subjectsList, setIdSubject } = useSubjectContext();
   const [subjects, setSubjects] = useState([]);
   const { setModalSubject } = useSubjectContext();
 
   useEffect(() => {
-    try{
+    try {
       if (subjectsList) {
         setSubjects(subjectsList.filter((s) => s.client_id === props.id));
       }
-    }catch (error){     
+    } catch (error) {
       console.error(error.message);
     }
-   
   }, [subjectsList]);
-  
-  
+
   useEffect(() => {
     try {
       if (props.title === "Subject Clients") {
@@ -46,29 +43,24 @@ const SubjectsClient = (props) => {
         setStatus(subject.status);
       }
     } catch (error) {
-    console.error(error)
+      console.error(error);
     }
-    
   }, [id]);
 
   const handleEdit = (id) => {
     setIdSubject(id);
     setModalInfo(false);
-  }
+  };
 
   const SubjectModal = () => {
     setModalCreateSubject(true);
-    setModalInfo(false);    
+    setModalInfo(false);
   };
-  console.log(props.clientStatus);
-
+  console.log(clientTarget);
   return (
-
     <ContainerDetails>
-
-<ButtonCreateSubject>
-
-        {status !== "INACTIVE" && (
+      <ButtonCreateSubject>
+        {status !== "INACTIVE" && userTarget.id === clientTarget.user_id && (
           <ButtonAdd
             onClick={() => SubjectModal()}
             $mode={props.clientStatus}
@@ -85,33 +77,27 @@ const SubjectsClient = (props) => {
         )}
       </ButtonCreateSubject>
 
-  {subjects.map((s) => (
-  <CardSubject onClick={() => handleEdit(s.id)}>
+      {subjects.map((s) => (
+        <CardSubject onClick={() => handleEdit(s.id)}>
+          <DivGlobalCard>
+            <DivStatusSubject>
+              <StatusSubject $mode={s.status}>
+                <span>{s.status}</span>
+              </StatusSubject>
+              <TitleSubject>
+                <span>{s.subject_title}</span>
+              </TitleSubject>
+            </DivStatusSubject>
 
-    <DivGlobalCard>
-      <DivStatusSubject>
-       <StatusSubject $mode={s.status}>
-        <span>{s.status}</span>
-        </StatusSubject>
-        <TitleSubject>
-          <span>
-            {s.subject_title}
-            </span>
-          </TitleSubject>
-        </DivStatusSubject>
-
-        <CreatedAt>
-        <span>Created  </span> 
-        {s.created_at.split(" ")[0]}
-        </CreatedAt>
-
-        </DivGlobalCard>
-        </CardSubject >
-        ))}
+            <CreatedAt>
+              <span>Created </span>
+              {s.created_at.split(" ")[0]}
+            </CreatedAt>
+          </DivGlobalCard>
+        </CardSubject>
+      ))}
     </ContainerDetails>
-
   );
 };
 
 export default SubjectsClient;
-

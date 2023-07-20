@@ -116,7 +116,7 @@ const ContentRemarks = (props) => {
       ) : (
         <ContainerCards>
           {remark.map((r) => (
-            <CardRemark $mode={status}  onClick={() => handleClick(r.id)}>
+            <CardRemark $mode={status} onClick={() => handleClick(r.id)}>
               <DivGlobalCard>
                 <DivDate $mode={status}>
                   <Calendar
@@ -128,6 +128,16 @@ const ContentRemarks = (props) => {
                           ? "#008585"
                           : status === "CANCELED"
                           ? "#771300"
+                          : status === "NOT STARTED"
+                          ? "#51bfd3"
+                          : status === "EXCELENT"
+                          ? "rgb(0, 123, 255)"
+                          : status === "NO ANSWERS"
+                          ? "#d10e00"
+                          : status === "NO INTEREST"
+                          ? "#faa3b1"
+                          : status === "GOOD"
+                          ? "#680072"
                           : "",
                     }}
                   />
@@ -160,6 +170,16 @@ const ContentRemarks = (props) => {
                           ? "#008585"
                           : status === "CANCELED"
                           ? "#771300"
+                          : status === "NOT STARTED"
+                          ? "#51bfd3"
+                          : status === "EXCELENT"
+                          ? "rgb(0, 123, 255)"
+                          : status === "NO ANSWERS"
+                          ? "#d10e00"
+                          : status === "NO INTEREST"
+                          ? "#faa3b1"
+                          : status === "GOOD"
+                          ? "#680072"
                           : "",
                     }}
                   />

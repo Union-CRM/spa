@@ -26,7 +26,7 @@ import { useClientContext } from "../../../hook/useClientContent";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useFetchSubject } from "../../../hook/useFetchSubject";
 import { useUserContext } from "../../../hook/useUserContext";
-import { usePlannerContext } from "../../../hook/usePlannerContent"
+import { usePlannerContext } from "../../../hook/usePlannerContent";
 
 const Subject = (props) => {
   const { setModal, title, id } = props;
@@ -36,19 +36,15 @@ const Subject = (props) => {
 
   // CLOSE E SAVE ////////////
   const closeModal = () => {
-    
     setModal(false);
     setModalSubject(false);
-    
   };
 
   const handleSubmit = () => {
     if (props.title === "Create Subject") {
       createSubject();
       setModalSubject(false);
-
     }
-
   };
 
   ////////////////////////////////////
@@ -166,7 +162,7 @@ const Subject = (props) => {
                   widthInput={"90% !important"}
                   value={business}
                   name={business}
-                  disabled={selectedClient}
+                  disabled
                 />
               </Label>
 
@@ -176,7 +172,7 @@ const Subject = (props) => {
                   onChange={(event) => setRelease(event.target.value)}
                   widthInput={"98% !important"}
                   value={release}
-                  disabled={selectedClient}
+                  disabled
                 />
               </Label>
             </DivBusiness>
@@ -188,8 +184,7 @@ const Subject = (props) => {
                   widthInput={"98% !important"}
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  disabled={selectedClient}
-                  
+                  disabled
                 />
               </Label>
             </DivEmail>

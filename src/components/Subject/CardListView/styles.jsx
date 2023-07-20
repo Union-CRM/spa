@@ -49,6 +49,26 @@ export const Card = styled.div`
         return css`
           border-left: 7px solid #771300;
         `;
+      case "EXCELLENT":
+        return css`
+          border-left: 7px solid rgb(0, 123, 255);
+        `;
+      case "GOOD":
+        return css`
+          border-left: 7px solid #680072;
+        `;
+      case "NO INTEREST":
+        return css`
+          border-left: 7px solid #faa3b1;
+        `;
+      case "NO ANSWERS":
+        return css`
+          border-left: 7px solid #d10e00;
+        `;
+      case "NOT STARTED":
+        return css`
+          border-left: 7px solid #51bfd3;
+        `;
       default:
         return css`
           border-left: 7px solid #6e6b6b;
@@ -70,6 +90,9 @@ export const Card = styled.div`
   @media (min-width: 1355px) and (max-width: 1824px) {
     height: 185px;
     width: 90%;
+    margin-bottom: 5%;
+  }
+  @media (max-width: 1354px) {
     margin-bottom: 5%;
   }
 `;
@@ -104,6 +127,28 @@ export const Status = styled.div`
         return css`
           background-color: #771300;
         `;
+      case "EXCELLENT":
+        return css`
+          background-color: rgb(0, 123, 255);
+        `;
+
+      case "GOOD":
+        return css`
+          background-color: #680072;
+        `;
+      case "NO ANSWERS":
+        return css`
+          background-color: #d10e00;
+        `;
+      case "NO INTEREST":
+        return css`
+          background-color: #faa3b1;
+        `;
+      case "NOT STARTED":
+        return css`
+          background-color: #51bfd3;
+        `;
+
       default:
         return css`
           background-color: #6e6b6b;
@@ -152,7 +197,7 @@ export const DivSubjectAndCreatedBy = styled.span`
   margin-top: 2%;
   p {
     font-weight: 900;
-    font-size:1rem;
+    font-size: 1rem;
   }
   @media (min-width: 1355px) and (max-width: 1824px) {
     font-size: 0.8rem;
@@ -211,11 +256,13 @@ export const DivInfo = styled.div`
 
 export const DivReleaseAndBusiness = styled.div`
   grid-row: 1;
+  margin-top: 10px;
   height: fit-content;
 `;
 
 export const ReleaseTrain = styled.div`
   font-size: 0.9rem;
+  margin-bottom: 6px;
   @media (min-width: 1355px) and (max-width: 1824px) {
     font-size: 0.75rem;
   }

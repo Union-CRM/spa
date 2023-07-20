@@ -35,11 +35,11 @@ import styled, { css } from "styled-components";
 const ClientCard = (props) => {
   const { openModal, openModalPopUp } = props;
 
-  const { updateStatusClient } = useFetchClient();    
-  const { toggleState, setToggleState } = useClientContext();
+  const { updateStatusClient } = useFetchClient();
+  const { toggleState, setToggleState, setClientTarget } = useClientContext();
   const { activeTab, setActiveTab } = useClientContext();
 
-  const { client: clientList, updateClient} = useClientContext();
+  const { client: clientList, updateClient } = useClientContext();
   const client = clientList.filter((item) => item.id === props.id)[0];
   const [tags] = useState(
     client.tags.map((tag) => {
@@ -50,6 +50,7 @@ const ClientCard = (props) => {
     openModal();
     setToggleState(0);
     setActiveTab(0);
+    setClientTarget(client);
     props.setId(client.id);
   };
 
@@ -58,14 +59,11 @@ const ClientCard = (props) => {
     props.setId(client.id);
   };
 
-
-
   /*const handleToggle = () => {
     setIsActive(!isActive);
     updateClient(client.id, { ...client, status: isActive ? "Inactive" : "Active" });
   };*/
-  const [ isActive, setIsActive ] =useState(client.status === "Active")
-  
+  const [isActive, setIsActive] = useState(client.status === "Active");
 
   const handleToggle = () => {
     const newStatus = isActive ? "Inactive" : "Active";
@@ -73,7 +71,6 @@ const ClientCard = (props) => {
     updateClient(client.id, { ...client, status: newStatus });
   };
 
-  
   return (
     <ContainerFather>
       <Container>
@@ -84,8 +81,7 @@ const ClientCard = (props) => {
           checked={isActive}
         >
           <Header>
-
-          <DivIcons>
+            <DivIcons>
               <ToggleContainer
                 isActive={isActive}
                 $mode={client.status}
@@ -101,13 +97,14 @@ const ClientCard = (props) => {
                 <ToggleButton checked={isActive} />
               </ToggleContainer>
             </DivIcons>
-            
+
             <DivPhoto>
               <DivPhotoI
-               isActive={isActive}
-               active={isActive}
-               $mode={client.status}
-               checked={isActive}>
+                isActive={isActive}
+                active={isActive}
+                $mode={client.status}
+                checked={isActive}
+              >
                 <Body
                   type={"Body1"}
                   name={client.client
@@ -121,9 +118,10 @@ const ClientCard = (props) => {
             </DivPhoto>
 
             <DivDadosCard>
-            <NameClient>
-              
-            <span>{SplitClientName(client.client)}</span>  </NameClient>
+              <NameClient>
+                {/*<span>{SplitClientName(client.client)}</span>{" "}*/}
+                <span>{client.client}</span>{" "}
+              </NameClient>
 
               <Subtitle type={"TextDescription"} name={client.email} />
 
@@ -135,28 +133,24 @@ const ClientCard = (props) => {
                 >
                   {client.status}
                 </Status>
-    
-                <Tippy content= {tags && tags.length === 0 ? (
-     "It has no tags" ) : (tags)}>
-    
-    
-                <TagsSpan
-                $mode={client.tags}
-                isActive={isActive}
-               active={isActive}
-               checked={isActive}>tags</TagsSpan>
+
+                <Tippy
+                  content={tags && tags.length === 0 ? "It has no tags" : tags}
+                >
+                  <TagsSpan
+                    $mode={client.tags}
+                    isActive={isActive}
+                    active={isActive}
+                    checked={isActive}
+                  >
+                    tags
+                  </TagsSpan>
                 </Tippy>
-
-
               </DivTagsStatus>
- 
             </DivDadosCard>
-
-     
           </Header>
 
-
-          <DivInfo  onClick={handleEdit}>
+          <DivInfo onClick={handleEdit}>
             <DivRole>
               <TitleInfo>
                 Role <span> | </span>{" "}

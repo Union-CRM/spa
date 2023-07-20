@@ -20,11 +20,11 @@ export const Container = styled.div`
 export const OpenClose = styled.button`
   transform: ${(props) => (props.$mode ? "rotateY(180deg)" : "")};
   grid-row: 1;
-  align-items:end;
-  padding-bottom:5%;
-  display:flex;
-  position:relative;
-  background:transparent;
+  align-items: end;
+  padding-bottom: 5%;
+  display: flex;
+  position: relative;
+  background: transparent;
   border: none;
   margin-left: ${(props) => (props.$mode ? "7%" : "70%")};
   color: #f5f7fa;
@@ -40,7 +40,7 @@ export const LogoutButton = styled.button`
   background-color: #1e2222;
   height: fit-content;
   width: fit-content;
-   //grid-row: 5;
+  //grid-row: 5;
   //margin-top: 28vh;
   margin-top: ${(props) => (props.$mode ? "60%" : "10%")};
   border: none;
@@ -51,14 +51,13 @@ export const LogoutButton = styled.button`
 
 export const Icon = styled.div`
   width: 100%;
-  height:100%;
+  height: 100%;
   display: flex;
   align-items: center;
   bottom: ${(props) => (props.$mode ? "50%" : "0px")};
   margin-top: ${(props) => (props.$mode ? "0%" : "0")};
   margin-left: ${(props) => (props.$mode ? "" : "15px")};
   justify-content: ${(props) => (props.$mode ? "center" : "left")};
-  
 `;
 
 export const User = styled.div`
@@ -71,16 +70,15 @@ export const User = styled.div`
   grid-row: 2;
   padding-top: 0%;
   padding-bottom: 3%;
-  position:relative;
+  position: relative;
   text-align: center;
-  background:transparent;
-
+  background: transparent;
 `;
 export const Img = styled.div`
   margin: ${(props) => (props.$mode ? "15px" : "0 auto")};
   display: flex;
   align-items: center;
-  position:relative;
+  position: relative;
   justify-content: center;
   width: ${(props) => (props.$mode ? "40px" : "60px")};
   height: ${(props) => (props.$mode ? "40px" : "60px")};
@@ -92,9 +90,9 @@ export const Img = styled.div`
       return "3px solid #007bff";
     }
   }};
-   margin-top: ${(props) => (props.$mode ? "0" : "0%")};
-   margin-bottom: ${(props) => (props.$mode ? "10%" : "3%")};
-   margin-left: ${(props) => (props.$mode ? "20%" : "33%")};
+  margin-top: ${(props) => (props.$mode ? "0" : "0%")};
+  margin-bottom: ${(props) => (props.$mode ? "10%" : "3%")};
+  margin-left: ${(props) => (props.$mode ? "20%" : "33%")};
   background-color: white;
 `;
 
@@ -103,8 +101,8 @@ export const Name = styled.h1`
   color: #ffff;
   align-self: center;
   font-size: 12px;
-  width:90%;
-  padding-top:1%;
+  width: 90%;
+  padding-top: 1%;
   display: ${(props) => (props.$mode ? "none" : "")};
 `;
 export const Id = styled.h2`
@@ -143,12 +141,12 @@ export const Li = styled.li`
   height: 59px;
   display: flex;
   text-align: center;
-  vertical-align: middle; 
+  vertical-align: middle;
   background-color: ${({ selected, level }) => {
     if (selected && level > 1) {
-      return "#E41165";
+      return "#e4116575";
     } else if (selected && level === 1) {
-      return "#007bff";
+      return "#007bff83";
     } else {
       return "#1e2222";
     }
@@ -159,7 +157,7 @@ export const Li = styled.li`
   :hover {
     background-color: ${({ level }) => {
       if (level > 1) {
-        return "#E41165";
+        return "#e41165";
       } else {
         return "#007bff";
       }
@@ -188,8 +186,8 @@ export const DivDots = styled.div`
   display: flex;
   margin: 0 auto;
   width: 75px;
-  justify-content:center;
-  align-items:center;
+  justify-content: center;
+  align-items: center;
   display: ${(props) => (props.$mode ? "none" : "flex")};
 `;
 
@@ -207,8 +205,8 @@ export const Dot1 = styled.div`
 `;
 
 export const Dot2 = styled.div`
-height: 12px;
-width: 12px;
+  height: 12px;
+  width: 12px;
   border-radius: 30px;
   background-color: ${({ level }) => {
     if (level >= 2) {
@@ -219,8 +217,8 @@ width: 12px;
   }};
 `;
 export const Dot3 = styled.div`
-height: 12px;
-width: 12px;
+  height: 12px;
+  width: 12px;
   border-radius: 30px;
   background-color: ${({ level }) => {
     if (level >= 3) {
@@ -232,8 +230,8 @@ width: 12px;
 `;
 
 export const Dot4 = styled.div`
-height: 12px;
-width: 12px;
+  height: 12px;
+  width: 12px;
   border-radius: 30px;
   background-color: ${({ level }) => {
     if (level >= 4) {
@@ -245,8 +243,8 @@ width: 12px;
 `;
 
 export const Dot5 = styled.div`
-height: 12px;
-width: 12px;
+  height: 12px;
+  width: 12px;
   border-radius: 30px;
   background-color: ${({ level }) => {
     if (level >= 5) {

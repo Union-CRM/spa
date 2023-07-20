@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 // * CONTAINER REMARK *//
 export const ContainerRemark = styled.div`
   position: relative;
-  background:transparent;
+  background: transparent;
 `;
 
 export const DivNoRemark = styled.span`
@@ -37,10 +37,37 @@ export const ButtonAdd = styled.button`
         return css`
           border: 1px solid #00953b;
         `;
+
       case "CANCELED":
         return css`
           border: 1px solid #771300;
         `;
+
+      case "EXCELLENT":
+        return css`
+          border: 1px solid rgb(0, 123, 255);
+        `;
+
+      case "GOOD":
+        return css`
+          border: 1px solid #680072;
+        `;
+
+      case "NO ANSWERS":
+        return css`
+          border: 1px solid #d10e00;
+        `;
+
+      case "NO INTEREST":
+        return css`
+          border: 1px solid #faa3b1;
+        `;
+
+      case "NOT STARTED":
+        return css`
+          border: 1px solid #51bfd3;
+        `;
+
       default:
         return css`
           background-color: #6e6b6b;
@@ -67,9 +94,34 @@ export const ButtonAdd = styled.button`
           return css`
             color: #00953b;
           `;
+
         case "CANCELED":
           return css`
             color: #771300;
+          `;
+
+        case "EXCELLENT":
+          return css`
+            color: rgb(0, 123, 255);
+          `;
+
+        case "GOOD":
+          return css`
+            color: #680072;
+          `;
+
+        case "NO ANSWERS":
+          return css`
+            color: #d10e00;
+          `;
+
+        case "NO INTEREST":
+          return css`
+            color: #faa3b1;
+          `;
+        case "NOT STARTED":
+          return css`
+            color: #51bfd3;
           `;
         default:
           return css`
@@ -88,7 +140,7 @@ export const ButtonAdd = styled.button`
 
 export const ContainerCards = styled.div`
   width: 98%;
-  height:210px;
+  height: 210px;
   padding-top: 0%;
   position: relative;
   background-color: ${(props) => (props.$mode ? "transparent" : "transparent")};
@@ -239,7 +291,7 @@ export const DivGlobalCard = styled.div`
 `;
 
 export const DivDate = styled.div`
-  height:50px;
+  height: 50px;
   width: 100%;
   padding-top: 0%;
   text-align: left;
@@ -284,7 +336,7 @@ export const DivDate = styled.div`
 `;
 
 export const DivDateReturn = styled.div`
-  height:50px;
+  height: 50px;
   width: 100%;
   padding-top: 0%;
   text-align: left;
@@ -294,7 +346,7 @@ export const DivDateReturn = styled.div`
     height: 13px;
   }
   span {
-    font-size:0.82rem;
+    font-size: 0.82rem;
   }
   p {
     font-size: 0.9rem;

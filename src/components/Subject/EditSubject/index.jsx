@@ -27,17 +27,16 @@ import { useUserContext } from "../../../hook/useUserContext";
 import { useFetchSubject } from "../../../hook/useFetchSubject";
 import { useFetchSubjectStatus } from "../../../hook/useFetchSubjectStatus";
 
-
 const Subject = (props) => {
   const { setModal, title, id } = props;
   const { client: clientList } = useClientContext();
   const { updateSubject } = useFetchSubject();
-  const { subjectFinished, subjectCanceld } = useFetchSubjectStatus();
+  const { updateSubjectStatus } = useFetchSubjectStatus();
   // CLOSE E SAVE ////////////
 
-  const { setModalDetails, setModalEdit, setEditModal, idSubject } = useSubjectContext();
-  const { toggleState, setToggleState, loadData} = useSubjectContext();
-
+  const { setModalDetails, setModalEdit, setEditModal, idSubject } =
+    useSubjectContext();
+  const { toggleState, setToggleState, loadData } = useSubjectContext();
 
   const closeModal = () => {
     setModalDetails(true);
@@ -82,13 +81,12 @@ const Subject = (props) => {
 
   useEffect(() => {
     if (props.title === "Edit Subject") {
-    
       /*if(idSubject){
         const subject = subjectsList.filter((item) => item.id === idSubject);
         console.log(subject)
       }else{*/
-        const subject = subjectsList.filter((item) => item.id === props.id)[0];
-          
+      const subject = subjectsList.filter((item) => item.id === props.id)[0];
+
       setStatus(subject.status);
       setSubject(subject.subject_title);
       setSelectedClient(subject.client);
@@ -106,13 +104,9 @@ const Subject = (props) => {
       status_id: status,
     };
 
-    console.log(newSubject);
+    console.log(status);
     if (subject && description && status) {
-      if (status === "FINISHED") {
-        subjectFinished(id, newSubject);
-      } else if (status === "CANCELED") {
-        subjectCanceld(id, newSubject);
-      }
+      updateSubjectStatus(id, status);
       updateSubject(id, newSubject);
       setModalEdit(false);
       setModalDetails(true);
@@ -175,6 +169,7 @@ const Subject = (props) => {
                   options={optionsClient}
                   value={selectedClient}
                   placeholder={flag && !selectedClient ? "" : ""}
+                  disabled
                 />
               </Label>
             </DivName>
@@ -188,6 +183,7 @@ const Subject = (props) => {
                   backgroundInput={"#D9D9D9"}
                   value={business}
                   name={business}
+                  disabled
                 />
               </Label>
 
@@ -198,6 +194,7 @@ const Subject = (props) => {
                   widthInput={"98% !important"}
                   backgroundInput={"#D9D9D9"}
                   value={release}
+                  disabled
                 />
               </Label>
             </DivBusiness>
@@ -210,6 +207,7 @@ const Subject = (props) => {
                   backgroundInput={"#D9D9D9"}
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
+                  disabled
                 />
               </Label>
             </DivEmail>
@@ -292,4 +290,9 @@ const status_mok = [
   { id: 1, value: "IN PROGRESS", label: "IN PROGRESS" },
   { id: 2, value: "FINISHED", label: "FINISHED" },
   { id: 3, value: "CANCELED", label: "CANCELED" },
+  { id: 4, value: "EXCELLENT", label: "EXCELLENT" },
+  { id: 5, value: "GOOD", label: "GOOD" },
+  { id: 6, value: "NO ANSWERS", label: "NO ANSWERS" },
+  { id: 7, value: "NO INTEREST", label: "NO INTEREST" },
+  { id: 8, value: "NOT STARTED", label: "NOT STARTED" },
 ];

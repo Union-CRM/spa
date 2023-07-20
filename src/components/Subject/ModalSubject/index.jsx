@@ -89,7 +89,7 @@ const ModalSubject = (props) => {
   };
 
   return (
-    <ContainerFather>
+    <ContainerFather name="container">
       <Container $mode={subject.status}>
         <BodyAll>
           <ClickButton>
@@ -111,11 +111,9 @@ const ModalSubject = (props) => {
               {subject.subject_title}
             </TitleSubject>
 
-          
-                <IconTag onClick={EditModal}>
-                  <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
-                </IconTag>
-     
+            <IconTag onClick={EditModal}>
+              <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
+            </IconTag>
 
             <CreatedBy onChange={(event) => setManager(event.target.value)}>
               Created by on {manager}
