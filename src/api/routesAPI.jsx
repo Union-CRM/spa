@@ -15,7 +15,7 @@ export const userCreate =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users";
 
 export const userGetAll =
-"http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users";
+  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users";
 //Subject
 export const subjectGetSubmissivesSubjects =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/submissives";
@@ -28,6 +28,12 @@ export const subjectUpdate =
 
 export const subjectUpdateStatusFinished =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/update/finished/";
+
+export const subjectUpdateStatus =
+  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/update/status/";
+
+export const subjectUpdateStatusGood =
+  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/update/status/:id";
 
 export const subjectUpdateStatusCanceled =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8089/union/v1/subjects/update/canceled/";
@@ -64,11 +70,14 @@ export const attachUser = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8
 
 export const detachUser = `http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/update/detach/`;
 
-export const groupGetUser = "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/user/"; //adicionar id usuario
+export const groupGetUser =
+  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/user/"; //adicionar id usuario
 
-export const countUserGroup = "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/count/user/";//adicionar id usuario  
+export const countUserGroup =
+  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/count/user/"; //adicionar id usuario
 
-export const getUsersGroup = "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/usersGroup/"; //id do grupo
+export const getUsersGroup =
+  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8085/union/v1/groups/usersGroup/"; //id do grupo
 
 //client
 export const clientGetClientsMyGroups =
@@ -98,8 +107,6 @@ export const customerUpdate =
 export const customerUpdateStatus =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8084/union/v1/customers/update/status/";
 
-
-
 //FetchRealise
 export const realiseGetRealiseTrains =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8087/union/v1/releasetrains";
@@ -110,6 +117,6 @@ export const roleCreate =
 export const getTags =
   "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8090/union/v1/tags";
 
-//Forgot Password  
+//Forgot Password
 export const forgotPass =
-  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/forgotpwd";  
+  "http://crm-lb-353213555.us-east-1.elb.amazonaws.com:8081/union/v1/users/forgotpwd";

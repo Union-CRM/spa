@@ -23,7 +23,22 @@ import {
   HowManyFinished,
   Canceled,
   HowManyCancel,
+  HowManyExcellent,
+  Excellent,
+  ButtonExcellent,
   ContainerLimit,
+  NoAnswers,
+  ButtonNoAnswers,
+  HowManyNoAnswers,
+  NoInterest,
+  ButtonNoInterest,
+  HowManyNoInterest,
+  NotStarted,
+  ButtonNotStarted,
+  HowManyNotStarted,
+  HowManyGood,
+  Good,
+  ButtonGood,
 } from "./styles";
 import SubjectCard from "../CardListView/index";
 import { useState, useEffect } from "react";
@@ -50,8 +65,12 @@ const cardStatus = {
   INPROGRESS: "IN PROGRESS",
   FINISHED: "FINISHED",
   CANCELED: "CANCELED",
+  NOANSWERS: "NO ANSWERS",
+  NOINTEREST: "NO INTEREST",
+  NOTSTARTED: "NOT STARTED",
+  GOOD: "GOOD",
+  EXCELLENT: "EXCELLENT",
 };
-
 const SubjectList = (props) => {
   const { subject } = useSubjectContext();
   const { user, userTarget, setUserTarget } = useUserContext();
@@ -95,16 +114,39 @@ const SubjectList = (props) => {
   const SubjectsCancel = subjectList.filter(
     (item) => item.status_description === "CANCELED"
   );
+
   const SubjectsFinished = subjectList.filter(
     (item) => item.status_description === "FINISHED"
   );
+
   const SubjectsProgress = subjectList.filter(
     (item) => item.status_description === "IN PROGRESS"
   );
+
+  const SubjectsExcellent = subjectList.filter(
+    (item) => item.status_description === "EXCELLENT"
+  );
+
+  const SubjectsGood = subjectList.filter(
+    (item) => item.status_description === "GOOD"
+  );
+
+  const SubjectsNotStarted = subjectList.filter(
+    (item) => item.status_description === "NOT STARTED"
+  );
+
+  const SubjectsNoAnswers = subjectList.filter(
+    (item) => item.status_description === "NO ANSWERS"
+  );
+
+  const SubjectsNoInterest = subjectList.filter(
+    (item) => item.status_description === "NO INTEREST"
+  );
+
   const [modal, setModal] = useState(false);
   const [openModalD, openModalSubjects] = useState(false);
   const [cards, setCards] = useState(SubjectsProgress);
-  const [active, setActive] = useState(cardStatus.INPROGRESS);
+  const [active, setActive] = useState(cardStatus.NOTSTARTED);
 
   const {
     modalDetails,
@@ -150,7 +192,16 @@ const SubjectList = (props) => {
   // Create Planner //
   const { idPlanner, setIdPlanner } = usePlannerContext();
   const { modalPlanner, setModalPlanner, modalSave } = usePlannerContext();
-
+  /*
+  NO ANWSERS   
+  NO INTEREST
+  NOT STARTED
+  IN PROGRESS
+  GOOD  
+  EXCELENT
+  FINISHED
+  CANCELED
+  */
   return (
     <ContainerGlobal>
       <ContainerHeaderAndCards>
@@ -184,7 +235,26 @@ const SubjectList = (props) => {
             </DivButton>
           </Top>
 
-          <DivSpans>
+          <DivSpans name="SubjectsStatus">
+            <ButtonNotStarted
+              key={cardStatus.NOTSTARTED}
+              onClick={() =>
+                handleClick(SubjectsNotStarted, cardStatus.NOTSTARTED)
+              }
+              style={getTabColor(cardStatus.NOTSTARTED)}
+            >
+              <NotStarted>
+                Not Started (
+                <HowManyNotStarted>
+                  {
+                    subjectList.filter((item) => item.status === "NOT STARTED")
+                      .length
+                  }
+                </HowManyNotStarted>
+                )
+              </NotStarted>
+            </ButtonNotStarted>
+
             <ButtonProgress
               key={cardStatus.INPROGRESS}
               onClick={() =>
@@ -204,6 +274,75 @@ const SubjectList = (props) => {
               </Progress>
             </ButtonProgress>
 
+            <ButtonExcellent
+              key={cardStatus.EXCELLENT}
+              onClick={() =>
+                handleClick(SubjectsExcellent, cardStatus.EXCELLENT)
+              }
+              style={getTabColor(cardStatus.EXCELLENT)}
+            >
+              <Excellent>
+                Excellent (
+                <HowManyExcellent>
+                  {
+                    subjectList.filter((item) => item.status === "EXCELLENT")
+                      .length
+                  }
+                </HowManyExcellent>
+                )
+              </Excellent>
+            </ButtonExcellent>
+            <ButtonGood
+              key={cardStatus.GOOD}
+              onClick={() => handleClick(SubjectsGood, cardStatus.GOOD)}
+              style={getTabColor(cardStatus.GOOD)}
+            >
+              <Good>
+                Good (
+                <HowManyGood>
+                  {subjectList.filter((item) => item.status === "GOOD").length}
+                </HowManyGood>
+                )
+              </Good>
+            </ButtonGood>
+            <ButtonNoAnswers
+              key={cardStatus.NOANSWERS}
+              onClick={() =>
+                handleClick(SubjectsNoAnswers, cardStatus.NOANSWERS)
+              }
+              style={getTabColor(cardStatus.NOANSWERS)}
+            >
+              <NoAnswers>
+                No Answers (
+                <HowManyNoAnswers>
+                  {
+                    subjectList.filter((item) => item.status === "NO ANSWERS") //answer
+                      .length
+                  }
+                </HowManyNoAnswers>
+                )
+              </NoAnswers>
+            </ButtonNoAnswers>
+
+            <ButtonNoInterest
+              key={cardStatus.NOINTEREST}
+              onClick={() =>
+                handleClick(SubjectsNoInterest, cardStatus.NOINTEREST)
+              }
+              style={getTabColor(cardStatus.NOINTEREST)}
+            >
+              <NoInterest>
+                No Interest (
+                <HowManyNoInterest>
+                  {
+                    subjectList.filter((item) => item.status === "NO INTEREST")
+                      .length
+                  }
+                </HowManyNoInterest>
+                )
+              </NoInterest>
+            </ButtonNoInterest>
+
             <ButtonFinished
               key={cardStatus.FINISHED}
               onClick={() => handleClick(SubjectsFinished, cardStatus.FINISHED)}
@@ -220,7 +359,6 @@ const SubjectList = (props) => {
                 )
               </Finished>
             </ButtonFinished>
-
             <ButtonCancel
               key={cardStatus.CANCELED}
               onClick={() => handleClick(SubjectsCancel, cardStatus.CANCELED)}
@@ -247,21 +385,25 @@ const SubjectList = (props) => {
               subjectList
                 .filter((item) => item.status === active)
                 .map((item, index) => {
-                  if(index<limit){
-                    return <SubjectCard
-                    key={item.id}
-                    id={item.id}
-                    /*setIdPlanner={(i) => setIdPlanner(i)}*/
-                    setIdRemark={(i) => setIdRemark(i)}
-                    setId={(i) => setId(i)}
-                    openModal={() => detailsModal()}
-                  />}
-                  })} 
+                  if (index < limit) {
+                    return (
+                      <SubjectCard
+                        key={item.id}
+                        id={item.id}
+                        /*setIdPlanner={(i) => setIdPlanner(i)}*/
+                        setIdRemark={(i) => setIdRemark(i)}
+                        setId={(i) => setId(i)}
+                        openModal={() => detailsModal()}
+                      />
+                    );
+                  }
+                })}
           </BoardStyle>
-          {limit < subjectList.length &&  
-          <ContainerLimit>
-            <p onClick={()=> setLimit(limit+50)}>Show more</p>  
-          </ContainerLimit>}  
+          {limit < subjectList.length && (
+            <ContainerLimit>
+              <p onClick={() => setLimit(limit + 50)}>Show more</p>
+            </ContainerLimit>
+          )}
         </ContainerCards>
       </ContainerHeaderAndCards>
 
@@ -319,15 +461,7 @@ const SubjectList = (props) => {
         />
       )}
 
-
-
-      {modalSave && (
-      
-
-          <ModalSave subject={"translate(25%, -350%)"} />
-     
-      )}
-
+      {modalSave && <ModalSave subject={"translate(25%, -350%)"} />}
 
       {modalDiscard && (
         <>

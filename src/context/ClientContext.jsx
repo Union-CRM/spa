@@ -6,6 +6,7 @@ export const ClientContext = createContext();
 export const ClientContextProvider = ({ children }) => {
   const [idClient, setIdClient] = useState(null);
   const [client, setClient] = useState([{}]);
+  const [clientTarget, setClientTarget] = useState();
   const [isActive, setIsActive] = useState(false);
   const [modalAddClient, setModalAddClient] = useState(false);
   const [selectedClient, setSelectedClient] = useState(null);
@@ -118,8 +119,11 @@ export const ClientContextProvider = ({ children }) => {
         setIdClient,
         modalAddClient,
         setModalAddClient,
-        modalCreateSubject, 
-        setModalCreateSubject
+        selectedClient,
+        modalCreateSubject,
+        setModalCreateSubject,
+        clientTarget,
+        setClientTarget,
       }}
     >
       {children}

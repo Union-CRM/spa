@@ -93,6 +93,31 @@ export const ButtonAdd = styled.button`
           border: 1px solid #771300;
         `;
 
+      case "EXCELLENT":
+        return css`
+          border: 1px solid rgb(0, 123, 255);
+        `;
+
+      case "GOOD":
+        return css`
+          border: 1px solid #680072;
+        `;
+
+      case "NO ANSWERS":
+        return css`
+          border: 1px solid #d10e00;
+        `;
+
+      case "NO INTEREST":
+        return css`
+          border: 1px solid #faa3b1;
+        `;
+
+      case "NOT STARTED":
+        return css`
+          border: 1px solid #51bfd3;
+        `;
+
       default:
         return css`
           background-color: #6e6b6b;
@@ -123,6 +148,31 @@ export const ButtonAdd = styled.button`
         case "CANCELED":
           return css`
             color: #771300;
+          `;
+
+        case "EXCELLENT":
+          return css`
+            color: rgb(0, 123, 255);
+          `;
+
+        case "GOOD":
+          return css`
+            color: #680072;
+          `;
+
+        case "NO ANSWERS":
+          return css`
+            color: #d10e00;
+          `;
+
+        case "NO INTEREST":
+          return css`
+            color: #faa3b1;
+          `;
+
+        case "NOT STARTED":
+          return css`
+            color: #51bfd3;
           `;
 
         default:
@@ -233,7 +283,7 @@ export const CardPlanner = styled.div`
 
 //* COMPONENT OPEN/CLOSE DETAILS *//
 export const Circle = styled.div`
-  width:16px;
+  width: 16px;
   height: 16px;
   cursor: pointer;
   bottom: 0;
@@ -244,7 +294,7 @@ export const Circle = styled.div`
 `;
 
 export const IconOpenClose = styled.div`
-  width:100%;
+  width: 100%;
   height: 100%;
   border: none;
   position: absolute;
@@ -274,7 +324,7 @@ export const DivDate = styled.div`
   padding-left: 3%;
   border-right: 2px solid #eff1f6;
   svg {
-    width:13px;
+    width: 13px;
     height: 13px;
   }
   p {
@@ -458,7 +508,7 @@ export const Span = styled.span`
         `;
       default:
         return css`
-          color: #00953b; ;
+          color: #00953b;
         `;
     }
   }}

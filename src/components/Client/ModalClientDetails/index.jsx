@@ -35,33 +35,35 @@ const ModalClientDetails = (props) => {
   const { setModal, id } = props;
   const { setModalInfo, setId, modalEditClient, setModalEditClient, loadData } =
     useClientContext();
-  const { user,userList, loadUserList } = useUserContext();
+  const { user, userList, loadUserList } = useUserContext();
   // UseEffect Clients //
-  const { client: clientList } = useClientContext();
+  const { client: clientList, setClientTarget } = useClientContext();
   const client = clientList.filter((item) => item.id === props.id)[0];
   const [statusClient, setStatus] = useState();
   const [clientName, setClientName] = useState();
   const [manager, setManager] = useState();
-  const [editable,setEditable] =useState(false);
+  const [editable, setEditable] = useState(false);
   const [activeContent, setActiveContent] = useState(0);
   const { toggleState, setToggleState } = useClientContext();
   const { activeTab, setActiveTab } = useClientContext();
-  //console.log(userList)
-  
+
   useEffect(() => {
-    const client = clientList.filter((item) => item.id === props.id)[0];  
+    const client = clientList.filter((item) => item.id === props.id)[0];
+    setClientTarget(client);
     if (props.title === "Client Details") {
       setStatus(client.status);
       setClientName(client.client_name);
       setManager(client.user_name);
     }
-    if(userList){
-      const usersID = (userList.map((u)=> u.id))
-      setEditable( usersID.includes(client.user_id) || client.user_id===user.id)
-    }else{
+    if (userList) {
+      const usersID = userList.map((u) => u.id);
+      setEditable(
+        usersID.includes(client.user_id) || client.user_id === user.id
+      );
+    } else {
       loadUserList();
-    }    
-  }, [id,userList]);
+    }
+  }, [id, userList]);
 
   const toggleTab = (index) => {
     setToggleState(index);

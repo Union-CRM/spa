@@ -18,7 +18,6 @@ export const ContainerGlobal = styled.div`
   }
 `;
 
-
 //* Container father and children *//
 export const ContainerHeaderAndCards = styled.div`
   width: 100%;
@@ -29,10 +28,10 @@ export const ContainerHeaderAndCards = styled.div`
   position: relative;
   display: grid;
   border-radius: 8px;
-  grid-template-rows: 15% 85%;
+  grid-template-rows: auto 80%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   @media (min-width: 50px) and (max-width: 1360px) {
-    height: 80vh;
+    height: 10;
     width: 100%;
   }
   @media (min-width: 1355px) and (max-width: 1824px) {
@@ -48,9 +47,9 @@ export const HeaderContainerCards = styled.div`
   width: auto;
   height: 100%;
   display: grid;
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 8px 8px 0px 0px;
-  grid-template-rows: 20% 50% 30%;
+  grid-template-rows: 20% 10% 700%;
   @media (min-width: 100px) and (max-width: 500px) {
     display: grid;
     grid-row: 1;
@@ -62,18 +61,20 @@ export const HeaderContainerCards = styled.div`
 `;
 
 export const DivInfo = styled.div`
-position:relative;
-top:6%;
-left:1%;
+  position: relative;
+  top: 6%;
+  left: 1%;
 `;
-
 
 // Div Title and Button //
 export const Top = styled.div`
   display: grid;
-  grid-row: 2;
+  grid-row: 1;
   grid-template-columns: 50% 50%;
   width: 100%;
+  height: fit-content;
+  margin-top: 4%;
+  background-color: #ffff;
 `;
 
 //** Line **//
@@ -81,6 +82,7 @@ export const LineDivisor = styled.div`
   width: 92%;
   height: 2px;
   margin-left: 5%;
+
   background-color: #e3e6ed;
   position: absolute;
 `;
@@ -93,6 +95,7 @@ export const ContainerCards = styled.div`
   grid-row: 2;
   width: auto;
   display: grid;
+
   position: relative;
   background-color: #fff;
   overflow-y: scroll;
@@ -129,7 +132,7 @@ export const BoardStyle = styled.div`
   top: 20px;
   grid-gap: 20px;
   grid-row: 1;
-  display: grid;
+  display: inline-block;
   position: relative;
   height: fit-content;
   grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
@@ -218,7 +221,9 @@ export const DivSpans = styled.div`
   grid-column: 1;
   grid-row: 3;
   padding-left: 5%;
+  margin-top: 5%;
   position: relative;
+  height: fit-content;
   @media (min-width: 100px) and (max-width: 500px) {
     display: flex;
     width: 80%;
@@ -231,7 +236,7 @@ export const DivSpans = styled.div`
 
 export const Progress = styled.span`
   font-family: "Houschka Rounded Alt";
-  font-size: 14px;
+  font-size: 12px;
   color: #525b75;
   line-height: 20px;
   font-weight: 600;
@@ -239,7 +244,7 @@ export const Progress = styled.span`
 
 export const Finished = styled.span`
   font-family: "Houschka Rounded Alt";
-  font-size: 14px;
+  font-size: 12px;
   line-height: 20px;
   color: #525b75;
   font-weight: 600;
@@ -247,7 +252,46 @@ export const Finished = styled.span`
 
 export const Canceled = styled.div`
   font-family: "Houschka Rounded Alt";
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 20px;
+  color: #525b75;
+  font-weight: 600;
+`;
+
+export const Excellent = styled.div`
+  font-family: "Houschka Rounded Alt";
+  font-size: 12px;
+  line-height: 20px;
+  color: #525b75;
+  font-weight: 600;
+`;
+
+export const NotStarted = styled.div`
+  font-family: "Houschka Rounded Alt";
+  font-size: 12px;
+  line-height: 20px;
+  color: #525b75;
+  font-weight: 600;
+`;
+export const NoInterest = styled.div`
+  font-family: "Houschka Rounded Alt";
+  font-size: 12px;
+  line-height: 20px;
+  color: #525b75;
+  font-weight: 600;
+`;
+
+export const NoAnswers = styled.div`
+  font-family: "Houschka Rounded Alt";
+  font-size: 12px;
+  line-height: 20px;
+  color: #525b75;
+  font-weight: 600;
+`;
+
+export const Good = styled.div`
+  font-family: "Houschka Rounded Alt";
+  font-size: 12px;
   line-height: 20px;
   color: #525b75;
   font-weight: 600;
@@ -263,8 +307,33 @@ export const HowManyCancel = styled.span`
   font-weight: 600;
 `;
 
+export const HowManyNoInterest = styled.span`
+  color: #faa3b1;
+  font-weight: 600;
+`;
+
+export const HowManyNotStarted = styled.span`
+  color: #51bfd3;
+  font-weight: 600;
+`;
+
 export const HowManyProgress = styled.span`
   color: #00953b;
+  font-weight: 600;
+`;
+
+export const HowManyExcellent = styled.span`
+  color: rgb(0, 123, 255);
+  font-weight: 600;
+`;
+
+export const HowManyNoAnswers = styled.span`
+  color: #d10e00;
+  font-weight: 600;
+`;
+
+export const HowManyGood = styled.span`
+  color: #680072;
   font-weight: 600;
 `;
 
@@ -274,23 +343,60 @@ export const ButtonProgress = styled.button`
   border: none;
   width: fit-content;
   height: fit-content;
-  background-color: white;
   margin-right: 3%;
+  background-color: transparent;
   &:hover {
     border-bottom: 2px solid #007bff;
   }
 `;
+export const ButtonNoInterest = styled.button`
+  cursor: pointer;
+  border: none;
+  width: fit-content;
+  height: fit-content;
+  margin-right: 3%;
+  background-color: transparent;
+  &:hover {
+    border-bottom: 2px solid #007bff;
+  }
+`;
+
 export const ButtonFinished = styled.button`
   cursor: pointer;
   border: none;
   height: fit-content;
   width: fit-content;
   margin-right: 3%;
-  background-color: white;
+  background-color: transparent;
   &:hover {
     border-bottom: 2px solid #007bff;
   }
 `;
+
+export const ButtonNoAnswers = styled.button`
+  cursor: pointer;
+  border: none;
+  height: fit-content;
+  width: fit-content;
+  margin-right: 3%;
+  background-color: transparent;
+  &:hover {
+    border-bottom: 2px solid #007bff;
+  }
+`;
+
+export const ButtonGood = styled.button`
+  cursor: pointer;
+  border: none;
+  height: fit-content;
+  width: fit-content;
+  margin-right: 3%;
+  background-color: transparent;
+  &:hover {
+    border-bottom: 2px solid #007bff;
+  }
+`;
+
 export const ButtonCancel = styled.button`
   cursor: pointer;
   border: none;
@@ -303,16 +409,40 @@ export const ButtonCancel = styled.button`
   }
 `;
 
+export const ButtonExcellent = styled.button`
+  cursor: pointer;
+  border: none;
+  height: fit-content;
+  width: fit-content;
+  margin-right: 10px;
+  background-color: transparent;
+  &:hover {
+    border-bottom: 2px solid #007bff;
+  }
+`;
+
+export const ButtonNotStarted = styled.button`
+  cursor: pointer;
+  border: none;
+  height: fit-content;
+  width: fit-content;
+  margin-right: 10px;
+  background-color: transparent;
+  &:hover {
+    border-bottom: 2px solid #007bff;
+  }
+`;
+
 export const ContainerLimit = styled.div`
-color:#007bff;
-align-items:center;
-text-align:center;
-justify-content: center;
-font-weight: 800;
-text-decoration: underline;
-padding-bottom: 2%;
-cursor: pointer;
-width:100%;
-bottom: 0;
-margin-top: 35px;
+  color: #007bff;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-weight: 800;
+  text-decoration: underline;
+  padding-bottom: 2%;
+  cursor: pointer;
+  width: 100%;
+  bottom: 0;
+  margin-top: 35px;
 `;

@@ -62,13 +62,12 @@ const ContainerCards = (props) => {
   const { modalInfo, setModalInfo } = useClientContext();
   const { modalEditClient, setModalEditClient } = useClientContext();
   const { modalCreateSubject, setModalCreateSubject } = useClientContext();
-  
-  const [limit,setLimit]=useState(50);
 
-  //const pages = Math.ceil(clientList.length/cardsPerPage);
+  const [limit, setLimit] = useState(50);
 
-  //const currentsItens = clientList.slice(startIndex,endIndex);
-
+  function includesAllWords(searchWords, clientList) {
+    return searchWords.every((searchWord) => clientList.includes(searchWord));
+  }
 
   useEffect(() => {
     if (props.adminList) {
@@ -83,10 +82,13 @@ const ContainerCards = (props) => {
 
   useEffect(() => {
     if (search) {
+      const searchWords = search.toLowerCase().split(" ");
+      //const clientList = SplitName(c.client.toLowerCase());
       setClientList(
         client.filter(
           (c) =>
             c.client.toLowerCase().includes(search.toLowerCase()) ||
+            SplitName(c.client).toLowerCase().includes(search.toLowerCase()) ||
             c.textRole.toLowerCase().includes(search.toLowerCase()) ||
             c.textCustomer.toLowerCase().includes(search.toLowerCase()) ||
             c.textBusiness.toLowerCase().includes(search.toLowerCase()) ||
@@ -200,29 +202,30 @@ const ContainerCards = (props) => {
             {clientList &&
               clientList
                 .filter((item) => item.status === active)
-                .sort((a, b) => (a.client || '').localeCompare(b.client || ''))
-                .map((item,index) => {
-                  if(index<limit){
-                    return <ClientCard
-                      setId={(i) => setId(i)}
-                      openModalPopUp={() => setModalPopUp(true)}
-                      openModal={() => detailsModal()}
-                      key={item.id}
-                      id={item.id}
-                    //modalPopUp={() => PopUp()}
-                    />
+                .sort((a, b) => (a.client || "").localeCompare(b.client || ""))
+                .map((item, index) => {
+                  if (index < limit) {
+                    return (
+                      <ClientCard
+                        setId={(i) => setId(i)}
+                        openModalPopUp={() => setModalPopUp(true)}
+                        openModal={() => detailsModal()}
+                        key={item.id}
+                        id={item.id}
+                        //modalPopUp={() => PopUp()}
+                      />
+                    );
                   }
-                  
-})} 
-
+                })}
           </BoardStyle>
-          {limit < clientList.length &&  
-          <ContainerLimit>
-            <p onClick={()=> setLimit(limit+50)}>Show more</p>  
-          </ContainerLimit>}  
+          {limit < clientList.length && (
+            <ContainerLimit>
+              <p onClick={() => setLimit(limit + 50)}>Show more</p>
+            </ContainerLimit>
+          )}
         </CardsContainer>
-      
-        {/* Metodo Array para definir qtd de paginas */ }
+
+        {/* Metodo Array para definir qtd de paginas */}
         {/* <DivPages>
           {Array.from(Array(pages), (item, index) => {
             return<ButtonPage>{index}</ButtonPage>
@@ -240,7 +243,13 @@ const ContainerCards = (props) => {
       )}
 
       <DivModal
-        $mode={modalInfo || modalEdit || modalEditClient || modalPopUp}
+        $mode={
+          modalInfo ||
+          modalEdit ||
+          modalEditClient ||
+          modalPopUp ||
+          modalCreateSubject
+        }
       />
 
       {modalInfo && (
@@ -261,10 +270,7 @@ const ContainerCards = (props) => {
       )}
 
       {modalCreateSubject && (
-        <Subject
-        id={idSubject} 
-        title={"Create Subject"} />
-        
+        <Subject id={idSubject} title={"Create Subject"} />
       )}
 
       {modalPopUp && (

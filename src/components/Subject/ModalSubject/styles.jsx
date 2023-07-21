@@ -63,6 +63,26 @@ export const Container = styled.div`
         return css`
           border-left: 16.56px solid #771300;
         `;
+      case "EXCELLENT":
+        return css`
+          border-left: 7px solid rgb(0, 123, 255);
+        `;
+      case "GOOD":
+        return css`
+          border-left: 7px solid #680072;
+        `;
+      case "NO INTEREST":
+        return css`
+          border-left: 7px solid #faa3b1;
+        `;
+      case "NO ANSWERS":
+        return css`
+          border-left: 7px solid #d10e00;
+        `;
+      case "NOT STARTED":
+        return css`
+          border-left: 7px solid #51bfd3;
+        `;
       default:
         return css`
           background-color: #6e6b6b;
@@ -157,6 +177,26 @@ export const Status = styled.div`
       case "CANCELED":
         return css`
           background-color: #771300;
+        `;
+      case "EXCELLENT":
+        return css`
+          background-color: rgb(0, 123, 255);
+        `;
+      case "GOOD":
+        return css`
+          background-color: #680072;
+        `;
+      case "NO INTEREST":
+        return css`
+          background-color: #faa3b1;
+        `;
+      case "NO ANSWERS":
+        return css`
+          background-color: #d10e00;
+        `;
+      case "NOT STARTED":
+        return css`
+          background-color: #51bfd3;
         `;
       default:
         return css`
@@ -276,6 +316,52 @@ export const TabButton = styled.button`
           color: ${(props) => (props.active ? "white" : "black")};
           :hover {
             background-color: #771300;
+            color: #fff;
+          }
+        `;
+      case "NOT STARTED":
+        return css`
+          background-color: ${(props) => (props.active ? "#51bfd3" : "white")};
+          color: ${(props) => (props.active ? "white" : "black")};
+          :hover {
+            background-color: #51bfd3;
+            color: #fff;
+          }
+        `;
+      case "EXCELLENT":
+        return css`
+          background-color: ${(props) =>
+            props.active ? "rgb(0, 123, 255);" : "white"};
+          color: ${(props) => (props.active ? "white" : "black")};
+          :hover {
+            background-color: rgb(0, 123, 255);
+            color: #fff;
+          }
+        `;
+      case "GOOD":
+        return css`
+          background-color: ${(props) => (props.active ? "#680072" : "white")};
+          color: ${(props) => (props.active ? "white" : "black")};
+          :hover {
+            background-color: #680072;
+            color: #fff;
+          }
+        `;
+      case "NO ANSWERS":
+        return css`
+          background-color: ${(props) => (props.active ? "#d10e00" : "white")};
+          color: ${(props) => (props.active ? "white" : "black")};
+          :hover {
+            background-color: #d10e00;
+            color: #fff;
+          }
+        `;
+      case "NO INTEREST":
+        return css`
+          background-color: ${(props) => (props.active ? "#faa3b1" : "white")};
+          color: ${(props) => (props.active ? "white" : "black")};
+          :hover {
+            background-color: #faa3b1;
             color: #fff;
           }
         `;

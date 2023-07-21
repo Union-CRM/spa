@@ -42,7 +42,6 @@ const Planner = (props) => {
   const [userSplit, setUserSplit] = useState();
   const [time, setTime] = useState(["", ""]);
 
- 
   useEffect(() => {
     if (props.title === "More Details Planner") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
@@ -82,7 +81,7 @@ const Planner = (props) => {
   return (
     <ContainerPlanner>
       <ContainerCards>
-        <CardPlanner $mode={planner.status}  onClick={() => toggleTab(2)}>
+        <CardPlanner $mode={planner.status} onClick={() => toggleTab(2)}>
           <DivGlobalCard>
             <DivDate $mode={planner.status}>
               <FaRegCalendarAlt $mode={planner.status} />
@@ -127,20 +126,18 @@ const Planner = (props) => {
 
           <IconOpenClose $mode={planner.status}>
             <Circle $mode={planner.status}>
-            <RowDown 
-            style={{
-              fill:
-              planner.status === "DONE"
-                  ? "#008585"
-                  : planner.status === "CANCELED"
-                  ? "#771300"
-                  : planner.status === "SCHEDULED"
-                  ? "transparent"
-                  : "",
-            }}/>
-          
-            
-        
+              <RowDown
+                style={{
+                  fill:
+                    planner.status === "DONE"
+                      ? "#008585"
+                      : planner.status === "CANCELED"
+                      ? "#771300"
+                      : planner.status === "SCHEDULED"
+                      ? "transparent"
+                      : "",
+                }}
+              />
             </Circle>
           </IconOpenClose>
         </CardPlanner>
