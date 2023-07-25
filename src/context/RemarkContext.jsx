@@ -8,8 +8,12 @@ export const RemarkContextProvider = ({ children }) => {
   const [remark, setRemark] = useState();
   const [remarkEdit, setRemarkEdit] = useState(remarkEntity);
   const [modalRemark, setModalRemark] = useState(false);
+  const [modalCreate, setModalCreate] =useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
   const [remarkTarget, setRemarkTarget] = useState();
-  const [modalSucess, setModalSucess] = useState(false); 
+  const [modalDiscard,setModalDiscard]=useState(false);
+  const [modalSucess, setModalSucess] = useState(false);
+  const [modalError,setModalError] = useState(false); 
   const [modalSaveRemark, setModalSaveRemark] = useState(false);
   const [sucessRemark, setSucessRemark] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
@@ -45,6 +49,8 @@ export const RemarkContextProvider = ({ children }) => {
         setRemarkTarget,
         remarkEdit,
         setRemarkEdit,
+        modalEdit,
+        setModalEdit,
         idRemark,
         setIdRemark,
         activeTab,
@@ -56,7 +62,10 @@ export const RemarkContextProvider = ({ children }) => {
         setModalSaveRemark,
         sucessRemark,
         setSucessRemark,
-        notification, setNotification
+        notification, setNotification,
+        modalCreate, setModalCreate,
+        modalDiscard,setModalDiscard,
+        modalError,setModalError
       }}
     >
       {children}

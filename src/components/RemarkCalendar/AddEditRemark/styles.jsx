@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 // Div Father
 export const ContainerCentral = styled.div`
-  justify-content: start;
-  display: grid;
+  //justify-content: fit-content;
+  height: 95%;
+  display: flex;
   grid-row: 1;
   @media (min-width: 100px) and (max-width: 590px) {
     grid-column: 1;
@@ -12,6 +13,9 @@ export const ContainerCentral = styled.div`
     position: absolute;
     top: 0px;
     left: 0;
+    justify-content: start;
+    height: 95%;
+    
   }
 `;
 
@@ -49,23 +53,31 @@ export const H1 = styled.h1`
 
 export const Container = styled.div`
     width: 30.7vw;
-    height: fit-content;
+    height: 85%;
     z-index: 20;
     background-color: #FFFFFF;
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-45%, -50%);
+    margin-bottom: 10px;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     border-left: 15px solid #007BFF;
     border-radius: 8px;
     @media(max-width: 1200px) {
-        transform: translate(-60%,-50%);
-        width: 35vw;
-         
+        transform: translate(-50%,-50%);
+        width: 375px;
+        height: 98%;  
     }
+    @media (width: 500px) {
+    width: 375px;
+    height: 100%;
+    flex-direction: flex-start;
+    position: relative;
+  }
+
 `;
 
 // Div Content
@@ -73,7 +85,7 @@ export const Container = styled.div`
 export const Form = styled.div`
   position: relative;
   display: grid;
-  height: 100%;
+  height: 95%;
   width: 93%;
   padding-left: 7%;
   grid-row: 2;
@@ -99,6 +111,7 @@ export const Input = styled.input`
   @media (min-width: 1355px) and (max-width: 1824px) {
     height: 25px;
   }
+
 `;
 
 export const TextArea = styled.textarea`
@@ -175,12 +188,14 @@ export const DivButton = styled.div`
   height: 100%;
   grid-row: 3;
   @media (min-width: 1355px) and (max-width: 1824px) {
-    bottom: 10%;
     position: relative;
     height: 100%;
   }
   @media (min-width: 1824px) and (max-width: 2000px) {
-    height: 85%;
+    height: 100%;
+  }
+  @media (max-width: 900px) {
+    height: fit-content;
   }
 `;
 

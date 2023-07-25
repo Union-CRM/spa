@@ -26,17 +26,17 @@ import { useRemarkContext } from "../../../hook/useRemarkContent";
 import { useUserContext } from "../../../hook/useUserContext";
 import { useFetchRemark } from "../../../hook/useFetchRemark";
 
-const CreateEditRemark = (props) => {
+const ModalPlanner = (props) => {
   const [newRemark, setNewRemark] = useState(remarkEntity);
   const { createRemark, updateRemark } = useFetchRemark();
-  const { remarkTarget, setModalSucess, setModalSaveRemark, setSucessRemark, } = useRemarkContext();
+  const { remarkTarget,setModalEdit, setModalSucess,setModalCreate,setModalRemark } = useRemarkContext();
   
   const [flag, setFlag] = useState(false);
   const { userTarget } = useUserContext();
   const { subject: subjectList } = useSubjectContext();
   const [subjectOption, setSubjectOption] = useState([]);
   const [prevStatus, setPrevStatus] = useState(false);
-
+  
   useEffect(() => {
     if (props.title === "Edit Remark") {
       const subjectObj = subjectList.filter(
@@ -46,8 +46,8 @@ const CreateEditRemark = (props) => {
         ...newRemark,
         ...remarkTarget,
         status_id: StatusOption.filter(
-          (s) => s.label === remarkTarget.status_description
-        )[0].value,
+           (s) => s.label === remarkTarget.status_description
+         )[0].value,
         client_email: subjectObj ? subjectObj.client_email : "",
       });
       setPrevStatus(remarkTarget.status_description);
@@ -80,7 +80,9 @@ const CreateEditRemark = (props) => {
   };
 
   const closeModal = () => {
-    props.setModal(false);
+    setModalEdit(false);
+    setModalRemark(true); 
+    setModalCreate(false)
   };
 
   const handleSubmit = () => {
@@ -100,6 +102,7 @@ const CreateEditRemark = (props) => {
       newRemark.text
     ) {
       createRemark({ ...newRemark, user_id: userTarget.id });
+      setModalCreate(true);
       props.setModal(false);
     } else {
       setFlag(true);
@@ -122,7 +125,7 @@ const CreateEditRemark = (props) => {
         },
         newRemark.id
       );
-      props.setModal(false);
+      closeModal();
     } else {
       setFlag(true);
     }
@@ -202,7 +205,7 @@ const CreateEditRemark = (props) => {
               <Label>
                 Title
                 <Input
-                  widthInput={"98% !important"}
+                  widthInput={"98%"}
                   name="remark_name"
                   placeholder={
                     flag && !newRemark.remark_name ? "Required field" : ""
@@ -325,7 +328,7 @@ const CreateEditRemark = (props) => {
                 />
               </Label>
             </DivDescription>
-          </Form>
+            </Form>
 
           <DivButton>
             <ClickButton onClick={handleSubmit}>
@@ -346,6 +349,7 @@ const CreateEditRemark = (props) => {
               />
             </PositionButtonCancel>
           </DivButton>
+        
         </Container>
       </ContainerCentral>
     </>
@@ -358,7 +362,7 @@ const StatusOption = [
   { id: 20, value: 20, label: "CANCELED" },
 ];
 
-export default CreateEditRemark;
+export default ModalPlanner;
 const remarkEntity = {
   remark_name: "",
   text: "",
