@@ -13,6 +13,7 @@ import { ReactComponent as Costumer } from "../../../assets/svg/Costumer.svg";
 import { ReactComponent as Release } from "../../../assets/svg/Release.svg";
 import { ReactComponent as Business } from "../../../assets/svg/Business.svg";
 import { ReactComponent as Users } from "../../../assets/svg/User.svg";
+import { ReactComponent as Brasil } from "../../../assets/svg/Brasil.svg";
 import { useCustomerContext } from "../../../hook/useCustomerContext";
 import { useLocation } from "react-router-dom";
 import { ReactComponent as Report } from "../../../assets/svg/ReportRemark.svg";
@@ -100,6 +101,8 @@ const SidBar = (props) => {
       setSelectedIcon("planner");
     } else if (path === "/remarkreport") {
       setSelectedIcon("remarkreport");
+    }  else if (path === "/remarkCalendar") {
+      setSelectedIcon("remarkCalendar");
     }
   }, [location]);
 
@@ -233,14 +236,22 @@ const SidBar = (props) => {
                 <Span $mode={sidBarState}>Subjects</Span>
               </Icon>
             </Li>
-            <Slink onClick={() => handleIconClick("remark")} to="/remark">
+            {/*<Slink onClick={() => handleIconClick("remark")} to="/remark">
               <Li selected={selectedIcon === "remark"} level={user.level}>
                 <Icon $mode={sidBarState}>
                   <Remark fill={colorAdmUser} width={"18px"} height={"20px"} />
                   <Span $mode={sidBarState}>Remark</Span>
                 </Icon>
               </Li>
-            </Slink>
+        </Slink>*/}
+          </Slink>
+          <Slink onClick={() => handleIconClick("remarkCalendar")} to="/remarkCalendar">
+            <Li selected={selectedIcon === "remarkCalendar"} level={user.level}>
+              <Icon $mode={sidBarState}>
+                <Remark fill={colorAdmUser} width={"20px"} height={"20px"} />
+                <Span $mode={sidBarState}>REMARK CALENDAR</Span>
+              </Icon>
+            </Li>
           </Slink>
           <Slink onClick={() => handleIconClick("planner")} to="/planner">
             <Li selected={selectedIcon === "planner"} level={user.level}>

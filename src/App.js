@@ -31,6 +31,7 @@ import Customer from "./pages/Adm/Customer/index";
 import ReleaseTrainPage from "./pages/Adm/ReleaseTrain";
 import GroupsList from "./pages/Admin/GroupsList/index";
 import RemarkReport from "./pages/Adm/RemarkReport/index"
+import RemarkCalendar from "./pages/User/RemarkCalendar";
 import { Helmet } from 'react-helmet';
 function App() {
   const { user } = useUserContext();
@@ -160,6 +161,16 @@ function App() {
                               element={
                                 localStorage.getItem("token") ? (
                                   <PlannerPage />
+                                ) : (
+                                  <LoginPage />
+                                )
+                              }
+                            />
+                             <Route
+                              path="/remarkCalendar"
+                              element={
+                                localStorage.getItem("token") ? (
+                                  <RemarkCalendar />
                                 ) : (
                                   <LoginPage />
                                 )

@@ -10,10 +10,11 @@ export const ContainerCentral = styled.div`
     display: grid;
     position: relative;
     top: 0px;
-    left: 0;s
+    left: 0;
     justify-content: start;
   }
 `;
+
 
 // Div Title
 export const PositionTitle = styled.div`
