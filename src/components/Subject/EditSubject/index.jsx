@@ -77,6 +77,7 @@ const Subject = (props) => {
     return lastId + 1;
   }
 
+
   ////////// EDIT SUBJECT ////////////
 
   useEffect(() => {

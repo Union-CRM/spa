@@ -67,7 +67,7 @@ const RemarkCard = (props) => {
         <DivRemark>
           <Headline type={"Headline3"} name={"Remark Of Day"} />
           {!props.home && (
-            <Tippy content="Agenda, calendar with activites and appointments of the day">
+            <Tippy content="Remark, with appointments of the day">
               <DivInfo>
                 <Info
                   width="25px"

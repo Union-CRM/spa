@@ -106,6 +106,7 @@ export const BigCalender = (props) => {
         setRemarkList(
           remark 
             ? remark
+                .filter((r) => r.user_id === userTarget.id)
                 .sort((a, b) => (a.status_description || "").localeCompare(b.status_description || "") )  
             : []);
       } else {

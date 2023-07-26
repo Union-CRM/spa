@@ -182,7 +182,7 @@ const ModalPlanner = (props) => {
     }
 
     if (timeStart && timeFinish && date) {
-      if (data > tDate) {
+     
         setFlagDate(false);
         setFlagStart(false);
         if (timeFinish > timeStart) {
@@ -235,7 +235,7 @@ const ModalPlanner = (props) => {
           setFlagStart(true);
         }
       }
-    }
+    
   };
 
   const handleCancel = (e) => {

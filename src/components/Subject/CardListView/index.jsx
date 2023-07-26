@@ -41,6 +41,8 @@ const SubjectCard = (props) => {
     props.setId(subject.id);
   };
 
+  const AdmLayout = props.translate === "Admin" ? true : false;
+
   return (
     <Container>
       <Card $mode={subject.status} onClick={() => handleClick()}>

@@ -16,6 +16,7 @@ export const ClientContextProvider = ({ children }) => {
   const [id, setId] = useState(null);
   const [modalEditClient, setModalEditClient] = useState(false);
   const [modalCreateSubject, setModalCreateSubject] = useState(false);
+
   const [modalInfo, setModalInfo] = useState(false);
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -124,6 +125,7 @@ export const ClientContextProvider = ({ children }) => {
         setModalCreateSubject,
         clientTarget,
         setClientTarget,
+
       }}
     >
       {children}

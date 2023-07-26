@@ -28,6 +28,7 @@ import Group from "../../../Grafico/Group";
 import Subtitle from "../../../../assets/FontSystem/Subtitle";
 import PlannerCard from "../../../Planner/PlannerCard";
 import { BigCalender } from "../../../Planner/Calendar/index";
+import { BigCalender as RemarkCalendar } from "../../../RemarkCalendar/Calendar";
 import { useUserContext } from "../../../../hook/useUserContext";
 import { useSubjectContext } from "../../../../hook/useSubjectContent";
 import { usePlannerContext } from "../../../../hook/usePlannerContext";
@@ -39,14 +40,18 @@ import ModalPlanner from "../../../Planner/AddEditPlanner";
 import ModalDiscardChanges from "../../../Planner/ModalDiscardChanges";
 import ModalSave from "../../../Planner/ModalSuccessfuly";
 import RemarkModal from "../../../Planner/RemarkModal";
-import PopUpCanceled from "../../../Planner/PopUpCanceled";
+import PopUpCanceled from "../../../Planner/PopUpCanceled"; 
 import FollowUpModal from "../../../Planner/FollowUpModal";
 import PopUpFinished from "../../../Planner/PopUpFinished";
 import ModalError from "../../../Planner/ModalError";
+import { ReactComponent as Subjects } from  "../../../../assets/svg/Subjects.svg"
+import { ReactComponent as Planner } from  "../../../../assets/svg/Planner.svg"
+import { ReactComponent as Remark } from  "../../../../assets/svg/Remark.svg"
 
 //import { Subject as SubjectUser } from "../../../Subject/CreateEditSubjectModal";
 
 import "react-tippy/dist/tippy.css";
+import { useRemarkContext } from "../../../../hook/useRemarkContent";
 
 const dateOfTheDay = new Date();
 
@@ -58,7 +63,6 @@ const UserProfile = () => {
     modalSave,
     setModalSave,
     modalDiscard,
-    modalRemark,
     modalReschedule,
     modalFollowUp,
     modalPopUpFinished,
@@ -67,10 +71,11 @@ const UserProfile = () => {
     setModalError,
   } = usePlannerContext();
 
-  const { userTarget, modalPlanner, setModalPlanner, setViewProfile } =
+  const { userTarget, modalPlanner, setModalPlanner, setViewProfile, modalRemark,  setModalRemark } =
     useUserContext();
   const { subject } = useSubjectContext();
   const { planner } = usePlannerContext();
+  const { remark } = useRemarkContext();
   // numberOfPlanner [0]-canceled | [1]- Scheduled | [2] Done
 
 
@@ -81,10 +86,15 @@ const UserProfile = () => {
   const handleCloseModal = () => {
     setModalPlanner(false);
     setModalSubject(false);
+    setModalRemark(false);
   };
 
   const handleClickSubject = () => {
     setModalSubject(true);
+  };
+
+  const handleClickRemark = () => {
+    setModalRemark(true);
   };
 
 
@@ -143,10 +153,18 @@ const UserProfile = () => {
         <>
           <DivClose onClick={handleCloseModal} />
           <DivSubject>
-            <SubjectList adminList={true} />
+            <SubjectList translate={"Admin"} adminList={true}  />
           </DivSubject>
         </>
       )}{" "}
+      {modalRemark && (
+        <>
+          <DivClose onClick={handleCloseModal} />
+          <DivCalendar>
+            <RemarkCalendar adminList={true} userTarget={userTarget.tcs_id} />
+          </DivCalendar>
+        </>
+      )}
       <Header>
         <DivPhoto>
           <DivPhotoI>
@@ -173,7 +191,7 @@ const UserProfile = () => {
             <Label>SUBJECT</Label>
             <Circle>
               <DivIcon>
-                <IconSystem icon={"Copy"} height={"25px"} width={"25px"} />
+              <Subjects fill={"#FFFFFF"} height={"25px"} width={"25px"} />
               </DivIcon>
             </Circle>
           </Button>
@@ -182,7 +200,15 @@ const UserProfile = () => {
             <Label>PLANNER</Label>
             <Circle>
               <DivIcon>
-                <IconSystem icon={"Copy"} height={"25px"} width={"25px"} />
+                <Planner fill={"#FFFFFF"} height={"25px"} width={"25px"} />
+              </DivIcon>
+            </Circle>
+          </Button>
+          <Button onClick={handleClickRemark}>
+            <Label>REMARK</Label>
+            <Circle>
+              <DivIcon>
+                <Remark fill={"#FFFFFF"}  height={"25px"} width={"25px"} />
               </DivIcon>
             </Circle>
           </Button>
@@ -248,6 +274,7 @@ const UserProfile = () => {
           <PopUpFinished />
         </>
       )}
+      
       {/*modalSubject && (
         <>
           <PositionSubject>
@@ -259,12 +286,12 @@ const UserProfile = () => {
           </PositionSubject>
         </>
       )*/}
-      {modalRemark && (
+      {/* {modalRemark && (
         <>
           <DivClose onClick={handleCloseModal}></DivClose>
-          <RemarkModal adminList={true} title={"Create Remark"} />
+          <RemarkCalendar adminList={true} title={"Remark "} />
         </>
-      )}
+      )} */}
       {modalError && (
         <>
           <DivClose onClick={() => setModalError(false)}></DivClose>

@@ -7,6 +7,7 @@ export const ContainerCentral = styled.div`
   display: flex;
   grid-row: 1;
   grid-column: 2;
+  z-index: 2000;
   @media (min-width: 100px) and (max-width: 590px) {
     grid-column: 1;
     grid-row: 1;
@@ -16,6 +17,7 @@ export const ContainerCentral = styled.div`
     left: 0;
     justify-content: start;
   }
+  transform: ${(props) => (props.$mode ? "translate(0%, -15%)" : "translate(0%, 0%)")};
 `;
 
 // Div Title

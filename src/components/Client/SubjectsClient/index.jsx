@@ -15,14 +15,15 @@ import {
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useClientContext } from "../../../hook/useClientContent";
 import { useUserContext } from "../../../hook/useUserContext";
+import { Link } from "react-router-dom";
 
 const SubjectsClient = (props) => {
   const { setModal, id } = props;
   const { userTarget } = useUserContext();
-  const { loadData, setModalInfo, setModalCreateSubject, clientTarget } =
+  const { loadData, setModalInfo, setModalCreateSubject, clientTarget} =
     useClientContext();
   const [status, setStatus] = useState();
-  const { subject: subjectsList, setIdSubject } = useSubjectContext();
+  const { subject: subjectsList, setIdSubject,setId,setModalDetails,setToggleState,setActiveTab,setViewSubject } = useSubjectContext();
   const [subjects, setSubjects] = useState([]);
   const { setModalSubject } = useSubjectContext();
 
@@ -50,13 +51,20 @@ const SubjectsClient = (props) => {
   const handleEdit = (id) => {
     setIdSubject(id);
     setModalInfo(false);
+    setModalDetails(true);
+    setToggleState(0);
+    setActiveTab(0);
+    setId(id);
   };
 
   const SubjectModal = () => {
     setModalCreateSubject(true);
     setModalInfo(false);
   };
-  console.log(clientTarget);
+  const handleClickViewSubject = () => {
+    setViewSubject(true);
+  
+  };
   return (
     <ContainerDetails>
       <ButtonCreateSubject>
@@ -79,21 +87,31 @@ const SubjectsClient = (props) => {
 
       {subjects.map((s) => (
         <CardSubject onClick={() => handleEdit(s.id)}>
+                <Link
+                to="/subject"
+                onClick={() => handleClickViewSubject()}
+                style={{ textDecoration: "none", color: "black" }}
+              >
           <DivGlobalCard>
+ 
             <DivStatusSubject>
+
               <StatusSubject $mode={s.status}>
                 <span>{s.status}</span>
               </StatusSubject>
               <TitleSubject>
                 <span>{s.subject_title}</span>
               </TitleSubject>
+           
             </DivStatusSubject>
 
             <CreatedAt>
               <span>Created </span>
               {s.created_at.split(" ")[0]}
             </CreatedAt>
+            
           </DivGlobalCard>
+          </Link>
         </CardSubject>
       ))}
     </ContainerDetails>
