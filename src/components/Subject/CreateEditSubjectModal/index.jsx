@@ -129,9 +129,11 @@ const Subject = (props) => {
 
   const [userChoice, setUserChoice] = useState("");
 
+  const Layout = props.Adm ? true : false;
+
   return (
     <>
-      <ContainerCentral>
+      <ContainerCentral $mode={Layout}>
         <Container $mode={subjectPlanner}>
           <PositionTitle>
             <H1>{title} </H1>

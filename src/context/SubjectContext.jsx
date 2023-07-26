@@ -7,6 +7,7 @@ export const SubjectContextProvider = ({ children }) => {
   const [subject, setSubject] = useState([{}]);
   const [editSubject, setEditSubject] = useState(false);
 
+
   useEffect(() => {
 
     if (localStorage.getItem("token")) {
@@ -56,6 +57,7 @@ export const SubjectContextProvider = ({ children }) => {
   const [modalEdit, setModalEdit] = useState(false);
   const [isEdit, setEdit] = useState(false);
   const [idSubject,setIdSubject]= useState();
+  const [viewSubject, setViewSubject] = useState(false);
 
 
   const [toggleState, setToggleState] = useState(1);
@@ -98,6 +100,8 @@ export const SubjectContextProvider = ({ children }) => {
         editSubject,
         setEditSubject,
         idSubject,
+        viewSubject, 
+        setViewSubject,
         setIdSubject,
       
       }}

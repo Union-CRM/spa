@@ -249,7 +249,7 @@ const SidBar = (props) => {
             <Li selected={selectedIcon === "remarkCalendar"} level={user.level}>
               <Icon $mode={sidBarState}>
                 <Remark fill={colorAdmUser} width={"20px"} height={"20px"} />
-                <Span $mode={sidBarState}>REMARK CALENDAR</Span>
+                <Span $mode={sidBarState}>Remark</Span>
               </Icon>
             </Li>
           </Slink>

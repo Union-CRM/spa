@@ -17,6 +17,7 @@ export const UserContextProvider = ({ children }) => {
   const [home, setHome] = useState(false);
   const [modalPlanner, setModalPlanner] = useState(false);
   const [modalSubject, setModalSubject] = useState(false);
+  const [modalRemark, setModalRemark] = useState(false);
   const [modalPassword, setModalPassword] = useState(false);
   const [blocked, setBlocked] = useState(false);
   const [token, setToken] = useState();
@@ -92,7 +93,9 @@ export const UserContextProvider = ({ children }) => {
         token,
         setToken,
         first,
-        setFirst
+        setFirst,
+        modalRemark,
+        setModalRemark,
       }}
     >
       {children}

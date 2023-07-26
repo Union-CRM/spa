@@ -72,7 +72,7 @@ const ClientCard = (props) => {
   };
 
   return (
-    <ContainerFather>
+    <ContainerFather onClick={handleEdit}>
       <Container>
         <Card
           isActive={isActive}
@@ -98,14 +98,14 @@ const ClientCard = (props) => {
               </ToggleContainer>
             </DivIcons>
 
-            <DivPhoto>
+            <DivPhoto onClick={handleEdit}>
               <DivPhotoI
                 isActive={isActive}
                 active={isActive}
                 $mode={client.status}
                 checked={isActive}
               >
-                <Body
+                <Body onClick={handleEdit}
                   type={"Body1"}
                   name={client.client
                     .match(/(^\S\S?|\b\S)?/g)
@@ -113,6 +113,7 @@ const ClientCard = (props) => {
                     .match(/(^\S|\S$)?/g)
                     .join("")
                     .toUpperCase()}
+                    
                 />
               </DivPhotoI>
             </DivPhoto>
@@ -150,7 +151,7 @@ const ClientCard = (props) => {
             </DivDadosCard>
           </Header>
 
-          <DivInfo onClick={handleEdit}>
+          <DivInfo >
             <DivRole>
               <TitleInfo>
                 Role <span> | </span>{" "}

@@ -29,6 +29,7 @@ export const ContainerHeaderAndCards = styled.div`
   display: grid;
   border-radius: 8px;
   grid-template-rows: auto 80%;
+  margin-bottom: 5%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   @media (min-width: 50px) and (max-width: 1360px) {
     height: 10;
@@ -37,6 +38,7 @@ export const ContainerHeaderAndCards = styled.div`
   @media (min-width: 1355px) and (max-width: 1824px) {
     width: 100%;
   }
+  transform: ${(props) => (props.$mode ? "translate(0%, -15%)" : "translate(0%, 0%)")};
 `;
 
 //* Header Container *//
@@ -49,7 +51,7 @@ export const HeaderContainerCards = styled.div`
   display: grid;
   background-color: #fff;
   border-radius: 8px 8px 0px 0px;
-  grid-template-rows: 20% 10% 700%;
+  grid-template-rows: 20% 10% 70%;
   @media (min-width: 100px) and (max-width: 500px) {
     display: grid;
     grid-row: 1;
@@ -138,6 +140,7 @@ export const BoardStyle = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
   @media (min-width: 1355px) and (max-width: 1724px) {
     grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
+    
   }
 `;
 

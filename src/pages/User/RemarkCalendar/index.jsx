@@ -25,7 +25,7 @@ class RemarkCalendar extends React.Component {
             <DivTitle>
               <Title>Remark</Title>
               {/*Tippy Usada para aparecer uma caixa de text quando passa o mouse em cima */}
-              <Tippy content="Agenda, calendar with activites and appointments of the day">
+              <Tippy content="Agenda, calendar with remarks of the day">
                 <DivIconTitle>
                   {" "}
                   <Info

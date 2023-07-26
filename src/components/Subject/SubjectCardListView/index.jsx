@@ -175,6 +175,7 @@ const SubjectList = (props) => {
     setModal(true);
   };
 
+  
   // Open modal of details
   const detailsModal = () => {
     setModalDetails(true);
@@ -202,9 +203,12 @@ const SubjectList = (props) => {
   FINISHED
   CANCELED
   */
+
+  const AdmLayout = props.translate === "Admin" ? true : false;
+
   return (
     <ContainerGlobal>
-      <ContainerHeaderAndCards>
+      <ContainerHeaderAndCards name="Modal" $mode={AdmLayout}>
         <HeaderContainerCards>
           <Top>
             <DivTitlePage>
@@ -411,6 +415,7 @@ const SubjectList = (props) => {
       {modalEdit && (
         <EditSubject
           id={id}
+          Adm={AdmLayout}
           setModalEdit={setModalEdit}
           title={isEdit ? "Create Subject" : "Edit Subject"}
         />
@@ -420,6 +425,7 @@ const SubjectList = (props) => {
       {modal && (
         <Subject
           id={id}
+          Adm={AdmLayout}
           adminList={props.adminList}
           setModal={setModal}
           title={"Create Subject"}

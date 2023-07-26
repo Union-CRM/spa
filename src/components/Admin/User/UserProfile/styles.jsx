@@ -23,7 +23,7 @@ export const Header = styled.div`
   margin-top: 1%;
   height: 14%;
   display: grid;
-  grid-template-columns: 10% 40% 50%;
+  grid-template-columns: 10% 30% 60%;
   grid-template-rows: 50% 50%;
   background: #e5f2ff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
@@ -258,15 +258,13 @@ export const Dot = styled.div`
 export const DivButtonUser = styled.div`
   display: flex;
   grid-row: 1;
-
   grid-column: 3;
   height: fit-content;
   width: 100%;
   margin-top: 3%;
-  margin-left: 10%;
   position: relative;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
   cursor: pointer;
 `;
 
