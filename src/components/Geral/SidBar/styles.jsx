@@ -54,6 +54,9 @@ export const Icon = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  &:hover svg {
+    fill: #ffffff;
+  }
   bottom: ${(props) => (props.$mode ? "50%" : "0px")};
   margin-top: ${(props) => (props.$mode ? "0%" : "0")};
   margin-left: ${(props) => (props.$mode ? "" : "15px")};

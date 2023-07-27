@@ -170,7 +170,7 @@ export const DivPlanner = styled.div`
 
 export const Graph1 = styled.div`
   /*min-width:900px;*/
-  width: fit-content;
+  width: 100%;
   grid-column: 1;
   display: flex;
   justify-content: space-between;

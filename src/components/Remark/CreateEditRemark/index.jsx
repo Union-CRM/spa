@@ -29,8 +29,9 @@ import { useFetchRemark } from "../../../hook/useFetchRemark";
 const CreateEditRemark = (props) => {
   const [newRemark, setNewRemark] = useState(remarkEntity);
   const { createRemark, updateRemark } = useFetchRemark();
-  const { remarkTarget, setModalSucess, setModalSaveRemark, setSucessRemark, } = useRemarkContext();
-  
+  const { remarkTarget, setModalSucess, setModalSaveRemark, setSucessRemark } =
+    useRemarkContext();
+
   const [flag, setFlag] = useState(false);
   const { userTarget } = useUserContext();
   const { subject: subjectList } = useSubjectContext();
@@ -64,9 +65,7 @@ const CreateEditRemark = (props) => {
     } else {
       setSubjectOption(
         subjectList
-          .filter(
-            (s) => s.status === "IN PROGRESS" && s.user_id === userTarget.id
-          )
+          .filter((s) => s.user_id === userTarget.id)
           .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
       );
     }
@@ -294,20 +293,18 @@ const CreateEditRemark = (props) => {
                 />
               </DivDate>
               <DivDate>
-               
-                  <SingleSelect
-                    placeholder={""}
-                    set={(s) => handleSelectStatus(s)}
-                    options={StatusOption}
-                    value={newRemark.status_description}
-                    sizeSingle={"100%"}
-                    sizeMenuList={"100%"}
-                    label={"Status"}
-                    sizeMenu={"100%"}
-                    isDisabled={false}
-                    sizeHeight={"3.5vh"}
-                  />
-             
+                <SingleSelect
+                  placeholder={""}
+                  set={(s) => handleSelectStatus(s)}
+                  options={StatusOption}
+                  value={newRemark.status_description}
+                  sizeSingle={"100%"}
+                  sizeMenuList={"100%"}
+                  label={"Status"}
+                  sizeMenu={"100%"}
+                  isDisabled={false}
+                  sizeHeight={"3.5vh"}
+                />
               </DivDate>
             </DivDateAll>
 

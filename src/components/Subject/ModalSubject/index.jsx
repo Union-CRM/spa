@@ -32,9 +32,11 @@ import { useRemarkContext } from "../../../hook/useRemarkContent";
 import ContentsPlanner from "../ContentPlanner";
 import Planner from "../../Subject/Planner";
 import { usePlannerContext } from "../../../hook/usePlannerContext";
+import { useUserContext } from "../../../hook/useUserContext";
 
 const ModalSubject = (props) => {
   const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
+  const { layoutAdm } = useUserContext();
   const { idRemark, setIdRemark } = useRemarkContext();
   const { setModal, id } = props;
   const { setStatusId, statusId } = useState();
@@ -89,7 +91,7 @@ const ModalSubject = (props) => {
   };
 
   return (
-    <ContainerFather name="container">
+    <ContainerFather $mode={layoutAdm} name="container">
       <Container $mode={subject.status}>
         <BodyAll>
           <ClickButton>

@@ -9,6 +9,7 @@ import {
   DivDescription,
 } from "./styles";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
+import { useUserContext } from "../../../hook/useUserContext";
 
 const SubjectsDetails = (props) => {
   const { setModal } = props;
@@ -20,9 +21,8 @@ const SubjectsDetails = (props) => {
   // UseEffect Details
   const { subject: subjectsList, loadData } = useSubjectContext();
   const subject = subjectsList.filter((item) => item.id === props.id)[0];
-
+  const { layoutAdm } = useUserContext();
   const { id, setId } = useSubjectContext();
-
   const [client, setClient] = useState();
   const [email, setEmail] = useState();
   const [release, setRelease] = useState();
@@ -30,7 +30,6 @@ const SubjectsDetails = (props) => {
   const [description, setDescription] = useState();
 
   useEffect(() => {
-    
     if (props.title === "Details") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
       setClient(subject.client);
@@ -39,7 +38,6 @@ const SubjectsDetails = (props) => {
       setBusiness(subject.business);
       setDescription(subject.subjectText);
     }
-
   }, [id]);
 
   return (
@@ -79,7 +77,7 @@ const SubjectsDetails = (props) => {
       <DivDescription>
         Description
         <span onChange={(event) => setDescription(event.target.value)}>
-        {subject.subjectText}
+          {subject.subjectText}
         </span>
       </DivDescription>
     </ContainerDetails>

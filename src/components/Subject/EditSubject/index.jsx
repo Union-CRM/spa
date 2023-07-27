@@ -33,6 +33,7 @@ const Subject = (props) => {
   const { updateSubject } = useFetchSubject();
   const { updateSubjectStatus } = useFetchSubjectStatus();
   // CLOSE E SAVE ////////////
+  console.log("Aqui");
 
   const { setModalDetails, setModalEdit, setEditModal, idSubject } =
     useSubjectContext();
@@ -56,7 +57,7 @@ const Subject = (props) => {
 
   const { subject: subjectsList, setSubject: setSubjectList } =
     useSubjectContext();
-  const { userTarget } = useUserContext();
+  const { userTarget, layoutAdm } = useUserContext();
   const [subject, setSubject] = useState();
   const [manager, setManager] = useState();
   const [description, setDescription] = useState();
@@ -76,7 +77,6 @@ const Subject = (props) => {
 
     return lastId + 1;
   }
-
 
   ////////// EDIT SUBJECT ////////////
 
@@ -105,7 +105,6 @@ const Subject = (props) => {
       status_id: status,
     };
 
-    console.log(status);
     if (subject && description && status) {
       updateSubjectStatus(id, status);
       updateSubject(id, newSubject);
@@ -151,9 +150,11 @@ const Subject = (props) => {
 
   const [userChoice, setUserChoice] = useState("");
 
+  const layout = layoutAdm ? true : false;
+
   return (
     <>
-      <ContainerCentral>
+      <ContainerCentral $mode={layout}>
         <Container>
           <PositionTitle>
             <H1>{title} </H1>

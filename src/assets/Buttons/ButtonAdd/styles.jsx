@@ -7,7 +7,7 @@ export const Button = styled.button`
   height: ${(props) => props.$height || "50px"};
   padding: ${(props) => props.$padding || "15px"};
   display: flex;
-  @media(max-width: 1120px){ 
+  @media (max-width: 1120px) {
     width: 150px;
   }
   align-items: center;
@@ -22,6 +22,9 @@ export const Button = styled.button`
 `;
 export const IconAdd = styled.div`
   margin-right: 8px;
+  svg {
+    fill: ${(props) => props.$mode || "#FFF"};
+  }
 `;
 
 export const SpanButton = styled.span`

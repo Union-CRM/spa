@@ -5,6 +5,7 @@ export const ContainerFather = styled.div`
   justify-content: end;
   display: flex;
   grid-row: 1;
+  z-index: 2000;
   @media (min-width: 100px) and (max-width: 500px) {
     grid-column: 1;
     display: grid;
@@ -13,6 +14,8 @@ export const ContainerFather = styled.div`
     left: 0;
     justify-content: start;
   }
+  transform: ${(props) =>
+    props.$mode ? "translate(-7%, -8%)" : "translate(0%, 1%)"};
 `;
 
 //* Modal Edit and Add Subject *//

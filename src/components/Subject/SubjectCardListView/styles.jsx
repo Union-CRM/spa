@@ -38,7 +38,8 @@ export const ContainerHeaderAndCards = styled.div`
   @media (min-width: 1355px) and (max-width: 1824px) {
     width: 100%;
   }
-  transform: ${(props) => (props.$mode ? "translate(0%, -15%)" : "translate(0%, 0%)")};
+  transform: ${(props) =>
+    props.$mode ? "translate(-7%, -8%)" : "translate(0%, 0%)"};
 `;
 
 //* Header Container *//
@@ -136,11 +137,10 @@ export const BoardStyle = styled.div`
   grid-row: 1;
   display: inline-block;
   position: relative;
-  height: fit-content;
+  height: 35%;
   grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
   @media (min-width: 1355px) and (max-width: 1724px) {
     grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
-    
   }
 `;
 

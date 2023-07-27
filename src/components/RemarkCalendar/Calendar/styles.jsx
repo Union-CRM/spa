@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   height: 70%;
   margin-top: 1.5%;
-
 `;
 
 export const Dot = styled.div`
@@ -91,6 +90,7 @@ export const HeadDays = styled.span`
   padding: 5px;
   background: #e5f2ff;
   color: #000000;
+
   font-size: 20px;
   border-width: 0px 1px;
   border-style: solid;
@@ -113,7 +113,6 @@ export const DateControls = styled.div`
   @media (max-width: 640px) {
     display: grid;
     grid-template-rows: 36% 50% 28%;
-  
   }
 
   ion-icon {
@@ -179,8 +178,6 @@ export const DivDays = styled.div`
   overflow-y: hidden;
   text-overflow: "[...]";
   color: ${({ dayColor }) => dayColor};
- 
-
 `;
 
 export const Scheduled = styled.div`
@@ -212,11 +209,11 @@ export const Canceled = styled.div`
 
 export const Types = styled.div`
   display: flex;
-  width:80%;
-  justify-content:flex-end;
+  width: 80%;
+  justify-content: flex-end;
   justify-content: space-between;
   @media (max-width: 640px) {
-    width:80%;
+    width: 80%;
   }
 `;
 
@@ -235,8 +232,8 @@ export const DivCurrentDate = styled.button`
   @media (max-width: 1200px) {
     font-size: 1rem;
     width: 200px;
-    text-align:left;
-    display:flex;
+    text-align: left;
+    display: flex;
   }
 `;
 
@@ -287,8 +284,7 @@ export const Container = styled.div`
   border: 1px solid #f5f7fa;
   border-radius: 20px;
   box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.25), 2px 2px 4px rgba(0, 0, 0, 0.3);
-
-  `;
+`;
 
 export const DivPrevMonth = styled.div`
   cursor: pointer;
@@ -305,10 +301,10 @@ export const DivNextMonth = styled.div`
 export const InputSearch = styled.input`
   width: 100%;
   height: 3.5vh;
-  padding:2;
-  position:Relative;
+  padding: 2;
+  position: Relative;
   border-radius: 8px;
-  background-color:#FFF;
+  background-color: #fff;
   border: none;
   :focus {
     outline: none;
@@ -324,7 +320,7 @@ export const DivIconSearch = styled.div`
   height: 3.5vh;
   display: flex;
   position: relative;
-  background:#fff;
+  background: #fff;
   border: 2px solid #cbd0dd;
   border-radius: 8px;
 `;
@@ -332,9 +328,9 @@ export const DivIconS = styled.div`
   width: fit-content;
   height: fit-content;
   border-radius: 50%;
-  background:transparent;
-  margin-left:1%;
-  margin-right:1%;
+  background: transparent;
+  margin-left: 1%;
+  margin-right: 1%;
   margin-top: 1%;
 `;
 
@@ -367,17 +363,17 @@ export const DivNumberPlanner = styled.span`
 export const Day = styled.span`
   border: transparent;
   display: inline-block;
-`
+`;
 
 export const DivDayHeader = styled.span`
   display: flex;
   justify-content: space-between;
   height: fit-content;
-  @media(max-height: 666px){
+  @media (max-height: 666px) {
     line-height: 12px;
   }
-`
+`;
 
 export const PositionModal = styled.div`
   transform: translate(-50%, -50%);
-`
+`;

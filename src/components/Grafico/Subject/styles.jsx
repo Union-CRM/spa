@@ -4,7 +4,7 @@ export const Container = styled.div`
   margin-left: 1vw;
   background-color: #ffffff;
   height: 20vh;
-  width: 40vw;
+  width: 90vw;
   border: 1px groove;
   border-radius: 12px;
   display: flex;
@@ -18,7 +18,7 @@ export const H1 = styled.h1`
   line-height: 36px;
   font-size: 30px;
   font-weight: 600;
-  margin-left: 0.8em;
+  margin-left: 1.3em;
   color: rgba(0, 0, 0, 0.8);
   margin-top: 0.4rem;
 `;
@@ -100,4 +100,12 @@ export const OnTimeSquare = styled.div`
   padding-bottom: 2%;
   justify-content: center;
   align-items: center;
+`;
+
+export const Line = styled.div`
+  height: 15vh;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #787777;
+  margin-top: 2%;
 `;

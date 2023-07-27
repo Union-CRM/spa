@@ -61,13 +61,9 @@ const ContainerCards = (props) => {
   const { id, setId, modalAddClient, setModalAddClient } = useClientContext();
   const { modalInfo, setModalInfo } = useClientContext();
   const { modalEditClient, setModalEditClient } = useClientContext();
-  const { modalCreateSubject, setModalCreateSubject } = useClientContext();
+  const { modalCreateSubject } = useClientContext();
 
   const [limit, setLimit] = useState(50);
-
-  function includesAllWords(searchWords, clientList) {
-    return searchWords.every((searchWord) => clientList.includes(searchWord));
-  }
 
   useEffect(() => {
     if (props.adminList) {
@@ -82,8 +78,6 @@ const ContainerCards = (props) => {
 
   useEffect(() => {
     if (search) {
-      const searchWords = search.toLowerCase().split(" ");
-      //const clientList = SplitName(c.client.toLowerCase());
       setClientList(
         client.filter(
           (c) =>
@@ -116,10 +110,6 @@ const ContainerCards = (props) => {
   const createClient = () => {
     setModalAddClient(true);
     setEdit(false);
-  };
-
-  const modalClose = () => {
-    setModalPopUp(true);
   };
 
   const detailsModal = () => {
@@ -212,7 +202,6 @@ const ContainerCards = (props) => {
                         openModal={() => detailsModal()}
                         key={item.id}
                         id={item.id}
-                        //modalPopUp={() => PopUp()}
                       />
                     );
                   }
@@ -276,7 +265,8 @@ const ContainerCards = (props) => {
       {modalPopUp && (
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
       )}
-      {modalEdit && <Subject id={idSubject} title={"Edit Subject"} />}
+
+      {/*modalEdit && <Subject id={idSubject} title={"Edit Subject"} />*/}
     </ContainerGlobal>
   );
 };

@@ -58,64 +58,76 @@ import { useSearchContext } from "../../../hook/useSearchContext";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
 
-
 export const BigCalender = (props) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [numberOfEvents] = useState(2);
   const [setOpenModal] = useState(false);
   const [dateTarget, setDateTarget] = useState(new Date());
   const { subject: subjectList } = useSubjectContext();
-  const {
-    planner,
-    modalSave,
-    setModalSave,
-    modalSubject,
-    setModalSubject,
-  } = usePlannerContext();
+  const { planner, modalSave, setModalSave, modalSubject, setModalSubject } =
+    usePlannerContext();
   const { user, userTarget, setUserTarget } = useUserContext();
   const { setSearch, search } = useSearchContext();
   const [searchtState, setSearchtState] = useState(false);
   const [hoverAtivo, setHoverAtivo] = useState(false);
   const [divAtiva, setDivAtiva] = useState(null);
-//---------------------------------------------------------///////
-//---------------------------------------------------------///////
-//---------------------------------------------------------///////
-//---------------------------------------------------------///////
-  const { remark ,
-          modalRemark,setModalRemark, 
-          modalEdit,setModalEdit, 
-          modalCreate, setModalCreate,
-          modalDiscard,setModalDiscard,
-          modalError,setModalError,
-          modalSucess, setModalSucess
-        } = useRemarkContext();
+  //---------------------------------------------------------///////
+  //---------------------------------------------------------///////
+  //---------------------------------------------------------///////
+  //---------------------------------------------------------///////
+  const {
+    remark,
+    modalRemark,
+    setModalRemark,
+    modalEdit,
+    setModalEdit,
+    modalCreate,
+    setModalCreate,
+    modalDiscard,
+    setModalDiscard,
+    modalError,
+    setModalError,
+    modalSucess,
+    setModalSucess,
+  } = useRemarkContext();
   const [remarkList, setRemarkList] = useState([]);
-  
+
   useEffect(() => {
     if (search) {
       setRemarkList(
-        remark 
+        remark
           ? remark.filter(
-            (s) =>
-            (s.remark_name.toLowerCase().includes(search.toLowerCase()) ||
-              s.client_name.toLowerCase().includes(search.toLowerCase())) )
+              (s) =>
+                s.remark_name.toLowerCase().includes(search.toLowerCase()) ||
+                s.client_name.toLowerCase().includes(search.toLowerCase())
+            )
           : []
-      )
+      );
     } else {
       if (props.adminList) {
         setRemarkList(
-          remark 
+          remark
             ? remark
                 .filter((r) => r.user_id === userTarget.id)
-                .sort((a, b) => (a.status_description || "").localeCompare(b.status_description || "") )  
-            : []);
+                .sort((a, b) =>
+                  (a.status_description || "").localeCompare(
+                    b.status_description || ""
+                  )
+                )
+            : []
+        );
       } else {
         setRemarkList(
-          remark 
+          remark
             ? remark
                 .filter((r) => r.user_id === user.id)
-                .sort((a, b) => (a.status_description || "").localeCompare(b.status_description || "") )  
-            : []);
+                .sort((a, b) =>
+                  (a.status_description || "").localeCompare(
+                    b.status_description || ""
+                  )
+                )
+            : []
+        );
         setUserTarget(user);
       }
     }
@@ -125,7 +137,6 @@ export const BigCalender = (props) => {
     setModalRemark(false);
     setSearch(false);
   }, []);
-
 
   const handleOnClickEvent = (d) => {
     setModalRemark(true);
@@ -158,7 +169,7 @@ export const BigCalender = (props) => {
   };
 
   //função para desativar o hover quando o mouse nao tiver na div
-  const handleMouseLeave = () => { 
+  const handleMouseLeave = () => {
     setDivAtiva(null);
     setHoverAtivo(false);
   };
@@ -170,7 +181,12 @@ export const BigCalender = (props) => {
           <DivIconSearch>
             <Tippy content="Search">
               <DivIconS name="search">
-                <IconSystem icon="Search" fill={"color: #007bff"} width={"20px"} height={"17px"} />
+                <IconSystem
+                  icon="Search"
+                  fill={"color: #007bff"}
+                  width={"20px"}
+                  height={"17px"}
+                />
               </DivIconS>
             </Tippy>
             <InputSearch
@@ -190,7 +206,6 @@ export const BigCalender = (props) => {
               <Done /> <span>Progress</span>
               <Scheduled /> <span>Finished</span>
               <Canceled /> <span>Canceled</span>
-              
             </Types>
           </PositionTodayDone>
           <CurrentMonth>
@@ -212,8 +227,10 @@ export const BigCalender = (props) => {
             <ButtonAdd
               height={"4.8vh"}
               width={"45%"}
-              mode={"#007BFF"}
-              color={"#FFFFFF"}
+              mode={"#F5F7FA"}
+              color={"#3999FF"}
+              border={"1px solid #3999FF"}
+              iconColor={"#3999FF"}
               name={"Create Remark"}
               //onClick={() => setOpenModal(true)}
             />
@@ -238,7 +255,10 @@ export const BigCalender = (props) => {
               const year = date.getFullYear();
               const dayOfWeek = date.getDay();
               const numberOfRemark = remarkList.filter((remark) =>
-                datesAreOnSameDay(new Date(remark.date_return.split("T")[0]+" 12:00"), date)
+                datesAreOnSameDay(
+                  new Date(remark.date_return.split("T")[0] + " 12:00"),
+                  date
+                )
               ).length;
               //console.log(numberOfRemark)
               return (
@@ -254,24 +274,26 @@ export const BigCalender = (props) => {
                   }
                 >
                   <DivDayHeader>
-                  <Day
-                    key={d}
-                    className={`nonDRAG ${
-                      datesAreOnSameDay(new Date(), date) ? "active" : ""
-                    }`}
-                  >
-                    {day}
+                    <Day
+                      key={d}
+                      className={`nonDRAG ${
+                        datesAreOnSameDay(new Date(), date) ? "active" : ""
+                      }`}
+                    >
+                      {day}
                     </Day>
                     {numberOfRemark > 2 && (
-                    <DivNumberPlanner>
-                      <p>+{numberOfRemark - 2}</p>
-                    </DivNumberPlanner>
-                  )}
+                      <DivNumberPlanner>
+                        <p>+{numberOfRemark - 2}</p>
+                      </DivNumberPlanner>
+                    )}
                   </DivDayHeader>
-                  {
-                    remarkList
+                  {remarkList
                     .filter((remark) =>
-                      datesAreOnSameDay(new Date(remark.date_return.split("T")[0]+" 12:00"), date)
+                      datesAreOnSameDay(
+                        new Date(remark.date_return.split("T")[0] + " 12:00"),
+                        date
+                      )
                     )
                     .map(
                       (ev, index) =>
@@ -295,18 +317,16 @@ export const BigCalender = (props) => {
                               }
                             ></Dot>
                             {/*client */}
-                            {hoverAtivo!==ev.id && (
-                              <p>{ev.client_name}</p>
-                              )}
-                              {/*Release e business */}
-                            {hoverAtivo ===ev.id && (
-                              <p>{ev.remark_name}, {ev.subject_name}</p>
+                            {hoverAtivo !== ev.id && <p>{ev.client_name}</p>}
+                            {/*Release e business */}
+                            {hoverAtivo === ev.id && (
+                              <p>
+                                {ev.remark_name}, {ev.subject_name}
+                              </p>
                             )}
                           </StyledEvent>
                         )
-                    )
-                  }
-
+                    )}
                 </DivDays>
               );
             })}
@@ -317,14 +337,22 @@ export const BigCalender = (props) => {
       {modalRemark && (
         <>
           <DivClose onClick={() => setModalRemark(false)}></DivClose>
-          <RemarkCard date={dateTarget} adminList={props.adminList} setModalEdit={() => setModalEdit()} />
+          <RemarkCard
+            date={dateTarget}
+            adminList={props.adminList}
+            setModalEdit={() => setModalEdit()}
+          />
         </>
       )}
 
       {modalCreate && (
         <>
-            <DivClose onClick={handleCloseModal}></DivClose>
-            <ModalRemark adminList={props.adminList} title={"Create Remark"} setModal={(e)=>setModalCreate(e)}/>
+          <DivClose onClick={handleCloseModal}></DivClose>
+          <ModalRemark
+            adminList={props.adminList}
+            title={"Create Remark"}
+            setModal={(e) => setModalCreate(e)}
+          />
         </>
       )}
 
@@ -334,7 +362,6 @@ export const BigCalender = (props) => {
           <ModalRemark adminList={props.adminList} title={"Edit Remark"} />
         </>
       )}
-      
 
       {modalSucess && (
         <>

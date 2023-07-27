@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSubjectContext } from "./useSubjectContent";
 import { subjectUpdateStatus } from "../api/routesAPI";
@@ -24,7 +23,6 @@ export const useFetchSubjectStatus = () => {
         console.log(error);
       });
   };
-
   return {
     updateSubjectStatus,
   };

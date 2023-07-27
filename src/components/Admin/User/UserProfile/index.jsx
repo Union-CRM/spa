@@ -40,13 +40,13 @@ import ModalPlanner from "../../../Planner/AddEditPlanner";
 import ModalDiscardChanges from "../../../Planner/ModalDiscardChanges";
 import ModalSave from "../../../Planner/ModalSuccessfuly";
 import RemarkModal from "../../../Planner/RemarkModal";
-import PopUpCanceled from "../../../Planner/PopUpCanceled"; 
+import PopUpCanceled from "../../../Planner/PopUpCanceled";
 import FollowUpModal from "../../../Planner/FollowUpModal";
 import PopUpFinished from "../../../Planner/PopUpFinished";
 import ModalError from "../../../Planner/ModalError";
-import { ReactComponent as Subjects } from  "../../../../assets/svg/Subjects.svg"
-import { ReactComponent as Planner } from  "../../../../assets/svg/Planner.svg"
-import { ReactComponent as Remark } from  "../../../../assets/svg/Remark.svg"
+import { ReactComponent as Subjects } from "../../../../assets/svg/Subjects.svg";
+import { ReactComponent as Planner } from "../../../../assets/svg/Planner.svg";
+import { ReactComponent as Remark } from "../../../../assets/svg/Remark.svg";
 
 //import { Subject as SubjectUser } from "../../../Subject/CreateEditSubjectModal";
 
@@ -71,13 +71,19 @@ const UserProfile = () => {
     setModalError,
   } = usePlannerContext();
 
-  const { userTarget, modalPlanner, setModalPlanner, setViewProfile, modalRemark,  setModalRemark } =
-    useUserContext();
+  const {
+    userTarget,
+    modalPlanner,
+    setModalPlanner,
+    setViewProfile,
+    modalRemark,
+    setModalRemark,
+    setAdmLayout,
+  } = useUserContext();
   const { subject } = useSubjectContext();
   const { planner } = usePlannerContext();
   const { remark } = useRemarkContext();
   // numberOfPlanner [0]-canceled | [1]- Scheduled | [2] Done
-
 
   const handleClickPlanner = () => {
     setModalPlanner(true);
@@ -91,12 +97,12 @@ const UserProfile = () => {
 
   const handleClickSubject = () => {
     setModalSubject(true);
+    setAdmLayout(true);
   };
 
   const handleClickRemark = () => {
     setModalRemark(true);
   };
-
 
   const numberOfPlanner = [
     planner
@@ -134,6 +140,27 @@ const UserProfile = () => {
       : 0,
   ];
 
+  const numberOfRemark = [
+    remark
+      ? remark.filter(
+          (r) =>
+            r.status_description === "CANCELED" && r.user_id === userTarget.id
+        ).length
+      : 0,
+    remark
+      ? remark.filter(
+          (r) =>
+            r.status_description === "FINISHED" && r.user_id === userTarget.id
+        ).length
+      : 0,
+    remark
+      ? remark.filter(
+          (r) =>
+            r.status_description === "ACTIVE" && r.user_id === userTarget.id
+        ).length
+      : 0,
+  ];
+
   return (
     <>
       <DivPath>
@@ -153,7 +180,7 @@ const UserProfile = () => {
         <>
           <DivClose onClick={handleCloseModal} />
           <DivSubject>
-            <SubjectList translate={"Admin"} adminList={true}  />
+            <SubjectList translate={"Admin"} adminList={true} />
           </DivSubject>
         </>
       )}{" "}
@@ -191,7 +218,7 @@ const UserProfile = () => {
             <Label>SUBJECT</Label>
             <Circle>
               <DivIcon>
-              <Subjects fill={"#FFFFFF"} height={"25px"} width={"25px"} />
+                <Subjects fill={"#FFFFFF"} height={"25px"} width={"25px"} />
               </DivIcon>
             </Circle>
           </Button>
@@ -208,7 +235,7 @@ const UserProfile = () => {
             <Label>REMARK</Label>
             <Circle>
               <DivIcon>
-                <Remark fill={"#FFFFFF"}  height={"25px"} width={"25px"} />
+                <Remark fill={"#FFFFFF"} height={"25px"} width={"25px"} />
               </DivIcon>
             </Circle>
           </Button>
@@ -229,11 +256,11 @@ const UserProfile = () => {
         <Subject
           numberOfSubjeccts={numberOfSubject}
           numberOfPlanner={numberOfPlanner}
+          numberOfRemark={numberOfRemark}
           value={0}
         />
-       <Group />
+        {/*<Group />*/}
       </Graph1>
-     
       {modalEdit && (
         <>
           <DivClose onClick={handleCloseModal}></DivClose>
@@ -274,7 +301,6 @@ const UserProfile = () => {
           <PopUpFinished />
         </>
       )}
-      
       {/*modalSubject && (
         <>
           <PositionSubject>
