@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useState } from "react";
 import { usePlannerContext } from "./usePlannerContext";
 import { useRemarkContext } from "./useRemarkContent";
 import {
@@ -24,8 +23,7 @@ export const useFetchRemark = () => {
       loadRemarkList();
       return response.data.id;
     } catch (error) {
-      console.log(error);
-
+      console.error(error);
       setModalError(true);
       setModalRemark(false);
       setModalPopUpFinished(false);

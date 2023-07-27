@@ -6,7 +6,7 @@ export const ClientContext = createContext();
 export const ClientContextProvider = ({ children }) => {
   const [idClient, setIdClient] = useState(null);
   const [client, setClient] = useState([{}]);
-  const [clientTarget, setClientTarget] = useState();
+  const [clientTarget, setClientTarget] = useState(clientEntity);
   const [isActive, setIsActive] = useState(false);
   const [modalAddClient, setModalAddClient] = useState(false);
   const [selectedClient, setSelectedClient] = useState(null);
@@ -125,7 +125,6 @@ export const ClientContextProvider = ({ children }) => {
         setModalCreateSubject,
         clientTarget,
         setClientTarget,
-
       }}
     >
       {children}
@@ -133,21 +132,7 @@ export const ClientContextProvider = ({ children }) => {
   );
 };
 
-/*
-const subjectsList = [
-  {
-    id: 1,
-    status: "Active",
-    email: "igorsena@tcs.com",
-    client: "Igor Sena Soares Silva",
-    textRole: "Analyst DevOps",
-    textCustomer: "Itaú",
-    textBusiness: "Infraestrutura e Operações TI",
-    textRelease: "Experiência Digital",
-    tags: [
-      { value: 6, label: "Azure", color: "#3ddc97" },
-      { value: 12, label: "Demand Drafts", color: "#6CB4EE" },
-      { value: 1, label: "Online Banking", color: "#FFB2D1" },
-    ],
-  },
-*/
+const clientEntity = {
+  client_name: "",
+  client_email: "",
+};

@@ -32,6 +32,7 @@ export const Card = styled.div`
   background-color: #f5f7fa;
   z-index: 0 !important;
   padding-left: 10px;
+  margin-top: 1%;
 `;
 export const Status = styled.div`
   ${(props) => {

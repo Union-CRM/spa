@@ -144,7 +144,6 @@ const SubjectList = (props) => {
   );
 
   const [modal, setModal] = useState(false);
-  const [openModalD, openModalSubjects] = useState(false);
   const [cards, setCards] = useState(SubjectsProgress);
   const [active, setActive] = useState(cardStatus.NOTSTARTED);
 
@@ -152,11 +151,9 @@ const SubjectList = (props) => {
     modalDetails,
     setModalDetails,
     isEdit,
-    setEdit,
     modalEdit,
     setModalEdit,
     modalDiscard,
-    setModalDiscard,
   } = useSubjectContext();
 
   // tabs status
@@ -175,7 +172,6 @@ const SubjectList = (props) => {
     setModal(true);
   };
 
-  
   // Open modal of details
   const detailsModal = () => {
     setModalDetails(true);
@@ -191,18 +187,8 @@ const SubjectList = (props) => {
   const { modalRemark, setModalRemark } = useRemarkContext();
 
   // Create Planner //
-  const { idPlanner, setIdPlanner } = usePlannerContext();
+  const { idPlanner } = usePlannerContext();
   const { modalPlanner, setModalPlanner, modalSave } = usePlannerContext();
-  /*
-  NO ANWSERS   
-  NO INTEREST
-  NOT STARTED
-  IN PROGRESS
-  GOOD  
-  EXCELENT
-  FINISHED
-  CANCELED
-  */
 
   const AdmLayout = props.translate === "Admin" ? true : false;
 
@@ -415,7 +401,6 @@ const SubjectList = (props) => {
       {modalEdit && (
         <EditSubject
           id={id}
-          Adm={AdmLayout}
           setModalEdit={setModalEdit}
           title={isEdit ? "Create Subject" : "Edit Subject"}
         />

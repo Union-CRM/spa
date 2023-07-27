@@ -9,11 +9,13 @@ import {
   DivRouteTitle,
   Path,
   Title,
+  PositionIcon,
 } from "./styles";
 import IconSystem from "../../../assets/IconSystem";
 import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
+import { ReactComponent as RemarkIcon } from "../../../assets/svg/Remark.svg";
 
 class RemarkCalendar extends React.Component {
   render() {
@@ -23,6 +25,9 @@ class RemarkCalendar extends React.Component {
           {/*A Rota e o Nome da Pagina de Planner*/}
           <DivRouteTitle>
             <DivTitle>
+              <PositionIcon>
+                <RemarkIcon />
+              </PositionIcon>
               <Title>Remark</Title>
               {/*Tippy Usada para aparecer uma caixa de text quando passa o mouse em cima */}
               <Tippy content="Agenda, calendar with remarks of the day">

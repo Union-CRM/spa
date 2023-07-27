@@ -26,7 +26,7 @@ const SubjectCard = (props) => {
   const { modalDetails, setModalDetails } = useSubjectContext();
 
   const { subject: subjectsList } = useSubjectContext();
-  
+
   const subject = subjectsList.filter((item) => item.id === props.id)[0];
 
   const { toggleState, setToggleState } = useSubjectContext();
@@ -41,15 +41,15 @@ const SubjectCard = (props) => {
     props.setId(subject.id);
   };
 
-  const AdmLayout = props.translate === "Admin" ? true : false;
-
   return (
     <Container>
       <Card $mode={subject.status} onClick={() => handleClick()}>
         <Header>
           <DivStatusSubject>
             <Status $mode={subject.status}>
-              <LabelStatus><span>{subject.status}</span></LabelStatus>
+              <LabelStatus>
+                <span>{subject.status}</span>
+              </LabelStatus>
             </Status>
           </DivStatusSubject>
 

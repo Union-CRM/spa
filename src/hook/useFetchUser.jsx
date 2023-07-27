@@ -4,13 +4,12 @@ import {
   userCreate,
   userUpdateStatus,
   userUpdateNoPSW,
-  forgotPass
+  forgotPass,
 } from "../api/routesAPI";
 
 export const useFetchUser = () => {
   const { loadUserList, token } = useUserContext();
   const createUser = async (user) => {
-    //console.log(user);
     try {
       const response = await axios.post(userCreate, user, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -36,7 +35,7 @@ export const useFetchUser = () => {
         loadUserList();
       })
       .catch(function (error) {
-        console.log(error.response);
+        console.error(error.response);
       });
   };
 
@@ -56,13 +55,12 @@ export const useFetchUser = () => {
   };
 
   const forgotPassword = async (email) => {
-    
     axios
-      .put(`${forgotPass}`,email, {
+      .put(`${forgotPass}`, email, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(function (response) {
-        console.log("Email enviado com sucesso!");
+        console.error("Email enviado com sucesso!");
       })
       .catch(function (error) {
         console.error(error.response);
@@ -73,7 +71,7 @@ export const useFetchUser = () => {
     createUser,
     updateStatusUser,
     updateUserNoPSW,
-    forgotPassword
+    forgotPassword,
   };
 };
 

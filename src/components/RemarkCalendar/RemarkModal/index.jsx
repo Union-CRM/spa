@@ -80,12 +80,9 @@ const RemarkModal = ({ title, setOpenModal }) => {
       });
 
     if (plannerEdit.status === 16) {
-      //to do: save plannerEdit
       setModalPopUpFinished(true);
       setModalRemark(false);
     } else {
-      //to do: save plannerEdit
-      //to do: open Modal
       setModalPopUpCanceled(true);
       setModalRemark(false);
     }

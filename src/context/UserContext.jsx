@@ -22,6 +22,7 @@ export const UserContextProvider = ({ children }) => {
   const [blocked, setBlocked] = useState(false);
   const [token, setToken] = useState();
   const [first, setFirst] = useState(false);
+  const [layoutAdm, setAdmLayout] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -96,6 +97,8 @@ export const UserContextProvider = ({ children }) => {
         setFirst,
         modalRemark,
         setModalRemark,
+        layoutAdm,
+        setAdmLayout,
       }}
     >
       {children}

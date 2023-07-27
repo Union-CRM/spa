@@ -1,24 +1,21 @@
 import axios from "axios";
 import { useGroupListContext } from "./useGroupListContext";
 
-import { useUserContext } from "./useUserContext";
-import { groupCreate, groupUpdate, attachUser, getUsersGroup, countUserGroup, groupUpdateStatus  } from "../api/routesAPI";
+import {
+  groupCreate,
+  groupUpdate,
+  getUsersGroup,
+  groupUpdateStatus,
+} from "../api/routesAPI";
 
 export const useFetchAdmGroupList = () => {
+  const { loadData, setCountGroups, loadContGroup } = useGroupListContext();
 
-  const { loadData, setUsersGroup , setCountGroups,loadContGroup } = useGroupListContext();
-  
-  const insertGroup = async (group) => {    
+  const insertGroup = async (group) => {
     axios
-      .post(
-        groupCreate,
-        group,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-          
-        }
-
-      )
+      .post(groupCreate, group, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
       .then(function (response) {
         loadData();
         loadContGroup();
@@ -27,13 +24,13 @@ export const useFetchAdmGroupList = () => {
         console.error(error);
       });
   };
-  
+
   const updateGroup = async (group, group_id) => {
     axios
       .put(
         `${groupUpdate}${group_id}`,
-          group,
-        
+        group,
+
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -51,8 +48,7 @@ export const useFetchAdmGroupList = () => {
     axios
       .put(
         `${groupUpdateStatus}${group_id}`,
-        {      
-        },
+        {},
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -86,8 +82,7 @@ export const useFetchAdmGroupList = () => {
     axios
       .put(
         `${detachUser}${group_id}`,
-        {      
-        },
+        {},
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -103,17 +98,15 @@ export const useFetchAdmGroupList = () => {
   const groups = async (group_id) => {
     let groups;
     try {
-      const response = await axios.get(`${getUsersGroup}${group_id}`,
-      {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      },
-      ),
-      groups = response;
+      const response = await axios.get(`${getUsersGroup}${group_id}`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }),
+        groups = response;
     } catch (error) {
       console.error(error);
     }
   };
-   
+
   return {
     insertGroup,
     updateGroup,
@@ -122,8 +115,6 @@ export const useFetchAdmGroupList = () => {
     attachUser,
     getUsersGroup,
     setCountGroups,
-    //countGroup,
-    groups
-
+    groups,
   };
 };

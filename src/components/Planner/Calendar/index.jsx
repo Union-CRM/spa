@@ -89,7 +89,7 @@ export const BigCalender = (props) => {
   const { setSearch, search } = useSearchContext();
   const [searchtState, setSearchtState] = useState(false);
   const [hoverAtivo, setHoverAtivo] = useState(false);
-  const [divAtiva, setDivAtiva] = useState(null)
+  const [divAtiva, setDivAtiva] = useState(null);
 
   useEffect(() => {
     setSearch(false);
@@ -110,13 +110,27 @@ export const BigCalender = (props) => {
     } else {
       if (props.adminList) {
         setPlannerList(
-          planner ? planner.filter((p) => p.user_id === userTarget.id)
-          .sort((a, b) => (b.status || "").localeCompare(a.status || "") || (a.date || "").localeCompare(b.date || "")) : []
+          planner
+            ? planner
+                .filter((p) => p.user_id === userTarget.id)
+                .sort(
+                  (a, b) =>
+                    (b.status || "").localeCompare(a.status || "") ||
+                    (a.date || "").localeCompare(b.date || "")
+                )
+            : []
         );
       } else {
         setPlannerList(
-          planner ? planner.filter((p) => p.user_id === user.id)
-          .sort((a, b) => (b.status || "").localeCompare(a.status || "") || (a.date || "").localeCompare(b.date || ""))  : []
+          planner
+            ? planner
+                .filter((p) => p.user_id === user.id)
+                .sort(
+                  (a, b) =>
+                    (b.status || "").localeCompare(a.status || "") ||
+                    (a.date || "").localeCompare(b.date || "")
+                )
+            : []
         );
         setUserTarget(user);
       }
@@ -163,7 +177,7 @@ export const BigCalender = (props) => {
   };
 
   //função para desativar o hover quando o mouse nao tiver na div
-  const handleMouseLeave = () => { 
+  const handleMouseLeave = () => {
     setDivAtiva(null);
     setHoverAtivo(false);
   };
@@ -175,7 +189,12 @@ export const BigCalender = (props) => {
           <DivIconSearch>
             <Tippy content="Search">
               <DivIconS name="search">
-                <IconSystem icon="Search" fill={"color: #007bff"} width={"20px"} height={"17px"} />
+                <IconSystem
+                  icon="Search"
+                  fill={"color: #007bff"}
+                  width={"20px"}
+                  height={"17px"}
+                />
               </DivIconS>
             </Tippy>
             <InputSearch
@@ -257,19 +276,19 @@ export const BigCalender = (props) => {
                   }
                 >
                   <DivDayHeader>
-                  <Day
-                    key={d}
-                    className={`nonDRAG ${
-                      datesAreOnSameDay(new Date(), date) ? "active" : ""
-                    }`}
-                  >
-                    {day}
+                    <Day
+                      key={d}
+                      className={`nonDRAG ${
+                        datesAreOnSameDay(new Date(), date) ? "active" : ""
+                      }`}
+                    >
+                      {day}
                     </Day>
                     {numberOfPlanner > 2 && (
-                    <DivNumberPlanner>
-                      <p>+{numberOfPlanner - 2}</p>
-                    </DivNumberPlanner>
-                  )}
+                      <DivNumberPlanner>
+                        <p>+{numberOfPlanner - 2}</p>
+                      </DivNumberPlanner>
+                    )}
                   </DivDayHeader>
                   {plannerList
                     .filter((planner) =>
@@ -297,17 +316,16 @@ export const BigCalender = (props) => {
                               }
                             ></Dot>
                             {/*client */}
-                            {hoverAtivo!==ev.id && (
-                              <p>{ev.client}</p>
-                              )}
-                              {/*Release e business */}
-                            {hoverAtivo ===ev.id && (
-                              <p>{ev.release}, {ev.business}</p>
+                            {hoverAtivo !== ev.id && <p>{ev.client}</p>}
+                            {/*Release e business */}
+                            {hoverAtivo === ev.id && (
+                              <p>
+                                {ev.release}, {ev.business}
+                              </p>
                             )}
                           </StyledEvent>
                         )
                     )}
-
                 </DivDays>
               );
             })}

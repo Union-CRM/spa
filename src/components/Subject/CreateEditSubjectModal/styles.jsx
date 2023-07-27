@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 
-
 // Div Father
 export const ContainerCentral = styled.div`
   justify-content: end;
@@ -17,7 +16,8 @@ export const ContainerCentral = styled.div`
     left: 0;
     justify-content: start;
   }
-  transform: ${(props) => (props.$mode ? "translate(0%, -15%)" : "translate(0%, 0%)")};
+  transform: ${(props) =>
+    props.$mode ? "translate(-7%, -8%)" : "translate(0%, 1%)"};
 `;
 
 // Div Title
@@ -80,7 +80,7 @@ export const Close = styled.button`
 export const Container = styled.div`
   grid-row: 1;
   grid-column: 2;
-  transform: ${(props) => (props.$mode ? "translate(-50%, 10%)" : (""))};
+  transform: ${(props) => (props.$mode ? "translate(-50%, 10%)" : "")};
   width: ${(props) => (props.$mode ? "40%" : "75%")};
   min-width: 350px;
   height: ${(props) => (props.$mode ? "700px" : "100%")};
@@ -130,8 +130,8 @@ export const Input = styled.input`
   display: block;
   position: relative;
   padding-left: 2%;
-  border: 2px solid ${(props) => props.placeholder === "" ? "#888C95" : "#b03535"
-  };
+  border: 2px solid
+    ${(props) => (props.placeholder === "" ? "#888C95" : "#b03535")};
   @media (min-width: 1355px) and (max-width: 1824px) {
     height: 25px;
   }
@@ -142,7 +142,7 @@ export const InputDisable = styled.input`
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
   border: 2px solid #888c95;
-  background-color:#D6D6D6;
+  background-color: #d6d6d6;
   display: block;
   position: relative;
   padding-left: 2%;
@@ -151,15 +151,14 @@ export const InputDisable = styled.input`
   }
 `;
 
-
 export const TextArea = styled.textarea`
   height: ${(props) => props.heightInput || "80px"};
   width: ${(props) => props.widthInput || "100%"};
   border-radius: 5px;
   border: 2px solid #888c95;
   background-color: ${(props) => props.backgroundInput || " rgba(0, 0, 0, 0) "};
-  border: 2px solid ${(props) => props.placeholder === "" ? "#888C95" : "#b03535"
-};
+  border: 2px solid
+    ${(props) => (props.placeholder === "" ? "#888C95" : "#b03535")};
   display: block;
   resize: none;
   padding-left: 2%;

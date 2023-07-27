@@ -1,11 +1,8 @@
 import axios from "axios";
 import { useSubjectContext } from "./useSubjectContent";
-import { useUserContext } from "./useUserContext";
 import { subjectCreate, subjectUpdate } from "../api/routesAPI";
 
 export const useFetchSubject = () => {
-  const { user } = useUserContext();
-
   const { loadData } = useSubjectContext();
   const insertSubject = async (subject, user_id) => {
     axios
@@ -32,7 +29,6 @@ export const useFetchSubject = () => {
   };
 
   const updateSubject = async (subject_id, subject) => {
-    //console.log(subject.title + "teste" + subject.text + subject_id);
     axios
       .put(
         `${subjectUpdate}${subject_id}`,

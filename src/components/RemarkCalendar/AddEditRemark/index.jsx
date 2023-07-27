@@ -29,14 +29,20 @@ import { useFetchRemark } from "../../../hook/useFetchRemark";
 const ModalPlanner = (props) => {
   const [newRemark, setNewRemark] = useState(remarkEntity);
   const { createRemark, updateRemark } = useFetchRemark();
-  const { remarkTarget,setModalEdit, setModalSucess,setModalCreate,setModalRemark } = useRemarkContext();
-  
+  const {
+    remarkTarget,
+    setModalEdit,
+    setModalSucess,
+    setModalCreate,
+    setModalRemark,
+  } = useRemarkContext();
+
   const [flag, setFlag] = useState(false);
   const { userTarget } = useUserContext();
   const { subject: subjectList } = useSubjectContext();
   const [subjectOption, setSubjectOption] = useState([]);
   const [prevStatus, setPrevStatus] = useState(false);
-  
+
   useEffect(() => {
     if (props.title === "Edit Remark") {
       const subjectObj = subjectList.filter(
@@ -46,8 +52,8 @@ const ModalPlanner = (props) => {
         ...newRemark,
         ...remarkTarget,
         status_id: StatusOption.filter(
-           (s) => s.label === remarkTarget.status_description
-         )[0].value,
+          (s) => s.label === remarkTarget.status_description
+        )[0].value,
         client_email: subjectObj ? subjectObj.client_email : "",
       });
       setPrevStatus(remarkTarget.status_description);
@@ -64,9 +70,7 @@ const ModalPlanner = (props) => {
     } else {
       setSubjectOption(
         subjectList
-          .filter(
-            (s) => s.status === "IN PROGRESS" && s.user_id === userTarget.id
-          )
+          .filter((s) => s.user_id === userTarget.id)
           .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
       );
     }
@@ -81,8 +85,8 @@ const ModalPlanner = (props) => {
 
   const closeModal = () => {
     setModalEdit(false);
-    setModalRemark(true); 
-    setModalCreate(false)
+    setModalRemark(true);
+    setModalCreate(false);
   };
 
   const handleSubmit = () => {
@@ -297,20 +301,18 @@ const ModalPlanner = (props) => {
                 />
               </DivDate>
               <DivDate>
-               
-                  <SingleSelect
-                    placeholder={""}
-                    set={(s) => handleSelectStatus(s)}
-                    options={StatusOption}
-                    value={newRemark.status_description}
-                    sizeSingle={"100%"}
-                    sizeMenuList={"100%"}
-                    label={"Status"}
-                    sizeMenu={"100%"}
-                    isDisabled={false}
-                    sizeHeight={"3.5vh"}
-                  />
-             
+                <SingleSelect
+                  placeholder={""}
+                  set={(s) => handleSelectStatus(s)}
+                  options={StatusOption}
+                  value={newRemark.status_description}
+                  sizeSingle={"100%"}
+                  sizeMenuList={"100%"}
+                  label={"Status"}
+                  sizeMenu={"100%"}
+                  isDisabled={false}
+                  sizeHeight={"3.5vh"}
+                />
               </DivDate>
             </DivDateAll>
 
@@ -328,7 +330,7 @@ const ModalPlanner = (props) => {
                 />
               </Label>
             </DivDescription>
-            </Form>
+          </Form>
 
           <DivButton>
             <ClickButton onClick={handleSubmit}>
@@ -349,7 +351,6 @@ const ModalPlanner = (props) => {
               />
             </PositionButtonCancel>
           </DivButton>
-        
         </Container>
       </ContainerCentral>
     </>

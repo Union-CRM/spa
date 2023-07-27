@@ -11,6 +11,8 @@ import {
   H1,
   Subject,
   Planner,
+  DivSeparete,
+  Line,
 } from "./styles";
 
 const Grafic = (props) => {
@@ -32,6 +34,7 @@ const Grafic = (props) => {
         <OnTimeSquare>{props.numberOfSubjeccts[2]}</OnTimeSquare>
         <SquareText>In Progress</SquareText>
       </SquareDiv>
+      <Line />
 
       <TitleDiv>
         <H1>Planner</H1>
@@ -48,6 +51,23 @@ const Grafic = (props) => {
       <SquareDiv>
         <OnTimeSquare>{props.numberOfPlanner[2]}</OnTimeSquare>
         <SquareText>Done</SquareText>
+      </SquareDiv>
+      <Line />
+      <TitleDiv>
+        <H1>Remark</H1>
+      </TitleDiv>
+      <SquareDiv>
+        <LateSquare>{props.numberOfRemark[0]}</LateSquare>
+        <SquareText>Canceled</SquareText>
+      </SquareDiv>
+
+      <SquareDiv>
+        <NearSquare>{props.numberOfRemark[1]}</NearSquare>
+        <SquareText>Finished</SquareText>
+      </SquareDiv>
+      <SquareDiv>
+        <OnTimeSquare>{props.numberOfRemark[2]}</OnTimeSquare>
+        <SquareText>Active</SquareText>
       </SquareDiv>
     </Container>
   );
