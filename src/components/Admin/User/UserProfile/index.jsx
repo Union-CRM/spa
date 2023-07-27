@@ -222,20 +222,20 @@ const UserProfile = () => {
               </DivIcon>
             </Circle>
           </Button>
+          <Button onClick={handleClickRemark}>
+            <Label>REMARK</Label>
+            <Circle>
+              <DivIcon>
+                <Remark fill={"#FFFFFF"} height={"25px"} width={"25px"} />
+              </DivIcon>
+            </Circle>
+          </Button>
 
           <Button onClick={handleClickPlanner}>
             <Label>PLANNER</Label>
             <Circle>
               <DivIcon>
                 <Planner fill={"#FFFFFF"} height={"25px"} width={"25px"} />
-              </DivIcon>
-            </Circle>
-          </Button>
-          <Button onClick={handleClickRemark}>
-            <Label>REMARK</Label>
-            <Circle>
-              <DivIcon>
-                <Remark fill={"#FFFFFF"} height={"25px"} width={"25px"} />
               </DivIcon>
             </Circle>
           </Button>

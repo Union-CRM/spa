@@ -271,9 +271,9 @@ export const DivButtonUser = styled.div`
 export const Button = styled.button`
   background-color: #ffffff;
   border-radius: 8px;
-  width: 30%;
+  width: 23%;
   height: 52px;
-  margin-left: 5%;
+  margin-left: 9%;
   border-radius: 8px;
   font-size: 12px;
   font-weight: 400;
