@@ -57,53 +57,41 @@ const CreateRemark = (props) => {
     setSubjectTarget(subjectList.filter((s) => s.id === id)[0]);
   }, [id]);
 
-
-
   const handleCreateRemark = (e) => {
-
     const horas = new Date();
-    var currentDate = new Date((horas.getMonth() + 1) + "/" + horas.getDate() + "/" + horas.getFullYear())
+    var currentDate = new Date(
+      horas.getMonth() + 1 + "/" + horas.getDate() + "/" + horas.getFullYear()
+    );
     var partesData = date.split("-");
-    var data = new Date(partesData[1] + "/" + partesData[2] + "/" + partesData[0]);
+    var data = new Date(
+      partesData[1] + "/" + partesData[2] + "/" + partesData[0]
+    );
 
-    
-    if (remarkName &&
-      text &&
-      date &&
-      dateReturn) {
+    if (remarkName && text && date && dateReturn) {
       setFlag(false);
 
-      if (data >= currentDate) {
-        setInvalidDateStart(false);
-        if (dateReturn >= date ) {
+      if (dateReturn >= date) {
         setInvalidDateReturn(false);
-    const newRemark = {
-      remark_name: remarkName,
-      text: text,
-      date: date + "T10:00:00.000",
-      date_return: dateReturn + "T10:00:00.000",
-      subject_id: subjectTarget.id,
-      client_id: subjectTarget.client_id,
-      release_id: subjectTarget.release_id,
-      user_id: user.id,
-    };
-      createRemark(newRemark).then(loadRemarkList());
-      loadRemarkList();
-      closeModal();
+        const newRemark = {
+          remark_name: remarkName,
+          text: text,
+          date: date + "T10:00:00.000",
+          date_return: dateReturn + "T10:00:00.000",
+          subject_id: subjectTarget.id,
+          client_id: subjectTarget.client_id,
+          release_id: subjectTarget.release_id,
+          user_id: user.id,
+        };
+        createRemark(newRemark).then(loadRemarkList());
+        loadRemarkList();
+        closeModal();
+      } else {
+        setInvalidDateReturn(true);
+      }
     } else {
-      setInvalidDateReturn(true);
+      setFlag(true);
     }
-  }
- else {
-  setInvalidDateStart(true);
-};
-
-} else {
-  setFlag(true);
-}
-console.log("FOIII!!!")
-};
-
+  };
 
   return (
     <ContainerCentral>
@@ -160,15 +148,30 @@ console.log("FOIII!!!")
           </DivText>
         </Form>{" "}
         <DivButton>
+          {invalidDateStart && (
+            <AlertaDate>
+              <span>
+                The start date must be greater than or equal to today.
+              </span>
+            </AlertaDate>
+          )}
 
-        {invalidDateStart &&
-         <AlertaDate><span>The start date must be greater than or equal to today.</span></AlertaDate>}
+          {flag && (
+            <AlertaDate>
+              <span>
+                Please make sure all fields are filled in to continue.
+              </span>
+            </AlertaDate>
+          )}
 
-        {flag &&
-        <AlertaDate><span>
-        Please make sure all fields are filled in to continue.</span></AlertaDate>}
-
-        {invalidDateReturn && <AlertaDate><span>The return date is incorrect, it cannot be less than the start date.</span></AlertaDate>}
+          {invalidDateReturn && (
+            <AlertaDate>
+              <span>
+                The return date is incorrect, it cannot be less than the start
+                date.
+              </span>
+            </AlertaDate>
+          )}
 
           <ClickButton>
             <ButtonDefault
@@ -182,8 +185,6 @@ console.log("FOIII!!!")
           <PositionButtonCancel onClick={closeModal}>
             <ButtonDefault type="userCancel" name={"Cancel"} />
           </PositionButtonCancel>
-
-          
         </DivButton>
       </Container>
     </ContainerCentral>
