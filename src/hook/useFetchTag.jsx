@@ -20,12 +20,14 @@ export const useFetchTag = (tag) => {
         console.error(error);
       }
       setTagList(
-        tags.data.tag_list.map((item) => ({
-          id: item.tag_id,
-          value: item.tag_id,
-          label: item.tag_name,
-          type: item.tag_type,
-        }))
+        tags.data.tag_list
+          .map((item) => ({
+            id: item.tag_id,
+            value: item.tag_id,
+            label: item.tag_name,
+            type: item.tag_type,
+          }))
+          .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
       );
 
       //Lista de tags (Business)

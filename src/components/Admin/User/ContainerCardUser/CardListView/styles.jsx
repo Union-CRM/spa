@@ -8,6 +8,7 @@ export const Container = styled.div`
   padding-left: 0px;
   width: 96%;
   z-index: 0 !important;
+  display: grid;
 `;
 //ok
 //Cards Clients //
@@ -96,7 +97,7 @@ export const DivPhoto = styled.div`
 //ok
 export const DivPhotoI = styled.div`
   background-color: #d9d9d9;
-  border: 5px solid ${(props) => (props.isActive ? "#E41165" : "#7a7a7a")};
+  border: 3px solid ${(props) => (props.isActive ? "#E41165" : "#7a7a7a")};
   width: 50px;
   height: 50px;
   border-radius: 100%;
@@ -118,7 +119,7 @@ export const DivDadosCard = styled.div`
   align-items: center;
   grid-column: 2;
   padding-left: 3%;
-  margin-top: 5%;
+  margin-top: 2%;
   cursor: pointer;
 `;
 
@@ -155,6 +156,9 @@ export const DivInfo = styled.div`
   height: auto;
   z-index: 0;
   grid-template-rows: auto;
+  @media (max-width: 1120px) {
+    margin-top: 7%;
+  }
 `;
 
 //ok
@@ -163,7 +167,6 @@ export const DivLevel = styled.span`
   height: fit-content;
   width: 100%;
   position: relative;
-  margin-top: 5px;
   flex-direction: row;
   justify-content: flex-start;
   span {
@@ -176,17 +179,25 @@ export const Dot = styled.div`
   height: 10px;
   padding-right: 10px;
   border-radius: 50%;
-  margin-top: 1%;
   //display: flex;
   align-self: center;
+
   margin-right: 3px;
   //overflow-x: visible;
 
   background-color: ${({ bgColor }) => bgColor};
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid #e41165;
 `;
 
 //ok
 export const ContainerFather = styled.div`
   z-index: 10;
+`;
+
+export const SpanDot = styled.span`
+  color: black;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 10px;
+  margin-right: 3px;
 `;

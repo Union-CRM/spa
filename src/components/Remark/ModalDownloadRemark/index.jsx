@@ -30,9 +30,9 @@ import { usePlannerContext } from "../../../hook/usePlannerContent";
 import { useUserContext } from "../../../hook/useUserContext";
 import { useFetchPlanner } from "../../../hook/useFetchPlanner";
 import { useClientContext } from "../../../hook/useClientContent";
-import LoginInvalid from '../../Geral/LoginModals/LoginInvalid';
+import LoginInvalid from "../../Geral/LoginModals/LoginInvalid";
 
-const ModalSheets) => {
+const ModalSheets = (props) => {
   const { subject, id } = useSubjectContext();
   const [subjectTarget] = useState(subject.filter((s) => s.id === id)[0]);
   const { setModalSave } = usePlannerContext();
@@ -63,30 +63,30 @@ const ModalSheets) => {
   const { setModalPlanner } = usePlannerContext();
 
   const HandleCreatePlanner = (e) => {
-
     const horas = new Date();
-    var currentDate = new Date((horas.getMonth() + 1) + "/" + horas.getDate() + "/" + horas.getFullYear())
+    var currentDate = new Date(
+      horas.getMonth() + 1 + "/" + horas.getDate() + "/" + horas.getFullYear()
+    );
     var partesData = date.split("-");
-    var data = new Date(partesData[1] + "/" + partesData[2] + "/" + partesData[0]);
+    var data = new Date(
+      partesData[1] + "/" + partesData[2] + "/" + partesData[0]
+    );
 
     var aux = "";
 
     if (horas.getMinutes() < 10) {
       aux = horas.getHours() + ":0" + horas.getMinutes();
-    }
-    else {
-      aux = horas.getHours() + ":" + horas.getMinutes()
+    } else {
+      aux = horas.getHours() + ":" + horas.getMinutes();
     }
 
     if (horas.getHours() < 10) {
-            aux = "0"+aux;
-          }
-
+      aux = "0" + aux;
+    }
 
     if (date && timeFinish && timeStart && guest) {
-        setFlag(false)
+      setFlag(false);
 
-    
       if (data >= currentDate) {
         setInvalidDateStart(false);
         if (timeFinish > timeStart && timeStart >= aux) {
@@ -106,18 +106,15 @@ const ModalSheets) => {
           setModalPlanner(false);
         } else {
           setTimeout(true);
-          console.log(setTimeout)
           //setInvalidHour(true);
         }
+      } else {
+        setInvalidDateStart(true);
       }
-     else {
-      setInvalidDateStart(true);
-    }} else {
+    } else {
       setFlag(true);
     }
-    console.log("FOIII!!!")
   };
-
 
   useEffect(() => {
     if (clientList) {
@@ -128,7 +125,6 @@ const ModalSheets) => {
       );
     }
   }, []);
-
 
   return (
     <>
@@ -150,9 +146,9 @@ const ModalSheets) => {
                       defaultValue={date}
                       onChange={(e) => setDate(e.target.value)}
                       required={flag && !date ? true : false}
-                    //placeholder={flag && !name ? "Required field" : ""}
-                    //value={name}
-                    //onChange={(event) => setName(event.target.value)}*/
+                      //placeholder={flag && !name ? "Required field" : ""}
+                      //value={name}
+                      //onChange={(event) => setName(event.target.value)}*/
                     />
                   </Label>
                 </DivDate>
@@ -179,7 +175,6 @@ const ModalSheets) => {
                       name="time-finish"
                       onChange={(e) => setTimeFinish(e.target.value)}
                       required={flag && !timeFinish ? true : false}
-
                     />
                   </Label>
                 </DivFinish>
@@ -193,14 +188,9 @@ const ModalSheets) => {
                   tags={guest}
                   indicator={"guest"}
                   value={guest.label}
-                
                 />
               </DivColumnTwo>
-
-
             </Form>{" "}
-
-
             <DivButton>
               <ClickButton onClick={(e) => HandleCreatePlanner(e)}>
                 <ButtonDefault
@@ -214,23 +204,36 @@ const ModalSheets) => {
                 <ButtonDefault type="userCancel" name={"Cancel"} />
               </PositionButtonCancel>
 
-              {invalidHour &&
-                <AlertaDate><span>The start time must be equal to or greater than the current time.</span></AlertaDate>}
-              {flag &&
-              <AlertaDate><span>
-              Please make sure all fields are filled in to continue.</span></AlertaDate>}
+              {invalidHour && (
+                <AlertaDate>
+                  <span>
+                    The start time must be equal to or greater than the current
+                    time.
+                  </span>
+                </AlertaDate>
+              )}
+              {flag && (
+                <AlertaDate>
+                  <span>
+                    Please make sure all fields are filled in to continue.
+                  </span>
+                </AlertaDate>
+              )}
 
-              {invalidDateStart &&
-              <AlertaDate><span>The end date must be equal to or greater than the current date.</span></AlertaDate>}
-
+              {invalidDateStart && (
+                <AlertaDate>
+                  <span>
+                    The end date must be equal to or greater than the current
+                    date.
+                  </span>
+                </AlertaDate>
+              )}
             </DivButton>
           </ContainerChildren>
-
-
         </Container>
       </ContainerCentral>
     </>
   );
 };
 
-export default ModalSheet;
+export default ModalSheets;

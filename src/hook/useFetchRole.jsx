@@ -19,11 +19,13 @@ export const useFetchRole = (role) => {
         console.error(error);
       }
       setRoleList(
-        roles.data.role_list.map((item) => ({
-          id: item.role_id,
-          value: item.role_id,
-          label: item.role_name,
-        }))
+        roles.data.role_list
+          .map((item) => ({
+            id: item.role_id,
+            value: item.role_id,
+            label: item.role_name,
+          }))
+          .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
       );
     }
     loadDate();

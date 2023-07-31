@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Container = styled.div`
   grid-column: 2;
@@ -87,38 +87,35 @@ export const ClickButton = styled.div`
   display: block;
 `;
 
-export const DivBusinessName = styled.div`
-`;
+export const DivBusinessName = styled.div``;
 
-export const Label = styled.label`
-` ;
+export const Label = styled.label``;
 
 export const Input = styled.input`
+  width: 90%;
+  border-radius: 5px;
+  height: 28px;
+  margin-top: 1%;
+  border: 2px solid ${(props) => (props.flag ? "#b03535" : "#888C95")};
+  @media (max-width: 1367px) {
     width: 90%;
-    border-radius: 5px;
-    height: 28px;
-    margin-top: 1%;
-    border: 2px solid ${(props)=> props.flag ? "#b03535" : "#888C95"};
-    @media(max-width: 1367px){
-      width: 90%;
-    }
+  }
 `;
 
 export const DivCodeStatus = styled.div`
-    display: flex;
-    column-gap: 15%;
+  display: flex;
+  column-gap: 15%;
 `;
 
 export const DivCode = styled.div`
   width: 40%;
-  @media(max-width: 1367px){
+  @media (max-width: 1367px) {
     width: 40%;
   }
 `;
 
 export const DivStatus = styled.div`
   width: 40%;
-
 `;
 
 export const DivSegment = styled.div`
@@ -126,5 +123,5 @@ export const DivSegment = styled.div`
 `;
 
 export const DivAtivo = styled.div`
-    margin-right: 2.2%;
-  `
+  margin-right: 2.2%;
+`;

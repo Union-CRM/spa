@@ -55,14 +55,14 @@ import PopUpFinished from "../PopUpFinished";
 import Subject from "../../Subject/CreateEditSubjectModal";
 import ModalError from "../ModalError";
 import { useSearchContext } from "../../../hook/useSearchContext";
-import { useSubjectContext } from "../../../hook/useSubjectContent";
+//import { useSubjectContext } from "../../../hook/useSubjectContent";
 
 export const BigCalender = (props) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [numberOfEvents] = useState(2);
   const [setOpenModal] = useState(false);
   const [dateTarget, setDateTarget] = useState(new Date());
-  const { subject: subjectList } = useSubjectContext();
+  //const { subject: subjectList } = useSubjectContext();
   const {
     planner,
     modalEdit,
@@ -165,11 +165,6 @@ export const BigCalender = (props) => {
   let dayweek = weekday[d.getDay()];
   let Month = month[d.getMonth()];
 
-  //funcão hover trazer para trazer infos do release, subject e business
-  /*const handleHover = () => {
-    setHoverAtivo(!hoverAtivo)
-  };*/
-
   //função para nao ativar o hover em todas as divs
   const handleMouseEnter = (id) => {
     setDivAtiva(id);
@@ -267,7 +262,7 @@ export const BigCalender = (props) => {
                 <DivDays
                   key={index}
                   id={`${year}/${month}/${day}`}
-                  onClick={(e) => handleOnClickEvent(date)} //abri planner of day
+                  onClick={(e) => handleOnClickEvent(date)}
                   dayColor={
                     6 > dayOfWeek && dayOfWeek > 0 ? "#31374A" : "#D6700A"
                   }

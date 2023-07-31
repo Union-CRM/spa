@@ -37,29 +37,9 @@ export const CustomerContextProvider = ({ children }) => {
         setPopUpSuccess,
         popUpError,
         setPopUpError,
-        
       }}
     >
       {children}
     </CustomerContext.Provider>
   );
 };
-
-/*
-const subjectsList = [
-  {
-    id: 1,
-    status: "Active",
-    email: "igorsena@tcs.com",
-    client: "Igor Sena Soares Silva",
-    textRole: "Analyst DevOps",
-    textCustomer: "Itaú",
-    textBusiness: "Infraestrutura e Operações TI",
-    textRelease: "Experiência Digital",
-    tags: [
-      { value: 6, label: "Azure", color: "#3ddc97" },
-      { value: 12, label: "Demand Drafts", color: "#6CB4EE" },
-      { value: 1, label: "Online Banking", color: "#FFB2D1" },
-    ],
-  },
-*/

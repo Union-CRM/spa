@@ -40,7 +40,7 @@ const AddEditBusiness = ({ title }) => {
       </DivBNameStatus>
 
       <DivCodeSeguiment>
-        <InputWithName label={"Seguiment"} width={"95%"} />
+        <InputWithName label={"BATATA"} width={"95%"} />
       </DivCodeSeguiment>
 
       <SubTitle>Tag</SubTitle>

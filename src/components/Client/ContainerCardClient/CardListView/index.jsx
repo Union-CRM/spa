@@ -30,14 +30,12 @@ import { useFetchClient } from "../../../../hook/useFetchClient";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
-import styled, { css } from "styled-components";
-
 const ClientCard = (props) => {
-  const { openModal, openModalPopUp } = props;
+  const { openModal } = props;
 
   const { updateStatusClient } = useFetchClient();
-  const { toggleState, setToggleState, setClientTarget } = useClientContext();
-  const { activeTab, setActiveTab } = useClientContext();
+  const { setToggleState, setClientTarget } = useClientContext();
+  const { setActiveTab } = useClientContext();
 
   const { client: clientList, updateClient } = useClientContext();
   const client = clientList.filter((item) => item.id === props.id)[0];
@@ -72,7 +70,7 @@ const ClientCard = (props) => {
   };
 
   return (
-    <ContainerFather onClick={handleEdit}>
+    <ContainerFather>
       <Container>
         <Card
           isActive={isActive}
@@ -105,7 +103,8 @@ const ClientCard = (props) => {
                 $mode={client.status}
                 checked={isActive}
               >
-                <Body onClick={handleEdit}
+                <Body
+                  onClick={handleEdit}
                   type={"Body1"}
                   name={client.client
                     .match(/(^\S\S?|\b\S)?/g)
@@ -113,12 +112,11 @@ const ClientCard = (props) => {
                     .match(/(^\S|\S$)?/g)
                     .join("")
                     .toUpperCase()}
-                    
                 />
               </DivPhotoI>
             </DivPhoto>
 
-            <DivDadosCard>
+            <DivDadosCard onClick={handleEdit}>
               <NameClient>
                 {/*<span>{SplitClientName(client.client)}</span>{" "}*/}
                 <span>{client.client}</span>{" "}
@@ -126,7 +124,7 @@ const ClientCard = (props) => {
 
               <Subtitle type={"TextDescription"} name={client.email} />
 
-              <DivTagsStatus>
+              <DivTagsStatus onClick={handleEdit}>
                 <Status
                   isActive={isActive}
                   $mode={client.status}
@@ -151,7 +149,7 @@ const ClientCard = (props) => {
             </DivDadosCard>
           </Header>
 
-          <DivInfo >
+          <DivInfo onClick={handleEdit}>
             <DivRole>
               <TitleInfo>
                 Role <span> | </span>{" "}
@@ -189,14 +187,6 @@ const ClientCard = (props) => {
 export default ClientCard;
 
 function SplitName(n) {
-  const user = n ? n : "";
-  var userSplit = user.split(" ");
-  var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
-
-  return user1;
-}
-
-function SplitClientName(n) {
   const user = n ? n : "";
   var userSplit = user.split(" ");
   var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";

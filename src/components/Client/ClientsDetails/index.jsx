@@ -13,10 +13,6 @@ import {
   DivColors,
 } from "./styles";
 import { useClientContext } from "../../../hook/useClientContent";
-//import { useFetchRelease } from "../../../hook/useFetchRelease";
-//import { useFetchCustomer } from "../../../hook/useFetchCustomer";
-//import { useFetchRole } from "../../../hook/useFetchRole";
-//import { useFetchTag } from "../../../hook/useFetchTag";
 
 const ClientDetails = (props) => {
   const { id } = props;
@@ -36,7 +32,7 @@ const ClientDetails = (props) => {
         }))
       );
     }
-  }, [id, clientList]);
+  }, [id, clientList, client.tags, props.title]);
 
   return (
     <ContainerDetails>

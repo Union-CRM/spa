@@ -7,26 +7,26 @@ import { useState, useEffect } from "react";
 import { usePlannerContext } from "../../../../hook/usePlannerContext";
 import {
   ContainerCards,
-    BoxClient,
-    Business,
-    Cards,
-    CardDate,
-    Client,
-    ClientName,
-    Container,
-    CreatedByManager,
-    Date1,
-    Date2,
-    DivDadosCard,
-    DivInfo,
-    DivReleaseAndBusiness,
-    DivStatusSubject,
-    DivSubjectAndCreatedBy,
-    Header,
-    LabelStatus,
-    ReleaseTrain,
-    Status,
-  } from "./styles";
+  BoxClient,
+  Business,
+  Cards,
+  CardDate,
+  Client,
+  ClientName,
+  Container,
+  CreatedByManager,
+  Date1,
+  Date2,
+  DivDadosCard,
+  DivInfo,
+  DivReleaseAndBusiness,
+  DivStatusSubject,
+  DivSubjectAndCreatedBy,
+  Header,
+  LabelStatus,
+  ReleaseTrain,
+  Status,
+} from "./styles";
 import { useRemarkContext } from "../../../../hook/useRemarkContent";
 
 function Split(n) {
@@ -41,7 +41,7 @@ function Split(n) {
 }
 
 const Card = (props) => {
-  const {remark} = props
+  const { remark } = props;
   const { setModalPlanner } = usePlannerContext();
   const { setModalRemark, setModalEdit } = useRemarkContext();
   const { remark: remarkList, setRemarkTarget } = useRemarkContext();
@@ -49,7 +49,7 @@ const Card = (props) => {
   //const [time, setTime] = useState(props.initial.split(" ")[1].split(":"));
   const whatsStatus = props.status === "ACTIVE" ? true : false;
   const handleEdit = () => {
-    if(remark.status_description === "ACTIVE"){
+    if (remark.status_description === "ACTIVE") {
       //props.OpenModal();
       setRemarkTarget(remarkDetail);
       setModalEdit(true);
@@ -57,23 +57,17 @@ const Card = (props) => {
       //setRemarkTarget(remarkList.filter((r)=>r.id===remark.id)[0]);
     }
   };
-  console.log(remark);
-  
 
-  
-  /*useEffect(() => {
-    const time = props.initial.split(" ")[1].split(":");
-    setTimeStart(`${time[0]}:${time[1]}`);
-  }, [props.initial]);
-*/
   return (
     <>
-
-      <ContainerCards $mode={remark.status_description } onClick={() => handleEdit()}>
-     {/* $mode={whatsStatus} onClick={() => handleEdit()}> */}
+      <ContainerCards
+        $mode={remark.status_description}
+        onClick={() => handleEdit()}
+      >
+        {/* $mode={whatsStatus} onClick={() => handleEdit()}> */}
         {/* <h1>OLAAA</h1> */}
 
-      {/* <Cards $mode={remark.status_description} onClick={handleEdit}> */}
+        {/* <Cards $mode={remark.status_description} onClick={handleEdit}> */}
         <Header>
           <DivStatusSubject>
             <Status $mode={remark.status_description}>
@@ -118,28 +112,18 @@ const Card = (props) => {
               <p>{remark.business_name}</p>
             </Business>
           </DivReleaseAndBusiness>
-
-         
         </DivInfo>
         <BoxClient>
-            <Client>
-              Client <p>|</p>
-            </Client>
+          <Client>
+            Client <p>|</p>
+          </Client>
 
-            <ClientName>
-              <p>{remark.client_name}</p>
-            </ClientName>
-          </BoxClient>
+          <ClientName>
+            <p>{remark.client_name}</p>
+          </ClientName>
+        </BoxClient>
       </ContainerCards>
     </>
   );
 };
 export default Card;
-
-
-
-
-
-
-
-

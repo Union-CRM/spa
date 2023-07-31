@@ -27,18 +27,31 @@ const PlannerCard = (props) => {
   useEffect(() => {
     if (props.adminList) {
       setPlannerList(
-        planner ? planner.filter((p) => p.user_id === userTarget.id)
-        .sort((a, b) => (b.status || "").localeCompare(a.status || "") || (a.date|| "").localeCompare(b.date || "")) : []
+        planner
+          ? planner
+              .filter((p) => p.user_id === userTarget.id)
+              .sort(
+                (a, b) =>
+                  (b.status || "").localeCompare(a.status || "") ||
+                  (a.date || "").localeCompare(b.date || "")
+              )
+          : []
       );
     } else {
       setPlannerList(
-        planner ? planner.filter((p) => p.user_id === user.id)
-        .sort((a, b) => (b.status || "").localeCompare(a.status || "") || (a.date || "").localeCompare(b.date || "")) : []
+        planner
+          ? planner
+              .filter((p) => p.user_id === user.id)
+              .sort(
+                (a, b) =>
+                  (b.status || "").localeCompare(a.status || "") ||
+                  (a.date || "").localeCompare(b.date || "")
+              )
+          : []
       );
     }
   }, [planner]);
-  // .sort((a, b) => (b.status || "").localeCompare(a.status || ""))
-  // console.log();
+
   const [plannerDay, setPlannerDay] = useState();
 
   useEffect(() => {
@@ -92,7 +105,6 @@ const PlannerCard = (props) => {
               releaseTrain={item.release}
               emailClient={item.client_email}
               emailUser={item.user_id}
-              
               guests={
                 item.guest
                   ? item.guest.map((g) => ({ client_name: g.client_name }))

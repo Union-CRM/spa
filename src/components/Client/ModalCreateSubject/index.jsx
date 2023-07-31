@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Input,
   ContainerCentral,
@@ -20,12 +20,10 @@ import {
 } from "./styles";
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
-//import subjectList from "../../../context/SubjectContext";
 import { useClientContext } from "../../../hook/useClientContent";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useUserContext } from "../../../hook/useUserContext";
 import { useFetchSubject } from "../../../hook/useFetchSubject";
-//import { useFetchSubjectStatus } from "../../../hook/useFetchSubjectStatus";
 
 const Subject = (props) => {
   const { title } = props;
@@ -54,12 +52,12 @@ const Subject = (props) => {
   };
 
   // CLOSE E SAVE ////////////
-
   const closeModal = () => {
     setModalInfo(true);
     setModalCreateSubject(false);
     setToggleState(1);
   };
+
   const createSubject = () => {
     const newSubject = {
       client: clientTarget.id,
@@ -67,14 +65,9 @@ const Subject = (props) => {
       subject_title: subject,
       subject_text: description,
     };
-
     if (subject && description) {
       insertSubject(newSubject, userTarget.id);
       loadData();
-      //insertSubject(newSubject, userTarget.id);
-      //loadData();
-      //setModal(false);
-      //setModalSubject(false);
     } else {
       setFlag(true);
     }
@@ -87,7 +80,6 @@ const Subject = (props) => {
           <PositionTitle>
             <H1>{title}</H1>
           </PositionTitle>
-
           <Form onSubmit={handleSubmit}>
             <DivName>
               <Label>

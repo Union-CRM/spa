@@ -24,7 +24,6 @@ import {
   Content,
 } from "./styles";
 
-import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useClientContext } from "../../../hook/useClientContent";
 
 import ClientDetails from "../ClientsDetails";
@@ -32,29 +31,26 @@ import SubjectClient from "../SubjectsClient";
 import { useUserContext } from "../../../hook/useUserContext";
 
 const ModalClientDetails = (props) => {
-  const { setModal, id } = props;
-  const { setModalInfo, setId, modalEditClient, setModalEditClient, loadData } =
-    useClientContext();
+  const { id } = props;
+
   const { user, userList, loadUserList } = useUserContext();
-  // UseEffect Clients //
   const { client: clientList, setClientTarget } = useClientContext();
   const client = clientList.filter((item) => item.id === props.id)[0];
-  const [statusClient, setStatus] = useState();
-  const [clientName, setClientName] = useState();
-  const [manager, setManager] = useState();
   const [editable, setEditable] = useState(false);
-  const [activeContent, setActiveContent] = useState(0);
-  const { toggleState, setToggleState } = useClientContext();
-  const { activeTab, setActiveTab } = useClientContext();
+  const {
+    toggleState,
+    setToggleState,
+    activeTab,
+    setActiveTab,
+    setModalInfo,
+    setId,
+    setModalEditClient,
+  } = useClientContext();
 
   useEffect(() => {
     const client = clientList.filter((item) => item.id === props.id)[0];
     setClientTarget(client);
-    if (props.title === "Client Details") {
-      setStatus(client.status);
-      setClientName(client.client_name);
-      setManager(client.user_name);
-    }
+
     if (userList) {
       const usersID = userList.map((u) => u.id);
       setEditable(
@@ -68,7 +64,7 @@ const ModalClientDetails = (props) => {
   const toggleTab = (index) => {
     setToggleState(index);
     setActiveTab(index);
-    setActiveContent(index);
+    //setActiveContent(index);
   };
 
   // Edit //
@@ -92,9 +88,7 @@ const ModalClientDetails = (props) => {
 
           <DivStatus>
             <Status $mode={client.status}>
-              <span onChange={(event) => setStatus(event.target.value)}>
-                {client.status}
-              </span>
+              <span>{client.status}</span>
             </Status>
           </DivStatus>
 
@@ -114,11 +108,7 @@ const ModalClientDetails = (props) => {
             </DivPhoto>
 
             <DivNameManager>
-              <ClientName
-                onChange={(event) => setClientName(event.target.value)}
-              >
-                {client.client}
-              </ClientName>
+              <ClientName>{client.client}</ClientName>
               {activeTab === 0 && editable && (
                 <IconTag onClick={EditModal}>
                   <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />

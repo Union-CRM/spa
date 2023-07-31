@@ -48,10 +48,6 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import ModalSave from "../ModalSuccessfuly";
 import ModalDiscardChanges from "../ModalDiscardChanges";
-import RemarkModal from "../RemarkModal";
-import PopUpCanceled from "../PopUpCanceled";
-import FollowUpModal from "../FollowUpModal";
-import PopUpFinished from "../PopUpFinished";
 import Subject from "../../Subject/CreateEditSubjectModal";
 import ModalError from "../ModalError";
 import { useSearchContext } from "../../../hook/useSearchContext";
@@ -260,7 +256,6 @@ export const BigCalender = (props) => {
                   date
                 )
               ).length;
-              //console.log(numberOfRemark)
               return (
                 <DivDays
                   key={index}

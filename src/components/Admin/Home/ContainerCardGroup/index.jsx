@@ -23,8 +23,6 @@ const ContainerCardsGroup = () => {
   const { group } = useGroupListContext();
   const [active] = useState(abaStatus.ACTIVE);
 
-  
-
   return (
     <>
       {

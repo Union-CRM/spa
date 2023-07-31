@@ -34,8 +34,8 @@ import { usePlannerContext } from "../../../hook/usePlannerContent";
 import { useUserContext } from "../../../hook/useUserContext";
 import { useFetchPlanner } from "../../../hook/useFetchPlanner";
 import { useClientContext } from "../../../hook/useClientContent";
-import LoginInvalid from '../../Geral/LoginModals/LoginInvalid';
-import { ReactComponent as Download } from "../../../assets/svg/Downloadsheet.svg"
+import LoginInvalid from "../../Geral/LoginModals/LoginInvalid";
+import { ReactComponent as Download } from "../../../assets/svg/Downloadsheet.svg";
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import { TagComponent } from "../../Geral/TagComponent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
@@ -59,8 +59,7 @@ const ModalSheet = (props) => {
   const [invalidHour, setInvalidHour] = useState(false);
   const [invalidDateStart, setInvalidDateStart] = useState(false);
   const [tags, setTags] = useState();
- 
- 
+
   const closeModal = () => {
     setModalDetails(true);
     setModalPlanner(false);
@@ -72,8 +71,6 @@ const ModalSheet = (props) => {
   const { setModalDetails } = useSubjectContext();
 
   const { setModalPlanner } = usePlannerContext();
-  
-
 
   /*const HandleCreatePlanner = (e) => {
 
@@ -119,7 +116,6 @@ const ModalSheet = (props) => {
           setModalPlanner(false);
         } else {
           setTimeout(true);
-          console.log(setTimeout)
           //setInvalidHour(true);
         }
       }
@@ -128,9 +124,8 @@ const ModalSheet = (props) => {
     }} else {
       setFlag(true);
     }
-    console.log("FOIII!!!")
-  };*/
 
+  };*/
 
   useEffect(() => {
     if (clientList) {
@@ -142,76 +137,71 @@ const ModalSheet = (props) => {
     }
   }, []);
 
-
-
   return (
     <>
       <ContainerCentral>
         <Container>
           <ContainerGray>
             <DivHeader>
-              <Download/><Title>Export Remark Details Spreedsheet</Title>
+              <Download />
+              <Title>Export Remark Details Spreedsheet</Title>
             </DivHeader>
             <ContainerChildren>
               <Form>
-                  <DivDate>
-                    <Label>
-                      Start Date
-                      <Input
-                        widthInput={"93%"}
-                        type="date"
-                        name="date"
-                        defaultValue={date}
-                        onChange={(e) => setDate(e.target.value)}
-                        required={flag && !date ? true : false}
+                <DivDate>
+                  <Label>
+                    Start Date
+                    <Input
+                      widthInput={"93%"}
+                      type="date"
+                      name="date"
+                      defaultValue={date}
+                      onChange={(e) => setDate(e.target.value)}
+                      required={flag && !date ? true : false}
                       //placeholder={flag && !name ? "Required field" : ""}
                       //value={name}
                       //onChange={(event) => setName(event.target.value)}*/
-                      />
-                    </Label>
-                    <Label>
-                      End Date
-                      <Input
-                        widthInput={"93%"}
-                        type="date"
-                        name="date"
-                        defaultValue={date}
-                        onChange={(e) => setDate(e.target.value)}
-                        required={flag && !date ? true : false}
+                    />
+                  </Label>
+                  <Label>
+                    End Date
+                    <Input
+                      widthInput={"93%"}
+                      type="date"
+                      name="date"
+                      defaultValue={date}
+                      onChange={(e) => setDate(e.target.value)}
+                      required={flag && !date ? true : false}
                       //placeholder={flag && !name ? "Required field" : ""}
                       //value={name}
                       //onChange={(event) => setName(event.target.value)}*/
-                      />
-                    </Label>
-                  </DivDate>
+                    />
+                  </Label>
+                </DivDate>
 
-                  <DivCheck>
-                      <Box type="checkbox" name="ola" value="olá"/>
-                      <span>Just This Day</span>
-                  </DivCheck> 
-                  
-                  <DivSubject>
-                    <TagComponent
-                      options={tags ? tags : []}
-                      tags={tags}
-                      placeholder={"Subjects"}
-                      label={"Subjects"}
-                      top={"130%"}
-                      width={"100%"}
-                      widths={"100%"}
-                      sizeHeight={"6.5vh"}
-                      heights={"15vh"}
-                      display={"flex"}
-                      sizeMenuList={"10vw"}
-                      sizeMenu={"40%"}
-                      set={(t) => setTags(t)}
-                      />
-                  </DivSubject>
+                <DivCheck>
+                  <Box type="checkbox" name="ola" value="olá" />
+                  <span>Just This Day</span>
+                </DivCheck>
 
-                  
+                <DivSubject>
+                  <TagComponent
+                    options={tags ? tags : []}
+                    tags={tags}
+                    placeholder={"Subjects"}
+                    label={"Subjects"}
+                    top={"130%"}
+                    width={"100%"}
+                    widths={"100%"}
+                    sizeHeight={"6.5vh"}
+                    heights={"15vh"}
+                    display={"flex"}
+                    sizeMenuList={"10vw"}
+                    sizeMenu={"40%"}
+                    set={(t) => setTags(t)}
+                  />
+                </DivSubject>
               </Form>{" "}
-
-
               <DivButton>
                 <ClickButton>
                   <ButtonDefault
@@ -221,21 +211,34 @@ const ModalSheet = (props) => {
                     name={"Export"}
                   />
                 </ClickButton>
-                
 
-                {invalidHour &&
-                  <AlertaDate><span>The start time must be equal to or greater than the current time.</span></AlertaDate>}
-                {flag &&
-                <AlertaDate><span>
-                Please make sure all fields are filled in to continue.</span></AlertaDate>}
+                {invalidHour && (
+                  <AlertaDate>
+                    <span>
+                      The start time must be equal to or greater than the
+                      current time.
+                    </span>
+                  </AlertaDate>
+                )}
+                {flag && (
+                  <AlertaDate>
+                    <span>
+                      Please make sure all fields are filled in to continue.
+                    </span>
+                  </AlertaDate>
+                )}
 
-                {invalidDateStart &&
-                <AlertaDate><span>The end date must be equal to or greater than the current date.</span></AlertaDate>}
-
+                {invalidDateStart && (
+                  <AlertaDate>
+                    <span>
+                      The end date must be equal to or greater than the current
+                      date.
+                    </span>
+                  </AlertaDate>
+                )}
               </DivButton>
             </ContainerChildren>
-
-          </ContainerGray>        
+          </ContainerGray>
         </Container>
       </ContainerCentral>
     </>

@@ -21,7 +21,7 @@ import { useUserContext } from "../../../../hook/useUserContext";
 import { useFetchUser } from "../../../../hook/useFetchUser";
 
 const AddEditUser = (props) => {
-  const { user, setModalPassword, userTarget } = useUserContext();
+  const { setModalPassword, userTarget } = useUserContext();
   const { createUser, updateUserNoPSW } = useFetchUser();
   const [newUser, setNewUser] = useState(entityUser);
   const [flag, setFlag] = useState(false);
@@ -80,7 +80,7 @@ const AddEditUser = (props) => {
   const levelOptions = levels
     .map((l) => {
       //if (l < user.level) {
-        return { value: l, label: l };
+      return { value: l, label: l };
       //}
     })
     .filter((l) => l);

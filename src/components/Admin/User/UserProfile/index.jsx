@@ -24,7 +24,6 @@ import {
   PreviousPath,
 } from "./styles";
 import Subject from "../../../Grafico/Subject";
-import Group from "../../../Grafico/Group";
 import Subtitle from "../../../../assets/FontSystem/Subtitle";
 import PlannerCard from "../../../Planner/PlannerCard";
 import { BigCalender } from "../../../Planner/Calendar/index";
@@ -33,13 +32,11 @@ import { useUserContext } from "../../../../hook/useUserContext";
 import { useSubjectContext } from "../../../../hook/useSubjectContent";
 import { usePlannerContext } from "../../../../hook/usePlannerContext";
 import Body from "../../../../assets/FontSystem/Body";
-import IconSystem from "../../../../assets/IconSystem";
 import SubjectList from "../../../Subject/SubjectCardListView";
 import { CustomerContextProvider } from "../../../../context/CustomerContext";
 import ModalPlanner from "../../../Planner/AddEditPlanner";
 import ModalDiscardChanges from "../../../Planner/ModalDiscardChanges";
 import ModalSave from "../../../Planner/ModalSuccessfuly";
-import RemarkModal from "../../../Planner/RemarkModal";
 import PopUpCanceled from "../../../Planner/PopUpCanceled";
 import FollowUpModal from "../../../Planner/FollowUpModal";
 import PopUpFinished from "../../../Planner/PopUpFinished";

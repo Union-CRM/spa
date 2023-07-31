@@ -27,7 +27,7 @@ const SubjectCard = ({
 }) => {
   return (
     <Container>
-      <Card $mode={status}>
+      <Card name="Card" $mode={status}>
         <Header>
           <Status $mode={status}>
             <StatusSpan>{status}</StatusSpan>

@@ -48,7 +48,7 @@ const ContainerRemarkReport = () => {
   const [flagStartDate, setFlagStartDate] = useState(false);
   const [remarkList, setRemarkList] = useState([]);
   const [plannerList, setPlannerList] = useState([]);
-  const [clientList, setClientList] = useState([])
+  const [clientList, setClientList] = useState([]);
   const [option, setOption] = useState({ value: 1, label: "Remark" });
   const [view, setView] = useState("Remark");
   //console.log(planner);
@@ -60,9 +60,11 @@ const ContainerRemarkReport = () => {
     if (userList) {
       setUserOptions([
         { id: user.id, value: user.id, label: user.name },
-        ...userList.map((u) => {
-          return { id: u.id, value: u.id, label: u.name };
-        }),
+        ...userList
+          .sort((a, b) => (a.name || "").localeCompare(b.name || ""))
+          .map((u) => {
+            return { id: u.id, value: u.id, label: u.name };
+          }),
       ]);
     }
   }, [userList]);
@@ -74,7 +76,6 @@ const ContainerRemarkReport = () => {
   const handleSelectOption = (value) => {
     setOption(Options.filter((o) => o.value === value)[0]);
   };
-
 
   const handleDownload = () => {
     setView(option.label);
@@ -148,8 +149,8 @@ const ContainerRemarkReport = () => {
             }),
           ];
           break;
-       
-      case "Client":
+
+        case "Client":
           data = [
             [
               "Client",
@@ -168,8 +169,7 @@ const ContainerRemarkReport = () => {
                 c.user_name,
                 c.projectManager,
                 c.director,
-                c.superintendent
-
+                c.superintendent,
               ];
             }),
           ];
@@ -192,7 +192,7 @@ const ContainerRemarkReport = () => {
 
   const Filter = (opt) => {
     if (userTarget.label) {
-      if(option.label ==="Client"){
+      if (option.label === "Client") {
         return opt.filter((r) => r.user_id === userTarget.value);
       }
       if (startDate && endDate) {
@@ -243,54 +243,84 @@ const ContainerRemarkReport = () => {
     }
   };
 
-  const [orderRemark,setOrderRemark]=useState("user_name")
-  const [orderPlanner, setOrderPlanner] = useState("")
-  const [orderClient, setOrderClient] = useState("")
-  const handleSelectOrder=(i)=>{
-    setOrderRemark(remarkOrder[i])
-    setOrderPlanner(plannerOrder[i])
-    setOrderClient(clientOrder[i])
-  }
+  const [orderRemark, setOrderRemark] = useState("user_name");
+  const [orderPlanner, setOrderPlanner] = useState("");
+  const [orderClient, setOrderClient] = useState("");
+  const handleSelectOrder = (i) => {
+    setOrderRemark(remarkOrder[i]);
+    setOrderPlanner(plannerOrder[i]);
+    setOrderClient(clientOrder[i]);
+  };
 
-  const FilterClient = ()=>{
-    let projectManager = client.filter((c)=> c.role_id===12);
-    let superintendent = client.filter((c)=> c.role_id===13);
-    let director = client.filter((c)=> c.role_id===14);
-    if(userTarget.label){
-      return client.map((c)=>{
-        const pm = projectManager.filter((pm)=> pm.release_id===c.release_id).length>0 ? projectManager.filter((pm)=> pm.release_id===c.release_id)[0].client : " ";
-        const sup = superintendent.filter((s)=> s.release_id===c.release_id).length>0 ? superintendent.filter((sup)=> sup.release_id===c.release_id)[0].client : " ";
-        const dir = director.filter((d)=> d.release_id===c.release_id).length>0 ? director.filter((d)=> d.release_id===c.release_id)[0].client : " ";
-        return {...c, projectManager:pm, superintendent: sup,director:dir}; 
-    }).filter((r) => r.user_id === userTarget.value)
-
+  const FilterClient = () => {
+    let projectManager = client.filter((c) => c.role_id === 12);
+    let superintendent = client.filter((c) => c.role_id === 13);
+    let director = client.filter((c) => c.role_id === 14);
+    if (userTarget.label) {
+      return client
+        .map((c) => {
+          const pm =
+            projectManager.filter((pm) => pm.release_id === c.release_id)
+              .length > 0
+              ? projectManager.filter((pm) => pm.release_id === c.release_id)[0]
+                  .client
+              : " ";
+          const sup =
+            superintendent.filter((s) => s.release_id === c.release_id).length >
+            0
+              ? superintendent.filter(
+                  (sup) => sup.release_id === c.release_id
+                )[0].client
+              : " ";
+          const dir =
+            director.filter((d) => d.release_id === c.release_id).length > 0
+              ? director.filter((d) => d.release_id === c.release_id)[0].client
+              : " ";
+          return {
+            ...c,
+            projectManager: pm,
+            superintendent: sup,
+            director: dir,
+          };
+        })
+        .filter((r) => r.user_id === userTarget.value);
     }
-    return client.map((c)=>{
-        const pm = projectManager.filter((pm)=> pm.release_id===c.release_id).length>0 ? projectManager.filter((pm)=> pm.release_id===c.release_id)[0].client : " ";
-        const sup = superintendent.filter((s)=> s.release_id===c.release_id).length>0 ? superintendent.filter((sup)=> sup.release_id===c.release_id)[0].client : " ";
-        const dir = director.filter((d)=> d.release_id===c.release_id).length>0 ? director.filter((d)=> d.release_id===c.release_id)[0].client : " ";
-        return {...c, projectManager:pm, superintendent: sup,director:dir}; 
-    })
-  
-  }
+    return client.map((c) => {
+      const pm =
+        projectManager.filter((pm) => pm.release_id === c.release_id).length > 0
+          ? projectManager.filter((pm) => pm.release_id === c.release_id)[0]
+              .client
+          : " ";
+      const sup =
+        superintendent.filter((s) => s.release_id === c.release_id).length > 0
+          ? superintendent.filter((sup) => sup.release_id === c.release_id)[0]
+              .client
+          : " ";
+      const dir =
+        director.filter((d) => d.release_id === c.release_id).length > 0
+          ? director.filter((d) => d.release_id === c.release_id)[0].client
+          : " ";
+      return { ...c, projectManager: pm, superintendent: sup, director: dir };
+    });
+  };
 
   const handleCreateReport = () => {
-    switch(option.value){
+    switch (option.value) {
       case 1:
         setRemarkList(Filter(remark));
-      break;
+        break;
       case 2:
         setPlannerList(Filter(planner));
-      break;
+        break;
       case 3:
         setClientList(Filter(client));
         setClientList(FilterClient());
-      break;
+        break;
     }
     setView(option.label);
-    setOrderClient("user")
-    setOrderRemark("user_name")
-    setOrderPlanner("user")
+    setOrderClient("user");
+    setOrderRemark("user_name");
+    setOrderPlanner("user");
     //console.log(Filter(planner));
   };
 
@@ -336,21 +366,25 @@ const ContainerRemarkReport = () => {
             />
           </DivPlanner>
         </DivSelect>
-        {option.label !=="Client" && <DivDate>
-          <Label>Start Date</Label>
-          <InputDate
-            type="date"
-            onChange={(s) => setStartDate(s.target.value)}
-          />
-        </DivDate>}
-        {option.label !== "Client" &&<DivDate>
-          <Label>End Date</Label>
-          <InputDate
-            type="date"
-            onChange={(e) => setEndDate(e.target.value)}
-            required={flagEndDate || (flagEndDate && !endDate) ? true : false}
-          />
-        </DivDate>}
+        {option.label !== "Client" && (
+          <DivDate>
+            <Label>Start Date</Label>
+            <InputDate
+              type="date"
+              onChange={(s) => setStartDate(s.target.value)}
+            />
+          </DivDate>
+        )}
+        {option.label !== "Client" && (
+          <DivDate>
+            <Label>End Date</Label>
+            <InputDate
+              type="date"
+              onChange={(e) => setEndDate(e.target.value)}
+              required={flagEndDate || (flagEndDate && !endDate) ? true : false}
+            />
+          </DivDate>
+        )}
         <DivButtons>
           <ButtonPesquisar onClick={handleCreateReport}>Search</ButtonPesquisar>
           <ButtonExportar onClick={handleDownload}>Export</ButtonExportar>
@@ -360,48 +394,69 @@ const ContainerRemarkReport = () => {
         <span>Total</span>
         {view}:{" "}
         <DivNumber>
-          ({view === "Remark" ? remarkList.length : 
-            view === "Planner" ? plannerList.length: clientList.length})
+          (
+          {view === "Remark"
+            ? remarkList.length
+            : view === "Planner"
+            ? plannerList.length
+            : clientList.length}
+          )
         </DivNumber>
       </Total>
       <ContainerPlanilha>
         <HeaderPlanilha>
           {view === "Remark" &&
-            remarkTitles.map((r,index) => (
+            remarkTitles.map((r, index) => (
               <Title key={index}>
-                <DivCenter onClick={()=>handleSelectOrder(index)}>{r}</DivCenter>
+                <DivCenter onClick={() => handleSelectOrder(index)}>
+                  {r}
+                </DivCenter>
               </Title>
             ))}
           {view === "Planner" &&
-            plannerTitles.map((p,index) => (
-              <Title key={index} onClick={()=>handleSelectOrder(index)}>
+            plannerTitles.map((p, index) => (
+              <Title key={index} onClick={() => handleSelectOrder(index)}>
                 <DivCenter>{p}</DivCenter>
               </Title>
             ))}
-            {view === "Client" &&
-              clientTitles.map((c,index) =>(
-                <Title key={index}>
-                <DivCenter onClick={()=>handleSelectOrder(index)}>{c}</DivCenter>
+          {view === "Client" &&
+            clientTitles.map((c, index) => (
+              <Title key={index}>
+                <DivCenter onClick={() => handleSelectOrder(index)}>
+                  {c}
+                </DivCenter>
               </Title>
-              ))}
+            ))}
         </HeaderPlanilha>
 
         <ContainerRemarks>
           {remarkList &&
             view === "Remark" &&
-            remarkList.sort((a, b) => (a[orderRemark] || "").localeCompare(b[orderRemark] || "")).map((r, index) => (
-              <RemarkCard key={index} index={index} remark={r} />
-            ))}
+            remarkList
+              .sort((a, b) =>
+                (a[orderRemark] || "").localeCompare(b[orderRemark] || "")
+              )
+              .map((r, index) => (
+                <RemarkCard key={index} index={index} remark={r} />
+              ))}
           {plannerList &&
             view === "Planner" &&
-            plannerList.sort((a, b) => (a[orderPlanner] || "").localeCompare(b[orderPlanner] || "")).map((p, index) => (
-              <PlannerCards key={index} index={index} planner={p} />
-            ))}
+            plannerList
+              .sort((a, b) =>
+                (a[orderPlanner] || "").localeCompare(b[orderPlanner] || "")
+              )
+              .map((p, index) => (
+                <PlannerCards key={index} index={index} planner={p} />
+              ))}
           {clientList &&
             view === "Client" &&
-            clientList.sort((a, b) => (a[orderClient] || "").localeCompare(b[orderClient] || "")).map((c, index) => (
-              <ClientsCards key={index} index={index} client={c} />
-            ))}
+            clientList
+              .sort((a, b) =>
+                (a[orderClient] || "").localeCompare(b[orderClient] || "")
+              )
+              .map((c, index) => (
+                <ClientsCards key={index} index={index} client={c} />
+              ))}
         </ContainerRemarks>
       </ContainerPlanilha>
     </Container>
@@ -417,13 +472,13 @@ const Options = [
 ];
 
 const clientTitles = [
-"Client",
-"Business",
-"Release Train",
-"User Name",
-"Project Manager",
-"Director",
-"Superintendent",
+  "Client",
+  "Business",
+  "Release Train",
+  "User Name",
+  "Project Manager",
+  "Director",
+  "Superintendent",
 ];
 
 const remarkTitles = [
@@ -444,7 +499,7 @@ const plannerTitles = [
   "Status",
 ];
 
-const remarkOrder =[
+const remarkOrder = [
   "user_name",
   "client_name",
   "subject_name",
@@ -453,7 +508,7 @@ const remarkOrder =[
   "date_return",
 ];
 
-const plannerOrder =[
+const plannerOrder = [
   "user",
   "client",
   "subject",
@@ -470,6 +525,4 @@ const clientOrder = [
   "projectManager",
   "director",
   "superintendent",
-  ];
-
-
+];
