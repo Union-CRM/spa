@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   ContainerDetails,
   CardSubject,
-  DivSubject,
   StatusSubject,
-  DivTitleSubject,
   TitleSubject,
   DivStatusSubject,
   DivGlobalCard,
@@ -18,14 +16,21 @@ import { useUserContext } from "../../../hook/useUserContext";
 import { Link } from "react-router-dom";
 
 const SubjectsClient = (props) => {
-  const { setModal, id } = props;
+  const { id } = props;
   const { userTarget } = useUserContext();
-  const { loadData, setModalInfo, setModalCreateSubject, clientTarget} =
+  const { setModalInfo, setModalCreateSubject, clientTarget } =
     useClientContext();
   const [status, setStatus] = useState();
-  const { subject: subjectsList, setIdSubject,setId,setModalDetails,setToggleState,setActiveTab,setViewSubject } = useSubjectContext();
+  const {
+    subject: subjectsList,
+    setIdSubject,
+    setId,
+    setModalDetails,
+    setToggleState,
+    setActiveTab,
+    setViewSubject,
+  } = useSubjectContext();
   const [subjects, setSubjects] = useState([]);
-  const { setModalSubject } = useSubjectContext();
 
   useEffect(() => {
     try {
@@ -63,7 +68,6 @@ const SubjectsClient = (props) => {
   };
   const handleClickViewSubject = () => {
     setViewSubject(true);
-  
   };
   return (
     <ContainerDetails>
@@ -87,30 +91,26 @@ const SubjectsClient = (props) => {
 
       {subjects.map((s) => (
         <CardSubject onClick={() => handleEdit(s.id)}>
-                <Link
-                to="/subject"
-                onClick={() => handleClickViewSubject()}
-                style={{ textDecoration: "none", color: "black" }}
-              >
-          <DivGlobalCard>
- 
-            <DivStatusSubject>
+          <Link
+            to="/subject"
+            onClick={() => handleClickViewSubject()}
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <DivGlobalCard>
+              <DivStatusSubject>
+                <StatusSubject $mode={s.status}>
+                  <span>{s.status}</span>
+                </StatusSubject>
+                <TitleSubject>
+                  <span>{s.subject_title}</span>
+                </TitleSubject>
+              </DivStatusSubject>
 
-              <StatusSubject $mode={s.status}>
-                <span>{s.status}</span>
-              </StatusSubject>
-              <TitleSubject>
-                <span>{s.subject_title}</span>
-              </TitleSubject>
-           
-            </DivStatusSubject>
-
-            <CreatedAt>
-              <span>Created </span>
-              {s.created_at.split(" ")[0]}
-            </CreatedAt>
-            
-          </DivGlobalCard>
+              <CreatedAt>
+                <span>Created </span>
+                {s.created_at.split(" ")[0]}
+              </CreatedAt>
+            </DivGlobalCard>
           </Link>
         </CardSubject>
       ))}

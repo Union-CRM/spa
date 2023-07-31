@@ -132,8 +132,8 @@ export const ContainerCards = styled.div`
 // Cards //
 export const BoardStyle = styled.div`
   width: 99%;
-  top: 20px;
-  grid-gap: 20px;
+  top: 10px;
+  //grid-gap: 10px;
   grid-row: 1;
   display: inline-block;
   position: relative;

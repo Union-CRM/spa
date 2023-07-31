@@ -123,7 +123,7 @@ export const BoardStyle = styled.div`
   z-index: 0 !important;
   width: 99%;
   top: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
+  grid-template-columns: repeat(auto-fit, minmax(390px, 2fr));
   grid-gap: 20px;
   grid-row: 1;
   display: grid;
@@ -292,17 +292,16 @@ export const DivInfo = styled.div`
   left: 1%;
 `;
 
-
 export const ContainerLimit = styled.div`
-color:#e41165;
-align-items:center;
-text-align:center;
-justify-content: center;
-font-weight: 800;
-text-decoration: underline;
-padding-bottom: 2%;
-cursor: pointer;
-width:100%;
-bottom: 0;
-margin-top: 35px;
+  color: #e41165;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-weight: 800;
+  text-decoration: underline;
+  padding-bottom: 2%;
+  cursor: pointer;
+  width: 100%;
+  bottom: 0;
+  margin-top: 35px;
 `;

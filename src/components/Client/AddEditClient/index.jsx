@@ -22,9 +22,7 @@ import {
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import { TagComponent } from "../../Geral/TagComponent";
-import { useClientContext } from "../../../hook/useClientContent";
 import { useUserContext } from "../../../hook/useUserContext";
-import { useFetchRelease } from "../../../hook/useFetchRelease";
 import { useFetchCustomer } from "../../../hook/useFetchCustomer";
 import { useFetchClient } from "../../../hook/useFetchClient";
 import { useFetchRole } from "../../../hook/useFetchRole";
@@ -33,13 +31,6 @@ import { useCustomerContext } from "../../../hook/useCustomerContext";
 import { useReleaseContext } from "../../../hook/useReleaseContent";
 
 const AddEditClient = (props) => {
-  /*const {
-    client: clientList,
-    setClient: setClientList,
-    updateStatusClient,
-  } = useClientContext();
-*/
-  // const [clientId, setClientId] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [customer, setCustomer] = useState({});
@@ -73,12 +64,14 @@ const AddEditClient = (props) => {
   useEffect(() => {
     if (releaseList) {
       setReleaseOptions(
-        releaseList.map((item) => ({
-          id: item.id,
-          value: item.id,
-          label: item.name,
-          //status: item.status,
-        }))
+        releaseList
+          .map((item) => ({
+            id: item.id,
+            value: item.id,
+            label: item.name,
+            //status: item.status,
+          }))
+          .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
       );
     }
   }, [releaseList]);
@@ -106,7 +99,6 @@ const AddEditClient = (props) => {
       user_id: userTarget.id,
       tags: tags.map((tag) => ({ tag_id: tag.value })),
     };
-    console.log(newClient);
     if (name && email && role.id && customer.id && releaseObj.id) {
       insertClient(newClient);
       setModal(false);
@@ -116,7 +108,6 @@ const AddEditClient = (props) => {
   };
 
   const handleSelectRelease = (release_id) => {
-    console.log(release_id);
     setReleaseObj(releaseList.filter((item) => item.id === release_id)[0]);
   };
 
@@ -212,6 +203,7 @@ const AddEditClient = (props) => {
                 label={"Role"}
                 sizeSingle={"100%"}
                 sizeMenu={"100%"}
+                sizeHeightList={"25vh"}
                 options={roleList ? roleList : []}
               />
             </DivEmail>

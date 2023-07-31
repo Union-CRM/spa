@@ -26,16 +26,11 @@ import { useRemarkContext } from "../../../hook/useRemarkContent";
 import { useUserContext } from "../../../hook/useUserContext";
 import { useFetchRemark } from "../../../hook/useFetchRemark";
 
-const ModalPlanner = (props) => {
+const ModalRemark = (props) => {
   const [newRemark, setNewRemark] = useState(remarkEntity);
   const { createRemark, updateRemark } = useFetchRemark();
-  const {
-    remarkTarget,
-    setModalEdit,
-    setModalSucess,
-    setModalCreate,
-    setModalRemark,
-  } = useRemarkContext();
+  const { remarkTarget, setModalEdit, setModalCreate, setModalRemark } =
+    useRemarkContext();
 
   const [flag, setFlag] = useState(false);
   const { userTarget } = useUserContext();
@@ -66,12 +61,14 @@ const ModalPlanner = (props) => {
         subjectList
           .filter((s) => s.user_id === userTarget.id)
           .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
+          .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
       );
     } else {
       setSubjectOption(
         subjectList
           .filter((s) => s.user_id === userTarget.id)
           .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
+          .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
       );
     }
   }, [subjectList, userTarget]);
@@ -363,7 +360,7 @@ const StatusOption = [
   { id: 20, value: 20, label: "CANCELED" },
 ];
 
-export default ModalPlanner;
+export default ModalRemark;
 const remarkEntity = {
   remark_name: "",
   text: "",

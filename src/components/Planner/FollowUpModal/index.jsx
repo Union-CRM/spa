@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
-import { GuestComponent } from "../../Geral/Input/GuestsComponent";
 import {
   Container,
   Title,
@@ -25,7 +24,7 @@ const options = [
 ];
 
 const FollowUpModal = (props) => {
-  const { user, userTarget } = useUserContext();
+  const { userTarget } = useUserContext();
   const { createPlanner } = useFetchPlanner();
   const [guests, setGuests] = useState();
   const { plannerEdit } = usePlannerContext();
@@ -105,7 +104,7 @@ const FollowUpModal = (props) => {
           value={plannerEdit.release_title}
           disabled
         ></InputSubject>
-                <PositionTag>
+        <PositionTag>
           <TagComponent
             indicator={"guest"}
             options={clientOption}
@@ -133,9 +132,6 @@ const FollowUpModal = (props) => {
             required
           />
         </PositionSingle>
-        {/*<PositionSingle>
-                <SingleSelect label={"Status"} options={options} sizeHeight={"3.5vh"} sizeSingle={"9vw"}/>
-            </PositionSingle>*/}
         <PositionButtons>
           <ButtonDefault
             type={"userCancel"}

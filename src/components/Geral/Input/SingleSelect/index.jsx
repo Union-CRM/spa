@@ -7,7 +7,7 @@ export const SingleSelect = (props) => {
   const { options, value } = props;
   const animatedComponents = makeAnimated();
   const [index, setIndex] = useState(-1);
-  
+
   useEffect(() => {
     let i = 0;
     let v = props.value;
@@ -17,7 +17,7 @@ export const SingleSelect = (props) => {
       }
       i = i + 1;
     });
-  }, [options,value]);
+  }, [options, value]);
 
   return (
     <>
@@ -46,10 +46,9 @@ export const SingleSelect = (props) => {
             placeholder: (styles, state) => ({
               ...styles,
               color: "#656464",
-             
+
               "::placeholder-shown": {
                 borderColor: "red",
-      
               },
             }),
 
@@ -61,10 +60,10 @@ export const SingleSelect = (props) => {
               height: "28px !important",
               position: "relative !important",
               cursor: "pointer",
-              backgroundColor:  props.backgroundColor || "transparent",
+              backgroundColor: props.backgroundColor || "transparent",
               display: "flex",
               borderRadius: "5px",
-              fontSize:"0.82rem",
+              fontSize: "0.82rem",
               top: "0px",
               alignItems: "center",
             }),
@@ -79,7 +78,7 @@ export const SingleSelect = (props) => {
             singleValue: (baseStyles, state) => ({
               ...baseStyles,
               color: "#656464",
-              
+
               width: props.sizeSingle || "512px",
             }),
             menu: (baseStyles, state) => ({
@@ -89,6 +88,7 @@ export const SingleSelect = (props) => {
             menuList: (baseStyles, state) => ({
               ...baseStyles,
               maxWidth: props.sizeMenuList || "auto",
+              maxHeight: props.sizeHeightList || "150px",
               overflowY: "scroll",
               "&::-webkit-scrollbar": {
                 backgroundColor: "#FFF",

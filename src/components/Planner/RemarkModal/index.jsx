@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Clock from "../../Geral/Input/clock";
-import { TagComponent } from "../../Geral/TagComponent";
+import React, { useState } from "react";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
-import SingleSelect from "../../Geral/Input/SingleSelect";
-import { useClientContext } from "../../../hook/useClientContent";
 import { usePlannerContext } from "../../../hook/usePlannerContext";
-import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useFetchRemark } from "../../../hook/useFetchRemark";
 import { useFetchPlanner } from "../../../hook/useFetchPlanner";
 import {
@@ -18,8 +13,6 @@ import {
   PositionLabel,
   DivClocks,
   Form,
-  PositionTags,
-  PositionStatus,
   DivDate,
   InputDate,
   DivStart,
@@ -31,21 +24,16 @@ import {
   PositionButtons,
   Text,
 } from "./styles";
-import ModalDiscardChanges from "../ModalDiscardChanges";
-import ModalSave from "../ModalSuccessfuly";
 
 const RemarkModal = ({ title, setOpenModal }) => {
   //const [date,setDate]= useState();
   const {
     plannerEdit,
-    modalDiscard,
-    setModalDiscard,
     setModalRemark,
     setModalPopUpFinished,
     setModalPopUpCanceled,
   } = usePlannerContext();
   const { updatePlanner } = useFetchPlanner();
-
   const { createRemark } = useFetchRemark();
   const [text, setText] = useState("");
   const date = new Date(plannerEdit.date);

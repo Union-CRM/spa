@@ -28,12 +28,13 @@ export const Card = styled.div`
   position: relative;
   cursor: pointer;
   width: auto;
-  height: 100%;
+  height: 90%;
   background-color: #f5f7fa;
   z-index: 0 !important;
   padding-left: 10px;
-  margin-top: 1%;
+  margin-top: 0.5%;
 `;
+
 export const Status = styled.div`
   ${(props) => {
     switch (props.$mode) {

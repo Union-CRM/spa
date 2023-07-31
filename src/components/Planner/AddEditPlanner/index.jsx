@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { TagComponent } from "../../Geral/TagComponent";
-import { GuestComponent } from "../../Geral/Input/GuestsComponent";
 import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import SingleSelect from "../../Geral/Input/SingleSelect";
 import { useClientContext } from "../../../hook/useClientContent";
@@ -57,8 +56,7 @@ const ModalPlanner = (props) => {
     modalReschedule,
   } = usePlannerContext();
   const { createPlanner, updatePlanner } = useFetchPlanner();
-  const { user, userTarget, userList, usersGlobal } = useUserContext();
-  const [flag, setFlag] = useState(false);
+  const { userTarget, usersGlobal } = useUserContext();
 
   const [flagSubject, setFlagSubject] = useState(false);
   const [flagDate, setFlagDate] = useState(false);
@@ -85,6 +83,7 @@ const ModalPlanner = (props) => {
             s.user_id === userTarget.id
         )
         .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
+        .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
     );
   }, [subjectList]);
 
@@ -140,14 +139,11 @@ const ModalPlanner = (props) => {
   const HandleCreatePlanner = () => {
     var aux = "";
     var todayDate = new Date();
-
     const partesData = date.split("/");
-
     //Data enviada do formulário
     var data = new Date(
       partesData[1] + "/" + partesData[2] + "/" + partesData[0]
     );
-
     //Data de hoje
     var tDate = new Date(
       todayDate.getMonth() +
@@ -182,9 +178,35 @@ const ModalPlanner = (props) => {
     }
 
     if (timeStart && timeFinish && date) {
-     
-        setFlagDate(false);
+      setFlagDate(false);
+      setFlagStart(false);
+      if (timeFinish > timeStart) {
+        setFlagFinish(false);
+
+        const newPlanner = {
+          name: subjectObj.subject_title,
+          date: date + " " + timeStart,
+          duration: timeFinish,
+          subject: subjectObj.id,
+          client: subjectObj.client_id,
+          release: subjectObj.release_id,
+          user: userTarget.id,
+          guest: guest.map((g) => ({ client_id: g.value })),
+        };
+        if (subjectObj.id && date && timeFinish && timeStart) {
+          createPlanner(newPlanner);
+        }
+      } else {
+        setFlagFinish(true);
+      }
+    } else if (data < tDate) {
+      setFlagDate(true);
+    } else {
+      setFlagDate(false);
+
+      if (timeStart >= aux) {
         setFlagStart(false);
+
         if (timeFinish > timeStart) {
           setFlagFinish(false);
 
@@ -204,38 +226,10 @@ const ModalPlanner = (props) => {
         } else {
           setFlagFinish(true);
         }
-      } else if (data < tDate) {
-        setFlagDate(true);
       } else {
-        setFlagDate(false);
-
-        if (timeStart >= aux) {
-          setFlagStart(false);
-
-          if (timeFinish > timeStart) {
-            setFlagFinish(false);
-
-            const newPlanner = {
-              name: subjectObj.subject_title,
-              date: date + " " + timeStart,
-              duration: timeFinish,
-              subject: subjectObj.id,
-              client: subjectObj.client_id,
-              release: subjectObj.release_id,
-              user: userTarget.id,
-              guest: guest.map((g) => ({ client_id: g.value })),
-            };
-            if (subjectObj.id && date && timeFinish && timeStart) {
-              createPlanner(newPlanner);
-            }
-          } else {
-            setFlagFinish(true);
-          }
-        } else {
-          setFlagStart(true);
-        }
+        setFlagStart(true);
       }
-    
+    }
   };
 
   const handleCancel = (e) => {
@@ -277,18 +271,6 @@ const ModalPlanner = (props) => {
       <Form>
         <PositionInputs>
           {!modalEdit && !modalReschedule && (
-            /*<SingleSelect
-              //placeholder={flagSubject && !subjectObj.id ? "Required field" : ""}
-              required={(flagSubject) || (flagSubject && !subjectObj.id) ? true : false} //testar melhor
-              set={(s) => handleSelectSubject(s)}
-              options={subjectOption}
-              name={"subject"}
-              label={"Subject"}
-              sizeHeight={"3.5vh"}
-              sizeSingle={"26vw"}
-              onChange={(s) => handleSelectSubject(s)}
-            />*/
-
             <SingleSelect
               placeholder={
                 flagSubject && !subjectObj.id ? "Required field" : ""

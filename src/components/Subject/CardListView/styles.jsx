@@ -86,14 +86,14 @@ export const Card = styled.div`
   z-index: 0;
   padding-left: 5%;
   padding-right: 5%;
-  padding-bottom: 10%;
+  padding-bottom: 5%;
   @media (min-width: 1355px) and (max-width: 1824px) {
     height: 185px;
     width: 90%;
-    margin-bottom: 5%;
+    margin-bottom: 1%;
   }
   @media (max-width: 1354px) {
-    margin-bottom: 5%;
+    margin-bottom: 1%;
   }
 `;
 

@@ -14,6 +14,7 @@ import {
   InputToggle,
   ToggleContainer,
   ToggleButton,
+  SpanDot,
 } from "./styles";
 import Body from "../../../../../assets/FontSystem/Body";
 import Subtitle from "../../../../../assets/FontSystem/Subtitle";
@@ -87,6 +88,7 @@ const UserCard = (props) => {
 
           <DivInfo>
             <DivLevel>
+              <SpanDot>Access Level: </SpanDot>
               <Dot
                 isActive={isActive}
                 bgColor={user.status === "ACTIVE" ? "#e41165" : "#7a7a7a"}
@@ -132,7 +134,7 @@ const UserCard = (props) => {
               <ButtonDefault
                 isActive={isActive}
                 onClick={() => handleClickViewProfile()}
-                type={user.status === "ACTIVE" ? "adminSave" : "userDisable"}
+                type={user.status === "ACTIVE" ? "adminCancel" : "userDisable"}
                 weightFont={"135"}
                 sizeFont={"14px"}
                 name={"View Profile"}

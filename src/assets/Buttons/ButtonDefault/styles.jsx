@@ -59,7 +59,7 @@ export const Button = styled.button`
   font-size: ${(props) => props.sizeFont || "12px"};
   font-weight: ${(props) => props.weightFont || "400"};
   border-radius: 0.5em;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+
   cursor: pointer;
   :hover {
     opacity: 0.8;

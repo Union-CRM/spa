@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   ContainerCentral,
@@ -25,34 +25,20 @@ import ButtonDefault from "../../../assets/Buttons/ButtonDefault";
 import { TagComponent } from "../../Geral/TagComponent";
 import { useClientContext } from "../../../hook/useClientContent";
 import { useUserContext } from "../../../hook/useUserContext";
-import { useFetchRelease } from "../../../hook/useFetchRelease";
 import { useFetchCustomer } from "../../../hook/useFetchCustomer";
 import { useFetchClient } from "../../../hook/useFetchClient";
 import { useFetchRole } from "../../../hook/useFetchRole";
 import { useFetchTag } from "../../../hook/useFetchTag";
-import { useFetchUser } from "../../../hook/useFetchUser";
-import { useFetchUsersNotin } from "../../../hook/useFetchUsersNotin";
 import { useReleaseContext } from "../../../hook/useReleaseContent";
 
 const ModalClientEdit = (props) => {
-  const {
-    client: clientList,
-    setClient: setClientList,
-    loadData,
-  } = useClientContext();
+  const { client: clientList } = useClientContext();
 
   const { user } = useUserContext();
   const [clientId, setClientId] = useState();
 
-  const {
-    setModalInfo,
-    setId,
-    modalEditClient,
-    setModalEditClient,
-    toggleState,
-    setToggleState,
-    idClient,
-  } = useClientContext();
+  const { setModalInfo, setModalEditClient, setToggleState } =
+    useClientContext();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [customer, setCustomer] = useState({});
@@ -60,11 +46,7 @@ const ModalClientEdit = (props) => {
   const [role, setRole] = useState({});
   const [status, setStatus] = useState({ value: "Active" });
   const [users, setUsers] = useState([]);
-
-  //const {userList} = useFetchUser("Users");
-
   const { release: releaseList } = useReleaseContext("release");
-
   const [customerList, setCustomerList] = useState([]);
   const { roleList } = useFetchRole("Role");
   const { tagList } = useFetchTag("Tag");
@@ -74,10 +56,9 @@ const ModalClientEdit = (props) => {
     business_name: "",
   });
   const [tags, setTags] = useState([]);
-  const { insertClient, updateClient, updateStatusClient } = useFetchClient();
+  const { updateClient, updateStatusClient } = useFetchClient();
   const [flag, setFlag] = useState(false);
-  const { setModal, id, title } = props;
-  const { loadUsers } = useUserContext();
+  const { id } = props;
   const [releaseOptions, setReleaseOptions] = useState([]);
   const { loadCustomerOptions } = useFetchCustomer();
 
@@ -108,16 +89,6 @@ const ModalClientEdit = (props) => {
       editClient();
     }
   };
-
-  function getId() {
-    let lastId = 1;
-
-    clientList.map((c) => {
-      lastId = c.id > lastId ? c.id : lastId;
-    });
-
-    return lastId + 1;
-  }
 
   useEffect(() => {
     if (props.title === "Edit Client") {

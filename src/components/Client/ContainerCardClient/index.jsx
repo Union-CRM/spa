@@ -213,13 +213,6 @@ const ContainerCards = (props) => {
             </ContainerLimit>
           )}
         </CardsContainer>
-
-        {/* Metodo Array para definir qtd de paginas */}
-        {/* <DivPages>
-          {Array.from(Array(pages), (item, index) => {
-            return<ButtonPage>{index}</ButtonPage>
-          })}
-        </DivPages> */}
       </ContainerHeaderAndCards>
 
       <DivModal $mode={modalAddClient} />
@@ -261,12 +254,9 @@ const ContainerCards = (props) => {
       {modalCreateSubject && (
         <Subject id={idSubject} title={"Create Subject"} />
       )}
-
       {modalPopUp && (
         <ModalPopUp id={id} modalClose={() => setModalPopUp(false)} />
       )}
-
-      {/*modalEdit && <Subject id={idSubject} title={"Edit Subject"} />*/}
     </ContainerGlobal>
   );
 };

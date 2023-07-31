@@ -1,6 +1,5 @@
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import Body from "../../../../../assets/FontSystem/Body";
-import Subtitle from "../../../../../assets/FontSystem/Subtitle";
 import {
   ContainerCards,
   DivInfo,
@@ -8,7 +7,6 @@ import {
   DivPhoto,
   DivUserInformation,
   DivTextCard,
-  TextSubject,
   ClientContent,
   UserContent,
   DivResponsible,
@@ -16,16 +14,11 @@ import {
   NameUser,
   TitleDiv,
   H1,
-  DivDonut,
 } from "./styles";
 import { Link } from "react-router-dom";
 import { useGroupListContext } from "../../../../../hook/useGroupListContext";
-import { useSubjectContext } from "../../../../../hook/useSubjectContent";
-import { usePlannerContext } from "../../../../../hook/usePlannerContext";
-import { useFetchAdmGroupList } from "../../../../../hook/useFetchAdmGroupList";
 
 const Group = (props) => {
- 
   const {
     group: groupList,
     setModalInfo,
@@ -33,18 +26,9 @@ const Group = (props) => {
     setInfoGroup,
     setToggleState,
     setActiveTab,
-    countGroups
+    countGroups,
   } = useGroupListContext();
   const group = groupList.filter((g) => g.id === props.id)[0];
-  /*const { subject } = useSubjectContext();
-
-  const { planner } = usePlannerContext();
-  const plannerGroup = planner
-    ? planner.filter((p) => group.usersId.includes(p.user_id))
-    : [];
-  const subjectGroup = subject
-    ? subject.filter((s) => group.usersId.includes(s.user_id))
-    : [];*/
 
   const handleClickViewGroup = () => {
     setInfoGroup(false);
@@ -53,11 +37,11 @@ const Group = (props) => {
     setModalInfo(true);
     setId(group.id);
   };
-  const [count,setCount] = useState();
+  const [count, setCount] = useState();
 
-  useEffect( () =>{
-    setCount(countGroups.filter((item) => item.group_id === group.id)[0])
-  },[countGroups])
+  useEffect(() => {
+    setCount(countGroups.filter((item) => item.group_id === group.id)[0]);
+  }, [countGroups]);
 
   return (
     <>
@@ -86,36 +70,7 @@ const Group = (props) => {
                 colorFont={"rgba(0, 0, 0, 1)"}
               />
             </DivInfo>
-            <DivTextCard>
-              {/*<TextSubject>
-                <Subtitle
-                  type={"TextDescription"}
-                  name={"Subjects"}
-                  colorFont={"rgba(136, 136, 136, 1)"}
-                />
-                <DivDonut>
-                  <Body
-                    type={"Body2"}
-                    name={subjectGroup.length}
-                    colorFont={"rgba(0, 0, 0, 0.6);"}
-                  />
-                </DivDonut>
-              </TextSubject>*/}
-              {/*<TextSubject>
-                <Subtitle
-                  type={"TextDescription"}
-                  name={"Planners "}
-                  colorFont={"rgba(136, 136, 136, 1)"}
-                />
-                <DivDonut>
-                  <Body
-                    type={"Body2"}
-                    name={plannerGroup.length}
-                    colorFont={"rgba(0, 0, 0, 0.6);"}
-                  />
-                </DivDonut>
-              </TextSubject>*/}
-            </DivTextCard>
+            <DivTextCard></DivTextCard>
           </ClientContent>
           <UserContent>
             <DivResponsible>
@@ -131,11 +86,6 @@ const Group = (props) => {
               </DivPhoto>
               <DivNameEmail>
                 <NameUser>{group.responsible_name}</NameUser>
-                {/*<Subtitle
-                type={"TextDescription"}
-                name={"props.emailUser"}
-                colorFont={"#888888"}
-              ></Subtitle>*/}
               </DivNameEmail>
             </DivUserInformation>
           </UserContent>
