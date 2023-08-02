@@ -78,7 +78,7 @@ const EditRemark = (props) => {
       newRemark.date_return &&
       newRemark.text
     ) {
-      setRemarkEdit(newRemark)
+      setRemarkEdit(newRemark);
       updateRemark(newRemark, remarkEdit.id).then(loadRemarkList());
       loadRemarkList();
     } else {
@@ -91,7 +91,6 @@ const EditRemark = (props) => {
       editRemark();
       setToggleState(3);
       setActiveTab(3);
-      console.log("ok")
     }
   };
 
@@ -113,7 +112,6 @@ const EditRemark = (props) => {
                 widthInput={"80%"}
                 type="date"
                 required={flag && !date ? true : false}
-
                 value={dateCorrect(dateReturn)}
                 onChange={(event) => setDateReturn(event.target.value)}
               />
@@ -193,8 +191,8 @@ function SplitName(n) {
 
   return user1;
 }
-function dateCorrect (dateReturn, date) {
-  if (dateReturn > date){
-    return 'Insira uma data válida!'
+function dateCorrect(dateReturn, date) {
+  if (dateReturn > date) {
+    return "Insira uma data válida!";
   }
 }

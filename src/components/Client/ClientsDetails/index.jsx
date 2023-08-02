@@ -17,52 +17,52 @@ import { useClientContext } from "../../../hook/useClientContent";
 const ClientDetails = (props) => {
   const { id } = props;
 
-  const { client: clientList } = useClientContext();
-  const client = clientList.filter((item) => item.id === props.id)[0];
+  const { client: clientList, clientTarget } = useClientContext();
+  //const client = clientList.filter((item) => item.id === props.id)[0];
 
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
     if (props.title === "Details Clients") {
       setTags(
-        client.tags.map((item) => ({
+        clientTarget.tags.map((item) => ({
           value: item.value,
           label: item.label,
           color: colors[Math.floor(Math.random() * (colors.length - 1))],
         }))
       );
     }
-  }, [id, clientList, client.tags, props.title]);
+  }, [id, clientList, clientTarget.tags, props.title]);
 
   return (
     <ContainerDetails>
       <DivBetween>
         <DivEmail>
           Email
-          <span>{client.email}</span>
+          <span>{clientTarget.email}</span>
         </DivEmail>
 
         <DivRole>
           Role
-          <span>{client.textRole}</span>
+          <span>{clientTarget.textRole}</span>
         </DivRole>
       </DivBetween>
 
       <DivBetween>
         <DivCustomer>
           Customer
-          <span>{client.textCustomer}</span>
+          <span>{clientTarget.textCustomer}</span>
         </DivCustomer>
 
         <DivRelease>
           Release Train
-          <span>{client.textRelease}</span>
+          <span>{clientTarget.textRelease}</span>
         </DivRelease>
       </DivBetween>
 
       <DivBusiness>
         Business
-        <span>{client.textBusiness}</span>
+        <span>{clientTarget.textBusiness}</span>
       </DivBusiness>
 
       <DivTags>
