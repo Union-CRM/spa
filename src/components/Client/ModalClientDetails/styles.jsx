@@ -103,13 +103,31 @@ export const ContainerBorder = styled.div`
   min-height: 100px;
   position: relative;
   margin-top: 0.9%;
-  border-radius: 0px 0px 5px 5px;
+  border-radius: 8px 8px 5px 5px;
   box-shadow: 1px 0px 4px rgba(0, 0, 0, 0.25);
   background-color: transparent;
-  @media (min-width: 1700px) and (max-width: 2500px) {
-  }
+
   @media (min-width: 100px) and (max-width: 1500px) {
     height: 68%;
+  }
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    //background-color: #ffffff;
+    margin-top: 15px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 80%;
+    background-color: #d9d9d9;
   }
 `;
 
@@ -236,7 +254,7 @@ export const DivPhoto = styled.div`
 
 export const DivPhotoI = styled.div`
   background-color: #d9d9d9;
-  border: 5px solid #007bff;
+  border: 3px solid #007bff;
   width: 58px;
   height: 59px;
   border-radius: 100%;
@@ -325,8 +343,9 @@ export const TabButton = styled.button`
 
 export const Content = styled.div`
   background: white;
-  width: 100%;
+  width: 98%;
   height: auto;
+  border-radius: 8px;
   display: ${(props) => (props.active ? "block" : "none")};
 `;
 
