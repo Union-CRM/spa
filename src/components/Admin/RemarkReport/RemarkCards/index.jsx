@@ -15,6 +15,9 @@ const RemarkCards = (props) => {
         <DivCenter>{props.remark.client_name}</DivCenter>
       </DivInfo>
       <DivInfo>
+        <DivCenter>{props.remark.client_role_name}</DivCenter>
+      </DivInfo>
+      <DivInfo>
         <DivCenter>{props.remark.subject_name}</DivCenter>
       </DivInfo>
       <DivInfo>

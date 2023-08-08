@@ -19,8 +19,16 @@ import {
   ButtonExportar,
   ContainerRemarks,
   Total,
+  PositionArrow,
   DivCenter,
+  DivSvg,
+  DivMsg,
+  DivDates,
 } from "./styles";
+import { ReactComponent as ArrowDown } from "../../../assets/svg/Drop.svg";
+import { ReactComponent as UpArrow } from "../../../assets/svg/UpArrow.svg";
+import { ReactComponent as AZdown } from "../../../assets/svg/AZDown.svg.svg";
+import { ReactComponent as AZup } from "../../../assets/svg/AZUp.svg";
 import { useUserContext } from "../../../hook/useUserContext";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
 import { usePlannerContext } from "../../../hook/usePlannerContext";
@@ -30,17 +38,20 @@ import RemarkCard from "./RemarkCards/index";
 import PlannerCards from "./PlannerCards/index";
 import ClientsCards from "./ClientCards/index";
 import * as XLSX from "xlsx";
-
+import { ReactComponent as Search } from "../../../assets/svg/Search.svg";
+import { ReactComponent as Download } from "../../../assets/svg/Download.svg";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { ReactComponent as Info } from "../../../assets/svg/Info.svg";
+import { TagComponent } from "../../Geral/TagComponent";
+import { ReactComponent as CalendarUp } from "../../../assets/svg/CalendarUP.svg";
+import { ReactComponent as CalendarDown } from "../../../assets/svg/CalendarDown.svg";
 
 const ContainerRemarkReport = () => {
   const { user, userList, loadUserList } = useUserContext();
   const { remark } = useRemarkContext();
   const { planner } = usePlannerContext();
   const { client } = useClientContext();
-  const [userTarget, setUserTarget] = useState({ label: "" });
   const [userOptions, setUserOptions] = useState([]);
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -51,7 +62,10 @@ const ContainerRemarkReport = () => {
   const [clientList, setClientList] = useState([]);
   const [option, setOption] = useState({ value: 1, label: "Remark" });
   const [view, setView] = useState("Remark");
-  //console.log(planner);
+  const [users, setUsers] = useState([]);
+
+  //const [arrow, setArrow] = useState(false);
+
   useEffect(() => {
     loadUserList();
   }, []);
@@ -68,10 +82,6 @@ const ContainerRemarkReport = () => {
       ]);
     }
   }, [userList]);
-
-  const selectUser = (id) => {
-    setUserTarget(userOptions.filter((u) => u.value === id)[0]);
-  };
 
   const handleSelectOption = (value) => {
     setOption(Options.filter((o) => o.value === value)[0]);
@@ -90,6 +100,7 @@ const ContainerRemarkReport = () => {
             [
               "User",
               "Client",
+              "Client Role",
               "Subject",
               "Remark",
               "Remark Text",
@@ -104,6 +115,7 @@ const ContainerRemarkReport = () => {
               return [
                 r.user_name,
                 r.client_name,
+                r.client_role_name,
                 r.subject_name,
                 r.remark_name,
                 r.text,
@@ -122,6 +134,7 @@ const ContainerRemarkReport = () => {
             [
               "User",
               "Client",
+              "Client Role",
               "Subject",
               "Date",
               "Time Start",
@@ -136,6 +149,7 @@ const ContainerRemarkReport = () => {
               return [
                 r.user,
                 r.client,
+                r.client_role_name,
                 r.subject,
                 r.date.split(" ")[0],
                 r.date.split(" ")[1],
@@ -191,20 +205,18 @@ const ContainerRemarkReport = () => {
   };
 
   const Filter = (opt) => {
-    if (userTarget.label) {
-      if (option.label === "Client") {
-        return opt.filter((r) => r.user_id === userTarget.value);
-      }
+    if (users.length > 0) {
+      const usersIds = users.map((u) => u.value);
       if (startDate && endDate) {
         // duas datas
         //verificação data final
         if (endDate >= startDate) {
           setFlagEndDate(false);
           return opt.filter(
-            (o) =>
-              o.date.split("T")[0].split(" ")[0] >= startDate &&
-              o.date.split("T")[0].split(" ")[0] <= endDate &&
-              o.user_id === userTarget.id
+            (r) =>
+              r.date.split("T")[0].split(" ")[0] >= startDate &&
+              r.date.split("T")[0].split(" ")[0] <= endDate &&
+              usersIds.includes(r.user_id)
           );
         } else {
           setFlagEndDate(true);
@@ -215,14 +227,14 @@ const ContainerRemarkReport = () => {
         return opt.filter(
           (r) =>
             r.date.split("T")[0].split(" ")[0] >= startDate &&
-            r.user_id === userTarget.id
+            usersIds.includes(r.user_id)
         );
       } else if (!startDate && endDate) {
         // somente data final
         setFlagStartDate(true);
       } else {
         // somente usuario
-        return opt.filter((r) => r.user_id === userTarget.value);
+        return opt.filter((r) => usersIds.includes(r.user_id));
       }
     } // Busca por data
     else if (startDate && endDate) {
@@ -246,17 +258,26 @@ const ContainerRemarkReport = () => {
   const [orderRemark, setOrderRemark] = useState("user_name");
   const [orderPlanner, setOrderPlanner] = useState("");
   const [orderClient, setOrderClient] = useState("");
+  const [order, setOrder] = useState(false); //false -- crescente  // true -- decrescente
+  const [arrow, setArrow] = useState(Array(10).fill(false));
   const handleSelectOrder = (i) => {
     setOrderRemark(remarkOrder[i]);
     setOrderPlanner(plannerOrder[i]);
     setOrderClient(clientOrder[i]);
+    const updatedArrow = arrow.map((value, index) =>
+      index === i ? !value : false
+    );
+    setOrder(updatedArrow[i]);
+    setArrow(updatedArrow);
   };
+  //console.log(order);
 
   const FilterClient = () => {
     let projectManager = client.filter((c) => c.role_id === 12);
     let superintendent = client.filter((c) => c.role_id === 13);
     let director = client.filter((c) => c.role_id === 14);
-    if (userTarget.label) {
+    if (users.length > 0) {
+      const usersIds = users.map((u) => u.value);
       return client
         .map((c) => {
           const pm =
@@ -283,7 +304,7 @@ const ContainerRemarkReport = () => {
             director: dir,
           };
         })
-        .filter((r) => r.user_id === userTarget.value);
+        .filter((r) => usersIds.includes(r.user_id));
     }
     return client.map((c) => {
       const pm =
@@ -316,6 +337,8 @@ const ContainerRemarkReport = () => {
         setClientList(Filter(client));
         setClientList(FilterClient());
         break;
+      default:
+        break;
     }
     setView(option.label);
     setOrderClient("user");
@@ -343,14 +366,17 @@ const ContainerRemarkReport = () => {
         <DivSelect>
           <DivUsers>
             {
-              <SingleSelect
-                set={(u) => selectUser(u)}
+              <TagComponent
+                label={"Users"}
+                sizeMenu={"100%"}
+                width={"10em"}
+                widths={"13.5em"}
+                heights={"10vh"}
+                marginLeft={"110%"}
+                tags={users}
+                set={(u) => setUsers(u)}
+                options={userOptions ? userOptions : []}
                 placeholder={""}
-                label={"User"}
-                sizeSingle={"100%"}
-                backgroundColor={"#FFF"}
-                options={userOptions}
-                value={userTarget.label}
               />
             }
           </DivUsers>
@@ -366,28 +392,42 @@ const ContainerRemarkReport = () => {
             />
           </DivPlanner>
         </DivSelect>
-        {option.label !== "Client" && (
-          <DivDate>
-            <Label>Start Date</Label>
-            <InputDate
-              type="date"
-              onChange={(s) => setStartDate(s.target.value)}
-            />
-          </DivDate>
-        )}
-        {option.label !== "Client" && (
-          <DivDate>
-            <Label>End Date</Label>
-            <InputDate
-              type="date"
-              onChange={(e) => setEndDate(e.target.value)}
-              required={flagEndDate || (flagEndDate && !endDate) ? true : false}
-            />
-          </DivDate>
-        )}
+        <DivDates>
+          {option.label !== "Client" && (
+            <DivDate>
+              <Label>Start Date</Label>
+              <InputDate
+                type="date"
+                onChange={(s) => setStartDate(s.target.value)}
+              />
+            </DivDate>
+          )}
+          {option.label !== "Client" && (
+            <DivDate>
+              <Label>End Date</Label>
+              <InputDate
+                type="date"
+                onChange={(e) => setEndDate(e.target.value)}
+                required={
+                  flagEndDate || (flagEndDate && !endDate) ? true : false
+                }
+              />
+            </DivDate>
+          )}
+        </DivDates>
         <DivButtons>
-          <ButtonPesquisar onClick={handleCreateReport}>Search</ButtonPesquisar>
-          <ButtonExportar onClick={handleDownload}>Export</ButtonExportar>
+          <ButtonPesquisar onClick={handleCreateReport}>
+            <DivSvg>
+              <Search fill={"#FFFFFF"} />
+            </DivSvg>
+            <DivMsg>Search</DivMsg>
+          </ButtonPesquisar>
+          <ButtonExportar onClick={handleDownload}>
+            <DivSvg>
+              <Download fill={"#E41165"} />
+            </DivSvg>
+            <DivMsg>Export</DivMsg>
+          </ButtonExportar>
         </DivButtons>
       </Header>
       <Total>
@@ -410,13 +450,39 @@ const ContainerRemarkReport = () => {
               <Title key={index}>
                 <DivCenter onClick={() => handleSelectOrder(index)}>
                   {r}
+
+                  <PositionArrow name="seta">
+                    {!arrow[index] && [index] < 5 && <AZdown fill={"#ffFF"} />}
+                    {!arrow[index] && [index] > 4 && (
+                      <CalendarDown fill={"#ffFF"} />
+                    )}
+                    {arrow[index] && [index] < 5 && <AZup fill={"#ffFF"} />}
+                    {arrow[index] && [index] > 4 && (
+                      <CalendarUp fill={"#ffFF"} />
+                    )}
+                  </PositionArrow>
                 </DivCenter>
               </Title>
             ))}
           {view === "Planner" &&
             plannerTitles.map((p, index) => (
               <Title key={index} onClick={() => handleSelectOrder(index)}>
-                <DivCenter>{p}</DivCenter>
+                <DivCenter>
+                  {p}
+
+                  <PositionArrow name="seta">
+                    {!arrow[index] && [index] < 4 && <AZdown fill={"#ffFF"} />}
+                    {!arrow[index] && [index] > 4 && <AZdown fill={"#ffFF"} />}
+                    {arrow[index] && [index] < 4 && <AZup fill={"#ffFF"} />}
+                    {arrow[index] && [index] > 4 && <AZup fill={"#ffFF"} />}
+                    {!arrow[index] && index === 4 && (
+                      <CalendarDown fill={"#ffFF"} />
+                    )}
+                    {arrow[index] && index === 4 && (
+                      <CalendarUp fill={"#ffFF"} />
+                    )}
+                  </PositionArrow>
+                </DivCenter>
               </Title>
             ))}
           {view === "Client" &&
@@ -424,6 +490,11 @@ const ContainerRemarkReport = () => {
               <Title key={index}>
                 <DivCenter onClick={() => handleSelectOrder(index)}>
                   {c}
+
+                  <PositionArrow name="seta">
+                    {!arrow[index] && <AZdown fill={"#ffFF"} />}
+                    {arrow[index] && <AZup fill={"#ffFF"} />}
+                  </PositionArrow>
                 </DivCenter>
               </Title>
             ))}
@@ -434,7 +505,9 @@ const ContainerRemarkReport = () => {
             view === "Remark" &&
             remarkList
               .sort((a, b) =>
-                (a[orderRemark] || "").localeCompare(b[orderRemark] || "")
+                !order
+                  ? (a[orderRemark] || "").localeCompare(b[orderRemark] || "")
+                  : (b[orderRemark] || "").localeCompare(a[orderRemark] || "")
               )
               .map((r, index) => (
                 <RemarkCard key={index} index={index} remark={r} />
@@ -443,7 +516,9 @@ const ContainerRemarkReport = () => {
             view === "Planner" &&
             plannerList
               .sort((a, b) =>
-                (a[orderPlanner] || "").localeCompare(b[orderPlanner] || "")
+                !order
+                  ? (a[orderPlanner] || "").localeCompare(b[orderPlanner] || "")
+                  : (b[orderPlanner] || "").localeCompare(a[orderPlanner] || "")
               )
               .map((p, index) => (
                 <PlannerCards key={index} index={index} planner={p} />
@@ -452,7 +527,9 @@ const ContainerRemarkReport = () => {
             view === "Client" &&
             clientList
               .sort((a, b) =>
-                (a[orderClient] || "").localeCompare(b[orderClient] || "")
+                !order
+                  ? (a[orderClient] || "").localeCompare(b[orderClient] || "")
+                  : (b[orderClient] || "").localeCompare(a[orderClient] || "")
               )
               .map((c, index) => (
                 <ClientsCards key={index} index={index} client={c} />
@@ -484,6 +561,7 @@ const clientTitles = [
 const remarkTitles = [
   "User",
   "Client",
+  "Role",
   "Subject",
   "Remark",
   "Initial Date",
@@ -493,6 +571,7 @@ const remarkTitles = [
 const plannerTitles = [
   "User",
   "Client",
+  "Role",
   "Subject",
   "Date",
   "Created By",
@@ -502,6 +581,7 @@ const plannerTitles = [
 const remarkOrder = [
   "user_name",
   "client_name",
+  "client_role_name",
   "subject_name",
   "remark_name",
   "date",
@@ -511,6 +591,7 @@ const remarkOrder = [
 const plannerOrder = [
   "user",
   "client",
+  "client_role_name",
   "subject",
   "date",
   "createdBy_name",
