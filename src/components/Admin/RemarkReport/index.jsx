@@ -65,6 +65,7 @@ const ContainerRemarkReport = () => {
   const [users, setUsers] = useState([]);
 
   //const [arrow, setArrow] = useState(false);
+  console.log(planner);
 
   useEffect(() => {
     loadUserList();
@@ -452,12 +453,12 @@ const ContainerRemarkReport = () => {
                   {r}
 
                   <PositionArrow name="seta">
-                    {!arrow[index] && [index] < 5 && <AZdown fill={"#ffFF"} />}
-                    {!arrow[index] && [index] > 4 && (
+                    {!arrow[index] && [index] < 6 && <AZdown fill={"#ffFF"} />}
+                    {!arrow[index] && [index] > 5 && (
                       <CalendarDown fill={"#ffFF"} />
                     )}
-                    {arrow[index] && [index] < 5 && <AZup fill={"#ffFF"} />}
-                    {arrow[index] && [index] > 4 && (
+                    {arrow[index] && [index] < 6 && <AZup fill={"#ffFF"} />}
+                    {arrow[index] && [index] > 5 && (
                       <CalendarUp fill={"#ffFF"} />
                     )}
                   </PositionArrow>
@@ -562,6 +563,7 @@ const remarkTitles = [
   "User",
   "Client",
   "Role",
+  "Release Train",
   "Subject",
   "Remark",
   "Initial Date",
@@ -582,6 +584,7 @@ const remarkOrder = [
   "user_name",
   "client_name",
   "client_role_name",
+  "release_name",
   "subject_name",
   "remark_name",
   "date",

@@ -123,7 +123,7 @@ export const Title = styled.div`
   width: 99%;
   height: 100%;
   display: flex;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 600;
   align-items: center;
   color: #fff;

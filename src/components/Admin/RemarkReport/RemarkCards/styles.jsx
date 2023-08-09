@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-self: start;
   align-self: start;
   background: ${(props) => props.color};
-  grid-template-columns: repeat(auto-fit, minmax(14.28%, 7fr));
+  grid-template-columns: repeat(auto-fit, minmax(12.5%, 8fr));
   width: 100%;
   :hover {
     background-color: #eaeaea;
