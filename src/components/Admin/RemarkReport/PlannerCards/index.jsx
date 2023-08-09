@@ -13,6 +13,9 @@ const PlannerCards = (props) => {
         <DivCenter>{props.planner.client.split(/(\s).+\s/).join("")}</DivCenter>
       </DivInfo>
       <DivInfo>
+        <DivCenter>{props.planner.client_role_name}</DivCenter>
+      </DivInfo>
+      <DivInfo>
         <DivCenter>{props.planner.subject}</DivCenter>
       </DivInfo>
       <DivInfo>

@@ -55,12 +55,11 @@ export const TagComponent = (props, placeholder, idTagOption) => {
             id={props.idTagOption}
             placeholder={props.placeholder}
             onChange={(item) => props.set(item)}
-            isClearable={false}
-            isSearchable={true}
+            isClearable={true}
+            isSearchable={false}
             isDisabled={false}
             isLoading={false}
             isRtl={false}
-            required
             closeMenuOnSelect={false}
             theme={(theme) => ({
               ...theme,
@@ -101,7 +100,6 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                 return {
                   ...styles,
                   gridColumn: "2",
-                  display: "grid",
                   display: "block",
                   position: props.positions || "absolute",
                   borderRadius: "5px",
@@ -163,6 +161,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
                 maxHeight: props.heightMenu || "110px",
                 fontSize: "0.8rem",
                 overflowY: "scroll",
+
                 "&::-webkit-scrollbar": {
                   backgroundColor: "#fff",
                 },
@@ -207,6 +206,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
               option: (styles, state) => ({
                 ...styles,
                 backgroundColor: state.isSelected ? "#DFDFDF" : "#fff",
+
                 color: state.isSelected ? "#656464" : "#656464",
                 ":hover": {
                   cursor: "pointer",

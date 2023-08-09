@@ -9,18 +9,17 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.div`
-  margin-top: 1.5%;
+  margin-top: 1%;
   display: flex;
-  grid-column: 3;
-  grid-template-columns: 50% 25% 25%;
-  width: 80%;
-  height: 20%;
+  width: 100%;
+  height: 30%;
 `;
 
 export const TitlePage = styled.label`
   width: 100%;
   align-items: end;
   display: flex;
+
   span {
     font-size: 1.5rem;
     height: fit-content;
@@ -41,7 +40,7 @@ export const DivInfo = styled.div`
 `;
 
 export const InputDate = styled.input`
-  width: auto;
+  width: 80%;
   max-width: 100%;
   height: 100%;
   color: #a0a0a0;
@@ -55,24 +54,29 @@ export const InputDate = styled.input`
 export const Label = styled.div``;
 
 export const DivDate = styled.div`
-  margin-left: 5%;
   height: 29px;
+  justify-content: center;
 `;
 
 export const DivSelect = styled.div`
-  width: 40%;
+  width: 75%;
   margin-top: 0.2%;
   display: flex;
-  justify-content: space-between;
 `;
 
 export const DivPlanner = styled.div`
   width: 100%;
-  margin-left: 5%;
+  margin-right: 4.5%;
 `;
 
 export const DivUsers = styled.div`
   width: 100%;
+  padding-right: 40%;
+`;
+export const DivDates = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 25%;
 `;
 
 export const ContainerPlanilha = styled.div`
@@ -101,7 +105,7 @@ export const HeaderPlanilha = styled.div`
   align-items: center;
   background-color: #e41165;
   box-sizing: border-box;
- 
+
   z-index: 0;
 `;
 
@@ -110,6 +114,7 @@ export const DivCenter = styled.div`
   position: relative;
   width: 100%;
   flex-direction: row;
+  margin-left: 5%;
   justify-content: center;
   cursor: pointer;
 `;
@@ -118,7 +123,7 @@ export const Title = styled.div`
   width: 99%;
   height: 100%;
   display: flex;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 600;
   align-items: center;
   color: #fff;
@@ -129,45 +134,55 @@ export const Title = styled.div`
 `;
 
 export const DivButtons = styled.div`
-  width: 20%;
+  width: 30%;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
+  align-items: left;
 `;
 
 export const ButtonPesquisar = styled.button`
-  width: 80%;
+  width: 30%;
   height: 5vh;
+  display: flex;
   background-color: #e41165;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-  border: none;
+  border: 1.5px solid #e41165;
   color: #ffffff;
-  border-radius: 20px;
-  margin-right: 5%;
+  font-weight: 700;
+  border-radius: 8px;
+  margin-right: 2%;
+  text-align: center;
+  align-items: center;
   cursor: pointer;
   :hover {
     opacity: 0.7;
   }
   align-self: center;
   margin-top: 6%;
-  margin-left: 15%;
+  justify-content: space-evenly;
 `;
 
 export const ButtonExportar = styled.button`
-  width: 80%;
+  width: 30%;
   height: 5vh;
-  background-color: #007bff;
+  display: flex;
+  background-color: #ffffff;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-  border: none;
-  color: #ffffff;
-  border-radius: 20px;
+  border: 1.5px solid #e41165;
+  color: #e41165;
+  font-weight: 700;
+  border-radius: 8px;
   cursor: pointer;
+  text-align: center;
+  align-items: center;
   :hover {
     opacity: 0.7;
   }
   align-self: center;
   margin-top: 6%;
   margin-left: 5%;
+  justify-content: space-evenly;
 `;
 
 export const ContainerRemarks = styled.div`
@@ -186,12 +201,12 @@ export const Total = styled.div`
   display: flex;
   width: fit-content;
   height: 1%;
-  margin-top: 1%;
+  margin-top: 2.5%;
   font-size: 24px;
   color: #525b75;
   font-weight: 600;
   span {
-    margin-right:2%;
+    margin-right: 2%;
   }
 `;
 
@@ -204,4 +219,24 @@ export const DivNumber = styled.div`
   font-size: 24px;
   color: #e41165;
   font-weight: 600;
+`;
+
+export const PositionArrow = styled.div`
+  margin-left: auto;
+  margin-right: 5%;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  grid-column: 3;
+  cursor: pointer;
+  justify-content: end;
+`;
+
+export const DivSvg = styled.div`
+  align-items: center;
+  justify-content: start;
+`;
+
+export const DivMsg = styled.div`
+  align-items: center;
 `;

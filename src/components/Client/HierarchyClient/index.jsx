@@ -11,20 +11,20 @@ const HierarhyClient = (props) => {
   useEffect(() => {
     try {
       const Directors = client
-        .filter((c) => c.business_id === clientTarget.business_id)
+        .filter((c) => c.release_id === clientTarget.release_id)
         .filter((c) => c.textRole === "Director (LCIO)")
         .sort((a, b) => (a.client || "").localeCompare(b.client || ""));
 
       const Superintendents = client
-        .filter((c) => c.business_id === clientTarget.business_id)
+        .filter((c) => c.release_id === clientTarget.release_id)
         .filter((c) => c.textRole === "Superintendent (cCIO)")
         .sort((a, b) => (a.client || "").localeCompare(b.client || ""));
       const Managers = client
-        .filter((c) => c.business_id === clientTarget.business_id)
+        .filter((c) => c.release_id === clientTarget.release_id)
         .filter((c) => c.textRole === "Project Manager")
         .sort((a, b) => (a.client || "").localeCompare(b.client || ""));
       const Coordinator = client
-        .filter((c) => c.business_id === clientTarget.business_id)
+        .filter((c) => c.release_id === clientTarget.release_id)
         .filter(
           (c) =>
             c.textRole !== "Project Manager" &&
