@@ -56,7 +56,7 @@ export const TagComponent = (props, placeholder, idTagOption) => {
             placeholder={props.placeholder}
             onChange={(item) => props.set(item)}
             isClearable={true}
-            isSearchable={false}
+            isSearchable={true}
             isDisabled={false}
             isLoading={false}
             isRtl={false}

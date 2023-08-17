@@ -53,9 +53,9 @@ const ModalSubject = (props) => {
   // planner details //
 
   const { planner } = usePlannerContext();
-  const [plannerSubject] = useState(
+  /* const [plannerSubject] = useState(
     planner.filter((p) => p.subject_id === props.id)
-  );
+  );*/
 
   useEffect(() => {
     if (props.title === "Subject Details") {

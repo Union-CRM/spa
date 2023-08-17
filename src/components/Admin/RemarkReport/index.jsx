@@ -65,7 +65,6 @@ const ContainerRemarkReport = () => {
   const [users, setUsers] = useState([]);
 
   //const [arrow, setArrow] = useState(false);
-  console.log(planner);
 
   useEffect(() => {
     loadUserList();

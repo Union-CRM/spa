@@ -100,6 +100,7 @@ const PlannerCard = (props) => {
             <Card
               home={props.home}
               key={item.id}
+              
               client={item.client}
               subject={item.subject}
               releaseTrain={item.release}

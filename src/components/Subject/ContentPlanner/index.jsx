@@ -62,11 +62,19 @@ const ContentsPlanner = (props) => {
   }, [id]);
 
   const [plannerSubject, setPlannerSubject] = useState(
-    planner.filter((p) => p.subject_id === props.id)
+    planner ? planner.filter((p) => p.subject_id === props.id) : []
   );
 
   useEffect(() => {
-    setPlannerSubject(planner.filter((p) => p.subject_id === props.id).sort((a, b) => (b.status || "").localeCompare(a.status || "")) );
+    try {
+      setPlannerSubject(
+        planner
+          .filter((p) => p.subject_id === props.id)
+          .sort((a, b) => (b.status || "").localeCompare(a.status || ""))
+      );
+    } catch {
+      setPlannerSubject([]);
+    }
   }, [planner]);
   /*
   const statusPlanner = {
