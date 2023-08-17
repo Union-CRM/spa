@@ -131,17 +131,14 @@ export const ContainerCards = styled.div`
 
 // Cards //
 export const BoardStyle = styled.div`
-  width: 99%;
+  width: 97%;
   top: 10px;
-  //grid-gap: 10px;
+  grid-gap: 10px;
   grid-row: 1;
-  display: inline-block;
+  display: grid;
   position: relative;
   height: 35%;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
-  @media (min-width: 1355px) and (max-width: 1724px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
-  }
+  grid-template-columns: 1fr;
 `;
 
 //* Modal Edit and Add Subject *//

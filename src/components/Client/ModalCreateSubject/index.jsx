@@ -205,4 +205,9 @@ const status_mok = [
   { id: 1, value: "IN PROGRESS", label: "IN PROGRESS" },
   { id: 2, value: "FINISHED", label: "FINISHED" },
   { id: 3, value: "CANCELED", label: "CANCELED" },
+  { id: 4, value: "EXCELLENT", label: "EXCELLENT" },
+  { id: 5, value: "GOOD", label: "GOOD" },
+  { id: 6, value: "NO ANSWERS", label: "NO ANSWERS" },
+  { id: 7, value: "NO INTEREST", label: "NO INTEREST" },
+  { id: 8, value: "NOT STARTED", label: "NOT STARTED" },
 ];

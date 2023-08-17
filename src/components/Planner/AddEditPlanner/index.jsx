@@ -384,6 +384,7 @@ const ModalPlanner = (props) => {
               placeholder={""}
               set={(c) => setStatus(c)}
               options={StatusOption}
+              isSearchable={true}
               value={status}
               label={"Status"}
               sizeSingle={"97%"}
