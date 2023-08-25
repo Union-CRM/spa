@@ -50,6 +50,7 @@ const ContainerCards = () => {
             {userList &&
               userList
                 .filter((u) => u.status === active)
+                .sort((a, b) => (a.name || "").localeCompare(b.name || ""))
                 .map((u) => <ClientCard key={u.id} id={u.id} />)}
           </BoardStyle>
         </CardsContainer>
