@@ -10,7 +10,7 @@ import { useRemarkContext } from "../../../hook/useRemarkContent";
 import { FaRegCalendarAlt, FaChevronCircleDown } from "react-icons/fa";
 
 const NavBar = () => {
-  const { setSearch, setSearchtState, setNotification, notification} = useSearchContext();
+  const { setSearch, setNotification, notification} = useSearchContext();
   const [searchtState ] = useState(false);
 
 
@@ -32,14 +32,12 @@ const NavBar = () => {
         </Logo>
 
         <DivSear>
-          <DivIcon $mode={searchtState} onClick={() => setSearchtState("true")}>
+          <DivIcon $mode={searchtState} >
             <IconSystem icon={"Search2"} />
           </DivIcon>
           <GoSearch
             type="search"
             placeholder="search..."
-            onFocus={() => setSearchtState("true")}
-            onBlur={() => setSearchtState("false")}
             onChange={(e) => setSearch(e.target.value)}
           ></GoSearch>
 
