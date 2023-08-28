@@ -30,6 +30,7 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import IconSystem from "../../../../assets/IconSystem";
 import { ReactComponent as Info } from "../../../../assets/svg/Info.svg";
+import { useSearchContext } from "../../../../hook/useSearchContext";
 
 // Group
 import { useGroupListContext } from "../../../../hook/useGroupListContext";
@@ -52,6 +53,7 @@ const GroupListView = () => {
   //const [modal, setModal] = useState(false);
   const [isEdit, setEdit] = useState(false);
   const { group, infoGroup, setInfoGroup, setIdEdit, modal, setModal } = useGroupListContext();
+  const { search } = useSearchContext();
   const [limit,setLimit]  = useState(10);
 
   //const [infoGroup, setInfoGroup] = useState(true);
@@ -90,6 +92,26 @@ const GroupListView = () => {
   const detailsModal = () => {
     setModalInfo(true);
   };
+
+
+  useEffect(() => {
+    if (group) {
+      if (search) {
+        setGroupList(
+          group
+            ? group.filter(
+                (g) =>
+                  g.group_name.toLowerCase().includes(search.toLowerCase()) 
+        
+              )
+            : group
+        );         
+      } else {
+        setGroupList(group);
+      }
+    }
+  }, [search, group]);
+
 
   return (
     <ContainerGlobal>
@@ -160,8 +182,8 @@ const GroupListView = () => {
           <LineDivisor />
 
           <BoardStyle>
-            {group &&
-              group
+            {groupList &&
+              groupList
                 .filter((item) => item.status === active)
                 .map((item,index) => {
                   if(index<limit){
