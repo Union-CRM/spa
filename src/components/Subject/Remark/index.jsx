@@ -87,7 +87,7 @@ const Remark = (props) => {
   return (
     <ContainerRemark>
       <ContainerCards>
-        <CardRemark $mode={status} onClick={() => toggleTab(1)}>
+        <CardRemark $mode={status}>
           <DivGlobalCard>
             <DivDate $mode={status}>
               <FaRegCalendarAlt $mode={status} />
@@ -101,11 +101,7 @@ const Remark = (props) => {
               <span> Final Date</span>
               <p>{dateReturn}</p>
             </DivDateReturn>
-            <DivDadosRemark>
-              <NameEmail>
-                {SplitName(remarkEdit.user_name)}
-              </NameEmail>
-            </DivDadosRemark>
+            
 
          
               <IconTag onClick={() => toggleTab(5)}>
@@ -125,18 +121,28 @@ const Remark = (props) => {
             </NoteText>
           </ContainerComplete>
 
-          <IconOpenClose $mode={status}  >
+          <IconOpenClose $mode={status} onClick={() => toggleTab(1)} >
             <Circle>
             <RowDown
             style={{
               fill:
-                status === "IN PROGRESS"
-                  ? "#00953B"
-                  : status === "FINISHED"
-                  ? "#008585"
-                  : status === "CANCELED"
-                  ? "#771300"
-                  : "",
+              status === "IN PROGRESS"
+                          ? "#00953B"
+                          : status === "FINISHED"
+                          ? "#008585"
+                          : status === "CANCELED"
+                          ? "#771300"
+                          : status === "NOT STARTED"
+                          ? "#51bfd3"
+                          : status === "EXCELENT"
+                          ? "rgb(0, 123, 255)"
+                          : status === "NO ANSWERS"
+                          ? "#d10e00"
+                          : status === "NO INTEREST"
+                          ? "#faa3b1"
+                          : status === "GOOD"
+                          ? "#680072"
+                          : "",
             }}/>
             </Circle>
           </IconOpenClose>

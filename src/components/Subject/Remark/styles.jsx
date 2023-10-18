@@ -154,7 +154,8 @@ export const IconOpenClose = styled.button`
 
 export const DivGlobalCard = styled.div`
   display: flex;
-  padding-top: 2%;
+  margin-top: 7px;
+  padding-top: 3%;
 `;
 
 export const DivDate = styled.div`
@@ -408,7 +409,7 @@ export const NoteRemark = styled.div`
     position: relative;
     display: block;
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.75rem;
     padding-top: 0%;
     padding-right: 5%;
     text-align: justify;

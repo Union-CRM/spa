@@ -40,13 +40,13 @@ export const TextArea = styled.textarea`
 
 export const ContainerCards = styled.div`
   width: 98%;
-  height: 100%;
+  height: 23rem;
   padding-top: 0%;
   position: relative;
-  background-color: ${(props) => (props.$mode ? "#fff" : "transparent")};
   padding-left: 1.5%;
   grid-row: ${(props) => (props.$mode ? "2" : "1")};
   overflow-y: scroll;
+  
   &::-webkit-scrollbar {
     width: 0px;
     height: 10px;
@@ -68,15 +68,15 @@ export const ContainerCards = styled.div`
 export const ButtonCreateRemark = styled.div`
   display: flex;
   width: 99%;
-  padding-top: 4%;
   padding-right: 1.5%;
   position: relative;
+  justify-content: right;
 `;
 
 export const ButtonAdd = styled.button`
   ${(props) => {
     switch (props.$mode) {
-      case "FINISHED":
+      case "ACTIVE":
         return css`
           border: 1px solid #008585;
         `;
@@ -96,7 +96,7 @@ export const ButtonAdd = styled.button`
   }}
   background-color:transparent;
   width: ${(props) => props.$width || "60px"};
-  height: ${(props) => props.$height || "fit-content"};
+  height: ${(props) => props.$height || "40px"};
   padding: ${(props) => props.$padding || "7px"};
   display: flex;
   align-items: center;
@@ -159,7 +159,7 @@ export const CardRemark = styled.div`
   }}
   width:97%;
   z-index: 9999999;
-  height: 100%;
+  height: 23rem;
   margin-top: 3%;
   position: relative;
   align-items: center;
@@ -477,7 +477,7 @@ export const ContainerComplete = styled.div`
 
 export const NoteText = styled.div`
   width: 98%;
-  height: 100%;
+  height: 100px;
   opacity: 0.8;
   padding-left: 0%;
   font-weight: 600;
@@ -522,7 +522,6 @@ export const ContainerDetailsRemark = styled.div`
   width: 100%;
   height: 215px;
   position: absolute;
-  background-color: red;
 `;
 export const IconTag = styled.div`
   position: relative;
@@ -568,4 +567,9 @@ export const DivTitle = styled.div`
       background-color: #dfdfdf;
     }
   }
+`;
+
+export const DivStatus = styled.div`
+  width: 10vw;
+  position: relative;
 `;
