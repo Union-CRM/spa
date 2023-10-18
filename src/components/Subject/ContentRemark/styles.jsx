@@ -140,7 +140,8 @@ export const ButtonAdd = styled.button`
 
 export const ContainerCards = styled.div`
   width: 98%;
-  height: 210px;
+  display: inline-block;
+  height: 50vh;
   padding-top: 0%;
   position: relative;
   background-color: ${(props) => (props.$mode ? "transparent" : "transparent")};
@@ -192,6 +193,29 @@ export const CardRemark = styled.div`
         return css`
           border-bottom: 8px solid #771300;
         `;
+      case "EXCELLENT":
+          return css`
+            border-bottom: 8px solid  rgb(0, 123, 255);
+          `;
+
+        case "GOOD":
+          return css`
+            border-bottom: 8px solid  #680072;
+          `;
+
+        case "NO ANSWERS":
+          return css`
+            border-bottom: 8px solid  #d10e00;
+          `;
+
+        case "NO INTEREST":
+          return css`
+            border-bottom: 8px solid  #faa3b1;
+          `;
+        case "NOT STARTED":
+          return css`
+            border-bottom: 8px solid  #51bfd3;
+          `;
       default:
         return css`
           background-color: #6e6b6b;
@@ -237,6 +261,26 @@ export const IconOpenClose = styled.button`
       case "CANCELED":
         return css`
           color: #771300;
+        `;
+      case "NOT STARTED":
+        return css`
+          color: #51bfd3;
+        `;
+      case "EXCELENT":
+        return css`
+          color: rgb(0, 123, 255);
+        `;
+      case "NO ANSWERS":
+        return css`
+          color: #d10e00;
+        `;
+      case "NO INTEREST":
+        return css`
+          color: #faa3b1;
+        `;
+      case "GOOD":
+        return css`
+          color: #680072;
         `;
       default:
         return css`
@@ -291,9 +335,9 @@ export const DivGlobalCard = styled.div`
 `;
 
 export const DivDate = styled.div`
-  height: 50px;
+  height: 60px;
   width: 100%;
-  padding-top: 0%;
+  padding-top: 2%;
   text-align: left;
   padding-left: 5%;
   svg {
@@ -322,6 +366,8 @@ export const DivDate = styled.div`
       }
     }}
     font-size:0.82rem;
+    font-weight: 900;
+
   }
   p {
     font-size: 0.9rem;
@@ -413,11 +459,11 @@ export const Photo = styled.div`
 
 ////////////// Name and Email //////////////
 export const DivDadosRemark = styled.div`
-  display: grid;
+  display: block;
   width: 100%;
   height: 100%;
-  align-items: center;
   margin-left: -10%;
+  
 `;
 
 export const NameEmail = styled.div`
@@ -426,15 +472,27 @@ export const NameEmail = styled.div`
   height: 100%;
   font-weight: 600;
   opacity: 0.8;
-  margin-top: 5px;
   position: relative;
   span {
     position: relative;
-    font-size: 0.74rem;
+    font-size: 0.9rem;
     align-items: center;
     justify-content: center;
     height: 100%;
-    font-weight: 200;
+    font-weight: 600;
+  }
+  @media (min-width: 1700px) and (max-width: 2500px) {
+    width: 90%;
+  }
+`;
+export const NoteTextRemark = styled.div`
+  span {
+    margin-top: 1%;
+    position: absolute;
+    font-size: 0.6rem;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
   @media (min-width: 1700px) and (max-width: 2500px) {
     width: 90%;

@@ -22,6 +22,7 @@ import {
   ButtonAdd,
   DivNoRemark,
   Create,
+  NoteTextRemark,
 } from "./styles";
 
 const ContentRemarks = (props) => {
@@ -35,6 +36,7 @@ const ContentRemarks = (props) => {
 
   //Remark Context //
   const [remark, setRemark] = useState([]);
+  const [ordenada, setOrdenada] = useState([]);
   const { remark: remarkList, setRemark: setRemarkList } = useRemarkContext();
 
   const { setModalRemark } = useRemarkContext();
@@ -48,7 +50,10 @@ const ContentRemarks = (props) => {
 
   useEffect(() => {
     if (remarkList) {
-      setRemark(remarkList.filter((r) => r.subject_id === props.id));
+      
+      setRemark(remarkList.filter((r) => r.subject_id === props.id).sort((a, b) => a.date - b.date))
+      // setRemark({ datasOrdenadas })
+      // console.log(remark)
     }
   }, [remarkList]);
 
@@ -65,12 +70,15 @@ const ContentRemarks = (props) => {
     setActiveContent(index);
   };
 
+
   // Remark //
 
   const RemarkModal = () => {
     setModalRemark(true);
     setModalDetails(false);
   };
+  
+ 
 
   const handleClick = (remark_id) => {
     setToggleState(3);
@@ -87,7 +95,7 @@ const ContentRemarks = (props) => {
       userSplit[userSplit.length - 1].split("")[0] +
       "";
 
-    return user2.toUpperCase();
+    return user2.toLowerCase();
   }
 
   return (
@@ -148,14 +156,14 @@ const ContentRemarks = (props) => {
                 </DivDate>
 
                 <DivDadosRemark>
-                  <NameEmail>
-                    {"Remark Title "}
+                <NameEmail>
                     <span>{r.remark_name}</span>
-                  </NameEmail>
-                  <Create>
-                    {" Create by "}
-                    <span>{SplitName(r.user_name)}</span>
-                  </Create>
+                  </NameEmail> 
+                  <NoteTextRemark>
+                    <span>{remarkEdit.text}</span>
+                  </NoteTextRemark>
+                  
+                  
                 </DivDadosRemark>
               </DivGlobalCard>
 
@@ -195,10 +203,4 @@ const ContentRemarks = (props) => {
 
 export default ContentRemarks;
 
-function SplitName(n) {
-  const user = n ? n : "";
-  var userSplit = user.split(" ");
-  var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
 
-  return user1;
-}

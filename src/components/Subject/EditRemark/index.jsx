@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaRegCalendarAlt, FaChevronCircleDown } from "react-icons/fa";
 import IconSystem from "../../../assets/IconSystem";
+import SingleSelect from "../../Geral/Input/SingleSelect";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
 import { useFetchRemark } from "../../../hook/useFetchRemark";
@@ -23,6 +24,7 @@ import {
   ButtonCreateRemark,
   ButtonAdd,
   DivTitle,
+  DivStatus,
 } from "./styles";
 
 const EditRemark = (props) => {
@@ -40,6 +42,8 @@ const EditRemark = (props) => {
   const [setActiveTab] = useState(0);
   const [flag, setFlag] = useState(false);
   const { updateRemark } = useFetchRemark();
+  const [newRemark, setNewRemark] = useState(remarkEntity);
+
 
   useEffect(() => {
     if (props.title === "Edit Remark") {
@@ -85,6 +89,14 @@ const EditRemark = (props) => {
       setFlag(true);
     }
   };
+  const handleSelectStatus = (status) => {
+    setNewRemark({
+      ...newRemark,
+      status_id: status,
+      status_description: StatusOption.filter((s) => s.value === status)[0]
+        .label,
+    });
+  };
 
   const handleSubmit = () => {
     if (props.title === "Edit Remark") {
@@ -112,34 +124,18 @@ const EditRemark = (props) => {
                 widthInput={"80%"}
                 type="date"
                 required={flag && !date ? true : false}
-                value={dateCorrect(dateReturn)}
+                value={dateReturn}
                 onChange={(event) => setDateReturn(event.target.value)}
               />
             </DivDateReturn>
 
-            <DivPhoto>
-              <DivPhotoII>
-                <Photo $mode={status}>{Split(remarkEdit.user_name)} </Photo>
-              </DivPhotoII>
-            </DivPhoto>
+            
 
             <DivDadosRemark>
-              <NameEmail>
-                {SplitName(remarkEdit.user_name)}
-                <ButtonCreateRemark onClick={handleSubmit}>
-                  <ButtonAdd
-                    $mode={status}
-                    width="130px"
-                    padding="0"
-                    sizeFont="0.9rem"
-                    boxShadow="none"
-                    margin="none"
-                  >
-                    {" "}
-                    <span>Save</span>
-                  </ButtonAdd>
-                </ButtonCreateRemark>
-              </NameEmail>
+             
+                
+                
+              
             </DivDadosRemark>
           </DivGlobalCard>
 
@@ -155,7 +151,7 @@ const EditRemark = (props) => {
                 />{" "}
               </span>
             </DivTitle>
-
+            
             <NoteText>
               Note Text:
               <TextArea
@@ -164,6 +160,35 @@ const EditRemark = (props) => {
                 required={flag && !noteText ? true : false}
               />
             </NoteText>
+            <DivStatus>
+            <SingleSelect
+                  placeholder={""}
+                  set={(s) => handleSelectStatus(s)}
+                  options={StatusOption}
+                  value={newRemark.status_description}
+                  sizeSingle={"100%"}
+                  sizeMenuList={"100%"}
+                  label={"Status"}
+                  sizeMenu={"100%"}
+                  isDisabled={false}
+                  sizeHeight={"3.5vh"}
+                />
+            </DivStatus>
+
+            <ButtonCreateRemark onClick={handleSubmit}>
+                  <ButtonAdd
+                    $mode={status}
+                    width="130px"
+                    padding="0"
+                    sizeFont="0.9rem"
+                    boxShadow="none"
+                    margin="none"
+                  >
+                    {" "}
+                    <span>Save</span>
+                  </ButtonAdd>
+                </ButtonCreateRemark>
+            
           </ContainerComplete>
         </CardRemark>
       </ContainerCards>
@@ -196,3 +221,25 @@ function dateCorrect(dateReturn, date) {
     return "Insira uma data válida!";
   }
 }
+
+const StatusOption = [
+  { id: 21, value: 21, label: "ACTIVE" },
+  { id: 19, value: 19, label: "FINISHED" },
+  { id: 20, value: 20, label: "CANCELED" },
+];
+
+const remarkEntity = {
+  remark_name: "",
+  text: "",
+  date: "",
+  date_return: "",
+  subject_id: "",
+  subject_name: "",
+  client_id: "",
+  release_id: "",
+  release_name: "",
+  user_id: "",
+  client_name: "",
+  client_email: "",
+  business_name: "",
+};
