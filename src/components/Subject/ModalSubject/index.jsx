@@ -18,6 +18,7 @@ import {
   IconTag,
   TabButton,
   Content,
+  ClientTop,
 } from "./styles";
 import ContentDetailsCard from "../ContentDetailsCard";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
@@ -49,6 +50,7 @@ const ModalSubject = (props) => {
   const [statusCard, setStatus] = useState();
   const [subjectTitle, setSubjectTitle] = useState();
   const [manager, setManager] = useState();
+  const [client, setClient] = useState();
 
   // planner details //
 
@@ -63,6 +65,7 @@ const ModalSubject = (props) => {
       setStatus(subject.status);
       setSubjectTitle(subject.subject_title);
       setManager(subject.manager);
+      setClient(subject.client)
     }
   }, [id]);
 
@@ -120,6 +123,9 @@ const ModalSubject = (props) => {
             <CreatedBy onChange={(event) => setManager(event.target.value)}>
               Created by on {manager}
             </CreatedBy>
+            <ClientTop onChange={(event) => setManager(event.target.value)}>
+              Client {client}
+            </ClientTop>
           </DivTitle>
 
           <DivPages>

@@ -243,7 +243,7 @@ export const DivTitle = styled.div`
 
 export const TitleSubject = styled.h1`
   width: 100%;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   padding-bottom: 1%;
   @media (min-width: 1825px) and (max-width: 2500px) {
     font-size: 1.4rem;
@@ -255,15 +255,27 @@ export const CreatedBy = styled.h2`
   height: 100%;
   grid-column: 1;
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   padding-top: 1%;
+
+  padding-bottom: 1px;
+  align-items: center;
+  @media (min-width: 1825px) and (max-width: 2500px) {
+    font-size: 0.9rem;
+  }
+`;
+export const ClientTop = styled.h2`
+  width: 100%;
+  height: 100%;
+  grid-column: 1;
+  font-weight: 500;
+  font-size: 0.8rem;
   padding-bottom: 1%;
   align-items: center;
   @media (min-width: 1825px) and (max-width: 2500px) {
     font-size: 0.9rem;
   }
 `;
-
 export const IconTag = styled.span`
   height: 100%;
   cursor: pointer;

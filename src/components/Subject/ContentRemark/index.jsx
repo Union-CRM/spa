@@ -10,10 +10,6 @@ import {
   CardRemark,
   ButtonCreateRemark,
   DivDate,
-  DivDateReturn,
-  DivPhoto,
-  DivPhotoII,
-  Photo,
   DivDadosRemark,
   NameEmail,
   IconOpenClose,
@@ -51,15 +47,18 @@ const ContentRemarks = (props) => {
   useEffect(() => {
     if (remarkList) {
       
-      setRemark(remarkList.filter((r) => r.subject_id === props.id).sort((a, b) => a.date - b.date))
-      // setRemark({ datasOrdenadas })
-      // console.log(remark)
+      // setRemark()
+     
+        organizarData(remarkList.filter((r) => r.subject_id === props.id))
+        console.log(remark)
+
     }
   }, [remarkList]);
 
   useEffect(() => {
     if (props.title === "Remark") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
+      
       setStatus(subject.status);
     }
   }, [id]);
@@ -97,6 +96,15 @@ const ContentRemarks = (props) => {
 
     return user2.toLowerCase();
   }
+
+  const organizarData = (r) => {
+    
+    setRemark([...r].sort((a, b) => {
+      // console.log(remark)
+      return new Date(a.date) - new Date(b.date);
+    }));
+
+  };
 
   return (
     <ContainerRemark>
