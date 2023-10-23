@@ -11,9 +11,7 @@ import {
   CardRemark,
   DivDate,
   DivDateReturn,
-  DivPhoto,
-  DivPhotoII,
-  Photo,
+  
   DivDadosRemark,
   NameEmail,
   ContainerComplete,
@@ -102,8 +100,6 @@ const Remark = (props) => {
               <p>{dateReturn}</p>
             </DivDateReturn>
             
-
-         
               <IconTag onClick={() => toggleTab(5)}>
                 <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
               </IconTag>
@@ -166,10 +162,3 @@ function Split(n) {
   return user2.toUpperCase();
 }
 
-function SplitName(n) {
-  const user = n ? n : "";
-  var userSplit = user.split(" ");
-  var user1 = userSplit[0] + " " + userSplit[userSplit.length - 1] + "";
-
-  return user1;
-}

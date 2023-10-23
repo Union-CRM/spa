@@ -33,6 +33,7 @@ const EditRemark = (props) => {
   const { remarkEdit, setRemarkEdit } = useRemarkContext();
   const { id } = useSubjectContext();
   const [status, setStatus] = useState();
+  const [statusRemark, setStatusRemark] = useState();
   const { loadRemarkList } = useRemarkContext();
   const [title, setTitle] = useState();
   const [date, setDate] = useState();
@@ -49,6 +50,8 @@ const EditRemark = (props) => {
     if (props.title === "Edit Remark") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
       setStatus(subject.status);
+
+      
     }
   }, [id]);
 
@@ -60,6 +63,7 @@ const EditRemark = (props) => {
       setDateReturn(remarkEdit.date_return.split("T")[0]);
       setTitle(remarkEdit.remark_name);
       setNoteText(remarkEdit.text);
+      setStatusRemark(remarkEdit.status);
     }
   }, [remarkEdit]);
 
@@ -74,13 +78,14 @@ const EditRemark = (props) => {
       release_id: remarkEdit.release_id,
       user_id: remarkEdit.user_id,
       user_name: remarkEdit.user_name,
-      status_id: 21,
+      status_id: remarkEdit.statusRemark,
     };
     if (
       newRemark.remark_name &&
       newRemark.date &&
       newRemark.date_return &&
-      newRemark.text
+      newRemark.text &&
+      newRemark.status_id
     ) {
       setRemarkEdit(newRemark);
       updateRemark(newRemark, remarkEdit.id).then(loadRemarkList());
@@ -121,7 +126,7 @@ const EditRemark = (props) => {
               <FaRegCalendarAlt $mode={status} />
               <span> Final Date </span>
               <Input
-                widthInput={"80%"}
+                widthInput={"89%"}
                 type="date"
                 required={flag && !date ? true : false}
                 value={dateReturn}
@@ -130,13 +135,6 @@ const EditRemark = (props) => {
             </DivDateReturn>
 
             
-
-            <DivDadosRemark>
-             
-                
-                
-              
-            </DivDadosRemark>
           </DivGlobalCard>
 
           <ContainerComplete>
@@ -165,7 +163,7 @@ const EditRemark = (props) => {
                   placeholder={""}
                   set={(s) => handleSelectStatus(s)}
                   options={StatusOption}
-                  value={newRemark.status_description}
+                  value={statusRemark}
                   sizeSingle={"100%"}
                   sizeMenuList={"100%"}
                   label={"Status"}

@@ -40,7 +40,7 @@ export const TextArea = styled.textarea`
 
 export const ContainerCards = styled.div`
   width: 98%;
-  height: 23rem;
+  height: 24rem;
   padding-top: 0%;
   position: relative;
   padding-left: 1.5%;
@@ -76,22 +76,45 @@ export const ButtonCreateRemark = styled.div`
 export const ButtonAdd = styled.button`
   ${(props) => {
     switch (props.$mode) {
-      case "ACTIVE":
-        return css`
-          border: 1px solid #008585;
-        `;
-      case "IN PROGRESS":
-        return css`
-          border: 1px solid #00953b;
-        `;
-      case "CANCELED":
-        return css`
-          border: 1px solid #771300;
-        `;
-      default:
-        return css`
-          background-color: #6e6b6b;
-        `;
+      case "FINISHED":
+          return css`
+            border: 1px solid#008585;
+          `;
+        case "IN PROGRESS":
+          return css`
+            border: 1px solid #00953b;
+          `;
+
+        case "CANCELED":
+          return css`
+            border: 1px solid #771300;
+          `;
+        case "NOT STARTED":
+          return css`
+            border: 1px solid#51bfd3;
+          `;
+        case "EXCELENT":
+          return css`
+            border: 1px solid rgb(0, 123, 255);
+          `;
+        case "NO ANSWERS":
+          return css`
+            border: 1px solid#d10e00;
+          `;
+        case "NO INTEREST":
+          return css`
+           border: 1px solid#faa3b1;
+          `;
+        case "GOOD":
+          return css`
+            border: 1px solid#680072;
+          `;
+
+        default:
+          return css`
+            border: 1px solid #6e6b6b;
+          `;
+      
     }
   }}
   background-color:transparent;
@@ -115,13 +138,35 @@ export const ButtonAdd = styled.button`
           return css`
             color: #00953b;
           `;
+
         case "CANCELED":
           return css`
             color: #771300;
           `;
+        case "NOT STARTED":
+          return css`
+            color: #51bfd3;
+          `;
+        case "EXCELENT":
+          return css`
+            color: rgb(0, 123, 255);
+          `;
+        case "NO ANSWERS":
+          return css`
+            color: #d10e00;
+          `;
+        case "NO INTEREST":
+          return css`
+            color: #faa3b1;
+          `;
+        case "GOOD":
+          return css`
+            color: #680072;
+          `;
+
         default:
           return css`
-            background-color: #6e6b6b;
+            color: #6e6b6b;
           `;
       }
     }}
@@ -140,26 +185,49 @@ export const CardRemark = styled.div`
   ${(props) => {
     switch (props.$mode) {
       case "FINISHED":
-        return css`
-          border-bottom: 8px solid #008585;
-        `;
-      case "IN PROGRESS":
-        return css`
-          border-bottom: 8px solid #00953b;
-        `;
-      case "CANCELED":
-        return css`
-          border-bottom: 8px solid #771300;
-        `;
-      default:
-        return css`
-          background-color: #6e6b6b;
-        `;
+          return css`
+            border-bottom: 8px solid#008585;
+          `;
+        case "IN PROGRESS":
+          return css`
+            border-bottom: 8px solid #00953b;
+          `;
+
+        case "CANCELED":
+          return css`
+            border-bottom: 8px solid #771300;
+          `;
+        case "NOT STARTED":
+          return css`
+            border-bottom: 8px solid#51bfd3;
+          `;
+        case "EXCELENT":
+          return css`
+            border-bottom: 8px solid rgb(0, 123, 255);
+          `;
+        case "NO ANSWERS":
+          return css`
+            border-bottom: 8px solid#d10e00;
+          `;
+        case "NO INTEREST":
+          return css`
+           border-bottom: 8px solid#faa3b1;
+          `;
+        case "GOOD":
+          return css`
+            border-bottom: 8px solid#680072;
+          `;
+
+        default:
+          return css`
+            border-bottom: 8px solid #6e6b6b;
+          `;
+      
     }
   }}
-  width:97%;
+    width:97%;
   z-index: 9999999;
-  height: 23rem;
+  height: 21rem;
   margin-top: 3%;
   position: relative;
   align-items: center;
@@ -184,21 +252,44 @@ export const IconOpenClose = styled.button`
   ${(props) => {
     switch (props.$mode) {
       case "FINISHED":
-        return css`
-          background-color: #008585;
-        `;
-      case "PROGRESS":
-        return css`
-          background-color: #00953b;
-        `;
-      case "CANCELED":
-        return css`
-          color: #771300;
-        `;
-      default:
-        return css`
-          color: #6e6b6b;
-        `;
+          return css`
+            color: #008585;
+          `;
+        case "IN PROGRESS":
+          return css`
+            color: #00953b;
+          `;
+
+        case "CANCELED":
+          return css`
+            color: #771300;
+          `;
+        case "NOT STARTED":
+          return css`
+            color: #51bfd3;
+          `;
+        case "EXCELENT":
+          return css`
+            color: rgb(0, 123, 255);
+          `;
+        case "NO ANSWERS":
+          return css`
+            color: #d10e00;
+          `;
+        case "NO INTEREST":
+          return css`
+            color: #faa3b1;
+          `;
+        case "GOOD":
+          return css`
+            color: #680072;
+          `;
+
+        default:
+          return css`
+            color: #6e6b6b;
+          `;
+    
     }
   }}
   width:100%;
@@ -221,15 +312,37 @@ export const IconOpenClose = styled.button`
           return css`
             color: #00953b;
           `;
+
         case "CANCELED":
           return css`
             color: #771300;
           `;
+        case "NOT STARTED":
+          return css`
+            color: #51bfd3;
+          `;
+        case "EXCELENT":
+          return css`
+            color: rgb(0, 123, 255);
+          `;
+        case "NO ANSWERS":
+          return css`
+            color: #d10e00;
+          `;
+        case "NO INTEREST":
+          return css`
+            color: #faa3b1;
+          `;
+        case "GOOD":
+          return css`
+            color: #680072;
+          `;
+
         default:
           return css`
             color: #6e6b6b;
           `;
-      }
+    }
     }}
     cursor:pointer;
     height: 100%;
@@ -250,22 +363,45 @@ export const DivDate = styled.div`
   ${(props) => {
     switch (props.$mode) {
       case "FINISHED":
-        return css`
-          color: #008585;
-        `;
-      case "IN PROGRESS":
-        return css`
-          color: #00953b;
-        `;
-      case "CANCELED":
-        return css`
-          color: #771300;
-        `;
-      default:
-        return css`
-          color: #6e6b6b;
-        `;
+          return css`
+            color: #008585;
+          `;
+        case "IN PROGRESS":
+          return css`
+            color: #00953b;
+          `;
+
+        case "CANCELED":
+          return css`
+            color: #771300;
+          `;
+        case "NOT STARTED":
+          return css`
+            color: #51bfd3;
+          `;
+        case "EXCELENT":
+          return css`
+            color: rgb(0, 123, 255);
+          `;
+        case "NO ANSWERS":
+          return css`
+            color: #d10e00;
+          `;
+        case "NO INTEREST":
+          return css`
+            color: #faa3b1;
+          `;
+        case "GOOD":
+          return css`
+            color: #680072;
+          `;
+
+        default:
+          return css`
+            color: #6e6b6b;
+          `;
     }
+    
   }}
 
   height:50px;
@@ -289,15 +425,37 @@ export const DivDate = styled.div`
           return css`
             color: #00953b;
           `;
+
         case "CANCELED":
           return css`
             color: #771300;
           `;
+        case "NOT STARTED":
+          return css`
+            color: #51bfd3;
+          `;
+        case "EXCELENT":
+          return css`
+            color: rgb(0, 123, 255);
+          `;
+        case "NO ANSWERS":
+          return css`
+            color: #d10e00;
+          `;
+        case "NO INTEREST":
+          return css`
+            color: #faa3b1;
+          `;
+        case "GOOD":
+          return css`
+            color: #680072;
+          `;
+
         default:
           return css`
             color: #6e6b6b;
           `;
-      }
+    }
     }}
   }
 
@@ -317,22 +475,46 @@ export const DivDateReturn = styled.div`
   ${(props) => {
     switch (props.$mode) {
       case "FINISHED":
-        return css`
-          color: #008585;
-        `;
-      case "IN PROGRESS":
-        return css`
-          color: #00953b;
-        `;
-      case "CANCELED":
-        return css`
-          color: #771300;
-        `;
-      default:
-        return css`
-          color: #6e6b6b;
-        `;
+          return css`
+            color: #008585;
+          `;
+        case "IN PROGRESS":
+          return css`
+            color: #00953b;
+          `;
+
+        case "CANCELED":
+          return css`
+            color: #771300;
+          `;
+        case "NOT STARTED":
+          return css`
+            color: #51bfd3;
+          `;
+        case "EXCELENT":
+          return css`
+            color: rgb(0, 123, 255);
+          `;
+        case "NO ANSWERS":
+          return css`
+            color: #d10e00;
+           
+          `;
+        case "NO INTEREST":
+          return css`
+            color: #faa3b1;
+          `;
+        case "GOOD":
+          return css`
+            color: #680072;
+          `;
+
+        default:
+          return css`
+            color: #6e6b6b;
+          `;
     }
+    
   }}
 
   height:50px;
@@ -434,12 +616,7 @@ export const Photo = styled.div`
 `;
 
 ////////////// Name and Email //////////////
-export const DivDadosRemark = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-`;
+
 
 export const NameEmail = styled.div`
   font-size: 0.8rem;
