@@ -17,9 +17,9 @@ import {
   DivGlobalCard,
   ButtonAdd,
   DivNoRemark,
-  Create,
   NoteTextRemark,
 } from "./styles";
+import Remark from "../Remark";
 
 const ContentRemarks = (props) => {
   // Tabs //
@@ -102,7 +102,7 @@ const ContentRemarks = (props) => {
     setRemark([...r].sort((a, b) => {
       // console.log(remark)
       return new Date(a.date) - new Date(b.date);
-    }));
+    }).slice().reverse());
 
   };
 

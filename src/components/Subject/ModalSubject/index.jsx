@@ -123,7 +123,7 @@ const ModalSubject = (props) => {
             <CreatedBy onChange={(event) => setManager(event.target.value)}>
               Created by on {manager}
             </CreatedBy>
-            <ClientTop onChange={(event) => setManager(event.target.value)}>
+            <ClientTop onChange={(event) => setClient(event.target.value)}>
               Client {client}
             </ClientTop>
           </DivTitle>
