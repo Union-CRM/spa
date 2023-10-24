@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { FaRegCalendarAlt, FaChevronCircleDown } from "react-icons/fa";
 import IconSystem from "../../../assets/IconSystem";
-import SingleSelect from "../../Geral/Input/SingleSelect";
 import { useSubjectContext } from "../../../hook/useSubjectContent";
 import { useRemarkContext } from "../../../hook/useRemarkContent";
+import { useUserContext } from "../../../hook/useUserContext";
+
 import { useFetchRemark } from "../../../hook/useFetchRemark";
+import SingleSelect from "../../Geral/Input/SingleSelect";
 import {
   ContainerRemark,
   ContainerCards,
   CardRemark,
   DivDate,
   DivDateReturn,
-  DivPhoto,
-  DivPhotoII,
-  Photo,
-  DivDadosRemark,
-  NameEmail,
   ContainerComplete,
   NoteText,
   DivGlobalCard,
@@ -24,17 +21,15 @@ import {
   ButtonCreateRemark,
   ButtonAdd,
   DivTitle,
-  DivStatus,
 } from "./styles";
 
 const EditRemark = (props) => {
   // Subject status
   const { subject: subjectsList } = useSubjectContext();
-  const { remarkEdit, setRemarkEdit } = useRemarkContext();
+  const { remarkEdit, setRemarkEdit,remarkTarget,loadRemarkList} = useRemarkContext();
   const { id } = useSubjectContext();
   const [status, setStatus] = useState();
   const [statusRemark, setStatusRemark] = useState();
-  const { loadRemarkList } = useRemarkContext();
   const [title, setTitle] = useState();
   const [date, setDate] = useState();
   const [dateReturn, setDateReturn] = useState();
@@ -44,14 +39,47 @@ const EditRemark = (props) => {
   const [flag, setFlag] = useState(false);
   const { updateRemark } = useFetchRemark();
   const [newRemark, setNewRemark] = useState(remarkEntity);
+  const { subject: subjectList } = useSubjectContext();
+  const [prevStatus, setPrevStatus] = useState(false);
+  const [subjectOption, setSubjectOption] = useState([]);
+  const { userTarget } = useUserContext();
 
 
   useEffect(() => {
     if (props.title === "Edit Remark") {
+      setNewRemark({
+        ...newRemark,
+        ...remarkTarget,
+        status_id: StatusOption.filter(
+          (s) => s.label === remarkTarget.status_description
+        )[0].value,
+       
+      });
+      setPrevStatus(remarkTarget.status_description);
+    }
+  }, []);
+  // useEffect(() => {
+  //   if (props.title === "Edit Remark") {
+  //     setSubjectOption(
+  //       subjectList
+  //         .filter((s) => s.user_id === userTarget.id)
+  //         .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
+  //         .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
+  //     );
+  //   } else {
+  //     setSubjectOption(
+  //       subjectList
+  //         .filter((s) => s.user_id === userTarget.id)
+  //         .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
+  //         .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
+  //     );
+  //   }
+  // }, [subjectList, userTarget]);
+  useEffect(() => {
+    if (props.title === "Edit Remark") {
       const subject = subjectsList.filter((item) => item.id === props.id)[0];
       setStatus(subject.status);
-
-      
+      setStatusRemark(remarkEdit.status_description)
     }
   }, [id]);
 
@@ -63,7 +91,7 @@ const EditRemark = (props) => {
       setDateReturn(remarkEdit.date_return.split("T")[0]);
       setTitle(remarkEdit.remark_name);
       setNoteText(remarkEdit.text);
-      setStatusRemark(remarkEdit.status);
+      setStatusRemark(remarkEdit.status)
     }
   }, [remarkEdit]);
 
@@ -78,22 +106,22 @@ const EditRemark = (props) => {
       release_id: remarkEdit.release_id,
       user_id: remarkEdit.user_id,
       user_name: remarkEdit.user_name,
-      status_id: remarkEdit.statusRemark,
+      status_id: 21,
     };
     if (
       newRemark.remark_name &&
       newRemark.date &&
       newRemark.date_return &&
-      newRemark.text &&
-      newRemark.status_id
+      newRemark.text
     ) {
-      setRemarkEdit(newRemark);
+      setRemarkEdit(newRemark)
       updateRemark(newRemark, remarkEdit.id).then(loadRemarkList());
       loadRemarkList();
     } else {
       setFlag(true);
     }
   };
+
   const handleSelectStatus = (status) => {
     setNewRemark({
       ...newRemark,
@@ -102,12 +130,12 @@ const EditRemark = (props) => {
         .label,
     });
   };
-
   const handleSubmit = () => {
     if (props.title === "Edit Remark") {
       editRemark();
       setToggleState(3);
       setActiveTab(3);
+      console.log("ok")
     }
   };
 
@@ -126,15 +154,17 @@ const EditRemark = (props) => {
               <FaRegCalendarAlt $mode={status} />
               <span> Final Date </span>
               <Input
-                widthInput={"89%"}
+                widthInput={"80%"}
                 type="date"
                 required={flag && !date ? true : false}
-                value={dateReturn}
+
+                value={dateCorrect(dateReturn)}
                 onChange={(event) => setDateReturn(event.target.value)}
               />
             </DivDateReturn>
 
-            
+               
+              
           </DivGlobalCard>
 
           <ContainerComplete>
@@ -149,7 +179,7 @@ const EditRemark = (props) => {
                 />{" "}
               </span>
             </DivTitle>
-            
+
             <NoteText>
               Note Text:
               <TextArea
@@ -158,12 +188,11 @@ const EditRemark = (props) => {
                 required={flag && !noteText ? true : false}
               />
             </NoteText>
-            <DivStatus>
             <SingleSelect
                   placeholder={""}
                   set={(s) => handleSelectStatus(s)}
                   options={StatusOption}
-                  value={statusRemark}
+                  value={newRemark.status_description}
                   sizeSingle={"100%"}
                   sizeMenuList={"100%"}
                   label={"Status"}
@@ -171,7 +200,6 @@ const EditRemark = (props) => {
                   isDisabled={false}
                   sizeHeight={"3.5vh"}
                 />
-            </DivStatus>
 
             <ButtonCreateRemark onClick={handleSubmit}>
                   <ButtonAdd
@@ -186,13 +214,20 @@ const EditRemark = (props) => {
                     <span>Save</span>
                   </ButtonAdd>
                 </ButtonCreateRemark>
-            
           </ContainerComplete>
+
+          
         </CardRemark>
       </ContainerCards>
     </ContainerRemark>
   );
 };
+
+const StatusOption = [
+  { id: 21, value: 21, label: "ACTIVE" },
+  { id: 19, value: 19, label: "FINISHED" },
+  { id: 20, value: 20, label: "CANCELED" },
+];
 
 export default EditRemark;
 function Split(n) {
@@ -214,17 +249,13 @@ function SplitName(n) {
 
   return user1;
 }
-function dateCorrect(dateReturn, date) {
-  if (dateReturn > date) {
-    return "Insira uma data válida!";
+function dateCorrect (dateReturn, date) {
+  if (dateReturn > date){
+    return 'Insira uma data válida!'
   }
 }
 
-const StatusOption = [
-  { id: 21, value: 21, label: "ACTIVE" },
-  { id: 19, value: 19, label: "FINISHED" },
-  { id: 20, value: 20, label: "CANCELED" },
-];
+
 
 const remarkEntity = {
   remark_name: "",
