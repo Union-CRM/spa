@@ -750,3 +750,7 @@ export const DivStatus = styled.div`
   width: 10vw;
   position: relative;
 `;
+
+export const DivDadosRemark = styled.div`
+ 
+`;
