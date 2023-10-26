@@ -25,7 +25,7 @@ import {
 
 const Remark = (props) => {
   const { subject: subjectsList } = useSubjectContext();
-  const { remarkEdit, setRemarkEdit } = useRemarkContext();
+  const { remarkEdit, setRemarkEdit,setRemarkTarget } = useRemarkContext();
   const { id } = useSubjectContext();
   const [status, setStatus] = useState();
   const {toggleState, setToggleState } = useSubjectContext();
@@ -82,6 +82,11 @@ const Remark = (props) => {
     setToggleState(1);
   };
 
+  const handleEdit = ()=>{
+    toggleTab(5);
+    setRemarkTarget(remarkEdit);
+  }
+
   return (
     <ContainerRemark>
       <ContainerCards>
@@ -100,7 +105,7 @@ const Remark = (props) => {
               <p>{dateReturn}</p>
             </DivDateReturn>
             
-              <IconTag onClick={() => toggleTab(5)}>
+              <IconTag onClick={handleEdit}>
                 <IconSystem icon={"Edit"} height={"16px"} width={"16px"} />
               </IconTag>
    
@@ -115,6 +120,7 @@ const Remark = (props) => {
               Note Text:
               <span>{remarkEdit.text}</span>
             </NoteText>
+           
           </ContainerComplete>
 
           <IconOpenClose $mode={status} onClick={() => toggleTab(1)} >

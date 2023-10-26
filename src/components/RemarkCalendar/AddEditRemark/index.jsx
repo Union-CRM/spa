@@ -55,23 +55,23 @@ const ModalRemark = (props) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (props.title === "Edit Remark") {
-      setSubjectOption(
-        subjectList
-          .filter((s) => s.user_id === userTarget.id)
-          .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
-          .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
-      );
-    } else {
-      setSubjectOption(
-        subjectList
-          .filter((s) => s.user_id === userTarget.id)
-          .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
-          .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
-      );
-    }
-  }, [subjectList, userTarget]);
+  // useEffect(() => {
+  //   if (props.title === "Edit Remark") {
+  //     setSubjectOption(
+  //       subjectList
+  //         .filter((s) => s.user_id === userTarget.id)
+  //         .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
+  //         .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
+  //     );
+  //   } else {
+  //     setSubjectOption(
+  //       subjectList
+  //         .filter((s) => s.user_id === userTarget.id)
+  //         .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
+  //         .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
+  //     );
+  //   }
+  // }, [subjectList, userTarget]);
 
   //return true if date 1 is before at date 2
   const dateIsValid = (date1, date2) => {

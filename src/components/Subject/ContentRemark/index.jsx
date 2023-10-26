@@ -48,7 +48,8 @@ const ContentRemarks = (props) => {
     if (remarkList) {
       
       // setRemark()
-     
+      
+
         organizarData(remarkList.filter((r) => r.subject_id === props.id))
         console.log(remark)
 
@@ -170,6 +171,7 @@ const ContentRemarks = (props) => {
                   <NoteTextRemark>
                     <span>{remarkEdit.text}</span>
                   </NoteTextRemark>
+                
                   
                   
                 </DivDadosRemark>

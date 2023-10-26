@@ -21,102 +21,82 @@ import {
   ButtonCreateRemark,
   ButtonAdd,
   DivTitle,
+  DivStatus
 } from "./styles";
 
 const EditRemark = (props) => {
-  // Subject status
-  const { subject: subjectsList } = useSubjectContext();
-  const { remarkEdit, setRemarkEdit,remarkTarget,loadRemarkList} = useRemarkContext();
-  const { id } = useSubjectContext();
-  const [status, setStatus] = useState();
-  const [statusRemark, setStatusRemark] = useState();
-  const [title, setTitle] = useState();
-  const [date, setDate] = useState();
-  const [dateReturn, setDateReturn] = useState();
-  const [noteText, setNoteText] = useState();
+  const [newRemark, setNewRemark] = useState(remarkEntity);
+  const { updateRemark } = useFetchRemark();
+  const { remarkTarget } =
+    useRemarkContext();
   const { setToggleState } = useSubjectContext();
   const [setActiveTab] = useState(0);
+
   const [flag, setFlag] = useState(false);
-  const { updateRemark } = useFetchRemark();
-  const [newRemark, setNewRemark] = useState(remarkEntity);
   const { subject: subjectList } = useSubjectContext();
-  const [prevStatus, setPrevStatus] = useState(false);
-  const [subjectOption, setSubjectOption] = useState([]);
-  const { userTarget } = useUserContext();
-
-
+  const [status, setStatus] = useState();
+  const [date, setDate] = useState();
+  
+  
   useEffect(() => {
-    if (props.title === "Edit Remark") {
+    if (props.title === "Edit Remark" && remarkTarget) {
+      setDate(remarkTarget.date.split("T")[0]);
+      setStatus(remarkTarget.status_description);   
       setNewRemark({
         ...newRemark,
         ...remarkTarget,
         status_id: StatusOption.filter(
           (s) => s.label === remarkTarget.status_description
         )[0].value,
-       
+        status_description: remarkTarget.status_description,
       });
-      setPrevStatus(remarkTarget.status_description);
+      
     }
-  }, []);
-  // useEffect(() => {
-  //   if (props.title === "Edit Remark") {
-  //     setSubjectOption(
-  //       subjectList
-  //         .filter((s) => s.user_id === userTarget.id)
-  //         .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
-  //         .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
-  //     );
-  //   } else {
-  //     setSubjectOption(
-  //       subjectList
-  //         .filter((s) => s.user_id === userTarget.id)
-  //         .map((s) => ({ id: s.id, value: s.id, label: s.subject_title }))
-  //         .sort((a, b) => (a.label || "").localeCompare(b.label || ""))
-  //     );
-  //   }
-  // }, [subjectList, userTarget]);
-  useEffect(() => {
+  }, [remarkTarget]);
+
+  //return true if date 1 is before at date 2
+  const dateIsValid = (date1, date2) => {
+    const d1 = new Date(date1.split("T")[0].split(" ")[0]);
+    const d2 = new Date(date2.split("T")[0].split(" "));
+    return d1 <= d2;
+  };
+
+  const closeModal = () => {
+    //setModalEdit(false);
+   
+      setToggleState(3);
+      setActiveTab(3);
+      console.log("ok")
+  };
+
+  const handleSubmit = () => {
     if (props.title === "Edit Remark") {
-      const subject = subjectsList.filter((item) => item.id === props.id)[0];
-      setStatus(subject.status);
-      setStatusRemark(remarkEdit.status_description)
+      handleEditRemark();
+      
     }
-  }, [id]);
-
-  // Remark //
-
-  useEffect(() => {
-    if (remarkEdit.date) {
-      setDate(remarkEdit.date.split("T")[0]);
-      setDateReturn(remarkEdit.date_return.split("T")[0]);
-      setTitle(remarkEdit.remark_name);
-      setNoteText(remarkEdit.text);
-      setStatusRemark(remarkEdit.status)
-    }
-  }, [remarkEdit]);
-
-  const editRemark = () => {
-    const newRemark = {
-      remark_name: title,
-      text: noteText,
-      date: date + "T10:00:00.000Z",
-      date_return: dateReturn + "T10:00:00.000Z",
-      subject_id: remarkEdit.subject_id,
-      client_id: remarkEdit.client_id,
-      release_id: remarkEdit.release_id,
-      user_id: remarkEdit.user_id,
-      user_name: remarkEdit.user_name,
-      status_id: 21,
-    };
+  };
+ 
+  // status 19: Finished,  20: canceled, 21: Active
+  const handleEditRemark = () => {
     if (
       newRemark.remark_name &&
+      newRemark.subject_id &&
       newRemark.date &&
       newRemark.date_return &&
       newRemark.text
     ) {
-      setRemarkEdit(newRemark)
-      updateRemark(newRemark, remarkEdit.id).then(loadRemarkList());
-      loadRemarkList();
+      updateRemark(
+        {
+          ...newRemark,
+          date: newRemark.date.split("T")[0] + "T12:00:00.000Z",
+          date_return: newRemark.date_return.split("T")[0] + "T12:00:00.000Z",
+          title: newRemark.title,
+          noteText: newRemark.noteText,
+          status_description: newRemark.status_description
+        },
+        newRemark.id
+      );
+      closeModal();
     } else {
       setFlag(true);
     }
@@ -130,15 +110,45 @@ const EditRemark = (props) => {
         .label,
     });
   };
-  const handleSubmit = () => {
-    if (props.title === "Edit Remark") {
-      editRemark();
-      setToggleState(3);
-      setActiveTab(3);
-      console.log("ok")
-    }
+
+  const handleChange = (event) => {
+    setNewRemark({
+      ...newRemark,
+      [event.target.name]: event.target.value,
+    });
   };
 
+  const handleChangeDate = (event) => {
+    if (event.target.name === "date") {
+      if (newRemark.date_return) {
+        if (dateIsValid(event.target.value, newRemark.date_return)) {
+          setNewRemark({
+            ...newRemark,
+            [event.target.name]: event.target.value,
+          });
+        } else {
+          setNewRemark({
+            ...newRemark,
+            [event.target.name]: event.target.value,
+            date_return: "",
+          });
+        }
+      } else {
+        setNewRemark({
+          ...newRemark,
+          [event.target.name]: event.target.value,
+        });
+      }
+    } else if (event.target.name === "date_return") {
+      if (dateIsValid(newRemark.date, event.target.value)) {
+        setNewRemark({
+          ...newRemark,
+          [event.target.name]: event.target.value,
+        });
+      }
+    }
+  };
+ 
   return (
     <ContainerRemark>
       <ContainerCards>
@@ -147,20 +157,20 @@ const EditRemark = (props) => {
             <DivDate $mode={status}>
               <FaRegCalendarAlt $mode={status} />
               <span> Initial Date </span>
-              <p onChange={(event) => setDate(event.target.value)}>{date}</p>
+              <p onChange={(event) => setDate(newRemark.date.split("T")[0])}>{date}</p>
             </DivDate>
 
             <DivDateReturn $mode={status}>
               <FaRegCalendarAlt $mode={status} />
               <span> Final Date </span>
               <Input
-                widthInput={"80%"}
-                type="date"
-                required={flag && !date ? true : false}
-
-                value={dateCorrect(dateReturn)}
-                onChange={(event) => setDateReturn(event.target.value)}
-              />
+                  widthInput={"85%"}
+                  type="date"
+                  value={newRemark.date_return.split("T")[0]}
+                  required={flag && !newRemark.date_return ? true : false}
+                  name={"date_return"}
+                  onChange={(event) => handleChangeDate(event)}
+                />
             </DivDateReturn>
 
                
@@ -172,22 +182,31 @@ const EditRemark = (props) => {
               <span>
                 Title
                 <Input
-                  widthInput={"80%"}
-                  value={title}
-                  required={flag && !title ? true : false}
-                  onChange={(event) => setTitle(event.target.value)}
+                  widthInput={"79%"}
+                  name="remark_name"
+                  placeholder={
+                    flag && !newRemark.remark_name ? "Required field" : ""
+                  }
+                  value={newRemark.remark_name}
+                  required={flag && !newRemark.remark_name ? true : false}
+                  onChange={(event) => handleChange(event)}
                 />{" "}
               </span>
             </DivTitle>
-
             <NoteText>
               Note Text:
               <TextArea
-                onChange={(event) => setNoteText(event.target.value)}
-                value={noteText}
-                required={flag && !noteText ? true : false}
-              />
+                  widthInput={"98% !important"}
+                  placeholder={flag && !newRemark.text ? "Required field" : ""}
+                  name={"text"}
+                  value={newRemark.text}
+                  onChange={(event) => handleChange(event)}
+                  required={flag && !newRemark.text ? true : false}
+                  rows="4"
+                />
             </NoteText>
+            
+            <DivStatus>
             <SingleSelect
                   placeholder={""}
                   set={(s) => handleSelectStatus(s)}
@@ -200,6 +219,7 @@ const EditRemark = (props) => {
                   isDisabled={false}
                   sizeHeight={"3.5vh"}
                 />
+            </DivStatus>
 
             <ButtonCreateRemark onClick={handleSubmit}>
                   <ButtonAdd
@@ -253,6 +273,8 @@ function dateCorrect (dateReturn, date) {
   if (dateReturn > date){
     return 'Insira uma data válida!'
   }
+  else
+  return dateReturn
 }
 
 
@@ -264,6 +286,7 @@ const remarkEntity = {
   date_return: "",
   subject_id: "",
   subject_name: "",
+  status_description:"",
   client_id: "",
   release_id: "",
   release_name: "",
